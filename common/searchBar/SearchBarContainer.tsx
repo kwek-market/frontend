@@ -1,9 +1,12 @@
 import React from 'react'
+import SearchBar from './SearchBar'
 
 const SearchBarContainer = () => {
   return (
-    <div>
-      
-    </div>
+    <React.Fragment>
+      <SearchBar />
+    </React.Fragment>
   )
 }
+
+export default SearchBarContainer

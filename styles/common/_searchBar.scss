@@ -1,0 +1,8 @@
+#search-bar {
+  width: 50%;
+  
+  form {
+    @include flex(space-between, center);
+    width: 90%;
+  }
+}

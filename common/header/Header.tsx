@@ -1,18 +1,42 @@
-import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-// import KwekLogo from 'public/svg/kweklogo.svg'
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+
+import SearchBar from "../searchBar/SearchBarContainer";
 
 const Header = () => {
   return (
-    <header>
-      <Link href='/'>
-        <a>
-          <Image width='228' height='30' src='/svg/kweklogo.svg' layout='responsive' alt='Kwek logo' />
+    <header id="main-header">
+      <Link href="/">
+        <a className="main-header__logo">
+          <Image
+            width="228"
+            height="30"
+            src="/svg/kweklogo.svg"
+            layout="responsive"
+            alt="Kwek logo"
+          />
         </a>
       </Link>
+
+      <SearchBar />
+
+      <div className="main-header__shortcuts">
+        <div className="main-header__shortcuts__shortcut">
+          <Image width="22" height="24" src="/svg/user.svg" />
+          <p>Sign In</p>
+        </div>
+        <div className="main-header__shortcuts__shortcut">
+          <Image width="22" height="24" src="/svg/heart-filled.svg" />
+          <p>Saved</p>
+        </div>
+        <div className="main-header__shortcuts__shortcut">
+          <Image width="22" height="24" src="/svg/cart.svg" />
+          <p>Cart</p>
+        </div>
+      </div>
     </header>
-  )
-}
+  );
+};
 
 export default Header;

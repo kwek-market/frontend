@@ -1,8 +1,8 @@
 import Head from 'next/head'
 
-import Header from '../common/header/Header'
+import Header from '../common/header/HeaderContainer';
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
       <Header />
@@ -10,3 +10,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Header

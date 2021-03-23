@@ -1,0 +1,18 @@
+#main-header {
+  padding: 2rem 5%;
+  @include flex(space-between, center);
+
+  .main-header__logo {
+    width: 20%;
+  }
+
+  .main-header__shortcuts {
+    width: 30%;
+    @include flex(space-between, center);
+  }
+
+  .main-header__shortcuts__shortcut {
+    @include flex(flex-start, center);
+    width: 30%;
+  }
+}
