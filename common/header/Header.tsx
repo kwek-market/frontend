@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import SearchBar from "../searchBar/SearchBarContainer";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   return (
@@ -23,7 +23,7 @@ const Header = () => {
 
       <div className="main-header__shortcuts">
         <div className="main-header__shortcuts__shortcut">
-          <Image width="22" height="24" src="/svg/user.svg" />
+          <Image width="22" height="24" src="/svg/user.svg" className='sign-in-icon' />
           <p>Sign In</p>
         </div>
         <div className="main-header__shortcuts__shortcut">

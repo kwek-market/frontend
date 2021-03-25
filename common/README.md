@@ -15,8 +15,8 @@ This folder contains components that are not specific to a single page. They can
 ### Structure
 
 common 
-  --componentName
-      --componentName.module.scss
-      --componentName.tsx
-      --componentContainer.module.tsx
+  --componentOne
+      --componentOne.tsx
+  --componentTwo
+      --componentTwo.tsx
 

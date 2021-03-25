@@ -15,9 +15,7 @@ This folder contains components that are specific to single pages. They should b
 
 components
   --home
-    --hero
-      hero.tsx
-      heroContainer.tsx
-    --features
-      features.tsx
-      featuresContainer.tsx
+    --componentOne
+      --componentOne.tsx
+    --componentTwo
+      --componentTwo.tsx

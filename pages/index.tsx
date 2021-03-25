@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import Header from '../common/header/HeaderContainer';
+import Header from '../common/header/Header';
 
 const Home = () => {
   return (
