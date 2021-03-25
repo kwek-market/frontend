@@ -4,36 +4,82 @@ import Image from "next/image";
 
 import SearchBar from "./SearchBar";
 
+import { Menu, Dropdown } from "antd";
+
 const Header = () => {
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <Link href="/">
+          <a>Account</a>
+        </Link>
+      </Menu.Item>
+
+      <Menu.Item>
+        <Link href="/">
+          <a>Logout</a>
+        </Link>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <header id="main-header">
       <Link href="/">
-        <a className="main-header__logo">
+        <a className="logo">
           <Image
             width="228"
             height="30"
             src="/svg/kweklogo.svg"
             layout="responsive"
             alt="Kwek logo"
+            className="logo___image"
           />
         </a>
       </Link>
 
       <SearchBar />
 
-      <div className="main-header__shortcuts">
-        <div className="main-header__shortcuts__shortcut">
-          <Image width="22" height="24" src="/svg/user.svg" className='sign-in-icon' />
-          <p>Sign In</p>
+      <div className="shortcuts">
+        <div className="shortcuts__item">
+          <Image
+            width="16"
+            height="18"
+            src="/svg/user.svg"
+            className="shortcuts__icon"
+          />
+          <Dropdown overlay={menu} className="shortcuts__label">
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              Hi Alison <i className="fas fa-chevron-down"></i>
+            </a>
+          </Dropdown>
         </div>
-        <div className="main-header__shortcuts__shortcut">
-          <Image width="22" height="24" src="/svg/heart-filled.svg" />
-          <p>Saved</p>
-        </div>
-        <div className="main-header__shortcuts__shortcut">
-          <Image width="22" height="24" src="/svg/cart.svg" />
-          <p>Cart</p>
-        </div>
+
+        <Link href="/">
+          <a className="shortcuts__item">
+            <Image
+              width="16"
+              height="18"
+              src="/svg/heart-filled.svg"
+              className="shortcuts__icon"
+            />
+            <p className="shortcuts__label">Saved</p>
+          </a>
+        </Link>
+        <Link href="/">
+          <a className="shortcuts__item">
+            <Image
+              width="16"
+              height="18"
+              src="/svg/cart.svg"
+              className="shortcuts__icon"
+            />
+            <p className="shortcuts__label">Cart</p>
+          </a>
+        </Link>
       </div>
     </header>
   );

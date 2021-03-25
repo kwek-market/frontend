@@ -1,8 +1,28 @@
-#search-bar {
-  width: 50%;
-  
-  form {
+#searchbar {
+  flex-grow: 1;
+  margin: 0 0 0 10%;
+
+  .search-form {
     @include flex(space-between, center);
-    width: 90%;
+    width: 100%;
+    padding: 0.2rem 0.2rem 0.2rem 1.8rem;
+    border: 1px solid lighten($color: $col-primary-200, $amount: 50);
+    border-radius: 5px;
+
+    &__icon {
+      margin: 0 1rem 0 2rem;
+    }
+
+    &__input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      margin-left: 1.5rem;
+
+      &::placeholder {
+        color: $col-primary-100;
+        font-weight: 500;
+      }
+    }
   }
 }

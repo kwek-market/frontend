@@ -1,19 +1,26 @@
-import React from 'react'
-import Image from 'next/image'
-import Button from '../button/Button'
+import React from "react";
+import Image from "next/image";
+import Button from "../button/Button";
 
 const SearchBar = () => {
   return (
-    <div id='search-bar'>
-      <form>
-        <Image width='24' height='24' src='/svg/search-icon.svg'/>
-        <input type="search"/>
-        <Button className='btn'>
-          Hello
-        </Button>
+    <div id="searchbar">
+      <form className="search-form">
+        <Image
+          width="18"
+          height="20"
+          src="/svg/search-icon.svg"
+          className="search-form__icon"
+        />
+        <input
+          type="search"
+          className="search-form__input"
+          placeholder="I'm searching for..."
+        />
+        <Button className="btn search-form__btn bg-primary">Search</Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;

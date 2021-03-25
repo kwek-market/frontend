@@ -2,17 +2,31 @@
   padding: 2rem 5%;
   @include flex(space-between, center);
 
-  .main-header__logo {
-    width: 20%;
+  .logo {
+    width: 15%;
   }
 
-  .main-header__shortcuts {
-    width: 30%;
-    @include flex(space-between, center);
+  .shortcuts {
+    width: fit-content;
+    @include flex(flex-end, center);
+    padding: 0 0 0 1rem
   }
 
-  .main-header__shortcuts__shortcut {
-    @include flex(flex-start, center);
-    width: 30%;
+  .shortcuts__item {
+    @include flex(flex-end, center);
+    width: fit-content;
+    margin-left: 1.2rem;
+  }
+
+  .shortcuts__label {
+    font-weight: 400;
+    font-size: 0.8rem;
+    margin: 0;
+    margin-left: 0.5rem;
+    color: $col-black;
+
+    i {
+      font-size: 0.6rem;
+    }
   }
 }
