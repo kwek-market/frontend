@@ -2,8 +2,6 @@ import React from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import "../sass/main.scss";
-import "antd/dist/antd.css";
-import { Fragment } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

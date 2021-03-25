@@ -1,0 +1,64 @@
+#topbar {
+  @include flex(center, center);
+  padding: 0.7rem 2%;
+  background-color: $col-primary-300;
+
+  .ad {
+    @include flex(center, center);
+    flex-grow: 1;
+
+    &__title {
+      margin: 0;
+      font-weight: 600;
+      color: $col-white;
+      border-right: 1px solid;
+      border-color: darken($color: $col-white, $amount: 40);
+      padding-right: 1rem;
+      margin-right: 1rem;
+
+      span {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &__timer {
+      @include flex(flex-start, center);
+      padding-right: 1rem;
+      border-right: 1px solid;
+      border-color: darken($color: $col-white, $amount: 40);
+    }
+
+    &__timer-title {
+      margin: 0;
+      font-weight: 600;
+      color: $col-white;
+      margin-right: 1rem;
+    }
+
+    &__timer-box {
+      margin: 0 0.5rem;
+      padding: 0.3rem 0.5rem;
+      font-size: 0.7rem;
+      border: 1px solid #FFFFFF;
+      border-radius: 5px;
+    }
+
+    &__time {
+      margin: 0;
+      font-weight: 600;
+      color: $col-white;
+
+    }
+
+    &__cta {
+      margin-left: 1rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      font-weight: 600;
+      opacity: 0.7;
+    }
+    
+  }
+
+  
+}
