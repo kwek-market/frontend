@@ -33,7 +33,6 @@ const Header = () => {
             width="228"
             height="30"
             src="/svg/kweklogo.svg"
-            layout="responsive"
             alt="Kwek logo"
             className="logo___image"
           />
@@ -73,12 +72,15 @@ const Header = () => {
         </Link>
         <Link href="/">
           <a className="shortcuts__item">
-            <Image
-              width="16"
-              height="18"
-              src="/svg/cart.svg"
-              className="shortcuts__icon"
-            />
+            <div className="shortcuts__icon-wrap">
+              <Image
+                width="16"
+                height="18"
+                src="/svg/cart.svg"
+                className="shortcuts__icon"
+              />
+              <span className='shortcuts__icon-super'>4</span>
+            </div>
             <p className="shortcuts__label">Cart</p>
           </a>
         </Link>

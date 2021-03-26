@@ -3,7 +3,7 @@
   @include flex(space-between, center);
 
   .logo {
-    width: 15%;
+    width: fit-content;
   }
 
   .shortcuts {
@@ -16,6 +16,25 @@
     @include flex(flex-end, center);
     width: fit-content;
     margin-left: 1.2rem;
+  }
+
+  .shortcuts__icon-wrap {
+    @include flex(center, center);
+    position: relative;
+  }
+
+  .shortcuts__icon-super {
+    @include flex(center, center);
+    font-size: 0.5rem;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.4rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    background: $col-secondary;
+    border-radius: 100%;
+    color: $col-black;
+    border: 1px solid $col-white;
   }
 
   .shortcuts__label {
