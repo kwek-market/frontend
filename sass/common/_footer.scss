@@ -1,0 +1,120 @@
+footer {
+  background-color: $col-primary-300;
+  padding: 2.5rem 5% 0;
+  color: $col-white;
+
+  .footer__section {
+    @include flex(space-between, center);
+
+    &-one {
+      border-bottom: 1px solid #c0c0c093;
+      padding-bottom: 2rem;
+    }
+
+    &-two {
+      @include flex(space-between, flex-start);
+      border-bottom: 1px solid #c0c0c093;
+      padding: 3rem 0 2rem;
+    }
+
+    &-three {
+      padding: 1.2rem 0;
+    }
+  }
+
+  .cta {
+    margin-left: auto;
+    margin-right: 2rem;
+    &__heading {
+      color: $col-white;
+    }
+
+    &__text {
+      margin: 0;
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+  }
+
+  .form {
+    width: 45%;
+    height: 36px;
+    @include flex(space-between, center);
+
+    &__input {
+      flex-grow: 1;
+      height: 100%;
+      margin-right: 0.5rem;
+      background: #574242;
+      border: 1px solid #624B4B;
+      border-radius: 5px;
+      padding: 0 1rem;
+      outline: none;
+
+      &::placeholder {
+        color: #BDA8A8;
+        font-size: 0.8rem;
+      }
+    }
+
+    .btn {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      height: 100%;
+      background: $col-primary-50;
+      color: $col-black;
+    }
+  }
+
+  .nav {
+    
+    &__header {
+      color: $col-white;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    &__menu {
+      list-style: none;
+      padding: 0;
+    }
+
+    &__item {
+      margin: 0 0 1rem;
+    }
+
+    &__link {
+      color: $col-white;
+      opacity: 0.6;
+      transition: all 0.2s linear;
+
+      &:hover {
+        opacity: 1;
+        color: $col-white;
+      }
+    }
+  }
+
+  .copyright {
+    opacity: 0.7;
+
+    &__text {
+      margin: 0;
+      @include flex(space-between, center)
+    }
+
+    &__symbol {
+      font-size: 1.2rem;
+      margin: 0 0.3rem;
+    }
+  }
+
+  .social {
+    @include flex(space-between, center);
+
+    &__link {
+      margin: 0 0 0 0.5rem;
+    }
+  }
+}

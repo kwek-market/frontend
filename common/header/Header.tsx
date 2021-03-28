@@ -30,7 +30,7 @@ const Header = () => {
       <Link href="/">
         <a className="logo">
           <Image
-            width="228"
+            width="180"
             height="30"
             src="/svg/kweklogo.svg"
             alt="Kwek logo"
@@ -79,7 +79,7 @@ const Header = () => {
                 src="/svg/cart.svg"
                 className="shortcuts__icon"
               />
-              <span className='shortcuts__icon-super'>4</span>
+              <span className="shortcuts__icon-super">4</span>
             </div>
             <p className="shortcuts__label">Cart</p>
           </a>
