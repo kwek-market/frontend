@@ -1,7 +1,7 @@
 import React from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import "../sass/main.scss";
+import "../styles/main.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
