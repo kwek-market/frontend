@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 interface Fields {
@@ -15,7 +14,6 @@ interface Props {
   fields: Fields[];
   submit: {
     text: string;
-    url: string;
     action: (data: any) => void;
   };
   extra: {
@@ -34,7 +32,6 @@ const AuthForm: React.FC<Props> = ({
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
-  const router = useRouter();
 
   const handleChange = (e: any) => {
     setFormData({
@@ -45,16 +42,16 @@ const AuthForm: React.FC<Props> = ({
 
   const handleSubmit = (e: any, submitData: any) => {
     e.preventDefault();
-    submitData.url && router.push(submitData.url);
     submitData.action(formData);
   };
 
   return (
     <div id="user-auth-form">
       <form className="form">
-        <h2 className="form__title">{title}</h2>
-
-        <p className="form__subtitle">{subtitle}</p>
+        <div className="form__titleblock">
+          <h2 className="form__title">{title}</h2>
+          <p className="form__subtitle">{subtitle}</p>
+        </div>
 
         {fields.map(({ type, ...fieldProps }, index) => (
           <div key={index} className="form__input-container">
@@ -81,12 +78,14 @@ const AuthForm: React.FC<Props> = ({
           </Link>
         </div>
 
-        <button
-          className="form__btn btn bg-primary"
-          onClick={(e) => handleSubmit(e, submit)}
-        >
-          {submit.text}
-        </button>
+        <div className="form__btn-container">
+          <button
+            className="btn bg-primary"
+            onClick={(e) => handleSubmit(e, submit)}
+          >
+            {submit.text}
+          </button>
+        </div>
 
         <div className="form__extra">
           <p className="form__extra-text">{extra.text}</p>

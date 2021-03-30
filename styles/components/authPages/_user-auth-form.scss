@@ -4,18 +4,29 @@
   .form {
     width: 100%;
 
+    &__titleblock {
+      margin-bottom: 2rem;
+    }
+
     &__title {
       text-align: center;
       font-size: 2rem;
       color: $col-primary;
-      margin-bottom: 2rem;
       margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &__subtitle {
+      text-align: center;
+      color: #BFA5A3;
+      padding: 0 12%;
+      font-size: 0.9rem
     }
 
     &__input-container {
       @include flex(space-between, center); 
       position: relative;
-      margin-bottom: 0.9rem;
+      margin-bottom: 1rem;
     }
 
     &__input {
@@ -44,6 +55,7 @@
       text-align: right;
       margin: 0;
       visibility: hidden;
+      display: none;
 
       &-link {
         font-size: 0.8rem;
@@ -52,10 +64,16 @@
       }
     }
 
-    &__btn {
+    &__btn-container {
       width: 100%;
-      padding: 0.8rem 0;
+      margin: 2rem 0;
+
+      .btn {
+        width: 100%;
+        padding: 0.8rem 0;
+      }
     }
+    
 
     &__extra {
       @include flex(center, center);

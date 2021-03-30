@@ -26,7 +26,6 @@ function SignIn() {
     ],
     submit: {
       text: "Sign In",
-      url: "/sign-in",
       action: signIn,
     },
     extra: {

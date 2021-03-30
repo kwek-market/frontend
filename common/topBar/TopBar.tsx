@@ -12,9 +12,11 @@ const Topbar = (props: any) => {
   return (
     <div id="topbar">
       {props.withLogo && (
-        <div className="logo">
-          <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
-        </div>
+        <Link href="/">
+          <a className="logo">
+            <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
+          </a>
+        </Link>
       )}
 
       <div className="ad">

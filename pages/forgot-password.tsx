@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const Page = () => {
+import Topbar from '../common/topBar/TopBar'
+import ForgotPass from "../components/auth/ForgotPass";
+
+function Page() {
   return (
-    <div>
-      
+    <div id='forgot-password' className="auth-page">
+      <Topbar withLogo={true} />
+      <ForgotPass />
     </div>
-  )
+  );
 }
+
+export default Page;

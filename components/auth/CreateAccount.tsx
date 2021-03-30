@@ -31,7 +31,6 @@ function SignUp() {
     ],
     submit: {
       text: "Create Account",
-      url: "/create-account",
       action: createAccount,
     },
     extra: {

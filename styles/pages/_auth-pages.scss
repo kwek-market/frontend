@@ -59,7 +59,6 @@
   #user-auth-form .form__sign-in-extra {
     visibility: visible;
     @include flex(flex-end, center);
-    margin: 0 0 1.5rem;
   }
 }
 
@@ -71,4 +70,14 @@
       margin-top: 10rem;
     }
   }
+}
+
+#forgot-password {
+  .form-container {
+    padding: 10% 22% 0;
+  }
+
+  // #user-auth-form .form__sign-in-extra {
+  //   display: none;
+  // }
 }
