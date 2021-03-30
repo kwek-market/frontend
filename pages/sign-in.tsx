@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import SignIn from "../components/auth/SiginIn";
 
 function Page() {
   return (
-    <div>
-      
+    <div className="auth-page">
+      <SignIn />
     </div>
-  )
+  );
 }
 
-export default Page
+export default Page;
