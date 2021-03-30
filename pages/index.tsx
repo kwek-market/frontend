@@ -8,7 +8,7 @@ import Footer from '../common/footer/Footer'
 const Home = () => {
   return (
     <div>
-      <TopBar />
+      <TopBar withLogo={false} />
       <Header />
       <Navbar />
       <Footer />

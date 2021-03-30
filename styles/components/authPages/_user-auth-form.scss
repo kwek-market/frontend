@@ -1,0 +1,78 @@
+#user-auth-form {
+  width: 100%;
+
+  .form {
+    width: 100%;
+
+    &__title {
+      text-align: center;
+      font-size: 2rem;
+      color: $col-primary;
+      margin-bottom: 2rem;
+      margin-top: 0;
+    }
+
+    &__input-container {
+      @include flex(space-between, center); 
+      position: relative;
+      margin-bottom: 0.9rem;
+    }
+
+    &__input {
+      flex-grow: 1;
+      outline: none;
+      border: none;
+      background: none;
+      padding: 0.8rem;
+      border: 1px solid #bfa5a3be;
+      border-radius: 5px;
+      
+      &::placeholder {
+        color: #BFA5A3;
+      }
+    }
+
+    &__input-icon {
+      position: absolute;
+      margin: auto;
+      right: 0.8rem;
+      color: #BFA5A3;
+    }
+
+    &__sign-in-extra {
+      width: 100%;
+      text-align: right;
+      margin: 0;
+      visibility: hidden;
+
+      &-link {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: #574240;
+      }
+    }
+
+    &__btn {
+      width: 100%;
+      padding: 0.8rem 0;
+    }
+
+    &__extra {
+      @include flex(center, center);
+      margin-top: 2rem;
+    }
+
+    &__extra-text {
+      margin: 0;
+      color: #BFA5A3;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    &__extra-link {
+      font-size: 0.8rem;
+      color: $col-black;
+      font-weight: 500;
+    }
+  }
+}

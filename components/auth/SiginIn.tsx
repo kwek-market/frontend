@@ -37,13 +37,15 @@ function SignIn() {
   };
 
   return (
-    <div id="auth-page">
+    <div className='auth-page-main-wrapper'>
       <div className="banner">
-        <h1 className="banner__text">A Fresh Approach to Shopping</h1>
-        <Link href="/">
+        <h1 className="banner__text">A Fresh <br/> Approach to <br/> Shopping</h1>
+        <Link href="#0">
           <a className="banner__link">
             <button className="btn">
+              <div className="btn__text">
               Shop with Kwek
+              </div>
               <Image
                 className="btn__icon btn__icon--right"
                 src="/svg/arrow-right-red.svg"

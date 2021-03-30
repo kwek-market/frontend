@@ -42,9 +42,9 @@ function SignUp() {
   };
 
   return (
-    <div id="auth-page">
+    <div className='auth-page-main-wrapper'>
       <div className="banner">
-        <h1 className="banner__text">Discover Something Different.</h1>
+        <h1 className="banner__text">Discover <br/> Something <br/> Different.</h1>
         <Link href="/">
           <a className="banner__link">
             <button className="btn">

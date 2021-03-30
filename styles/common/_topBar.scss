@@ -1,7 +1,13 @@
 #topbar {
   @include flex(center, center);
+  width: 100%;
   padding: 0.7rem 2%;
   background-color: $col-primary-300;
+  height: fit-content;
+
+  .logo {
+    @include flex(center, center);
+  }
 
   .ad {
     @include flex(center, center);

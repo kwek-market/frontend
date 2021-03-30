@@ -12,15 +12,17 @@
 
 // pages
 @import 'pages/index';
-@import 'pages/sign-in';
-@import 'pages/sign-up';
+@import 'pages/auth-pages';
 
 // common
 @import 'common/topBar';
 @import 'common/header';
 @import 'common/searchBar';
 @import 'common/navbar';
-@import 'common/footer'
+@import 'common/footer';
+
+// components
+@import 'components/authPages/user-auth-form'
 
 
 // components

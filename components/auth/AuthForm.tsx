@@ -44,7 +44,7 @@ const AuthForm: React.FC<Props> = ({
   };
 
   const handleSubmit = (e: any, submitData: any) => {
-    e.preventDefault()
+    e.preventDefault();
     submitData.url && router.push(submitData.url);
     submitData.action(formData);
   };
@@ -60,19 +60,31 @@ const AuthForm: React.FC<Props> = ({
           <div key={index} className="form__input-container">
             <input
               {...fieldProps}
-              type={type === 'password' ? (showPassword ? 'text' : type) : type}
+              className="form__input"
+              type={type === "password" ? (showPassword ? "text" : type) : type}
               onChange={(e) => handleChange(e)}
             />
             {type === "password" && (
               <i
-                className={!showPassword ? "far fa-eye" : "far fa-eye-slash"}
+                className={`form__input-icon ${
+                  !showPassword ? "far fa-eye" : "far fa-eye-slash"
+                }`}
                 onClick={() => setShowPassword(!showPassword)}
               ></i>
             )}
           </div>
         ))}
 
-        <button className="btn bg-primary" onClick={e => handleSubmit(e, submit)}>
+        <div className="form__sign-in-extra">
+          <Link href="/forgot-password">
+            <a className="form__sign-in-extra-link">Forgot Password?</a>
+          </Link>
+        </div>
+
+        <button
+          className="form__btn btn bg-primary"
+          onClick={(e) => handleSubmit(e, submit)}
+        >
           {submit.text}
         </button>
 

@@ -4,13 +4,19 @@ import Link from "next/link";
 
 import Button from "../button/Button";
 
-const Topbar = () => {
+const Topbar = (props: any) => {
   const [show, setShow] = useState(true);
 
   if (!show) return null;
 
   return (
     <div id="topbar">
+      {props.withLogo && (
+        <div className="logo">
+          <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
+        </div>
+      )}
+
       <div className="ad">
         <p className="ad__title">
           Black Friday. <span className="text-primary">Save up to 50%.</span>
