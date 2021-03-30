@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,6 +9,8 @@ import SearchBar from "./SearchBar";
 import { Menu, Dropdown } from "antd";
 
 const Header = () => {
+  const [auth, setAuth] = useState(false);
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -19,7 +21,7 @@ const Header = () => {
 
       <Menu.Item>
         <Link href="/">
-          <a>Logout</a>
+          <a onClick={() => setAuth(false)}>Logout</a>
         </Link>
       </Menu.Item>
     </Menu>
@@ -42,22 +44,36 @@ const Header = () => {
       <SearchBar />
 
       <div className="shortcuts">
-        <div className="shortcuts__item">
-          <Image
-            width="16"
-            height="18"
-            src="/svg/user.svg"
-            className="shortcuts__icon"
-          />
-          <Dropdown overlay={menu} className="shortcuts__label">
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-            >
-              Hi Alison <i className="fas fa-chevron-down"></i>
+        {auth ? (
+          <div className="shortcuts__item">
+            <Image
+              width="16"
+              height="18"
+              src="/svg/user.svg"
+              className="shortcuts__icon"
+            />
+            <Dropdown overlay={menu} className="shortcuts__label">
+              <a
+                className="ant-dropdown-link"
+                onClick={(e) => e.preventDefault()}
+              >
+                Hi Alison <i className="fas fa-chevron-down"></i>
+              </a>
+            </Dropdown>
+          </div>
+        ) : (
+          <Link href="/sign-in">
+            <a className="shortcuts__item" onClick={() => setAuth(true)}>
+              <Image
+                width="16"
+                height="18"
+                src="/svg/user.svg"
+                className="shortcuts__icon"
+              />
+              <p className="shortcuts__label">Sign In</p>
             </a>
-          </Dropdown>
-        </div>
+          </Link>
+        )}
 
         <Link href="/">
           <a className="shortcuts__item">
