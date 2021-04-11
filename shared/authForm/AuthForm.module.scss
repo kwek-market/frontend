@@ -53,17 +53,17 @@
       color: #BFA5A3;
     }
 
-    &_signInExtra {
+    &_inputSub {
+      @include flex(flex-end, center);
       width: 100%;
       text-align: right;
       margin: 0;
-      visibility: hidden;
-      display: none;
 
       &Link {
         font-size: 0.8rem;
         font-style: italic;
         color: #574240;
+        margin-right: 0.1rem;
       }
     }
 

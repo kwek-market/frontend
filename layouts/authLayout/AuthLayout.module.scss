@@ -59,11 +59,6 @@
       margin-bottom: 3rem;
     }
   }
-
-  #user-auth-form .form__sign-in-extra {
-    visibility: visible;
-    @include flex(flex-end, center);
-  }
 }
 
 #createAccount {

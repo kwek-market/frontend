@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from './AuthForm.module.scss'
+import styles from "./AuthForm.module.scss";
 
 import Link from "next/link";
 
@@ -8,6 +8,7 @@ interface Fields {
   placeholder: string;
   type: string;
   className?: string;
+  sub?: any;
 }
 
 interface Type {
@@ -55,30 +56,38 @@ const AuthForm: React.FC<Type> = ({
           <p className={styles.form_subtitle}>{subtitle}</p>
         </div>
 
-        {fields.map(({ type, ...fieldProps }, index) => (
-          <div key={index} className={styles.form_inputContainer}>
-            <input
-              {...fieldProps}
-              className={styles.form_input}
-              type={type === "password" ? (showPassword ? "text" : type) : type}
-              onChange={(e) => handleChange(e)}
-            />
-            {type === "password" && (
-              <i
-                className={`${styles.form_inputIcon} ${
-                  !showPassword ? "far fa-eye" : "far fa-eye-slash"
-                }`}
-                onClick={() => setShowPassword(!showPassword)}
-              ></i>
-            )}
-          </div>
-        ))}
+        {fields.map(({ type, sub, ...fieldProps }, index) => (
+          <React.Fragment>
+            <div key={index} className={styles.form_inputContainer}>
+              <input
+                {...fieldProps}
+                className={styles.form_input}
+                type={
+                  type === "password" ? (showPassword ? "text" : type) : type
+                }
+                onChange={(e) => handleChange(e)}
+              />
+              {type === "password" && (
+                <i
+                  className={`${styles.form_inputIcon} ${
+                    !showPassword ? "far fa-eye" : "far fa-eye-slash"
+                  }`}
+                  onClick={() => setShowPassword(!showPassword)}
+                ></i>
+              )}
+            </div>
 
-        <div className={styles.form_signInExtra}>
-          <Link href="/forgot-password">
-            <a className={styles.form_signInExtraLink}>Forgot Password?</a>
-          </Link>
-        </div>
+            {sub && (
+              <div className={styles.form_inputSub}>
+                <Link href={sub.url}>
+                  <a className={styles.form_inputSubLink}>
+                    {sub.text}
+                  </a>
+                </Link>
+              </div>
+            )}
+          </React.Fragment>
+        ))}
 
         <div className={styles.form_btnContainer}>
           <button

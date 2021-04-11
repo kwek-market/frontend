@@ -21,6 +21,10 @@ const Page = () => {
         name: "password",
         placeholder: "Password",
         type: "password",
+        sub: {
+          text: "Forgot Password?",
+          url: "/forgot-password"
+        }
       },
     ],
     submit: {
