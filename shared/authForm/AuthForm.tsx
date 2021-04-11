@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import styles from './AuthForm.module.scss'
+
 import Link from "next/link";
 
 interface Fields {
@@ -46,24 +48,24 @@ const AuthForm: React.FC<Type> = ({
   };
 
   return (
-    <div id="user-auth-form">
-      <form className="form">
-        <div className="form__titleblock">
-          <h2 className="form__title">{title}</h2>
-          <p className="form__subtitle">{subtitle}</p>
+    <div id={styles.authForm}>
+      <form className={styles.form}>
+        <div className={styles.form_titleblock}>
+          <h2 className={styles.form_title}>{title}</h2>
+          <p className={styles.form_subtitle}>{subtitle}</p>
         </div>
 
         {fields.map(({ type, ...fieldProps }, index) => (
-          <div key={index} className="form__input-container">
+          <div key={index} className={styles.form_inputContainer}>
             <input
               {...fieldProps}
-              className="form__input"
+              className={styles.form_input}
               type={type === "password" ? (showPassword ? "text" : type) : type}
               onChange={(e) => handleChange(e)}
             />
             {type === "password" && (
               <i
-                className={`form__input-icon ${
+                className={`${styles.form_inputIcon} ${
                   !showPassword ? "far fa-eye" : "far fa-eye-slash"
                 }`}
                 onClick={() => setShowPassword(!showPassword)}
@@ -72,25 +74,25 @@ const AuthForm: React.FC<Type> = ({
           </div>
         ))}
 
-        <div className="form__sign-in-extra">
+        <div className={styles.form_signInExtra}>
           <Link href="/forgot-password">
-            <a className="form__sign-in-extra-link">Forgot Password?</a>
+            <a className={styles.form_signInExtraLink}>Forgot Password?</a>
           </Link>
         </div>
 
-        <div className="form__btn-container">
+        <div className={styles.form_btnContainer}>
           <button
-            className="btn bg-primary"
+            className={`btn bg-primary ${styles.btn}`}
             onClick={(e) => handleSubmit(e, submit)}
           >
             {submit.text}
           </button>
         </div>
 
-        <div className="form__extra">
-          <p className="form__extra-text">{extra.text}</p>
+        <div className={styles.form_extra}>
+          <p className={styles.form_extraText}>{extra.text}</p>
           <Link href={extra.linkUrl}>
-            <a className="form__extra-link">{extra.linkText}</a>
+            <a className={styles.form_extraLink}>{extra.linkText}</a>
           </Link>
         </div>
       </form>

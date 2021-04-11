@@ -1,0 +1,99 @@
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+#authForm {
+  width: 100%;
+
+  .form {
+    width: 100%;
+
+    &_titleblock {
+      margin-bottom: 2rem;
+    }
+
+    &_title {
+      text-align: center;
+      font-size: 2rem;
+      color: $col-primary;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &_subtitle {
+      text-align: center;
+      color: #BFA5A3;
+      padding: 0 12%;
+      font-size: 0.9rem
+    }
+
+    &_inputContainer {
+      @include flex(space-between, center); 
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    &_input {
+      flex-grow: 1;
+      outline: none;
+      border: none;
+      background: none;
+      padding: 0.8rem;
+      border: 1px solid #bfa5a3be;
+      border-radius: 5px;
+      
+      &::placeholder {
+        color: #BFA5A3;
+      }
+    }
+
+    &_inputIcon {
+      position: absolute;
+      margin: auto;
+      right: 0.8rem;
+      color: #BFA5A3;
+    }
+
+    &_signInExtra {
+      width: 100%;
+      text-align: right;
+      margin: 0;
+      visibility: hidden;
+      display: none;
+
+      &Link {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: #574240;
+      }
+    }
+
+    &_btnContainer {
+      width: 100%;
+      margin: 2rem 0;
+
+      .btn {
+        width: 100%;
+        padding: 0.8rem 0;
+      }
+    }
+    
+
+    &_extra {
+      @include flex(center, center);
+      margin-top: 2rem;
+    }
+
+    &_extraText {
+      margin: 0;
+      color: #BFA5A3;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    &_extraLink {
+      font-size: 0.8rem;
+      color: $col-black;
+      font-weight: 500;
+    }
+  }
+}
