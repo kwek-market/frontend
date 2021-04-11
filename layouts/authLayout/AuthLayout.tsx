@@ -18,11 +18,11 @@ const AuthLayout = ({ children, id, withBanner }: any) => {
               A Fresh <br /> Approach to <br /> Shopping
             </h1>
             <Link href="#0">
-              <a className={styles.banner__link}>
+              <a className={styles.banner_link}>
                 <button className={`btn ${styles.btn}`}>
-                  <div className={styles.btn__text}>Shop with Kwek</div>
+                  <div className={styles.btn_text}>Shop with Kwek</div>
                   <Image
-                    className={styles.btn__icon}
+                    className={styles.btn_icon}
                     src="/svg/arrow-right-red.svg"
                     width="24"
                     height="11.6"

@@ -8,7 +8,7 @@ interface Fields {
   className?: string;
 }
 
-interface Props {
+interface Type {
   title: string;
   subtitle?: string;
   fields: Fields[];
@@ -23,7 +23,7 @@ interface Props {
   };
 }
 
-const AuthForm: React.FC<Props> = ({
+const AuthForm: React.FC<Type> = ({
   title,
   subtitle,
   fields,
