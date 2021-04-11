@@ -1,6 +1,6 @@
 import React from "react";
 
-import Topbar from "../../shared/topBar/TopBar";
+import { Topbar } from "../../shared";
 import Header from "../../shared/header/Header";
 import Navbar from "../../shared/navBar/NavBar";
 import Footer from "../../shared/footer/Footer";

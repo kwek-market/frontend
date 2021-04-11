@@ -1,0 +1,83 @@
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+#mainHeader {
+  padding: 2rem 5%;
+  @include flex(space-between, center);
+
+  .logo {
+    width: fit-content;
+  }
+
+  .shortcuts {
+    width: fit-content;
+    @include flex(flex-end, center);
+    padding: 0 0 0 1rem
+  }
+
+  .shortcuts_item {
+    @include flex(flex-end, center);
+    width: fit-content;
+    margin-left: 1.2rem;
+  }
+
+  .shortcuts_iconWrap {
+    @include flex(center, center);
+    position: relative;
+  }
+
+  .shortcuts_iconSuper {
+    @include flex(center, center);
+    font-size: 0.5rem;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.4rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    background: $col-secondary;
+    border-radius: 100%;
+    color: $col-black;
+    border: 1px solid $col-white;
+  }
+
+  .shortcuts_label {
+    font-weight: 400;
+    font-size: 0.8rem;
+    margin: 0;
+    margin-left: 0.5rem;
+    color: $col-black;
+
+    i {
+      font-size: 0.6rem;
+    }
+  }
+}
+
+#searchbar {
+  flex-grow: 1;
+  margin: 0 0 0 10%;
+
+  .searchForm {
+    @include flex(space-between, center);
+    width: 100%;
+    padding: 0.2rem 0.2rem 0.2rem 1.8rem;
+    border: 1px solid lighten($color: $col-primary-200, $amount: 50);
+    border-radius: 5px;
+
+    &_icon {
+      margin: 0 1rem 0 2rem;
+    }
+
+    &_input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      margin-left: 1.5rem;
+
+      &::placeholder {
+        color: $col-primary-100;
+        font-weight: 500;
+      }
+    }
+  }
+}

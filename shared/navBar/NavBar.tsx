@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './Navbar.module.scss'
 import Link from "next/link";
 
 const NavBar = () => {
@@ -37,20 +38,20 @@ const NavBar = () => {
     },
   ];
   return (
-    <nav id="main-nav" className="bg-primary">
-      <ul className="nav">
+    <nav id={styles.mainNav} className="bg-primary">
+      <ul className={styles.nav}>
         {menu.map((item, index) => (
-          <li className="nav__item" key={index}>
+          <li className={styles.nav_item} key={index}>
             <Link href="/">
-              <a className="nav__link"> {item.title} </a>
+              <a className={styles.nav_link}> {item.title} </a>
             </Link>
           </li>
         ))}
       </ul>
 
-      <div className="extra">
+      <div className={styles.extra}>
         <Link href="/">
-          <a className="extra__link">Kwek’s Response to COVID-19</a>
+          <a className={styles.extra_link}>Kwek’s Response to COVID-19</a>
         </Link>
       </div>
     </nav>

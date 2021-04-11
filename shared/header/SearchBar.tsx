@@ -1,22 +1,23 @@
 import React from "react";
+import styles from './Header.module.scss'
 import Image from "next/image";
 
 const SearchBar = () => {
   return (
-    <div id="searchbar">
-      <form className="search-form">
+    <div id={styles.searchbar}>
+      <form className={styles.searchForm}>
         <Image
           width="18"
           height="20"
           src="/svg/search-icon.svg"
-          className="search-form__icon"
+          className={styles.searchForm_icon}
         />
         <input
           type="search"
-          className="search-form__input"
+          className={styles.searchForm_input}
           placeholder="I'm searching for..."
         />
-        <button className="btn search-form__btn bg-primary">Search</button>
+        <button className={`btn bg-primary ${styles.searchForm_btn}`}>Search</button>
       </form>
     </div>
   );

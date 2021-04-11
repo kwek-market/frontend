@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import styles from './Header.module.scss'
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -28,31 +30,31 @@ const Header = () => {
   );
 
   return (
-    <header id="main-header">
+    <header id={styles.mainHeader}>
       <Link href="/">
-        <a className="logo">
+        <a className={styles.logo}>
           <Image
             width="180"
             height="30"
             src="/svg/kweklogo.svg"
             alt="Kwek logo"
-            className="logo___image"
+            className={styles.logo_image}
           />
         </a>
       </Link>
 
       <SearchBar />
 
-      <div className="shortcuts">
+      <div className={styles.shortcuts}>
         {auth ? (
-          <div className="shortcuts__item">
+          <div className={styles.shortcuts_item}>
             <Image
               width="16"
               height="18"
               src="/svg/user.svg"
-              className="shortcuts__icon"
+              className={styles.shortcuts_icon}
             />
-            <Dropdown overlay={menu} className="shortcuts__label">
+            <Dropdown overlay={menu} className={styles.shortcuts_label}>
               <a
                 className="ant-dropdown-link"
                 onClick={(e) => e.preventDefault()}
@@ -63,41 +65,41 @@ const Header = () => {
           </div>
         ) : (
           <Link href="/sign-in">
-            <a className="shortcuts__item" onClick={() => setAuth(true)}>
+            <a className={styles.shortcuts_item} onClick={() => setAuth(true)}>
               <Image
                 width="16"
                 height="18"
                 src="/svg/user.svg"
-                className="shortcuts__icon"
+                className={styles.shortcuts_icon}
               />
-              <p className="shortcuts__label">Sign In</p>
+              <p className={styles.shortcuts_label}>Sign In</p>
             </a>
           </Link>
         )}
 
         <Link href="/">
-          <a className="shortcuts__item">
+          <a className={styles.shortcuts_item}>
             <Image
               width="16"
               height="18"
               src="/svg/heart-filled.svg"
-              className="shortcuts__icon"
+              className={styles.shortcuts_icon}
             />
-            <p className="shortcuts__label">Saved</p>
+            <p className={styles.shortcuts_label}>Saved</p>
           </a>
         </Link>
         <Link href="/">
-          <a className="shortcuts__item">
-            <div className="shortcuts__icon-wrap">
+          <a className={styles.shortcuts_item}>
+            <div className={styles.shortcuts_iconWrap}>
               <Image
                 width="16"
                 height="18"
                 src="/svg/cart.svg"
-                className="shortcuts__icon"
+                className={styles.shortcuts_icon}
               />
-              <span className="shortcuts__icon-super">4</span>
+              <span className={styles.shortcuts_iconSuper}>4</span>
             </div>
-            <p className="shortcuts__label">Cart</p>
+            <p className={styles.shortcuts_label}>Cart</p>
           </a>
         </Link>
       </div>
