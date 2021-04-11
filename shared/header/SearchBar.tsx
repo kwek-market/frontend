@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Button from "../button/Button";
 
 const SearchBar = () => {
   return (
@@ -17,7 +16,7 @@ const SearchBar = () => {
           className="search-form__input"
           placeholder="I'm searching for..."
         />
-        <Button className="btn search-form__btn bg-primary">Search</Button>
+        <button className="btn search-form__btn bg-primary">Search</button>
       </form>
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import styles from './TopBar.module.scss'
+
 import Image from "next/image";
 import Link from "next/link";
-
-import Button from "../button/Button";
 
 const Topbar = (props: any) => {
   const [show, setShow] = useState(true);
@@ -10,39 +10,39 @@ const Topbar = (props: any) => {
   if (!show) return null;
 
   return (
-    <div id="topbar">
+    <div id={styles.topbar}>
       {props.withLogo && (
         <Link href="/">
-          <a className="logo">
+          <a className={styles.logo}>
             <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
           </a>
         </Link>
       )}
 
-      <div className="ad">
-        <p className="ad__title">
+      <div className={styles.ad}>
+        <p className={styles.ad_title}>
           Black Friday. <span className="text-primary">Save up to 50%.</span>
         </p>
 
-        <div className="ad__timer">
-          <p className="ad__timer-title">Deal Ends:</p>
-          <div className="ad__timer-box">
-            <p className="ad__time">
+        <div className={styles.ad_timer}>
+          <p className={styles.ad_timerTitle}>Deal Ends:</p>
+          <div className={styles.ad_timerBox}>
+            <p className={styles.ad_time}>
               81 <span className="text-primary">D</span>
             </p>
           </div>
-          <div className="ad__timer-box">
-            <p className="ad__time">
+          <div className={styles.ad_timerBox}>
+            <p className={styles.ad_time}>
               17 <span className="text-primary">H</span>
             </p>
           </div>
-          <div className="ad__timer-box">
-            <p className="ad__time">
+          <div className={styles.ad_timerBox}>
+            <p className={styles.ad_time}>
               26 <span className="text-primary">M</span>
             </p>
           </div>
-          <div className="ad__timer-box">
-            <p className="ad__time">
+          <div className={styles.ad_timerBox}>
+            <p className={styles.ad_time}>
               47 <span className="text-primary">S</span>
             </p>
           </div>
@@ -50,17 +50,17 @@ const Topbar = (props: any) => {
 
         <Link href="/">
           <a>
-            <Button className="ad__cta btn btn--outline-white">
+            <button className={`btn btn--outline-white ${styles.ad_cta}`}>
               Learn More
-            </Button>
+            </button>
           </a>
         </Link>
       </div>
 
       <div className="control">
-        <Button className="btn btn--naked" action={() => setShow(!show)}>
+        <button className="btn btn--naked" onClick={() => setShow(!show)}>
           <Image src="/svg/cancel.svg" width="25" height="25" />
-        </Button>
+        </button>
       </div>
     </div>
   );
