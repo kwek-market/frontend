@@ -1,15 +1,44 @@
 import React from "react";
 
-import Topbar from '../common/topBar/TopBar'
-import ResetPass from "../components/auth/ResetPass";
+import { AuthLayout } from "../layouts";
+import { AuthForm } from "../shared";
 
-function Page() {
+const Page = () => {
+  const resetPass = (formData: any) => {
+    console.log(formData);
+  };
+
+  const form = {
+    title: "Reset your Password.",
+    subtitle: "Reset your password to continue.",
+    fields: [
+      {
+        name: "password",
+        placeholder: "New Password",
+        type: "password",
+      },
+      {
+        name: "newPassword",
+        placeholder: "Confirm New Password",
+        type: "password",
+      },
+    ],
+    submit: {
+      text: "Reset Password",
+      action: resetPass,
+    },
+    extra: {
+      text: "Do you remember your password?",
+      linkText: "Try Logging In",
+      linkUrl: "/sign-in",
+    },
+  };
+  
   return (
-    <div id='forgot-password' className="auth-page">
-      <Topbar withLogo={true} />
-      <ResetPass />
-    </div>
+    <AuthLayout id="createAccount">
+      <AuthForm {...form} />
+    </AuthLayout>
   );
-}
+};
 
 export default Page;

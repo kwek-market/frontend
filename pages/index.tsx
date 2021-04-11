@@ -1,19 +1,11 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import Header from '../common/header/Header';
-import TopBar from '../common/topBar/TopBar';
-import Navbar from '../common/navBar/NavBar';
-import Footer from '../common/footer/Footer'
+import { MainLayout } from "../layouts";
 
 const Home = () => {
-  return (
-    <div>
-      <TopBar withLogo={false} />
-      <Header />
-      <Navbar />
-      <Footer />
-    </div>
-  )
-}
+  return (<MainLayout>
 
-export default Home
+  </MainLayout>)
+};
+
+export default Home;

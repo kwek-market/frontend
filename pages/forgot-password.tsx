@@ -1,15 +1,40 @@
 import React from "react";
 
-import Topbar from '../common/topBar/TopBar'
-import ForgotPass from "../components/auth/ForgotPass";
+import { AuthLayout } from "../layouts";
+import { AuthForm } from "../shared";
 
-function Page() {
+const Page = () => {
+  const sendResetRequest = (formData: any) => {
+    console.log(formData);
+  };
+
+  const form = {
+    title: "Forgot Password?",
+    subtitle:
+      "Don’t worry, resetting your password is easy. Just enter the email address you used to sign up to Kwek.",
+    fields: [
+      {
+        name: "email",
+        placeholder: "Email Address",
+        type: "email",
+      },
+    ],
+    submit: {
+      text: "Request Reset Link",
+      action: sendResetRequest,
+    },
+    extra: {
+      text: "Do you remember your password?",
+      linkText: "Try Logging In",
+      linkUrl: "/sign-in",
+    },
+  };
+
   return (
-    <div id='forgot-password' className="auth-page">
-      <Topbar withLogo={true} />
-      <ForgotPass />
-    </div>
+    <AuthLayout id="createAccount">
+      <AuthForm {...form} />
+    </AuthLayout>
   );
-}
+};
 
 export default Page;
