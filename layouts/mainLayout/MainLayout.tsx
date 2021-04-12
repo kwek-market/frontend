@@ -1,9 +1,6 @@
 import React from "react";
-
-import { Topbar } from "../../shared";
-import Header from "../../shared/header/Header";
-import Navbar from "../../shared/navBar/NavBar";
-import Footer from "../../shared/footer/Footer";
+import styles from './MainLayout.module.scss'
+import { Topbar, Header, Navbar, Footer } from "../../shared";
 
 const MainLayout = ({ children }) => {
   return (
@@ -11,7 +8,7 @@ const MainLayout = ({ children }) => {
       <Topbar withLogo={false} />
       <Header />
       <Navbar />
-      {children}
+      <main className={styles.main_container}>{children}</main>
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
-import Categorymenu from './categoryMenu/CategoryMenu'
+import CategoryMenu from './categoryMenu/CategoryMenu'
 import Hero from './hero/Hero'
 
 export {
-  Categorymenu,
+  CategoryMenu,
   Hero
 }

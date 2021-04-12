@@ -1,11 +1,12 @@
 import Head from "next/head";
 
 import { MainLayout } from "../layouts";
+import { Hero } from '../components/home'
 
 const Home = () => {
   return (
     <MainLayout>
-      <h1>Home Page Kwek</h1>
+      <Hero />
     </MainLayout>
   );
 };
