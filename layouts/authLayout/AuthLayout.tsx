@@ -4,7 +4,7 @@ import styles from "./AuthLayout.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 
-import { Topbar } from "../../shared";
+import { Topbar } from "@/shared/";
 
 const AuthLayout = ({ children, id, withBanner }: any) => {
   return (

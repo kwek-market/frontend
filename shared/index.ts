@@ -4,10 +4,13 @@ import Header from './header/Header'
 import Navbar from './navBar/NavBar'
 import Footer from './footer/Footer'
 
+import ProductBox from './productBox/ProductBox'
+
 export {
   AuthForm,
   Topbar,
   Header,
   Navbar,
-  Footer
+  Footer,
+  ProductBox
 }

@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./Hero.module.scss";
 
-import Image from "next/image";
-
 import { CategoryMenu } from "../index";
 
 const Hero = () => {

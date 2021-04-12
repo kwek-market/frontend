@@ -1,0 +1,14 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins"; 
+
+.mainContainer {
+  @include flex();
+}
+
+.products {
+  @include flex(space-between, flex-start);
+}
+
+.product {
+  width: 24%;
+}
