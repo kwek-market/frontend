@@ -1,11 +1,11 @@
 // abstracts
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/helpers';
+@import 'variables';
+@import 'functions';
+@import 'mixins';
+@import 'helpers';
 
 
 // base
-@import 'base/reset';
-@import 'base/typography';
-@import 'base/global';
+@import 'reset';
+@import 'typography';
+@import 'global';
