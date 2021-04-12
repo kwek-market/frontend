@@ -34,7 +34,7 @@ const Page = () => {
     extra: {
       text: "Already have an account?",
       linkText: "Login",
-      linkUrl: "/sign-in",
+      linkUrl: "/login",
     },
   };
 

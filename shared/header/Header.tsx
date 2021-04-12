@@ -64,7 +64,7 @@ const Header = () => {
             </Dropdown>
           </div>
         ) : (
-          <Link href="/sign-in">
+          <Link href="/login">
             <a className={styles.shortcuts_item} onClick={() => setAuth(true)}>
               <Image
                 width="16"

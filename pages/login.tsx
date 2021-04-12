@@ -39,7 +39,7 @@ const Page = () => {
   };
 
   return (
-    <AuthLayout id='signIn' withBanner={true} >
+    <AuthLayout id='Login' withBanner={true} >
       <AuthForm {...form} />
     </AuthLayout>
   );

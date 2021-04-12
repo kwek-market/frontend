@@ -26,7 +26,7 @@ const Page = () => {
     extra: {
       text: "Do you remember your password?",
       linkText: "Try Logging In",
-      linkUrl: "/sign-in",
+      linkUrl: "/login",
     },
   };
 
