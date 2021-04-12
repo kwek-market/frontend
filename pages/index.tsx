@@ -1,12 +1,13 @@
 import Head from "next/head";
 
 import { MainLayout } from "../layouts";
-import { Hero } from '../components/home'
+import { Hero, Features } from '../components/home'
 
 const Home = () => {
   return (
     <MainLayout>
       <Hero />
+      <Features />
     </MainLayout>
   );
 };
