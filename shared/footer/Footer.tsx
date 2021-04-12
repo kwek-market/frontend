@@ -193,7 +193,7 @@ const Component = () => {
         </nav>
       </div>
 
-      <div className="footer__section footer__section-three">
+      <div className={`${styles.footer_section} ${styles.footer_sectionThree}`}>
         <div className={styles.gateways}>
           <Image
             width="48"
