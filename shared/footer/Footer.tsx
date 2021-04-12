@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './Footer.module.scss'
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,21 +7,21 @@ import Form from "./SubscribeForm";
 
 const Component = () => {
   return (
-    <footer className="footer">
-      <div className="footer__section footer__section-one">
-        <div className="logo">
+    <footer className={styles.footer}>
+      <div className={`${styles.footer_section} ${styles.footer_sectionOne}`}>
+        <div className={styles.logo}>
           <Image
             width="180"
             height="30"
             src="/svg/kwek-logo-white.svg"
             alt="Kwek logo"
-            className="logo__image"
+            className={styles.logo_image}
           />
         </div>
 
-        <div className="cta">
-          <h4 className="cta__heading">NEW TO KWEKMARTKET?</h4>
-          <p className="cta__text">
+        <div className={styles.cta}>
+          <h4 className={styles.cta_heading}>NEW TO KWEKMARTKET?</h4>
+          <p className={styles.cta_text}>
             Subscribe to our newsletter to get updates on our latest offers!
           </p>
         </div>
@@ -28,164 +29,164 @@ const Component = () => {
         <Form />
       </div>
 
-      <div className="footer__section footer__section-two">
-        <nav className="nav">
-          <h4 className="nav__header">KWEK</h4>
+      <div className={`${styles.footer_section} ${styles.footer_sectionTwo}`}>
+        <nav className={styles.nav}>
+          <h4 className={styles.nav_header}>KWEK</h4>
 
-          <ul className="nav__menu">
-            <li className="nav__item">
+          <ul className={styles.nav_menu}>
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">About Us</a>
+                <a className={styles.nav_link}>About Us</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Contact Us</a>
+                <a className={styles.nav_link}>Contact Us</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Career</a>
+                <a className={styles.nav_link}>Career</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Blog</a>
+                <a className={styles.nav_link}>Blog</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Terms and condition</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        <nav className="nav">
-          <h4 className="nav__header">Payment</h4>
-
-          <ul className="nav__menu">
-            <li className="nav__item">
-              <Link href="/">
-                <a className="nav__link">Wallet</a>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link href="/">
-                <a className="nav__link">Mastercard</a>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link href="/">
-                <a className="nav__link">Paystack</a>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link href="/">
-                <a className="nav__link">Visa</a>
+                <a className={styles.nav_link}>Terms and condition</a>
               </Link>
             </li>
           </ul>
         </nav>
 
-        <nav className="nav">
-          <h4 className="nav__header">Buying On kwek</h4>
+        <nav className={styles.nav}>
+          <h4 className={styles.nav_header}>Payment</h4>
 
-          <ul className="nav__menu">
-            <li className="nav__item">
+          <ul className={styles.nav_menu}>
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Buyer Safety Center</a>
+                <a className={styles.nav_link}>Wallet</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">FAQ</a>
+                <a className={styles.nav_link}>Mastercard</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Delivery</a>
+                <a className={styles.nav_link}>Paystack</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Kwek Return Policy</a>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link href="/">
-                <a className="nav__link">Digital Services</a>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link href="/">
-                <a className="nav__link">Bulk Purchase</a>
+                <a className={styles.nav_link}>Visa</a>
               </Link>
             </li>
           </ul>
         </nav>
 
-        <nav className="nav">
-          <h4 className="nav__header">Make Money With Kwek</h4>
+        <nav className={styles.nav}>
+          <h4 className={styles.nav_header}>Buying On kwek</h4>
 
-          <ul className="nav__menu">
-            <li className="nav__item">
+          <ul className={styles.nav_menu}>
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Sell On Kwek</a>
+                <a className={styles.nav_link}>Buyer Safety Center</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Become A Kwek Affiliate</a>
+                <a className={styles.nav_link}>FAQ</a>
+              </Link>
+            </li>
+
+            <li className={styles.nav_item}>
+              <Link href="/">
+                <a className={styles.nav_link}>Delivery</a>
+              </Link>
+            </li>
+
+            <li className={styles.nav_item}>
+              <Link href="/">
+                <a className={styles.nav_link}>Kwek Return Policy</a>
+              </Link>
+            </li>
+
+            <li className={styles.nav_item}>
+              <Link href="/">
+                <a className={styles.nav_link}>Digital Services</a>
+              </Link>
+            </li>
+
+            <li className={styles.nav_item}>
+              <Link href="/">
+                <a className={styles.nav_link}>Bulk Purchase</a>
               </Link>
             </li>
           </ul>
         </nav>
 
-        <nav className="nav">
-          <h4 className="nav__header">More Info</h4>
+        <nav className={styles.nav}>
+          <h4 className={styles.nav_header}>Make Money With Kwek</h4>
 
-          <ul className="nav__menu">
-            <li className="nav__item">
+          <ul className={styles.nav_menu}>
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Site Map</a>
+                <a className={styles.nav_link}>Sell On Kwek</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Track My Order</a>
+                <a className={styles.nav_link}>Become A Kwek Affiliate</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <nav className={styles.nav}>
+          <h4 className={styles.nav_header}>More Info</h4>
+
+          <ul className={styles.nav_menu}>
+            <li className={styles.nav_item}>
+              <Link href="/">
+                <a className={styles.nav_link}>Site Map</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Privacy Policy</a>
+                <a className={styles.nav_link}>Track My Order</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Authentic Items Policy</a>
+                <a className={styles.nav_link}>Privacy Policy</a>
               </Link>
             </li>
 
-            <li className="nav__item">
+            <li className={styles.nav_item}>
               <Link href="/">
-                <a className="nav__link">Billing Policy</a>
+                <a className={styles.nav_link}>Authentic Items Policy</a>
+              </Link>
+            </li>
+
+            <li className={styles.nav_item}>
+              <Link href="/">
+                <a className={styles.nav_link}>Billing Policy</a>
               </Link>
             </li>
           </ul>
@@ -193,57 +194,57 @@ const Component = () => {
       </div>
 
       <div className="footer__section footer__section-three">
-        <div className="gateways">
+        <div className={styles.gateways}>
           <Image
             width="48"
             height="48"
             src="/svg/visacard.svg"
             alt="visacard"
-            className="gateways__image"
+            className={styles.gateways_image}
           />
         </div>
 
-        <div className="copyright">
-          <p className="copyright__text">
+        <div className={styles.copyright}>
+          <p className={styles.copyright_text}>
             Kwekmarket eCommerce{" "}
-            <span className="copyright__symbol">&copy;</span> 2020 . All Rights
+            <span className={styles.copyright_symbol}>&copy;</span> 2020 . All Rights
             Reserved
           </p>
         </div>
 
-        <div className="social">
+        <div className={styles.social}>
           <Link href="/">
-            <a className="social__link">
+            <a className={styles.social_link}>
               <Image
                 width="28"
                 height="28"
                 src="/svg/facebook.svg"
                 alt="visacard"
-                className="social__icon"
+                className={styles.social_icon}
               />
             </a>
           </Link>
 
           <Link href="/">
-            <a className="social__link">
+            <a className={styles.social_link}>
               <Image
                 width="28"
                 height="28"
                 src="/svg/instagram.svg"
                 alt="visacard"
-                className="social__icon"
+                className={styles.social_icon}
               />
             </a>
           </Link>
 
           <Link href="/">
-            <a className="social__link">
+            <a className={styles.social_link}>
               <Image
                 width="28"
                 height="28"
                 src="/svg/twitter.svg"
                 alt="visacard"
-                className="social__icon"
+                className={styles.social_icon}
               />
             </a>
           </Link>
