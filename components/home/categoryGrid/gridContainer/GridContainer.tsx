@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./GridContainer.module.scss";
 
 import { TitleBlock, Banner, Card } from "../index";
-import { ProductBox } from '@/shared/'
+import { ProductBox } from '@/shared/index'
 
 const GridContainer = () => {
   return (
@@ -10,6 +10,18 @@ const GridContainer = () => {
       <TitleBlock />
       <div className={styles.mainContainer}>
         <div className={styles.products}>
+          <div className={styles.product}>
+            <ProductBox />
+          </div>
+
+          <div className={styles.product}>
+            <ProductBox />
+          </div>
+
+          <div className={styles.product}>
+            <ProductBox />
+          </div>
+
           <div className={styles.product}>
             <ProductBox />
           </div>

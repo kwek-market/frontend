@@ -3,10 +3,13 @@
 
 .mainContainer {
   @include flex();
+  margin-top: 2rem;
+  width: 100%
 }
 
 .products {
   @include flex(space-between, flex-start);
+  width: 100%;
 }
 
 .product {
