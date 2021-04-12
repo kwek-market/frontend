@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+import styles from "./GridContainer.module.scss";
+
+import { TitleBlock, Banner, Card } from "../index";
 
 const GridContainer = () => {
   return (
-    <div>
-      
+    <div id={styles.categoryGrid}>
+      <TitleBlock />
+      <div className={styles.mainContainer}></div>
+      <aside className={styles.sidebarContainer}></aside>
     </div>
-  )
-}
+  );
+};
 
-export default GridContainer
+export default GridContainer;
