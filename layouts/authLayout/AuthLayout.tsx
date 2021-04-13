@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import { Topbar } from "@/shared/index";
 
-const AuthLayout = ({ children, id, withBanner }: any) => {
+const AuthLayout = ({ children, id, withBanner, bannerText }: any) => {
   return (
     <div id={styles[id]} className={styles.authPage}>
       <Topbar withLogo={true} />
@@ -15,7 +15,7 @@ const AuthLayout = ({ children, id, withBanner }: any) => {
         {withBanner && (
           <div className={styles.banner}>
             <h1 className={styles.banner_text}>
-              A Fresh <br /> Approach to <br /> Shopping
+              {bannerText.lineOne} <br /> {bannerText.lineTwo} <br /> {bannerText.lineThree}
             </h1>
             <Link href="#0">
               <a className={styles.banner_link}>

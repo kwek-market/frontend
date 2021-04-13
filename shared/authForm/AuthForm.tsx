@@ -57,8 +57,8 @@ const AuthForm: React.FC<Type> = ({
         </div>
 
         {fields.map(({ type, sub, ...fieldProps }, index) => (
-          <React.Fragment>
-            <div key={index} className={styles.form_inputContainer}>
+          <React.Fragment key={index}> 
+            <div className={styles.form_inputContainer}>
               <input
                 {...fieldProps}
                 className={styles.form_input}

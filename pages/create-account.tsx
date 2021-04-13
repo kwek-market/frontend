@@ -37,9 +37,15 @@ const Page = () => {
       linkUrl: "/login",
     },
   };
+  
+  const bannerText = {
+    lineOne: "Discover",
+    lineTwo: "Something",
+    lineThree: "Different"
+  }
 
   return (
-    <AuthLayout id='createAccount' withBanner={true}>
+    <AuthLayout id='createAccount' withBanner={true} bannerText={bannerText} >
       <AuthForm {...form} />
     </AuthLayout>
   );

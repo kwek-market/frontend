@@ -1,7 +1,7 @@
 import React from "react";
 
-import { AuthLayout } from '../layouts'
-import { AuthForm } from '../shared'
+import { AuthLayout } from '@/layouts/index'
+import { AuthForm } from '@/shared/index'
 
 const Page = () => {
 
@@ -38,8 +38,14 @@ const Page = () => {
     },
   };
 
+  const bannerText = {
+    lineOne: "A Fresh",
+    lineTwo: "Approach to",
+    lineThree: "Shopping"
+  }
+
   return (
-    <AuthLayout id='Login' withBanner={true} >
+    <AuthLayout id='Login' withBanner={true} bannerText={bannerText} >
       <AuthForm {...form} />
     </AuthLayout>
   );
