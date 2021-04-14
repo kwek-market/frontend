@@ -1,0 +1,39 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+
+.hero {
+    background-color: $col-primary-50;
+    padding: 5rem;
+    width: 100%;
+}
+.hero_split{
+    @include flex(space-around, center, nowrap)
+}
+.hero_textContent{
+    width: 40%;
+}
+.hero_textContent__headText {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1D1616;
+}
+.hero_textContent__subText{
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 36px;
+    color: #574240;
+}
+.hero_image1 {
+    border-radius: 100%;
+    object-fit: cover;
+}
+.hero_image2 {
+    border-radius: 100%;
+    object-fit: cover;
+}
+.hero_image2__div {
+    position: absolute;
+    right: 19rem;
+    bottom: 6rem;
+}

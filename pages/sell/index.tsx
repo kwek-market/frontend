@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {MainLayout} from '../../layouts';
+import { HeroSection } from '../../components/sellerLanding'
 
 function index() {
   return (
-    <div>
-      
-    </div>
+    <MainLayout>
+     <HeroSection /> 
+    </MainLayout>
   )
 }
 

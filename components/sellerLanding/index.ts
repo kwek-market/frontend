@@ -1,5 +1,5 @@
-import sellerLanding from './landingPage/sellerLanding';
+import HeroSection from './heroSection/heroSection';
 
 export {
-
+ HeroSection
 }
