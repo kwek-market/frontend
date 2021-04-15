@@ -1,6 +1,6 @@
 import React from 'react';
 import {MainLayout} from '../../layouts';
-import { HeroSection, FeatureSection } from '../../components/sellerLanding'
+import { HeroSection, FeatureSection, } from '../../components/sellerLanding'
 
 function index() {
   return (
