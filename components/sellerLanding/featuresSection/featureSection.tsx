@@ -1,5 +1,6 @@
 import React from 'react';
 import Styles from './featureSection.module.scss';
+import Testimonials from '../Testimonials/testimonials'
 
 import Image from 'next/image'
 
@@ -98,7 +99,9 @@ const featureSection = () => {
                 </div>
 
             </div>
-
+            <div>
+                <Testimonials />
+            </div>
             
         </div>
     )
