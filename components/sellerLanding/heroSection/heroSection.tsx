@@ -3,6 +3,8 @@ import Styles from './heroSection.module.scss'
 // import image
 import Image from 'next/image'
 
+
+
 const heroSection = () => {
     return (
         <div className={Styles.hero}>
@@ -31,8 +33,11 @@ const heroSection = () => {
                  
               </div>
 
-            </div>  
+            </div>
+             
         </div>
+       
+      
     )
 }
 

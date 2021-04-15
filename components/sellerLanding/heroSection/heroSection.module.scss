@@ -3,7 +3,10 @@
 
 
 .hero {
-    background-color: $col-primary-50;
+    background-color: #FBF4F5;
+    background-image: url("/images/bg-elipse1.png");
+    background-repeat: no-repeat;
+    background-position: bottom;
     padding: 5rem;
     width: 100%;
 }
@@ -35,5 +38,5 @@
 .hero_image2__div {
     position: absolute;
     right: 19rem;
-    bottom: 6rem;
+    bottom: 10rem;
 }
