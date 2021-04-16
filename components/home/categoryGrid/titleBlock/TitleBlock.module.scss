@@ -4,6 +4,7 @@
 .title {
   @include flex(flex-start, center);
   margin: 1rem 0;
+  width: 100%;
 }
 
 .title_heading {

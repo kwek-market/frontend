@@ -1,17 +1,49 @@
 @import "../../../../styles/variables";
 @import "../../../../styles/mixins"; 
 
+#categoryGrid {
+  @include flex(space-between, flex-start);
+}
+
 .mainContainer {
   @include flex();
   margin-top: 2rem;
-  width: 100%
+  width: 78%;
+}
+
+.sidebarContainer {
+  width: 20%;
+  margin-top: 2rem;
 }
 
 .products {
   @include flex(space-between, flex-start);
   width: 100%;
+  margin-bottom: 2rem;
+
+  .product {
+    width: 24%;
+  }
 }
 
-.product {
-  width: 24%;
+.cards {
+  @include flex(space-between, flex-start);
+  width: 100%;
+  margin-bottom: 2rem;
+
+  .card {
+    width: 32%;
+  }
 }
+
+.banners {
+  @include flex(space-between, flex-start);
+  width: 100%;
+  margin-bottom: 2rem;
+
+  .banner {
+    width: 48%;
+  }
+}
+
+
