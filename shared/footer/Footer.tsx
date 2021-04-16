@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Footer.module.scss'
+import styles from "./Footer.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -195,20 +195,42 @@ const Component = () => {
 
       <div className={`${styles.footer_section} ${styles.footer_sectionThree}`}>
         <div className={styles.gateways}>
-          <Image
-            width="48"
-            height="48"
-            src="/svg/visacard.svg"
-            alt="visacard"
-            className={styles.gateways_image}
-          />
+          <div className={styles.gateway}>
+            <Image
+              width="44"
+              height="24"
+              src="/images/visa.png"
+              alt="visacard"
+              className={styles.gateways_image}
+            />
+          </div>
+
+          <div className={styles.gateway}>
+            <Image
+              width="44"
+              height="24"
+              src="/images/visa.png"
+              alt="visacard"
+              className={styles.gateways_image}
+            />
+          </div>
+
+          <div className={styles.gateway}>
+            <Image
+              width="44"
+              height="24"
+              src="/images/visa.png"
+              alt="visacard"
+              className={styles.gateways_image}
+            />
+          </div>
         </div>
 
         <div className={styles.copyright}>
           <p className={styles.copyright_text}>
             Kwekmarket eCommerce{" "}
-            <span className={styles.copyright_symbol}>&copy;</span> 2020 . All Rights
-            Reserved
+            <span className={styles.copyright_symbol}>&copy;</span> 2020 . All
+            Rights Reserved
           </p>
         </div>
 

@@ -114,6 +114,14 @@
     }
   }
 
+  .gateways {
+    @include flex(flex-start, center);
+
+    .gateway {
+      margin-right: 0.5rem
+    }
+  }
+
   .social {
     @include flex(space-between, center);
 

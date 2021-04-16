@@ -18,6 +18,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
+      <div className="no-mobile">
+        <h3>Please Use A Desktop Device <span>{`:(`}</span> </h3>
+      </div>
     </React.Fragment>
   );
 }

@@ -33,7 +33,7 @@ const AuthLayout = ({ children, id, withBanner, bannerText }: any) => {
           </div>
         )}
 
-        <div className={styles.formContainer}>{children}</div>
+        <div className={withBanner ? styles.formContainer : styles.formContainer__full}>{children}</div>
       </div>
     </div>
   );

@@ -1,3 +1,21 @@
+.no-mobile {
+  display: none;
+
+  @media screen and (max-width: 1150px) {
+    @include flex(center, center);
+    position: fixed;
+    background: #fff;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    span {
+      margin-left: 0.3rem;
+    }
+  }
+}
+
 .btn {
   @include flex(center, center);
   border: none;
