@@ -25,10 +25,10 @@ const heroSection = () => {
 
               <div className={Styles.hero_image}>
                   <div className={Styles.hero_image1__div}>
-                  <Image className={Styles.hero_image1} src="/images/smiling-people.png" width="210" height="210"  />
+                  <Image className={`circle-image ${Styles.hero_image1}`} src="/images/smiling-people.png" width="210" height="210"  />
                   </div>
                   <div className={Styles.hero_image2__div}>
-                  <Image className={Styles.hero_image2} src="/images/flower-girl.png" width="110" height="110"  />
+                  <Image className={`circle-image ${Styles.hero_image2}`} src="/images/flower-girl.png" width="110" height="110"  />
                   </div>
                  
               </div>

@@ -4,7 +4,7 @@
 
 .hero {
     background-color: #FBF4F5;
-    background-image: url("/images/bg-elipse1.png");
+    background-image: url("/svg/bg-elipse1.svg");
     background-repeat: no-repeat;
     background-position: bottom;
     padding: 5rem;
@@ -19,21 +19,13 @@
 .hero_textContent__headText {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1D1616;
+    color: $col-primary-300;
 }
 .hero_textContent__subText{
     font-size: 22px;
     font-weight: 300;
     line-height: 36px;
     color: #574240;
-}
-.hero_image1 {
-    border-radius: 100%;
-    object-fit: cover;
-}
-.hero_image2 {
-    border-radius: 100%;
-    object-fit: cover;
 }
 .hero_image2__div {
     position: absolute;
