@@ -1,15 +1,18 @@
-import React from 'react';
-import {MainLayout} from '../../layouts';
-import { HeroSection, FeatureSection, Use } from '../../components/sellerLanding'
+import React from "react";
+import {
+  HeroSection,
+  FeatureSection,
+  Use,
+} from "../../components/sellerLanding";
 
 function index() {
   return (
-    <MainLayout>
-     <HeroSection /> 
-     <FeatureSection />
-     <Use />
-    </MainLayout>
-  )
+    <React.Fragment>
+      <HeroSection />
+      <FeatureSection />
+      <Use />
+    </React.Fragment>
+  );
 }
 
-export default index
+export default index;
