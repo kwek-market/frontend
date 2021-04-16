@@ -4,15 +4,15 @@ import styles from "./GridContainer.module.scss";
 import { TitleBlock, Banner, Card, SideBar } from "../index";
 import { ProductBox } from "shared";
 
-const GridContainer = () => {
+const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
   const products = [1, 2, 3, 4];
-  const cards = [1, 2, 3];
-  const banners = [1, 2];
 
   return (
     <div id={styles.categoryGrid}>
-      <TitleBlock />
-      <div className={styles.mainContainer}>
+      <TitleBlock title={title} timer={timer} />
+      <div
+        className={sidebar ? styles.mainContainer : styles.mainContainer__full}
+      >
         <div className={styles.products}>
           {products.map(() => (
             <div className={styles.product}>
@@ -21,25 +21,31 @@ const GridContainer = () => {
           ))}
         </div>
 
-        <div className={styles.cards}>
-          {cards.map(() => (
-            <div className={styles.card}>
-              <Card />
-            </div>
-          ))}
-        </div>
+        {cards && (
+          <div className={styles.cards}>
+            {cards.map(() => (
+              <div className={styles.card}>
+                <Card />
+              </div>
+            ))}
+          </div>
+        )}
 
-        <div className={styles.banners}>
-          {banners.map(() => (
-            <div className={styles.banner}>
-              <Banner />
-            </div>
-          ))}
-        </div>
+        {banners && (
+          <div className={styles.banners}>
+            {banners.map(() => (
+              <div className={styles.banner}>
+                <Banner />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      <aside className={styles.sidebarContainer}>
-        <SideBar />
-      </aside>
+      {sidebar && (
+        <aside className={styles.sidebarContainer}>
+          <SideBar />
+        </aside>
+      )}
     </div>
   );
 };

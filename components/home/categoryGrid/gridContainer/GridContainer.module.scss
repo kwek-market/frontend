@@ -3,12 +3,19 @@
 
 #categoryGrid {
   @include flex(space-between, flex-start);
+  margin-bottom: 2rem
 }
 
 .mainContainer {
   @include flex();
   margin-top: 2rem;
   width: 78%;
+}
+
+.mainContainer__full {
+  @include flex();
+  margin-top: 2rem;
+  width: 100%;
 }
 
 .sidebarContainer {
