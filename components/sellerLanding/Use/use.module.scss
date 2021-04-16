@@ -1,0 +1,76 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.Use  {
+    background-color: #FBF4F5;
+    background-image: url("/svg/bg-elipse2.svg");
+    background-repeat: no-repeat;
+    background-position: top;
+    padding: 5rem;
+    width: 100%;
+}
+.UseDesc {
+    text-align: center;
+    padding: 1rem;
+    margin: 5rem 0;
+}
+.UseDesc_text {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 56px;
+    color: $col-primary-300;
+ }
+ .UseList {
+     @include flex(space-between, center, nowrap);
+     margin: 6rem 0;
+ }
+ .UseList_contentLogo {
+     display: inline;
+ }
+ .UseList_contentText {
+     text-align: left;
+ }
+ .UseList_contentText__head {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: #18191F;
+ }
+ .UseList_contentText__sub {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 32px;
+    color: #18191F;
+ }
+ .useRegister {
+    background-image: url("/images/yellow-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 70%;
+    align-items: center;
+    margin: 8rem auto;
+ }
+ .useRegister_content {
+    @include flex(flex-start, center, nowrap);
+    width: 100%;
+    margin: auto;
+    
+ }
+ .useRegister_contentText {
+     margin: auto 4rem;
+ }
+ .useRegister_contentText__head {
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 80px;
+    color: $col-primary-300;
+ }
+ .useRegister_contentText__sub {
+     padding: 1rem 7rem;
+     margin-bottom: 2rem;
+ }
+ .useRegister_contentImage {
+     position: relative;
+     left: 1rem;
+     top: 3rem;
+ }

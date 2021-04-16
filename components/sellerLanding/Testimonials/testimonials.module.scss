@@ -1,0 +1,80 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.testimonials {
+    @include flex(flex-start, center, nowrap);
+    height: 33rem;
+    width: 100%;
+    background-color: #FAD1D7;
+    ;
+}
+.testimonialsAssurance {
+    background-color: $col-primary;
+    text-align: center;
+    color: $col-white;
+    width: 50%;
+    height: 100%;
+    @include flex(center, center, nowrap);
+   flex-direction: column;
+}
+.testimonialsAssurance_text {
+   margin: 0 6rem;
+   text-align: left;
+}
+.testimonialsAssurance_textHead {
+    color: $col-white;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 56px;
+    text-align: left;
+}
+.testimonialsAssurance_textSub {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+}
+.feedback {
+    background-color: $col-white;
+    height: 85%;
+    width: 45%;
+}
+.feedbackBox {
+    overflow: hidden;
+    margin: 2rem 1.5rem;
+}
+.feedbackBox_quote {
+    position: relative;
+    left: 35rem;
+}
+.feedbackBox_person {
+    @include flex(flex-start, center, nowrap);
+}
+.feedbackBox_personInfo {
+    margin-left: 0.9rem;
+    align-self: center;
+    line-height: 11px;
+}
+.feedbackBox_personInfo__head {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: $col-primary-300;
+}
+.feedbackBox_personInfo__sub {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: rgba(29, 22, 22, 0.7);
+}
+.feedbackBox_message {
+    margin-top: 2.5rem;
+}
+.feedbackBox_messageContent {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 28px;
+    color: $col-primary-300;
+}
+.feedbackBox_logo {
+    @include flex(space-between, center, nowrap);
+}
