@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import { MainLayout } from "layouts";
-import { Hero, Features, CategoryGrid, Brands } from 'components/home'
+import { MainLayout } from "@/layouts";
+import { Hero, Features, CategoryGrid, Brands } from '@/components/home'
 
 const Home = () => {
   const cards = [1, 2, 3];
