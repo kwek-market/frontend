@@ -1,7 +1,7 @@
 import React from "react";
 
-import { AuthLayout } from "../layouts";
-import { AuthForm } from "../shared";
+import { AuthLayout } from "@/layouts";
+import { AuthForm } from "@/shared";
 
 const Page = () => {
   const sendResetRequest = (formData: any) => {

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./GridContainer.module.scss";
 
 import { TitleBlock, Banner, Card, SideBar } from "../index";
-import { ProductBox } from "shared";
+import { ProductBox } from "@/shared";
 
 const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
   const products = [1, 2, 3, 4];

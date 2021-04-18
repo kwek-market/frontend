@@ -3,7 +3,7 @@ import {
   HeroSection,
   FeatureSection,
   Use,
-} from "../../components/sellerLanding";
+} from "@/components/sellerLanding";
 
 function index() {
   return (

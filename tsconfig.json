@@ -19,17 +19,14 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@/*": [
+        "*"
+      ],
       "@/components/*": [
         "components/*"
       ],
       "@/public/*": [
         "public/*"
-      ],
-      "@/shared/*": [
-        "shared/*"
-      ],
-      "@/layouts/*": [
-        "layouts"
       ]
     },
   },

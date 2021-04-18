@@ -1,7 +1,7 @@
 import React from "react";
 
-import { AuthLayout } from '@/layouts/index'
-import { AuthForm } from '@/shared/index'
+import { AuthLayout } from '@/layouts'
+import { AuthForm } from '@/shared'
 
 const Page = () => {
 
