@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './MainLayout.module.scss'
-import { Topbar, Header, Navbar, Footer } from "@/shared/index";
+import { Topbar, Header, Navbar, Footer } from "@/shared";
 
 const MainLayout = ({ children }) => {
   return (
