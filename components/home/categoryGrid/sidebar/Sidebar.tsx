@@ -10,8 +10,8 @@ const Sidebar = () => {
       <h3 className={styles.header}>Best Selling</h3>
 
       <div className={styles.products}>
-        {products.map(() => (
-          <div className={styles.product}>
+        {products.map((product) => (
+          <div key={product} className={styles.product}>
             <div className={styles.product_imageContainer}>
               <Image
                 src="/images/sidebar-product.png"
