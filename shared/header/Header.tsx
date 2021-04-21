@@ -68,7 +68,7 @@ const Header = ({ user, setUser }) => {
             </Dropdown>
           </div>
         ) : (
-          <Link href="#">
+          <Link href="/login">
             <a className={styles.shortcuts_item} onClick={() => setUser({ id: "jUIninujIinfA", name: "Alison" })}>
               <Image
                 width="16"
