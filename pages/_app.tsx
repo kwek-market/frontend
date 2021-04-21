@@ -3,9 +3,9 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import "../styles/index.scss";
 
-import {Provider} from 'react-redux';
+import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
-import store from '@/store';
+import store from "@/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,14 +21,16 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         />
         <title>Kwek</title>
-        <meta name="description" content="Online Shop"/>
+        <meta name="description" content="Online Shop" />
       </Head>
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
-      
+
       <div className="no-mobile">
-        <h3>Please Use A Desktop Device <span>{`:(`}</span> </h3>
+        <h3>
+          Please Use A Desktop Device <span>{`:(`}</span>{" "}
+        </h3>
       </div>
     </React.Fragment>
   );
