@@ -14,8 +14,8 @@ const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
         className={sidebar ? styles.mainContainer : styles.mainContainer__full}
       >
         <div className={styles.products}>
-          {products.map(() => (
-            <div className={styles.product}>
+          {products.map((product: any) => (
+            <div key={product} className={styles.product}>
               <ProductBox />
             </div>
           ))}
@@ -23,8 +23,8 @@ const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
 
         {cards && (
           <div className={styles.cards}>
-            {cards.map(() => (
-              <div className={styles.card}>
+            {cards.map((card: any) => (
+              <div key={card} className={styles.card}>
                 <Card />
               </div>
             ))}
@@ -33,8 +33,8 @@ const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
 
         {banners && (
           <div className={styles.banners}>
-            {banners.map(() => (
-              <div className={styles.banner}>
+            {banners.map((banner: any) => (
+              <div key={banner} className={styles.banner}>
                 <Banner />
               </div>
             ))}
