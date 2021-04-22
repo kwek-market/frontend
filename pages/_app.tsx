@@ -4,7 +4,8 @@ import Head from "next/head";
 import "../styles/index.scss";
 
 import { Provider } from "react-redux";
-import withRedux from "next-redux-wrapper";
+
+import { createWrapper } from 'next-redux-wrapper';
 import store from "@/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -27,15 +28,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Provider>
 
-      <div className="no-mobile">
+      {/* <div className="no-mobile">
         <h3>
           Please Use A Desktop Device <span>{`:(`}</span>{" "}
         </h3>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 }
 
 const makeStore = () => store;
+const wrapper = createWrapper(makeStore);;
 
-export default withRedux(makeStore)(MyApp);
+export default wrapper.withRedux(MyApp);

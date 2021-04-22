@@ -1,4 +1,4 @@
-export const NEW_RECIPIENT = /* GraphQL */ `
+export const CREATE_USER = /* GraphQL */ `
   mutation createUser(
     $email: String!
     $fullName: String!

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Header.module.scss";
 
 import { connect } from "react-redux";
-import { setUser } from "@/store/user/user.actions";
+import { logout } from "@/store/user/user.actions";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -13,7 +13,7 @@ import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
 
-const Header = ({ user, setUser }) => {
+const Header = ({ user, logout }) => {
 
   const menu = (
     <Menu>
@@ -25,7 +25,7 @@ const Header = ({ user, setUser }) => {
 
       <Menu.Item>
         <Link href="/">
-          <a onClick={() => setUser({ id: null, name: null })}>
+          <a onClick={() => logout({id: null})}>
             Logout
           </a>
         </Link>
@@ -69,7 +69,7 @@ const Header = ({ user, setUser }) => {
           </div>
         ) : (
           <Link href="/login">
-            <a className={styles.shortcuts_item} onClick={() => setUser({ id: "jUIninujIinfA", name: "Alison" })}>
+            <a className={styles.shortcuts_item}>
               <Image
                 width="16"
                 height="18"
@@ -116,7 +116,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setUser: (user: any) => dispatch(setUser(user)),
+  logout: () => dispatch(logout()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
