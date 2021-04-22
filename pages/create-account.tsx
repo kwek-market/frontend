@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Router from "next/router";
+
+// import useSWR from "swr";
+
+// import { request } from 'graphql-request';
 
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
 
-const Page = () => {
-  const createAccount = (formData: any) => {
+import { fetcher } from "@/helpers";
+import { CREATE_USER } from "@/store/user/user.queries";
+
+import { connect } from "react-redux";
+
+const Page = ({ user }) => {
+  const createAccount = async (formData: any) => {
     console.log(formData);
+
+    const data = await fetcher(CREATE_USER, {
+      email: formData.email,
+      fullName: formData.fullName,
+      password1: formData.password,
+      password2: formData.password,
+    });
+
+    console.log(data);
   };
 
   const form = {
     title: "Create an Account",
     fields: [
       {
-        name: "name",
+        name: "fullName",
         placeholder: "Full Name",
         type: "text",
       },
@@ -37,18 +56,28 @@ const Page = () => {
       linkUrl: "/login",
     },
   };
-  
+
   const bannerText = {
     lineOne: "Discover",
     lineTwo: "Something",
-    lineThree: "Different"
-  }
+    lineThree: "Different",
+  };
+
+  useEffect(() => {
+    if (user.id !== null) {
+      Router.push("/login");
+    }
+  });
 
   return (
-    <AuthLayout id='createAccount' withBanner={true} bannerText={bannerText} >
+    <AuthLayout id="createAccount" withBanner={true} bannerText={bannerText}>
       <AuthForm {...form} />
     </AuthLayout>
   );
 };
 
-export default Page;
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(Page);

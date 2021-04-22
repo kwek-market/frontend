@@ -3,7 +3,13 @@ import React from "react";
 import { AuthLayout } from '@/layouts'
 import { AuthForm } from '@/shared'
 
-const Page = () => {
+import { connect } from 'react-redux'
+import { setUser } from '@/store/user/user.actions'
+
+import { fetcher } from '@/helpers'
+
+
+const Page = ({ user }) => {
 
   const signIn = (formData: any) => {
     console.log(formData);
@@ -51,4 +57,12 @@ const Page = () => {
   );
 }
 
-export default Page;
+const mapStateToProps = (state: any) => ({
+  user: state.user
+})
+
+const mapDispatchToProps = (dispatch: any) => ({
+  setUser: (user: any) => dispatch(setUser(user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
