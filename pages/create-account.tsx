@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import Router from "next/router";
 
-// import useSWR from "swr";
-
-// import { request } from 'graphql-request';
-
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
 
@@ -17,7 +13,7 @@ const Page = ({ user }) => {
   const createAccount = async (formData: any) => {
     console.log(formData);
 
-    const data = await fetcher(CREATE_USER, {
+    const {data, error} = await fetcher(CREATE_USER, {
       email: formData.email,
       fullName: formData.fullName,
       password1: formData.password,
@@ -25,6 +21,8 @@ const Page = ({ user }) => {
     });
 
     console.log(data);
+    console.log("error is:",error);
+    
   };
 
   const form = {
