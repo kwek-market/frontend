@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import styles from './Header.module.scss'
+import React from "react";
+import styles from "./Header.module.scss";
+
+import { connect } from "react-redux";
+import { setUser } from "@/store/user/user.actions";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -10,8 +13,7 @@ import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
 
-const Header = () => {
-  const [auth, setAuth] = useState(false);
+const Header = ({ user, setUser }) => {
 
   const menu = (
     <Menu>
@@ -23,7 +25,9 @@ const Header = () => {
 
       <Menu.Item>
         <Link href="/">
-          <a onClick={() => setAuth(false)}>Logout</a>
+          <a onClick={() => setUser({ id: null, name: null })}>
+            Logout
+          </a>
         </Link>
       </Menu.Item>
     </Menu>
@@ -46,7 +50,7 @@ const Header = () => {
       <SearchBar />
 
       <div className={styles.shortcuts}>
-        {auth ? (
+        {user.id ? (
           <div className={styles.shortcuts_item}>
             <Image
               width="16"
@@ -59,13 +63,13 @@ const Header = () => {
                 className="ant-dropdown-link"
                 onClick={(e) => e.preventDefault()}
               >
-                Hi Alison <i className="fas fa-chevron-down"></i>
+                Hi {user.name} <i className="fas fa-chevron-down"></i>
               </a>
             </Dropdown>
           </div>
         ) : (
           <Link href="/login">
-            <a className={styles.shortcuts_item} onClick={() => setAuth(true)}>
+            <a className={styles.shortcuts_item} onClick={() => setUser({ id: "jUIninujIinfA", name: "Alison" })}>
               <Image
                 width="16"
                 height="18"
@@ -107,4 +111,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  setUser: (user: any) => dispatch(setUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
