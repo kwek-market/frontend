@@ -1,0 +1,287 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.desc_container {
+  margin-bottom: 80px;
+
+  .tab_content {
+    .descP {
+      font-size: 14px;
+      line-height: 25px;
+      color: #574240;
+    }
+    .checked {
+      padding: 10px;
+
+      .cheaked_content {
+        @include flex(flex-start, center, row);
+        margin-bottom: 8px;
+
+        i {
+          font-size: 16px;
+          margin-right: 12px;
+          color: #574240;
+        }
+
+        p {
+          font-size: 14px;
+          color: #574240;
+          margin-bottom: 0;
+        }
+      }
+    }
+    .add_add {
+      p {
+        font-size: 14px;
+        color: #1d1616;
+        margin-bottom: 8px;
+        font-weight: 500;
+
+        span {
+          color: #574240 !important;
+          margin-left: 10px;
+          font-weight: 400 !important;
+        }
+      }
+    }
+
+    .sr_content {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+
+      @media (min-width: 320px) and (max-width: 640px) {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+
+      @media (min-width: 641px) and (max-width: 768px) {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contentbox {
+        @include flex(flex-start, flex-start, row);
+
+        .img {
+          margin-right: 20px;
+        }
+
+        .info {
+          .head {
+            font-size: 20px;
+            font-weight: 600;
+            color: #574240;
+            margin-bottom: 4px;
+          }
+          .sub {
+            font-size: 15px !important;
+            font-weight: 600;
+            color: #bfa5a3;
+            margin-bottom: 4px;
+
+            a {
+              color: #af1328 !important;
+            }
+          }
+        }
+      }
+    }
+
+    .reviewContent {
+      .review_content {
+        @include flex(flex-start, center, row);
+        padding-bottom: 36px;
+        margin: 32px 0;
+        border-bottom: 1px solid rgba(191, 165, 163, 0.4);
+
+        .rating_head {
+          font-size: 18px;
+          font-weight: 500;
+          color: #1d1616;
+          margin-bottom: 0;
+        }
+
+        .box_productRating {
+          @include flex(flex-start, center);
+          margin-left: 32px;
+
+          span {
+            font-size: 1.2rem;
+            color: #ffc107;
+          }
+        }
+
+        .reviewer {
+          @include flex(flex-start, flex-start, row);
+          width: 100%;
+
+          .img {
+            border-radius: 9999px !important;
+          }
+          .reviewer_content:last-child {
+            border-bottom: none;
+          }
+          .reviewer_content {
+            margin-bottom: 16px;
+            margin-left: 32px;
+            width: 100%;
+
+            .user {
+              @include flex(flex-start, flex-start, row);
+              width: 100%;
+
+              .infouser {
+                margin-right: auto;
+
+                .name {
+                  font-weight: 500;
+                  font-size: 16px;
+                  color: #1d1616;
+                  margin-bottom: 2px;
+                }
+
+                .date {
+                  font-size: 16px;
+                  color: #bfa5a3;
+                }
+              }
+
+              .box_productRating {
+                @include flex(flex-start, center);
+                margin-left: auto;
+
+                span {
+                  font-size: 1.2rem;
+                  color: #ffc107;
+                }
+              }
+            }
+
+            .reviewer_review {
+              font-size: 16px;
+              color: #574240;
+            }
+          }
+        }
+      }
+    }
+    .formbox {
+      padding: 40px 48px;
+      background: #fff;
+      border: 1px solid #bfa5a3;
+      border-radius: 5px;
+
+      .form_content {
+        .form_head {
+          font-weight: 600;
+          font-size: 22px;
+          margin-bottom: 4px;
+          color: #574240;
+        }
+
+        .form_sub {
+          font-size: 16px;
+          color: #bfa5a3;
+        }
+      }
+      .form {
+        .ratebox {
+          @include flex(flex-start, center, row);
+          margin-bottom: 33px;
+
+          p {
+            font-weight: 500;
+            font-size: 18px;
+            margin-bottom: 0;
+            color: #1d1616;
+          }
+
+          .box_productRating {
+            @include flex(flex-start, center);
+            margin-left: 24px;
+
+            span {
+              font-size: 24px;
+              color: #bfa5a3;
+            }
+          }
+        }
+
+        .inputs {
+          textarea {
+            width: 100%;
+            background: #fbf9f9;
+            border: 1px solid #bfa5a3;
+            border-radius: 5px;
+            height: 182px;
+            color: #1d1616;
+            font-size: 16px;
+            padding: 24px;
+          }
+          ::placeholder {
+            color: #bfa5a3 !important;
+            font-size: 16px;
+          }
+          .input_grid {
+            margin-top: 24px;
+            margin-bottom: 40px;
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            width: 100%;
+
+            @media (min-width: 320px) and (max-width: 640px) {
+              grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+
+            @media (min-width: 641px) and (max-width: 768px) {
+              grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+
+            @media (min-width: 769px) and (max-width: 1024px) {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            div {
+              input {
+                width: 100%;
+                background: #fbf9f9;
+                border: 1px solid #bfa5a3;
+                border-radius: 5px;
+                color: #1d1616;
+                font-size: 16px;
+                padding: 24px;
+              }
+              ::placeholder {
+                color: #bfa5a3 !important;
+                font-size: 16px;
+              }
+            }
+          }
+        }
+
+        .button {
+          @include flex(center, center);
+
+          button {
+            width: 80%;
+            background: #af1328;
+            padding: 14px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            outline: none;
+            border: none;
+            appearance: none;
+            cursor: pointer;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+}
