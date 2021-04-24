@@ -1,0 +1,53 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.info_container {
+  width: 100%;
+  margin-bottom: 40px;
+  background-color: #fff;
+  padding: 40px 50px;
+
+  .info_content {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    @media (min-width: 320px) and (max-width: 640px) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    @media (min-width: 641px) and (max-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .info_box {
+      @include flex(flex-start, center, row);
+      width: 100%;
+
+      .info_box_content {
+        margin-left: 24px;
+
+        .head {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 36px;
+          color: #574240;
+          margin-bottom: 0.5px;
+        }
+        .sub {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 24px;
+          margin-bottom: 0;
+          color: #bfa5a3;
+        }
+      }
+    }
+  }
+}
