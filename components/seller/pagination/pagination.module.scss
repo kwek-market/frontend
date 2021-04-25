@@ -1,0 +1,68 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.pag_container {
+  @include flex(center, center, row);
+  width: 100%;
+  margin-top: 140px;
+  margin-bottom: 100px;
+
+  .pag_sub {
+    @include flex(flex-start, center, row);
+    margin: 0 10px;
+
+    a {
+      margin: 0 10px;
+      text-align: center;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 24px;
+      color: #1d1616;
+      margin-bottom: 0;
+    }
+
+    .pag_active {
+      padding: 8px 16px;
+      border: 1px solid #af1328;
+      border-radius: 10px;
+      color: #af1328;
+    }
+
+    p {
+      margin: 0 10px;
+      text-align: center;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 24px;
+      color: #1d1616;
+      margin-bottom: 0;
+    }
+  }
+
+  .pag_button {
+    padding: 8px 15px;
+    background: #af1328;
+    border-radius: 10px;
+
+    a {
+      @include flex(flex-start, center, row);
+
+      p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        color: #fff;
+        margin-bottom: 0;
+      }
+
+      i {
+        font-size: 16px;
+        margin: 0 14px;
+        color: #fff;
+      }
+    }
+  }
+}
