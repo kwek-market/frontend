@@ -11,18 +11,17 @@ import { connect } from "react-redux";
 
 const Page = ({ user }) => {
   const createAccount = async (formData: any) => {
-    console.log(formData);
-
-    const {data, error} = await fetcher(CREATE_USER, {
+    const query = CREATE_USER;
+    const variables = {
       email: formData.email,
       fullName: formData.fullName,
       password1: formData.password,
       password2: formData.password,
-    });
+    };
+
+    const data = await fetcher(query, variables);
 
     console.log(data);
-    console.log("error is:",error);
-    
   };
 
   const form = {
