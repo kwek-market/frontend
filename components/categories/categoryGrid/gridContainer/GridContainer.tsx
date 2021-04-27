@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "./GridContainer.module.scss";
 
-import { TitleBlock, Banner, Card, SideBar } from "../index";
+import { Card, ActiveTabbar } from "../index";
+import Pagination from '../../pagination/Pagination'
 import { ProductBox } from "@/shared";
 
-const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
-  const products = [1, 2, 3, 4];
+const GridContainer = ({ sidebar, cards }: any) => {
+  const products = [1, 2, 3, 4, 5];
 
   return (
     <div id={styles.categoryGrid}>
-      <TitleBlock title={title} timer={timer} />
+      <ActiveTabbar />
       <div
         className={sidebar ? styles.mainContainer : styles.mainContainer__full}
       >
@@ -30,22 +31,8 @@ const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
             ))}
           </div>
         )}
-
-        {banners && (
-          <div className={styles.banners}>
-            {banners.map((banner: any) => (
-              <div key={banner} className={styles.banner}>
-                <Banner />
-              </div>
-            ))}
-          </div>
-        )}
       </div>
-      {sidebar && (
-        <aside className={styles.sidebarContainer}>
-          <SideBar />
-        </aside>
-      )}
+      <Pagination />
     </div>
   );
 };
