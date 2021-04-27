@@ -20,6 +20,7 @@
   border: 1px solid #574240;
   border-radius: 10px 10px 0 0;
   font-size: 0.8rem;
+  cursor: pointer;
 
   i {
     font-size: 1.1rem;
@@ -45,7 +46,7 @@
     border-bottom: 1px solid #c4c4c4;
     border-radius: 0 0 10px 10px;
   }
-  
+
   .menu_link {
     @include flex(flex-start, center);
     color: #574240;

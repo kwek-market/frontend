@@ -1,13 +1,11 @@
-
 // flexbox
 
-@mixin flex($justify: flex-start, $align: flex-start, $flow: row wrap,) {
+@mixin flex($justify: flex-start, $align: flex-start, $flow: row wrap) {
   flex-flow: $flow;
   display: flex;
   justify-content: $justify;
   align-items: $align;
 }
-
 
 // breakpoints
 
@@ -18,10 +16,8 @@ $breakpoints: (
 ) !default;
 
 @mixin respondMin($breakpoint) {
-
   // If the key exists in the map
   @if map-has-key($breakpoints, $breakpoint) {
-
     // Prints a media query based on the value
     @media (min-width: map-get($breakpoints, $breakpoint)) {
       @content;
@@ -36,10 +32,8 @@ $breakpoints: (
 }
 
 @mixin respondMax($breakpoint) {
-
   // If the key exists in the map
   @if map-has-key($breakpoints, $breakpoint) {
-
     // Prints a media query based on the value
     @media (max-width: map-get($breakpoints, $breakpoint)) {
       @content;
