@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Router from "next/router";
 
-import { AuthLayout } from '@/layouts'
-import { AuthForm } from '@/shared'
+import { AuthLayout } from "@/layouts";
+import { AuthForm } from "@/shared";
 
-import { connect } from 'react-redux'
-import { setUser } from '@/store/user/user.actions'
+import { connect } from "react-redux";
+import { setUser } from "@/store/user/user.actions";
+import { GET_USER } from "@/store/user/user.queries";
 
-import { fetcher } from '@/helpers'
-
+import { userFetcher } from "@/helpers";
 
 const Page = ({ user }) => {
+  const signIn = async (formData: any) => {
+    const query = GET_USER;
+    const variables = {
+      email: formData.email,
+      password: formData.password,
+    };
 
-  const signIn = (formData: any) => {
-    console.log(formData);
+    const data = await userFetcher(query, variables);
+
+    console.log(data.loginUser);
+
+    const now = new Date();
+    const time = now.getTime();
+    now.setTime(time + 60 * 1000);
+    document.cookie = `token=true;expires=${now.toUTCString()};path=/`;
   };
 
   const form = {
@@ -29,8 +42,8 @@ const Page = ({ user }) => {
         type: "password",
         sub: {
           text: "Forgot Password?",
-          url: "/forgot-password"
-        }
+          url: "/forgot-password",
+        },
       },
     ],
     submit: {
@@ -47,22 +60,30 @@ const Page = ({ user }) => {
   const bannerText = {
     lineOne: "A Fresh",
     lineTwo: "Approach to",
-    lineThree: "Shopping"
+    lineThree: "Shopping",
+  };
+
+  useEffect(() => {
+    user.id && Router.push("/");
+  }, []);
+
+  if (user.id) {
+    return null;
   }
 
   return (
-    <AuthLayout id='Login' withBanner={true} bannerText={bannerText} >
+    <AuthLayout id="Login" withBanner={true} bannerText={bannerText}>
       <AuthForm {...form} />
     </AuthLayout>
   );
-}
+};
 
 const mapStateToProps = (state: any) => ({
-  user: state.user
-})
+  user: state.user,
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setUser: (user: any) => dispatch(setUser(user))
-})
+  setUser: (user: any) => dispatch(setUser(user)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

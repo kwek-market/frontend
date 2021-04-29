@@ -4,12 +4,13 @@ import Router from "next/router";
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
 
-import { fetcher } from "@/helpers";
+import { userFetcher } from "@/helpers";
 import { CREATE_USER } from "@/store/user/user.queries";
+import { setUser } from '@/store/user/user.actions'
 
 import { connect } from "react-redux";
 
-const Page = ({ user }) => {
+const Page = ({ user, setUser }) => {
   const createAccount = async (formData: any) => {
     const query = CREATE_USER;
     const variables = {
@@ -19,9 +20,20 @@ const Page = ({ user }) => {
       password2: formData.password,
     };
 
-    const data = await fetcher(query, variables);
+    const data = await userFetcher(query, variables);
 
-    console.log(data);
+    if (data.createUser.status) {
+      setUser({
+        ...user,
+        email: formData.email
+      })
+
+      Router.push("/verify-account");
+    } else if (user.email) {
+      Router.push("/verify-account");
+    } else {
+      console.log(data);
+    }
   };
 
   const form = {
@@ -77,4 +89,8 @@ const mapStateToProps = (state: any) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(Page);
+const mapDispatchToProps = (dispatch: any) => ({
+  setUser: (user: any) => dispatch(setUser(user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);

@@ -18,6 +18,25 @@ export const CREATE_USER = /* GraphQL */ `
         email
       }
       status
+      message
+    }
+  }
+`;
+
+export const GET_USER = /* GraphQL */ `
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      user {
+        id
+        fullName
+      }
+      token
+      refreshToken
+      verificationPrompt
+      payloadString
+      timeDiff
+      status
+      message
     }
   }
 `;
