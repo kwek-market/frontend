@@ -15,11 +15,11 @@ interface Type {
   title: string;
   subtitle?: string;
   fields: Fields[];
-  submit: {
+  submit?: {
     text: string;
     action: (data: any) => void;
   };
-  extra: {
+  extra?: {
     text: string;
     linkText: string;
     linkUrl: string;
@@ -57,7 +57,7 @@ const AuthForm: React.FC<Type> = ({
         </div>
 
         {fields.map(({ type, sub, ...fieldProps }, index) => (
-          <React.Fragment key={index}> 
+          <React.Fragment key={index}>
             <div className={styles.form_inputContainer}>
               <input
                 {...fieldProps}
@@ -80,30 +80,32 @@ const AuthForm: React.FC<Type> = ({
             {sub && (
               <div className={styles.form_inputSub}>
                 <Link href={sub.url}>
-                  <a className={styles.form_inputSubLink}>
-                    {sub.text}
-                  </a>
+                  <a className={styles.form_inputSubLink}>{sub.text}</a>
                 </Link>
               </div>
             )}
           </React.Fragment>
         ))}
 
-        <div className={styles.form_btnContainer}>
-          <button
-            className={`btn bg-primary ${styles.btn}`}
-            onClick={(e) => handleSubmit(e, submit)}
-          >
-            {submit.text}
-          </button>
-        </div>
+        {submit && (
+          <div className={styles.form_btnContainer}>
+            <button
+              className={`btn bg-primary ${styles.btn}`}
+              onClick={(e) => handleSubmit(e, submit)}
+            >
+              {submit.text}
+            </button>
+          </div>
+        )}
 
-        <div className={styles.form_extra}>
-          <p className={styles.form_extraText}>{extra.text}</p>
-          <Link href={extra.linkUrl}>
-            <a className={styles.form_extraLink}>{extra.linkText}</a>
-          </Link>
-        </div>
+        {extra && (
+          <div className={styles.form_extra}>
+            <p className={styles.form_extraText}>{extra.text}</p>
+            <Link href={extra.linkUrl}>
+              <a className={styles.form_extraLink}>{extra.linkText}</a>
+            </Link>
+          </div>
+        )}
       </form>
     </div>
   );

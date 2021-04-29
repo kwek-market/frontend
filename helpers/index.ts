@@ -1,5 +1,5 @@
-import fetcher from './fetcher'
+import userFetcher from './userFetcher'
 
 export {
-  fetcher
+  userFetcher
 }
