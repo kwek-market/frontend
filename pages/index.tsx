@@ -1,11 +1,19 @@
 import Head from "next/head";
-
+import { useEffect } from 'react'
 import { MainLayout } from "@/layouts";
 import { Hero, Features, CategoryGrid, Brands } from '@/components/home'
+// import { userFetcherWithAuth } from '@/helpers'
 
-const Home = () => {
+import { parseCookies } from 'nookies'
+// import { GET_USER } from '@/store/user/user.queries'
+
+const Home = ({ cookies }) => {
   const cards = [1, 2, 3];
   const banners = [1, 2];
+
+  useEffect(() => {
+    console.log(cookies);
+  }, [])
 
   return (
     <MainLayout>
@@ -18,5 +26,17 @@ const Home = () => {
     </MainLayout>
   );
 };
+
+export async function getServerSideProps (ctx) {
+  const cookies = parseCookies(ctx);
+
+  return {
+    props: {
+      cookies
+    }
+  }
+  
+}
+
 
 export default Home;

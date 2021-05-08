@@ -42,3 +42,21 @@ export const LOGIN_USER = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_USER = /* GraphQL */ `
+  query user($id: ID!) {
+    user(id: $id) {
+      id
+      username
+      email
+      fullName
+      isVerified
+      isActive
+      isStaff
+      dateJoined
+      secondaryEmail
+      verified
+      lastLogin
+    }
+  }
+`;
