@@ -23,12 +23,14 @@ export const CREATE_USER = /* GraphQL */ `
   }
 `;
 
-export const GET_USER = /* GraphQL */ `
+export const LOGIN_USER = /* GraphQL */ `
   mutation loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
       user {
         id
+        email
         fullName
+        isVerified
       }
       token
       refreshToken

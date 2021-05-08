@@ -6,26 +6,45 @@ import { AuthForm } from "@/shared";
 
 import { connect } from "react-redux";
 import { setUser } from "@/store/user/user.actions";
-import { GET_USER } from "@/store/user/user.queries";
+import { LOGIN_USER } from "@/store/user/user.queries";
 
 import { userFetcher } from "@/helpers";
 
-const Page = ({ user }) => {
+const Page = ({ user, setUser }) => {
   const signIn = async (formData: any) => {
-    const query = GET_USER;
+    const query = LOGIN_USER;
+
     const variables = {
       email: formData.email,
       password: formData.password,
     };
 
-    const data = await userFetcher(query, variables);
+    try {
+      // call login
+      const data = await userFetcher(query, variables);
 
-    console.log(data.loginUser);
+      // log login data
+      console.log(data.loginUser);
 
-    const now = new Date();
-    const time = now.getTime();
-    now.setTime(time + 60 * 1000);
-    document.cookie = `token=true;expires=${now.toUTCString()};path=/`;
+      // set cookie with token from login
+      const now = new Date();
+      const time = now.getTime();
+      now.setTime(time + 60 * 60 * 24 * 1000);
+
+      document.cookie = `token=${data.loginUser.token};expires=${now.toUTCString()};path=/`;
+
+      // set user state
+      setUser({
+        ...user,
+        ...data.loginUser.user
+      })
+
+      // redirect to home page
+      Router.push("/")
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const form = {

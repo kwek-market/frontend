@@ -63,7 +63,7 @@ const Header = ({ user, logout }) => {
                 className="ant-dropdown-link"
                 onClick={(e) => e.preventDefault()}
               >
-                Hi {user.name} <i className="fas fa-chevron-down"></i>
+                Hi {user.fullName.split(" ")[0]} <i className="fas fa-chevron-down"></i>
               </a>
             </Dropdown>
           </div>
