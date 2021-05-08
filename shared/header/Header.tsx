@@ -92,7 +92,7 @@ const Header = ({ user, logout }) => {
             <p className={styles.shortcuts_label}>Saved</p>
           </a>
         </Link>
-        <Link href="/">
+        <Link href="/cart">
           <a className={styles.shortcuts_item}>
             <div className={styles.shortcuts_iconWrap}>
               <Image
