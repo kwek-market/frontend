@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from "next/head";
 
-import CategoryDesc from '@/shared/categoryDesc/CategoryDesc'
 import ExtraInfo from '@/shared/extraInfo/ExtraInfo'
 import List from '@/components/wishlist/List'
 
@@ -9,8 +8,7 @@ import { MainLayout } from "@/layouts";
 
 const Page = () => {
   return (
-    <MainLayout>
-      <CategoryDesc title="Wishlist" />
+    <MainLayout title="Wishlist">
       <List />
       <ExtraInfo />
     </MainLayout>

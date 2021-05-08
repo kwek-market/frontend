@@ -12,6 +12,30 @@
       @include flex(flex-start, center, row);
       margin-right: auto;
       padding: 14px 28px;
+      background: transparent;
+      border: 1px solid #bfa5a3;
+      border-radius: 5px;
+
+      a {
+        @include flex(flex-start, center, row);
+        color: #bfa5a3;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 22px;
+        margin-bottom: 0;
+
+        i {
+          margin-right: 14px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .filter__red {
+      @include flex(flex-start, center, row);
+      margin-right: auto;
+      padding: 14px 28px;
       background: #af1328;
       border-radius: 5px;
 
@@ -30,6 +54,7 @@
         }
       }
     }
+
     .sortPart {
       @include flex(flex-start, center, row);
       margin-left: auto;
@@ -59,7 +84,7 @@
           font-size: 15px;
           line-height: 22px;
           appearance: none;
-          background-color: transparent;
+          background: transparent;
         }
 
         .arrow_down {
