@@ -1,17 +1,24 @@
 import React from 'react'
-import Head from "next/head";
+// import Head from "next/head";
 
 import Header from '@/shared/categoryHead/Header'
 import ExtraInfo from '@/shared/extraInfo/ExtraInfo'
 
-import { FilterCategory } from '@/components/categories'
+import { GridContainer } from '@/components/category'
 import { MainLayout } from "@/layouts";
 
+import { useRouter } from 'next/router'
+
 const Page = () => {
+
+  const router = useRouter();
+
+  const { category } = router.query
+
   return (
-    <MainLayout>
+    <MainLayout title={category}>
       <Header />
-      <FilterCategory sidebar={true} />
+      <GridContainer />
       <ExtraInfo />
     </MainLayout>
   )

@@ -25,7 +25,7 @@ const Header = ({ user, logout }) => {
 
       <Menu.Item>
         <Link href="/">
-          <a onClick={() => logout({id: null})}>
+          <a onClick={() => logout()}>
             Logout
           </a>
         </Link>
@@ -81,7 +81,7 @@ const Header = ({ user, logout }) => {
           </Link>
         )}
 
-        <Link href="/">
+        <Link href="/wishlist">
           <a className={styles.shortcuts_item}>
             <Image
               width="16"
