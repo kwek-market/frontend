@@ -1,5 +1,6 @@
-import userFetcher from './userFetcher'
+import { userFetcher, userFetcherWithAuth } from './userFetcher'
 
 export {
-  userFetcher
+  userFetcher,
+  userFetcherWithAuth
 }
