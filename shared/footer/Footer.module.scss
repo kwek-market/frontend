@@ -33,12 +33,16 @@
     @include flex(space-between, center);
 
     @include respondMax("tablet") {
-      margin-top: .75rem;
+      margin-top: 0.75rem;
     }
   }
 
   .cta {
     margin-right: 2.5rem;
+
+    @include respondMax("tablet") {
+      margin-right: 0;
+    }
 
     &_heading {
       color: $col-white;
@@ -69,6 +73,10 @@
       border-radius: 5px;
       padding: 0 1rem;
       outline: none;
+
+      @include respondMax("mobile") {
+        width: 100%;
+      }
 
       &::placeholder {
         color: #bda8a8;

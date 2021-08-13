@@ -1,15 +1,19 @@
 @import "@/styles/variables";
-@import "@/styles/mixins"; 
+@import "@/styles/mixins";
 
 #categoryGrid {
   @include flex(space-between, flex-start);
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 
 .mainContainer {
   @include flex();
   margin-top: 2rem;
   width: 78%;
+
+  @include respondMax("tablet") {
+    width: 100%;
+  }
 }
 
 .mainContainer__full {
@@ -21,6 +25,10 @@
 .sidebarContainer {
   width: 20%;
   margin-top: 2rem;
+
+  @include respondMax("tablet") {
+    display: none;
+  }
 }
 
 .products {
@@ -30,6 +38,10 @@
 
   .product {
     width: 24%;
+
+    @include respondMax("mobile") {
+      width: 48%;
+    }
   }
 }
 
@@ -40,6 +52,13 @@
 
   .card {
     width: 32%;
+
+    @include respondMax("tablet") {
+      width: 48%;
+    }
+    @include respondMax("mobile") {
+      width: 100%;
+    }
   }
 }
 
@@ -48,9 +67,16 @@
   width: 100%;
   margin-bottom: 2rem;
 
+  @include respondMax("mobile") {
+    display: block;
+  }
+
   .banner {
     width: 48%;
+
+    @include respondMax("mobile") {
+      width: 100%;
+      margin: 0.75rem 0 0.75rem 0;
+    }
   }
 }
-
-

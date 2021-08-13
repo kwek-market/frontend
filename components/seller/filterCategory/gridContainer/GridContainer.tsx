@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./GridContainer.module.scss";
 
 import { Card, ActiveTabbar, SideBar } from "../index";
-import Pagination from '../../pagination/Pagination'
+import Pagination from "../../pagination/Pagination";
 import { ProductBox } from "@/shared";
 
 const GridContainer = ({ sidebar, cards }: any) => {
