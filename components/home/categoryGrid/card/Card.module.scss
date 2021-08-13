@@ -1,26 +1,33 @@
 @import "@/styles/variables";
-@import "@/styles/mixins"; 
+@import "@/styles/mixins";
 
 .card {
   @include flex(space-between, stretch, row nowrap);
-  border: 10px solid #C4C4C4;
-  background: #F3F3F3;
+  border: 10px solid #c4c4c4;
+  background: #f3f3f3;
   padding: 1rem;
   margin: 2rem 0;
+
+  @include respondMax("tablet") {
+    margin: 1rem 0;
+  }
+  @include respondMax("mobile") {
+    margin: 0.5rem 0;
+  }
 }
 
 .card_imageContainer {
   width: 45%;
 
   div {
-    height: 100%
+    height: 100%;
   }
 }
 
 .card_textContainer {
   @include flex(space-between, flex-start);
   width: 55%;
-  color: #C4C4C4;
+  color: #c4c4c4;
   padding: 0.5rem 0;
 
   .card_text {
