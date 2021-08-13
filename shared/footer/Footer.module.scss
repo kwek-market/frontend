@@ -1,5 +1,5 @@
-@import '@/styles/variables';
-@import '@/styles/mixins'; 
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 .footer {
   background-color: $col-primary-300;
@@ -18,6 +18,10 @@
       @include flex(space-between, flex-start);
       border-bottom: 1px solid #c0c0c093;
       padding: 3rem 0 2rem;
+
+      @include respondMax("mobile") {
+        display: block;
+      }
     }
 
     &Three {
@@ -25,9 +29,16 @@
     }
   }
 
+  .cta_section {
+    @include flex(space-between, center);
+
+    @include respondMax("tablet") {
+      margin-top: .75rem;
+    }
+  }
+
   .cta {
-    margin-left: auto;
-    margin-right: 2rem;
+    margin-right: 2.5rem;
 
     &_heading {
       color: $col-white;
@@ -41,22 +52,26 @@
   }
 
   .form {
-    width: 45%;
     height: 36px;
+    margin: 0.5rem 0 0.5rem 0;
     @include flex(space-between, center);
+
+    @include respondMax("mobile") {
+      margin-bottom: 2rem;
+    }
 
     &_input {
       flex-grow: 1;
       height: 100%;
       margin-right: 0.5rem;
       background: #574242;
-      border: 1px solid #624B4B;
+      border: 1px solid #624b4b;
       border-radius: 5px;
       padding: 0 1rem;
       outline: none;
 
       &::placeholder {
-        color: #BDA8A8;
+        color: #bda8a8;
         font-size: 0.8rem;
       }
     }
@@ -67,11 +82,14 @@
       height: 100%;
       background: $col-primary-50;
       color: $col-black;
+
+      @include respondMax("mobile") {
+        margin-top: 0.6rem;
+      }
     }
   }
 
   .nav {
-    
     &_header {
       color: $col-white;
       margin-bottom: 1rem;
@@ -105,7 +123,7 @@
 
     &_text {
       margin: 0;
-      @include flex(space-between, center)
+      @include flex(space-between, center);
     }
 
     &_symbol {
@@ -118,7 +136,7 @@
     @include flex(flex-start, center);
 
     .gateway {
-      margin-right: 0.5rem
+      margin-right: 0.5rem;
     }
   }
 
