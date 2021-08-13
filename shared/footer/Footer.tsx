@@ -19,17 +19,18 @@ const Component = () => {
           />
         </div>
 
-        <div className={styles.cta}>
-          <h4 className={styles.cta_heading}>NEW TO KWEKMARTKET?</h4>
-          <p className={styles.cta_text}>
-            Subscribe to our newsletter to get updates on our latest offers!
-          </p>
+        <div className={styles.cta_section}>
+          <div className={styles.cta}>
+            <h4 className={styles.cta_heading}>NEW TO KWEKMARTKET?</h4>
+            <p className={styles.cta_text}>
+              Subscribe to our newsletter to get updates on our latest offers!
+            </p>
+          </div>
+          <Form />
         </div>
-
-        <Form />
       </div>
 
-      <div className={`${styles.footer_section} ${styles.footer_sectionTwo}`}>
+      <div className={`${styles.footer_sectionTwo}`}>
         <nav className={styles.nav}>
           <h4 className={styles.nav_header}>KWEK</h4>
 
