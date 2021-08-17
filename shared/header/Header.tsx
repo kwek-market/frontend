@@ -14,7 +14,6 @@ import SearchBar from "./SearchBar";
 import { Menu, Dropdown } from "antd";
 
 const Header = ({ user, logout }) => {
-
   const menu = (
     <Menu>
       <Menu.Item>
@@ -25,9 +24,7 @@ const Header = ({ user, logout }) => {
 
       <Menu.Item>
         <Link href="/">
-          <a onClick={() => logout()}>
-            Logout
-          </a>
+          <a onClick={() => logout()}>Logout</a>
         </Link>
       </Menu.Item>
     </Menu>
@@ -47,65 +44,70 @@ const Header = ({ user, logout }) => {
         </a>
       </Link>
 
-      <SearchBar />
-
-      <div className={styles.shortcuts}>
-        {user.id ? (
-          <div className={styles.shortcuts_item}>
-            <Image
-              width="16"
-              height="18"
-              src="/svg/user.svg"
-              className={styles.shortcuts_icon}
-            />
-            <Dropdown overlay={menu} className={styles.shortcuts_label}>
-              <a
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}
-              >
-                Hi {user.fullName.split(" ")[0]} <i className="fas fa-chevron-down"></i>
-              </a>
-            </Dropdown>
-          </div>
-        ) : (
-          <Link href="/login">
-            <a className={styles.shortcuts_item}>
+      <div className={styles.headerNav}>
+        <SearchBar />
+        <div className={styles.shortcuts}>
+          {user.id ? (
+            <div className={styles.shortcuts_item}>
               <Image
                 width="16"
                 height="18"
                 src="/svg/user.svg"
                 className={styles.shortcuts_icon}
               />
-              <p className={styles.shortcuts_label}>Sign In</p>
-            </a>
-          </Link>
-        )}
+              <Dropdown overlay={menu} className={styles.shortcuts_label}>
+                <a
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Hi {user.fullName.split(" ")[0]}{" "}
+                  <i className="fas fa-chevron-down"></i>
+                </a>
+              </Dropdown>
+            </div>
+          ) : (
+            <Link href="/login">
+              <a className={styles.shortcuts_item}>
+                <Image
+                  width="16"
+                  height="18"
+                  src="/svg/user.svg"
+                  className={styles.shortcuts_icon}
+                />
+                <p className={styles.shortcuts_label}>Sign In</p>
+              </a>
+            </Link>
+          )}
 
-        <Link href="/wishlist">
-          <a className={styles.shortcuts_item}>
-            <Image
-              width="16"
-              height="18"
-              src="/svg/heart-filled.svg"
-              className={styles.shortcuts_icon}
-            />
-            <p className={styles.shortcuts_label}>Saved</p>
-          </a>
-        </Link>
-        <Link href="/cart">
-          <a className={styles.shortcuts_item}>
-            <div className={styles.shortcuts_iconWrap}>
+          <Link href="/wishlist">
+            <a className={styles.shortcuts_item}>
               <Image
                 width="16"
                 height="18"
-                src="/svg/cart.svg"
+                src="/svg/heart-filled.svg"
                 className={styles.shortcuts_icon}
               />
-              <span className={styles.shortcuts_iconSuper}>4</span>
-            </div>
-            <p className={styles.shortcuts_label}>Cart</p>
-          </a>
-        </Link>
+              <p className={styles.shortcuts_label}>Saved</p>
+            </a>
+          </Link>
+          <Link href="/cart">
+            <a className={styles.shortcuts_item}>
+              <div className={styles.shortcuts_iconWrap}>
+                <Image
+                  width="16"
+                  height="18"
+                  src="/svg/cart.svg"
+                  className={styles.shortcuts_icon}
+                />
+                <span className={styles.shortcuts_iconSuper}>4</span>
+              </div>
+              <p className={styles.shortcuts_label}>Cart</p>
+            </a>
+          </Link>
+        </div>
+      </div>
+      <div>
+        <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
       </div>
     </header>
   );

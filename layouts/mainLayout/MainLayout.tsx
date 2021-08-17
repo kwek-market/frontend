@@ -1,13 +1,15 @@
-import React from "react";
-import styles from './MainLayout.module.scss'
+import React, { useState } from "react";
+import styles from "./MainLayout.module.scss";
 import { Topbar, Header, Navbar, Footer, PageTitle } from "@/shared";
 
 const MainLayout = ({ children, title }: any) => {
+  const [showNavBar, setShowNavBar] = useState<boolean>(false);
+
   return (
     <div>
       <Topbar withLogo={false} />
       <Header />
-      <Navbar />
+      <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
       {title && <PageTitle title={title} />}
       <main className={styles.main_container}>{children}</main>
       <Footer />

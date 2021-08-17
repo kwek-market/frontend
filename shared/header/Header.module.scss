@@ -1,5 +1,5 @@
-@import '@/styles/variables';
-@import '@/styles/mixins';
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 #mainHeader {
   padding: 2rem 5%;
@@ -9,10 +9,14 @@
     width: fit-content;
   }
 
+  .headerNav {
+    @include flex(flex-start, center);
+  }
+
   .shortcuts {
     width: fit-content;
     @include flex(flex-end, center);
-    padding: 0 0 0 1rem
+    padding: 0 0 0 1rem;
   }
 
   .shortcuts_item {
@@ -54,8 +58,6 @@
 }
 
 #searchbar {
-  flex-grow: 1;
-  margin: 0 0 0 10%;
 
   .searchForm {
     @include flex(space-between, center);
