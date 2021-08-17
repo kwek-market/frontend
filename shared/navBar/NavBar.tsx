@@ -1,8 +1,13 @@
 import React from "react";
-import styles from './Navbar.module.scss'
+import styles from "./Navbar.module.scss";
 import Link from "next/link";
 
-const NavBar = () => {
+interface NavProps {
+  showNavBar: boolean;
+  setShowNavBar: (showNavBar: boolean) => void;
+}
+
+const NavBar: React.FC<NavProps> = ({ showNavBar, setShowNavBar }) => {
   const menu = [
     {
       title: "Shop",
@@ -38,7 +43,15 @@ const NavBar = () => {
     },
   ];
   return (
-    <nav id={styles.mainNav} className="bg-primary">
+    <nav
+      id={styles.mainNav}
+      className="bg-primary"
+      style={{ transform: showNavBar && "translateX(0)" }}
+    >
+      <div className={styles.close} onClick={() => setShowNavBar(false)}>
+        <i className={`fas fa-times ${styles.close_icon}`}></i>
+      </div>
+
       <ul className={styles.nav}>
         {menu.map((item, index) => (
           <li className={styles.nav_item} key={index}>
