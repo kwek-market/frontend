@@ -93,6 +93,10 @@
 
     &_text {
       margin-top: 10rem;
+
+      @include respondMax("tablet") {
+        margin-top: 0;
+      }
     }
   }
 }
