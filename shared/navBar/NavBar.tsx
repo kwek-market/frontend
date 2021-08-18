@@ -7,7 +7,7 @@ interface NavProps {
   setShowNavBar: (showNavBar: boolean) => void;
 }
 
-const NavBar: React.FC<NavProps> = ({ showNavBar, setShowNavBar }) => {
+const NavBar = ({ showNavBar, setShowNavBar }: NavProps) => {
   const menu = [
     {
       title: "Shop",

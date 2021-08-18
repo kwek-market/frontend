@@ -4,13 +4,14 @@
 #mainHeader {
   padding: 2rem 5%;
   @include flex(space-between, center);
+  flex-flow: nowrap;
 
   .logo {
     width: fit-content;
   }
 
   .headerNav {
-    @include flex(flex-start, center);
+    @include flex(flex-end, center);
 
     @include respondMax("tablet") {
       position: fixed;

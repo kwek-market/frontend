@@ -21,13 +21,13 @@ interface HeaderProps {
   setShowNavBar: (showNavBar: boolean) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   user,
   logout,
   setShowNavBar,
   setUserNav,
   userNav,
-}) => {
+}: HeaderProps) => {
   const menu = (
     <Menu>
       <Menu.Item>
