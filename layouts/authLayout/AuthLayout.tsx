@@ -15,25 +15,34 @@ const AuthLayout = ({ children, id, withBanner, bannerText }: any) => {
         {withBanner && (
           <div className={styles.banner}>
             <h1 className={styles.banner_text}>
-              {bannerText.lineOne} <br /> {bannerText.lineTwo} <br /> {bannerText.lineThree}
+              {bannerText.lineOne} <br /> {bannerText.lineTwo} <br />{" "}
+              {bannerText.lineThree}
             </h1>
-            <Link href="#0">
-              <a className={styles.banner_link}>
-                <button className={`btn ${styles.btn}`}>
-                  <div className={styles.btn_text}>Shop with Kwek</div>
-                  <Image
-                    className={styles.btn_icon}
-                    src="/svg/arrow-right-red.svg"
-                    width="24"
-                    height="11.6"
-                  />
-                </button>
-              </a>
-            </Link>
+            <div className={styles.banner_link}>
+              <Link href="#0">
+                <a className={styles.banner_link}>
+                  <button className={`btn ${styles.btn}`}>
+                    <div className={styles.btn_text}>Shop with Kwek</div>
+                    <Image
+                      className={styles.btn_icon}
+                      src="/svg/arrow-right-red.svg"
+                      width="24"
+                      height="11.6"
+                    />
+                  </button>
+                </a>
+              </Link>
+            </div>
           </div>
         )}
 
-        <div className={withBanner ? styles.formContainer : styles.formContainer__full}>{children}</div>
+        <div
+          className={
+            withBanner ? styles.formContainer : styles.formContainer__full
+          }
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

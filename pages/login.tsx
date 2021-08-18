@@ -31,17 +31,18 @@ const Page = ({ user, setUser }) => {
       const time = now.getTime();
       now.setTime(time + 60 * 60 * 24 * 1000);
 
-      document.cookie = `token=${data.loginUser.token};expires=${now.toUTCString()};path=/`;
+      document.cookie = `token=${
+        data.loginUser.token
+      };expires=${now.toUTCString()};path=/`;
 
       // set user state
       setUser({
         ...user,
-        ...data.loginUser.user
-      })
+        ...data.loginUser.user,
+      });
 
       // redirect to home page
-      Router.push("/")
-
+      Router.push("/");
     } catch (error) {
       console.log(error);
     }
