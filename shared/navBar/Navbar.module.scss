@@ -50,6 +50,7 @@
 
     @include respondMax("tablet") {
       display: block;
+      cursor: pointer;
       position: absolute;
       right: 2.5rem;
       top: 2rem;

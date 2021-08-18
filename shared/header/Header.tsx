@@ -13,7 +13,21 @@ import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
 
-const Header = ({ user, logout }) => {
+interface HeaderProps {
+  user: any;
+  logout: any;
+  userNav: boolean;
+  setUserNav: (showNavBar: boolean) => void;
+  setShowNavBar: (showNavBar: boolean) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({
+  user,
+  logout,
+  setShowNavBar,
+  setUserNav,
+  userNav,
+}) => {
   const menu = (
     <Menu>
       <Menu.Item>
@@ -32,6 +46,10 @@ const Header = ({ user, logout }) => {
 
   return (
     <header id={styles.mainHeader}>
+      <div onClick={() => setUserNav(true)}>
+        <i className={`fas fa-ellipsis-v ${styles.navBar_icon}`}></i>
+      </div>
+
       <Link href="/">
         <a className={styles.logo}>
           <Image
@@ -44,7 +62,14 @@ const Header = ({ user, logout }) => {
         </a>
       </Link>
 
-      <div className={styles.headerNav}>
+      <div
+        className={styles.headerNav}
+        style={{ transform: userNav && "translateX(0)" }}
+      >
+        <div className={styles.close} onClick={() => setUserNav(false)}>
+          <i className={`fas fa-times ${styles.close_icon}`}></i>
+        </div>
+
         <SearchBar />
         <div className={styles.shortcuts}>
           {user.id ? (
@@ -106,7 +131,7 @@ const Header = ({ user, logout }) => {
           </Link>
         </div>
       </div>
-      <div>
+      <div onClick={() => setShowNavBar(true)}>
         <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
       </div>
     </header>

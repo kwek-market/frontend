@@ -11,18 +11,76 @@
 
   .headerNav {
     @include flex(flex-start, center);
+
+    @include respondMax("tablet") {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background: #efefef;
+      z-index: 5;
+      padding: 2vh 8%;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
+  .navBar_icon {
+    display: none;
+    font-size: 2.5rem;
+
+    @include respondMax("tablet") {
+      display: block;
+      cursor: pointer;
+    }
+  }
+
+  .close {
+    display: none;
+
+    @include respondMax("tablet") {
+      display: block;
+      cursor: pointer;
+      position: absolute;
+      left: 2.5rem;
+      top: 4rem;
+      padding: 0.5rem 1rem;
+    }
+
+    &_icon {
+      font-size: 3rem;
+    }
   }
 
   .shortcuts {
     width: fit-content;
     @include flex(flex-end, center);
     padding: 0 0 0 1rem;
+
+    @include respondMax("tablet") {
+      order: 1;
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+      align-self: flex-end;
+    }
   }
 
   .shortcuts_item {
     @include flex(flex-end, center);
     width: fit-content;
     margin-left: 1.2rem;
+
+    @include respondMax("tablet") {
+      margin: 2.25rem 0;
+    }
+  }
+
+  .shortcuts_icon {
+    @include respondMax("tablet") {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   .shortcuts_iconWrap {
@@ -51,6 +109,10 @@
     margin-left: 0.5rem;
     color: $col-black;
 
+    @include respondMax("tablet") {
+      font-size: 2rem;
+    }
+
     i {
       font-size: 0.6rem;
     }
@@ -58,6 +120,10 @@
 }
 
 #searchbar {
+  @include respondMax("tablet") {
+    order: 2;
+    width: 100%;
+  }
 
   .searchForm {
     @include flex(space-between, center);
@@ -66,8 +132,18 @@
     border: 1px solid lighten($color: $col-primary-200, $amount: 50);
     border-radius: 5px;
 
+    @include respondMax("tablet") {
+      flex-flow: nowrap;
+      padding: 0.2rem 0.2rem 0.2rem 0.75rem;
+    }
+
     &_icon {
       margin: 0 1rem 0 2rem;
+
+      @include respondMax("tablet") {
+        width: 2rem;
+        height: 2rem;
+      }
     }
 
     &_input {
@@ -76,9 +152,23 @@
       outline: none;
       margin-left: 1.5rem;
 
+      @include respondMax("tablet") {
+        margin-left: 0.5rem;
+        width: 100%;
+        font-size: 1rem;
+        background: inherit;
+      }
+
       &::placeholder {
         color: $col-primary-100;
         font-weight: 500;
+      }
+    }
+
+    &_btn {
+      @include respondMax("mobile") {
+        padding: 0.4rem 2rem;
+        font-size: 0.9rem;
       }
     }
   }
