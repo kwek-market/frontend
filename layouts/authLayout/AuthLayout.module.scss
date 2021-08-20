@@ -74,6 +74,13 @@
     flex-grow: 1;
     height: 100%;
     padding: 10% 25% 0;
+
+    @include respondMax("tablet") {
+      padding: 10% 15% 0;
+    }
+    @include respondMax("mobile") {
+      padding: 10% 5% 0;
+    }
   }
 }
 
