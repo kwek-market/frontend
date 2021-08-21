@@ -34,15 +34,15 @@
       margin-top: 16px;
 
       @media (min-width: 320px) and (max-width: 640px) {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
 
       @media (min-width: 641px) and (max-width: 768px) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
 
       @media (min-width: 769px) and (max-width: 1024px) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
 
       .img_sub {
@@ -136,7 +136,8 @@
       color: #1d1616;
       max-width: 705px;
     }
-    .product_optionbox1 {
+
+    .product_options_color {
       @include flex(flex-start, center, row);
       margin-bottom: 24px;
 
@@ -175,15 +176,19 @@
       }
     }
 
-    .product_optionbox:last-child {
-      border-bottom: none;
+    .product_option_size {
+      @extend .product_options;
     }
 
-    .product_optionbox {
-      @include flex(flex-start, center, row);
+    .product_option_order {
+      @include flex(space-between, center,row wrap);
       margin-bottom: 24px;
       padding-bottom: 32px;
       border-bottom: 1px solid #bfa5a3;
+
+      @include respondMax("mobile") {
+        display: block;
+      }
 
       p {
         font-size: 14px;
@@ -194,23 +199,9 @@
         margin-bottom: 0;
       }
 
-      .product_sizebox {
-        @include flex(flex-start, center, row);
-
-        button {
-          appearance: none !important;
-          border: none;
-          outline: none;
-          padding: 4px 8px;
-          margin-right: 16px !important;
-          cursor: pointer;
-          border: 1px solid #574240;
-          color: #574240;
-          background: transparent;
-          font-size: 13px;
-          font-weight: 500;
-          line-height: 25px;
-        }
+      .product_qty {
+        @include flex(flex-start, center, row nowrap);
+        margin-bottom: 1rem;
       }
 
       .product_addToCart {
@@ -252,6 +243,10 @@
           border-radius: 5px;
           margin-right: 16px;
 
+          @include respondMax("mobile") {
+            padding: .75rem 1.25rem;
+          }
+
           i {
             color: #fff;
             font-size: 24px;
@@ -275,6 +270,10 @@
           border-radius: 5px !important;
           background: transparent;
 
+          @include respondMax("mobile") {
+            padding: .75rem 1.25rem;
+          }
+
           i {
             color: #af1328 !important;
             font-size: 24px !important;
@@ -291,27 +290,24 @@
           }
         }
       }
+    }
 
-      .orderbox {
-        @include flex(flex-start, center, row);
-        margin-right: auto;
+    .product_option_details {
+      @extend .product_options;
+    }
 
-        p {
-          margin-left: 20px;
-          font-size: 15px;
-          color: #574240;
-        }
-      }
+    .product_option_share {
+      @include flex(flex-start, center, row);
+      margin-bottom: 24px;
+      padding-bottom: 32px;
 
-      .debox {
-        @include flex(flex-start, center, row);
-        margin-left: auto;
-
-        p {
-          margin-left: 20px;
-          font-size: 15px;
-          color: #574240;
-        }
+      p {
+        font-size: 14px;
+        line-height: 25px;
+        color: #1d1616;
+        font-weight: 500;
+        margin-right: 24px;
+        margin-bottom: 0;
       }
 
       .socialbox {
@@ -322,6 +318,10 @@
           padding: 8px 10px;
           border-radius: 5px;
           margin-right: 10px;
+
+          @include respondMax("tablet") {
+            margin: 0.5rem;
+          }
 
           i {
             color: #fff;
@@ -358,6 +358,10 @@
             margin-top: 16px;
           }
 
+          @include respondMax("tablet") {
+            margin-top: 0.5rem;
+          }
+
           i {
             color: #bfa5a3 !important;
             font-size: 16px;
@@ -371,6 +375,67 @@
             line-height: 20px;
             margin-left: 10px;
           }
+        }
+      }
+
+      @include respondMax("tablet") {
+        display: block;
+      }
+    }
+
+    .product_options {
+      @include flex(flex-start, center, row);
+      margin-bottom: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #bfa5a3;
+
+      p {
+        font-size: 14px;
+        line-height: 25px;
+        color: #1d1616;
+        font-weight: 500;
+        margin-right: 24px;
+        margin-bottom: 0;
+      }
+
+      .product_sizebox {
+        @include flex(flex-start, center, row);
+
+        button {
+          appearance: none !important;
+          border: none;
+          outline: none;
+          padding: 4px 8px;
+          margin-right: 16px !important;
+          cursor: pointer;
+          border: 1px solid #574240;
+          color: #574240;
+          background: transparent;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 25px;
+        }
+      }
+
+      .orderbox {
+        @include flex(flex-start, center, row);
+        margin-right: auto;
+
+        p {
+          margin-left: 20px;
+          font-size: 15px;
+          color: #574240;
+        }
+      }
+
+      .debox {
+        @include flex(flex-start, center, row);
+        margin-left: auto;
+
+        p {
+          margin-left: 20px;
+          font-size: 15px;
+          color: #574240;
         }
       }
     }
