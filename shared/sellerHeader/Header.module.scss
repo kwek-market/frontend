@@ -13,8 +13,16 @@
     .content {
       @include flex(flex-start, center, row);
 
+      @include respondMax("tablet") {
+        display: block;
+      }
+
       .profile {
         @include flex(flex-start, flex-start, row);
+
+        @include respondMax("tablet") {
+          margin-bottom: 1.5rem;
+        }
 
         .img {
           border-radius: 5px;
@@ -22,6 +30,11 @@
 
         .info {
           margin-left: 40px;
+
+          @include respondMax("tablet") {
+            margin-left: 1.5rem;
+          }
+
           .name {
             font-size: 48px;
             font-weight: 500;
@@ -57,6 +70,10 @@
           margin-bottom: 0;
           margin-right: 16px;
           color: #ffc107;
+
+          @include respondMax("tablet") {
+            padding: 1rem 1.5rem;
+          }
         }
 
         .contactbtn {
@@ -67,6 +84,11 @@
           margin-bottom: 0;
           margin-right: 16px;
           color: #1d1616;
+
+          @include respondMax("tablet") {
+            padding: 1rem 1.5rem;
+            margin-right: 0;
+          }
         }
       }
     }
@@ -78,9 +100,17 @@
     .content {
       @include flex(flex-start, center, row);
 
+      @include respondMax("mobile") {
+        display: block;
+      }
+
       .bars {
         @include flex(flex-start, center, row);
         width: 100%;
+
+        @include respondMax("mobile"){
+          justify-content: space-between;
+        }
 
         .progressbox:nth-child(2) {
           margin: 0 32px;
@@ -88,6 +118,10 @@
 
         .progressbox {
           width: 20%;
+
+          @include respondMax("mobile"){
+            width: auto;
+          }
 
           p {
             font-weight: 500;
@@ -122,6 +156,11 @@
         border-radius: 5px;
         background-color: #f5f0f0;
         width: 30%;
+
+        @include respondMax("mobile"){
+          margin: 1.5rem 0 0 0;
+          width: auto;
+        } 
 
         .info {
           margin-left: 16px;

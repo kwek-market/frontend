@@ -4,12 +4,15 @@
 .pag_container {
   @include flex(center, center, row);
   width: 100%;
-  margin-top: 140px;
-  margin-bottom: 100px;
+  margin: 5rem 0;
 
   .pag_sub {
     @include flex(flex-start, center, row);
     margin: 0 10px;
+
+    @include respondMax("mobile") {
+      margin: 0 8px;
+    }
 
     a {
       margin: 0 10px;
@@ -20,6 +23,11 @@
       line-height: 24px;
       color: #1d1616;
       margin-bottom: 0;
+
+      @include respondMax("mobile") {
+        margin: 0 8px;
+        font-size: 14px;
+      }
     }
 
     .pag_active {
@@ -27,6 +35,10 @@
       border: 1px solid #af1328;
       border-radius: 10px;
       color: #af1328;
+
+      @include respondMax("mobile") {
+        padding: 5px 10px;
+      }
     }
 
     p {
@@ -46,6 +58,18 @@
     background: #af1328;
     border-radius: 10px;
 
+    &:nth-child(1) {
+      @include respondMax("mobile") {
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
+      }
+    }
+
+    &:nth-child(3) {
+      @include respondMax("mobile") {
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+      }
+    }
+
     a {
       @include flex(flex-start, center, row);
 
@@ -62,6 +86,10 @@
         font-size: 16px;
         margin: 0 14px;
         color: #fff;
+
+        @include respondMax("mobile") {
+          margin: 0 8px;
+        }
       }
     }
   }

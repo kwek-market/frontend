@@ -8,12 +8,21 @@
   .bar_content {
     @include flex(flex-start, center, row);
 
+    @include respondMax("mobile") {
+      justify-content: space-between;
+    }
+
     .filter {
       @include flex(flex-start, center, row);
       margin-right: auto;
       padding: 14px 28px;
       background: #af1328;
       border-radius: 5px;
+
+      @include respondMax("mobile") {
+        padding: 0.75rem 1rem;
+        margin-right: 0;
+      }
 
       a {
         @include flex(flex-start, center, row);
@@ -60,6 +69,10 @@
           line-height: 22px;
           appearance: none;
           background-color: transparent;
+
+          @include respondMax("mobile") {
+            padding: 0.75rem 0.8rem;
+          }
         }
 
         .arrow_down {
