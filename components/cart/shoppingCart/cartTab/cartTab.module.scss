@@ -1,0 +1,28 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.tab_container {
+  @include flex(center, center, row);
+  margin-top: 64px;
+  margin-bottom: 72px;
+
+  .tab_content {
+    @include flex(flex-end, center, row);
+
+    .active {
+      color: #574240 !important;
+    }
+
+    a {
+      font-size: 32px;
+      font-weight: 600;
+      color: #bfa5a3;
+    }
+
+    i {
+      margin: 0 32px;
+      font-size: 32px;
+      color: #bfa5a3;
+    }
+  }
+}
