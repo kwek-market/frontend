@@ -1,0 +1,72 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+#mainNav {
+  @include flex(space-between, center);
+  padding: 1rem 6%;
+
+  @include respondMax("tablet") {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 5;
+    flex-flow: column nowrap;
+    padding: 1rem 12%;
+    transform: translateX(105%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .nav {
+    @include flex(flex-start, center);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    @include respondMax("tablet") {
+      margin-top: 10vh;
+      height: 75vh;
+      flex-flow: column nowrap;
+      width: 100%;
+      justify-content: space-evenly;
+      font-size: 1.5rem;
+    }
+
+    &_item {
+      margin-right: 2.5rem;
+
+      @include respondMax("tablet") {
+        margin-right: 0;
+      }
+    }
+
+    &_link {
+      color: $col-white;
+    }
+  }
+
+  .close {
+    display: none;
+
+    @include respondMax("tablet") {
+      display: block;
+      cursor: pointer;
+      position: absolute;
+      right: 2.5rem;
+      top: 2rem;
+      padding: .5rem 1rem;
+    }
+
+    &_icon {
+      font-size: 2.5rem;
+    }
+  }
+
+  .extra_link {
+    color: $col-white;
+
+    @include respondMax("tablet") {
+      font-size: 1.1rem;
+    }
+  }
+}

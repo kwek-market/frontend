@@ -1,0 +1,38 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.first_banner {
+  background: rgba(175, 19, 40, 0.7);
+  border-radius: 10px 10px 0px 0px;
+  padding: 40px 20px;
+  margin: 2rem 6% 0;
+
+  .sublink {
+    @include flex(center, center);
+    margin-bottom: 16px;
+
+    i {
+      margin: 0 13px;
+      color: $col-white;
+    }
+
+    p {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 22px;
+      color: $col-white;
+      margin-bottom: 0;
+    }
+  }
+
+  .category_title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    color: $col-white;
+    text-align: center;
+    margin-bottom: 0;
+  }
+}

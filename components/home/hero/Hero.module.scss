@@ -1,0 +1,121 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+#hero {
+  @include flex(space-between, flex-start);
+
+  @include respondMax("tablet") {
+    display: block;
+  }
+}
+
+.banner {
+  @include flex(space-between, stretch);
+  background: linear-gradient(270.61deg, #5dcae1 0.44%, #90d8e4 99.43%);
+  width: 74%;
+
+  @include respondMax("tablet") {
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  &_section {
+    width: 50%;
+
+    @include respondMax("mobile") {
+      width: 100%;
+    }
+  }
+
+  &_section__one {
+    @include flex(center, flex-start, column);
+    padding: 4rem 0 0 4rem;
+
+    @include respondMax("tablet") {
+      padding: 2rem;
+    }
+  }
+
+  &_section__two {
+    @include flex(flex-end, flex-end);
+    margin-top: auto;
+    overflow: hidden;
+    padding: 5rem 4rem 0 0;
+
+    @include respondMax("tablet") {
+      padding: 0 2rem 0 0;
+    }
+
+    @include respondMax("mobile") {
+      display: none;
+    }
+
+    img {
+      max-width: 80%;
+    }
+  }
+
+  &_text,
+  &_heading {
+    margin: 0;
+  }
+
+  &_textContainer {
+    @include flex(flex-start, center);
+  }
+
+  &_textContainer:nth-child(1) {
+    color: #002d33;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+
+    .btn {
+      margin-left: 1rem;
+      padding: 0.6rem 1rem;
+      border-radius: 0;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+  }
+
+  &_textContainer:nth-child(2) {
+    @include flex(flex-start, flex-start, column);
+
+    .banner_heading {
+      color: #006371;
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    .banner_text {
+      font-size: 1.3rem;
+      color: #002d33;
+    }
+
+    .banner_subtext {
+      margin-top: 0.3rem;
+      color: #002d33;
+      font-size: 0.8rem;
+    }
+  }
+
+  &_textContainer:nth-child(3) {
+    margin-top: 2rem;
+
+    .btn {
+      @include flex(center, center);
+      border-radius: 0;
+      padding: 0.7rem 1.3rem 0.7rem 1rem;
+      color: #222222;
+      background: #e9a501;
+      font-size: 0.9rem;
+      font-weight: 600;
+
+      i {
+        margin-left: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

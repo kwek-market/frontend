@@ -1,0 +1,67 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.extra_container {
+  @include flex(flex-start, center, row);
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(191, 165, 163, 0.15);
+  padding: 24px;
+  margin-bottom: 56px;
+
+  @include respondMax("mobile") {
+    display: block;
+  }
+
+  .extra_info {
+    @include flex(flex-start, center, row);
+    margin-right: auto;
+
+    .img {
+      border-radius: 5px;
+    }
+
+    p {
+      font-size: 20px;
+      color: #574240;
+      margin-bottom: 0;
+      margin-left: 32px;
+
+      span {
+        font-weight: 600;
+        color: #af1328;
+      }
+    }
+
+    .box_productRating {
+      @include flex(flex-start, center);
+      margin-left: 32px;
+
+      span {
+        font-size: 1.2rem;
+        color: #ffc107;
+      }
+
+      small {
+        margin-left: 1rem;
+        color: #c7c0bf;
+        font-size: 0.65rem;
+      }
+    }
+  }
+  .extra_contact {
+    margin-left: auto;
+
+    @include respondMax("mobile") {
+    margin-top: 1.5rem;
+  }
+
+    a {
+      text-decoration: underline;
+      font-size: 15px;
+      font-weight: 500;
+      color: #af1328;
+      margin-right: 80px;
+    }
+  }
+}
