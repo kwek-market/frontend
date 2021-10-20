@@ -1,0 +1,58 @@
+.no-mobile {
+  display: none;
+
+  @media screen and (max-width: 1150px) {
+    @include flex(center, center);
+    position: fixed;
+    background: #fff;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    span {
+      margin-left: 0.3rem;
+    }
+  }
+}
+
+.btn {
+  @include flex(center, center);
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 3rem;
+  font-size: 0.7rem;
+  outline: none;
+  cursor: pointer;
+
+  &--short {
+    padding: 0.4rem 1.5rem;
+  }
+
+  &--naked {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    outline: none;
+    background: transparent;
+  }
+
+  &--outline-white {
+    border: 1px solid $col-white;
+    color: $col-white;
+    background: transparent;
+  }
+
+
+  &__icon {
+    height: fit-content;
+
+    &--right {
+      margin-left: 0.3rem;
+    }
+  }
+}
+.circle-image {
+  border-radius: 100%;
+    object-fit: cover;
+}

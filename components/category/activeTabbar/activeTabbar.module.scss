@@ -1,0 +1,105 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.bar_container {
+  margin-bottom: 34px;
+  width: 100%;
+
+  .bar_content {
+    @include flex(flex-start, center, row);
+
+    .filter {
+      @include flex(flex-start, center, row);
+      margin-right: auto;
+      padding: 14px 28px;
+      background: transparent;
+      border: 1px solid #bfa5a3;
+      border-radius: 5px;
+
+      a {
+        @include flex(flex-start, center, row);
+        color: #bfa5a3;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 22px;
+        margin-bottom: 0;
+
+        i {
+          margin-right: 14px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .filter__red {
+      @include flex(flex-start, center, row);
+      margin-right: auto;
+      padding: 14px 28px;
+      background: #af1328;
+      border-radius: 5px;
+
+      a {
+        @include flex(flex-start, center, row);
+        color: #ededed;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 22px;
+        margin-bottom: 0;
+
+        i {
+          margin-left: 14px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .sortPart {
+      @include flex(flex-start, center, row);
+      margin-left: auto;
+
+      p {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 22px;
+        color: #1d1616;
+        margin-bottom: 0;
+        margin-right: 14px;
+      }
+
+      .select {
+        @include flex(flex-start, center, row);
+        position: relative;
+
+        select {
+          padding: 14px 32px;
+          padding-right: 42px;
+          border: 1px solid #1d1616;
+          border-radius: 5px;
+          color: #574240;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 22px;
+          appearance: none;
+          background: transparent;
+        }
+
+        .arrow_down {
+          position: absolute;
+          right: 0;
+          margin-right: 20px;
+          cursor: pointer !important;
+          pointer-events: none;
+
+          i {
+            font-size: 18px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

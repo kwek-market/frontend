@@ -1,0 +1,52 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.second_banner {
+  @include flex(flex-start, center, row);
+  background: linear-gradient(92.2deg, #f2da00 1.63%, #df7800 98.14%);
+  border-radius: 10px 10px 0px 0px;
+  padding: 70px 80px;
+  margin-top: 56px;
+  margin-bottom: 150px;
+
+  .discountDesc {
+    margin-right: auto;
+
+    span {
+      background: #222222;
+      padding: 12px 20px;
+      color: $col-white;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 28px;
+    }
+
+    p {
+      color: #222222;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 60px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .shopButton {
+      border: 1px solid #222222;
+      box-sizing: border-box;
+      border-radius: 5px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+      color: #222222;
+      padding: 16px 40px;
+      background-color: transparent;
+    }
+  }
+
+  .discountImg {
+    margin-left: auto;
+  }
+}

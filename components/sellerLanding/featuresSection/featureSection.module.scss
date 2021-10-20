@@ -1,0 +1,38 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.features_question {
+    text-align: center;
+    margin-top: 3rem;
+}
+.features_questionHead {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 56px;
+}
+.features_answer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 90%;
+    margin: 0 4rem;
+}
+.features_answerContent {
+    @include flex(flex-start, center, nowrap);
+    margin: 2.5rem;
+}
+.features_answerContent__textHead {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    color: $col-primary-300;
+}
+.features_answerContent__textSub {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 28px;
+    color: $col-primary-300;
+}
+.features_answerContent__elipse {
+    margin-right: 2rem;
+    align-self: flex-start;
+}
