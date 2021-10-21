@@ -1,0 +1,49 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.menu {
+  z-index: 3;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $col-white;
+  width: 100%;
+  padding: 20px;
+  background-color: $col-bg;
+  overflow: auto;
+
+  @include respondMin("tablet") {
+    display: none;
+  }
+
+  .authDiv {
+    @include flex(space-between, center);
+  }
+
+  .menuItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-top: 30px;
+    gap: 20px;
+  }
+
+  .categories {
+    margin-top: 16px;
+
+    p {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      color: $col-primary-400;
+    }
+
+    > div {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.categoryBox {
+  @include flex(flex-start, center, row nowrap);
+  border: 1px solid rgba(191, 165, 163, 0.1);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 16px 10px;
+  background-color: $col-white;
+
+  .img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .name {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 15px;
+    color: $stock-color;
+    padding-left: 20px;
+  }
+}
