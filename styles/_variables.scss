@@ -2,15 +2,24 @@
 
 $col-white: #FFFFFF;
 $col-black: #000000;
+$col-bg: #e5e5e5;
 
 $col-primary: #AF1328;
+$error: #FF2D1A;
 $col-primary-50:  #FCCFD5;
 $col-primary-100:#A88C8A;
 $col-primary-200: #3a2c2b;
 $col-primary-300: #1D1616;
+$col-primary-400: #483735;
 
 $col-secondary:#E9A501;
+$star-filled: #ffc107;
+$stock-color: #574240;
+$review-color: #C7C0BF;
+$col-gray: #BFA5A3;
 
+$border-bottom: 1px solid $col-gray;
+$border-button-red: 1px solid $col-primary;
 
 
 $font-default: 'Poppins', sans-serif;

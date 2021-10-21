@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
 
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/user/user.actions";
 
 import Link from "next/link";
@@ -46,8 +46,8 @@ const Header = ({
 
   return (
     <header id={styles.mainHeader}>
-      <div onClick={() => setUserNav(true)}>
-        <i className={`fas fa-ellipsis-v ${styles.navBar_icon}`}></i>
+      <div onClick={() => setShowNavBar(true)}>
+        <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
       </div>
 
       <Link href="/">
@@ -131,9 +131,7 @@ const Header = ({
           </Link>
         </div>
       </div>
-      <div onClick={() => setShowNavBar(true)}>
-        <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
-      </div>
+      
     </header>
   );
 };
