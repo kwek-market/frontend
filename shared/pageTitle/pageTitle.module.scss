@@ -2,10 +2,16 @@
 @import "@/styles/mixins";
 
 .first_banner {
-  background: rgba(175, 19, 40, 0.7);
+  background-image: linear-gradient(rgba(175, 19, 40, 0.7), rgba(175, 19, 40, 0.7)),
+    url("/images/watches.png");
   border-radius: 10px 10px 0px 0px;
   padding: 40px 20px;
   margin: 2rem 6% 0;
+
+  @include respondMax("tablet") {
+    margin: 2rem 0 0;
+    border-radius: 0;
+  }
 
   .sublink {
     @include flex(center, center);

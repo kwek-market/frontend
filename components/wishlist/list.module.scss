@@ -19,12 +19,14 @@
     width: 100%;
     background: #fff;
 
+    // on small screens this will work
     @include respondMax("tablet") {
       align-items: stretch;
       justify-content: space-evenly;
       border-top: 1px solid #bfa5a3;
       border-bottom: 1px solid #bfa5a3;
       padding: 0.75rem 0;
+      display: none;
     }
 
     .first_grid {
@@ -114,5 +116,75 @@
   .list_grid_out {
     @extend .list_grid;
     background: #fffbf0;
+  }
+
+  .list_grid_mobile {
+    @include flex();
+    border-bottom: $border-bottom;
+    margin-bottom: 1.5rem;
+
+    @include respondMin("tablet") {
+      display: none;
+    }
+
+    .picture_grid {
+      width: 45%;
+    }
+
+    .content_box {
+      width: 55%;
+      padding-left: 1.1rem;
+
+      .stock {
+        font-size: 0.5rem;
+        color: $stock-color;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 150%;
+        opacity: 0.5;
+
+        &_out {
+          font-size: 0.5rem;
+          color: $error;
+          font-style: normal;
+          font-weight: normal;
+          line-height: 150%;
+        }
+      }
+
+      .item_name {
+        font-size: 0.75rem;
+        color: $stock-color;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 150%;
+      }
+
+      .item_price {
+        font-size: 1.125rem;
+        color: $col-black;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+      }
+
+      .star {
+        @include flex(flex-start, center);
+
+        &_filled {
+          color: $star-filled;
+          font-size: 0.8rem;
+        }
+
+        .reviews {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 0.8rem;
+          line-height: 150%;
+          color: #c7c0bf;
+          margin-left: 0.3rem;
+        }
+      }
+    }
   }
 }
