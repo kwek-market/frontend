@@ -8,9 +8,9 @@ import { connect } from "react-redux";
 import { setUser } from "@/store/user/user.actions";
 import { LOGIN_USER } from "@/store/user/user.queries";
 
-import { userFetcher } from "@/helpers";
+// import { userFetcher } from "@/helpers";
 
-const Page = ({ user, setUser }) => {
+const Page = ({ user, setUser, apis }) => {
   const signIn = async (formData: any) => {
     const query = LOGIN_USER;
 
@@ -19,9 +19,41 @@ const Page = ({ user, setUser }) => {
       password: formData.password,
     };
 
+    console.log(variables.email, variables.password);
+
     try {
       // call login
-      const data = await userFetcher(query, variables);
+      // const data = await userFetcher(query, variables);
+
+      const result = await fetch(`https://kwekapi.com/v1/kwekql`, {
+    headers: {
+      "Content-Type": `application/json`,
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      query: `
+      mutation{
+        loginUser(email:"${variables.email}",password:"${variables.password}"){
+        user{
+        id
+        }
+        status
+        message
+        token
+        }
+      }          
+      `,
+    }),
+  });
+
+  if(!result.ok){
+    console.error(result);
+    return {};
+  }
+
+  const { data } = await result.json();
+  const apis = data.loginUser
+  console.log(apis);
 
       // log login data
       console.log(data.loginUser);
@@ -40,6 +72,8 @@ const Page = ({ user, setUser }) => {
         ...user,
         ...data.loginUser.user,
       });
+
+      console.log(user);
 
       // redirect to home page
       Router.push("/");
@@ -94,6 +128,8 @@ const Page = ({ user, setUser }) => {
   return (
     <AuthLayout id="Login" withBanner={true} bannerText={bannerText}>
       <AuthForm {...form} />
+      {/* <div><pre>{JSON.stringify(apis, null, 2)}</pre></div> */}
+      {/* <pre>{user}</pre> */}
     </AuthLayout>
   );
 };
@@ -105,5 +141,42 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   setUser: (user: any) => dispatch(setUser(user)),
 });
+
+export async function getStaticProps(context) {
+  const result = await fetch(`https://kwekapi.com/v1/kwekql`, {
+    headers: {
+      "Content-Type": `application/json`,
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      query: `
+      mutation{
+        loginUser(email:"eemmanuel.idoko@gmail.com",password:"pidoxy.com1"){
+        user{
+        id
+        }
+        status
+        message
+        token
+        }
+      }          
+      `,
+    }),
+  });
+
+  if(!result.ok){
+    console.error(result);
+    return {};
+  }
+
+  const { data } = await result.json();
+  const apis = data.loginUser
+
+  return {
+    props: {
+      apis,
+    }, 
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
 
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/user/user.actions";
 
 import Link from "next/link";
@@ -19,6 +19,8 @@ interface HeaderProps {
   userNav: boolean;
   setUserNav: (showNavBar: boolean) => void;
   setShowNavBar: (showNavBar: boolean) => void;
+  showMenu: boolean;
+  openMenu: any
 }
 
 const Header = ({
@@ -27,6 +29,8 @@ const Header = ({
   setShowNavBar,
   setUserNav,
   userNav,
+  showMenu,
+  openMenu
 }: HeaderProps) => {
   const menu = (
     <Menu>
@@ -46,8 +50,12 @@ const Header = ({
 
   return (
     <header id={styles.mainHeader}>
-      <div onClick={() => setUserNav(true)}>
-        <i className={`fas fa-ellipsis-v ${styles.navBar_icon}`}></i>
+      <div onClick={() => openMenu()}>
+        {!showMenu ? (
+          <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
+        ) : (
+          <i className={`fas fa-times ${styles.navBar_icon}`}></i>
+        )}
       </div>
 
       <Link href="/">
@@ -130,9 +138,6 @@ const Header = ({
             </a>
           </Link>
         </div>
-      </div>
-      <div onClick={() => setShowNavBar(true)}>
-        <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
       </div>
     </header>
   );
