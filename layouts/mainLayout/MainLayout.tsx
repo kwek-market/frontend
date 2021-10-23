@@ -5,6 +5,11 @@ import { Topbar, Header, Navbar, Footer, PageTitle, Menu } from "@/shared";
 const MainLayout = ({ children, title }: any) => {
   const [showNavBar, setShowNavBar] = useState<boolean>(false);
   const [userNav, setUserNav] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  function openMenu() {
+    setShowMenu(!showMenu);
+  }
 
   return (
     <div>
@@ -13,15 +18,20 @@ const MainLayout = ({ children, title }: any) => {
         setShowNavBar={setShowNavBar}
         setUserNav={setUserNav}
         userNav={userNav}
+        showMenu={showMenu}
+        openMenu={openMenu}
       />
       {/* <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} /> */}
-      <Menu
-        setShowNavBar={setShowNavBar}
-        user={undefined}
-        logout={undefined}
-        setUserNav={undefined}
-        userNav={undefined}
-      />
+      {showMenu && (
+        <Menu
+          setShowNavBar={setShowNavBar}
+          user={undefined}
+          logout={undefined}
+          setUserNav={undefined}
+          userNav={undefined}
+        />
+      )}
+
       {title && <PageTitle title={title} />}
       <main className={styles.main_container}>{children}</main>
       <Footer />
