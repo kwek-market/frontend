@@ -6,6 +6,7 @@ import Footer from './footer/Footer'
 import PageTitle from './pageTitle/pageTitle'
 
 import ProductBox from './productBox/ProductBox'
+import Menu from './menu/Menu'
 
 export {
   AuthForm,
@@ -14,5 +15,6 @@ export {
   Navbar,
   Footer,
   ProductBox,
-  PageTitle
+  PageTitle,
+  Menu
 }
