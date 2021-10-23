@@ -1,7 +1,7 @@
 import { GraphQLClient, request } from "graphql-request";
 
 export const userFetcher = async (query: string, variables: any) => {
-  return await request(`http://kwekapi.com/v1/users_auth`, query, variables);
+  return await request(`https://kwekapi.com/v1/kwekql`, query, variables);
 };
 
 export const userFetcherWithAuth = async (
@@ -9,7 +9,7 @@ export const userFetcherWithAuth = async (
   variables: any,
   headerToken?: any
 ) => {
-  const endpoint = "http://kwekapi.com/v1/users_auth";
+  const endpoint = "https://kwekapi.com/v1/kwekql";
 
   let token = headerToken;
 
