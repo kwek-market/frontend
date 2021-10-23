@@ -1,0 +1,55 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+@mixin common_button_style($padding: 12px 12px) {
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 21px;
+  margin-bottom: 0;
+  padding: $padding;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  outline: none;
+  width: 48%;
+}
+
+.red_border_button {
+  @include common_button_style($padding: 10px 12px);
+  border: $border-button-red;
+  color: $col-primary;
+  background-color: $col-white;
+}
+
+.red_filled_button {
+  @include common_button_style($padding: 10px 12px);
+  background-color: $col-primary;
+  color: $col-white;
+  border: $border-button-red;
+}
+
+.btn_block {
+  @include flex(flex-start, center);
+  width: 100%;
+  padding: 16px 8px;
+  background: $col-white;
+  border: 1px solid rgba(191, 165, 163, 0.1);
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 8px;
+
+  &_red {
+    @include flex(flex-start, center);
+    width: 100%;
+    padding: 16px 8px;
+    background: $col-white;
+    border: 1px solid rgba(191, 165, 163, 0.1);
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: $error;
+  }
+}

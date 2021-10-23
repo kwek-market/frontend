@@ -1,0 +1,35 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.menuBox {
+  @include flex(flex-start, center, row nowrap);
+  border: 1px solid rgba(191, 165, 163, 0.1);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: $col-white;
+
+  .icon {
+    font-size: 2rem;
+    padding-right: 5px;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    display: block;
+    color: $stock-color;
+  }
+
+  .description {
+    font-weight: 400;
+    display: block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 9px;
+    line-height: 13px;
+    color: $col-primary-300;
+    opacity: 0.5;
+  }
+}
