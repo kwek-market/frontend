@@ -4,7 +4,7 @@
 .menu {
   z-index: 3;
   position: fixed;
-  top: 100px;
+  top: 120px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -20,6 +20,22 @@
 
   .authDiv {
     @include flex(space-between, center);
+  }
+
+  .userDiv {
+    @include flex(space-between, center);
+
+    .userInitials {
+      height: 40px;
+      width: 40px;
+      background: $col-green;
+      border-radius: 2px;
+      @include flex(center, center);
+    }
+
+    .user {
+      @include flex(flex-start, flex-start, column nowrap);
+    }
   }
 
   .menuItems {

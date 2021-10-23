@@ -68,6 +68,16 @@ function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
           }}
         />
       </div>
+      {/* <div className={menuStyle.userDiv}>
+        <div className={menuStyle.userInitials}>AE</div>
+        <div className={menuStyle.user}>
+          <span>Alison Eyo</span>
+          <span>alisoneyo@example.com</span>
+        </div>
+        <div>
+          <i className="fas fa-cog fa-2x" />
+        </div>
+      </div> */}
       <div className={menuStyle.menuItems}>
         {Object.entries(menuBoxItems).map((key, val) => (
           <MenuBox
