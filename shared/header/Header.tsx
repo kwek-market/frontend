@@ -19,6 +19,8 @@ interface HeaderProps {
   userNav: boolean;
   setUserNav: (showNavBar: boolean) => void;
   setShowNavBar: (showNavBar: boolean) => void;
+  showMenu: boolean;
+  openMenu: any
 }
 
 const Header = ({
@@ -27,6 +29,8 @@ const Header = ({
   setShowNavBar,
   setUserNav,
   userNav,
+  showMenu,
+  openMenu
 }: HeaderProps) => {
   const menu = (
     <Menu>
@@ -46,8 +50,12 @@ const Header = ({
 
   return (
     <header id={styles.mainHeader}>
-      <div onClick={() => setShowNavBar(true)}>
-        <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
+      <div onClick={() => openMenu()}>
+        {!showMenu ? (
+          <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
+        ) : (
+          <i className={`fas fa-times ${styles.navBar_icon}`}></i>
+        )}
       </div>
 
       <Link href="/">
@@ -131,7 +139,6 @@ const Header = ({
           </Link>
         </div>
       </div>
-      
     </header>
   );
 };
