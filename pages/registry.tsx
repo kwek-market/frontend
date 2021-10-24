@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from "next/head";
 import Link from "next/link";
-
+import { MainLayout } from "@/layouts";
 
 
 
@@ -11,7 +11,11 @@ import Link from "next/link";
 
 
 const Page = () => {
-    
+    return (
+        <MainLayout title="">
+          
+        </MainLayout>
+      )
 }
 
 
