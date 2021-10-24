@@ -56,15 +56,15 @@ function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
         <Button
           buttonStyle={buttonStyle.red_border_button}
           text={"Sign up"}
-          cmd={function (): void {
-            throw new Error("Function not implemented.");
+          cmd={() => {
+            history.pushState(history.state, "", "/create-account");
           }}
         />
         <Button
           buttonStyle={buttonStyle.red_filled_button}
           text={"Sign in"}
-          cmd={function (): void {
-            throw new Error("Function not implemented.");
+          cmd={() => {
+            history.pushState(history.state, "", "/create-account");
           }}
         />
       </div>

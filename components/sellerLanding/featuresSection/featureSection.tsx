@@ -1,110 +1,69 @@
-import React from 'react';
-import Styles from './featureSection.module.scss';
-import Testimonials from '../Testimonials/testimonials'
+import React from "react";
+import Styles from "./featureSection.module.scss";
+import Testimonials from "../Testimonials/testimonials";
 
-import Image from 'next/image'
+import Image from "next/image";
+import Feature from "./Feature";
 
 const featureSection = () => {
-    return (
-        <div className={Styles.features}>
-            <div className={Styles.features_question}>
-                <h2 className={Styles.features_questionHead}>
-                Why Choose KwekMarketMall?
-                </h2>
-            </div>
-            <div className={Styles.features_answer}>
-                <div className={Styles.features_answerContent}>
-                    <div className={Styles.features_answerContent__elipse}>
-                    <Image src="/images/Ellipse.png" height="65px" width="65px" />
-                    </div>
-                    <div className={Styles.features_answerContent__text}>
-                        <h4 className={Styles.features_answerContent__textHead}>
-                        Effective Buyers Leveraging
-                        </h4>
-                        <p className={Styles.features_answerContent__textSub}>
-                        Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!
-                        </p>
-                    </div>
-
-                </div>
-                <div className={Styles.features_answerContent}>
-                    <div className={Styles.features_answerContent__elipse}>
-                        <Image src="/images/Ellipse.png" height="65px" width="65px" />
-                    </div>
-                    <div className={Styles.features_answerContent__text}>
-                        <h4 className={Styles.features_answerContent__textHead}>
-                        24hrs delivery optimization
-                        </h4>
-                        <p className={Styles.features_answerContent__textSub}>
-                        Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!
-                        </p>
-                    </div>
-
-                </div>
-                <div className={Styles.features_answerContent}>
-                    <div className={Styles.features_answerContent__elipse}>
-                        <Image src="/images/Ellipse.png" height="65px" width="65px" />
-                    </div>
-                    <div className={Styles.features_answerContent__text}>
-                        <h4 className={Styles.features_answerContent__textHead}>
-                        Effective customer support
-                        </h4>
-                        <p className={Styles.features_answerContent__textSub}>
-                        Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!
-                        </p>
-                    </div>
-
-                </div>
-                <div className={Styles.features_answerContent}>
-                    <div className={Styles.features_answerContent__elipse}>
-                        <Image src="/images/Ellipse.png" height="65px" width="65px" />
-                    </div>
-                    <div className={Styles.features_answerContent__text}>
-                        <h4 className={Styles.features_answerContent__textHead}>
-                        Organized Online Outlet
-                        </h4>
-                        <p className={Styles.features_answerContent__textSub}>
-                        Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!
-                        </p>
-                    </div>
-
-                </div>
-                <div className={Styles.features_answerContent}>
-                    <div className={Styles.features_answerContent__elipse}>
-                        <Image src="/images/Ellipse.png" height="65px" width="65px" />
-                    </div>
-                    <div className={Styles.features_answerContent__text}>
-                        <h4 className={Styles.features_answerContent__textHead}>
-                        Swift transaction
-                        </h4>
-                        <p className={Styles.features_answerContent__textSub}>
-                        Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!
-                        </p>
-                    </div>
-
-                </div>
-                <div className={Styles.features_answerContent}>
-                    <div className={Styles.features_answerContent__elipse}>
-                        <Image src="/images/Ellipse.png" height="65px" width="65px" />
-                    </div>
-                    <div className={Styles.features_answerContent__text}>
-                        <h4 className={Styles.features_answerContent__textHead}>
-                        Optimized Logistic Service
-                        </h4>
-                        <p className={Styles.features_answerContent__textSub}>
-                        Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-            <div>
-                <Testimonials />
-            </div>
-            
-        </div>
-    )
-}
+  const features = [
+    {
+      title: "Effective Buyer’s Leveraging",
+      description:
+        "Our system functionality is enhanced to bring the right audience to your online shop outlet in your “nearness”.",
+      image: "/images/smiling-people.png",
+    },
+    {
+      title: "24hrs delivery optimization",
+      description:
+        "Reach to a large community of people who value the availability of your products in their doorsteps “in no time”. Are you surprised?",
+      image: "/images/smiling-people.png",
+    },
+    {
+      title: "Effective customer support",
+      description:
+        "Easy communication, 24hrs instant response and convincing support level are all guaranteed.",
+      image: "/images/smiling-people.png",
+    },
+    {
+      title: "Organized Online Outlet",
+      description:
+        "Are you looking for the appearance for your online store? A well branded online shop outlet is available for you on kwekmarket.",
+      image: "/images/smiling-people.png",
+    },
+    {
+      title: "Swift transaction",
+      description:
+        "Enjoy Money-to-hand transaction, transparent sales tracking, well understandable and traceable transaction history",
+      image: "/images/smiling-people.png",
+    },
+    {
+      title: "Optimized Logistic Service",
+      description:
+        "Fastest delivery of your product is only a click away. Our team is available for you with our well-structured procurement system",
+      image: "/images/smiling-people.png",
+    },
+  ];
+  return (
+    <div className={Styles.features}>
+      <div className={Styles.features_question}>
+        <h2 className="tw-text-3xl md:tw-text-6xl tw-text-gray-kwek200">
+          Why Choose KwekMarketMall?
+        </h2>
+      </div>
+      <div className="tw-grid tw-grid-cols-kwek-1 tw-gap-5 md:tw-md-gap-10 lg:tw-gap-20 tw-mx-5 md:tw-mx-20">
+        {features.map((feature, index) => (
+          <Feature
+            key={index}
+            imgSrc={feature.image}
+            title={feature.title}
+            description={feature.description}
+          />
+        ))}
+      </div>
+      <Testimonials />
+    </div>
+  );
+};
 
 export default featureSection;

@@ -9,3 +9,9 @@
 @import 'reset';
 @import 'typography';
 @import 'global';
+
+// add some basic styles here
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
