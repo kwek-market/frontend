@@ -11,3 +11,31 @@
 .text-primary {
   color: $col-primary;
 }
+
+.show-b {
+  display: block;
+}
+
+.show-f {
+  display: flex;
+}
+
+.show-g {
+  display: grid;
+}
+
+.hide {
+  display: none;
+}
+
+@mixin hide($screen: 768px) {
+  @media (max-width: $screen) {
+    display: none;
+  }  
+} 
+
+@mixin show($screen: 768px, $disp: flex) {
+  @media (max-width: $screen) {
+    display: $disp;
+  }
+}

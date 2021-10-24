@@ -10,6 +10,11 @@
     width: 70%;
     margin-right: 32px;
 
+    @include respondMax("tablet") {
+      margin-right: 0;
+      width: 100%;
+    }
+
     .billing_container {
       border-radius: 5px;
       border: 1px solid rgba(191, 165, 163, 0.5);
@@ -522,6 +527,10 @@
   }
 
   .second_box {
+    @include respondMax("tablet") {
+      display: none;
+    }
+    display: block;
     width: 30%;
     padding: 30px 20px;
     background-color: #fff;

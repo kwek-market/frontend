@@ -9,12 +9,20 @@
     background-position: bottom;
     padding: 5rem;
     width: 100%;
+
+    @include respondMax("tablet") {
+        padding: 5rem 20px;
+    }
 }
 .hero_split{
     @include flex(space-around, center, nowrap)
 }
 .hero_textContent{
     width: 40%;
+
+    @include respondMax("tablet") {
+        width: 100%;
+    }
 }
 .hero_textContent__headText {
     font-size: 2.5rem;
