@@ -13,7 +13,7 @@ import { MainLayout } from "@/layouts";
 
 const Page = () => {
     return (
-        <MainLayout title="Gift Cards">
+        <MainLayout title="Gift">
           
         </MainLayout>
       )
