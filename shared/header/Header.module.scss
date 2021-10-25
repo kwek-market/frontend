@@ -3,6 +3,9 @@
 
 #mainHeader {
   padding: 2rem 5%;
+  @include respondMax("tablet") {
+    padding: 2rem 5% 0;
+  }
   @include flex(space-between, center);
   flex-flow: nowrap;
 

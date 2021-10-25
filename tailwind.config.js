@@ -13,10 +13,15 @@ module.exports = {
         },
         white: {
           100: "#FFF",
+          light: "#f4f1f0",
         },
         black: {
           kwek100: "#000000",
           stock: "#574240",
+        },
+        brown: {
+          kwek100: "#A88C8A",
+          kwek200: "#BFA5A3",
         },
         yellow: {
           filled: "#ffc107",
@@ -24,6 +29,9 @@ module.exports = {
         },
         green: {
           success: "#009D19",
+        },
+        red: {
+          kwek100: "#AF1328",
         },
         error: "#FF2D1A",
       },
@@ -33,7 +41,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: { 
+      backgroundColor: ['active'],
+    },
   },
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
 };

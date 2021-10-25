@@ -3,6 +3,9 @@
 
 #category_menu {
   @include flex(center, center, column);
+  @include respondMax("tablet") {
+    display: none;
+  }
   padding: 0;
   margin: 0;
   list-style: none;
@@ -67,7 +70,7 @@
 
 .chevron_down {
   transform: rotate(90deg);
-  transition: transform .25s ease-in;
+  transition: transform 0.25s ease-in;
 }
 
 .menu_item {

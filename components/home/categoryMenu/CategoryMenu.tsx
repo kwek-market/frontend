@@ -20,37 +20,99 @@ const CategoryMenu = () => {
   ];
 
   return (
-    <section id={styles.category_menu}>
-      <div className={styles.category_menuTitle}>
-        <i className={`fas fa-bars ${styles.burger_icon}`}></i>
-        <h4 className={styles.category_menuHeading}>All Categories</h4>
-        <div
-          className={styles.category_showMore_icon}
-          onClick={() => setShowCat(!showCat)}
-        >
-          <i className={`fas fa-chevron-right ${styles.chevron_down}`} style={{transform: showCat && "rotate(-90deg)"}}></i>
+    <>
+      <section id={styles.category_menu}>
+        <div className={styles.category_menuTitle}>
+          <i className={`fas fa-bars ${styles.burger_icon}`}></i>
+          <h4 className={styles.category_menuHeading}>All Categories</h4>
+          <div
+            className={styles.category_showMore_icon}
+            onClick={() => setShowCat(!showCat)}
+          >
+            <i
+              className={`fas fa-chevron-right ${styles.chevron_down}`}
+              style={{ transform: showCat && "rotate(-90deg)" }}
+            ></i>
+          </div>
         </div>
-      </div>
-      <ul
-        className={styles.category_list}
-        style={{ maxHeight: showCat && "325px" }}
-      >
-        {categories.map((item, index) => (
-          <li key={index} className={styles.menu_item}>
-            <Link href="/">
-              <a className={styles.menu_link}>
-                <Image
-                  src="/svg/cat-icon-electronics.svg"
-                  width="20"
-                  height="20"
-                />
-                <span className={styles.menu_text}> {item.name} </span>
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
+        <ul
+          className={styles.category_list}
+          style={{ maxHeight: showCat && "325px" }}
+        >
+          {categories.map((item, index) => (
+            <li key={index} className={styles.menu_item}>
+              <Link href="/">
+                <a className={styles.menu_link}>
+                  <Image
+                    src="/svg/cat-icon-electronics.svg"
+                    width="20"
+                    height="20"
+                  />
+                  <span className={styles.menu_text}> {item.name} </span>
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section className="tw-flex md:tw-hidden tw-overflow-auto">
+        <div className="tw-px-8">
+          <img src="/svg/all.svg" alt="all" className="tw-max-w-none" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            {" "}
+            All
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/dress.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Fashion
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/stones.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Beauty
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/car.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Automobile
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/electronics.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Electronics
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/toys.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Toys
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/home.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Home
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/sports.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Sporting
+          </p>
+        </div>
+        <div className="tw-px-8">
+          <img src="/svg/others.svg" alt="electronics" />
+          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
+            Others
+          </p>
+        </div>
+      </section>
+    </>
   );
 };
 
