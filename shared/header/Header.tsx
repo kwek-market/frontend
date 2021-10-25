@@ -21,7 +21,7 @@ interface HeaderProps {
   setUserNav: (showNavBar: boolean) => void;
   setShowNavBar: (showNavBar: boolean) => void;
   showMenu: boolean;
-  openMenu: any
+  openMenu: any;
 }
 
 const Header = ({
@@ -31,7 +31,7 @@ const Header = ({
   setUserNav,
   userNav,
   showMenu,
-  openMenu
+  openMenu,
 }: HeaderProps) => {
   console.log(user)
   const menu = (
@@ -54,9 +54,9 @@ const Header = ({
     <header id={styles.mainHeader}>
       <div onClick={() => openMenu()}>
         {!showMenu ? (
-          <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
+          <i className={`fas fa-bars fa-2x ${styles.navBar_icon}`}></i>
         ) : (
-          <i className={`fas fa-times ${styles.navBar_icon}`}></i>
+          <i className={`fas fa-times fa-2x ${styles.navBar_icon}`}></i>
         )}
       </div> 
 
@@ -72,6 +72,14 @@ const Header = ({
         </a>
       </Link>
 
+      <div className={styles.headerControls}>
+        <i className="fas fa-heart fa-2x" />
+        <i
+          className="fas fa-shopping-cart fa-2x"
+          style={{ marginLeft: "20px" }}
+        />
+      </div>
+
       <div
         className={styles.headerNav}
         style={{ transform: userNav && "translateX(0)" }}
@@ -81,6 +89,7 @@ const Header = ({
         </div>
 
         <SearchBar />
+
         <div className={styles.shortcuts}>
           {user.id ? (
             <div className={styles.shortcuts_item}>

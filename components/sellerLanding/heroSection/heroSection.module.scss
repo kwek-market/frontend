@@ -7,14 +7,26 @@
     background-image: url("/svg/bg-elipse1.svg");
     background-repeat: no-repeat;
     background-position: bottom;
-    padding: 5rem;
+    padding: 30px 5rem 5rem;
     width: 100%;
+
+    @include respondMax("tablet") {
+        padding: 30px 20px 5rem;
+    }
 }
 .hero_split{
-    @include flex(space-around, center, nowrap)
+    @include flex(flex-start, center, nowrap);
+    margin-top: 150px;
+    @include respondMax("tablet") {
+        margin-top: 90px;
+    }
 }
 .hero_textContent{
     width: 40%;
+
+    @include respondMax("tablet") {
+        width: 100%;
+    }
 }
 .hero_textContent__headText {
     font-size: 2.5rem;
