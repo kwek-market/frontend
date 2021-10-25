@@ -4,8 +4,10 @@ import buttonStyle from "@/styles/buttons.module.scss";
 import menuStyle from "./menu.module.scss";
 import MenuBox from "@/components/menu/MenuBox";
 import CategoryBox from "@/components/menu/CategoryBox";
+import { useRouter } from 'next/router'
 
 function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
+  const router = useRouter();
   const menuBoxItems = {
     myCart: {
       icon: "fa-shopping-cart",
@@ -57,14 +59,14 @@ function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
           buttonStyle={buttonStyle.red_border_button}
           text={"Sign up"}
           cmd={() => {
-            history.pushState(history.state, "", "/create-account");
+            router.push("/create-account");
           }}
         />
         <Button
           buttonStyle={buttonStyle.red_filled_button}
           text={"Sign in"}
           cmd={() => {
-            history.pushState(history.state, "", "/create-account");
+            router.push("/login");
           }}
         />
       </div>
