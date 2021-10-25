@@ -7,10 +7,11 @@ import { AuthForm } from "@/shared";
 import { connect } from "react-redux";
 import { setUser } from "@/store/user/user.actions";
 import { LOGIN_USER } from "@/store/user/user.queries";
+import { message } from "antd";
 
 // import { userFetcher } from "@/helpers";
 
-const Page = ({ user, setUser, apis }) => {
+const Page = ({ user, setUser }) => {
   const signIn = async (formData: any) => {
     const query = LOGIN_USER;
 
@@ -19,23 +20,24 @@ const Page = ({ user, setUser, apis }) => {
       password: formData.password,
     };
 
-    console.log(variables.email, variables.password);
-
     try {
       // call login
       // const data = await userFetcher(query, variables);
 
       const result = await fetch(`https://kwekapi.com/v1/kwekql`, {
-    headers: {
-      "Content-Type": `application/json`,
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      query: `
+        headers: {
+          "Content-Type": `application/json`,
+        },
+        method: "POST",
+        body: JSON.stringify({
+          query: `
       mutation{
         loginUser(email:"${variables.email}",password:"${variables.password}"){
         user{
         id
+        fullName
+        username
+        lastName
         }
         status
         message
@@ -43,20 +45,20 @@ const Page = ({ user, setUser, apis }) => {
         }
       }          
       `,
-    }),
-  });
+        }),
+      });
 
-  if(!result.ok){
-    console.error(result);
-    return {};
-  }
+      console.log(result);
+      if (!result.ok) {
+        console.error(result.status);
+        return {};
+      }
 
-  const { data } = await result.json();
-  const apis = data.loginUser
-  console.log(apis);
+      const { data } = await result.json();
+      const apis = data.loginUser;
 
       // log login data
-      console.log(data.loginUser);
+      console.log(apis);
 
       // set cookie with token from login
       const now = new Date();
@@ -70,13 +72,13 @@ const Page = ({ user, setUser, apis }) => {
       // set user state
       setUser({
         ...user,
-        ...data.loginUser.user,
+        ...apis.user,
       });
 
       console.log(user);
 
       // redirect to home page
-      Router.push("/");
+      // Router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -109,6 +111,9 @@ const Page = ({ user, setUser, apis }) => {
       linkText: "Create an Account",
       linkUrl: "/create-account",
     },
+    userId : {
+      id: user.id
+    }
   };
 
   const bannerText = {
@@ -122,14 +127,12 @@ const Page = ({ user, setUser, apis }) => {
   }, []);
 
   if (user.id) {
-    return null;
-  }
+      Router.push("/");
+    }
 
   return (
     <AuthLayout id="Login" withBanner={true} bannerText={bannerText}>
       <AuthForm {...form} />
-      {/* <div><pre>{JSON.stringify(apis, null, 2)}</pre></div> */}
-      {/* <pre>{user}</pre> */}
     </AuthLayout>
   );
 };
@@ -141,42 +144,5 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   setUser: (user: any) => dispatch(setUser(user)),
 });
-
-export async function getStaticProps(context) {
-  const result = await fetch(`https://kwekapi.com/v1/kwekql`, {
-    headers: {
-      "Content-Type": `application/json`,
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      query: `
-      mutation{
-        loginUser(email:"eemmanuel.idoko@gmail.com",password:"pidoxy.com1"){
-        user{
-        id
-        }
-        status
-        message
-        token
-        }
-      }          
-      `,
-    }),
-  });
-
-  if(!result.ok){
-    console.error(result);
-    return {};
-  }
-
-  const { data } = await result.json();
-  const apis = data.loginUser
-
-  return {
-    props: {
-      apis,
-    }, 
-  };
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);
