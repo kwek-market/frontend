@@ -3,6 +3,9 @@
 
 .tab_container {
   @include flex(center, center, row);
+  @include respondMax("tablet") {
+    display: none;
+  }
   margin-top: 64px;
   margin-bottom: 72px;
 
@@ -14,7 +17,7 @@
     }
 
     a {
-      font-size: 32px;
+      font-size: 22px;
       font-weight: 600;
       color: #bfa5a3;
     }
