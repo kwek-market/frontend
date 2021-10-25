@@ -5,6 +5,7 @@ import { Hero, Features, CategoryGrid, Brands } from "@/components/home";
 // import { userFetcherWithAuth } from '@/helpers'
 
 import { parseCookies } from "nookies";
+import MobileSearchBar from "@/shared/header/MobileSearchBar";
 // import { GET_USER } from '@/store/user/user.queries'
 
 const Home = ({ cookies }) => {
@@ -17,6 +18,7 @@ const Home = ({ cookies }) => {
 
   return (
     <MainLayout>
+      <MobileSearchBar />
       <Hero />
       <Features />
       <CategoryGrid title="Deals Of The day" timer={true} cards={cards} />

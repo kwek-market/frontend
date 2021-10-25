@@ -31,7 +31,7 @@
 
     @include respondMax("tablet") {
       width: 100%;
-      display: block;
+      display: none;
       padding: 2rem 10%;
       text-align: center;
     }
