@@ -12,6 +12,7 @@ import "antd/dist/antd.css";
 import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
+import use from "@/components/sellerLanding/Use/use";
 
 interface HeaderProps {
   user: any;
@@ -32,6 +33,7 @@ const Header = ({
   showMenu,
   openMenu,
 }: HeaderProps) => {
+  console.log(user)
   const menu = (
     <Menu>
       <Menu.Item>
@@ -56,9 +58,9 @@ const Header = ({
         ) : (
           <i className={`fas fa-times fa-2x ${styles.navBar_icon}`}></i>
         )}
-      </div>
+      </div> 
 
-      <Link href="/">
+       <Link href="/">
         <a className={styles.logo}>
           <Image
             width="180"
@@ -102,7 +104,7 @@ const Header = ({
                   className="ant-dropdown-link"
                   onClick={(e) => e.preventDefault()}
                 >
-                  Hi {user.fullName.split(" ")[0]}{" "}
+                  Hi {user.fullName.split(" ")[0]}{" "} 
                   <i className="fas fa-chevron-down"></i>
                 </a>
               </Dropdown>

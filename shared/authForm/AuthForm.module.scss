@@ -78,6 +78,10 @@
       }
     }
     
+    &_error {
+      color: red;
+      text-align: center;
+    }
 
     &_extra {
       @include flex(center, center);
