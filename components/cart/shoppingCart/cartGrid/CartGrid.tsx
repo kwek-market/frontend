@@ -4,13 +4,15 @@ import styles from "./cartGrid.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import CartTab from "../cartTab/CartTab";
+import CartGridComponent from "./cartGridComponent";
+import Button from "@/components/buttons/Button";
 
 const CartGrid = () => {
   return (
     <div>
       <CartTab />
-      <div className={styles.items_container}>
-        <div className={styles.items_content}>
+      <div className={`${styles.items_container}`}>
+        <div className={`${styles.items_content} ${styles.hideShow}`}>
           <div className={styles.grid}>
             <div className={styles.firstBox}>
               <p className={styles.title}>PRODUCT</p>
@@ -26,117 +28,7 @@ const CartGrid = () => {
             </div>
           </div>
         </div>
-        <div className={styles.items_content}>
-          <div className={styles.grid}>
-            <div className={styles.firstBox}>
-              <div className={styles.imgbox}>
-                <Image
-                  src="/images/store.png"
-                  width="120"
-                  height="120"
-                  className={styles.img}
-                />
-                <button>
-                  <i className="fas fa-times"></i>
-                </button>
-              </div>
-              <div className={styles.item_desc}>
-                <p className={styles.seller}>Seller: Nike Stores</p>
-                <p className={styles.name}>
-                  Solid pattern in fashion summer dress
-                </p>
-              </div>
-            </div>
-            <div className={styles.secondBox}>
-              <p className={styles.discount_price}>$129.99</p>
-              <p className={styles.current_price}>$129.99</p>
-            </div>
-            <div className={styles.thirdBox}>
-              <div className={styles.addbtn}>
-                <button>-</button>
-                <p>1</p>
-                <button>+</button>
-              </div>
-            </div>
-            <div className={styles.forthBox}>
-              <p className={styles.subtotal}>$129.99</p>
-            </div>
-          </div>
-        </div>
-        <div className={styles.items_content}>
-          <div className={styles.grid}>
-            <div className={styles.firstBox}>
-              <div className={styles.imgbox}>
-                <Image
-                  src="/images/store.png"
-                  width="120"
-                  height="120"
-                  className={styles.img}
-                />
-                <button>
-                  <i className="fas fa-times"></i>
-                </button>
-              </div>
-              <div className={styles.item_desc}>
-                <p className={styles.seller}>Seller: Nike Stores</p>
-                <p className={styles.name}>
-                  Solid pattern in fashion summer dress
-                </p>
-              </div>
-            </div>
-            <div className={styles.secondBox}>
-              <p className={styles.discount_price}>$129.99</p>
-              <p className={styles.current_price}>$129.99</p>
-            </div>
-            <div className={styles.thirdBox}>
-              <div className={styles.addbtn}>
-                <button>-</button>
-                <p>1</p>
-                <button>+</button>
-              </div>
-            </div>
-            <div className={styles.forthBox}>
-              <p className={styles.subtotal}>$129.99</p>
-            </div>
-          </div>
-        </div>
-        <div className={styles.items_content}>
-          <div className={styles.grid}>
-            <div className={styles.firstBox}>
-              <div className={styles.imgbox}>
-                <Image
-                  src="/images/store.png"
-                  width="120"
-                  height="120"
-                  className={styles.img}
-                />
-                <button>
-                  <i className="fas fa-times"></i>
-                </button>
-              </div>
-              <div className={styles.item_desc}>
-                <p className={styles.seller}>Seller: Nike Stores</p>
-                <p className={styles.name}>
-                  Solid pattern in fashion summer dress
-                </p>
-              </div>
-            </div>
-            <div className={styles.secondBox}>
-              <p className={styles.discount_price}>$129.99</p>
-              <p className={styles.current_price}>$129.99</p>
-            </div>
-            <div className={styles.thirdBox}>
-              <div className={styles.addbtn}>
-                <button>-</button>
-                <p>1</p>
-                <button>+</button>
-              </div>
-            </div>
-            <div className={styles.forthBox}>
-              <p className={styles.subtotal}>$129.99</p>
-            </div>
-          </div>
-        </div>
+        <CartGridComponent />
         <div className={styles.bottom_part}>
           <div className={styles.content}>
             <form className={styles.coupon_box}>
@@ -156,6 +48,27 @@ const CartGrid = () => {
             </a>
           </Link>
         </div>
+      </div>
+      <div className="tw-flex tw-flex-row tw-shadow-md tw-bg-white-100 tw-fixed tw-w-full tw-z-10 tw-bottom-0 tw-left-0 tw-right-0 tw-justify-between tw-items-center tw-p-3 md:tw-hidden">
+        <div>
+          <i className={"fas fa-angle-up tw-text-green-success tw-text-base"} />
+        </div>
+        <div className="tw-flex tw-flex-col">
+          <span className="tw-text-sm tw-text-black-stock">Total</span>
+          <span className="tw-text-gray-kwek200 tw-text-lg tw-font-medium">
+            $256
+          </span>
+          <span className="tw-text-error tw-text-xs">
+            * Delivery fee is not included
+          </span>
+        </div>
+        <Button
+          buttonStyle="tw-bg-green-success tw-text-white-100 tw-py-5 tw-px-10 tw-rounded"
+          text={"checkout"}
+          cmd={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       </div>
     </div>
   );

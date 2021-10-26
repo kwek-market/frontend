@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./AuthForm.module.scss";
 
 import Link from "next/link";
+import Loader from "react-loader-spinner";
 
 interface Fields {
   name: string;
@@ -24,6 +25,9 @@ interface Type {
     linkText: string;
     linkUrl: string;
   };
+  userId?: {
+    id: string;
+  };
 }
 
 const AuthForm: React.FC<Type> = ({
@@ -32,9 +36,12 @@ const AuthForm: React.FC<Type> = ({
   fields,
   submit,
   extra,
+  userId,
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
+  const [error, setError] = useState<any>({});
+  const [loading, setLoading] = useState<any>(false);
 
   const handleChange = (e: any) => {
     setFormData({
@@ -45,7 +52,35 @@ const AuthForm: React.FC<Type> = ({
 
   const handleSubmit = (e: any, submitData: any) => {
     e.preventDefault();
+    console.log(userId);
+    console.log(formData)
     submitData.action(formData);
+    setLoading(true);
+
+    if (!formData.email && !formData.password) {
+      // console.log("enter your email and password in");
+      setError({ status: true, message: "Input your email and password" });
+      setLoading(false);
+      // console.log(formData);
+    } else if (!formData.email && formData.password) {
+      setError({ status: true, message: "type in your email" });
+      setLoading(false);
+      // console.log(formData);
+      // console.log("Input your email");
+    } else if (!formData.password) {
+      // console.log("type in your password");
+      setLoading(false);
+      setError({ status: true, message: "Input your password" });
+    // } 
+    // else if (userId.id === null) {
+    //   setError({ status: true, message: "user does not exist" });
+    //   setLoading(false);
+    } else {
+      setError({ status: true, message: "" });
+      submitData.action(formData);
+      // setLoading(false);
+      console.log(formData)
+    } 
   };
 
   return (
@@ -55,6 +90,11 @@ const AuthForm: React.FC<Type> = ({
           <h2 className={styles.form_title}>{title}</h2>
           <p className={styles.form_subtitle}>{subtitle}</p>
         </div>
+        {error && (
+          <span className={`${styles.form_error}`}>
+            <div style={{ paddingLeft: "0.3rem" }}>{error.message}</div>
+          </span>
+        )}
 
         {fields.map(({ type, sub, ...fieldProps }, index) => (
           <React.Fragment key={index}>
@@ -86,14 +126,21 @@ const AuthForm: React.FC<Type> = ({
             )}
           </React.Fragment>
         ))}
-
         {submit && (
           <div className={styles.form_btnContainer}>
             <button
               className={`btn bg-primary ${styles.btn}`}
               onClick={(e) => handleSubmit(e, submit)}
             >
-              {submit.text}
+              {loading ? <Loader
+                type="Puff"
+                color="#fff"
+                height={30}
+                width={30}
+                timeout={3000} //3 secs
+              /> :
+              (submit.text)}
+              {/* {submit.text} */}
             </button>
           </div>
         )}

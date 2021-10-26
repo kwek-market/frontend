@@ -2,17 +2,24 @@
 @import "@/styles/mixins";
 
 .testimonials {
-    @include flex(flex-start, center, nowrap);
+    @include flex(flex-start, center, row wrap);
+
+    @include respondMax("tablet") {
+        @include flex(flex-start, center, column nowrap);
+    }
     height: 33rem;
     width: 100%;
     background-color: #FAD1D7;
-    ;
 }
 .testimonialsAssurance {
     background-color: $col-primary;
     text-align: center;
     color: $col-white;
     width: 50%;
+    @include respondMax("tablet") {
+        width: 100%;
+        padding: 50px;
+    }
     height: 100%;
     @include flex(center, center, nowrap);
    flex-direction: column;
@@ -37,10 +44,16 @@
     background-color: $col-white;
     height: 85%;
     width: 45%;
+    @include respondMax("tablet") {
+        width: 85%;
+    }
 }
 .feedbackBox {
     overflow: hidden;
     margin: 2rem 1.5rem;
+    @include respondMax("tablet") {
+        margin: 10px 1.5rem;
+    }
 }
 .feedbackBox_quote {
     position: relative;
@@ -68,10 +81,16 @@
 }
 .feedbackBox_message {
     margin-top: 2.5rem;
+    @include respondMax("tablet") {
+        margin-top: 1rem;
+    }
 }
 .feedbackBox_messageContent {
     font-weight: normal;
     font-size: 16px;
+    @include respondMax("tablet") {
+        font-size: 12px;
+    }
     line-height: 28px;
     color: $col-primary-300;
 }
