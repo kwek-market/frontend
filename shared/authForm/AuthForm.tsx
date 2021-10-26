@@ -27,6 +27,7 @@ interface Type {
   };
   userId?: {
     id: string;
+    message: string;
   };
 }
 
@@ -50,18 +51,28 @@ const AuthForm: React.FC<Type> = ({
     });
   };
 
+   
+
   const handleSubmit = (e: any, submitData: any) => {
     e.preventDefault();
     console.log(userId);
     console.log(formData)
     submitData.action(formData);
     setLoading(true);
+    // console.log(user);
 
+    // Email validation
+    const validateEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // console.log(validateEmail.test(formData.email))
+    
     if (!formData.email && !formData.password) {
       // console.log("enter your email and password in");
       setError({ status: true, message: "Input your email and password" });
       setLoading(false);
       // console.log(formData);
+    } else if(formData.email && formData.password && !(validateEmail.test(formData.email))){
+      setError({ status: true, message: "Invalid email" });
+      setLoading(false);
     } else if (!formData.email && formData.password) {
       setError({ status: true, message: "type in your email" });
       setLoading(false);
@@ -71,10 +82,10 @@ const AuthForm: React.FC<Type> = ({
       // console.log("type in your password");
       setLoading(false);
       setError({ status: true, message: "Input your password" });
-    // } 
-    // else if (userId.id === null) {
-    //   setError({ status: true, message: "user does not exist" });
-    //   setLoading(false);
+    } 
+    else if (userId.id === null && !(validateEmail.test(formData.email))) {
+      setError({ status: true, message: userId.message });
+      setLoading(false);
     } else {
       setError({ status: true, message: "" });
       submitData.action(formData);
@@ -92,7 +103,7 @@ const AuthForm: React.FC<Type> = ({
         </div>
         {error && (
           <span className={`${styles.form_error}`}>
-            <div style={{ paddingLeft: "0.3rem" }}>{error.message}</div>
+            <div>{error.message}</div>
           </span>
         )}
 
@@ -132,15 +143,14 @@ const AuthForm: React.FC<Type> = ({
               className={`btn bg-primary ${styles.btn}`}
               onClick={(e) => handleSubmit(e, submit)}
             >
-              {loading ? <Loader
+              {loading && loading ? <Loader
                 type="Puff"
                 color="#fff"
                 height={30}
                 width={30}
-                timeout={3000} //3 secs
+                // timeout={3000} //3 secs
               /> :
               (submit.text)}
-              {/* {submit.text} */}
             </button>
           </div>
         )}
