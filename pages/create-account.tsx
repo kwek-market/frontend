@@ -20,7 +20,33 @@ const Page = ({ user, setUser }) => {
       password2: formData.password,
     };
 
-    const data = await userFetcher(query, variables);
+    // const data = await userFetcher(query, variables);
+
+    const result = await fetch(`https://kwekapi.com/v1/kwekql`, {
+        headers: {
+          "Content-Type": `application/json`,
+        },
+        method: "POST",
+        body: JSON.stringify({
+          query: `
+      mutation{
+        createUser(email: "eemmanuel.idoko@gmail.com", fullName: "Pidoxy" password1: "pidoxy.com1", password2: "pidoxy.com1"){
+          user {
+            id
+            firstName
+            lastName
+            email
+          }
+          status
+          message
+        }
+      }          
+      `,
+        }),
+      });
+
+      const { data } = await result.json();
+      const apis = data;
 
     if (data.createUser.status) {
       setUser({
@@ -50,8 +76,13 @@ const Page = ({ user, setUser }) => {
         type: "email",
       },
       {
-        name: "password",
+        name: "password1",
         placeholder: "Password",
+        type: "password",
+      },
+      {
+        name: "password2",
+        placeholder: "Confirm Password",
         type: "password",
       },
     ],
