@@ -81,8 +81,12 @@
     &_error {
       color: red;
       text-align: center;
+      padding-bottom: 1rem;
     }
 
+    &_error div{
+      padding-bottom: 1rem;
+    }
     &_extra {
       @include flex(center, center);
       margin-top: 2rem;
