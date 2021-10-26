@@ -55,8 +55,8 @@ const AuthForm: React.FC<Type> = ({
 
   const handleSubmit = (e: any, submitData: any) => {
     e.preventDefault();
-    console.log(userId);
-    console.log(formData)
+    // console.log(userId);
+    // console.log(formData)
     submitData.action(formData);
     setLoading(true);
     // console.log(user);
@@ -70,6 +70,9 @@ const AuthForm: React.FC<Type> = ({
       setError({ status: true, message: "Input your email and password" });
       setLoading(false);
       // console.log(formData);
+    // } else if(!formData.fullName ){
+    //   setError({ status: true, message: "Input your full name" });
+    //   setLoading(false);
     } else if(formData.email && formData.password && !(validateEmail.test(formData.email))){
       setError({ status: true, message: "Invalid email" });
       setLoading(false);
