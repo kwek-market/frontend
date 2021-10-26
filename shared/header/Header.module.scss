@@ -3,11 +3,22 @@
 
 #mainHeader {
   padding: 2rem 5%;
+  @include respondMax("tablet") {
+    padding: 2rem 5% 0;
+  }
   @include flex(space-between, center);
   flex-flow: nowrap;
 
   .logo {
     width: fit-content;
+  }
+
+  .headerControls {
+    display: none;
+
+    @include respondMax("tablet") {
+      display: block;
+    }
   }
 
   .headerNav {
@@ -28,7 +39,8 @@
 
   .navBar_icon {
     display: none;
-    font-size: 2.5rem;
+
+    // font-size: 2.5rem;
 
     @include respondMax("tablet") {
       display: block;

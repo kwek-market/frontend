@@ -7,8 +7,9 @@ import { AuthForm } from "@/shared";
 import { connect } from "react-redux";
 import { setUser } from "@/store/user/user.actions";
 import { LOGIN_USER } from "@/store/user/user.queries";
+import { message } from "antd";
 
-import { userFetcher } from "@/helpers";
+// import { userFetcher } from "@/helpers";
 
 const Page = ({ user, setUser }) => {
   const signIn = async (formData: any) => {
@@ -21,10 +22,43 @@ const Page = ({ user, setUser }) => {
 
     try {
       // call login
-      const data = await userFetcher(query, variables);
+      // const data = await userFetcher(query, variables);
+
+      const result = await fetch(`https://kwekapi.com/v1/kwekql`, {
+        headers: {
+          "Content-Type": `application/json`,
+        },
+        method: "POST",
+        body: JSON.stringify({
+          query: `
+      mutation{
+        loginUser(email:"${variables.email}",password:"${variables.password}"){
+        user{
+        id
+        fullName
+        username
+        lastName
+        }
+        status
+        message
+        token
+        }
+      }          
+      `,
+        }),
+      });
+
+      console.log(result);
+      if (!result.ok) {
+        console.error(result.status);
+        return {};
+      }
+
+      const { data } = await result.json();
+      const apis = data.loginUser;
 
       // log login data
-      console.log(data.loginUser);
+      console.log(apis);
 
       // set cookie with token from login
       const now = new Date();
@@ -38,11 +72,13 @@ const Page = ({ user, setUser }) => {
       // set user state
       setUser({
         ...user,
-        ...data.loginUser.user,
+        ...apis.user,
       });
 
+      console.log(user);
+
       // redirect to home page
-      Router.push("/");
+      // Router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -75,6 +111,9 @@ const Page = ({ user, setUser }) => {
       linkText: "Create an Account",
       linkUrl: "/create-account",
     },
+    userId : {
+      id: user.id
+    }
   };
 
   const bannerText = {
@@ -88,8 +127,8 @@ const Page = ({ user, setUser }) => {
   }, []);
 
   if (user.id) {
-    return null;
-  }
+      Router.push("/");
+    }
 
   return (
     <AuthLayout id="Login" withBanner={true} bannerText={bannerText}>

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
 
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/user/user.actions";
 
 import Link from "next/link";
@@ -12,6 +12,7 @@ import "antd/dist/antd.css";
 import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
+import use from "@/components/sellerLanding/Use/use";
 
 interface HeaderProps {
   user: any;
@@ -19,6 +20,8 @@ interface HeaderProps {
   userNav: boolean;
   setUserNav: (showNavBar: boolean) => void;
   setShowNavBar: (showNavBar: boolean) => void;
+  showMenu: boolean;
+  openMenu: any;
 }
 
 const Header = ({
@@ -27,7 +30,10 @@ const Header = ({
   setShowNavBar,
   setUserNav,
   userNav,
+  showMenu,
+  openMenu,
 }: HeaderProps) => {
+  console.log(user)
   const menu = (
     <Menu>
       <Menu.Item>
@@ -46,11 +52,15 @@ const Header = ({
 
   return (
     <header id={styles.mainHeader}>
-      <div onClick={() => setUserNav(true)}>
-        <i className={`fas fa-ellipsis-v ${styles.navBar_icon}`}></i>
-      </div>
+      <div onClick={() => openMenu()}>
+        {!showMenu ? (
+          <i className={`fas fa-bars fa-2x ${styles.navBar_icon}`}></i>
+        ) : (
+          <i className={`fas fa-times fa-2x ${styles.navBar_icon}`}></i>
+        )}
+      </div> 
 
-      <Link href="/">
+       <Link href="/">
         <a className={styles.logo}>
           <Image
             width="180"
@@ -62,6 +72,14 @@ const Header = ({
         </a>
       </Link>
 
+      <div className={styles.headerControls}>
+        <i className="fas fa-heart fa-2x" />
+        <i
+          className="fas fa-shopping-cart fa-2x"
+          style={{ marginLeft: "20px" }}
+        />
+      </div>
+
       <div
         className={styles.headerNav}
         style={{ transform: userNav && "translateX(0)" }}
@@ -71,6 +89,7 @@ const Header = ({
         </div>
 
         <SearchBar />
+
         <div className={styles.shortcuts}>
           {user.id ? (
             <div className={styles.shortcuts_item}>
@@ -85,7 +104,7 @@ const Header = ({
                   className="ant-dropdown-link"
                   onClick={(e) => e.preventDefault()}
                 >
-                  Hi {user.fullName.split(" ")[0]}{" "}
+                  Hi {user.fullName.split(" ")[0]}{" "} 
                   <i className="fas fa-chevron-down"></i>
                 </a>
               </Dropdown>
@@ -130,9 +149,6 @@ const Header = ({
             </a>
           </Link>
         </div>
-      </div>
-      <div onClick={() => setShowNavBar(true)}>
-        <i className={`fas fa-bars ${styles.navBar_icon}`}></i>
       </div>
     </header>
   );
