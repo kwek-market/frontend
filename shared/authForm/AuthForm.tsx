@@ -86,7 +86,7 @@ const AuthForm: React.FC<Type> = ({
       setLoading(false);
       setError({ status: true, message: "Input your password" });
     } 
-    else if (userId.id === null && !(validateEmail.test(formData.email))) {
+    else if (userId.id === null) {
       setError({ status: true, message: userId.message });
       setLoading(false);
     } else {
