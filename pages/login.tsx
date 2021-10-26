@@ -48,17 +48,13 @@ const Page = ({ user, setUser }) => {
         }),
       });
 
-      console.log(result);
-      if (!result.ok) {
-        console.error(result.status);
-        return {};
-      }
+      // console.log(result);
 
       const { data } = await result.json();
       const apis = data.loginUser;
 
       // log login data
-      console.log(apis);
+      // console.log(apis);
 
       // set cookie with token from login
       const now = new Date();
@@ -71,11 +67,10 @@ const Page = ({ user, setUser }) => {
 
       // set user state
       setUser({
-        ...user,
+        // ...user,
+        ...apis,
         ...apis.user,
       });
-
-      console.log(user);
 
       // redirect to home page
       // Router.push("/");
@@ -112,7 +107,8 @@ const Page = ({ user, setUser }) => {
       linkUrl: "/create-account",
     },
     userId : {
-      id: user.id
+      id: user.id,
+      message: user.message
     }
   };
 
