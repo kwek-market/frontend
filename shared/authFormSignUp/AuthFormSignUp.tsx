@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import styles from "./AuthForm.module.scss";
+import styles from "../authForm/AuthForm.module.scss";
 
 import Link from "next/link";
 import Loader from "react-loader-spinner";
-import { message } from "antd";
 
 interface Fields {
   name: string;
@@ -30,16 +29,19 @@ interface Type {
     id: string;
     message: string;
   };
-  // message: string;
+  createUserInfo: {
+    message: string;
+  };
 }
 
-const AuthForm: React.FC<Type> = ({
+const AuthFormSign: React.FC<Type> = ({
   title,
   subtitle,
   fields,
   submit,
   extra,
   userId,
+  createUserInfo,
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
@@ -53,31 +55,33 @@ const AuthForm: React.FC<Type> = ({
     });
   };
 
-   
-
   const handleSubmit = (e: any, submitData: any) => {
     e.preventDefault();
     // console.log(userId);
-    console.log(formData)
-    submitData.action(formData);
-    setLoading(true);
+    // console.log(formData);
+    // submitData.action(formData);
+    // setLoading(true);
     // console.log(user);
-
+    // console.log(loading);
+    console.log(createUserInfo)
     // Email validation
-    const validateEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const validateEmail =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // console.log(validateEmail.test(formData.email))
-    
-    if(userId.message === "E-mail Already in use"){
-      setError({ status: true, message: "E-mail Already in use" });
-      setLoading(false);
-    }
 
-    if (!formData.email && !formData.password) {
+    if (!formData.fullName) {
+      setError({ status: true, message: "Input your full name" });
+      setLoading(false);
+    } else if (!formData.email && !formData.password) {
       // console.log("enter your email and password in");
       setError({ status: true, message: "Input your email and password" });
       setLoading(false);
       // console.log(formData);
-    } else if(formData.email && formData.password && !(validateEmail.test(formData.email))){
+    } else if (
+      formData.email &&
+      formData.password &&
+      !validateEmail.test(formData.email)
+    ) {
       setError({ status: true, message: "Invalid email" });
       setLoading(false);
     } else if (!formData.email && formData.password) {
@@ -85,20 +89,33 @@ const AuthForm: React.FC<Type> = ({
       setLoading(false);
       // console.log(formData);
       // console.log("Input your email");
-    } else if (!formData.password) {
+    } else if (!formData.password1) {
       // console.log("type in your password");
       setLoading(false);
       setError({ status: true, message: "Input your password" });
-    } 
-    else if (userId.id === null) {
-      setError({ status: true, message: userId.message });
+    } else if (formData.password1 !== formData.password2) {
+      // console.log("enter your email and password in");
+      setError({ status: true, message: "Passwords do not match" });
+      setLoading(false);
+      // console.log(formData);
+    // } else if (userId.id === null) {
+    //   setError({ status: true, message: userId.message });
+    //   setLoading(false);
+    } else if (createUserInfo.message === "Password is should not be less than 8 characters") {
+      setError({ status: true, message: "Password is should not be less than 8 characters" });
+      setLoading(false); 
+    } else if (createUserInfo.message === "Password should contain numerical character") {
+      setError({ status: true, message: "Password should contain numerical character" });
+      setLoading(false); 
+    } else if (createUserInfo.message === "E-mail Already in use") {
+      setError({ status: true, message: "E-mail Already in use" });
       setLoading(false);
     } else {
       setError({ status: true, message: "" });
       submitData.action(formData);
       // setLoading(false);
-      console.log(formData)
-    } 
+      console.log(formData);
+    }
   };
 
   return (
@@ -150,14 +167,17 @@ const AuthForm: React.FC<Type> = ({
               className={`btn bg-primary ${styles.btn}`}
               onClick={(e) => handleSubmit(e, submit)}
             >
-              {loading && loading ? <Loader
-                type="Puff"
-                color="#fff"
-                height={30}
-                width={30}
-                // timeout={3000} //3 secs
-              /> :
-              (submit.text)}
+              {loading && loading ? (
+                <Loader
+                  type="Puff"
+                  color="#fff"
+                  height={30}
+                  width={30}
+                  // timeout={3000} //3 secs
+                />
+              ) : (
+                submit.text
+              )}
             </button>
           </div>
         )}
@@ -175,4 +195,4 @@ const AuthForm: React.FC<Type> = ({
   );
 };
 
-export default AuthForm;
+export default AuthFormSign;
