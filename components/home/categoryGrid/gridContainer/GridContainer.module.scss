@@ -54,7 +54,8 @@
     width: 32%;
 
     @include respondMax("tablet") {
-      width: 48%;
+      width: 100%;
+      display: none;
     }
     @include respondMax("mobile") {
       width: 100%;
@@ -73,6 +74,11 @@
 
   .banner {
     width: 48%;
+
+    @include respondMax("tablet") {
+      width: 100%;
+      display: none;
+    }
 
     @include respondMax("mobile") {
       width: 100%;

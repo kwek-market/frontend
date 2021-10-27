@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FiHeart } from "react-icons/fi";
 
 import { connect, useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/user/user.actions";
@@ -32,21 +34,21 @@ const Header = ({
   showMenu,
   openMenu,
 }: HeaderProps) => {
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <Link href="/">
-          <a>Account</a>
-        </Link>
-      </Menu.Item>
+  // const menu = (
+  //   <Menu>
+  //     <Menu.Item>
+  //       <Link href="/">
+  //         <a>Account</a>
+  //       </Link>
+  //     </Menu.Item>
 
-      <Menu.Item>
-        <Link href="/">
-          <a onClick={() => logout()}>Logout</a>
-        </Link>
-      </Menu.Item>
-    </Menu>
-  );
+  //     <Menu.Item>
+  //       <Link href="/">
+  //         <a onClick={() => logout()}>Logout</a>
+  //       </Link>
+  //     </Menu.Item>
+  //   </Menu>
+  // );
 
   return (
     <header id={styles.mainHeader}>
@@ -59,7 +61,7 @@ const Header = ({
       </div>
 
       <Link href="/">
-        <a className={styles.logo}>
+        <a className={`${styles.logo} tw-px-2`}>
           <Image
             width="180"
             height="30"
@@ -70,12 +72,9 @@ const Header = ({
         </a>
       </Link>
 
-      <div className={styles.headerControls}>
-        <i className="fas fa-heart fa-2x" />
-        <i
-          className="fas fa-shopping-cart fa-2x"
-          style={{ marginLeft: "20px" }}
-        />
+      <div className={`${styles.headerControls} tw-flex`}>
+        <FiHeart className="tw-text-4xl tw-inline" />
+        <AiOutlineShoppingCart className="tw-ml-3 md:tw-ml-5 tw-text-4xl tw-inline" />
       </div>
 
       <div
@@ -88,7 +87,7 @@ const Header = ({
 
         <SearchBar />
 
-        <div className={styles.shortcuts}>
+        {/* <div className={styles.shortcuts}>
           {user.id ? (
             <div className={styles.shortcuts_item}>
               <Image
@@ -146,7 +145,7 @@ const Header = ({
               <p className={styles.shortcuts_label}>Cart</p>
             </a>
           </Link>
-        </div>
+        </div> */}
       </div>
     </header>
   );

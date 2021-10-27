@@ -14,10 +14,6 @@
   background-color: $col-bg;
   overflow: auto;
 
-  @include respondMin("tablet") {
-    display: none;
-  }
-
   .authDiv {
     @include flex(space-between, center);
   }

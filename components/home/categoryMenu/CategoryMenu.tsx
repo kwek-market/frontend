@@ -4,6 +4,7 @@ import styles from "./CategoryMenu.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import CategoryMobile from "./CategoryMobile";
 
 const CategoryMenu = () => {
   const [showCat, setShowCat] = useState<boolean>(false);
@@ -55,20 +56,16 @@ const CategoryMenu = () => {
           ))}
         </ul>
       </section>
-      <section className="tw-flex md:tw-hidden tw-overflow-auto">
-        <div className="tw-px-8">
-          <img src="/svg/all.svg" alt="all" className="tw-max-w-none" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            {" "}
-            All
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/dress.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Fashion
-          </p>
-        </div>
+      <section className="tw-flex md:tw-hidden tw-overflow-x-auto tw-overflow-y-hidden">
+        <CategoryMobile
+          imgSrc={"/svg/all.svg"}
+          text={"All"}
+          style={"tw-max-w-none"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/dress.svg"}
+          text={"Fashion"}
+        />
         <div className="tw-px-8">
           <img src="/svg/stones.svg" alt="electronics" />
           <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
