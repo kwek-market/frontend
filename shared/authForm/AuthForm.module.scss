@@ -84,6 +84,16 @@
       padding-bottom: 1rem;
     }
 
+    &_success {
+      color: green;
+      text-align: center;
+      padding-bottom: 1rem;
+    }
+
+    &_success div{
+      padding-bottom: 1rem;
+    }
+
     &_error div{
       padding-bottom: 1rem;
     }
