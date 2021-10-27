@@ -14,6 +14,7 @@ import "antd/dist/antd.css";
 import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
+import use from "@/components/sellerLanding/Use/use";
 
 interface HeaderProps {
   user: any;
@@ -34,21 +35,21 @@ const Header = ({
   showMenu,
   openMenu,
 }: HeaderProps) => {
-  // const menu = (
-  //   <Menu>
-  //     <Menu.Item>
-  //       <Link href="/">
-  //         <a>Account</a>
-  //       </Link>
-  //     </Menu.Item>
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <Link href="/">
+          <a>Account</a>
+        </Link>
+      </Menu.Item>
 
-  //     <Menu.Item>
-  //       <Link href="/">
-  //         <a onClick={() => logout()}>Logout</a>
-  //       </Link>
-  //     </Menu.Item>
-  //   </Menu>
-  // );
+      <Menu.Item>
+        <Link href="/">
+          <a onClick={() => logout()}>Logout</a>
+        </Link>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <header id={styles.mainHeader}>
@@ -58,7 +59,7 @@ const Header = ({
         ) : (
           <i className={`fas fa-times fa-2x ${styles.navBar_icon}`}></i>
         )}
-      </div>
+      </div> 
 
       <Link href="/">
         <a className={`${styles.logo} tw-px-2`}>
@@ -87,7 +88,7 @@ const Header = ({
 
         <SearchBar />
 
-        {/* <div className={styles.shortcuts}>
+        <div className={styles.shortcuts}>
           {user.id ? (
             <div className={styles.shortcuts_item}>
               <Image
@@ -101,7 +102,7 @@ const Header = ({
                   className="ant-dropdown-link"
                   onClick={(e) => e.preventDefault()}
                 >
-                  Hi {user.fullName.split(" ")[0]}{" "}
+                  Hi {user.fullName.split(" ")[0]}{" "} 
                   <i className="fas fa-chevron-down"></i>
                 </a>
               </Dropdown>
@@ -145,7 +146,7 @@ const Header = ({
               <p className={styles.shortcuts_label}>Cart</p>
             </a>
           </Link>
-        </div> */}
+        </div>
       </div>
     </header>
   );
