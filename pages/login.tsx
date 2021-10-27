@@ -109,7 +109,7 @@ const Page = ({ user, setUser }) => {
     userId : {
       id: user.id,
       message: user.message
-    }
+    },
   };
 
   const bannerText = {
