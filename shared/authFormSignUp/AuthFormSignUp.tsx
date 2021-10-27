@@ -3,7 +3,6 @@ import styles from "../authForm/AuthForm.module.scss";
 
 import Link from "next/link";
 import Loader from "react-loader-spinner";
-import { message } from "antd";
 
 interface Fields {
   name: string;
