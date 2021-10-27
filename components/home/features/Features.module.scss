@@ -7,6 +7,9 @@
   margin: 3rem 0;
   background: url("/images/features-bg.png"), #ffffff;
   background-size: cover;
+  @include respondMax("tablet") {
+    display: none;
+  }
   border-radius: 10px;
 }
 
