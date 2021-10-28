@@ -22,6 +22,7 @@ module.exports = {
         brown: {
           kwek100: "#A88C8A",
           kwek200: "#BFA5A3",
+          kwek300: "rgb(87, 66, 64)",
         },
         yellow: {
           filled: "#ffc107",
@@ -32,6 +33,7 @@ module.exports = {
         },
         red: {
           kwek100: "#AF1328",
+          kwek200: "rgba(175, 19, 40, 0.6)",
         },
         error: "#FF2D1A",
       },
@@ -41,8 +43,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: { 
-      backgroundColor: ['active'],
+    extend: {
+      backgroundColor: ["active, hover"],
+      display: ["responsive", "hover", "focus", "group-hover, active"],
     },
   },
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],

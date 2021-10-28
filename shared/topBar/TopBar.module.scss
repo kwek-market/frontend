@@ -1,5 +1,5 @@
-@import '@/styles/variables';
-@import '@/styles/mixins';
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 #topbar {
   @include flex(center, center);
@@ -7,6 +7,11 @@
   padding: 0.7rem 2%;
   background-color: $col-primary-300;
   height: fit-content;
+  display: block;
+
+  @include respondMax("tablet") {
+    display: none;
+  }
 
   .logo {
     @include flex(center, center);
@@ -48,7 +53,7 @@
       margin: 0 0.5rem;
       padding: 0.3rem 0.5rem;
       font-size: 0.7rem;
-      border: 1px solid #FFFFFF;
+      border: 1px solid #ffffff;
       border-radius: 5px;
     }
 
@@ -56,7 +61,6 @@
       margin: 0;
       font-weight: 600;
       color: $col-white;
-
     }
 
     &_cta {
@@ -66,8 +70,5 @@
       font-weight: 600;
       opacity: 0.7;
     }
-    
   }
-
-  
 }
