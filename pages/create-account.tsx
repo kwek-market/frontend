@@ -65,7 +65,7 @@ const Page = ({ user, setUser }) => {
     ) {
       setError({ status: true, message: apis.message, success: true });
 
-      router.push("/");
+      // router.push("/");
     } else if (!formData.email && !formData.password) {
       setError({ status: true, message: "Input your email and password", success: false });
       setLoading(false);
@@ -111,7 +111,7 @@ const Page = ({ user, setUser }) => {
     } else {
       setError({ status: true, message: `${apis.message}`, success: true });
       setLoading(true);
-      router.push("/");
+      // router.push("/");
     }
   };
 
