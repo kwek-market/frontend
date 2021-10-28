@@ -4,7 +4,7 @@ import buttonStyle from "@/styles/buttons.module.scss";
 import menuStyle from "./menu.module.scss";
 import MenuBox from "@/components/menu/MenuBox";
 import CategoryBox from "@/components/menu/CategoryBox";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
   const router = useRouter();
@@ -53,7 +53,7 @@ function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
   ];
 
   return (
-    <div className={menuStyle.menu}>
+    <div className={`${menuStyle.menu} lg:tw-hidden tw-block`}>
       <div className={menuStyle.authDiv}>
         <Button
           buttonStyle={buttonStyle.red_border_button}
