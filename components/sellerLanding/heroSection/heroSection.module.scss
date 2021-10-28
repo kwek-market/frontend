@@ -1,46 +1,53 @@
 @import "@/styles/variables";
 @import "@/styles/mixins";
 
-
 .hero {
-    background-color: #FBF4F5;
-    background-image: url("/svg/bg-elipse1.svg");
-    background-repeat: no-repeat;
-    background-position: bottom;
-    padding: 30px 5rem 5rem;
+  background-color: #fbf4f5;
+  background-image: url("/svg/bg-elipse1.svg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 30px 5rem 5rem;
+  width: 100%;
+
+  @include respondMax("tablet") {
+    padding: 30px 20px 5rem;
+  }
+}
+.hero_split {
+  @include flex(flex-start, center, nowrap);
+  margin-top: 150px;
+  @include respondMax("tablet") {
+    margin-top: 90px;
+  }
+}
+.hero_textContent {
+  width: 40%;
+
+  @include respondMax("tablet") {
     width: 100%;
-
-    @include respondMax("tablet") {
-        padding: 30px 20px 5rem;
-    }
-}
-.hero_split{
-    @include flex(flex-start, center, nowrap);
-    margin-top: 150px;
-    @include respondMax("tablet") {
-        margin-top: 90px;
-    }
-}
-.hero_textContent{
-    width: 40%;
-
-    @include respondMax("tablet") {
-        width: 100%;
-    }
+  }
 }
 .hero_textContent__headText {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: $col-primary-300;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $col-primary-300;
 }
-.hero_textContent__subText{
-    font-size: 22px;
-    font-weight: 300;
-    line-height: 36px;
-    color: #574240;
+.hero_textContent__subText {
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 36px;
+  color: #574240;
 }
 .hero_image2__div {
-    position: absolute;
-    right: 19rem;
-    bottom: 10rem;
+  position: absolute;
+  right: 19rem;
+  bottom: 10rem;
+}
+
+.sell {
+  color: $col-primary-300;
+  &:hover {
+    color: $col-primary;
+    border-bottom: 2px solid $col-primary;
+  }
 }

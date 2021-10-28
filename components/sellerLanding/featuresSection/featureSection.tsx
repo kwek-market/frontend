@@ -51,7 +51,7 @@ const featureSection = () => {
           Why Choose KwekMarketMall?
         </h2>
       </div>
-      <div className="tw-grid tw-grid-cols-kwek-1 tw-gap-5 md:tw-md-gap-10 lg:tw-gap-20 tw-mx-5 md:tw-mx-20">
+      <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-kwek-1 tw-gap-5 md:tw-md-gap-10 lg:tw-gap-20 tw-mx-5 md:tw-mx-20">
         {features.map((feature, index) => (
           <Feature
             key={index}
