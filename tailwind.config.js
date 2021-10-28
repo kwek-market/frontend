@@ -44,8 +44,9 @@ module.exports = {
   },
   variants: {
     extend: {
-      backgroundColor: ["active, hover"],
+      backgroundColor: ["active"],
       display: ["responsive", "hover", "focus", "group-hover, active"],
+      border: ['active', 'hover'],
     },
   },
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
