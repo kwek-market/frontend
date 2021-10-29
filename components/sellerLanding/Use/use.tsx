@@ -2,67 +2,46 @@ import React from "react";
 import Styles from "./use.module.scss";
 
 import Image from "next/image";
+import UseBox from "./UseBox";
 
 const use = () => {
+  const useBox = [
+    {
+      title: "Create your store",
+      description:
+        "Register your store with a unique store URL for your store on Kwekmarkethall.com",
+      image: "/images/shop.png",
+      bgColor: "tw-bg-green-700"
+    },
+    {
+      title: "List your products",
+      description:
+        "Create your products, set your own prices, and make them available for purchase",
+      image: "/images/list.png",
+    },
+    {
+      title: "Sell to millions of buyers",
+      description:
+        "Manage your orders, choose your own shipping method, and receive sales proceeds.",
+      image: "/images/sell.png",
+    },
+  ];
   return (
-    <div className={Styles.Use}>
-      <div className="tw-text-center tw-p-2 tw-my-3 md:tw-my-5 lg:tw-my-10">
-        <h2 className="tw-font-semibold tw-text-gray-kwek200 tw-text-base md:tw-text-2xl lg:tw-text-5xl">
-          How it Works
-        </h2>
-      </div>
-      <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-px-5 md:tw-px-7">
-        <div className="tw-flex tw-flex-row">
-          <div className={Styles.UseList_contentLogo}>
-            <Image src="/svg/Feature-icon-1.svg" height="72px" width="72px" />
-          </div>
-          <div className={Styles.UseList_contentText}>
-            <h3 className="tw-font-semibold tw-text-lg md:tw-text-2xl tw-text-gray-kwek300">
-              Ideate
-            </h3>
-            <p className="tw-font-normal tw-text-sm md:tw-text-xl tw-text-gray-kwek300">
-              Turn your idea from concept to MVP
-            </p>
-          </div>
+    <div className={`tw-py-16 md:tw-py-24 tw-px-8 md:tw-px-14 ${Styles.Use}`}>
+      <div
+        className={` tw-flex md:tw-flex-row tw-flex-col tw-justify-between tw-w-full`}
+      >
+        <div className="tw-text-center md:tw-text-left tw-flex-1 tw-p-2 tw-my-3 md:tw-my-5 lg:tw-my-10">
+          <h2 className="tw-font-semibold tw-text-gray-kwek200 tw-text-base md:tw-text-2xl lg:tw-text-5xl">
+            How it Works
+          </h2>
+          <p className="tw-text-base">Get set-up in three easy steps</p>
+          <div className="tw-w-full tw-h-32 tw-bg-gray-600"></div>
         </div>
-        <div className="tw-flex tw-flex-row">
-          <div className={Styles.UseList_contentLogo}>
-            <Image src="/svg/Feature-icon-2.svg" height="72px" width="72px" />
-          </div>
-          <div className={Styles.UseList_contentText}>
-            <h3 className="tw-font-semibold tw-text-lg md:tw-text-2xl tw-text-gray-kwek300">
-              Design
-            </h3>
-            <p className="tw-font-normal tw-text-sm md:tw-text-xl tw-text-gray-kwek300">
-              Sketch out the product to align the user needs
-            </p>
-          </div>
-        </div>
-        <div className="tw-flex tw-flex-row">
-          <div className={Styles.UseList_contentLogo}>
-            <Image src="/svg/Feature-icon-3.svg" height="72px" width="72px" />
-          </div>
-          <div className={Styles.UseList_contentText}>
-            <h3 className="tw-font-semibold tw-text-lg md:tw-text-2xl tw-text-gray-kwek300">
-              Develop
-            </h3>
-            <p className="tw-font-normal tw-text-sm md:tw-text-xl tw-text-gray-kwek300">
-              Convert the designs into a live application
-            </p>
-          </div>
-        </div>
-        <div className="tw-flex tw-flex-row">
-          <div className={Styles.UseList_contentLogo}>
-            <Image src="/svg/Feature-icon-3.svg" height="72px" width="72px" />
-          </div>
-          <div className={Styles.UseList_contentText}>
-            <h3 className="tw-font-semibold tw-text-lg md:tw-text-2xl tw-text-gray-kwek300">
-              Deploy
-            </h3>
-            <p className="tw-font-normal tw-text-sm md:tw-text-xl tw-text-gray-kwek300">
-              Launching the application to the market
-            </p>
-          </div>
+        <div className="tw-flex tw-flex-col tw-flex-1">
+          {useBox.map((item, index) => (
+            <UseBox key={index} title={item.title} desc={item.description} imgSrc={item.image} bgColor={item?.bgColor} />
+          ))}
         </div>
       </div>
       <div className={Styles.useRegister}>

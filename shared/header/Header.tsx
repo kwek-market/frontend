@@ -74,8 +74,8 @@ const Header = ({
       </Link>
 
       <div className={`${styles.headerControls} tw-flex`}>
-        <FiHeart className="tw-text-4xl tw-inline" />
-        <AiOutlineShoppingCart className="tw-ml-3 md:tw-ml-5 tw-text-4xl tw-inline" />
+        <FiHeart className="tw-text-4xl tw-inline tw-w-8 tw-h-8" />
+        <AiOutlineShoppingCart className="tw-ml-3 tw-w-8 tw-h-8 md:tw-ml-5 tw-text-4xl tw-inline" />
       </div>
 
       <div

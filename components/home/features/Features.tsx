@@ -3,17 +3,23 @@ import styles from "./Features.module.scss";
 
 import Image from "next/image";
 import Carousel from "@/components/Carousel/Carousel";
+import Slider from "@/components/slider/slider";
 
 const Features = () => {
   const slides = [
     {
       element: (
-        <div className="tw-flex tw-flex-row">
+        <div
+          className="tw-grid tw-grid-cols-kwek-2 tw-text-center tw-gap-5 tw-mr-5 tw-p-3 tw-rounded-lg"
+          style={{
+            background: `#ffffff url("/images/features-bg.png") no-repeat center / cover`,
+          }}
+        >
           <Image src="/svg/features-delivery.svg" width="120" height="120" />
-          <div className="ml-2 tw-flex tw-flex-col tw-justify-center">
-            <h4 className="tw-text-white-100 tw-text-lg">Free Delivery</h4>
-            <p className="tw-text-white-100 tw-text-base">
-              When order from $500
+          <div className="tw-flex tw-flex-col tw-justify-center">
+            <h4 className="tw-text-white-100 tw-text-lg tw-text-left">Free Delivery</h4>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">
+              When you order from $500
             </p>
           </div>
         </div>
@@ -21,11 +27,16 @@ const Features = () => {
     },
     {
       element: (
-        <div className="tw-flex tw-flex-row">
+        <div
+          className="tw-grid tw-grid-cols-kwek-2 tw-text-center tw-gap-5 tw-mr-5 tw-p-3 tw-rounded-lg"
+          style={{
+            background: `#ffffff url("/images/features-bg.png") no-repeat center / cover`,
+          }}
+        >
           <Image src="/svg/features-return.svg" width="120" height="120" />
-          <div className="ml-2 tw-flex tw-flex-col tw-justify-center">
-            <h4 className="tw-text-white-100 tw-text-lg">Return Policy</h4>
-            <p className="tw-text-white-100 tw-text-base">
+          <div className="tw-flex tw-flex-col tw-justify-center">
+            <h4 className="tw-text-white-100 tw-text-lg tw-text-left">Return Policy</h4>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">
               Free Shipping on all order
             </p>
           </div>
@@ -34,11 +45,16 @@ const Features = () => {
     },
     {
       element: (
-        <div className="tw-flex tw-flex-row">
+        <div
+          className="tw-grid tw-grid-cols-kwek-2 tw-text-center tw-gap-5 tw-mr-5 tw-p-3 tw-rounded-lg"
+          style={{
+            background: `#ffffff url("/images/features-bg.png") no-repeat center / cover`,
+          }}
+        >
           <Image src="/svg/features-support.svg" width="120" height="120" />
-          <div className="ml-2 tw-flex tw-flex-col tw-justify-center">
-            <h4 className="tw-text-white-100 tw-text-lg">24/7 Support</h4>
-            <p className="tw-text-white-100 tw-text-base">
+          <div className="tw-flex tw-flex-col tw-justify-center">
+            <h4 className="tw-text-white-100 tw-text-lg tw-text-left">24/7 Support</h4>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">
               Free Shipping on all order
             </p>
           </div>
@@ -47,11 +63,16 @@ const Features = () => {
     },
     {
       element: (
-        <div className="tw-flex tw-flex-row">
+        <div
+          className="tw-grid tw-grid-cols-kwek-2 tw-text-center tw-gap-5 tw-p-3 tw-rounded-lg"
+          style={{
+            background: `#ffffff url("/images/features-bg.png") no-repeat center / cover`,
+          }}
+        >
           <Image src="/svg/features-payment.svg" width="120" height="120" />
-          <div className="ml-2 tw-flex tw-flex-col tw-justify-center">
-            <h4 className="tw-text-white-100 tw-text-lg">Secure Payment</h4>
-            <p className="tw-text-white-100 tw-text-base">
+          <div className="tw-flex tw-flex-col tw-justify-center">
+            <h4 className="tw-text-white-100 tw-text-lg tw-text-left">Secure Payment</h4>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">
               When order from $500
             </p>
           </div>
@@ -98,14 +119,9 @@ const Features = () => {
           </div>
         </div>
       </div>
-      <div className="tw-block md:tw-hidden">
-      <Carousel
-        slides={slides}
-        height="250px"
-        background={`#ffffff url("/images/features-bg.png") no-repeat center / cover`}
-      />
+      <div className="tw-block md:tw-hidden tw-mt-5">
+        <Slider element={slides} />
       </div>
-      
     </>
   );
 };

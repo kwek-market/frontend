@@ -10,6 +10,7 @@ module.exports = {
           review: "#C7C0BF",
           kwek200: "#1D1616",
           kwek300: "#18191f",
+          kwek400: "#8B8B8B",
         },
         white: {
           100: "#FFF",
@@ -39,6 +40,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         "kwek-1": "repeat(auto-fit, minmax(350px, 1fr))",
+        "kwek-2": "repeat(2, 150px)"
       },
     },
   },
