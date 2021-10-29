@@ -13,28 +13,22 @@ const heroSection = () => {
 
   return (
     <div className={Styles.hero}>
-      <div className="tw-flex tw-justify-between">
+      <div className="tw-flex tw-justify-between tw-px-5 md:tw-px-20">
         <img src="/svg/kweklogo.svg" />
         <div className="md:tw-flex tw-justify-center tw-items-center tw-hidden">
           <Link href="/sell">
             <a className={Styles.sell}>
-              <span className="tw-mr-3 lg:tw-mr-5">
-                Marketplace
-              </span>
+              <span className="tw-mr-3 lg:tw-mr-5">Marketplace</span>
             </a>
           </Link>
           <Link href="/">
             <a className={Styles.sell}>
-              <span className="tw-mr-3 lg:tw-mr-5">
-                Pricing
-              </span>
+              <span className="tw-mr-3 lg:tw-mr-5">Pricing</span>
             </a>
           </Link>
           <Link href="/">
             <a className={Styles.sell}>
-              <span className="tw-mr-3 lg:tw-mr-5">
-                Buy on kwek
-              </span>
+              <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
             </a>
           </Link>
           <Button
@@ -65,16 +59,12 @@ const heroSection = () => {
               </Link>
               <Link href="/">
                 <a className={Styles.sell}>
-                  <span className="tw-mr-3 lg:tw-mr-5">
-                    Pricing
-                  </span>
+                  <span className="tw-mr-3 lg:tw-mr-5">Pricing</span>
                 </a>
               </Link>
               <Link href="/">
                 <a className={Styles.sell}>
-                  <span className="tw-mr-3 lg:tw-mr-5">
-                    Buy on kwek
-                  </span>
+                  <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
                 </a>
               </Link>
               <Button
@@ -129,6 +119,13 @@ const heroSection = () => {
           </div>
         </div>
       </div>
+      <svg viewBox="0 0 1440 319" className="tw-pt-10 md:tw-pt-20">
+        <path
+          fill="#fff"
+          fillOpacity="1"
+          d="M0,32L48,80C96,128,192,224,288,224C384,224,480,128,576,90.7C672,53,768,75,864,96C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+        ></path>
+      </svg>
     </div>
   );
 };

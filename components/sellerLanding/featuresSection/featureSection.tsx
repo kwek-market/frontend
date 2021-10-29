@@ -11,37 +11,37 @@ const featureSection = () => {
       title: "Effective Buyer’s Leveraging",
       description:
         "Our system functionality is enhanced to bring the right audience to your online shop outlet in your “nearness”.",
-      image: "/images/smiling-people.png",
+      image: "/images/investor.png",
     },
     {
       title: "24hrs delivery optimization",
       description:
         "Reach to a large community of people who value the availability of your products in their doorsteps “in no time”. Are you surprised?",
-      image: "/images/smiling-people.png",
+      image: "/images/24hours.png",
     },
     {
       title: "Effective customer support",
       description:
         "Easy communication, 24hrs instant response and convincing support level are all guaranteed.",
-      image: "/images/smiling-people.png",
+      image: "/images/customer.png",
     },
     {
       title: "Organized Online Outlet",
       description:
         "Are you looking for the appearance for your online store? A well branded online shop outlet is available for you on kwekmarket.",
-      image: "/images/smiling-people.png",
+      image: "/images/outlet.png",
     },
     {
       title: "Swift transaction",
       description:
         "Enjoy Money-to-hand transaction, transparent sales tracking, well understandable and traceable transaction history",
-      image: "/images/smiling-people.png",
+      image: "/images/swiftpay.png",
     },
     {
       title: "Optimized Logistic Service",
       description:
         "Fastest delivery of your product is only a click away. Our team is available for you with our well-structured procurement system",
-      image: "/images/smiling-people.png",
+      image: "/images/delivery.png",
     },
   ];
   return (
@@ -51,7 +51,7 @@ const featureSection = () => {
           Why Choose KwekMarketMall?
         </h2>
       </div>
-      <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-kwek-1 tw-gap-5 md:tw-md-gap-10 lg:tw-gap-20 tw-mx-5 md:tw-mx-20">
+      <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-kwek-1 tw-gap-5 md:tw-md-gap-10 lg:tw-gap-20 tw-mx-5 md:tw-mx-20 tw-mb-5">
         {features.map((feature, index) => (
           <Feature
             key={index}
