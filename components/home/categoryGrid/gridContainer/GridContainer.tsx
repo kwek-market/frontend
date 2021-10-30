@@ -6,6 +6,7 @@ import { ProductBox } from "@/shared";
 import Button from "@/components/buttons/Button";
 import { useRouter } from "next/router";
 import Carousel from "@/components/Carousel/Carousel";
+import Slider from "@/components/slider/slider";
 
 const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
   const products = [1, 2, 3, 4];
@@ -52,7 +53,7 @@ const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
                 </div>
               ))}
             </div>
-            <Carousel slides={slides} height="200px" />
+            <Slider element={slides} />
           </>
         )}
 
@@ -65,7 +66,7 @@ const GridContainer = ({ title, timer, sidebar, cards, banners }: any) => {
               </div>
             ))}
           </div>
-          <Carousel slides={banner} height="200px" />
+          <Slider element={banner} />
           </>
         )}
       </div>

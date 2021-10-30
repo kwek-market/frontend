@@ -9,11 +9,17 @@
 
   @include respondMax("tablet") {
     padding: 1.6rem 1.2rem 1.6rem 1.6rem;
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    margin-right: 20px;
   }
 }
 
 .imageContainer {
   width: 50%;
+  @include respondMax("tablet") {
+    width: 100%;
+  }
 
   div {
     height: 100%;
@@ -25,6 +31,9 @@
   width: 50%;
   padding: 1rem 0;
   color: $col-white;
+  @include respondMax("tablet") {
+    width: 100%;
+  }
 
   .textSm {
     font-size: 0.7rem;
