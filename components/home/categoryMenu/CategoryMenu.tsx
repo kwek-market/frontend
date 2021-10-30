@@ -66,48 +66,34 @@ const CategoryMenu = () => {
           imgSrc={"/svg/dress.svg"}
           text={"Fashion"}
         />
-        <div className="tw-px-8">
-          <img src="/svg/stones.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Beauty
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/car.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Automobile
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/electronics.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Electronics
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/toys.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Toys
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/home.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Home
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/sports.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Sporting
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/others.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Others
-          </p>
-        </div>
+        <CategoryMobile
+          imgSrc={"/svg/stones.svg"}
+          text={"Stones"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/car.svg"}
+          text={"Automobile"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/toys.svg"}
+          text={"Toys"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/electronics.svg"}
+          text={"Electronics"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/home.svg"}
+          text={"Home"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/sports.svg"}
+          text={"Sporting"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/others.svg"}
+          text={"Others"}
+        />
       </section>
     </>
   );

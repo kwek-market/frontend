@@ -11,3 +11,11 @@
 .text-primary {
   color: $col-primary;
 }
+
+// hover
+.overlay {
+  opacity: 0;
+  &:hover {
+    opacity: 0.75;
+  }
+}

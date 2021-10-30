@@ -50,8 +50,11 @@ function Carousel({ slides, height, background }: CarouselProps) {
   }, [current]);
 
   return (
-    <div className="tw-relative md:tw-hidden tw-flex tw-h-3/6 tw-w-full tw-justify-center tw-items-center tw-mt-5 tw-bg-cover" style={{height: height, background: background}}>
-      <div className="tw-rounded-full tw-bg-white-100 tw-absolute tw-top-2/4 tw-left-2 tw-p-3">
+    <div
+      className="tw-relative md:tw-hidden tw-flex tw-h-3/6 tw-w-full tw-justify-center tw-items-center tw-mt-5 tw-bg-cover"
+      style={{ height: height, background: background }}
+    >
+      <div className="tw-rounded-full tw-bg-white-100 tw-absolute tw-top-2/4 tw-left-2 tw-p-3 tw-opacity-0 hover:tw-opacity-100">
         <MdArrowBackIos
           className="tw-text-2xl tw-text-blue-400"
           onClick={prevSlide}
@@ -65,7 +68,7 @@ function Carousel({ slides, height, background }: CarouselProps) {
           {index === current && file.element}
         </div>
       ))}
-      <div className="tw-rounded-full tw-bg-white-100 tw-absolute tw-top-2/4 tw-right-2 tw-p-3">
+      <div className="tw-rounded-full tw-bg-white-100 tw-absolute tw-top-2/4 tw-right-2 tw-p-3 tw-opacity-0 hover:tw-opacity-100">
         <MdArrowForwardIos
           className="tw-text-2xl tw-text-blue-400"
           onClick={nextSlide}
