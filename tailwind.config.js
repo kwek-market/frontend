@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   prefix: "tw-",
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
@@ -11,6 +12,8 @@ module.exports = {
           kwek200: "#1D1616",
           kwek300: "#18191f",
           kwek400: "#8B8B8B",
+          kwek500: "#796866",
+          kwek600: "rgba(0,0,0,0.21)"
         },
         white: {
           100: "#FFF",
@@ -40,7 +43,8 @@ module.exports = {
       },
       gridTemplateColumns: {
         "kwek-1": "repeat(auto-fit, minmax(350px, 1fr))",
-        "kwek-2": "repeat(2, 150px)"
+        "kwek-2": "repeat(2, 150px)",
+        "kwek-3": "2fr 6fr",
       },
     },
   },
@@ -48,7 +52,7 @@ module.exports = {
     extend: {
       backgroundColor: ["active"],
       display: ["responsive", "hover", "focus", "group-hover, active"],
-      border: ['active', 'hover'],
+      border: ["active", "hover"],
     },
   },
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
