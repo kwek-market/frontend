@@ -59,7 +59,7 @@ const Header = ({
         ) : (
           <i className={`fas fa-times fa-2x ${styles.navBar_icon}`}></i>
         )}
-      </div> 
+      </div>
 
       <Link href="/">
         <a className={`${styles.logo} tw-px-2`}>
@@ -74,8 +74,8 @@ const Header = ({
       </Link>
 
       <div className={`${styles.headerControls} tw-flex`}>
-        <FiHeart className="tw-text-4xl tw-inline tw-w-8 tw-h-8" />
-        <AiOutlineShoppingCart className="tw-ml-3 tw-w-8 tw-h-8 md:tw-ml-5 tw-text-4xl tw-inline" />
+        <FiHeart style={{ height: "28px", width: "30px" }} />
+        <AiOutlineShoppingCart style={{ height: "28px", width: "30px" }} />
       </div>
 
       <div
@@ -102,7 +102,7 @@ const Header = ({
                   className="ant-dropdown-link"
                   onClick={(e) => e.preventDefault()}
                 >
-                  Hi {user.fullName.split(" ")[0]}{" "} 
+                  Hi {user.fullName.split(" ")[0]}{" "}
                   <i className="fas fa-chevron-down"></i>
                 </a>
               </Dropdown>
