@@ -5,7 +5,7 @@ function ProfileContent({ activeBtn }) {
   const [menu, setMenu] = React.useState(false);
 
   return (
-    <div className="tw-border tw-border-gray-500 tw-border-opacity-50 tw-rounded tw-p-5">
+    <div className="tw-border tw-border-gray-500 tw-border-opacity-50 tw-rounded tw-p-2 md:tw-p-5 tw-relative">
       {/* <div className="tw-flex tw-justify-between"> */}
         {activeBtn === "Account" && <Account activeBtn={activeBtn} />}
         {activeBtn === "My Orders" && <Orders activeBtn={activeBtn} />}
