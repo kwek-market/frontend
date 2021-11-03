@@ -6,6 +6,9 @@
   margin-bottom: 40px;
   background-color: #fff;
   padding: 40px 50px;
+  @include respondMax("tablet") {
+    padding: 20px;
+  }
 
   .info_content {
     display: grid;

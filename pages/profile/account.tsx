@@ -9,10 +9,7 @@ import { useRouter } from "next/router";
 import { Menu, ProfileContent } from "@/components/profile/";
 
 function account() {
-  const [activeBtn, setActiveBtn] = useState("Account")
-  function chooseActive() {
-    console.log()
-  }
+  const [activeBtn, setActiveBtn] = useState("Account");
 
   return (
     <MainLayout title={"Profile"}>
