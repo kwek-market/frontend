@@ -14,7 +14,7 @@ function Account({ activeBtn }) {
   return (
     <>
       <div className="tw-border-b tw-border-gray-500 tw-border-opacity-50">
-        <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-3xl">
+        <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl">
           {activeBtn}
         </h4>
       </div>
@@ -24,37 +24,41 @@ function Account({ activeBtn }) {
           type={"text"}
           value={firstName}
           setValue={setFirstName}
+          hide={undefined}
         />
         <TextInput
           text={"last name"}
           type={"text"}
           value={lastName}
           setValue={setLastName}
+          hide={undefined}
         />
         <TextInput
           text={"email address"}
           type={"email"}
           value={email}
           setValue={setEmail}
+          hide={undefined}
         />
         <TextInput
           text={"phone number"}
           type={"tel"}
           value={phoneNumber}
           setValue={setPhoneNumber}
+          hide={undefined}
         />
       </div>
       <div className="tw-flex tw-justify-between">
         <Button
           buttonStyle={
-            "tw-border tw-border-gray-400 tw-p-2 tw-rounded-sm tw-text-sm md:tw-text-base tw-text-black-stock hover:tw-text-red-kwek100 tw-font-semibold"
+            "tw-border tw-whitespace-nowrap tw-border-gray-400 tw-p-2 tw-rounded-sm tw-text-sm md:tw-text-base tw-text-black-stock hover:tw-text-red-kwek100 tw-font-semibold tw-truncate tw-whitespace-nowrap"
           }
           text={"Change Password"}
           cmd={() => router.push("/change-password")}
         />
         <Button
           buttonStyle={
-            "tw-bg-green-success tw-p-2 tw-rounded-sm tw-text-sm md:tw-text-base tw-text-white-100 hover:tw-text-black-stock tw-font-semibold"
+            "tw-bg-green-success tw-p-2 tw-rounded-sm tw-text-sm md:tw-text-base tw-text-white-100 hover:tw-text-black-stock tw-font-semibold tw-truncate tw-whitespace-nowrap"
           }
           text={"Save Changes"}
           cmd={() => saveChanges()}

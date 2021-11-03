@@ -9,7 +9,11 @@ type ButtonProps = {
 
 function Button({ buttonStyle, text, cmd, icon }: ButtonProps) {
   return (
-    <button className={buttonStyle} onClick={cmd}>
+    <button
+      className={buttonStyle}
+      style={{ whiteSpace: "nowrap" }}
+      onClick={cmd}
+    >
       {icon && (
         <i className={`fas ${icon}`} style={{ paddingRight: "12px" }}></i>
       )}
