@@ -1,6 +1,24 @@
 import React from "react";
 
-function TextInput({ text, type, value, setValue, hide }) {
+type TextInputProps = {
+  text: string;
+  type: string;
+  value: string | number;
+  setValue: React.Dispatch<React.SetStateAction<string | number>>;
+  hide?: boolean;
+  min?: number;
+  max?: number;
+};
+
+function TextInput({
+  text,
+  type,
+  value,
+  setValue,
+  hide,
+  min,
+  max,
+}: TextInputProps) {
   return (
     <div className="tw-flex tw-flex-col">
       <label
@@ -16,6 +34,8 @@ function TextInput({ text, type, value, setValue, hide }) {
         className="tw-rounded-sm tw-w-full"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        min={min}
+        max={max}
       />
     </div>
   );
