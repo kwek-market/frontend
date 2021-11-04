@@ -35,9 +35,17 @@ const Page = ({ user, setUser }) => {
         loginUser(email:"${variables.email}",password:"${variables.password}"){
         user{
         id
+        email
         fullName
         username
         lastName
+        firstName
+        phoneNumber
+        isVerified
+        isSeller
+        lastLogin
+        isActive
+        dateJoined
         }
         status
         message
@@ -67,9 +75,8 @@ const Page = ({ user, setUser }) => {
 
       // set user state
       setUser({
-        // ...user,
+        id: apis.user.id,
         ...apis,
-        ...apis.user,
       });
 
       // redirect to home page
@@ -106,9 +113,9 @@ const Page = ({ user, setUser }) => {
       linkText: "Create an Account",
       linkUrl: "/create-account",
     },
-    userId : {
+    userId: {
       id: user.id,
-      message: user.message
+      message: user.message,
     },
   };
 
@@ -123,8 +130,8 @@ const Page = ({ user, setUser }) => {
   }, []);
 
   if (user.id) {
-      Router.push("/");
-    }
+    Router.push("/");
+  }
 
   return (
     <AuthLayout id="Login" withBanner={true} bannerText={bannerText}>

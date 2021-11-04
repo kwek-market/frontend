@@ -1,10 +1,10 @@
 import React from "react";
 import { ClosedOrder } from "./index";
 
-function ClosedOrders() {
+function ClosedOrders({setActiveBtn}) {
   return (
     <>
-      <ClosedOrder />
+      <ClosedOrder setActiveBtn={setActiveBtn} />
     </>
   );
 }

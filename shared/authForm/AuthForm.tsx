@@ -4,6 +4,7 @@ import styles from "./AuthForm.module.scss";
 import Link from "next/link";
 import Loader from "react-loader-spinner";
 import { message } from "antd";
+import { emailValidator } from "@/helpers";
 
 interface Fields {
   name: string;
@@ -53,21 +54,18 @@ const AuthForm: React.FC<Type> = ({
     });
   };
 
-   
-
   const handleSubmit = (e: any, submitData: any) => {
     e.preventDefault();
     // console.log(userId);
-    console.log(formData)
+    console.log(formData);
     submitData.action(formData);
     setLoading(true);
     // console.log(user);
 
     // Email validation
-    const validateEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // console.log(validateEmail.test(formData.email))
-    
-    if(userId.message === "E-mail Already in use"){
+
+    if (userId.message === "E-mail Already in use") {
       setError({ status: true, message: "E-mail Already in use" });
       setLoading(false);
     }
@@ -77,7 +75,11 @@ const AuthForm: React.FC<Type> = ({
       setError({ status: true, message: "Input your email and password" });
       setLoading(false);
       // console.log(formData);
-    } else if(formData.email && formData.password && !(validateEmail.test(formData.email))){
+    } else if (
+      formData.email &&
+      formData.password &&
+      !emailValidator(formData.email)
+    ) {
       setError({ status: true, message: "Invalid email" });
       setLoading(false);
     } else if (!formData.email && formData.password) {
@@ -89,16 +91,15 @@ const AuthForm: React.FC<Type> = ({
       // console.log("type in your password");
       setLoading(false);
       setError({ status: true, message: "Input your password" });
-    } 
-    else if (userId.id === null) {
+    } else if (userId.id === null) {
       setError({ status: true, message: userId.message });
       setLoading(false);
     } else {
       setError({ status: true, message: "" });
       submitData.action(formData);
       // setLoading(false);
-      console.log(formData)
-    } 
+      console.log(formData);
+    }
   };
 
   return (
@@ -150,14 +151,17 @@ const AuthForm: React.FC<Type> = ({
               className={`btn bg-primary ${styles.btn}`}
               onClick={(e) => handleSubmit(e, submit)}
             >
-              {loading && loading ? <Loader
-                type="Puff"
-                color="#fff"
-                height={30}
-                width={30}
-                // timeout={3000} //3 secs
-              /> :
-              (submit.text)}
+              {loading && loading ? (
+                <Loader
+                  type="Puff"
+                  color="#fff"
+                  height={30}
+                  width={30}
+                  // timeout={3000} //3 secs
+                />
+              ) : (
+                submit.text
+              )}
             </button>
           </div>
         )}
