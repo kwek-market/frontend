@@ -7,7 +7,6 @@ import { AuthForm } from "@/shared";
 import { connect } from "react-redux";
 import { setUser } from "@/store/user/user.actions";
 import { LOGIN_USER } from "@/store/user/user.queries";
-import { message } from "antd";
 
 // import { userFetcher } from "@/helpers";
 
