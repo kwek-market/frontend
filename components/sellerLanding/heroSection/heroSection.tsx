@@ -14,7 +14,11 @@ const heroSection = () => {
   return (
     <div className={Styles.hero}>
       <div className="tw-flex tw-justify-between tw-px-5 md:tw-px-20">
-        <img src="/svg/kweklogo.svg" />
+        <Link href="/">
+          <a>
+            <img src="/svg/kweklogo.svg" />
+          </a>
+        </Link>
         <div className="md:tw-flex tw-justify-center tw-items-center tw-hidden">
           <Link href="/sell">
             <a className={Styles.sell}>
