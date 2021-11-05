@@ -1,0 +1,16 @@
+.form_title {
+  text-align: center;
+  font-size: 2rem;
+  /* color: $col-primary; */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.form_link {
+  font-size: 0.8rem;
+  color: #574240;
+  text-align: center;
+  margin: auto 0;
+  text-decoration: underline;
+
+}

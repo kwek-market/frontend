@@ -22,8 +22,8 @@
 
   .banner {
     @include flex(center, flex-start, column nowrap);
-    padding: 0 6%;
-    width: 40vw;
+    padding: 0 5%;
+    width: 45vw;
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -58,11 +58,16 @@
     }
   }
 
+  .subText{
+    color: #ffffff;
+    font-weight: 200;
+  }
+
   .formContainer {
     @include flex(center, flex-start);
     flex-grow: 1;
     height: 100%;
-    padding: 10% 10% 0;
+    padding: 10% 5% 0;
 
     @include respondMax("tablet") {
       padding-bottom: 2.5rem;
@@ -105,6 +110,31 @@
         margin-top: 0;
       }
     }
+  }
+
+  .logo {
+    margin-bottom: 6rem;
+  }
+
+}
+
+#createSellerAccount{
+  .banner {
+    background-image: url("/svg/seller-sign-up-bg.svg");
+    box-shadow: none;
+
+    &_text {
+      color: #ffffff;
+
+      @include respondMax("tablet") {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .formContainer {
+    padding: 2.5% 4%;
+
   }
 }
 
