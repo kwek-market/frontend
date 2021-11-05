@@ -5,7 +5,7 @@ type TextInputProps = {
   type: string;
   value: string | number;
   setValue: React.Dispatch<React.SetStateAction<string | number>>;
-  hide?: boolean;
+  hide?: string;
   min?: number;
   max?: number;
 };

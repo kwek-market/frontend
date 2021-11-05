@@ -3,7 +3,7 @@ import TextInput from "@/components/input/textInput";
 import React from "react";
 
 function Track({ activeBtn }) {
-  const [track, setTrack] = React.useState("");
+  const [track, setTrack] = React.useState<string>("");
   function checkOrder() {}
   return (
     <>

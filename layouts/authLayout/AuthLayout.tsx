@@ -6,7 +6,23 @@ import Image from "next/image";
 
 import { Topbar } from "@/shared";
 
-const AuthLayout = ({ children, id, withBanner, bannerText }: any) => {
+type AuthLayoutProps = {
+  children: JSX.Element;
+  id: string;
+  withBanner: boolean;
+  bannerText?: {
+    lineOne: string;
+    lineTwo: string;
+    lineThree: string;
+  };
+};
+
+const AuthLayout = ({
+  children,
+  id,
+  withBanner,
+  bannerText,
+}: AuthLayoutProps) => {
   return (
     <div id={styles[id]} className={styles.authPage}>
       <Topbar withLogo={true} />
@@ -14,10 +30,10 @@ const AuthLayout = ({ children, id, withBanner, bannerText }: any) => {
       <div className={styles.mainWrapper}>
         {withBanner && (
           <div className={styles.banner}>
-            <h1 className={styles.banner_text}>
-              {bannerText.lineOne} <br /> {bannerText.lineTwo} <br />{" "}
-              {bannerText.lineThree}
-            </h1>
+              <h1 className={styles.banner_text}>
+                {bannerText?.lineOne} <br /> {bannerText?.lineTwo} <br />{" "}
+                {bannerText?.lineThree}
+              </h1>
             <div className={styles.banner_link}>
               <Link href="#0">
                 <a className={styles.banner_link}>

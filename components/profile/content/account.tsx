@@ -103,7 +103,7 @@ function Account({ activeBtn }) {
             "tw-border tw-whitespace-nowrap tw-border-gray-400 tw-p-2 tw-rounded-sm tw-text-sm md:tw-text-base tw-text-black-stock hover:tw-text-red-kwek100 tw-font-semibold tw-truncate tw-whitespace-nowrap"
           }
           text={"Change Password"}
-          cmd={() => router.push("/reset-password")}
+          cmd={() => router.push("/forgot-password")}
         />
         <Button
           buttonStyle={
