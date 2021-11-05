@@ -2,7 +2,7 @@ import Button from "@/components/buttons/Button";
 import React from "react";
 import { ClosedOrders, OpenOrders } from "../index";
 
-function Orders({ activeBtn }) {
+function Orders({ activeBtn, setActiveBtn }) {
   const [orderStatus, setOrderStatus] = React.useState<string>("open");
 
   return (
@@ -33,8 +33,8 @@ function Orders({ activeBtn }) {
         />
       </div>
       <>
-        {orderStatus === "open" && <OpenOrders />}
-        {orderStatus === "closed" && <ClosedOrders />}
+        {orderStatus === "open" && <OpenOrders setActiveBtn={setActiveBtn} />}
+        {orderStatus === "closed" && <ClosedOrders setActiveBtn={setActiveBtn} />}
       </>
     </>
   );

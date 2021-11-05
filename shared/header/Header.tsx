@@ -3,7 +3,7 @@ import styles from "./Header.module.scss";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FiHeart } from "react-icons/fi";
 
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/user/user.actions";
 
 import Link from "next/link";
@@ -15,30 +15,22 @@ import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
 import use from "@/components/sellerLanding/Use/use";
+import { RootState } from "@/store/rootReducer";
 
 interface HeaderProps {
-  user: any;
-  logout: any;
   userNav: boolean;
   setUserNav: (showNavBar: boolean) => void;
-  setShowNavBar: (showNavBar: boolean) => void;
   showMenu: boolean;
   openMenu: any;
 }
 
-const Header = ({
-  user,
-  logout,
-  setShowNavBar,
-  setUserNav,
-  userNav,
-  showMenu,
-  openMenu,
-}: HeaderProps) => {
+const Header = ({ setUserNav, userNav, showMenu, openMenu }: HeaderProps) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link href="/">
+        <Link href="/profile/account">
           <a>Account</a>
         </Link>
       </Menu.Item>
@@ -102,7 +94,7 @@ const Header = ({
                   className="ant-dropdown-link"
                   onClick={(e) => e.preventDefault()}
                 >
-                  Hi {user.fullName.split(" ")[0]}{" "}
+                  Hi {user.user.fullName.split(" ")[0]}{" "}
                   <i className="fas fa-chevron-down"></i>
                 </a>
               </Dropdown>
@@ -152,12 +144,4 @@ const Header = ({
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  logout: () => dispatch(logout()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
