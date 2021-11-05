@@ -157,7 +157,7 @@ const Page = ({ user, setUser }) => {
   };
 
   return (
-    <AuthLayout id="createAccount" withBanner={true} bannerText={bannerText}>
+    <AuthLayout id="createAccount" withBanner={true} bannerLink={true} bannerText={bannerText}>
       <div id={styles.authForm}>
         <form className={styles.form}>
           <div className={styles.form_titleblock}>
