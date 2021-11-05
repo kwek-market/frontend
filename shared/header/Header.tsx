@@ -66,8 +66,22 @@ const Header = ({ setUserNav, userNav, showMenu, openMenu }: HeaderProps) => {
       </Link>
 
       <div className={`${styles.headerControls} tw-flex`}>
-        <FiHeart style={{ height: "28px", width: "30px" }} />
-        <AiOutlineShoppingCart style={{ height: "28px", width: "30px" }} />
+        <Link href="/wishlist">
+          <a>
+            <FiHeart
+              className="tw-text-black-stock"
+              style={{ height: "28px", width: "30px" }}
+            />
+          </a>
+        </Link>
+        <Link href="/cart">
+          <a>
+            <AiOutlineShoppingCart
+              className="tw-text-black-stock"
+              style={{ height: "28px", width: "30px" }}
+            />
+          </a>
+        </Link>
       </div>
 
       <div
