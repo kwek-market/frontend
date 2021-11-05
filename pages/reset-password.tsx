@@ -33,9 +33,9 @@ const Page = () => {
       linkUrl: "/login",
     },
   };
-  
+
   return (
-    <AuthLayout id="forgotPassword">
+    <AuthLayout id="resetPassword" withBanner={false}>
       <AuthForm {...form} />
     </AuthLayout>
   );
