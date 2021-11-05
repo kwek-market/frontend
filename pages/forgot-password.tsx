@@ -31,7 +31,7 @@ const Page = () => {
   };
 
   return (
-    <AuthLayout id="forgotPassword">
+    <AuthLayout id="forgotPassword" withBanner={false}>
       <AuthForm {...form} />
     </AuthLayout>
   );
