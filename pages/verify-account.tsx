@@ -18,15 +18,15 @@ const verifyAccount = ({ email }) => {
   };
 
   useEffect(() => {
-    !email && Router.push("/create-account")
-  }, [])
+    !email && Router.push("/create-account");
+  }, []);
 
   if (!email) {
-    return null
+    return null;
   }
 
   return (
-    <AuthLayout id="forgotPassword">
+    <AuthLayout id="verifyAccount" withBanner={false}>
       <AuthForm {...form} />
     </AuthLayout>
   );
