@@ -2,8 +2,10 @@ import React from "react";
 import Button from "@/components/buttons/Button";
 import Badge from "@/components/badge/Badge";
 
-function ClosedOrder() {
-  function checkDetails() {}
+function ClosedOrder({setActiveBtn}) {
+  function checkDetails() {
+    setActiveBtn("Closed Order Details")
+  }
   return (
     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-border tw-border-gray-kwek700 tw-rounded-md tw-p-2">
       <div className="tw-flex tw-flex-col md:tw-flex-row">
