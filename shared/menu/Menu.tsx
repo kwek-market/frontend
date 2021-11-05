@@ -5,39 +5,51 @@ import menuStyle from "./menu.module.scss";
 import MenuBox from "@/components/menu/MenuBox";
 import CategoryBox from "@/components/menu/CategoryBox";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
+import { getInitials2 } from "@/helpers";
+import { logout } from "@/store/user/user.actions";
 
-function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
+function Menu({  }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
   const router = useRouter();
   const menuBoxItems = {
     myCart: {
       icon: "fa-shopping-cart",
       title: "My Cart",
       description: "No items in the cart",
+      link: "/profile/account",
     },
     trackOrder: {
       icon: "fa-map-marker-alt",
       title: "Track Order",
       description: "View order status",
+      link: "/profile/account",
     },
     myOrders: {
       icon: "fa-shopping-bag",
       title: "My Orders",
       description: "No item ordered",
+      link: "/profile/account",
     },
     savedItems: {
       icon: "fa-heart",
       title: "Saved Items",
       description: "View saved items",
+      link: "/wishlist",
     },
     sell: {
       icon: "fa-shopping-cart",
       title: "Sell on Kwek",
       description: "Join other merchants",
+      link: "/sell",
     },
     address: {
       icon: "fa-home",
       title: "My Addresses",
       description: "View saved addresses",
+      link: "/profile/account",
     },
   };
 
@@ -53,33 +65,38 @@ function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
   ];
 
   return (
-    <div className={`${menuStyle.menu} lg:tw-hidden tw-block`}>
-      <div className={menuStyle.authDiv}>
-        <Button
-          buttonStyle={buttonStyle.red_border_button}
-          text={"Sign up"}
-          cmd={() => {
-            router.push("/create-account");
-          }}
-        />
-        <Button
-          buttonStyle={buttonStyle.red_filled_button}
-          text={"Sign in"}
-          cmd={() => {
-            router.push("/login");
-          }}
-        />
-      </div>
-      {/* <div className={menuStyle.userDiv}>
-        <div className={menuStyle.userInitials}>AE</div>
-        <div className={menuStyle.user}>
-          <span>Alison Eyo</span>
-          <span>alisoneyo@example.com</span>
+    <div className={`${menuStyle.menu} md:tw-hidden tw-block`}>
+      {user.id === null ? (
+        <div className={menuStyle.authDiv}>
+          <Button
+            buttonStyle={buttonStyle.red_border_button}
+            text={"Sign up"}
+            cmd={() => {
+              router.push("/create-account");
+            }}
+          />
+          <Button
+            buttonStyle={buttonStyle.red_filled_button}
+            text={"Sign in"}
+            cmd={() => {
+              router.push("/login");
+            }}
+          />
         </div>
-        <div>
-          <i className="fas fa-cog fa-2x" />
+      ) : (
+        <div className={menuStyle.userDiv}>
+          <div className={menuStyle.userInitials}>
+            {user.id !== null && getInitials2(user.user.fullName)}
+          </div>
+          <div className={menuStyle.user}>
+            <span>{user.user.fullName}</span>
+            <span>{user.user.username}</span>
+          </div>
+          <div>
+            <i className="fas fa-cog fa-2x" />
+          </div>
         </div>
-      </div> */}
+      )}
       <div className={menuStyle.menuItems}>
         {Object.entries(menuBoxItems).map((key, val) => (
           <MenuBox
@@ -87,6 +104,7 @@ function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
             icon={key[1].icon}
             title={key[1].title}
             description={key[1].description}
+            link={key[1].link}
           />
         ))}
       </div>
@@ -109,13 +127,13 @@ function Menu({ user, logout, setShowNavBar, setUserNav, userNav }) {
         <Button
           buttonStyle={buttonStyle.btn_block}
           text="Contact Us"
-          cmd={() => null}
+          cmd={() => router.push("/contact-us")}
           icon="fa-phone"
         />
         <Button
           buttonStyle={buttonStyle.btn_block_red}
           text="Log out"
-          cmd={() => null}
+          cmd={() => dispatch(logout())}
           icon="fa-sign-out-alt"
         />
       </div>
