@@ -9,6 +9,7 @@ import { setUser } from "@/store/user/user.actions";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import Link from "next/link";
+import { emailValidator } from "@/helpers";
 
 const Page = ({ user, setUser }) => {
   const [showPassword1, setShowPassword1] = useState<boolean>(false);
@@ -38,6 +39,7 @@ const Page = ({ user, setUser }) => {
            password2: "${formData.password2}"){
           status
           message
+          emailText
         }
       }          
       `,
@@ -49,9 +51,6 @@ const Page = ({ user, setUser }) => {
     setCreateUserData(apis);
 
     console.log(apis);
-
-    const validateEmail =
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (apis !== null &&
       apis.message !==
@@ -72,7 +71,7 @@ const Page = ({ user, setUser }) => {
     } else if (
       formData.email &&
       formData.password &&
-      !validateEmail.test(formData.email)
+      !emailValidator(formData.email)
     ) {
       setError({ status: true, message: "Invalid email", success: false });
       setLoading(false);
