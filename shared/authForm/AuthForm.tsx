@@ -3,39 +3,12 @@ import styles from "./AuthForm.module.scss";
 
 import Link from "next/link";
 import Loader from "react-loader-spinner";
-import { message } from "antd";
 import { emailValidator } from "@/helpers";
-
-interface Fields {
-  name: string;
-  placeholder: string;
-  type: string;
-  className?: string;
-  sub?: any;
-}
-
-interface Type {
-  title: string;
-  subtitle?: string;
-  fields: Fields[];
-  submit?: {
-    text: string;
-    action: (data: any) => void;
-  };
-  extra?: {
-    text: string;
-    linkText: string;
-    linkUrl: string;
-  };
-  userId?: {
-    id: string;
-    message: string;
-  };
-  // message: string;
-}
+import { Type, UserLogin, UserError } from "@/interfaces/commonTypes";
 
 const AuthForm: React.FC<Type> = ({
   title,
+  isLoading,
   subtitle,
   fields,
   submit,
@@ -43,18 +16,27 @@ const AuthForm: React.FC<Type> = ({
   userId,
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [formData, setFormData] = useState<any>({});
-  const [error, setError] = useState<any>({});
-  const [loading, setLoading] = useState<any>(false);
+  const [formData, setFormData] = useState<UserLogin>({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState<UserError>({
+    status: false,
+    message: "",
+  });
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e: any, submitData: any) => {
+  const handleSubmit = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    submitData: any
+  ) => {
     e.preventDefault();
     // console.log(userId);
     console.log(formData);
@@ -91,11 +73,8 @@ const AuthForm: React.FC<Type> = ({
       // console.log("type in your password");
       setLoading(false);
       setError({ status: true, message: "Input your password" });
-    } else if (userId.id === null) {
-      setError({ status: true, message: userId.message });
-      setLoading(false);
     } else {
-      setError({ status: true, message: "" });
+      setError({ status: false, message: "" });
       submitData.action(formData);
       // setLoading(false);
       console.log(formData);
@@ -109,10 +88,16 @@ const AuthForm: React.FC<Type> = ({
           <h2 className={styles.form_title}>{title}</h2>
           <p className={styles.form_subtitle}>{subtitle}</p>
         </div>
-        {error && (
-          <span className={`${styles.form_error}`}>
-            <div>{error.message}</div>
-          </span>
+        {error.status && (
+          <div
+            className={`tw-mb-2 tw-p-2 tw-rounded-sm tw-flex tw-justify-between tw-bg-red-100 tw-text-error`}
+          >
+            <span>{error.message}</span>
+            <i
+              className="fas fa-times"
+              onClick={() => setError({ ...error, status: false })}
+            />
+          </div>
         )}
 
         {fields.map(({ type, sub, ...fieldProps }, index) => (
@@ -151,7 +136,7 @@ const AuthForm: React.FC<Type> = ({
               className={`btn bg-primary ${styles.btn}`}
               onClick={(e) => handleSubmit(e, submit)}
             >
-              {loading && loading ? (
+              {isLoading ? (
                 <Loader
                   type="Puff"
                   color="#fff"

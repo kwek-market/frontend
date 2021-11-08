@@ -82,19 +82,23 @@
       color: red;
       text-align: center;
       padding-bottom: 1rem;
+      background: rgba(255, 0, 0, 0.63);
+      border-radius: 5px;
     }
 
     &_success {
       color: green;
+      background: rgba(0, 183, 255, 0.63);
+      border-radius: 5px;
       text-align: center;
       padding-bottom: 1rem;
     }
 
-    &_success div{
+    &_success span{
       padding-bottom: 1rem;
     }
 
-    &_error div{
+    &_error span{
       padding-bottom: 1rem;
     }
     &_extra {
