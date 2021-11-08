@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AuthLayout } from "@/layouts";
 import Button from "@/components/buttons/Button";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
+import { clearAccount } from "@/store/account/account.actions";
 
 function Emailverification() {
+  const dispatch = useDispatch();
+  const account = useSelector((state: RootState) => state.account);
   const router = useRouter();
+
   return (
     <AuthLayout id={"emailVerification"} withBanner={false}>
       <div className="tw-flex tw-h-[80vh] tw-flex-col tw-justify-center tw-items-center tw-p-2 md:tw-p-0">
@@ -15,17 +21,9 @@ function Emailverification() {
           Thank you for choosing Kwek
         </p>
         <p className="tw-text-black-stock tw-text-sm md:tw-text-base">
-          Please confirm that alisoneyo@gmail.com is your email address by
-          clicking the button below or use this link{" "}
-          <a
-            href="https://courselify.com/confirm-email/SMLSDSV/650000500005000000"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="tw-text-yellow-filled"
-          >
-            verify-email
-          </a>{" "}
-          within the next 24 hours
+          Please confirm that <strong>{account.email} </strong>is your email
+          address by clicking on the link sent to your email within the next 24
+          hours
         </p>
         <Button
           buttonStyle={
@@ -34,6 +32,7 @@ function Emailverification() {
           text={"sign in"}
           cmd={() => {
             router.push("/login");
+            dispatch(clearAccount());
           }}
         />
       </div>

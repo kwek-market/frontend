@@ -8,13 +8,13 @@ import { logout } from "@/store/user/user.actions";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import "antd/dist/antd.css";
 
 import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
-import use from "@/components/sellerLanding/Use/use";
 import { RootState } from "@/store/rootReducer";
 
 interface HeaderProps {
@@ -27,6 +27,11 @@ interface HeaderProps {
 const Header = ({ setUserNav, userNav, showMenu, openMenu }: HeaderProps) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+  const router = useRouter();
+  function handleLogout() {
+    dispatch(logout());
+    router.push("/login");
+  }
   const menu = (
     <Menu>
       <Menu.Item>
@@ -37,7 +42,7 @@ const Header = ({ setUserNav, userNav, showMenu, openMenu }: HeaderProps) => {
 
       <Menu.Item>
         <Link href="/">
-          <a onClick={() => logout()}>Logout</a>
+          <a onClick={() => handleLogout()}>Logout</a>
         </Link>
       </Menu.Item>
     </Menu>

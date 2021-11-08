@@ -11,15 +11,9 @@ export const CREATE_USER = /* GraphQL */ `
       password1: $password1
       password2: $password2
     ) {
-      user {
-        id
-        firstName
-        lastName
-        email,
-        phoneNumber
-      }
       status
       message
+      emailText
     }
   }
 `;
@@ -31,16 +25,17 @@ export const LOGIN_USER = /* GraphQL */ `
         id
         email
         fullName
-        firstName
+        username
         lastName
+        firstName
         phoneNumber
         isVerified
+        isSeller
+        lastLogin
+        isActive
+        dateJoined
       }
       token
-      refreshToken
-      verificationPrompt
-      payloadString
-      timeDiff
       status
       message
     }

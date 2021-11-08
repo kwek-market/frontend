@@ -10,10 +10,14 @@ import { RootState } from "@/store/rootReducer";
 import { getInitials2 } from "@/helpers";
 import { logout } from "@/store/user/user.actions";
 
-function Menu({  }) {
+function Menu({}) {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const router = useRouter();
+  function handleLogout() {
+    dispatch(logout());
+    router.push("/login");
+  }
   const menuBoxItems = {
     myCart: {
       icon: "fa-shopping-cart",
@@ -133,7 +137,7 @@ function Menu({  }) {
         <Button
           buttonStyle={buttonStyle.btn_block_red}
           text="Log out"
-          cmd={() => dispatch(logout())}
+          cmd={() => handleLogout()}
           icon="fa-sign-out-alt"
         />
       </div>
