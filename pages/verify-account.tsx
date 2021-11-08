@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Router from "next/router";
 
 import { AuthLayout } from "@/layouts";
@@ -7,8 +7,10 @@ import { AuthForm } from "@/shared";
 import { connect } from "react-redux";
 
 const verifyAccount = ({ email }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = {
     title: "Verify your email to finish signing up to Kwek",
+    isLoading: isLoading,
     subtitle: `Thank you for choosing Kwek! We've sent a message to ${email}, kindly check your inbox and follow the link to confirm your email`,
     fields: [],
     submit: {
