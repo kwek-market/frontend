@@ -11,6 +11,15 @@ function Emailverification() {
   const account = useSelector((state: RootState) => state.account);
   const router = useRouter();
 
+  useEffect(() => {
+    if (account.email === "") {
+      import("antd").then(({ message }) => {
+        message.error("Email is not set");
+      });
+      router.push("/create-account");
+    }
+  }, [account.email]);
+
   return (
     <AuthLayout id={"emailVerification"} withBanner={false}>
       <div className="tw-flex tw-h-[80vh] tw-flex-col tw-justify-center tw-items-center tw-p-2 md:tw-p-0">
