@@ -4,7 +4,6 @@ import { Account, Addresses, Empty, Orders, Track } from "./content";
 import OpenOrderDetails from "./OpenOrderDetails";
 
 function ProfileContent({ activeBtn, setActiveBtn }) {
-  const [menu, setMenu] = React.useState(false);
 
   return (
     <div className="tw-border tw-border-gray-500 tw-border-opacity-50 tw-rounded tw-p-2 md:tw-p-5 tw-relative">
@@ -14,7 +13,6 @@ function ProfileContent({ activeBtn, setActiveBtn }) {
         <Orders activeBtn={activeBtn} setActiveBtn={setActiveBtn} />
       )}
       {activeBtn === "Track My Order" && <Track activeBtn={activeBtn} />}
-      {/* {activeBtn === "Sell On Kwek" && <Account activeBtn={activeBtn} />} */}
       {activeBtn === "My Addresses" && <Addresses activeBtn={activeBtn} />}
       {activeBtn === "Open Order Details" && (
         <OpenOrderDetails setActiveBtn={setActiveBtn} />

@@ -1,5 +1,13 @@
-import { userFetcher, userFetcherWithAuth } from './userFetcher'
-import {getInitials, getInitials2, verifyTokenFunc, emailValidator } from "./helper"
+import { userFetcher, userFetcherWithAuth } from "./userFetcher";
+import {
+  getInitials,
+  getInitials2,
+  verifyTokenFunc,
+  emailValidator,
+  passwordMatch,
+  PASSWORDREGEX,
+  passwordValidator,
+} from "./helper";
 
 export {
   userFetcher,
@@ -7,5 +15,8 @@ export {
   getInitials,
   getInitials2,
   verifyTokenFunc,
-  emailValidator
-}
+  emailValidator,
+  passwordMatch,
+  PASSWORDREGEX,
+  passwordValidator,
+};
