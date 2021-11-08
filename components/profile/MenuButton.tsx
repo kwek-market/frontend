@@ -1,5 +1,6 @@
 import router from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
 
 type MenuButtonProps = {
   name: string;
@@ -14,6 +15,7 @@ function MenuButton({
   setActiveBtn,
   IconName,
 }: MenuButtonProps) {
+  const router = useRouter();
   return (
     <div
       role="button"
