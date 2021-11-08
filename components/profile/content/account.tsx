@@ -26,28 +26,28 @@ function Account({ activeBtn }) {
   function saveChanges() {
     // check firstName, lastName, email and phoneNumber and ensure they're not empty and invalid
     if (firstName !== "" && firstName.length > 0) {
-      setFirstName(firstName);
+      //setFirstName(firstName);
     } else {
       import("antd").then((antd) => {
         antd.message.error("Invalid firstName");
       });
     }
     if (lastName !== "" && lastName.length > 0) {
-      setLastName(lastName);
+      //setLastName(lastName);
     } else {
       import("antd").then((antd) => {
         antd.message.error("Invalid lastName");
       });
     }
     if (email !== "" && emailValidator(email)) {
-      setEmail(email);
+      //setEmail(email);
     } else {
       import("antd").then((antd) => {
         antd.message.error("Invalid email");
       });
     }
     if (phoneNumber !== 0 && phoneNumber.toString().length > 7) {
-      setPhoneNumber(phoneNumber);
+      //setPhoneNumber(phoneNumber);
     } else {
       import("antd").then((antd) => {
         antd.message.error("Invalid phoneNumber");
