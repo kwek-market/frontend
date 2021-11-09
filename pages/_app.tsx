@@ -5,6 +5,7 @@ import "../styles/index.scss";
 import 'antd/dist/antd.css'; 
 
 import { Provider } from "react-redux";
+import 'tailwindcss/tailwind.css'
 
 import { createWrapper } from 'next-redux-wrapper';
 import store from "@/store";

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
 
 const Page = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetPass = (formData: any) => {
     console.log(formData);
   };
 
   const form = {
     title: "Reset your Password.",
+    isLoading: isLoading,
     subtitle: "Reset your password to continue.",
     fields: [
       {
@@ -33,9 +35,9 @@ const Page = () => {
       linkUrl: "/login",
     },
   };
-  
+
   return (
-    <AuthLayout id="forgotPassword">
+    <AuthLayout id="resetPassword" withBanner={false}>
       <AuthForm {...form} />
     </AuthLayout>
   );

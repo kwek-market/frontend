@@ -1,60 +1,43 @@
-import React, { useEffect } from "react";
-import Router from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
 
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/store/user/user.actions";
 import { LOGIN_USER } from "@/store/user/user.queries";
-import { message } from "antd";
 
-// import { userFetcher } from "@/helpers";
+import { userFetcher } from "@/helpers";
+import { RootState } from "@/store/rootReducer";
+import { UserLogin } from "@/interfaces/commonTypes";
 
-const Page = ({ user, setUser }) => {
-  const signIn = async (formData: any) => {
+const Page = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+  const signIn = async (formData: UserLogin) => {
     const query = LOGIN_USER;
 
-    const variables = {
+    const variables: UserLogin = {
       email: formData.email,
       password: formData.password,
     };
 
     try {
       // call login
-      // const data = await userFetcher(query, variables);
+      setIsLoading(true);
+      const data = await userFetcher(query, variables);
+      setIsLoading(false);
 
-      const result = await fetch(`https://kwekapi.com/v1/kwekql`, {
-        headers: {
-          "Content-Type": `application/json`,
-        },
-        method: "POST",
-        body: JSON.stringify({
-          query: `
-      mutation{
-        loginUser(email:"${variables.email}",password:"${variables.password}"){
-        user{
-        id
-        fullName
-        username
-        lastName
-        }
-        status
-        message
-        token
-        }
-      }          
-      `,
-        }),
-      });
-
-      // console.log(result);
-
-      const { data } = await result.json();
       const apis = data.loginUser;
-
-      // log login data
-      // console.log(apis);
+      import("antd").then((antd) => {
+        apis.status
+          ? antd.message.success(apis.message)
+          : antd.message.error(apis.message);
+      });
 
       // set cookie with token from login
       const now = new Date();
@@ -66,14 +49,15 @@ const Page = ({ user, setUser }) => {
       };expires=${now.toUTCString()};path=/`;
 
       // set user state
-      setUser({
-        // ...user,
-        ...apis,
-        ...apis.user,
-      });
-
+      dispatch(
+        setUser({
+          id: apis.user.id,
+          ...apis,
+        })
+      );
+      setIsLoading(false);
       // redirect to home page
-      // Router.push("/");
+      apis.status && router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -81,6 +65,7 @@ const Page = ({ user, setUser }) => {
 
   const form = {
     title: "Welcome Back",
+    isLoading: isLoading,
     fields: [
       {
         name: "email",
@@ -106,10 +91,10 @@ const Page = ({ user, setUser }) => {
       linkText: "Create an Account",
       linkUrl: "/create-account",
     },
-    userId : {
+    userId: {
       id: user.id,
-      message: user.message
-    }
+      message: user.message,
+    },
   };
 
   const bannerText = {
@@ -119,12 +104,8 @@ const Page = ({ user, setUser }) => {
   };
 
   useEffect(() => {
-    user.id && Router.push("/");
+    user.id !== null && router.push("/");
   }, []);
-
-  if (user.id) {
-      Router.push("/");
-    }
 
   return (
     <AuthLayout id="Login" withBanner={true} bannerText={bannerText}>
@@ -133,12 +114,4 @@ const Page = ({ user, setUser }) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  setUser: (user: any) => dispatch(setUser(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Page);
+export default Page;
