@@ -72,7 +72,7 @@ const Page = ({ user, setUser, data }) => {
                 type="text"
                 name="company-website"
                 id="company-website"
-                className="tw-bg-red-50 tw-border-none focus:tw-bg-white-100 tw-border-none focus:tw-ring-gray-300 focus:tw-border-gray-300 tw-flex-1 tw-block tw-w-full tw-rounded-l tw-rounded-r-md sm:tw-text-sm "
+                className="tw-bg-red-50 focus:tw-bg-white-100 tw-border-none focus:tw-ring-gray-300 focus:tw-border-gray-300 tw-flex-1 tw-block tw-w-full tw-rounded-l tw-rounded-r-md sm:tw-text-sm "
                 placeholder="Alison"
               />
 
@@ -159,7 +159,7 @@ const Page = ({ user, setUser, data }) => {
               Shop url
             </label>
             <div className="tw-mt-1 tw-flex tw-rounded-md">
-              <span className="tw-inline-flex tw-bg-red-50 tw-items-center tw-px-3 tw-rounded-l-md tw-border tw-border-r-0 tw-border-gray-300 tw-bg-gray-50 tw-text-gray-500 tw-text-sm">
+              <span className="tw-inline-flex tw-bg-red-50 tw-items-center tw-px-3 tw-rounded-l-md tw-border tw-border-r-0 tw-border-gray-300 focus:tw-bg-gray-50 tw-text-gray-500 tw-text-sm">
                 www.kwekmarket.com/
               </span>
               <input

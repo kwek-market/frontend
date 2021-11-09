@@ -5,6 +5,7 @@ import {
   Use,
   Stats
 } from "@/components/sellerLanding";
+import { Footer } from "@/shared";
 
 function index() {
   return (
@@ -13,6 +14,7 @@ function index() {
       <Stats />
       <FeatureSection />
       <Use />
+      <Footer />
     </React.Fragment>
   );
 }
