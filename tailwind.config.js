@@ -15,6 +15,7 @@ module.exports = {
           kwek500: "#796866",
           kwek600: "rgba(0,0,0,0.21)",
           kwek700: "rgba(191, 165, 163, 0.1)",
+          kwek800: "#c4c4c4"
         },
         white: {
           100: "#FFF",

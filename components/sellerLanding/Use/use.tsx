@@ -11,19 +11,21 @@ const use = () => {
       description:
         "Register your store with a unique store URL for your store on Kwekmarkethall.com",
       image: "/images/shop.png",
-      bgColor: "tw-bg-green-700"
+      bgColor: "tw-bg-green-success",
     },
     {
       title: "List your products",
       description:
         "Create your products, set your own prices, and make them available for purchase",
       image: "/images/list.png",
+      bgColor: "tw-bg-gray-kwek700",
     },
     {
       title: "Sell to millions of buyers",
       description:
         "Manage your orders, choose your own shipping method, and receive sales proceeds.",
       image: "/images/sell.png",
+      bgColor: "tw-bg-gray-kwek700",
     },
   ];
   return (
@@ -36,11 +38,17 @@ const use = () => {
             How it Works
           </h2>
           <p className="tw-text-base">Get set-up in three easy steps</p>
-          <div className="tw-w-full tw-h-32 tw-bg-gray-600"></div>
+          <div className="tw-w-full tw-h-[95%] tw-bg-gray-kwek800"></div>
         </div>
         <div className="tw-flex tw-flex-col tw-flex-1">
           {useBox.map((item, index) => (
-            <UseBox key={index} title={item.title} desc={item.description} imgSrc={item.image} bgColor={item?.bgColor} />
+            <UseBox
+              key={index}
+              title={item.title}
+              desc={item.description}
+              imgSrc={item.image}
+              bgColor={item?.bgColor}
+            />
           ))}
         </div>
       </div>
