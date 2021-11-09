@@ -11,11 +11,11 @@ const NavBar = ({ showNavBar, setShowNavBar }: NavProps) => {
   const menu = [
     {
       title: "Shop",
-      url: "/",
+      url: "/shop",
     },
     {
       title: "About Us",
-      url: "/",
+      url: "/about-us",
     },
     {
       title: "Sell On Kwek",
@@ -23,23 +23,23 @@ const NavBar = ({ showNavBar, setShowNavBar }: NavProps) => {
     },
     {
       title: "Registry",
-      url: "/",
+      url: "/registry",
     },
     {
       title: "Gift Cards",
-      url: "/",
+      url: "/gift-cards",
     },
     {
       title: "Customer Service",
-      url: "/",
+      url: "/customer-service",
     },
     {
       title: "Reviews",
-      url: "/",
+      url: "/reviews",
     },
     {
       title: "Vendors",
-      url: "/",
+      url: "/vendors",
     },
   ];
   return (
