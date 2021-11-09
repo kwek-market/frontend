@@ -12,7 +12,7 @@ export function getInitials2(str: string) {
 }
 
 export function verifyTokenFunc(token: string) {
-  return userFetcherWithAuth(VERIFY_TOKEN, { token: token });
+  return userFetcherWithAuth(VERIFY_TOKEN, { token: token }, token);
 }
 
 export function emailValidator(email: string) {
