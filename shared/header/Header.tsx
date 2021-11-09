@@ -1,50 +1,48 @@
 import React from "react";
 import styles from "./Header.module.scss";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FiHeart } from "react-icons/fi";
 
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/user/user.actions";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import "antd/dist/antd.css";
 
 import SearchBar from "./SearchBar";
 
 import { Menu, Dropdown } from "antd";
-import use from "@/components/sellerLanding/Use/use";
+import { RootState } from "@/store/rootReducer";
 
 interface HeaderProps {
-  user: any;
-  logout: any;
   userNav: boolean;
   setUserNav: (showNavBar: boolean) => void;
-  setShowNavBar: (showNavBar: boolean) => void;
   showMenu: boolean;
   openMenu: any;
 }
 
-const Header = ({
-  user,
-  logout,
-  setShowNavBar,
-  setUserNav,
-  userNav,
-  showMenu,
-  openMenu,
-}: HeaderProps) => {
-  console.log(user)
+const Header = ({ setUserNav, userNav, showMenu, openMenu }: HeaderProps) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  const router = useRouter();
+  function handleLogout() {
+    dispatch(logout());
+    router.push("/login");
+  }
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link href="/">
+        <Link href="/profile/account">
           <a>Account</a>
         </Link>
       </Menu.Item>
 
       <Menu.Item>
         <Link href="/">
-          <a onClick={() => logout()}>Logout</a>
+          <a onClick={() => handleLogout()}>Logout</a>
         </Link>
       </Menu.Item>
     </Menu>
@@ -58,10 +56,10 @@ const Header = ({
         ) : (
           <i className={`fas fa-times fa-2x ${styles.navBar_icon}`}></i>
         )}
-      </div> 
+      </div>
 
-       <Link href="/">
-        <a className={styles.logo}>
+      <Link href="/">
+        <a className={`${styles.logo} tw-px-2`}>
           <Image
             width="180"
             height="30"
@@ -72,12 +70,23 @@ const Header = ({
         </a>
       </Link>
 
-      <div className={styles.headerControls}>
-        <i className="fas fa-heart fa-2x" />
-        <i
-          className="fas fa-shopping-cart fa-2x"
-          style={{ marginLeft: "20px" }}
-        />
+      <div className={`${styles.headerControls} tw-flex`}>
+        <Link href="/wishlist">
+          <a>
+            <FiHeart
+              className="tw-text-black-stock"
+              style={{ height: "28px", width: "30px" }}
+            />
+          </a>
+        </Link>
+        <Link href="/cart">
+          <a>
+            <AiOutlineShoppingCart
+              className="tw-text-black-stock"
+              style={{ height: "28px", width: "30px" }}
+            />
+          </a>
+        </Link>
       </div>
 
       <div
@@ -104,7 +113,7 @@ const Header = ({
                   className="ant-dropdown-link"
                   onClick={(e) => e.preventDefault()}
                 >
-                  Hi {user.fullName.split(" ")[0]}{" "} 
+                  Hi {user.user.fullName.split(" ")[0]}{" "}
                   <i className="fas fa-chevron-down"></i>
                 </a>
               </Dropdown>
@@ -154,12 +163,4 @@ const Header = ({
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  logout: () => dispatch(logout()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
 
 const Page = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const sendResetRequest = (formData: any) => {
     console.log(formData);
   };
 
   const form = {
     title: "Forgot Password?",
+    isLoading: isLoading,
     subtitle:
       "Don’t worry, resetting your password is easy. Just enter the email address you used to sign up to Kwek.",
     fields: [
@@ -31,7 +33,7 @@ const Page = () => {
   };
 
   return (
-    <AuthLayout id="forgotPassword">
+    <AuthLayout id="forgotPassword" withBanner={false}>
       <AuthForm {...form} />
     </AuthLayout>
   );

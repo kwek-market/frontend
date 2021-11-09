@@ -4,7 +4,7 @@
 .menu {
   z-index: 3;
   position: fixed;
-  top: 120px;
+  top: 90px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -13,10 +13,6 @@
   padding: 20px;
   background-color: $col-bg;
   overflow: auto;
-
-  @include respondMin("tablet") {
-    display: none;
-  }
 
   .authDiv {
     @include flex(space-between, center);

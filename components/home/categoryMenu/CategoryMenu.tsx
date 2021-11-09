@@ -4,6 +4,7 @@ import styles from "./CategoryMenu.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import CategoryMobile from "./CategoryMobile";
 
 const CategoryMenu = () => {
   const [showCat, setShowCat] = useState<boolean>(false);
@@ -55,62 +56,44 @@ const CategoryMenu = () => {
           ))}
         </ul>
       </section>
-      <section className="tw-flex md:tw-hidden tw-overflow-auto">
-        <div className="tw-px-8">
-          <img src="/svg/all.svg" alt="all" className="tw-max-w-none" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            {" "}
-            All
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/dress.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Fashion
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/stones.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Beauty
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/car.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Automobile
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/electronics.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Electronics
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/toys.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Toys
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/home.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Home
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/sports.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Sporting
-          </p>
-        </div>
-        <div className="tw-px-8">
-          <img src="/svg/others.svg" alt="electronics" />
-          <p className="tw-font-normal tw-text-xs tw-text-brown-kwek200 tw-mt-2">
-            Others
-          </p>
-        </div>
+      <section className="tw-flex md:tw-hidden tw-overflow-x-auto tw-overflow-y-hidden">
+        <CategoryMobile
+          imgSrc={"/svg/all.svg"}
+          text={"All"}
+          style={"tw-max-w-none"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/dress.svg"}
+          text={"Fashion"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/stones.svg"}
+          text={"Stones"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/car.svg"}
+          text={"Automobile"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/toys.svg"}
+          text={"Toys"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/electronics.svg"}
+          text={"Electronics"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/home.svg"}
+          text={"Home"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/sports.svg"}
+          text={"Sporting"}
+        />
+        <CategoryMobile
+          imgSrc={"/svg/others.svg"}
+          text={"Others"}
+        />
       </section>
     </>
   );

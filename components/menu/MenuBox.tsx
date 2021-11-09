@@ -1,23 +1,29 @@
 import React from "react";
 import style from "./menubox.module.scss";
+import Link from "next/link";
 
 type MenuBoxProps = {
   icon: string;
   title: string;
   description: string;
+  link: string;
 };
 
-function MenuBox({ icon, title, description }: MenuBoxProps) {
+function MenuBox({ icon, title, description, link }: MenuBoxProps) {
   return (
-    <div className={style.menuBox}>
-      <div>
-        <i className={`fas ${icon} icon`} />
-      </div>
-      <div style={{ paddingLeft: "12px" }}>
-        <span className={style.title}>{title}</span>
-        <span className={style.description}>{description}</span>
-      </div>
-    </div>
+    <Link href={link}>
+      <a>
+        <span className={style.menuBox}>
+          <span>
+            <i className={`fas ${icon} icon tw-text-black-kwek100`} />
+          </span>
+          <span style={{ paddingLeft: "12px" }}>
+            <span className={style.title}>{title}</span>
+            <span className={style.description}>{description}</span>
+          </span>
+        </span>
+      </a>
+    </Link>
   );
 }
 
