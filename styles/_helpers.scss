@@ -11,3 +11,24 @@
 .text-primary {
   color: $col-primary;
 }
+
+.bg-red-200 {
+  background: rgba(175, 19, 40, 0.6);
+}
+
+.bg-yellow {
+  background-color: $star-filled;
+}
+
+.top-75 {
+  top: 75%;
+}
+
+// hover
+.overlay {
+  opacity: 0;
+  &:hover {
+    background-color: $col-gray-2;
+    opacity: 0.75;
+  }
+}
