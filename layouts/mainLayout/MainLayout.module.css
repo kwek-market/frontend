@@ -1,0 +1,21 @@
+.main_container {
+  padding: 2rem 6%;
+  background-color: #fefbfc;
+}
+
+.main_container ::-webkit-input-placeholder {
+  color: #bfa5a3 !important;
+}
+
+.main_container :-ms-input-placeholder {
+  color: #bfa5a3 !important;
+}
+
+.main_container ::-ms-input-placeholder {
+  color: #bfa5a3 !important;
+}
+
+.main_container ::placeholder {
+  color: #bfa5a3 !important;
+}
+/*# sourceMappingURL=MainLayout.module.css.map */
