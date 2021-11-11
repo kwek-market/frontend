@@ -9,10 +9,14 @@ export const setUser = (user: any) => ({
   payload: user,
 });
 
-export function updateUser(user: UserUpdate) {
+export function updateUser(user: UserUpdate, token: string) {
   return async function (dispatch: Dispatch) {
     try {
-      const result = await userFetcherWithAuth(USER_ACCOUNT_UPDATE, user);
+      const result = await userFetcherWithAuth(
+        USER_ACCOUNT_UPDATE,
+        user,
+        token
+      );
       // console.log({ result });
       import("antd").then((antd) => {
         antd.message.success(
