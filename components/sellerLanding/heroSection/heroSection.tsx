@@ -87,12 +87,12 @@ const heroSection = () => {
           <h1 className="tw-text-3xl md:text-6xl tw-font-bold tw-text-gray-kwek200 tw-text-center md:tw-text-left">
             Make Money & Grow your Business Online
           </h1>
-          <p className="tw-text-base md:tw-text-xl tw-text-black-stock tw-font-light tw-text-center md:tw-text-left">
+          <p className="tw-text-base md:tw-text-xl tw-text-black-stock tw-font-light tw-text-center md:tw-text-left tw-mt-3 tw-mb-5">
             Reach millions of buyers in every state in Nigeria easily, get your
             store on KwekMarket today!
           </p>
           <button
-            className={`btn bg-primary tw-p-4 tw-font-medium tw-w-9/12 tw-m-auto md:tw-w-auto md:tw-m-0 tw-text-base`}
+            className={`btn bg-primary tw-p-4 tw-font-medium tw-w-9/12 tw-m-auto md:tw-w-auto md:tw-m-0 tw-text-sm sm:tw-text-base tw-truncate`}
             onClick={() => router.push("/create-account")}
           >
             Start your free trial{" "}
