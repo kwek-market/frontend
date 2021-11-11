@@ -1,0 +1,97 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+// @import "@/styles/reset";
+
+.heading {
+	font-size: 2rem;
+	font-weight: 600;
+	color: $stock-color;
+	/* color: $stock-color; */
+}
+
+.description {
+	font-weight: 500;
+	font-size: 24px;
+	color: $stock-color;
+	text-transform: uppercase;
+}
+
+.sales {
+	font-weight: 500;
+	color: $stock-color;
+	font-size: 16px;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.salesNumber {
+	font-weight: 600;
+	font-size: 32px;
+	color: $stock-color;
+	margin: 0;
+}
+
+.salesAmount {
+	font-size: 14px;
+	color: #bfa5a3;
+	margin: 0;
+}
+
+.review {
+	background: #fcf7f8;
+	border: 2px solid rgba(191, 165, 163, 0.2);
+	box-sizing: border-box;
+	border-radius: 10px;
+	width: 284.8px;
+
+	height: 176px;
+	padding-left: 32px;
+	padding-top: 29px;
+	margin-top: 27px;
+	// margin-left: 32px;
+	margin-bottom: 55px;
+	// margin: 27px 0 55px 32px;
+}
+
+.container {
+	@include flex(space-between, unset, inherit);
+
+	@include respondMax("tablet") {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.recent {
+	border: 1px solid #1d1616;
+	box-sizing: border-box;
+	border-radius: 5px;
+	width: 206px;
+	@include flex(space-between, center, unset);
+	padding: 5px 25px;
+	margin-left: 10px;
+}
+
+.flex1 {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@include respondMax("tablet") {
+		flex-direction: column;
+	}
+}
+
+.flex {
+	@include flex(unset, center, unset);
+}
+
+.emptyReviews {
+	@include flex(center, center);
+	text-align: center;
+	font-weight: 600;
+	font-size: 32px;
+	color: $stock-color;
+	height: 50vh;
+}

@@ -1,0 +1,194 @@
+.authPage {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .authPage {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .authPage .mainWrapper {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .authPage .mainWrapper {
+    display: block;
+  }
+}
+
+.authPage .banner {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 0 6%;
+  width: 40vw;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-box-shadow: inset 0 0 3000px 3000px #ffffffb7;
+          box-shadow: inset 0 0 3000px 3000px #ffffffb7;
+}
+
+@media (max-width: 768px) {
+  .authPage .banner {
+    width: 100%;
+    display: none;
+    padding: 2rem 10%;
+    text-align: center;
+  }
+}
+
+.authPage .banner_text {
+  font-size: 2.5rem;
+  color: #574240;
+}
+
+.authPage .banner_link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.authPage .banner .btn {
+  padding: 0.8rem 2.5rem;
+  color: #AF1328;
+  border: 2px solid #AF1328;
+}
+
+.authPage .banner .btn .btn_text {
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.authPage .formContainer {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  height: 100%;
+  padding: 10% 10% 0;
+}
+
+@media (max-width: 768px) {
+  .authPage .formContainer {
+    padding-bottom: 2.5rem;
+  }
+}
+
+.authPage .formContainer__full {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  height: 100%;
+  padding: 10% 25% 0;
+}
+
+@media (max-width: 768px) {
+  .authPage .formContainer__full {
+    padding: 10% 15% 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .authPage .formContainer__full {
+    padding: 10% 5% 0;
+  }
+}
+
+#Login .banner {
+  background-image: url("/svg/sign-in-bg.svg");
+}
+
+#Login .banner .btn {
+  margin-bottom: 3rem;
+}
+
+#createAccount .banner {
+  background-image: url("/svg/sign-up-bg.svg");
+}
+
+#createAccount .banner_text {
+  margin-top: 10rem;
+}
+
+@media (max-width: 768px) {
+  #createAccount .banner_text {
+    margin-top: 0;
+  }
+}
+
+#forgotPassword .formContainer {
+  padding: 10% 22% 0;
+}
+/*# sourceMappingURL=AuthLayout.module.css.map */
