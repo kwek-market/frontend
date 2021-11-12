@@ -54,13 +54,16 @@ function Account({ activeBtn }) {
       });
     }
     dispatch(
-      updateUser({
-        newFirstName: firstName,
-        newLastName: lastName,
-        newEmail: email,
-        newPhoneNumber: phoneNumber,
-        token: selector.token,
-      })
+      updateUser(
+        {
+          newFirstName: firstName,
+          newLastName: lastName,
+          newEmail: email,
+          newPhoneNumber: phoneNumber,
+          token: selector.token,
+        },
+        selector.token
+      )
     );
   }
 

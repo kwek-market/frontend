@@ -12,7 +12,7 @@ function Feature({ imgSrc, title, description }) {
           className="tw-rounded-full tw-"
         />
       </div>
-      <div className="tw-flex tw-flex-col tw-justify-between tw-ml-10 tw-pr-5" style={{flex: 5}}>
+      <div className="tw-flex tw-flex-col tw-justify-between tw-ml-4 md:tw-ml-10 tw-pr-5" style={{flex: 5}}>
         <p className="tw-font-semibold tw-text-base md:tw-text-2xl">{title}</p>
         <p>{description}</p>
       </div>
