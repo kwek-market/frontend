@@ -15,7 +15,7 @@ module.exports = {
           kwek500: "#796866",
           kwek600: "rgba(0,0,0,0.21)",
           kwek700: "rgba(191, 165, 163, 0.1)",
-          kwek800: "#c4c4c4"
+          kwek800: "#c4c4c4",
         },
         white: {
           100: "#FFF",
@@ -33,7 +33,7 @@ module.exports = {
         yellow: {
           filled: "#ffc107",
           secondary: "#E9A501",
-          primary: "#E6AC00"
+          primary: "#E6AC00",
         },
         green: {
           success: "#009D19",
@@ -48,7 +48,8 @@ module.exports = {
         "kwek-1": "repeat(auto-fit, minmax(350px, 1fr))",
         "kwek-2": "repeat(2, 150px)",
         "kwek-3": "2fr 6fr",
-        "kwek-4": "repeat(auto-fit, minmax(50px, 1fr))"
+        "kwek-4": "repeat(auto-fit, minmax(50px, 1fr))",
+        "kwek-5": "repeat(auto-fit, minmax(200px, 1fr))",
       },
     },
   },
