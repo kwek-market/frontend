@@ -38,7 +38,7 @@ const heroSection = () => {
           <Button
             buttonStyle="tw-p-3 tw-text-white-100 tw-rounded-md tw-bg-red-kwek100"
             text="Register now"
-            cmd={() => router.push('/create-account')}
+            cmd={() => router.push('/seller/create-account')}
           />
         </div>
         <i className="fas fa-bars fa-2x tw-text-black-stock tw-block md:tw-hidden" onClick={() => setShowMenu(true)} />
@@ -69,7 +69,7 @@ const heroSection = () => {
               <Button
                 buttonStyle="tw-p-3 tw-text-white-100 tw-rounded-md tw-bg-red-kwek100"
                 text="Register now"
-                cmd={() => router.push('/create-account')}
+                cmd={() => router.push('/seller/create-account')}
               />
             </div>
           </div>

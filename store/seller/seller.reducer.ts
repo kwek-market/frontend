@@ -1,45 +1,48 @@
-import SellerTypes from './seller.types';
+import SellerTypes from "./seller.types";
 
 const initialState = {
   loading: false,
   error: null,
   sellerCreated: {
-    message: '',
+    message: "",
     status: false,
   },
   sellerVerified: {
-    message: '',
+    message: "",
     status: false,
   },
   seller: {
-    firstname: '',
-    lastname: '',
-    phoneNumber: '',
-    shopName: '',
-    shopUrl: '',
-    shopAddress: '',
-    state: '',
-    city: '',
-    lga: '',
-    landmark: '',
-    howYouHeardAboutUs: '',
+    firstname: "",
+    lastname: "",
+    phoneNumber: "",
+    shopName: "",
+    shopUrl: "",
+    shopAddress: "",
+    state: "",
+    city: "",
+    lga: "",
+    landmark: "",
+    howYouHeardAboutUs: "",
     acceptedPolicy: false,
-    storeBannerUrl: '',
-    storeDescription: '',
-    preferedId: '',
-    preferedIdUrl: '',
-    bvn: '',
-    bankName: '',
-    bankSortCode: '',
-    bankAccountNumber: '',
-    bankAccountName: '',
+    storeBannerUrl: "",
+    storeDescription: "",
+    preferedId: "",
+    preferedIdUrl: "",
+    bvn: "",
+    bankName: "",
+    bankSortCode: "",
+    bankAccountNumber: "",
+    bankAccountName: "",
     sellerIsVerified: false,
     bankAccountIsVerified: false,
     acceptedVendorPolicy: false,
   },
 };
 
-export default function sellerReducer(state: typeof initialState = initialState, action: any) {
+export default function sellerReducer(
+  state: typeof initialState = initialState,
+  action: { type: any; payload: any; }
+) {
   switch (action.type) {
     case SellerTypes.START_SELLING:
       return {

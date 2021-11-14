@@ -1,0 +1,7 @@
+export enum newsLetterType {
+  NEWSLETTER = 'NEWSLETTER',
+  SUBSCRIBE = 'SUBSCRIBE',
+  UNSUBSCRIBE = 'UNSUBSCRIBE',
+  LOADING = 'LOADING',
+  ERROR = 'ERROR',
+}
