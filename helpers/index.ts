@@ -1,4 +1,4 @@
-import { userFetcher, userFetcherWithAuth } from "./userFetcher";
+import { userFetcher, userFetcherWithAuth } from './userFetcher';
 import {
   getInitials,
   getInitials2,
@@ -7,7 +7,7 @@ import {
   passwordMatch,
   PASSWORDREGEX,
   passwordValidator,
-} from "./helper";
+} from './helper';
 
 export {
   userFetcher,

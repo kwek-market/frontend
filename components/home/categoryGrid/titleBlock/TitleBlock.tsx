@@ -1,10 +1,10 @@
-import React from "react";
-import styles from "./TitleBlock.module.scss";
+import React from 'react';
+import styles from './TitleBlock.module.scss';
 
-const TitleBlock = ({ title, timer }) => {
+const TitleBlock = function ({ title, timer }) {
   return (
     <div className={styles.title}>
-      <h3 className={timer ? styles.title_heading : styles.title_heading__noBorder}>{ title }</h3>
+      <h3 className={timer ? styles.title_heading : styles.title_heading__noBorder}>{title}</h3>
 
       {timer && (
         <div className={styles.title_timer}>
@@ -31,7 +31,7 @@ const TitleBlock = ({ title, timer }) => {
       )}
 
       <button className={`btn btn--naked ${styles.title_btn}`}>
-        View More <i className="fas fa-chevron-right"></i>
+        View More <i className="fas fa-chevron-right" />
       </button>
     </div>
   );

@@ -1,7 +1,4 @@
-import CategoryGrid from './categoryGrid'
-import FilterCategory from './filterCategory'
+import CategoryGrid from './categoryGrid';
+import FilterCategory from './filterCategory';
 
-export {
-  CategoryGrid,
-  FilterCategory
-}
+export { CategoryGrid, FilterCategory };

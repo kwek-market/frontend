@@ -1,19 +1,17 @@
-import React from 'react'
+import React from 'react';
 // import Head from "next/head";
 
-import Header from '@/shared/categoryHead/Header'
-import ExtraInfo from '@/shared/extraInfo/ExtraInfo'
+import { useRouter } from 'next/router';
+import Header from '@/shared/categoryHead/Header';
+import ExtraInfo from '@/shared/extraInfo/ExtraInfo';
 
-import { GridContainer } from '@/components/category'
-import { MainLayout } from "@/layouts";
+import { GridContainer } from '@/components/category';
+import { MainLayout } from '@/layouts';
 
-import { useRouter } from 'next/router'
-
-const Page = () => {
-
+const Page = function () {
   const router = useRouter();
 
-  const { category } = router.query
+  const { category } = router.query;
 
   return (
     <MainLayout title={category}>
@@ -21,7 +19,7 @@ const Page = () => {
       <GridContainer />
       <ExtraInfo />
     </MainLayout>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

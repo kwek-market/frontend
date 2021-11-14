@@ -1,20 +1,11 @@
-import AuthForm from './authForm/AuthForm'
-import Topbar from './topBar/TopBar'
-import Header from './header/Header'
-import Navbar from './navBar/NavBar'
-import Footer from './footer/Footer'
-import PageTitle from './pageTitle/pageTitle'
+import AuthForm from './authForm/AuthForm';
+import Topbar from './topBar/TopBar';
+import Header from './header/Header';
+import Navbar from './navBar/NavBar';
+import Footer from './footer/Footer';
+import PageTitle from './pageTitle/pageTitle';
 
-import ProductBox from './productBox/ProductBox'
-import Menu from './menu/Menu'
+import ProductBox from './productBox/ProductBox';
+import Menu from './menu/Menu';
 
-export {
-  AuthForm,
-  Topbar,
-  Header,
-  Navbar,
-  Footer,
-  ProductBox,
-  PageTitle,
-  Menu
-}
+export { AuthForm, Topbar, Header, Navbar, Footer, ProductBox, PageTitle, Menu };

@@ -1,10 +1,10 @@
-import React from "react";
-import Button from "@/components/buttons/Button";
-import Badge from "@/components/badge/Badge";
+import React from 'react';
+import Button from '@/components/buttons/Button';
+import Badge from '@/components/badge/Badge';
 
-function ClosedOrder({setActiveBtn}) {
+const ClosedOrder = function ({ setActiveBtn }) {
   function checkDetails() {
-    setActiveBtn("Closed Order Details")
+    setActiveBtn('Closed Order Details');
   }
   return (
     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-border tw-border-gray-kwek700 tw-rounded-md tw-p-2">
@@ -25,19 +25,17 @@ function ClosedOrder({setActiveBtn}) {
       </div>
       <div className="tw-flex tw-flex-col tw-items-end">
         <Badge
-          badgeStyle={
-            "tw-bg-black-stock tw-opacity-40 tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-uppercase tw-whitespace-nowrap"
-          }
-          text={"CANCELLED - PAYMENT UNSUCCESSFUL"}
+          badgeStyle="tw-bg-black-stock tw-opacity-40 tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-uppercase tw-whitespace-nowrap"
+          text="CANCELLED - PAYMENT UNSUCCESSFUL"
         />
         <Button
-          buttonStyle={"tw-underline tw-text-yellow-primary tw-uppercase"}
-          text={"See Details"}
+          buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
+          text="See Details"
           cmd={() => checkDetails()}
         />
       </div>
     </div>
   );
-}
+};
 
 export default ClosedOrder;
