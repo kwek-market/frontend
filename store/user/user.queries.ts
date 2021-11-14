@@ -1,16 +1,6 @@
 export const CREATE_USER = /* GraphQL */ `
-  mutation createUser(
-    $email: String!
-    $fullName: String!
-    $password1: String!
-    $password2: String!
-  ) {
-    createUser(
-      email: $email
-      fullName: $fullName
-      password1: $password1
-      password2: $password2
-    ) {
+  mutation createUser($email: String!, $fullName: String!, $password1: String!, $password2: String!) {
+    createUser(email: $email, fullName: $fullName, password1: $password1, password2: $password2) {
       status
       message
       emailText
@@ -23,17 +13,20 @@ export const LOGIN_USER = /* GraphQL */ `
     loginUser(email: $email, password: $password) {
       user {
         id
+        lastLogin
+        username
+        firstName
+        lastName
+        isStaff
+        isActive
+        dateJoined
         email
         fullName
-        username
-        lastName
-        firstName
         phoneNumber
         isVerified
         isSeller
-        lastLogin
-        isActive
-        dateJoined
+        password
+        isSuperuser
       }
       token
       status
@@ -46,19 +39,20 @@ export const GET_USER = /* GraphQL */ `
   query user($id: ID!) {
     user(id: $id) {
       id
+      lastLogin
       username
-      email
-      fullName
       firstName
       lastName
-      isVerified
-      isActive
       isStaff
+      isActive
       dateJoined
+      email
+      fullName
       phoneNumber
-      secondaryEmail
-      verified
-      lastLogin
+      isVerified
+      isSeller
+      password
+      isSuperuser
     }
   }
 `;
@@ -104,18 +98,8 @@ export const RESEND_VERIFICATION_EMAIL = /* GraphQL */ `
 `;
 
 export const RESET_PASSWORD = /* GraphQL */ `
-  mutation resetPassword(
-    $email: String!
-    $password1: String!
-    $password2: String!
-    $token: String!
-  ) {
-    resetPassword(
-      email: $email
-      password1: $password1
-      password2: $password2
-      token: $token
-    ) {
+  mutation resetPassword($email: String!, $password1: String!, $password2: String!, $token: String!) {
+    resetPassword(email: $email, password1: $password1, password2: $password2, token: $token) {
       message
       status
     }
@@ -132,18 +116,8 @@ export const RESET_PASSWORD_REQUEST = /* GraphQL */ `
 `;
 
 export const UPDATE_PASSWORD = /* GraphQL */ `
-  mutation updatePassword(
-    $oldPassword: String!
-    $newPassword1: String!
-    $newPassword2: String!
-    $token: String!
-  ) {
-    updatePassword(
-      oldPassword: $oldPassword
-      newPassword1: $newPassword1
-      newPassword2: $newPassword2
-      token: $token
-    ) {
+  mutation updatePassword($oldPassword: String!, $newPassword1: String!, $newPassword2: String!, $token: String!) {
+    updatePassword(oldPassword: $oldPassword, newPassword1: $newPassword1, newPassword2: $newPassword2, token: $token) {
       message
       status
     }
@@ -151,18 +125,8 @@ export const UPDATE_PASSWORD = /* GraphQL */ `
 `;
 
 export const UPDATE_USER_PROFILE = /* GraphQL */ `
-  mutation updateUserProfile(
-    $firstName: String!
-    $lastName: String!
-    $phoneNumber: String!
-    $token: String!
-  ) {
-    updateUserProfile(
-      firstName: $firstName
-      lastName: $lastName
-      phoneNumber: $phoneNumber
-      token: $token
-    ) {
+  mutation updateUserProfile($firstName: String!, $lastName: String!, $phoneNumber: String!, $token: String!) {
+    updateUserProfile(firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, token: $token) {
       message
       status
     }

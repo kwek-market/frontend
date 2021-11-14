@@ -1,13 +1,13 @@
-import React from "react";
-import { OpenOrder } from "./index";
+import React from 'react';
+import { OpenOrder } from './index';
 
-function OpenOrders({setActiveBtn}) {
+const OpenOrders = function ({ setActiveBtn }) {
   return (
     <>
       <OpenOrder setActiveBtn={setActiveBtn} />
       <OpenOrder setActiveBtn={setActiveBtn} />
     </>
   );
-}
+};
 
 export default OpenOrders;

@@ -1,38 +1,38 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { AuthLayout } from "@/layouts";
-import { AuthForm } from "@/shared";
+import { AuthLayout } from '@/layouts';
+import { AuthForm } from '@/shared';
 
-const Page = () => {
+const Page = function () {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const resetPass = (formData: any) => {
     console.log(formData);
   };
 
   const form = {
-    title: "Reset your Password.",
-    isLoading: isLoading,
-    subtitle: "Reset your password to continue.",
+    title: 'Reset your Password.',
+    isLoading,
+    subtitle: 'Reset your password to continue.',
     fields: [
       {
-        name: "password",
-        placeholder: "New Password",
-        type: "password",
+        name: 'password',
+        placeholder: 'New Password',
+        type: 'password',
       },
       {
-        name: "newPassword",
-        placeholder: "Confirm New Password",
-        type: "password",
+        name: 'newPassword',
+        placeholder: 'Confirm New Password',
+        type: 'password',
       },
     ],
     submit: {
-      text: "Reset Password",
+      text: 'Reset Password',
       action: resetPass,
     },
     extra: {
-      text: "Do you remember your password?",
-      linkText: "Try Logging In",
-      linkUrl: "/login",
+      text: 'Do you remember your password?',
+      linkText: 'Try Logging In',
+      linkUrl: '/login',
     },
   };
 

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Modal, Button } from "antd";
-import styles from "./checkGrid.module.scss";
+import React, { useState } from 'react';
+import { Modal, Button } from 'antd';
 
-import Link from "next/link";
-import Image from "next/image";
-import CartTab from "../cartTab/CartTab";
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './checkGrid.module.scss';
+import CartTab from '../cartTab/CartTab';
 
-const CheckGrid = () => {
+const CheckGrid = function () {
   const [isModaloneVisible, setIsModaloneVisible] = useState(false);
   const [isModaltwoVisible, setIsModaltwoVisible] = useState(false);
   const [isModalthreeVisible, setIsModalthreeVisible] = useState(false);
@@ -71,11 +71,7 @@ const CheckGrid = () => {
             <form>
               <div className={styles.input_grid}>
                 <div className={styles.input_box}>
-                  <input
-                    type="text"
-                    name="First Name"
-                    placeholder="First Name"
-                  />
+                  <input type="text" name="First Name" placeholder="First Name" />
                 </div>
                 <div className={styles.input_box}>
                   <input type="text" name="Last Name" placeholder="Last Name" />
@@ -89,24 +85,16 @@ const CheckGrid = () => {
                       <option>+234</option>
                       <option>+234</option>
                     </select>
-                    <i className="fas fa-angle-down"></i>
+                    <i className="fas fa-angle-down" />
                   </div>
-                  <input
-                    type="text"
-                    name="Phone Number"
-                    placeholder="Phone Number"
-                  />
+                  <input type="text" name="Phone Number" placeholder="Phone Number" />
                 </div>
                 <div className={styles.input_box}>
-                  <input
-                    type="email"
-                    name="Email Address"
-                    placeholder="Email Address"
-                  />
+                  <input type="email" name="Email Address" placeholder="Email Address" />
                 </div>
               </div>
               <div className={styles.one_input}>
-                <textarea placeholder="Address"></textarea>
+                <textarea placeholder="Address" />
               </div>
               <div className={styles.one_input}>
                 <div className={styles.custom}>
@@ -115,7 +103,7 @@ const CheckGrid = () => {
                       State/Region
                     </option>
                   </select>
-                  <i className="fas fa-angle-down"></i>
+                  <i className="fas fa-angle-down" />
                 </div>
               </div>
               <div className={styles.one_input}>
@@ -125,7 +113,7 @@ const CheckGrid = () => {
                       City
                     </option>
                   </select>
-                  <i className="fas fa-angle-down"></i>
+                  <i className="fas fa-angle-down" />
                 </div>
               </div>
               <button type="submit">Save & Continue</button>
@@ -135,9 +123,7 @@ const CheckGrid = () => {
                 <p className={styles.name}>Alison Eyo</p>
                 <a className={styles.edit}>Edit Information</a>
               </div>
-              <p className={styles.contact}>
-                Suite 5, OGB Plaza, Obafemi Awolowo Way, Utako, Abutja
-              </p>
+              <p className={styles.contact}>Suite 5, OGB Plaza, Obafemi Awolowo Way, Utako, Abutja</p>
               <p className={styles.contact}>+234 812 3456 7890</p>
             </div>
           </div>
@@ -146,18 +132,14 @@ const CheckGrid = () => {
               <Image src="/svg/inactivetick.svg" width="32" height="32" />
               <p>2. DELIVERY METHOD</p>
             </div>
-            <p className={styles.sub}>
-              How do you want your order to be delivered?
-            </p>
+            <p className={styles.sub}>How do you want your order to be delivered?</p>
             <div className={styles.option_box}>
               <div className={styles.option_grid}>
                 <button className={styles.option_one}>
                   <Image src="/svg/bike.svg" width="56" height="56" />
                   <div className={styles.info}>
                     <p className={styles.head}>Deliver To Me</p>
-                    <p className={styles.sub_text}>
-                      Delivered within 24hrs for $20
-                    </p>
+                    <p className={styles.sub_text}>Delivered within 24hrs for $20</p>
                   </div>
                 </button>
                 <button className={styles.option_two}>
@@ -165,16 +147,12 @@ const CheckGrid = () => {
                   <div className={styles.info}>
                     <div className={styles.header}>
                       <p className={styles.head}>Pick-Up Station</p>
-                      <button
-                        className={styles.pickupbtn}
-                        onClick={showModalone}
-                      >
+                      <button className={styles.pickupbtn} onClick={showModalone}>
                         Select Pickup Location
                       </button>
                     </div>
                     <p className={styles.sub_text}>
-                      Select a pickup location in your area from our 33
-                      locations nationwide
+                      Select a pickup location in your area from our 33 locations nationwide
                     </p>
                   </div>
                 </button>
@@ -201,29 +179,17 @@ const CheckGrid = () => {
               </div>
               <div className={styles.option_grid}>
                 <div className={styles.option_box}>
-                  <input
-                    type="checkbox"
-                    className={styles.inputRound}
-                    onClick={showModalthree}
-                  />
+                  <input type="checkbox" className={styles.inputRound} onClick={showModalthree} />
                   <div className={styles.info}>
                     <p className={styles.head}>Bank Transfer</p>
-                    <p className={styles.sub}>
-                      Make Payments using Bank Transfer
-                    </p>
+                    <p className={styles.sub}>Make Payments using Bank Transfer</p>
                   </div>
                 </div>
                 <div className={styles.option_box}>
-                  <input
-                    type="checkbox"
-                    className={styles.inputRound}
-                    onClick={showModaltwo}
-                  />
+                  <input type="checkbox" className={styles.inputRound} onClick={showModaltwo} />
                   <div className={styles.info}>
                     <p className={styles.head}>Card</p>
-                    <p className={styles.sub}>
-                      Make Payments using your Credit or Debit Card
-                    </p>
+                    <p className={styles.sub}>Make Payments using your Credit or Debit Card</p>
                   </div>
                 </div>
               </div>
@@ -234,17 +200,10 @@ const CheckGrid = () => {
           <p className={styles.title}>YOUR ORDER</p>
           <div className={styles.card_box}>
             <div className={styles.card}>
-              <Image
-                src="/images/store.png"
-                width="144"
-                height="144"
-                className={styles.img}
-              />
+              <Image src="/images/store.png" width="144" height="144" className={styles.img} />
               <div className={styles.info}>
                 <p className={styles.seller}>Seller: Nike Stores</p>
-                <p className={styles.name}>
-                  Solid pattern in fashion summer dress
-                </p>
+                <p className={styles.name}>Solid pattern in fashion summer dress</p>
                 <div className={styles.item_info}>
                   <p className={styles.qty}>Qty: 1</p>
                   <p className={styles.price}>$129.99</p>
@@ -252,17 +211,10 @@ const CheckGrid = () => {
               </div>
             </div>
             <div className={styles.card}>
-              <Image
-                src="/images/store.png"
-                width="144"
-                height="144"
-                className={styles.img}
-              />
+              <Image src="/images/store.png" width="144" height="144" className={styles.img} />
               <div className={styles.info}>
                 <p className={styles.seller}>Seller: Nike Stores</p>
-                <p className={styles.name}>
-                  Solid pattern in fashion summer dress
-                </p>
+                <p className={styles.name}>Solid pattern in fashion summer dress</p>
                 <div className={styles.item_info}>
                   <p className={styles.qty}>Qty: 1</p>
                   <p className={styles.price}>$129.99</p>
@@ -270,17 +222,10 @@ const CheckGrid = () => {
               </div>
             </div>
             <div className={styles.card}>
-              <Image
-                src="/images/store.png"
-                width="144"
-                height="144"
-                className={styles.img}
-              />
+              <Image src="/images/store.png" width="144" height="144" className={styles.img} />
               <div className={styles.info}>
                 <p className={styles.seller}>Seller: Nike Stores</p>
-                <p className={styles.name}>
-                  Solid pattern in fashion summer dress
-                </p>
+                <p className={styles.name}>Solid pattern in fashion summer dress</p>
                 <div className={styles.item_info}>
                   <p className={styles.qty}>Qty: 1</p>
                   <p className={styles.price}>$129.99</p>
@@ -288,17 +233,10 @@ const CheckGrid = () => {
               </div>
             </div>
             <div className={styles.card}>
-              <Image
-                src="/images/store.png"
-                width="144"
-                height="144"
-                className={styles.img}
-              />
+              <Image src="/images/store.png" width="144" height="144" className={styles.img} />
               <div className={styles.info}>
                 <p className={styles.seller}>Seller: Nike Stores</p>
-                <p className={styles.name}>
-                  Solid pattern in fashion summer dress
-                </p>
+                <p className={styles.name}>Solid pattern in fashion summer dress</p>
                 <div className={styles.item_info}>
                   <p className={styles.qty}>Qty: 1</p>
                   <p className={styles.price}>$129.99</p>
@@ -333,14 +271,12 @@ const CheckGrid = () => {
           </Button>,
         ]}
       >
-        <div
-          style={{ display: "flex", alignItems: "center", marginBottom: 10 }}
-        >
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
           <p
             style={{
               fontSize: 16,
               fontWeight: 600,
-              color: "#1d1616",
+              color: '#1d1616',
               marginBottom: 0,
             }}
           >
@@ -350,8 +286,8 @@ const CheckGrid = () => {
             style={{
               fontSize: 16,
               fontWeight: 600,
-              marginLeft: "auto",
-              color: "#af1328",
+              marginLeft: 'auto',
+              color: '#af1328',
             }}
           >
             Show All
@@ -359,93 +295,79 @@ const CheckGrid = () => {
         </div>
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            width: "100%",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            width: '100%',
+            justifyContent: 'center',
             paddingBottom: 10,
           }}
         >
           <div
             style={{
-              position: "relative",
-              width: "48%",
-              marginRight: "2%",
-              display: "flex",
-              alignItems: "center",
+              position: 'relative',
+              width: '48%',
+              marginRight: '2%',
+              display: 'flex',
+              alignItems: 'center',
               marginBottom: 20,
               marginTop: 20,
             }}
           >
             <select
               style={{
-                borderColor: "#574240",
+                borderColor: '#574240',
                 borderRadius: 5,
                 padding: 16,
-                appearance: "none",
+                appearance: 'none',
                 borderWidth: 1,
-                width: "100%",
+                width: '100%',
               }}
             >
-              <option
-                style={{ fontSize: 16, color: "#574240" }}
-                selected
-                disabled
-              >
+              <option style={{ fontSize: 16, color: '#574240' }} selected disabled>
                 Choose State
               </option>
             </select>
-            <i
-              style={{ position: "absolute", right: 0, marginRight: 15 }}
-              className="fas fa-angle-down"
-            ></i>
+            <i style={{ position: 'absolute', right: 0, marginRight: 15 }} className="fas fa-angle-down" />
           </div>
           <div
             style={{
-              position: "relative",
-              width: "48%",
-              display: "flex",
-              alignItems: "center",
+              position: 'relative',
+              width: '48%',
+              display: 'flex',
+              alignItems: 'center',
               marginBottom: 20,
               marginTop: 20,
             }}
           >
             <select
               style={{
-                borderColor: "#574240",
+                borderColor: '#574240',
                 borderRadius: 5,
                 padding: 16,
-                appearance: "none",
+                appearance: 'none',
                 borderWidth: 1,
-                width: "100%",
+                width: '100%',
               }}
             >
-              <option
-                style={{ fontSize: 16, color: "#574240" }}
-                selected
-                disabled
-              >
+              <option style={{ fontSize: 16, color: '#574240' }} selected disabled>
                 Choose City
               </option>
             </select>
-            <i
-              style={{ position: "absolute", right: 0, marginRight: 15 }}
-              className="fas fa-angle-down"
-            ></i>
+            <i style={{ position: 'absolute', right: 0, marginRight: 15 }} className="fas fa-angle-down" />
           </div>
         </div>
-        <div style={{ width: "100%", height: 300, overflowY: "auto" }}>
+        <div style={{ width: '100%', height: 300, overflowY: 'auto' }}>
           <button
             style={{
-              backgroundColor: "#fdfcfc",
+              backgroundColor: '#fdfcfc',
               borderWidth: 1,
-              borderColor: "rgba(191, 165, 163, 0.5)",
+              borderColor: 'rgba(191, 165, 163, 0.5)',
               borderRadius: 5,
               padding: 24,
               marginBottom: 16,
-              width: "100%",
-              cursor: "pointer",
+              width: '100%',
+              cursor: 'pointer',
             }}
           >
             <div style={{}}>
@@ -454,36 +376,34 @@ const CheckGrid = () => {
                   fontWeight: 600,
                   fontSize: 20,
                   marginBottom: 8,
-                  color: "#af1328",
-                  textAlign: "left",
+                  color: '#af1328',
+                  textAlign: 'left',
                 }}
               >
                 Pickup Location 1
               </p>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Image src="/svg/lochouse.svg" width="24" height="24" />
                 <p
                   style={{
                     fontSize: 16,
                     marginBottom: 4,
-                    color: "#574240",
-                    textAlign: "left",
+                    color: '#574240',
+                    textAlign: 'left',
                     marginLeft: 12,
                   }}
                 >
                   10, Medical Road, Computer Village, Ikeja
                 </p>
               </div>
-              <div
-                style={{ display: "flex", alignItems: "center", marginTop: 4 }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: 4 }}>
                 <Image src="/svg/locphone.svg" width="18" height="18" />
                 <p
                   style={{
                     fontSize: 16,
                     marginBottom: 0,
-                    color: "#574240",
-                    textAlign: "left",
+                    color: '#574240',
+                    textAlign: 'left',
                     marginLeft: 12,
                   }}
                 >
@@ -494,14 +414,14 @@ const CheckGrid = () => {
           </button>
           <button
             style={{
-              backgroundColor: "#fdfcfc",
+              backgroundColor: '#fdfcfc',
               borderWidth: 1,
-              borderColor: "rgba(191, 165, 163, 0.5)",
+              borderColor: 'rgba(191, 165, 163, 0.5)',
               borderRadius: 5,
               padding: 24,
               marginBottom: 16,
-              width: "100%",
-              cursor: "pointer",
+              width: '100%',
+              cursor: 'pointer',
             }}
           >
             <div style={{}}>
@@ -510,36 +430,34 @@ const CheckGrid = () => {
                   fontWeight: 600,
                   fontSize: 20,
                   marginBottom: 8,
-                  color: "#af1328",
-                  textAlign: "left",
+                  color: '#af1328',
+                  textAlign: 'left',
                 }}
               >
                 Pickup Location 1
               </p>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Image src="/svg/lochouse.svg" width="24" height="24" />
                 <p
                   style={{
                     fontSize: 16,
                     marginBottom: 4,
-                    color: "#574240",
-                    textAlign: "left",
+                    color: '#574240',
+                    textAlign: 'left',
                     marginLeft: 12,
                   }}
                 >
                   10, Medical Road, Computer Village, Ikeja
                 </p>
               </div>
-              <div
-                style={{ display: "flex", alignItems: "center", marginTop: 4 }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: 4 }}>
                 <Image src="/svg/locphone.svg" width="18" height="18" />
                 <p
                   style={{
                     fontSize: 16,
                     marginBottom: 0,
-                    color: "#574240",
-                    textAlign: "left",
+                    color: '#574240',
+                    textAlign: 'left',
                     marginLeft: 12,
                   }}
                 >
@@ -550,14 +468,14 @@ const CheckGrid = () => {
           </button>
           <button
             style={{
-              backgroundColor: "#fdfcfc",
+              backgroundColor: '#fdfcfc',
               borderWidth: 1,
-              borderColor: "rgba(191, 165, 163, 0.5)",
+              borderColor: 'rgba(191, 165, 163, 0.5)',
               borderRadius: 5,
               padding: 24,
               marginBottom: 16,
-              width: "100%",
-              cursor: "pointer",
+              width: '100%',
+              cursor: 'pointer',
             }}
           >
             <div style={{}}>
@@ -566,36 +484,34 @@ const CheckGrid = () => {
                   fontWeight: 600,
                   fontSize: 20,
                   marginBottom: 8,
-                  color: "#af1328",
-                  textAlign: "left",
+                  color: '#af1328',
+                  textAlign: 'left',
                 }}
               >
                 Pickup Location 1
               </p>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Image src="/svg/lochouse.svg" width="24" height="24" />
                 <p
                   style={{
                     fontSize: 16,
                     marginBottom: 4,
-                    color: "#574240",
-                    textAlign: "left",
+                    color: '#574240',
+                    textAlign: 'left',
                     marginLeft: 12,
                   }}
                 >
                   10, Medical Road, Computer Village, Ikeja
                 </p>
               </div>
-              <div
-                style={{ display: "flex", alignItems: "center", marginTop: 4 }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: 4 }}>
                 <Image src="/svg/locphone.svg" width="18" height="18" />
                 <p
                   style={{
                     fontSize: 16,
                     marginBottom: 0,
-                    color: "#574240",
-                    textAlign: "left",
+                    color: '#574240',
+                    textAlign: 'left',
                     marginLeft: 12,
                   }}
                 >
@@ -622,14 +538,12 @@ const CheckGrid = () => {
           </Button>,
         ]}
       >
-        <div
-          style={{ display: "flex", alignItems: "center", marginBottom: 24 }}
-        >
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 24 }}>
           <p
             style={{
               fontSize: 16,
               fontWeight: 600,
-              color: "#1d1616",
+              color: '#1d1616',
               marginBottom: 0,
             }}
           >
@@ -639,8 +553,8 @@ const CheckGrid = () => {
             style={{
               fontSize: 16,
               fontWeight: 600,
-              marginLeft: "auto",
-              color: "#af1328",
+              marginLeft: 'auto',
+              color: '#af1328',
               marginBottom: 0,
             }}
           >
@@ -648,12 +562,12 @@ const CheckGrid = () => {
           </p>
         </div>
         <form>
-          <div style={{ marginBottom: 10, width: "100%" }}>
+          <div style={{ marginBottom: 10, width: '100%' }}>
             <p
               style={{
                 fontSize: 14,
                 fontWeight: 600,
-                color: "#574240",
+                color: '#574240',
                 marginBottom: 10,
               }}
             >
@@ -665,34 +579,34 @@ const CheckGrid = () => {
                 paddingBottom: 14,
                 paddingLeft: 20,
                 paddingRight: 20,
-                backgroundColor: "rgba(191, 165, 163, 0.05)",
+                backgroundColor: 'rgba(191, 165, 163, 0.05)',
                 borderWidth: 1,
-                borderColor: "rgba(191, 165, 163, 0.5)",
+                borderColor: 'rgba(191, 165, 163, 0.5)',
                 borderRadius: 5,
                 fontWeight: 600,
-                fontSize: "16px",
-                color: "#574240",
-                appearance: "none",
-                width: "100%",
-                outline: "none",
+                fontSize: '16px',
+                color: '#574240',
+                appearance: 'none',
+                width: '100%',
+                outline: 'none',
               }}
               placeholder="0000 0000 0000 0000"
             />
           </div>
           <div
             style={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              width: "100%",
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              width: '100%',
             }}
           >
-            <div style={{ marginTop: 20, marginBottom: 20, width: "48%" }}>
+            <div style={{ marginTop: 20, marginBottom: 20, width: '48%' }}>
               <p
                 style={{
                   fontSize: 14,
                   fontWeight: 600,
-                  color: "#574240",
+                  color: '#574240',
                   marginBottom: 10,
                 }}
               >
@@ -704,16 +618,16 @@ const CheckGrid = () => {
                   paddingBottom: 14,
                   paddingLeft: 20,
                   paddingRight: 20,
-                  backgroundColor: "rgba(191, 165, 163, 0.05)",
+                  backgroundColor: 'rgba(191, 165, 163, 0.05)',
                   borderWidth: 1,
-                  borderColor: "rgba(191, 165, 163, 0.5)",
+                  borderColor: 'rgba(191, 165, 163, 0.5)',
                   borderRadius: 5,
                   fontWeight: 600,
-                  fontSize: "16px",
-                  color: "#574240",
-                  appearance: "none",
-                  width: "100%",
-                  outline: "none",
+                  fontSize: '16px',
+                  color: '#574240',
+                  appearance: 'none',
+                  width: '100%',
+                  outline: 'none',
                 }}
                 placeholder="MM / YY"
               />
@@ -722,15 +636,15 @@ const CheckGrid = () => {
               style={{
                 marginTop: 20,
                 marginBottom: 20,
-                width: "48%",
-                marginLeft: "auto",
+                width: '48%',
+                marginLeft: 'auto',
               }}
             >
               <p
                 style={{
                   fontSize: 14,
                   fontWeight: 600,
-                  color: "#574240",
+                  color: '#574240',
                   marginBottom: 10,
                 }}
               >
@@ -742,16 +656,16 @@ const CheckGrid = () => {
                   paddingBottom: 14,
                   paddingLeft: 20,
                   paddingRight: 20,
-                  backgroundColor: "rgba(191, 165, 163, 0.05)",
+                  backgroundColor: 'rgba(191, 165, 163, 0.05)',
                   borderWidth: 1,
-                  borderColor: "rgba(191, 165, 163, 0.5)",
+                  borderColor: 'rgba(191, 165, 163, 0.5)',
                   borderRadius: 5,
                   fontWeight: 600,
-                  fontSize: "16px",
-                  color: "#574240",
-                  appearance: "none",
-                  width: "100%",
-                  outline: "none",
+                  fontSize: '16px',
+                  color: '#574240',
+                  appearance: 'none',
+                  width: '100%',
+                  outline: 'none',
                 }}
                 placeholder="123"
               />
@@ -774,14 +688,12 @@ const CheckGrid = () => {
           </Button>,
         ]}
       >
-        <div
-          style={{ display: "flex", alignItems: "center", marginBottom: 24 }}
-        >
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 24 }}>
           <p
             style={{
               fontSize: 16,
               fontWeight: 600,
-              color: "#1d1616",
+              color: '#1d1616',
               marginBottom: 0,
             }}
           >
@@ -791,8 +703,8 @@ const CheckGrid = () => {
             style={{
               fontSize: 16,
               fontWeight: 600,
-              marginLeft: "auto",
-              color: "#af1328",
+              marginLeft: 'auto',
+              color: '#af1328',
               marginBottom: 0,
             }}
           >
@@ -800,12 +712,12 @@ const CheckGrid = () => {
           </p>
         </div>
         <form>
-          <div style={{ marginBottom: 10, width: "100%" }}>
+          <div style={{ marginBottom: 10, width: '100%' }}>
             <p
               style={{
                 fontSize: 14,
                 fontWeight: 600,
-                color: "#574240",
+                color: '#574240',
                 marginBottom: 10,
               }}
             >
@@ -817,16 +729,16 @@ const CheckGrid = () => {
                 paddingBottom: 14,
                 paddingLeft: 20,
                 paddingRight: 20,
-                backgroundColor: "rgba(191, 165, 163, 0.05)",
+                backgroundColor: 'rgba(191, 165, 163, 0.05)',
                 borderWidth: 1,
-                borderColor: "rgba(191, 165, 163, 0.5)",
+                borderColor: 'rgba(191, 165, 163, 0.5)',
                 borderRadius: 5,
                 fontWeight: 600,
-                fontSize: "16px",
-                color: "#574240",
-                appearance: "none",
-                width: "100%",
-                outline: "none",
+                fontSize: '16px',
+                color: '#574240',
+                appearance: 'none',
+                width: '100%',
+                outline: 'none',
               }}
               placeholder="Enter your full name here"
             />
@@ -849,14 +761,12 @@ const CheckGrid = () => {
           </Button>,
         ]}
       >
-        <div
-          style={{ display: "flex", alignItems: "center", marginBottom: 24 }}
-        >
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 24 }}>
           <p
             style={{
               fontSize: 16,
               fontWeight: 600,
-              color: "#1d1616",
+              color: '#1d1616',
               marginBottom: 0,
             }}
           >
@@ -866,8 +776,8 @@ const CheckGrid = () => {
             style={{
               fontSize: 16,
               fontWeight: 600,
-              marginLeft: "auto",
-              color: "#af1328",
+              marginLeft: 'auto',
+              color: '#af1328',
               marginBottom: 0,
             }}
           >
@@ -875,29 +785,26 @@ const CheckGrid = () => {
           </p>
         </div>
         <div style={{}}>
-          <p style={{ fontSize: 18, color: "#574240", marginBottom: 24 }}>
-            Kindly transfer to the Account below using the Transaction ID as
-            Ref, then click the “I have made a transfer” button to complete
-            thetransaction.
+          <p style={{ fontSize: 18, color: '#574240', marginBottom: 24 }}>
+            Kindly transfer to the Account below using the Transaction ID as Ref, then click the “I have made a
+            transfer” button to complete thetransaction.
           </p>
           <div style={{ marginBottom: 10 }}>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 marginBottom: 10,
               }}
             >
-              <p style={{ fontSize: 16, color: "#574240", marginBottom: 0 }}>
-                Amount:
-              </p>
+              <p style={{ fontSize: 16, color: '#574240', marginBottom: 0 }}>Amount:</p>
               <p
                 style={{
                   fontSize: 16,
                   fontWeight: 600,
-                  color: "#574240",
+                  color: '#574240',
                   marginBottom: 0,
-                  marginLeft: "auto",
+                  marginLeft: 'auto',
                 }}
               >
                 $590.02
@@ -905,21 +812,19 @@ const CheckGrid = () => {
             </div>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 marginBottom: 10,
               }}
             >
-              <p style={{ fontSize: 16, color: "#574240", marginBottom: 0 }}>
-                Bank Name:
-              </p>
+              <p style={{ fontSize: 16, color: '#574240', marginBottom: 0 }}>Bank Name:</p>
               <p
                 style={{
                   fontSize: 16,
                   fontWeight: 600,
-                  color: "#574240",
+                  color: '#574240',
                   marginBottom: 0,
-                  marginLeft: "auto",
+                  marginLeft: 'auto',
                 }}
               >
                 Kuda Bank
@@ -927,21 +832,19 @@ const CheckGrid = () => {
             </div>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 marginBottom: 10,
               }}
             >
-              <p style={{ fontSize: 16, color: "#574240", marginBottom: 0 }}>
-                Account Number:
-              </p>
+              <p style={{ fontSize: 16, color: '#574240', marginBottom: 0 }}>Account Number:</p>
               <p
                 style={{
                   fontSize: 16,
                   fontWeight: 600,
-                  color: "#574240",
+                  color: '#574240',
                   marginBottom: 0,
-                  marginLeft: "auto",
+                  marginLeft: 'auto',
                 }}
               >
                 00123456789
@@ -949,21 +852,19 @@ const CheckGrid = () => {
             </div>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 marginBottom: 10,
               }}
             >
-              <p style={{ fontSize: 16, color: "#574240", marginBottom: 0 }}>
-                Account Name:
-              </p>
+              <p style={{ fontSize: 16, color: '#574240', marginBottom: 0 }}>Account Name:</p>
               <p
                 style={{
                   fontSize: 16,
                   fontWeight: 600,
-                  color: "#574240",
+                  color: '#574240',
                   marginBottom: 0,
-                  marginLeft: "auto",
+                  marginLeft: 'auto',
                 }}
               >
                 Coco le Design
@@ -971,21 +872,19 @@ const CheckGrid = () => {
             </div>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 marginBottom: 10,
               }}
             >
-              <p style={{ fontSize: 16, color: "#574240", marginBottom: 0 }}>
-                Transaction ID:
-              </p>
+              <p style={{ fontSize: 16, color: '#574240', marginBottom: 0 }}>Transaction ID:</p>
               <p
                 style={{
                   fontSize: 16,
                   fontWeight: 600,
-                  color: "#574240",
+                  color: '#574240',
                   marginBottom: 0,
-                  marginLeft: "auto",
+                  marginLeft: 'auto',
                 }}
               >
                 THX000923890

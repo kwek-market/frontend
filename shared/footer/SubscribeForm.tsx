@@ -1,9 +1,8 @@
-import React from "react";
-import { useState } from "react";
-import styles from "./Footer.module.scss";
+import React, { useState } from 'react';
+import styles from './Footer.module.scss';
 
-const Component = () => {
-  const [email, setEmail] = useState<string>("");
+const Component = function () {
+  const [email, setEmail] = useState<string>('');
 
   return (
     <form className={styles.form}>

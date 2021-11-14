@@ -1,14 +1,16 @@
-import React from "react";
-import styles from "./Card.module.scss";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
+import styles from './Card.module.scss';
 
-const Card = () => {
+const Card = function () {
   return (
     <div className={styles.card}>
       <div className={styles.card_textContainer}>
         <div className={styles.card_text}>
           <p className={styles.card_textSm}>Category</p>
-          <p className={styles.card_textLg}>Luxury at its <br/> Finest</p>
+          <p className={styles.card_textLg}>
+            Luxury at its <br /> Finest
+          </p>
         </div>
 
         <div className={styles.card_text}>

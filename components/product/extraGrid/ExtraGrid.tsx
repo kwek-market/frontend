@@ -1,17 +1,12 @@
-import React from "react";
-import Image from "next/image";
-import styles from "./extraGrid.module.scss";
+import React from 'react';
+import Image from 'next/image';
+import styles from './extraGrid.module.scss';
 
-const ExtraGrid = () => {
+const ExtraGrid = function () {
   return (
     <div className={styles.extra_container}>
       <div className={styles.extra_info}>
-        <Image
-          src="/images/store.png"
-          width="100"
-          height="100"
-          className={styles.img}
-        />
+        <Image src="/images/store.png" width="100" height="100" className={styles.img} />
         <p>
           Sold by <span>Moda Stores</span>
         </p>

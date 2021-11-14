@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { AuthLayout } from "@/layouts";
-import { AuthForm } from "@/shared";
+import { AuthLayout } from '@/layouts';
+import { AuthForm } from '@/shared';
 
-const Page = () => {
+const Page = function () {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const sendResetRequest = (formData: any) => {
     console.log(formData);
   };
 
   const form = {
-    title: "Forgot Password?",
-    isLoading: isLoading,
-    subtitle:
-      "Don’t worry, resetting your password is easy. Just enter the email address you used to sign up to Kwek.",
+    title: 'Forgot Password?',
+    isLoading,
+    subtitle: 'Don’t worry, resetting your password is easy. Just enter the email address you used to sign up to Kwek.',
     fields: [
       {
-        name: "email",
-        placeholder: "Email Address",
-        type: "email",
+        name: 'email',
+        placeholder: 'Email Address',
+        type: 'email',
       },
     ],
     submit: {
-      text: "Request Reset Link",
+      text: 'Request Reset Link',
       action: sendResetRequest,
     },
     extra: {
-      text: "Do you remember your password?",
-      linkText: "Try Logging In",
-      linkUrl: "/login",
+      text: 'Do you remember your password?',
+      linkText: 'Try Logging In',
+      linkUrl: '/login',
     },
   };
 

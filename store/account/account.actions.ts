@@ -1,11 +1,7 @@
-import {
-  CLEAR_ACCOUNT,
-  CREATE_ACCOUNT,
-  SET_LOADING,
-} from "./../user/user.types";
-import { userFetcher } from "@/helpers";
-import { Dispatch } from "redux";
-import { CREATE_USER } from "../user/user.queries";
+import { Dispatch } from 'redux';
+import { CLEAR_ACCOUNT, CREATE_ACCOUNT, SET_LOADING } from '../user/user.types';
+import { userFetcher } from '@/helpers';
+import { CREATE_USER } from '../user/user.queries';
 
 type AccountType = {
   email: string;
@@ -25,7 +21,7 @@ export function createUserAccount(account: AccountType) {
       });
       const result = await userFetcher(CREATE_USER, account);
       console.log({ result });
-      import("antd").then((antd) => {
+      import('antd').then((antd) => {
         antd.message.success(result.createUser.message);
       });
       dispatch({
@@ -33,7 +29,7 @@ export function createUserAccount(account: AccountType) {
         payload: { ...result.createUser, email: account.email },
       });
     } catch (err) {
-      import("antd").then((antd) => {
+      import('antd').then((antd) => {
         antd.message.error(err.message);
       });
     }
@@ -50,7 +46,7 @@ export function clearAccount() {
 // loading
 export function setLoading() {
   return {
-    type: "SET_LOADING",
+    type: 'SET_LOADING',
     payload: true,
   };
 }

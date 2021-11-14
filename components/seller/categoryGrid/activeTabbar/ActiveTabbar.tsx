@@ -1,9 +1,8 @@
-import React from "react";
-import styles from "./activeTabbar.module.scss";
+import React from 'react';
+import Link from 'next/link';
+import styles from './activeTabbar.module.scss';
 
-import Link from "next/link";
-
-const ActiveTabbar = () => {
+const ActiveTabbar = function () {
   return (
     <div className={styles.bar_container}>
       <div className={styles.bar_content}>
@@ -11,7 +10,7 @@ const ActiveTabbar = () => {
           <div className={styles.filter}>
             <a>
               Filters
-              <i className="fas fa-angle-right"></i>
+              <i className="fas fa-angle-right" />
             </a>
           </div>
         </Link>
@@ -26,7 +25,7 @@ const ActiveTabbar = () => {
               <option>Product Rating</option>
             </select>
             <div className={styles.arrow_down}>
-              <i className="fas fa-angle-down"></i>
+              <i className="fas fa-angle-down" />
             </div>
           </div>
         </div>

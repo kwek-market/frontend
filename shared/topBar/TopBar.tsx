@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styles from './TopBar.module.scss'
+import React, { useState } from 'react';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './TopBar.module.scss';
 
-const Topbar = (props: any) => {
+const Topbar = function (props: any) {
   const [show, setShow] = useState(true);
 
   if (!show) return null;
@@ -50,9 +50,7 @@ const Topbar = (props: any) => {
 
         <Link href="/">
           <a>
-            <button className={`btn btn--outline-white ${styles.ad_cta}`}>
-              Learn More
-            </button>
+            <button className={`btn btn--outline-white ${styles.ad_cta}`}>Learn More</button>
           </a>
         </Link>
       </div>

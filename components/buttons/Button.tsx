@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type ButtonProps = {
   buttonStyle: string;
@@ -7,20 +7,14 @@ type ButtonProps = {
   cmd: () => void;
 };
 
-function Button({ buttonStyle, text, cmd, icon }: ButtonProps) {
+const Button = function ({ buttonStyle, text, cmd, icon }: ButtonProps) {
   return (
-    <button
-      className={buttonStyle}
-      style={{ whiteSpace: "nowrap" }}
-      onClick={cmd}
-    >
-      {icon && (
-        <i className={`fas ${icon}`} style={{ paddingRight: "12px" }}></i>
-      )}
-      {"    "}
+    <button className={buttonStyle} style={{ whiteSpace: 'nowrap' }} onClick={cmd}>
+      {icon && <i className={`fas ${icon}`} style={{ paddingRight: '12px' }} />}
+      {'    '}
       {text}
     </button>
   );
-}
+};
 
 export default Button;

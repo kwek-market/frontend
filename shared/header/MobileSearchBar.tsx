@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styles from "./mobilesearchbar.module.scss";
+import React, { useState } from 'react';
+import styles from './mobilesearchbar.module.scss';
 
-function MobileSearchBar() {
-  const [searchValue, setSearchValue] = useState<string>("");
+const MobileSearchBar = function () {
+  const [searchValue, setSearchValue] = useState<string>('');
 
   return (
     <div className={styles.searchBox}>
@@ -16,6 +16,6 @@ function MobileSearchBar() {
       />
     </div>
   );
-}
+};
 
 export default MobileSearchBar;

@@ -1,55 +1,51 @@
-import React from "react";
-import styles from "./Navbar.module.scss";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
+import styles from './Navbar.module.scss';
 
 interface NavProps {
   showNavBar: boolean;
   setShowNavBar: (showNavBar: boolean) => void;
 }
 
-const NavBar = ({ showNavBar, setShowNavBar }: NavProps) => {
+const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
   const menu = [
     {
-      title: "Shop",
-      url: "/shop",
+      title: 'Shop',
+      url: '/shop',
     },
     {
-      title: "About Us",
-      url: "/about-us",
+      title: 'About Us',
+      url: '/about-us',
     },
     {
-      title: "Sell On Kwek",
-      url: "/",
+      title: 'Sell On Kwek',
+      url: '/',
     },
     {
-      title: "Registry",
-      url: "/registry",
+      title: 'Registry',
+      url: '/registry',
     },
     {
-      title: "Gift Cards",
-      url: "/gift-cards",
+      title: 'Gift Cards',
+      url: '/gift-cards',
     },
     {
-      title: "Customer Service",
-      url: "/customer-service",
+      title: 'Customer Service',
+      url: '/customer-service',
     },
     {
-      title: "Reviews",
-      url: "/reviews",
+      title: 'Reviews',
+      url: '/reviews',
     },
     {
-      title: "Vendors",
-      url: "/vendors",
+      title: 'Vendors',
+      url: '/vendors',
     },
   ];
   return (
-    <nav
-      id={styles.mainNav}
-      className="bg-primary"
-      style={{ transform: showNavBar && "translateX(0)" }}
-    >
+    <nav id={styles.mainNav} className="bg-primary" style={{ transform: showNavBar && 'translateX(0)' }}>
       <div className={styles.close} onClick={() => setShowNavBar(false)}>
-        <i className={`fas fa-times ${styles.close_icon}`}></i>
+        <i className={`fas fa-times ${styles.close_icon}`} />
       </div>
 
       <ul className={styles.nav}>
