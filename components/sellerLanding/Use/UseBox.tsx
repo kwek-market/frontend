@@ -14,8 +14,12 @@ const UseBox = function ({ imgSrc, bgColor, title, desc }: UseBoxProps) {
         <img src={imgSrc} width="80px" height="80px" />
       </div>
       <div className="tw-text-left tw-ml-2 md:tw-ml-5">
-        <h3 className="tw-font-semibold tw-text-base md:tw-text-xl tw-text-gray-kwek300">{title}</h3>
-        <p className="tw-font-normal tw-text-sm md:tw-text-lg tw-text-gray-kwek300">{desc}</p>
+        <h3 className="tw-font-semibold tw-text-base md:tw-text-xl tw-text-gray-kwek300">
+         {title}
+        </h3>
+        <p className="tw-font-normal tw-text-sm md:tw-text-lg tw-text-gray-kwek300">
+          {desc}
+        </p>
       </div>
     </div>
   );

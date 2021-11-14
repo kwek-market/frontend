@@ -50,9 +50,14 @@ const use = () => {
       <div className={Styles.useRegister}>
         <div className={Styles.useRegister_content}>
           <div className={Styles.useRegister_contentText}>
-            <h1 className="tw-font-semibold tw-text-lg md:tw-text-4xl lg:tw-text-6xl">Sell Big, Sell Fast</h1>
-            <button className={`tw-p-2 tw-truncate tw-rounded-md tw-bg-red-kwek100 tw-text-white-100 tw-flex `}>
-              Register Now <i className="fas fa-long-arrow-alt-right fa-2x tw-ml-2" />
+            <h1 className="tw-font-semibold tw-text-lg md:tw-text-4xl lg:tw-text-6xl">
+              Sell Big, Sell Fast
+            </h1>
+            <button
+              className={`tw-p-2 tw-truncate tw-rounded-md tw-bg-red-kwek100 tw-text-white-100 tw-flex `}
+            >
+              Register Now{" "}
+              <i className="fas fa-long-arrow-alt-right fa-2x tw-ml-2"></i>
             </button>
           </div>
           <div className={Styles.useRegister_contentImage}>
