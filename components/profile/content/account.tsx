@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@/components/buttons/Button';
 import TextInput from '@/components/input/textInput';
-import { emailValidator, userFetcherWithAuth } from '@/helpers';
+import { emailValidator } from '@/helpers';
 import { RootState } from '@/store/rootReducer';
 import { updateUser } from '@/store/user/user.actions';
 
