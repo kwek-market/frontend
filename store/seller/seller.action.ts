@@ -1,8 +1,12 @@
-import { Dispatch } from 'redux';
-import { userFetcherWithAuth } from '@/helpers';
-import { SellerData, StartSelling } from '../../interfaces/commonTypes';
-import { SELLER_DATA, SELLER_VERIFICATION, START_SELLING } from './seller.queries';
-import SellerTypes from './seller.types';
+import { Dispatch } from "redux";
+import { userFetcherWithAuth } from "@/helpers";
+import { SellerData, StartSelling } from "../../interfaces/commonTypes";
+import {
+  SELLER_DATA,
+  SELLER_VERIFICATION,
+  START_SELLING,
+} from "./seller.queries";
+import SellerTypes from "./seller.types";
 
 // loading
 export function sellerLoading() {
@@ -16,9 +20,13 @@ export function startSelling(startSelling: StartSelling, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(START_SELLING, startSelling, token);
+      const response = await userFetcherWithAuth(
+        START_SELLING,
+        startSelling,
+        token
+      );
       console.log(response);
-      import('antd').then(({ message }) => {
+      import("antd").then(({ message }) => {
         response.startSelling.status
           ? message.success(response.startSelling.message)
           : message.error(response.startSelling.message);
@@ -32,7 +40,7 @@ export function startSelling(startSelling: StartSelling, token: string) {
           },
         });
     } catch (error) {
-      import('antd').then(({ message }) => {
+      import("antd").then(({ message }) => {
         message.error(error.message);
       });
       dispatch({
@@ -43,13 +51,20 @@ export function startSelling(startSelling: StartSelling, token: string) {
   };
 }
 
-export function sellerVerification(sellerVerification: SellerData, token: string) {
+export function sellerVerification(
+  sellerVerification: SellerData,
+  token: string
+) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(SELLER_VERIFICATION, sellerVerification, token);
+      const response = await userFetcherWithAuth(
+        SELLER_VERIFICATION,
+        sellerVerification,
+        token
+      );
       console.log(response);
-      import('antd').then(({ message }) => {
+      import("antd").then(({ message }) => {
         response.sellerVerification.status
           ? message.success(response.sellerVerification.message)
           : message.error(response.sellerVerification.message);
@@ -76,7 +91,7 @@ export function getSellerData(token: string) {
         payload: response.sellerData,
       });
     } catch (error) {
-      import('antd').then(({ message }) => {
+      import("antd").then(({ message }) => {
         message.error(error.message);
       });
       dispatch({

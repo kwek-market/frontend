@@ -36,11 +36,6 @@ const AuthForm: React.FC<Type> = function ({ title, isLoading, subtitle, fields,
     // Email validation
     // console.log(validateEmail.test(formData.email))
 
-    if (userId.message === 'E-mail Already in use') {
-      setError({ status: true, message: 'E-mail Already in use' });
-      setLoading(false);
-    }
-
     if (!formData.email && !formData.password) {
       // console.log("enter your email and password in");
       setError({ status: true, message: 'Input your email and password' });

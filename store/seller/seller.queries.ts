@@ -63,7 +63,7 @@ export const SELLER_VERIFICATION = /* GraphQL */ `
 `;
 
 export const SELLER_DATA = /* GRAPHQL */ `
-  mutation sellerData($token: String!) {
+  query sellerData($token: String!) {
     sellerData(token: $token) {
       firstname
       lastname

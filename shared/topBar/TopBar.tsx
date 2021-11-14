@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from './TopBar.module.scss';
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./TopBar.module.scss";
 
-const Topbar = function (props: any) {
+const Topbar = function ({ withLogo }: { withLogo: boolean }) {
   const [show, setShow] = useState(true);
 
   if (!show) return null;
 
   return (
     <div id={styles.topbar}>
-      {props.withLogo && (
+      {withLogo && (
         <Link href="/">
           <a className={styles.logo}>
             <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
@@ -50,7 +50,9 @@ const Topbar = function (props: any) {
 
         <Link href="/">
           <a>
-            <button className={`btn btn--outline-white ${styles.ad_cta}`}>Learn More</button>
+            <button className={`btn btn--outline-white ${styles.ad_cta}`}>
+              Learn More
+            </button>
           </a>
         </Link>
       </div>

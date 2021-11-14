@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { Menu } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { message } from 'antd';
+import { Menu } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/solid";
+import { message } from "antd";
 
-import { useSelector, useDispatch } from 'react-redux';
-import Link from 'next/link';
+import { useSelector, useDispatch } from "react-redux";
+import Link from "next/link";
 
-import Loader from 'react-loader-spinner';
-import styles from './styles/sellers.module.css';
-import { AuthLayout } from '@/layouts';
-import { StartSelling } from '@/interfaces/commonTypes';
-import { RootState } from '@/store/rootReducer';
-import { startSelling } from '@/store/seller/seller.action';
+import Loader from "react-loader-spinner";
+import styles from "./styles/sellers.module.css";
+import { AuthLayout } from "@/layouts";
+import { StartSelling } from "@/interfaces/commonTypes";
+import { RootState } from "@/store/rootReducer";
+import { startSelling } from "@/store/seller/seller.action";
 
 const classNames = (...classes: string[]) => {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 };
 
 const Page = function ({ data }) {
@@ -25,20 +25,20 @@ const Page = function ({ data }) {
   const router = useRouter();
   const [callCode, setCallCode] = useState<number>(93);
   const [flag, setFlag] = useState<string>(
-    'https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg'
+    "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg"
   );
   const [sellerData, setSellerData] = useState<StartSelling>({
     acceptedPolicy: true,
-    firstname: '',
-    landmark: '',
-    lastname: '',
-    lga: '',
-    phoneNumber: '',
-    shopAddress: '',
-    shopName: '',
-    shopUrl: '',
-    state: '',
-    howYouHeardAboutUs: '',
+    firstname: "",
+    landmark: "",
+    lastname: "",
+    lga: "",
+    phoneNumber: "",
+    shopAddress: "",
+    shopName: "",
+    shopUrl: "",
+    state: "",
+    howYouHeardAboutUs: "",
     token: user.token,
   });
 
@@ -58,69 +58,75 @@ const Page = function ({ data }) {
       acceptedPolicy,
       howYouHeardAboutUs,
     } = sellerData;
-    if (firstname === '') {
-      message.error('Firstname is required');
+    if (firstname === "") {
+      message.error("Firstname is required");
       return;
     }
-    if (lastname === '') {
-      message.error('Lastname is required');
+    if (lastname === "") {
+      message.error("Lastname is required");
       return;
     }
-    if (phoneNumber === '') {
-      message.error('Phone number is required');
+    if (phoneNumber === "") {
+      message.error("Phone number is required");
       return;
     }
     if (phoneNumber.length < 8) {
-      message.error('Phone number is invalid');
+      message.error("Phone number is invalid");
       return;
     }
-    if (shopName === '') {
-      message.error('Shop name is required');
+    if (shopName === "") {
+      message.error("Shop name is required");
       return;
     }
-    if (shopUrl === '') {
-      message.error('Shop url is required');
+    if (shopUrl === "") {
+      message.error("Shop url is required");
       return;
     }
-    if (shopAddress === '') {
-      message.error('Shop address is required');
+    if (shopAddress === "") {
+      message.error("Shop address is required");
       return;
     }
-    if (state === '') {
-      message.error('State is required');
+    if (state === "") {
+      message.error("State is required");
       return;
     }
-    if (lga === '') {
-      message.error('LGA is required');
+    if (lga === "") {
+      message.error("LGA is required");
       return;
     }
-    if (landmark === '') {
-      message.error('Landmark is required');
+    if (landmark === "") {
+      message.error("Landmark is required");
       return;
     }
     if (acceptedPolicy === false) {
-      message.error('You must accept the policy');
+      message.error("You must accept the policy");
       return;
     }
-    if (howYouHeardAboutUs === '') {
-      message.error('How you heard about us is required');
+    if (howYouHeardAboutUs === "") {
+      message.error("How you heard about us is required");
       return;
     }
     // dispatch
-    dispatch(startSelling({ ...sellerData, phoneNumber: `${callCode}${phoneNumber}` }, user.token));
+    dispatch(
+      startSelling(
+        { ...sellerData, phoneNumber: `${callCode}${phoneNumber}` },
+        user.token
+      )
+    );
   };
 
   useEffect(() => {
-    seller.sellerCreated.status && router.push('/seller/profile');
+    seller.sellerCreated.status && router.push("/seller/profile");
   }, []);
 
   const bannerText = {
-    lineOne: 'Make Money &',
-    lineTwo: 'Grow your',
-    lineThree: 'Business Online',
+    lineOne: "Make Money &",
+    lineTwo: "Grow your",
+    lineThree: "Business Online",
   };
 
-  const subText = 'Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!';
+  const subText =
+    "Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!";
 
   return (
     <AuthLayout
@@ -140,12 +146,15 @@ const Page = function ({ data }) {
                 <h2 className="">Set up your Store</h2>
               </div>
               <div className={` ${styles.form_link}`}>
-                <Link href="http://localhost:3000/seller/create-account">
+                <Link href="/profile">
                   <a className="tw-text-red-kwek100">I have an account</a>
                 </Link>
               </div>
             </div>
-            <label htmlFor="fullname" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+            <label
+              htmlFor="fullname"
+              className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+            >
               Full name
             </label>
             <div className="tw-mt-1 tw-flex tw-rounded-md tw-space-x-4">
@@ -180,7 +189,10 @@ const Page = function ({ data }) {
             </div>
           </div>
           <div className="tw-col-span-12 sm:tw-col-span-6">
-            <label htmlFor="phoneNumber" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+            <label
+              htmlFor="phoneNumber"
+              className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+            >
               Phone number
             </label>
             <Menu as="div" className="relative inline-block text-left">
@@ -188,18 +200,21 @@ const Page = function ({ data }) {
                 <Menu.Button className="tw-inline-flex tw-items-center tw-px-3 tw-rounded-l-md tw-rounded-r-md tw-border tw-border-r-md tw-border-gray-300 tw-bg-gray-50 tw-text-gray-500 tw-text-sm">
                   <img
                     style={{
-                      borderRadius: '50%',
-                      width: '2.25vw',
-                      height: '1.75vw',
+                      borderRadius: "50%",
+                      width: "2.25vw",
+                      height: "1.75vw",
                     }}
                     className="tw-inline-flex"
                     src={flag}
                   />
                   +{callCode}
-                  <ChevronDownIcon className="tw-mr-1 tw-ml-2 tw-h-5 tw-w-5" aria-hidden="true" />
+                  <ChevronDownIcon
+                    className="tw-mr-1 tw-ml-2 tw-h-5 tw-w-5"
+                    aria-hidden="true"
+                  />
                 </Menu.Button>
                 <Menu.Items className="tw-origin-top-right tw-overflow-y-scroll tw-bg-gray-100 tw-absolute tw-mt-2 tw-w-72 tw-rounded-md tw-shadow-lg tw-bg-opacity-100 tw-ring-1 tw-ring-black tw-ring-opacity-5 focus:tw-outline-none">
-                  <div style={{ height: '70vh' }} className="tw-py-1">
+                  <div style={{ height: "70vh" }} className="tw-py-1">
                     {data.map(
                       (
                         item: {
@@ -215,8 +230,10 @@ const Page = function ({ data }) {
                               href="#"
                               key={id}
                               className={classNames(
-                                active ? 'tw-bg-gray-100 tw-text-gray-900' : 'tw-text-gray-700 tw-flex',
-                                'tw-block tw-px-4 tw-py-2 tw-text-sm'
+                                active
+                                  ? "tw-bg-gray-100 tw-text-gray-900"
+                                  : "tw-text-gray-700 tw-flex",
+                                "tw-block tw-px-4 tw-py-2 tw-text-sm"
                               )}
                               onClick={() => {
                                 setCallCode(item.callingCodes);
@@ -225,9 +242,9 @@ const Page = function ({ data }) {
                             >
                               <img
                                 style={{
-                                  borderRadius: '50%',
-                                  width: '2.25vw',
-                                  height: '1.75vw',
+                                  borderRadius: "50%",
+                                  width: "2.25vw",
+                                  height: "1.75vw",
                                 }}
                                 className="tw-inline-flex tw-mr-2"
                                 src={item.flag}
@@ -258,7 +275,10 @@ const Page = function ({ data }) {
             </Menu>
           </div>
           <div className="tw-col-span-12 sm:tw-col-span-6">
-            <label htmlFor="shopName" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+            <label
+              htmlFor="shopName"
+              className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+            >
               Shop name
             </label>
             <div className="tw-mt-1 tw-flex tw-rounded-md tw-space-x-4">
@@ -279,7 +299,10 @@ const Page = function ({ data }) {
             </div>
           </div>
           <div className="tw-col-span-12 sm:tw-col-span-6">
-            <label htmlFor="shopUrl" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+            <label
+              htmlFor="shopUrl"
+              className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+            >
               Shop url
             </label>
             <div className="tw-mt-1 tw-flex tw-rounded-md">
@@ -304,7 +327,10 @@ const Page = function ({ data }) {
           </div>
           <div className="tw-flex tw-col-span-12 sm:tw-col-span-6 tw-space-x-4 tw-my-3 tw-justify-between">
             <div className="tw-flex-1">
-              <label htmlFor="state" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+              <label
+                htmlFor="state"
+                className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+              >
                 State
               </label>
               <div className="tw-mt-1 tw-rounded-md ">
@@ -325,7 +351,10 @@ const Page = function ({ data }) {
               </div>
             </div>
             <div className="tw-flex-1">
-              <label htmlFor="lga" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+              <label
+                htmlFor="lga"
+                className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+              >
                 LGA
               </label>
               <div className="tw-mt-1 tw-rounded-md">
@@ -347,7 +376,10 @@ const Page = function ({ data }) {
             </div>
           </div>
           <div className="tw-col-span-12 sm:tw-col-span-6">
-            <label htmlFor="shopAddress" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+            <label
+              htmlFor="shopAddress"
+              className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+            >
               Shop Address
             </label>
             <div className="tw-mt-1 tw-flex tw-rounded-md tw-space-x-4">
@@ -368,7 +400,10 @@ const Page = function ({ data }) {
             </div>
           </div>
           <div className="tw-col-span-12 sm:tw-col-span-6">
-            <label htmlFor="landmark" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+            <label
+              htmlFor="landmark"
+              className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+            >
               Landmark
             </label>
             <div className="tw-mt-1 tw-flex tw-rounded-md tw-space-x-4">
@@ -389,8 +424,11 @@ const Page = function ({ data }) {
             </div>
           </div>
           <div className="tw-col-span-12 sm:tw-col-span-6">
-            <label htmlFor="hearAbout" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
-              How did you hear about Kwek Vendorship?{' '}
+            <label
+              htmlFor="hearAbout"
+              className="tw-block tw-text-sm tw-font-medium tw-text-gray-700"
+            >
+              How did you hear about Kwek Vendorship?{" "}
             </label>
             <div className="tw-mt-1 tw-flex tw-rounded-md tw-space-x-4">
               <input
@@ -424,20 +462,26 @@ const Page = function ({ data }) {
                     htmlFor="push-everything"
                     className="tw-ml-3 tw-block tw-text-xs tw-font-small tw-text-gray-700 tw-mb-5"
                   >
-                    I have heard and accepted the{' '}
+                    I have heard and accepted the{" "}
                     <Link href="/">
                       <a className="tw-text-red-kwek100">Seller’s Policy</a>
-                    </Link>{' '}
-                    and{' '}
+                    </Link>{" "}
+                    and{" "}
                     <Link href="/">
-                      <a className="tw-text-red-kwek100">Terms and Conditions </a>
+                      <a className="tw-text-red-kwek100">
+                        Terms and Conditions{" "}
+                      </a>
                     </Link>
                   </label>
                 </div>
               </div>
               <div className="tw-mt-2 tw-flex ">
                 <button className="btn bg-primary tw-flex-1 tw-w-6 tw-p-4">
-                  {seller.loading ? <Loader type="Puff" color="#fff" height={30} width={30} /> : 'Start Selling'}
+                  {seller.loading ? (
+                    <Loader type="Puff" color="#fff" height={30} width={30} />
+                  ) : (
+                    "Start Selling"
+                  )}
                 </button>
               </div>
             </fieldset>

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
-import { CLEAR_ACCOUNT, CREATE_ACCOUNT, SET_LOADING } from '../user/user.types';
 import { userFetcher } from '@/helpers';
 import { CREATE_USER } from '../user/user.queries';
+import { CLEAR_ACCOUNT, CREATE_ACCOUNT, SET_LOADING } from './account.types';
 
 type AccountType = {
   email: string;

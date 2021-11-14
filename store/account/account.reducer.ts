@@ -1,4 +1,4 @@
-import { CLEAR_ACCOUNT, CREATE_ACCOUNT, SET_LOADING } from '../user/user.types';
+import { CLEAR_ACCOUNT, CREATE_ACCOUNT, SET_LOADING } from '../account/account.types';
 
 const initialState = {
   status: false,
