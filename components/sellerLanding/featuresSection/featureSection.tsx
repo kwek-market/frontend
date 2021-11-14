@@ -1,47 +1,46 @@
-import React from "react";
-import Styles from "./featureSection.module.scss";
-import Testimonials from "../Testimonials/testimonials";
+import React from 'react';
+import Image from 'next/image';
+import Styles from './featureSection.module.scss';
+import Testimonials from '../Testimonials/testimonials';
 
-import Image from "next/image";
-import Feature from "./Feature";
+import Feature from './Feature';
 
 const featureSection = () => {
   const features = [
     {
-      title: "Effective Buyer’s Leveraging",
+      title: 'Effective Buyer’s Leveraging',
       description:
-        "Our system functionality is enhanced to bring the right audience to your online shop outlet in your “nearness”.",
-      image: "/images/investor.png",
+        'Our system functionality is enhanced to bring the right audience to your online shop outlet in your “nearness”.',
+      image: '/images/investor.png',
     },
     {
-      title: "24hrs delivery optimization",
+      title: '24hrs delivery optimization',
       description:
-        "Reach to a large community of people who value the availability of your products in their doorsteps “in no time”. Are you surprised?",
-      image: "/images/24hours.png",
+        'Reach to a large community of people who value the availability of your products in their doorsteps “in no time”. Are you surprised?',
+      image: '/images/24hours.png',
     },
     {
-      title: "Effective customer support",
-      description:
-        "Easy communication, 24hrs instant response and convincing support level are all guaranteed.",
-      image: "/images/customer.png",
+      title: 'Effective customer support',
+      description: 'Easy communication, 24hrs instant response and convincing support level are all guaranteed.',
+      image: '/images/customer.png',
     },
     {
-      title: "Organized Online Outlet",
+      title: 'Organized Online Outlet',
       description:
-        "Are you looking for the appearance for your online store? A well branded online shop outlet is available for you on kwekmarket.",
-      image: "/images/outlet.png",
+        'Are you looking for the appearance for your online store? A well branded online shop outlet is available for you on kwekmarket.',
+      image: '/images/outlet.png',
     },
     {
-      title: "Swift transaction",
+      title: 'Swift transaction',
       description:
-        "Enjoy Money-to-hand transaction, transparent sales tracking, well understandable and traceable transaction history",
-      image: "/images/swiftpay.png",
+        'Enjoy Money-to-hand transaction, transparent sales tracking, well understandable and traceable transaction history',
+      image: '/images/swiftpay.png',
     },
     {
-      title: "Optimized Logistic Service",
+      title: 'Optimized Logistic Service',
       description:
-        "Fastest delivery of your product is only a click away. Our team is available for you with our well-structured procurement system",
-      image: "/images/delivery.png",
+        'Fastest delivery of your product is only a click away. Our team is available for you with our well-structured procurement system',
+      image: '/images/delivery.png',
     },
   ];
   return (
@@ -53,12 +52,7 @@ const featureSection = () => {
       </div>
       <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-kwek-1 tw-gap-5 md:tw-md-gap-10 lg:tw-gap-20 tw-mx-5 md:tw-mx-20 tw-mb-5">
         {features.map((feature, index) => (
-          <Feature
-            key={index}
-            imgSrc={feature.image}
-            title={feature.title}
-            description={feature.description}
-          />
+          <Feature key={index} imgSrc={feature.image} title={feature.title} description={feature.description} />
         ))}
       </div>
       <Testimonials />

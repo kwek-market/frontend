@@ -1,17 +1,14 @@
-import { CLEAR_ACCOUNT, CREATE_ACCOUNT, SET_LOADING } from "../user/user.types";
+import { CLEAR_ACCOUNT, CREATE_ACCOUNT, SET_LOADING } from '../account/account.types';
 
 const initialState = {
   status: false,
   emailText: null,
   message: null,
-  email: "",
+  email: '',
   loading: false,
 };
 
-export function createAccountReducer(
-  state: typeof initialState = initialState,
-  action: any
-) {
+export function createAccountReducer(state: typeof initialState = initialState, action: any) {
   switch (action.type) {
     case CREATE_ACCOUNT:
       return {
@@ -25,7 +22,7 @@ export function createAccountReducer(
       };
     }
     case SET_LOADING: {
-      console.log("loading");
+      console.log('loading');
       return {
         ...state,
         loading: action.payload.loading,

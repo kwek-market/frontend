@@ -1,20 +1,15 @@
-import React from "react";
-import styles from "./extraInfo.module.scss";
+import React from 'react';
 
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './extraInfo.module.scss';
 
-const Component = () => {
+const Component = function () {
   return (
     <div className={styles.info_container}>
       <div className={styles.info_content}>
         <div className={styles.info_box}>
-          <Image
-            width="56"
-            height="56"
-            src="/svg/Delivery.svg"
-            alt="delivery"
-          />
+          <Image width="56" height="56" src="/svg/Delivery.svg" alt="delivery" />
           <div className={styles.info_box_content}>
             <p className={styles.head}>24 hrs Delivery</p>
             <p className={styles.sub}>When order from $500</p>

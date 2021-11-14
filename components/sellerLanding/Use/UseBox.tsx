@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 type UseBoxProps = {
   imgSrc: string;
@@ -7,7 +7,7 @@ type UseBoxProps = {
   title: string;
   desc: string;
 };
-function UseBox({ imgSrc, bgColor, title, desc }: UseBoxProps) {
+const UseBox = function ({ imgSrc, bgColor, title, desc }: UseBoxProps) {
   return (
     <div className={`tw-grid tw-grid-cols-kwek-3 tw-justify-center tw-items-center tw-p-4 md:tw-p-10 ${bgColor}`}>
       <div className="tw-self-start">
@@ -23,6 +23,6 @@ function UseBox({ imgSrc, bgColor, title, desc }: UseBoxProps) {
       </div>
     </div>
   );
-}
+};
 
 export default UseBox;

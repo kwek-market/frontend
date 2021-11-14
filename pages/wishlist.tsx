@@ -1,18 +1,18 @@
-import React from 'react'
-import Head from "next/head";
+import React from 'react';
+import Head from 'next/head';
 
-import ExtraInfo from '@/shared/extraInfo/ExtraInfo'
-import List from '@/components/wishlist/List'
+import ExtraInfo from '@/shared/extraInfo/ExtraInfo';
+import List from '@/components/wishlist/List';
 
-import { MainLayout } from "@/layouts";
+import { MainLayout } from '@/layouts';
 
-const Page = () => {
+const Page = function () {
   return (
     <MainLayout title="Wishlist">
       <List />
       <ExtraInfo />
     </MainLayout>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

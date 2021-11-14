@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type TextInputProps = {
   text: string;
@@ -10,15 +10,7 @@ type TextInputProps = {
   max?: number;
 };
 
-function TextInput({
-  text,
-  type,
-  value,
-  setValue,
-  hide,
-  min,
-  max,
-}: TextInputProps) {
+const TextInput = function ({ text, type, value, setValue, hide, min, max }: TextInputProps) {
   return (
     <div className="tw-flex tw-flex-col">
       <label
@@ -39,6 +31,6 @@ function TextInput({
       />
     </div>
   );
-}
+};
 
 export default TextInput;

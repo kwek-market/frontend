@@ -1,8 +1,8 @@
-import React from "react";
-import Styles from "./testimonials.module.scss";
+import React from 'react';
+import Image from 'next/image';
+import Styles from './testimonials.module.scss';
 
-import Image from "next/image";
-import Switcher from "./Switcher";
+import Switcher from './Switcher';
 
 const testimonials = () => {
   const slides = [
@@ -10,16 +10,9 @@ const testimonials = () => {
       element: (
         <>
           <div className="tw-flex tw-relative">
-            <Image
-              className={`circle-image`}
-              src="/images/testimonial-man.png"
-              height="70px"
-              width="70px"
-            />
+            <Image className="circle-image" src="/images/testimonial-man.png" height="70px" width="70px" />
             <div className="tw-flex tw-flex-col tw-justify-center tw-items-left tw-ml-3">
-              <h3 className="tw-text-base md:tw-text-lg tw-text-gray-kwek200">
-                James Afuye
-              </h3>
+              <h3 className="tw-text-base md:tw-text-lg tw-text-gray-kwek200">James Afuye</h3>
               <h4 className="tw-text-sm md:tw-text-lg">Sales & Marketing</h4>
             </div>
             <div className="tw-absolute tw-right-1">
@@ -27,13 +20,10 @@ const testimonials = () => {
             </div>
           </div>
           <div>
-            <h3
-              className={`tw-line-clamp-3 md:tw-line-clamp-4 lg:tw-line-clamp-5 xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6`}
-            >
-              “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat."
+            <h3 className="tw-line-clamp-3 md:tw-line-clamp-4 lg:tw-line-clamp-5 xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6">
+              “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat."
             </h3>
           </div>
           <div className="tw-mt-4">
@@ -46,16 +36,9 @@ const testimonials = () => {
       element: (
         <>
           <div className="tw-flex tw-relative">
-            <Image
-              className={`circle-image`}
-              src="/images/testimonial-man.png"
-              height="70px"
-              width="70px"
-            />
+            <Image className="circle-image" src="/images/testimonial-man.png" height="70px" width="70px" />
             <div className="tw-flex tw-flex-col tw-justify-center tw-items-left tw-ml-3">
-              <h3 className="tw-text-base md:tw-text-lg tw-text-gray-kwek200">
-                Grego
-              </h3>
+              <h3 className="tw-text-base md:tw-text-lg tw-text-gray-kwek200">Grego</h3>
               <h4 className="tw-text-sm md:tw-text-lg">Developer</h4>
             </div>
             <div className="tw-absolute tw-right-1">
@@ -63,13 +46,10 @@ const testimonials = () => {
             </div>
           </div>
           <div>
-            <h3
-              className={`tw-line-clamp-3 md:tw-line-clamp-4 lg:tw-line-clamp-5 xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6`}
-            >
-              “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat."
+            <h3 className="tw-line-clamp-3 md:tw-line-clamp-4 lg:tw-line-clamp-5 xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6">
+              “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat."
             </h3>
           </div>
           <div className="tw-mt-4">

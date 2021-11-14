@@ -1,15 +1,15 @@
-import React from "react";
-import styles from "./GridContainer.module.scss";
+import React from 'react';
+import styles from './GridContainer.module.scss';
 
-import { TitleBlock, Card } from "../index";
-import { ProductBox } from "@/shared";
+import { TitleBlock, Card } from '../index';
+import { ProductBox } from '@/shared';
 
 interface GridContainerProps {
   title: string;
   cards?: any;
 }
 
-const GridContainer = ({ title, cards }: GridContainerProps) => {
+const GridContainer = function ({ title, cards }: GridContainerProps) {
   const products = [1, 2, 3, 4, 5];
 
   return (

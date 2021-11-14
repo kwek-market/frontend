@@ -1,10 +1,7 @@
-import ActiveTabbar from './activeTabbar/ActiveTabbar'
-import Card from "./card/Card"
-import GridContainer from "./gridContainer/GridContainer";
+import ActiveTabbar from './activeTabbar/ActiveTabbar';
+import Card from './card/Card';
+import GridContainer from './gridContainer/GridContainer';
 
-export {
-  Card,
-  ActiveTabbar
-};
+export { Card, ActiveTabbar };
 
-export default GridContainer
+export default GridContainer;
