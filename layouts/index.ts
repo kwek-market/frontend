@@ -1,7 +1,4 @@
-import MainLayout from './mainLayout/MainLayout'
-import AuthLayout from './authLayout/AuthLayout'
+import MainLayout from './mainLayout/MainLayout';
+import AuthLayout from './authLayout/AuthLayout';
 
-export {
-  MainLayout,
-  AuthLayout
-}
+export { MainLayout, AuthLayout };

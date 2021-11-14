@@ -1,8 +1,8 @@
-import React from "react";
-import Badge from "../badge/Badge";
-import Button from "../buttons/Button";
+import React from 'react';
+import Badge from '../badge/Badge';
+import Button from '../buttons/Button';
 
-function Details({ show }) {
+const Details = function ({ show }) {
   function cancelItem() {}
 
   function trackItem() {}
@@ -27,17 +27,13 @@ function Details({ show }) {
           {show && (
             <div className="tw-flex tw-flex-row tw-justify-between">
               <Button
-                buttonStyle={
-                  "tw-p-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-sm tw-border tw-border-red-kwek100 hover:tw-opacity-50"
-                }
-                text={"Cancel Item"}
+                buttonStyle="tw-p-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-sm tw-border tw-border-red-kwek100 hover:tw-opacity-50"
+                text="Cancel Item"
                 cmd={cancelItem}
               />
               <Button
-                buttonStyle={
-                  "tw-p-2 tw-text-red-kwek100 tw-border tw-border-red-kwek100 tw-rounded-sm"
-                }
-                text={"Track Item"}
+                buttonStyle="tw-p-2 tw-text-red-kwek100 tw-border tw-border-red-kwek100 tw-rounded-sm"
+                text="Track Item"
                 cmd={trackItem}
               />
               {/* <Button
@@ -59,24 +55,18 @@ function Details({ show }) {
             text={"order in progress"}
           /> */}
             <Badge
-              badgeStyle={
-                "tw-p-1 tw-bg-green-success tw-center tw-uppercase tw-text-white-100 tw-text-xs tw-font-semibold"
-              }
-              text={"delivered"}
+              badgeStyle="tw-p-1 tw-bg-green-success tw-center tw-uppercase tw-text-white-100 tw-text-xs tw-font-semibold"
+              text="delivered"
             />
           </div>
         )}
         <div className="tw-flex tw-flex-col tw-justify-between tw-items-end">
-          <span className="tw-uppercase tw-opacity-60 tw-text-black-stock tw-text-base tw-font-normal">
-            qty:1
-          </span>
-          <span className="tw-uppercase tw-text-black-stock tw-font-medium tw-text-lg">
-            NGN 3000
-          </span>
+          <span className="tw-uppercase tw-opacity-60 tw-text-black-stock tw-text-base tw-font-normal">qty:1</span>
+          <span className="tw-uppercase tw-text-black-stock tw-font-medium tw-text-lg">NGN 3000</span>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Details;

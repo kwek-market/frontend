@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import styles from "./productDesc.module.scss";
-import { Tabs } from "antd";
+import React from 'react';
+import Image from 'next/image';
+import { Tabs } from 'antd';
+import styles from './productDesc.module.scss';
 
 const { TabPane } = Tabs;
 
@@ -9,45 +9,41 @@ function callback(key) {
   console.log(key);
 }
 
-const ProductDesc = () => {
+const ProductDesc = function () {
   return (
     <div className={styles.desc_container}>
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="Description" key="1">
           <div className={styles.tab_content}>
             <p className={styles.descP}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur.
             </p>
             <div className={styles.checked}>
               <div className={styles.cheaked_content}>
-                <i className="fas fa-check"></i>
+                <i className="fas fa-check" />
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
               </div>
               <div className={styles.cheaked_content}>
-                <i className="fas fa-check"></i>
+                <i className="fas fa-check" />
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
               </div>
               <div className={styles.cheaked_content}>
-                <i className="fas fa-check"></i>
+                <i className="fas fa-check" />
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
               </div>
               <div className={styles.cheaked_content}>
-                <i className="fas fa-check"></i>
+                <i className="fas fa-check" />
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
               </div>
             </div>
             <p className={styles.descP}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur.
             </p>
           </div>
         </TabPane>
@@ -90,25 +86,17 @@ const ProductDesc = () => {
                 </div>
                 <div className={styles.info}>
                   <p className={styles.head}>Delivery</p>
-                  <p className={styles.sub}>
-                    Estimated delivery time: 1 - 9 days
-                  </p>
+                  <p className={styles.sub}>Estimated delivery time: 1 - 9 days</p>
                 </div>
               </div>
               <div className={styles.contentbox}>
                 <div className={styles.img}>
-                  <Image
-                    src="/svg/returnsvg.svg"
-                    width="40"
-                    height="40"
-                    className={styles.img}
-                  />
+                  <Image src="/svg/returnsvg.svg" width="40" height="40" className={styles.img} />
                 </div>
                 <div className={styles.info}>
                   <p className={styles.head}>7 Days Return Guarantee</p>
                   <p className={styles.sub}>
-                    For more information on the return shipping options, go to{" "}
-                    <a>Kwek return Policy</a>
+                    For more information on the return shipping options, go to <a>Kwek return Policy</a>
                   </p>
                 </div>
               </div>
@@ -130,19 +118,12 @@ const ProductDesc = () => {
               </div>
               <div className={styles.review_content}>
                 <div className={styles.reviewer}>
-                  <Image
-                    src="/images/store.png"
-                    width="80"
-                    height="80"
-                    className={styles.img}
-                  />
+                  <Image src="/images/store.png" width="80" height="80" className={styles.img} />
                   <div className={styles.reviewer_content}>
                     <div className={styles.user}>
                       <div className={styles.infouser}>
                         <p className={styles.name}>James Afuye</p>
-                        <p className={styles.date}>
-                          Novemeber 9, 2020 at 3:20 pm
-                        </p>
+                        <p className={styles.date}>Novemeber 9, 2020 at 3:20 pm</p>
                       </div>
                       <div className={styles.box_productRating}>
                         <span className="material-icons">star</span>
@@ -153,11 +134,9 @@ const ProductDesc = () => {
                       </div>
                     </div>
                     <p className={styles.reviewer_review}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
                       esse cillum dolore eu fugiat nulla pariatur.
                     </p>
                   </div>
@@ -165,19 +144,12 @@ const ProductDesc = () => {
               </div>
               <div className={styles.review_content}>
                 <div className={styles.reviewer}>
-                  <Image
-                    src="/images/store.png"
-                    width="80"
-                    height="80"
-                    className={styles.img}
-                  />
+                  <Image src="/images/store.png" width="80" height="80" className={styles.img} />
                   <div className={styles.reviewer_content}>
                     <div className={styles.user}>
                       <div className={styles.infouser}>
                         <p className={styles.name}>James Afuye</p>
-                        <p className={styles.date}>
-                          Novemeber 9, 2020 at 3:20 pm
-                        </p>
+                        <p className={styles.date}>Novemeber 9, 2020 at 3:20 pm</p>
                       </div>
                       <div className={styles.box_productRating}>
                         <span className="material-icons">star</span>
@@ -188,11 +160,9 @@ const ProductDesc = () => {
                       </div>
                     </div>
                     <p className={styles.reviewer_review}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
                       esse cillum dolore eu fugiat nulla pariatur.
                     </p>
                   </div>
@@ -202,8 +172,7 @@ const ProductDesc = () => {
                 <div className={styles.form_content}>
                   <p className={styles.form_head}>Add a Review</p>
                   <p className={styles.form_sub}>
-                    Your email address will not be published, Required fields
-                    are marked *
+                    Your email address will not be published, Required fields are marked *
                   </p>
                 </div>
                 <form className={styles.form}>
@@ -218,27 +187,13 @@ const ProductDesc = () => {
                     </div>
                   </div>
                   <div className={styles.inputs}>
-                    <textarea
-                      placeholder="Comment *"
-                      name="Comment"
-                      required
-                    ></textarea>
+                    <textarea placeholder="Comment *" name="Comment" required />
                     <div className={styles.input_grid}>
                       <div>
-                        <input
-                          placeholder="Name *"
-                          name="Name"
-                          type="text"
-                          required
-                        />
+                        <input placeholder="Name *" name="Name" type="text" required />
                       </div>
                       <div>
-                        <input
-                          placeholder="Email *"
-                          name="Email"
-                          type="email"
-                          required
-                        />
+                        <input placeholder="Email *" name="Email" type="email" required />
                       </div>
                     </div>
                   </div>

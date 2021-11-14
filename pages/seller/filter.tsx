@@ -1,21 +1,21 @@
-import React from 'react'
-import Head from "next/head";
+import React from 'react';
+import Head from 'next/head';
 
-import ExtraInfo from '@/shared/extraInfo/ExtraInfo'
+import ExtraInfo from '@/shared/extraInfo/ExtraInfo';
 
-import Header from '@/shared/sellerHeader/Header'
-import { FilterCategory } from '@/components/seller'
+import Header from '@/shared/sellerHeader/Header';
+import { FilterCategory } from '@/components/seller';
 
-import { MainLayout } from "@/layouts";
+import { MainLayout } from '@/layouts';
 
-const Page = () => {
+const Page = function () {
   return (
     <MainLayout>
       <Header />
-      <FilterCategory sidebar={true} />
+      <FilterCategory sidebar />
       <ExtraInfo />
     </MainLayout>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

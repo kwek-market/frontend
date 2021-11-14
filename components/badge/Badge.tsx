@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-function Badge({ badgeStyle, text }) {
+const Badge = function ({ badgeStyle, text }) {
   return <span className={badgeStyle}>{text}</span>;
-}
+};
 
 export default Badge;

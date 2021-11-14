@@ -1,11 +1,11 @@
-import React from "react";
-import styles from "./Features.module.scss";
+import React from 'react';
+import Image from 'next/image';
+import styles from './Features.module.scss';
 
-import Image from "next/image";
-import Carousel from "@/components/Carousel/Carousel";
-import Slider from "@/components/slider/slider";
+import Carousel from '@/components/Carousel/Carousel';
+import Slider from '@/components/slider/slider';
 
-const Features = () => {
+const Features = function () {
   const slides = [
     {
       element: (
@@ -18,9 +18,7 @@ const Features = () => {
           <Image src="/svg/features-delivery.svg" width="120" height="120" />
           <div className="tw-flex tw-flex-col tw-justify-center">
             <h4 className="tw-text-white-100 tw-text-lg tw-text-left">Free Delivery</h4>
-            <p className="tw-text-white-100 tw-text-base tw-text-left">
-              When you order from $500
-            </p>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">When you order from $500</p>
           </div>
         </div>
       ),
@@ -36,9 +34,7 @@ const Features = () => {
           <Image src="/svg/features-return.svg" width="120" height="120" />
           <div className="tw-flex tw-flex-col tw-justify-center">
             <h4 className="tw-text-white-100 tw-text-lg tw-text-left">Return Policy</h4>
-            <p className="tw-text-white-100 tw-text-base tw-text-left">
-              Free Shipping on all order
-            </p>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">Free Shipping on all order</p>
           </div>
         </div>
       ),
@@ -54,9 +50,7 @@ const Features = () => {
           <Image src="/svg/features-support.svg" width="120" height="120" />
           <div className="tw-flex tw-flex-col tw-justify-center">
             <h4 className="tw-text-white-100 tw-text-lg tw-text-left">24/7 Support</h4>
-            <p className="tw-text-white-100 tw-text-base tw-text-left">
-              Free Shipping on all order
-            </p>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">Free Shipping on all order</p>
           </div>
         </div>
       ),
@@ -72,9 +66,7 @@ const Features = () => {
           <Image src="/svg/features-payment.svg" width="120" height="120" />
           <div className="tw-flex tw-flex-col tw-justify-center">
             <h4 className="tw-text-white-100 tw-text-lg tw-text-left">Secure Payment</h4>
-            <p className="tw-text-white-100 tw-text-base tw-text-left">
-              When order from $500
-            </p>
+            <p className="tw-text-white-100 tw-text-base tw-text-left">When order from $500</p>
           </div>
         </div>
       ),
@@ -95,9 +87,7 @@ const Features = () => {
           <Image src="/svg/features-return.svg" width="56" height="56" />
           <div className={styles.feature_details}>
             <h4 className={styles.feature_title}>Return Policy</h4>
-            <p className={styles.feature_description}>
-              Free Shipping on all order
-            </p>
+            <p className={styles.feature_description}>Free Shipping on all order</p>
           </div>
         </div>
 
@@ -105,9 +95,7 @@ const Features = () => {
           <Image src="/svg/features-support.svg" width="56" height="56" />
           <div className={styles.feature_details}>
             <h4 className={styles.feature_title}>24/7 Support</h4>
-            <p className={styles.feature_description}>
-              Free Shipping on all order
-            </p>
+            <p className={styles.feature_description}>Free Shipping on all order</p>
           </div>
         </div>
 

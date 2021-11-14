@@ -1,28 +1,20 @@
-import React, { useState } from "react";
-import styles from "./AuthForm.module.scss";
+import React, { useState } from 'react';
 
-import Link from "next/link";
-import Loader from "react-loader-spinner";
-import { emailValidator } from "@/helpers";
-import { Type, UserLogin, UserError } from "@/interfaces/commonTypes";
+import Link from 'next/link';
+import Loader from 'react-loader-spinner';
+import styles from './AuthForm.module.scss';
+import { emailValidator } from '@/helpers';
+import { Type, UserLogin, UserError } from '@/interfaces/commonTypes';
 
-const AuthForm: React.FC<Type> = ({
-  title,
-  isLoading,
-  subtitle,
-  fields,
-  submit,
-  extra,
-  userId,
-}) => {
+const AuthForm: React.FC<Type> = function ({ title, isLoading, subtitle, fields, submit, extra, userId }) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserLogin>({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [error, setError] = useState<UserError>({
     status: false,
-    message: "",
+    message: '',
   });
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -33,10 +25,7 @@ const AuthForm: React.FC<Type> = ({
     });
   };
 
-  const handleSubmit = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    submitData: any
-  ) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, submitData: any) => {
     e.preventDefault();
     // console.log(userId);
     console.log(formData);
@@ -47,34 +36,30 @@ const AuthForm: React.FC<Type> = ({
     // Email validation
     // console.log(validateEmail.test(formData.email))
 
-    if (userId.message === "E-mail Already in use") {
-      setError({ status: true, message: "E-mail Already in use" });
+    if (userId.message === 'E-mail Already in use') {
+      setError({ status: true, message: 'E-mail Already in use' });
       setLoading(false);
     }
 
     if (!formData.email && !formData.password) {
       // console.log("enter your email and password in");
-      setError({ status: true, message: "Input your email and password" });
+      setError({ status: true, message: 'Input your email and password' });
       setLoading(false);
       // console.log(formData);
-    } else if (
-      formData.email &&
-      formData.password &&
-      !emailValidator(formData.email)
-    ) {
-      setError({ status: true, message: "Invalid email" });
+    } else if (formData.email && formData.password && !emailValidator(formData.email)) {
+      setError({ status: true, message: 'Invalid email' });
       setLoading(false);
     } else if (!formData.email && formData.password) {
-      setError({ status: true, message: "type in your email" });
+      setError({ status: true, message: 'type in your email' });
       setLoading(false);
       // console.log(formData);
       // console.log("Input your email");
     } else if (!formData.password) {
       // console.log("type in your password");
       setLoading(false);
-      setError({ status: true, message: "Input your password" });
+      setError({ status: true, message: 'Input your password' });
     } else {
-      setError({ status: false, message: "" });
+      setError({ status: false, message: '' });
       submitData.action(formData);
       // setLoading(false);
       console.log(formData);
@@ -89,14 +74,9 @@ const AuthForm: React.FC<Type> = ({
           <p className={styles.form_subtitle}>{subtitle}</p>
         </div>
         {error.status && (
-          <div
-            className={`tw-mb-2 tw-p-2 tw-rounded-sm tw-flex tw-justify-between tw-bg-red-100 tw-text-error`}
-          >
+          <div className="tw-mb-2 tw-p-2 tw-rounded-sm tw-flex tw-justify-between tw-bg-red-100 tw-text-error">
             <span>{error.message}</span>
-            <i
-              className="fas fa-times"
-              onClick={() => setError({ ...error, status: false })}
-            />
+            <i className="fas fa-times" onClick={() => setError({ ...error, status: false })} />
           </div>
         )}
 
@@ -106,18 +86,14 @@ const AuthForm: React.FC<Type> = ({
               <input
                 {...fieldProps}
                 className={styles.form_input}
-                type={
-                  type === "password" ? (showPassword ? "text" : type) : type
-                }
+                type={type === 'password' ? (showPassword ? 'text' : type) : type}
                 onChange={(e) => handleChange(e)}
               />
-              {type === "password" && (
+              {type === 'password' && (
                 <i
-                  className={`${styles.form_inputIcon} ${
-                    !showPassword ? "far fa-eye" : "far fa-eye-slash"
-                  }`}
+                  className={`${styles.form_inputIcon} ${!showPassword ? 'far fa-eye' : 'far fa-eye-slash'}`}
                   onClick={() => setShowPassword(!showPassword)}
-                ></i>
+                />
               )}
             </div>
 
@@ -132,10 +108,7 @@ const AuthForm: React.FC<Type> = ({
         ))}
         {submit && (
           <div className={styles.form_btnContainer}>
-            <button
-              className={`btn bg-primary ${styles.btn}`}
-              onClick={(e) => handleSubmit(e, submit)}
-            >
+            <button className={`btn bg-primary ${styles.btn}`} onClick={(e) => handleSubmit(e, submit)}>
               {isLoading ? (
                 <Loader
                   type="Puff"

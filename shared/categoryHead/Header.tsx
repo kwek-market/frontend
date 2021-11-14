@@ -1,36 +1,28 @@
-import React from 'react'
-import styles from "./Header.module.scss";
+import React from 'react';
 
-import Link from "next/link";
-import Image from 'next/image'
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './Header.module.scss';
 
-const Component = () => {
-    return (
-        <div>
-            <div className={styles.second_banner}>
-                <div className={styles.discountDesc}>
-                    <span>THRIFT THURSDAY</span>
-                    <p>20%  OFF LEATHER BAGS</p>
-                    <Link href="/">
-                        <a className={styles.shopButton}>
-                            SHOP NOW
-                        </a>
-                    </Link>
-                </div>
-                <div className={styles.discountImg}>
-                    <div>
-                        <Image
-                            width="764"
-                            height="512"
-                            src="/images/bag.png"
-                            alt="bag"
-                            className={styles.bag_image}
-                        />
-                    </div>
-                </div>
-            </div>
+const Component = function () {
+  return (
+    <div>
+      <div className={styles.second_banner}>
+        <div className={styles.discountDesc}>
+          <span>THRIFT THURSDAY</span>
+          <p>20% OFF LEATHER BAGS</p>
+          <Link href="/">
+            <a className={styles.shopButton}>SHOP NOW</a>
+          </Link>
         </div>
-    )
-}
+        <div className={styles.discountImg}>
+          <div>
+            <Image width="764" height="512" src="/images/bag.png" alt="bag" className={styles.bag_image} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Component;

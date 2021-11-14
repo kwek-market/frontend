@@ -11,7 +11,7 @@
 
   .mainWrapper {
     @include respondMin("tablet") {
-      @include flex(flex-start, flex-start);
+      @include flex(flex-start, flex-start, row nowrap);
       flex-grow: 1;
       width: 100%;
     }

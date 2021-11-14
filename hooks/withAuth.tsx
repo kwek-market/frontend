@@ -1,13 +1,13 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { verifyTokenFunc } from "@/helpers";
-import { RootState } from "@/store/rootReducer";
-import { logout } from "@/store/user/user.actions";
-import { Skeleton } from "antd";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Skeleton } from 'antd';
+import { verifyTokenFunc } from '@/helpers';
+import { RootState } from '@/store/rootReducer';
+import { logout } from '@/store/user/user.actions';
 
 const withAuth = (WrappedComponent: any) => {
-  return (props: any) => {
+  return function (props: any) {
     const router = useRouter();
     const dispatch = useDispatch();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,10 +19,10 @@ const withAuth = (WrappedComponent: any) => {
         // if no accessToken was found,then we redirect to "/" page.
         if (!user.token) {
           // console.log("no token found");
-          import("antd").then((antd) => {
-            antd.message.error("You are not authenticated");
+          import('antd').then((antd) => {
+            antd.message.error('You are not authenticated');
           });
-          router.push("/login");
+          router.push('/login');
         } else {
           // we call the api that verifies the token.
           const data = await verifyTokenFunc(user.token);
@@ -35,7 +35,7 @@ const withAuth = (WrappedComponent: any) => {
           } else {
             // If the token was fraud we first remove it from localStorage and then redirect to "/"
             dispatch(logout());
-            router.push("/login");
+            router.push('/login');
           }
         }
       })();
@@ -47,9 +47,8 @@ const withAuth = (WrappedComponent: any) => {
     }
     if (isAuthenticated) {
       return <WrappedComponent isLoading={isLoading} {...props} />;
-    } else {
-      return null;
     }
+    return null;
   };
 };
 

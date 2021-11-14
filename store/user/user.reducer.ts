@@ -1,4 +1,4 @@
-import { SET_USER, CLEAR_USER, UPDATE_USER, SET_ERROR } from "./user.types";
+import { SET_USER, CLEAR_USER, UPDATE_USER, SET_ERROR } from './user.types';
 
 const initialState = {
   id: null,
@@ -21,10 +21,7 @@ const initialState = {
   },
 };
 
-const userReducer = (
-  state: typeof initialState = initialState,
-  action: any
-) => {
+const userReducer = (state: typeof initialState = initialState, action: any) => {
   switch (action.type) {
     case SET_USER:
       return {

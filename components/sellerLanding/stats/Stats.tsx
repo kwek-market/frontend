@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 
 function stats() {
   const statsDetails = [
     {
-      title: "1,432,908",
-      description: "Active buyers",
+      title: '1,432,908',
+      description: 'Active buyers',
     },
     {
-      title: "314,546",
-      description: "Daily product inquiry",
+      title: '314,546',
+      description: 'Daily product inquiry',
     },
     {
-      title: "200+",
-      description: "regions represented",
+      title: '200+',
+      description: 'regions represented',
     },
     {
-      title: "12,087",
-      description: "Stores registered",
+      title: '12,087',
+      description: 'Stores registered',
     },
   ];
   return (
@@ -26,9 +26,7 @@ function stats() {
           <h2 className="tw-text-lg md:tw-text-2xl lg:tw-text-5xl tw-text-gray-kwek200 tw-font-semibold tw-mb-2">
             {stat.title}
           </h2>
-          <p className="tw-text-base md:tw-text-xl tw-font-normal">
-            {stat.description}
-          </p>
+          <p className="tw-text-base md:tw-text-xl tw-font-normal">{stat.description}</p>
         </div>
       ))}
     </div>
