@@ -41,7 +41,7 @@ const initialState = {
 
 export default function sellerReducer(
   state: typeof initialState = initialState,
-  action: { type: any; payload: any; }
+  action: { type: any; payload: any }
 ) {
   switch (action.type) {
     case SellerTypes.START_SELLING:
@@ -64,6 +64,10 @@ export default function sellerReducer(
         loading: false,
         error: null,
         seller: action.payload,
+      };
+    case SellerTypes.CLEAR_SELLER:
+      return {
+        ...initialState,
       };
     case SellerTypes.SELLER_ERROR:
       return {

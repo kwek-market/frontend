@@ -136,7 +136,7 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/sell">
                 <a className={styles.nav_link}>Sell On Kwek</a>
               </Link>
             </li>

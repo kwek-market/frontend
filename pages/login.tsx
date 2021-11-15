@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthLayout } from '@/layouts';
-import { AuthForm } from '@/shared';
+import { useDispatch, useSelector } from "react-redux";
+import { AuthLayout } from "@/layouts";
+import { AuthForm } from "@/shared";
 
-import { setUser } from '@/store/user/user.actions';
-import { LOGIN_USER } from '@/store/user/user.queries';
-
-import { userFetcher } from '@/helpers';
-import { RootState } from '@/store/rootReducer';
-import { UserLogin } from '@/interfaces/commonTypes';
+import { loginUser } from "@/store/user/user.actions";
+import { RootState } from "@/store/rootReducer";
+import { UserLogin } from "@/interfaces/commonTypes";
 
 const Page = function () {
   const dispatch = useDispatch();
@@ -18,74 +15,41 @@ const Page = function () {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const signIn = async (formData: UserLogin) => {
-    const query = LOGIN_USER;
-
+  const signIn = (formData: UserLogin) => {
     const variables: UserLogin = {
       email: formData.email,
       password: formData.password,
     };
-
-    try {
-      // call login
-      setIsLoading(true);
-      const data = await userFetcher(query, variables);
-      setIsLoading(false);
-
-      const apis = data.loginUser;
-      import('antd').then((antd) => {
-        apis.status ? antd.message.success(apis.message) : antd.message.error(apis.message);
-      });
-
-      // set cookie with token from login
-      const now = new Date();
-      const time = now.getTime();
-      now.setTime(time + 60 * 60 * 24 * 1000);
-
-      document.cookie = `token=${data.loginUser.token};expires=${now.toUTCString()};path=/`;
-
-      // set user state
-      dispatch(
-        setUser({
-          id: apis.user.id,
-          ...apis,
-        })
-      );
-      setIsLoading(false);
-      // redirect to home page
-      apis.status && router.push('/');
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(loginUser(variables));
   };
 
   const form = {
-    title: 'Welcome Back',
+    title: "Welcome Back",
     isLoading,
     fields: [
       {
-        name: 'email',
-        placeholder: 'Email Address',
-        type: 'email',
+        name: "email",
+        placeholder: "Email Address",
+        type: "email",
       },
       {
-        name: 'password',
-        placeholder: 'Password',
-        type: 'password',
+        name: "password",
+        placeholder: "Password",
+        type: "password",
         sub: {
-          text: 'Forgot Password?',
-          url: '/forgot-password',
+          text: "Forgot Password?",
+          url: "/forgot-password",
         },
       },
     ],
     submit: {
-      text: 'Sign In',
+      text: "Sign In",
       action: signIn,
     },
     extra: {
-      text: 'Don’t have an account?',
-      linkText: 'Create an Account',
-      linkUrl: '/create-account',
+      text: "Don’t have an account?",
+      linkText: "Create an Account",
+      linkUrl: "/create-account",
     },
     userId: {
       id: user.id,
@@ -94,15 +58,15 @@ const Page = function () {
   };
 
   const bannerText = {
-    lineOne: 'A Fresh',
-    lineTwo: 'Approach to',
-    lineThree: 'Shopping',
+    lineOne: "A Fresh",
+    lineTwo: "Approach to",
+    lineThree: "Shopping",
   };
 
   useEffect(() => {
     // check if user is a seller or not and redirect to appropriate page
-    user.id !== null && router.push('/');
-  }, []);
+    user.id !== null && router.push("/");
+  }, [user.id]);
 
   return (
     <AuthLayout id="Login" withBanner bannerText={bannerText}>

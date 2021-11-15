@@ -35,7 +35,6 @@ export const LOGIN_USER = /* GraphQL */ `
         phoneNumber
         isVerified
         isSeller
-        password
         isSuperuser
       }
       token
@@ -46,8 +45,8 @@ export const LOGIN_USER = /* GraphQL */ `
 `;
 
 export const GET_USER = /* GraphQL */ `
-  query user($id: ID!) {
-    user(id: $id) {
+  query userData($token: String) {
+    userData(token: $token) {
       id
       lastLogin
       username

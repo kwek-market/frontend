@@ -32,7 +32,7 @@ const Page = function () {
       return setError({
         status: true,
         message:
-          "Password can't be empty and password must contain a capital letter, a mumber, a symbol, must be 8 characters long",
+          "password must contain a capital letter, a number, a symbol, must be 8 characters long",
       });
     }
     if (newPassword !== confirmPassword) {
@@ -42,7 +42,11 @@ const Page = function () {
     router.query.token.length > 0 &&
       dispatch(
         changePassword(
-          { password1: newPassword, password2: confirmPassword },
+          {
+            password1: newPassword,
+            password2: confirmPassword,
+            token: myToken,
+          },
           myToken
         )
       );
@@ -51,6 +55,21 @@ const Page = function () {
   const onClose = () => {
     setError({ status: false, message: "" });
   };
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const pwd = (
+    <div
+      className="tw-absolute tw-p-[5px] tw-left-[92%] tw-top-[20%]"
+      onClick={() => setShowPassword(!showPassword)}
+    >
+      {showPassword ? (
+        <i className="fas fa-eye" />
+      ) : (
+        <i className="fas fa-eye-slash" />
+      )}
+    </div>
+  );
 
   return (
     <section>
@@ -66,22 +85,23 @@ const Page = function () {
         </div>
 
         <div className="tw-my-5 tw-w-8/12">
-          {error.status && (
-            <Alert
-              message={error.message}
-              type="error"
-              closable
-              onClose={onClose}
-              className="tw-max-w-xl"
-            />
-          )}
-          <br />
+          <div className="tw-mb-3">
+            {error.status && (
+              <Alert
+                message={error.message}
+                type="error"
+                closable
+                onClose={onClose}
+              />
+            )}
+          </div>
           <TextInput
             text={"new password"}
-            type={"password"}
+            type={`${!showPassword ? "text" : "password"}`}
             value={newPassword}
             setValue={setNewPassword}
             hide={"tw-hidden"}
+            children={pwd}
           />
           <br />
           <TextInput
