@@ -8,14 +8,11 @@ const initialState = {
   status: false,
   emailText: null,
   message: null,
-  email: "",
+  email: '',
   loading: false,
 };
 
-export function createAccountReducer(
-  state: typeof initialState = initialState,
-  action: any
-) {
+export function createAccountReducer(state: typeof initialState = initialState, action: any) {
   switch (action.type) {
     case CREATE_ACCOUNT:
       return {

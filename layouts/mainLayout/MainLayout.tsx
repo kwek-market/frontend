@@ -25,12 +25,7 @@ const MainLayout = function ({ children, title }: any) {
   return (
     <div>
       <Topbar withLogo={false} />
-      <Header
-        setUserNav={setUserNav}
-        userNav={userNav}
-        showMenu={showMenu}
-        openMenu={openMenu}
-      />
+      <Header setUserNav={setUserNav} userNav={userNav} showMenu={showMenu} openMenu={openMenu} />
       {/* <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} /> */}
       {showMenu && <Menu />}
 

@@ -39,15 +39,15 @@ export function getUserData(token: string) {
     try {
       setLoading();
       const response = await userFetcherWithAuth(GET_USER, { token }, token);
-      console.log(response)
+      console.log(response);
       dispatch({
         type: GET_USER_DATA,
         payload: response.userData,
       });
     } catch (error) {
-      dispatch({ 
-        type: SET_ERROR, 
-        payload: error.message 
+      dispatch({
+        type: SET_ERROR,
+        payload: error.message,
       });
     }
   };
@@ -139,10 +139,6 @@ export function sendPasswordResetEmail(email: string, token: string) {
     } catch (err) {
       import("antd").then((antd) => {
         antd.message.error(err.message);
-      });
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
       });
     }
   };

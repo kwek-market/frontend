@@ -28,6 +28,10 @@ const Page = function () {
     setError("");
   };
 
+  useEffect(() => {
+    user.status && router.push("/change_password");
+  }, [user.status]);
+
   return (
     <section>
       <Topbar withLogo={true} />
