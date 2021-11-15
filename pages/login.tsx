@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { useDispatch, useSelector } from "react-redux";
 import { AuthLayout } from "@/layouts";
@@ -28,28 +28,28 @@ const Page = function () {
     isLoading,
     fields: [
       {
-        name: "email",
-        placeholder: "Email Address",
-        type: "email",
+        name: 'email',
+        placeholder: 'Email Address',
+        type: 'email',
       },
       {
-        name: "password",
-        placeholder: "Password",
-        type: "password",
+        name: 'password',
+        placeholder: 'Password',
+        type: 'password',
         sub: {
-          text: "Forgot Password?",
-          url: "/forgot-password",
+          text: 'Forgot Password?',
+          url: '/forgot-password',
         },
       },
     ],
     submit: {
-      text: "Sign In",
+      text: 'Sign In',
       action: signIn,
     },
     extra: {
-      text: "Don’t have an account?",
-      linkText: "Create an Account",
-      linkUrl: "/create-account",
+      text: 'Don’t have an account?',
+      linkText: 'Create an Account',
+      linkUrl: '/create-account',
     },
     userId: {
       id: user.id,
@@ -58,9 +58,9 @@ const Page = function () {
   };
 
   const bannerText = {
-    lineOne: "A Fresh",
-    lineTwo: "Approach to",
-    lineThree: "Shopping",
+    lineOne: 'A Fresh',
+    lineTwo: 'Approach to',
+    lineThree: 'Shopping',
   };
 
   useEffect(() => {
