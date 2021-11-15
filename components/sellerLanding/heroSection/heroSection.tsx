@@ -38,7 +38,7 @@ const heroSection = () => {
           <Button
             buttonStyle="tw-p-3 tw-text-white-100 tw-rounded-md tw-bg-red-kwek100"
             text="Register now"
-            cmd={() => router.push('/seller/create-account')}
+            cmd={() => router.push('/sell/create-account')}
           />
         </div>
         <i className="fas fa-bars fa-2x tw-text-black-stock tw-block md:tw-hidden" onClick={() => setShowMenu(true)} />
@@ -85,7 +85,7 @@ const heroSection = () => {
           </p>
           <button
             className="btn bg-primary tw-p-4 tw-font-medium tw-w-9/12 tw-m-auto md:tw-w-auto md:tw-m-0 tw-text-sm sm:tw-text-base tw-truncate"
-            onClick={() => router.push('/create-account')}
+            onClick={() => router.push('/sell/create-account')}
           >
             Start your free trial <i className="fas fa-long-arrow-alt-right fa-2x tw-ml-2" />
           </button>

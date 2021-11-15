@@ -25,6 +25,10 @@ export function subcribeReducer(
         message: action.payload.message,
         status: action.payload.status,
       };
+    case newsLetterType.CLEAR_SUBS:
+      return {
+        ...initialState,
+      };
     case newsLetterType.LOADING:
       return {
         ...state,

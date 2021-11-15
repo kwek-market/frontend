@@ -101,3 +101,9 @@ export function getSellerData(token: string) {
     }
   };
 }
+
+
+export const clearSeller = () => ({
+  type: SellerTypes.CLEAR_SELLER,
+  payload: null,
+});

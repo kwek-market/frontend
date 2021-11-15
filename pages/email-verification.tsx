@@ -18,7 +18,7 @@ const Emailverification = function () {
       });
       router.push('/create-account');
     }
-  }, [account.email]);
+  }, []);
 
   return (
     <AuthLayout id="emailVerification" withBanner={false}>

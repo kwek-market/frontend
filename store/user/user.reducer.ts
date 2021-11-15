@@ -4,14 +4,17 @@ import {
   UPDATE_USER,
   SET_ERROR,
   CHANGE_PASSWORD,
-  SET_LOADING,
+  LOADING,
   RESEND_EMAIL,
+  LOGIN_USER,
+  GET_USER_DATA,
 } from "./user.types";
 
 const initialState = {
   id: null,
   token: null,
   status: false,
+  success: false,
   message: null,
   loading: false,
   error: null,
@@ -40,6 +43,25 @@ const userReducer = (
       return {
         ...state,
         loading: false,
+        success: false,
+        ...action.payload,
+        error: null,
+      };
+    case GET_USER_DATA:
+      return {
+        ...state,
+        id: action.payload.id,
+        loading: false,
+        success: false,
+        user: action.payload,
+        error: null,
+      };
+    case LOGIN_USER:
+      return {
+        ...state,
+        id: action.payload.user.id,
+        loading: false,
+        success: false,
         ...action.payload,
         error: null,
       };
@@ -52,7 +74,7 @@ const userReducer = (
         ...state,
         loading: false,
         error: null,
-        status: action.payload.status,
+        success: action.payload.status,
         message: action.payload.message,
       };
     case CHANGE_PASSWORD:
@@ -60,6 +82,7 @@ const userReducer = (
         ...state,
         loading: false,
         error: null,
+        success: false,
         status: action.payload.status,
         message: action.payload.message,
       };
@@ -68,6 +91,7 @@ const userReducer = (
         ...state,
         loading: false,
         error: null,
+        success: false,
         token: action.payload.token,
         user: {
           ...state.user,
@@ -77,16 +101,18 @@ const userReducer = (
           email: action.payload.newEmail,
         },
       };
-    case SET_LOADING:
+    case LOADING:
       return {
         ...state,
         error: null,
+        success: false,
         loading: action.payload,
       };
     case SET_ERROR:
       return {
         ...state,
         loading: false,
+        success: false,
         error: action.payload,
       };
     default:
