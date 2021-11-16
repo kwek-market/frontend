@@ -8,11 +8,21 @@ type TextInputProps = {
   hide?: string;
   min?: number;
   max?: number;
+  children?: JSX.Element;
 };
 
-const TextInput = function ({ text, type, value, setValue, hide, min, max }: TextInputProps) {
+const TextInput = function ({
+  text,
+  type,
+  value,
+  setValue,
+  hide,
+  min,
+  max,
+  children,
+}: TextInputProps) {
   return (
-    <div className="tw-flex tw-flex-col">
+    <div className="tw-flex tw-flex-col tw-relative">
       <label
         htmlFor={text}
         className={`tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 ${hide}`}
@@ -29,6 +39,7 @@ const TextInput = function ({ text, type, value, setValue, hide, min, max }: Tex
         min={min}
         max={max}
       />
+      {children}
     </div>
   );
 };

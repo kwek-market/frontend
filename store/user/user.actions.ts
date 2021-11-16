@@ -1,7 +1,9 @@
 import { Dispatch } from "redux";
-import { userFetcherWithAuth } from "@/helpers";
-import { UserUpdate } from "@/interfaces/commonTypes";
+import { userFetcher, userFetcherWithAuth } from "@/helpers";
+import { UserLogin, UserUpdate } from "@/interfaces/commonTypes";
 import {
+  GET_USER,
+  LOGIN_USER,
   RESEND_VERIFICATION_EMAIL,
   RESET_PASSWORD,
   USER_ACCOUNT_UPDATE,
@@ -11,14 +13,19 @@ import {
   CLEAR_USER,
   UPDATE_USER,
   SET_ERROR,
-  SET_LOADING,
+  LOADING,
   CHANGE_PASSWORD,
   RESEND_EMAIL,
+  LOGIN_USER as USERLOGIN,
+  GET_USER_DATA,
 } from "./user.types";
 
 export function setLoading() {
-  return {
-    type: SET_LOADING,
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: LOADING,
+      payload: true,
+    });
   };
 }
 
@@ -26,6 +33,51 @@ export const setUser = (user: any) => ({
   type: SET_USER,
   payload: user,
 });
+
+export function getUserData(token: string) {
+  return async function (dispatch: Dispatch) {
+    try {
+      setLoading();
+      const response = await userFetcherWithAuth(GET_USER, { token }, token);
+      console.log(response);
+      dispatch({
+        type: GET_USER_DATA,
+        payload: response.userData,
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+}
+
+export function loginUser(user: UserLogin) {
+  return async function (dispatch: Dispatch) {
+    try {
+      dispatch({
+        type: LOADING,
+        payload: true,
+      });
+      const response = await userFetcher(LOGIN_USER, user);
+      import("antd").then(({ message }) => {
+        response.loginUser.status
+          ? message.success(response.loginUser.message)
+          : message.error(response.loginUser.message);
+      });
+      dispatch({
+        type: USERLOGIN,
+        payload: response.loginUser,
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+}
 
 // update user account
 export function updateUser(user: UserUpdate, token: string) {
@@ -60,12 +112,12 @@ export function updateUser(user: UserUpdate, token: string) {
   };
 }
 
-// send password reser email
+// send password reset email
 export function sendPasswordResetEmail(email: string, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       dispatch({
-        type: SET_LOADING,
+        type: LOADING,
         payload: true,
       });
       const result = await userFetcherWithAuth(
@@ -88,17 +140,13 @@ export function sendPasswordResetEmail(email: string, token: string) {
       import("antd").then((antd) => {
         antd.message.error(err.message);
       });
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
     }
   };
 }
 
 // change password
 export function changePassword(
-  changeData: { password1: string; password2: string },
+  changeData: { password1: string; password2: string; token: string },
   token: string
 ) {
   return async function (dispatch: Dispatch) {

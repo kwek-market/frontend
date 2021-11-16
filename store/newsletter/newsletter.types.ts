@@ -4,4 +4,5 @@ export enum newsLetterType {
   UNSUBSCRIBE = 'UNSUBSCRIBE',
   LOADING = 'LOADING',
   ERROR = 'ERROR',
+  CLEAR_SUBS = 'CLEAR_SUBS',
 }

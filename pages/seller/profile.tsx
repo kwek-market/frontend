@@ -17,7 +17,6 @@ const Page = function () {
 
   useEffect(() => {
     dispatch(getSellerData(user.token));
-    console.log(seller);
   }, []);
 
   return (

@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { useDispatch, useSelector } from 'react-redux';
-import Loader from 'react-loader-spinner';
-import Link from 'next/link';
-import styles from '../shared/authForm/AuthForm.module.scss';
-import { AuthLayout } from '@/layouts';
-import { emailValidator, passwordMatch, PASSWORDREGEX, passwordValidator } from '@/helpers';
-import { RootState } from '@/store/rootReducer';
-import { createUserAccount } from '@/store/account/account.actions';
-import { FormDataType, ErrorType } from '@/interfaces/commonTypes';
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "react-loader-spinner";
+import Link from "next/link";
+import styles from "../shared/authForm/AuthForm.module.scss";
+import { AuthLayout } from "@/layouts";
+import {
+  emailValidator,
+  passwordMatch,
+  PASSWORDREGEX,
+  passwordValidator,
+} from "@/helpers";
+import { RootState } from "@/store/rootReducer";
+import { createUserAccount } from "@/store/account/account.actions";
+import { FormDataType, ErrorType } from "@/interfaces/commonTypes";
+import Alert from "antd/lib/alert";
 
 const Page = function () {
   const dispatch = useDispatch();
@@ -29,6 +35,10 @@ const Page = function () {
   });
 
   const router = useRouter();
+
+  function onClose() {
+    setError({ ...error, status: "none" });
+  }
 
   useEffect(() => {
     if (account.status) {
@@ -75,7 +85,7 @@ const Page = function () {
         status: 'error',
         success: false,
         message:
-          "Password can't be empty and password must contain a capital letter, a mumber, a symbol, must be 8 characters long",
+          "password must contain a capital letter, a mumber, a symbol, must be 8 characters long",
       });
     }
     // pass to dispatch
@@ -112,20 +122,25 @@ const Page = function () {
           <div className={styles.form_titleblock}>
             <h2 className={styles.form_title}>Create an Account</h2>
           </div>
-          {error.status.match('error') && (
-            <div className="tw-mb-2 tw-p-2 tw-rounded-sm tw-flex tw-justify-between tw-bg-red-100 tw-text-error">
-              <span>{error.message}</span>
-              <i className="fas fa-times" onClick={() => setError({ ...error, status: 'none' })} />
-            </div>
+          {error.status.match("error") && (
+            <Alert
+              message={error.message}
+              type="error"
+              closable
+              onClose={onClose}
+            />
           )}
-
+          <br />
           <div className={styles.form_inputContainer}>
             <input
               className={styles.form_input}
               type="text"
               value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, fullName: e.target.value })
+              }
               placeholder="Full Name"
+              required
             />
           </div>
           <div className={styles.form_inputContainer}>
@@ -133,8 +148,11 @@ const Page = function () {
               className={styles.form_input}
               type="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               placeholder="Email Address"
+              required
             />
           </div>
           <div className={styles.form_inputContainer}>
@@ -145,6 +163,7 @@ const Page = function () {
               onChange={(e) => setFormData({ ...formData, password1: e.target.value })}
               pattern={String(PASSWORDREGEX)}
               placeholder="Password"
+              required
             />
             {'password' && (
               <i
@@ -158,8 +177,11 @@ const Page = function () {
               className={styles.form_input}
               type={showPassword2 ? 'text' : 'password'}
               value={formData.password2}
-              onChange={(e) => setFormData({ ...formData, password2: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, password2: e.target.value })
+              }
               placeholder="Confirm Password"
+              required
             />
             {'password' && (
               <i

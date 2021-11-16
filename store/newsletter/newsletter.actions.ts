@@ -14,7 +14,7 @@ export function subscribeToNewsletter(email: string, token: string) {
     try {
       setLoading();
       const response = await userFetcherWithAuth(SUBCRIBE, { email }, token);
-      console.log({response})
+      // console.log({ response });
       import("antd").then(({ message }) => {
         response.createSubscriber.status
           ? message.success(response.createSubscriber.message)
@@ -33,3 +33,8 @@ export function subscribeToNewsletter(email: string, token: string) {
     }
   };
 }
+
+export const clearSubs = () => ({
+  type: newsLetterType.CLEAR_SUBS,
+  payload: null,
+});
