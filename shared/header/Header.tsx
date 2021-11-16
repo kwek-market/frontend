@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FiHeart } from 'react-icons/fi';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,10 +11,13 @@ import { useRouter } from 'next/router';
 
 import 'antd/dist/antd.css';
 
-import { Menu, Dropdown } from 'antd';
-import SearchBar from './SearchBar';
-import { logout } from '@/store/user/user.actions';
-import { RootState } from '@/store/rootReducer';
+import { Menu, Dropdown } from "antd";
+import SearchBar from "./SearchBar";
+import { logout } from "@/store/user/user.actions";
+import { RootState } from "@/store/rootReducer";
+import { clearAccount } from "@/store/account/account.actions";
+import { clearSubs } from "@/store/newsletter/newsletter.actions";
+import { clearSeller } from "@/store/seller/seller.action";
 
 interface HeaderProps {
   userNav: boolean;
@@ -23,13 +26,21 @@ interface HeaderProps {
   openMenu: any;
 }
 
-const Header = function ({ setUserNav, userNav, showMenu, openMenu }: HeaderProps) {
+const Header = function ({
+  setUserNav,
+  userNav,
+  showMenu,
+  openMenu,
+}: HeaderProps) {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const router = useRouter();
   function handleLogout() {
     dispatch(logout());
-    router.push('/login');
+    dispatch(clearSubs());
+    dispatch(clearAccount());
+    dispatch(clearSeller());
+    router.push("/login");
   }
   const menu = (
     <Menu>
@@ -88,8 +99,12 @@ const Header = function ({ setUserNav, userNav, showMenu, openMenu }: HeaderProp
             <div className={styles.shortcuts_item}>
               <Image width="16" height="18" src="/svg/user.svg" className={styles.shortcuts_icon} />
               <Dropdown overlay={menu} className={styles.shortcuts_label}>
-                <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                  Hi {user.user.fullName.split(' ')[0]} <i className="fas fa-chevron-down" />
+                <a
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Hi {user.user.fullName.split(" ")[0]}{" "}
+                  <i className="fas fa-chevron-down" />
                 </a>
               </Dropdown>
             </div>

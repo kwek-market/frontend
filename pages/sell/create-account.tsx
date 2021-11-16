@@ -146,7 +146,7 @@ const Page = function ({ data }) {
                 <h2 className="">Set up your Store</h2>
               </div>
               <div className={` ${styles.form_link}`}>
-                <Link href="/profile">
+                <Link href="/seller/profile">
                   <a className="tw-text-red-kwek100">I have an account</a>
                 </Link>
               </div>

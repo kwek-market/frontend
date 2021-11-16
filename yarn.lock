@@ -2550,6 +2550,11 @@ react-refresh@0.8.3:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
+react-step-builder@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/react-step-builder/-/react-step-builder-2.0.11.tgz#228aa7018645af0b6f92b43942759f9233e2dd32"
+  integrity sha512-f6EVLpvLfLZNM9NWv/5XAq9MLY89vjA4VUlZb5Qcf8Y2N9GBTiuinR9IkBhLwdh6MYLKUPj6CbK48E+y8joStw==
+
 react@17.0.1:
   version "17.0.1"
   resolved "https://registry.npmjs.org/react/-/react-17.0.1.tgz"

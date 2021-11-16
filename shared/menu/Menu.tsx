@@ -9,6 +9,9 @@ import CategoryBox from '@/components/menu/CategoryBox';
 import { RootState } from '@/store/rootReducer';
 import { getInitials2 } from '@/helpers';
 import { logout } from '@/store/user/user.actions';
+import { clearAccount } from '@/store/account/account.actions';
+import { clearSubs } from '@/store/newsletter/newsletter.actions';
+import { clearSeller } from '@/store/seller/seller.action';
 
 const Menu = function ({}) {
   const dispatch = useDispatch();
@@ -16,6 +19,9 @@ const Menu = function ({}) {
   const router = useRouter();
   function handleLogout() {
     dispatch(logout());
+    dispatch(clearSubs());
+    dispatch(clearAccount());
+    dispatch(clearSeller());
     router.push('/login');
   }
   const menuBoxItems = {
