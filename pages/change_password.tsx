@@ -32,7 +32,7 @@ const Page = function () {
       return setError({
         status: true,
         message:
-          "password must contain a capital letter, a number, a symbol, must be 8 characters long",
+          "Password must contain a capital letter, a number, a symbol, must be atleast 8 characters long",
       });
     }
     if (newPassword !== confirmPassword) {
@@ -97,7 +97,7 @@ const Page = function () {
           </div>
           <TextInput
             text={"new password"}
-            type={`${!showPassword ? "text" : "password"}`}
+            type={`${showPassword ? "text" : "password"}`}
             value={newPassword}
             setValue={setNewPassword}
             hide={"tw-hidden"}

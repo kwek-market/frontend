@@ -85,7 +85,7 @@ const Page = function () {
         status: 'error',
         success: false,
         message:
-          "password must contain a capital letter, a mumber, a symbol, must be 8 characters long",
+          "Password must contain a capital letter, a number, a symbol, must be atleast 8 characters long",
       });
     }
     // pass to dispatch

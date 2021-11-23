@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Header } from "@/shared/shop";
 
-function ShopLayout() {
+function ShopLayout({ children }) {
   return (
     <div>
-      
+      <Header />
+      {children}
     </div>
-  )
+  );
 }
 
-export default ShopLayout
+export default ShopLayout;
