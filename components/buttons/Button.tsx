@@ -1,17 +1,29 @@
-import React from 'react';
+import React from "react";
 
 type ButtonProps = {
   buttonStyle: string;
   text: string;
   icon?: string;
   cmd: () => void;
+  isDisabled?: boolean;
 };
 
-const Button = function ({ buttonStyle, text, cmd, icon }: ButtonProps) {
+const Button = function ({
+  buttonStyle,
+  text,
+  cmd,
+  icon,
+  isDisabled = false,
+}: ButtonProps) {
   return (
-    <button className={buttonStyle} style={{ whiteSpace: 'nowrap' }} onClick={cmd}>
-      {icon && <i className={`fas ${icon}`} style={{ paddingRight: '12px' }} />}
-      {'    '}
+    <button
+      disabled={isDisabled}
+      className={buttonStyle}
+      style={{ whiteSpace: "nowrap" }}
+      onClick={cmd}
+    >
+      {icon && <i className={`fas ${icon}`} style={{ paddingRight: "12px" }} />}
+      {"    "}
       {text}
     </button>
   );
