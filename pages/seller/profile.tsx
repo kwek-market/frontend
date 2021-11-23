@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import Head from "next/head";
 
 import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
 
 import Header from "@/shared/sellerHeader/Header";
 import { CategoryGrid } from "@/components/seller";
 
-import { MainLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { getSellerData } from "@/store/seller/seller.action";
+import ShopLayout from "@/layouts/seller/ShopLayout";
+import { Modal } from "@/components/verification";
+import sellerAuth from "@/hooks/sellerAuth";
 
 const Page = function () {
   const dispatch = useDispatch();
@@ -20,11 +21,21 @@ const Page = function () {
   }, []);
 
   return (
-    <MainLayout>
+    <ShopLayout>
       <Header />
-      <CategoryGrid />
-      <ExtraInfo />
-    </MainLayout>
+      <>
+        {seller.seller.sellerIsVerified ? (
+          <>
+            <CategoryGrid />
+            <ExtraInfo />
+          </>
+        ) : (
+          <>
+          <Modal />
+          </>
+        )}
+      </>
+    </ShopLayout>
   );
 };
 
