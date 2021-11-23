@@ -117,7 +117,7 @@ const Page = function ({ data }) {
 
   useEffect(() => {
     seller.sellerCreated.status && router.push("/seller/profile");
-  }, []);
+  }, [seller.sellerCreated]);
 
   const bannerText = {
     lineOne: "Make Money &",

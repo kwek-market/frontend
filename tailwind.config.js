@@ -1,11 +1,17 @@
 module.exports = {
   mode: "jit",
   prefix: "tw-",
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  purge: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./shared/**/*.{js,ts,jsx,tsx}",
+    "./layouts/**/*.{js,ts,jsx,tsx}",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
+        primary: "#FCF7F8",
         gray: {
           kwek100: "#BFA5A3",
           review: "#C7C0BF",
@@ -16,10 +22,14 @@ module.exports = {
           kwek600: "rgba(0,0,0,0.21)",
           kwek700: "rgba(191, 165, 163, 0.1)",
           kwek800: "#c4c4c4",
+          kwek200a: "rgba(29, 22, 22, 0.7)",
+          kwek900: "#574240"
         },
         white: {
           100: "#FFF",
           light: "#f4f1f0",
+          200: "rgba(255,255,255,0.25)",
+          300: "rgba(175, 19, 40, 0.1)",
         },
         black: {
           kwek100: "#000000",
@@ -29,16 +39,19 @@ module.exports = {
           kwek100: "#A88C8A",
           kwek200: "#BFA5A3",
           kwek300: "rgb(87, 66, 64)",
+          kwek400: "#DFD2D1",
         },
         yellow: {
           filled: "#ffc107",
           secondary: "#E9A501",
           primary: "#E6AC00",
+          kwek100: "#F7E249",
         },
         green: {
           success: "#009D19",
         },
         red: {
+          notif: "#FC476E",
           kwek100: "#AF1328",
           kwek200: "rgba(175, 19, 40, 0.6)",
         },
