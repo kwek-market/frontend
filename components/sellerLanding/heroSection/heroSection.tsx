@@ -69,7 +69,7 @@ const heroSection = () => {
               <Button
                 buttonStyle="tw-p-3 tw-text-white-100 tw-rounded-md tw-bg-red-kwek100"
                 text="Register now"
-                cmd={() => router.push('/seller/create-account')}
+                cmd={() => router.push('/sell/create-account')}
               />
             </div>
           </div>

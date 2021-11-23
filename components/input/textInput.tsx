@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type TextInputProps = {
   text: string;
@@ -8,6 +8,7 @@ type TextInputProps = {
   hide?: string;
   min?: number;
   max?: number;
+  style?: string;
   children?: JSX.Element;
 };
 
@@ -19,6 +20,7 @@ const TextInput = function ({
   hide,
   min,
   max,
+  style,
   children,
 }: TextInputProps) {
   return (
@@ -32,8 +34,9 @@ const TextInput = function ({
       <input
         id={text}
         type={type}
+        name={text}
         placeholder={text}
-        className="tw-rounded-sm tw-w-full"
+        className={`tw-rounded-sm tw-w-full ${style}`}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         min={min}

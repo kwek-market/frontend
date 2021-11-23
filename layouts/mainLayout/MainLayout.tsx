@@ -8,7 +8,7 @@ import { getUserData } from "@/store/user/user.actions";
 
 const MainLayout = function ({ children, title }: any) {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const { user } = useSelector((state: RootState) => state);
   const [showNavBar, setShowNavBar] = useState<boolean>(false);
   const [userNav, setUserNav] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -19,13 +19,18 @@ const MainLayout = function ({ children, title }: any) {
 
   useEffect(() => {
     user.token && dispatch(getUserData(user.token));
-    user.token && dispatch(getSellerData(user.token));
+    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
   }, []);
 
   return (
     <div>
       <Topbar withLogo={false} />
-      <Header setUserNav={setUserNav} userNav={userNav} showMenu={showMenu} openMenu={openMenu} />
+      <Header
+        setUserNav={setUserNav}
+        userNav={userNav}
+        showMenu={showMenu}
+        openMenu={openMenu}
+      />
       {/* <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} /> */}
       {showMenu && <Menu />}
 
