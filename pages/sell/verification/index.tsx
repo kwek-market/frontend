@@ -15,6 +15,11 @@ function index(props: StepComponentProps) {
   const dispatch = useDispatch();
   const seller = useSelector((state: RootState) => state.seller);
 
+  const submitDetails = details => {
+    console.log(details);
+    //  not sure about the function to send to the backend
+  };
+
   interface configProps {
     navigation: {
       component: (props: any) => JSX.Element;
@@ -34,7 +39,11 @@ function index(props: StepComponentProps) {
         <Step title="Vendor's Policy" component={VendorsPolicy} />
         <Step title="Upload a Valid ID" component={ValidID} />
         <Step title="Verify BVN" component={VerifyBVN} />
-        <Step title="Verify Bank Account" component={VerifyBankAccount} />
+        <Step
+          title="Verify Bank Account"
+          component={VerifyBankAccount}
+          submit={submitDetails}
+        />
       </Steps>
     </VerificationLayout>
   );
