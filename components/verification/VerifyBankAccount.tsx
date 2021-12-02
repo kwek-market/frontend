@@ -1,30 +1,38 @@
-import React, { useEffect, useState } from "react";
-import Button from "../buttons/Button";
-import TextInput from "../input/textInput";
-import Header from "./Header";
-import { StepComponentProps } from "react-step-builder";
+import React, { useEffect, useState } from 'react';
+import Button from '../buttons/Button';
+import TextInput from '../input/textInput';
+import Header from './Header';
+import { StepComponentProps } from 'react-step-builder';
 
-function VerifyBankAccount(props: StepComponentProps) {
-  const [bankName, setBankName] = useState("");
-  const [bankAccount, setBankAccount] = useState("");
-  const [disabled, setDisabled] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (bankName !== "" && bankAccount !== "") {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
+interface T extends StepComponentProps {
+  submit: (data: any) => void;
+}
+function VerifyBankAccount(props: T) {
+  const fetchFromState = (value: string, defaultValue: string = '') => {
+    const checkThis = props.getState(value, defaultValue);
+    if (!!checkThis && typeof checkThis === 'string') {
+      defaultValue = checkThis;
     }
-  }, [bankName, bankAccount]);
+    return defaultValue;
+  };
+  const [bankAccountNumber, setBankAccountNumber] = useState(
+    fetchFromState('bankAccountNumber'),
+  );
+  const [bankAccountName, setBankAccountName] = useState(
+    fetchFromState('bankAccountName'),
+  );
 
   async function confirmDetails() {
-    const { message } = await import("antd");
-    if (bankName === "") return message.error("Please enter your bank name");
-    if (bankAccount === "") {
-      return message.error("Please enter your bank account");
-    }
-    console.log(props.state);
-    console.log({ bankName, bankAccount });
+    const { message } = await import('antd');
+    props.setState('bankAccountName', bankAccountName);
+    props.setState('bankAccountNumber', bankAccountNumber);
+
+    if (bankAccountName === '')
+      return message.error('Please enter your bank name');
+    if (bankAccountNumber === '')
+      return message.error('Please enter your bank account number');
+
+    console.log(props.submit(props.state));
   }
 
   return (
@@ -36,29 +44,27 @@ function VerifyBankAccount(props: StepComponentProps) {
         </h4>
         <form className="tw-w-full md:tw-w-9/12">
           <TextInput
-            text={"bank name"}
-            type={"text"}
-            value={bankName}
-            setValue={setBankName}
-            style={"tw-bg-primary tw-border-gray-kwek700"}
+            text={'Bank Name'}
+            type={'text'}
+            value={bankAccountName}
+            setValue={setBankAccountName}
+            style={'tw-bg-primary tw-border-gray-kwek700'}
           />
           <br />
           <TextInput
-            text={"account number"}
-            type={"text"}
-            value={bankAccount}
-            setValue={setBankAccount}
-            style={"tw-bg-primary tw-border-gray-kwek700"}
+            text={'Account Number'}
+            type={'text'}
+            value={bankAccountNumber}
+            setValue={setBankAccountNumber}
+            style={'tw-bg-primary tw-border-gray-kwek700'}
           />
         </form>
         <br />
         <div className="tw-flex tw-justify-end tw-mt-5">
           <Button
-            isDisabled={disabled}
-            buttonStyle={`tw-rounded-sm tw-py-3 tw-px-10 ${
-              disabled ? "tw-bg-gray-kwek100" : "tw-bg-green-success"
-            } tw-text-white-100 tw-text-xs`}
-            text={"Verify"}
+            isDisabled={bankAccountName === '' || bankAccountNumber === ''}
+            buttonStyle={`tw-rounded-sm tw-py-3 tw-px-10 tw-bg-green-success tw-text-white-100 tw-text-xs disabled:tw-bg-gray-kwek100`}
+            text={'Verify'}
             cmd={confirmDetails}
           />
         </div>
@@ -68,7 +74,7 @@ function VerifyBankAccount(props: StepComponentProps) {
           className="tw-p-3 tw-rounded-sm tw-text-white-100 tw-bg-red-kwek100"
           onClick={props.prev}
         >
-          previous
+          Previous
         </button>
       </div>
     </>
