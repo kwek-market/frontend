@@ -1,12 +1,8 @@
-import React from "react";
-import { ClosedOrder } from "./index";
+import React from 'react';
+import { ClosedOrder } from './index';
 
-function ClosedOrders({setActiveBtn}) {
-  return (
-    <>
-      <ClosedOrder setActiveBtn={setActiveBtn} />
-    </>
-  );
-}
+const ClosedOrders = function ({ setActiveBtn }) {
+  return <ClosedOrder setActiveBtn={setActiveBtn} />;
+};
 
 export default ClosedOrders;

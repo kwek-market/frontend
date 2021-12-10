@@ -1,8 +1,8 @@
-import { RootState } from "./rootReducer";
+import { RootState } from './rootReducer';
 
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("kwek");
+    const serializedState = localStorage.getItem('kwek');
     if (serializedState === null) {
       return undefined;
     }
@@ -15,7 +15,7 @@ export const loadState = () => {
 export const saveState = (state: RootState) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem("kwek", serializedState);
+    localStorage.setItem('kwek', serializedState);
   } catch (err) {
     throw new Error(`errors from localstorage.js -: ${err}`);
   }

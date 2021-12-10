@@ -1,9 +1,8 @@
-import React from "react";
-import styles from "./Banner.module.scss";
+import React from 'react';
+import Image from 'next/image';
+import styles from './Banner.module.scss';
 
-import Image from "next/image";
-
-const Banner = () => {
+const Banner = function () {
   return (
     <div className={styles.banner}>
       <div className={styles.textContainer}>

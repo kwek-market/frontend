@@ -1,3 +1,3 @@
-import CartGrid from './cartGrid/CartGrid'
+import CartGrid from './cartGrid/CartGrid';
 
-export default CartGrid
+export default CartGrid;

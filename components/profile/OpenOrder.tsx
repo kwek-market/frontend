@@ -1,10 +1,10 @@
-import React from "react";
-import Button from "@/components/buttons/Button";
-import Badge from "@/components/badge/Badge";
+import React from 'react';
+import Button from '@/components/buttons/Button';
+import Badge from '@/components/badge/Badge';
 
-function Order({setActiveBtn}) {
+const Order = function ({ setActiveBtn }) {
   function checkDetails() {
-    setActiveBtn("Open Order Details")
+    setActiveBtn('Open Order Details');
   }
   return (
     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-border tw-border-gray-kwek700 tw-rounded-md tw-p-2 tw-mb-2">
@@ -20,9 +20,7 @@ function Order({setActiveBtn}) {
             <h3 className="tw-text-base md:tw-text-lg lg:tw-text-2xl tw-font-medium tw-text-gray-kwek200">
               Order KWK12345357398
             </h3>
-            <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">
-              4 Items
-            </span>
+            <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">4 Items</span>
           </div>
           <span className="tw-opacity-90 tw-text-sm tw-font-medium tw-text-black-stock">
             Delivered by, Friday, 6 June
@@ -31,19 +29,17 @@ function Order({setActiveBtn}) {
       </div>
       <div className="tw-flex tw-flex-col">
         <Badge
-          badgeStyle={
-            "tw-bg-green-success tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-mb-2"
-          }
-          text={"Delivered"}
+          badgeStyle="tw-bg-green-success tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-mb-2"
+          text="Delivered"
         />
         <Button
-          buttonStyle={"tw-underline tw-text-yellow-primary tw-uppercase"}
-          text={"See Details"}
+          buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
+          text="See Details"
           cmd={() => checkDetails()}
         />
       </div>
     </div>
   );
-}
+};
 
 export default Order;

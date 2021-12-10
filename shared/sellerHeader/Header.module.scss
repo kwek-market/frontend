@@ -2,8 +2,6 @@
 @import "@/styles/mixins";
 
 .header_container {
-  margin: -2rem -6.8% !important;
-  margin-bottom: 5% !important;
   background-color: #1d1616;
 
   .firstBox {
@@ -108,7 +106,7 @@
         @include flex(flex-start, center, row);
         width: 100%;
 
-        @include respondMax("mobile"){
+        @include respondMax("mobile") {
           justify-content: space-between;
         }
 
@@ -119,7 +117,7 @@
         .progressbox {
           width: 20%;
 
-          @include respondMax("mobile"){
+          @include respondMax("mobile") {
             width: auto;
           }
 
@@ -157,10 +155,10 @@
         background-color: #f5f0f0;
         width: 30%;
 
-        @include respondMax("mobile"){
+        @include respondMax("mobile") {
           margin: 1.5rem 0 0 0;
           width: auto;
-        } 
+        }
 
         .info {
           margin-left: 16px;

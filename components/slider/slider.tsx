@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 type SliderProps = {
   element: { element: JSX.Element }[];
 };
 
-function Slider({ element }: SliderProps) {
+const Slider = function ({ element }: SliderProps) {
   return (
     <div className="tw-flex tw-flex-row md:tw-hidden tw-overflow-x-auto tw-overflow-y-hidden">
       {element.map((item, index) => {
@@ -12,6 +12,6 @@ function Slider({ element }: SliderProps) {
       })}
     </div>
   );
-}
+};
 
 export default Slider;

@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./Sidebar.module.scss";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
+import styles from './Sidebar.module.scss';
 
-const Sidebar = () => {
+const Sidebar = function () {
   const products = [1, 2, 3, 4, 5];
 
   return (
@@ -115,7 +115,7 @@ const Sidebar = () => {
         <p className={styles.header}>PRICE ( ₦ )</p>
         <div className={styles.subMenu}>
           <div className={styles.sliderBox}>
-            <input type="range" min="1" max="100" value="1" className={styles.slider}  />
+            <input type="range" min="1" max="100" value="1" className={styles.slider} />
           </div>
           <div className={styles.priceInput}>
             <input type="text" value="0" />
@@ -149,11 +149,10 @@ const Sidebar = () => {
           </div>
           <div className={styles.checkSub}>
             <input className={styles.inputSquare} type="checkbox" />
-            <p >XXXL</p>
+            <p>XXXL</p>
           </div>
         </div>
       </div>
-
     </div>
   );
 };

@@ -1,20 +1,16 @@
-import Button from "@/components/buttons/Button";
-import React from "react";
-import { AddressCard } from "../index";
+import React from 'react';
+import Button from '@/components/buttons/Button';
+import { AddressCard } from '../index';
 
-function Addresses({ activeBtn }) {
+const Addresses = function ({ activeBtn }) {
   function openModal() {}
   return (
     <>
       <div className="tw-border-b tw-border-gray-500 tw-border-opacity-50 tw-flex tw-flex-row tw-justify-between">
-        <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl">
-          {activeBtn}
-        </h4>
+        <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl">{activeBtn}</h4>
         <Button
-          buttonStyle={
-            "tw-p-2 tw-rounded-md tw-bg-yellow-filled tw-mb-2 tw-font-normal tw-text-gray-kwek200 tw-text-sm md:tw-text-base"
-          }
-          text={"New Address"}
+          buttonStyle="tw-p-2 tw-rounded-md tw-bg-yellow-filled tw-mb-2 tw-font-normal tw-text-gray-kwek200 tw-text-sm md:tw-text-base"
+          text="New Address"
           cmd={openModal}
           icon="fa-plus"
         />
@@ -25,6 +21,6 @@ function Addresses({ activeBtn }) {
       </div>
     </>
   );
-}
+};
 
 export default Addresses;

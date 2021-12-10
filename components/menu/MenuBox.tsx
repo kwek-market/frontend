@@ -1,6 +1,6 @@
-import React from "react";
-import style from "./menubox.module.scss";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
+import style from './menubox.module.scss';
 
 type MenuBoxProps = {
   icon: string;
@@ -9,7 +9,7 @@ type MenuBoxProps = {
   link: string;
 };
 
-function MenuBox({ icon, title, description, link }: MenuBoxProps) {
+const MenuBox = function ({ icon, title, description, link }: MenuBoxProps) {
   return (
     <Link href={link}>
       <a>
@@ -17,7 +17,7 @@ function MenuBox({ icon, title, description, link }: MenuBoxProps) {
           <span>
             <i className={`fas ${icon} icon tw-text-black-kwek100`} />
           </span>
-          <span style={{ paddingLeft: "12px" }}>
+          <span style={{ paddingLeft: '12px' }}>
             <span className={style.title}>{title}</span>
             <span className={style.description}>{description}</span>
           </span>
@@ -25,6 +25,6 @@ function MenuBox({ icon, title, description, link }: MenuBoxProps) {
       </a>
     </Link>
   );
-}
+};
 
 export default MenuBox;

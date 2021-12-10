@@ -1,9 +1,9 @@
-import React from "react";
-import Image from "next/image";
-import { Carousel } from "antd";
-import styles from "./productHead.module.scss";
+import React from 'react';
+import Image from 'next/image';
+import { Carousel } from 'antd';
+import styles from './productHead.module.scss';
 
-const SampleNextArrow = (props) => {
+const SampleNextArrow = function (props) {
   const { className, style, onClick } = props;
   return (
     <div
@@ -16,7 +16,7 @@ const SampleNextArrow = (props) => {
   );
 };
 
-const SamplePrevArrow = (props) => {
+const SamplePrevArrow = function (props) {
   const { className, style, onClick } = props;
   return (
     <div
@@ -34,83 +34,43 @@ const settings = {
   prevArrow: <SamplePrevArrow />,
 };
 
-const ProductHead = () => {
+const ProductHead = function () {
   return (
     <div className={styles.product_container}>
       <div className={styles.product_carousel}>
         <Carousel arrows {...settings} autoplay dots={false}>
           <div>
-            <Image
-              className={styles.carousel_img}
-              src="/images/shoe.png"
-              width="848"
-              height="765"
-            />
+            <Image className={styles.carousel_img} src="/images/shoe.png" width="848" height="765" />
           </div>
           <div>
-            <Image
-              className={styles.carousel_img}
-              src="/images/shoe.png"
-              width="848"
-              height="765"
-            />
+            <Image className={styles.carousel_img} src="/images/shoe.png" width="848" height="765" />
           </div>
           <div>
-            <Image
-              className={styles.carousel_img}
-              src="/images/shoe.png"
-              width="848"
-              height="765"
-            />
+            <Image className={styles.carousel_img} src="/images/shoe.png" width="848" height="765" />
           </div>
           <div>
-            <Image
-              className={styles.carousel_img}
-              src="/images/shoe.png"
-              width="848"
-              height="765"
-            />
+            <Image className={styles.carousel_img} src="/images/shoe.png" width="848" height="765" />
           </div>
         </Carousel>
         <div className={styles.carousel_sub}>
           <div>
             <button className={styles.img_sub}>
-              <Image
-                className={styles.carousel_img}
-                src="/images/shoe.png"
-                width="200"
-                height="200"
-              />
+              <Image className={styles.carousel_img} src="/images/shoe.png" width="200" height="200" />
             </button>
           </div>
           <div>
             <button className={styles.img_sub}>
-              <Image
-                className={styles.carousel_img}
-                src="/images/shoe.png"
-                width="200"
-                height="200"
-              />
+              <Image className={styles.carousel_img} src="/images/shoe.png" width="200" height="200" />
             </button>
           </div>
           <div>
             <button className={styles.img_sub}>
-              <Image
-                className={styles.carousel_img}
-                src="/images/shoe.png"
-                width="200"
-                height="200"
-              />
+              <Image className={styles.carousel_img} src="/images/shoe.png" width="200" height="200" />
             </button>
           </div>
           <div>
             <button className={styles.img_sub}>
-              <Image
-                className={styles.carousel_img}
-                src="/images/shoe.png"
-                width="200"
-                height="200"
-              />
+              <Image className={styles.carousel_img} src="/images/shoe.png" width="200" height="200" />
             </button>
           </div>
         </div>
@@ -118,11 +78,11 @@ const ProductHead = () => {
       <div className={styles.product_desc}>
         <div className={styles.navigation}>
           <Image src="/svg/house.svg" width="20" height="20" />
-          <i className="fas fa-angle-right"></i>
+          <i className="fas fa-angle-right" />
           <a>Fashion</a>
-          <i className="fas fa-angle-right"></i>
+          <i className="fas fa-angle-right" />
           <a>Shoes</a>
-          <i className="fas fa-angle-right"></i>
+          <i className="fas fa-angle-right" />
           <a>Women's Fashion Shiny High Heels</a>
         </div>
         <p className={styles.productTitle}>Women's Fashion Shiny High Heels</p>
@@ -142,19 +102,17 @@ const ProductHead = () => {
           <small>(6 Reviews)</small>
         </div>
         <p className={styles.product_subtitle}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.{" "}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur.{' '}
         </p>
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
           <div className={styles.colorbox}>
-            <button></button>
-            <button></button>
-            <button></button>
+            <button />
+            <button />
+            <button />
           </div>
         </div>
         <div className={styles.product_option_size}>
@@ -178,11 +136,11 @@ const ProductHead = () => {
           </div>
           <div className={styles.product_buttonbox}>
             <a className={styles.butnowButton}>
-              <i className="fas fa-shopping-cart"></i>
+              <i className="fas fa-shopping-cart" />
               <p>Buy Now</p>
             </a>
             <a className={styles.product_saveButton}>
-              <i className="far fa-heart"></i>
+              <i className="far fa-heart" />
               <p>Save for Later</p>
             </a>
           </div>
@@ -201,19 +159,19 @@ const ProductHead = () => {
           <p>Share:</p>
           <div className={styles.socialbox}>
             <a>
-              <i className="fab fa-facebook-f"></i>
+              <i className="fab fa-facebook-f" />
               <p>Facebook</p>
             </a>
             <a>
-              <i className="fab fa-twitter"></i>
+              <i className="fab fa-twitter" />
               <p>Twitter</p>
             </a>
             <a>
-              <i className="fab fa-whatsapp"></i>
+              <i className="fab fa-whatsapp" />
               <p>Whatsapp</p>
             </a>
             <a>
-              <i className="fas fa-link"></i>
+              <i className="fas fa-link" />
               <p>Copy Link</p>
             </a>
           </div>

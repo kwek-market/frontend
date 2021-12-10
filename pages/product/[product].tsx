@@ -1,15 +1,10 @@
-import React from "react";
-import { useRouter } from "next/router";
-import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
-import {
-  ProductHead,
-  ExtraGrid,
-  ProductDesc,
-  MoreCard,
-} from "@/components/product";
-import { MainLayout } from "@/layouts";
+import React from 'react';
+import { useRouter } from 'next/router';
+import ExtraInfo from '@/shared/extraInfo/ExtraInfo';
+import { ProductHead, ExtraGrid, ProductDesc, MoreCard } from '@/components/product';
+import { MainLayout } from '@/layouts';
 
-const Page = () => {
+const Page = function () {
   const router = useRouter();
 
   const { product } = router.query;
