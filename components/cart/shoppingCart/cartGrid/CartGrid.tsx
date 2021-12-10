@@ -1,13 +1,13 @@
-import React from "react";
-import styles from "./cartGrid.module.scss";
+import React from 'react';
 
-import Link from "next/link";
-import Image from "next/image";
-import CartTab from "../cartTab/CartTab";
-import CartGridComponent from "./cartGridComponent";
-import Button from "@/components/buttons/Button";
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './cartGrid.module.scss';
+import CartTab from '../cartTab/CartTab';
+import CartGridComponent from './cartGridComponent';
+import Button from '@/components/buttons/Button';
 
-const CartGrid = () => {
+const CartGrid = function () {
   return (
     <div>
       <CartTab />
@@ -42,31 +42,25 @@ const CartGrid = () => {
           <p>Delivery Fee is not included yet</p>
           <Link href="/cart/checkout">
             <a>
-              <button className={styles.checkout_btn}>
-                Proceed to Checkout
-              </button>
+              <button className={styles.checkout_btn}>Proceed to Checkout</button>
             </a>
           </Link>
         </div>
       </div>
       <div className="tw-flex tw-flex-row tw-shadow-md tw-bg-white-100 tw-fixed tw-w-full tw-z-10 tw-bottom-0 tw-left-0 tw-right-0 tw-justify-between tw-items-center tw-p-3 md:tw-hidden">
         <div>
-          <i className={"fas fa-angle-up tw-text-green-success tw-text-base"} />
+          <i className="fas fa-angle-up tw-text-green-success tw-text-base" />
         </div>
         <div className="tw-flex tw-flex-col">
           <span className="tw-text-sm tw-text-black-stock">Total</span>
-          <span className="tw-text-gray-kwek200 tw-text-lg tw-font-medium">
-            $256
-          </span>
-          <span className="tw-text-error tw-text-xs">
-            * Delivery fee is not included
-          </span>
+          <span className="tw-text-gray-kwek200 tw-text-lg tw-font-medium">$256</span>
+          <span className="tw-text-error tw-text-xs">* Delivery fee is not included</span>
         </div>
         <Button
           buttonStyle="tw-bg-green-success tw-text-white-100 tw-py-5 tw-px-10 tw-rounded"
-          text={"checkout"}
+          text="checkout"
           cmd={function (): void {
-            throw new Error("Function not implemented.");
+            throw new Error('Function not implemented.');
           }}
         />
       </div>

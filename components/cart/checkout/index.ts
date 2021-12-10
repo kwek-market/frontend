@@ -1,3 +1,3 @@
-import CheckGrid from './checkGrid/CheckGrid'
+import CheckGrid from './checkGrid/CheckGrid';
 
-export default CheckGrid
+export default CheckGrid;

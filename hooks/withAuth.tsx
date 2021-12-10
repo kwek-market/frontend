@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Skeleton } from "antd";
 import { verifyTokenFunc } from "@/helpers";
 import { RootState } from "@/store/rootReducer";
 import { logout } from "@/store/user/user.actions";
-import { Skeleton } from "antd";
 
 const withAuth = (WrappedComponent: any) => {
-  return (props: any) => {
+  return function (props: any) {
     const router = useRouter();
     const dispatch = useDispatch();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,13 +43,19 @@ const withAuth = (WrappedComponent: any) => {
 
     // check loading state
     if (isLoading) {
-      return <Skeleton active />;
+      return (
+        <>
+          <Skeleton active />
+          <Skeleton active />
+          <Skeleton active />
+          <Skeleton active />
+        </>
+      );
     }
     if (isAuthenticated) {
       return <WrappedComponent isLoading={isLoading} {...props} />;
-    } else {
-      return null;
     }
+    return null;
   };
 };
 

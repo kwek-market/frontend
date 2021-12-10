@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3100",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
@@ -25,6 +26,7 @@
     "react-icons": "^4.3.1",
     "react-loader-spinner": "^4.0.0",
     "react-redux": "^7.2.3",
+    "react-step-builder": "^2.0.11",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",

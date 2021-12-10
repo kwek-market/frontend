@@ -1,30 +1,36 @@
 import React, { useState } from "react";
-import styles from "./AuthForm.module.scss";
 
 import Link from "next/link";
 import Loader from "react-loader-spinner";
+import styles from "./AuthForm.module.scss";
 import { emailValidator } from "@/helpers";
 import { Type, UserLogin, UserError } from "@/interfaces/commonTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
+import Alert from "antd/lib/alert";
 
-const AuthForm: React.FC<Type> = ({
+const AuthForm: React.FC<Type> = function ({
   title,
-  isLoading,
   subtitle,
   fields,
   submit,
   extra,
-  userId,
-}) => {
+}) {
+  const user = useSelector((state: RootState) => state.user);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserLogin>({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [error, setError] = useState<UserError>({
     status: false,
-    message: "",
+    message: '',
   });
   const [loading, setLoading] = useState<boolean>(false);
+
+  function onClose() {
+    setError({ ...error, status: false });
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -33,30 +39,13 @@ const AuthForm: React.FC<Type> = ({
     });
   };
 
-  const handleSubmit = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    submitData: any
-  ) => {
+  function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    // console.log(userId);
-    console.log(formData);
-    submitData.action(formData);
     setLoading(true);
-    // console.log(user);
-
-    // Email validation
-    // console.log(validateEmail.test(formData.email))
-
-    if (userId.message === "E-mail Already in use") {
-      setError({ status: true, message: "E-mail Already in use" });
-      setLoading(false);
-    }
 
     if (!formData.email && !formData.password) {
-      // console.log("enter your email and password in");
       setError({ status: true, message: "Input your email and password" });
       setLoading(false);
-      // console.log(formData);
     } else if (
       formData.email &&
       formData.password &&
@@ -65,21 +54,16 @@ const AuthForm: React.FC<Type> = ({
       setError({ status: true, message: "Invalid email" });
       setLoading(false);
     } else if (!formData.email && formData.password) {
-      setError({ status: true, message: "type in your email" });
+      setError({ status: true, message: 'type in your email' });
       setLoading(false);
-      // console.log(formData);
-      // console.log("Input your email");
     } else if (!formData.password) {
-      // console.log("type in your password");
       setLoading(false);
-      setError({ status: true, message: "Input your password" });
+      setError({ status: true, message: 'Input your password' });
     } else {
       setError({ status: false, message: "" });
-      submitData.action(formData);
-      // setLoading(false);
-      console.log(formData);
+      submit.action(formData);
     }
-  };
+  }
 
   return (
     <div id={styles.authForm}>
@@ -89,15 +73,12 @@ const AuthForm: React.FC<Type> = ({
           <p className={styles.form_subtitle}>{subtitle}</p>
         </div>
         {error.status && (
-          <div
-            className={`tw-mb-2 tw-p-2 tw-rounded-sm tw-flex tw-justify-between tw-bg-red-100 tw-text-error`}
-          >
-            <span>{error.message}</span>
-            <i
-              className="fas fa-times"
-              onClick={() => setError({ ...error, status: false })}
-            />
-          </div>
+          <Alert
+            message={error.message}
+            type="error"
+            closable
+            onClose={onClose}
+          />
         )}
 
         {fields.map(({ type, sub, ...fieldProps }, index) => (
@@ -106,18 +87,14 @@ const AuthForm: React.FC<Type> = ({
               <input
                 {...fieldProps}
                 className={styles.form_input}
-                type={
-                  type === "password" ? (showPassword ? "text" : type) : type
-                }
+                type={type === 'password' ? (showPassword ? 'text' : type) : type}
                 onChange={(e) => handleChange(e)}
               />
-              {type === "password" && (
+              {type === 'password' && (
                 <i
-                  className={`${styles.form_inputIcon} ${
-                    !showPassword ? "far fa-eye" : "far fa-eye-slash"
-                  }`}
+                  className={`${styles.form_inputIcon} ${!showPassword ? 'far fa-eye' : 'far fa-eye-slash'}`}
                   onClick={() => setShowPassword(!showPassword)}
-                ></i>
+                />
               )}
             </div>
 
@@ -130,26 +107,25 @@ const AuthForm: React.FC<Type> = ({
             )}
           </React.Fragment>
         ))}
-        {submit && (
-          <div className={styles.form_btnContainer}>
-            <button
-              className={`btn bg-primary ${styles.btn}`}
-              onClick={(e) => handleSubmit(e, submit)}
-            >
-              {isLoading ? (
-                <Loader
-                  type="Puff"
-                  color="#fff"
-                  height={30}
-                  width={30}
-                  // timeout={3000} //3 secs
-                />
-              ) : (
-                submit.text
-              )}
-            </button>
-          </div>
-        )}
+
+        <div className={styles.form_btnContainer}>
+          <button
+            className={`btn bg-primary ${styles.btn}`}
+            onClick={(e) => handleSubmit(e)}
+          >
+            {user.loading ? (
+              <Loader
+                type="Puff"
+                color="#fff"
+                height={30}
+                width={30}
+                // timeout={3000} //3 secs
+              />
+            ) : (
+              submit.text
+            )}
+          </button>
+        </div>
 
         {extra && (
           <div className={styles.form_extra}>

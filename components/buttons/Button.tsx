@@ -5,22 +5,28 @@ type ButtonProps = {
   text: string;
   icon?: string;
   cmd: () => void;
+  isDisabled?: boolean;
 };
 
-function Button({ buttonStyle, text, cmd, icon }: ButtonProps) {
+const Button = function ({
+  buttonStyle,
+  text,
+  cmd,
+  icon,
+  isDisabled = false,
+}: ButtonProps) {
   return (
     <button
+      disabled={isDisabled}
       className={buttonStyle}
       style={{ whiteSpace: "nowrap" }}
       onClick={cmd}
     >
-      {icon && (
-        <i className={`fas ${icon}`} style={{ paddingRight: "12px" }}></i>
-      )}
+      {icon && <i className={`fas ${icon}`} style={{ paddingRight: "12px" }} />}
       {"    "}
       {text}
     </button>
   );
-}
+};
 
 export default Button;

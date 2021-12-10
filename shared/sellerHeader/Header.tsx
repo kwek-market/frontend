@@ -3,8 +3,12 @@ import styles from "./Header.module.scss";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
 
 const Component = () => {
+  const seller = useSelector((state: RootState) => state.seller);
+
   return (
     <div className={styles.header_container}>
       <div className={styles.firstBox}>
