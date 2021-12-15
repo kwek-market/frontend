@@ -1,73 +1,32 @@
-import React, { useEffect, useState } from "react";
-import Button from "../buttons/Button";
-import { StepComponentProps } from "react-step-builder";
-import Header from "./Header";
-import NumberInput from "./NumberInput";
-
-export type NumberInputProps = {
-  first: number;
-  second: number;
-  third: number;
-  fourth: number;
-  fifth: number;
-  sixth: number;
-  seventh: number;
-  eighth: number;
-  ninth: number;
-  tenth: number;
-  eleventh: number;
-};
+import React, { useEffect, useState } from 'react';
+import Button from '../buttons/Button';
+import { StepComponentProps } from 'react-step-builder';
+import Header from './Header';
+import { message } from 'antd';
 
 function VerifyBVN(props: StepComponentProps) {
-  const [bvn, setBvn] = useState<NumberInputProps>({
-    first: 0,
-    second: 0,
-    third: 0,
-    fourth: 0,
-    fifth: 0,
-    sixth: 0,
-    seventh: 0,
-    eighth: 0,
-    ninth: 0,
-    tenth: 0,
-    eleventh: 0,
-  });
+  const fetchFromState = (value: string, defaultValue: string = '') => {
+    const checkThis = props.getState(value, defaultValue);
+    if (!!checkThis && typeof checkThis === 'string') {
+      defaultValue = checkThis;
+    }
+    return defaultValue;
+  };
 
-  // need to find a better way, this is shit
-  useEffect(() => {
-    const userBVN = `${
-      props.state.first === undefined ? 0 : props.state.first
-    }${props.state.second === undefined ? 0 : props.state.second}${
-      props.state.third === undefined ? 0 : props.state.third
-    }${props.state.fourth === undefined ? 0 : props.state.fourth}${
-      props.state.fifth === undefined ? 0 : props.state.fifth
-    }${props.state.sixth === undefined ? 0 : props.state.sixth}${
-      props.state.seventh === undefined ? 0 : props.state.seventh
-    }${props.state.eighth === undefined ? 0 : props.state.eighth}${
-      props.state.ninth === undefined ? 0 : props.state.ninth
-    }${props.state.tenth === undefined ? 0 : props.state.tenth}${
-      props.state.eleventh === undefined ? 0 : props.state.eleventh
-    }`;
-    console.log({ userBVN });
-    props.setState("bvn", userBVN);
-  }, [
-    props.state.first,
-    props.state.second,
-    props.state.third,
-    props.state.fourth,
-    props.state.fifth,
-    props.state.sixth,
-    props.state.seventh,
-    props.state.eighth,
-    props.state.ninth,
-    props.state.tenth,
-    props.state.eleventh,
-  ]);
+  const bvnReqLength = 11;
+  const [bvn, setBvn] = useState(fetchFromState(`bvn`));
 
   async function checkProceed() {
-    console.log(bvn);
-    console.log(props.state.bvn);
-    props.next();
+    props.setState('bvn', bvn);
+    if (!bvn) return message.error('Please enter a valid BVN');
+
+    if (bvn.length !== bvnReqLength)
+      return message.error('BVN Must be 11 characters long');
+
+    if (bvn.match(new RegExp(/^(?!\d).*/, 'gim')) !== null)
+      return message.error('BVN cannot contain letters');
+
+    if (bvn && bvn.length === bvnReqLength) return props.next();
   }
 
   return (
@@ -77,15 +36,24 @@ function VerifyBVN(props: StepComponentProps) {
         <h4 className="tw-text-gray-kwek200 tw-font-semibold tw-text-2xl tw-mb-3">
           Enter your 11-digit Bank Verification Number
         </h4>
-        <form className="tw-my-7">
-          <NumberInput bvn={bvn} setBvn={setBvn} props={props} />
-        </form>
+        <div className="tw-my-7">
+          <input
+            type="text"
+            placeholder="Enter BVN"
+            className={`tw-bg-primary tw-rounded-sm tw-border-gray-700 tw-text-gray-kwek200 tw-mr-2`}
+            min={bvnReqLength}
+            max={bvnReqLength}
+            required
+            value={bvn}
+            onChange={e => setBvn(e.target.value)}
+          />
+        </div>
         <div className="tw-flex tw-justify-end tw-mt-6">
           <Button
             buttonStyle={
-              "tw-rounded-sm tw-py-3  tw-px-10 tw-bg-green-success tw-text-white-100 tw-text-xs"
+              'tw-rounded-sm tw-py-3  tw-px-10 tw-bg-green-success tw-text-white-100 tw-text-xs'
             }
-            text={"Proceed"}
+            text={'Proceed'}
             cmd={checkProceed}
           />
         </div>
@@ -95,7 +63,7 @@ function VerifyBVN(props: StepComponentProps) {
           className="tw-p-3 tw-rounded-sm tw-text-white-100 tw-bg-red-kwek100"
           onClick={props.prev}
         >
-          previous
+          Previous
         </button>
       </div>
     </>
