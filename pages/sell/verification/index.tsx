@@ -14,6 +14,8 @@ import { Steps, Step, StepComponentProps } from "react-step-builder";
 function index(props: StepComponentProps) {
   const dispatch = useDispatch();
   const seller = useSelector((state: RootState) => state.seller);
+  // find last element in the array
+  
 
   return (
     <VerificationLayout>
