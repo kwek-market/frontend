@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "@/shared/shop";
+import sellerAuth from "@/hooks/sellerAuth";
 
 function ShopLayout({ children }) {
   return (
@@ -10,4 +11,4 @@ function ShopLayout({ children }) {
   );
 }
 
-export default ShopLayout;
+export default sellerAuth(ShopLayout);

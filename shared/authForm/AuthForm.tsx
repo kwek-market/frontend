@@ -19,12 +19,12 @@ const AuthForm: React.FC<Type> = function ({
   const user = useSelector((state: RootState) => state.user);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserLogin>({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [error, setError] = useState<UserError>({
     status: false,
-    message: '',
+    message: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -54,11 +54,11 @@ const AuthForm: React.FC<Type> = function ({
       setError({ status: true, message: "Invalid email" });
       setLoading(false);
     } else if (!formData.email && formData.password) {
-      setError({ status: true, message: 'type in your email' });
+      setError({ status: true, message: "type in your email" });
       setLoading(false);
     } else if (!formData.password) {
       setLoading(false);
-      setError({ status: true, message: 'Input your password' });
+      setError({ status: true, message: "Input your password" });
     } else {
       setError({ status: false, message: "" });
       submit.action(formData);
@@ -86,13 +86,17 @@ const AuthForm: React.FC<Type> = function ({
             <div className={styles.form_inputContainer}>
               <input
                 {...fieldProps}
-                className={styles.form_input}
-                type={type === 'password' ? (showPassword ? 'text' : type) : type}
+                className={`${styles.form_input} tw-w-full`}
+                type={
+                  type === "password" ? (showPassword ? "text" : type) : type
+                }
                 onChange={(e) => handleChange(e)}
               />
-              {type === 'password' && (
+              {type === "password" && (
                 <i
-                  className={`${styles.form_inputIcon} ${!showPassword ? 'far fa-eye' : 'far fa-eye-slash'}`}
+                  className={`${styles.form_inputIcon} ${
+                    !showPassword ? "far fa-eye" : "far fa-eye-slash"
+                  }`}
                   onClick={() => setShowPassword(!showPassword)}
                 />
               )}
