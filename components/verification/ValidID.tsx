@@ -70,6 +70,7 @@ function ValidID(props: StepComponentProps) {
     fetch(process.env.NEXT_PUBLIC_CLOUDINARY_URL, options)
       .then(res => res.json())
       .then(res => {
+        console.log(res)
         const { secure_url } = res;
         setUploadedImage(secure_url);
         props.setState('uploadedID', secure_url);

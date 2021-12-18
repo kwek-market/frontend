@@ -84,7 +84,7 @@ const Page = function () {
           </p>
         </div>
 
-        <div className="tw-my-5 tw-w-8/12">
+        <div className="tw-my-5 md:tw-w-8/12 tw-w-full">
           <div className="tw-mb-3">
             {error.status && (
               <Alert
