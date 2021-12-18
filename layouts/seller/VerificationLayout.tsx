@@ -1,5 +1,6 @@
-import React from 'react';
-import { Header } from '@/shared/verification';
+import React from "react";
+import { Header } from "@/shared/verification";
+import sellerAuth from "@/hooks/sellerAuth";
 
 function VerificationLayout({ children }) {
   return (
