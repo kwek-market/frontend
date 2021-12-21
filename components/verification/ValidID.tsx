@@ -75,14 +75,14 @@ function ValidID(props: StepComponentProps) {
         setUploadedImage(secure_url);
         props.setState('uploadedID', secure_url);
       })
-      .then(() => {
+      .then((stuff) => {
         if (!!UploadedImage) {
           message.success('ID Uploaded');
           props.next();
         } else message.error('An error has occured. Please try again');
       })
       .catch(err => {
-        message.error('An error has occured. Please try again');
+        message.error('An error has occured. Please try again', err);
         console.error(err);
       });
   }
