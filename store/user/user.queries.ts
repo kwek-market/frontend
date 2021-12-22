@@ -19,8 +19,8 @@ export const CREATE_USER = /* GraphQL */ `
 `;
 
 export const LOGIN_USER = /* GraphQL */ `
-  mutation loginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
+  mutation loginUser($email: String!, $password: String!, $ip: String!) {
+    loginUser(email: $email, password: $password, ip: $ip) {
       user {
         id
         lastLogin

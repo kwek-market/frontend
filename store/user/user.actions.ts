@@ -60,7 +60,8 @@ export function loginUser(user: UserLogin) {
         type: LOADING,
         payload: true,
       });
-      const response = await userFetcher(LOGIN_USER, user);
+      const myIp = await (await fetch("https://api.ipify.org")).text();
+      const response = await userFetcher(LOGIN_USER, { ...user, ip: myIp });
       import("antd").then(({ message }) => {
         response.loginUser.status
           ? message.success(response.loginUser.message)

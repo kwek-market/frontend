@@ -15,9 +15,8 @@ function index(props: StepComponentProps) {
   const dispatch = useDispatch();
   const seller = useSelector((state: RootState) => state.seller);
   // find last element in the array
-  
 
-  const submitDetails = details => {
+  const submitDetails = (details: any) => {
     console.log(details);
     //  not sure about the function to send to the backend
   };
