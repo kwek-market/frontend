@@ -26,7 +26,7 @@ const Page = function () {
   useEffect(() => {
     async function getIp() {
       const myIp = await (await fetch("https://api.ipify.org")).text();
-      console.log(myIp)
+      //console.log(myIp)
     }
     getIp()
   }, [])
