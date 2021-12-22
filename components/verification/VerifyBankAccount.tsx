@@ -24,14 +24,16 @@ function VerifyBankAccount(props: T) {
 
   async function confirmDetails() {
     const { message } = await import('antd');
-    props.setState('bankAccountName', bankAccountName);
-    props.setState('bankAccountNumber', bankAccountNumber);
+    // props.setState('bankAccountName', bankAccountName);
+    // props.setState('bankAccountNumber', bankAccountNumber);
 
-    if (bankAccountName === '')
+    if (props.state.bankName === '')
       return message.error('Please enter your bank name');
-    if (bankAccountNumber === '')
+    if (props.state.bankAccountName === '')
+      return message.error('Please enter your bank name');
+    if (props.state.bankAccountNumber === '')
       return message.error('Please enter your bank account number');
-
+    console.log(props.state)
     console.log(props.submit(props.state));
   }
 
@@ -43,26 +45,50 @@ function VerifyBankAccount(props: T) {
           Enter your account details linked to the BVN entered previously
         </h4>
         <form className="tw-w-full md:tw-w-9/12">
-          <TextInput
-            text={'Bank Name'}
-            type={'text'}
-            value={bankAccountName}
-            setValue={setBankAccountName}
-            style={'tw-bg-primary tw-border-gray-kwek700'}
-          />
-          <br />
-          <TextInput
-            text={'Account Number'}
-            type={'text'}
-            value={bankAccountNumber}
-            setValue={setBankAccountNumber}
-            style={'tw-bg-primary tw-border-gray-kwek700'}
-          />
+          <label>
+            <input
+              type="text"
+              placeholder="Enter Bank Name"
+              className={`tw-bg-primary tw-rounded-sm tw-border-gray-700 tw-text-gray-kwek200 tw-mr-2`}
+              min={1}
+              max={50}
+              required
+              name="bankName"
+              value={props.getState("bankName", "")}
+              onChange={props.handleChange}
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="Enter Bank account number"
+              className={`tw-bg-primary tw-rounded-sm tw-border-gray-700 tw-text-gray-kwek200 tw-mr-2`}
+              min={1}
+              max={50}
+              required
+              name="bankAccountNumber"
+              value={props.getState("bankAccountNumber", "")}
+              onChange={props.handleChange}
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="Enter Bank account number"
+              className={`tw-bg-primary tw-rounded-sm tw-border-gray-700 tw-text-gray-kwek200 tw-mr-2`}
+              min={1}
+              max={50}
+              required
+              name="bankAccountName"
+              value={props.getState("bankAccountName", "")}
+              onChange={props.handleChange}
+            />
+          </label>
         </form>
         <br />
         <div className="tw-flex tw-justify-end tw-mt-5">
           <Button
-            isDisabled={bankAccountName === '' || bankAccountNumber === ''}
+            isDisabled={props.state.bankAccountName === '' || props.state.bankAccountNumber === ''}
             buttonStyle={`tw-rounded-sm tw-py-3 tw-px-10 tw-bg-green-success tw-text-white-100 tw-text-xs disabled:tw-bg-gray-kwek100`}
             text={'Verify'}
             cmd={confirmDetails}

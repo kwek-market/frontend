@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { userFetcherWithAuth } from "@/helpers";
-import { SellerData, StartSelling } from "../../interfaces/commonTypes";
+import { SellerData, SellerVerification, StartSelling } from "../../interfaces/commonTypes";
 import {
   SELLER_DATA,
   SELLER_VERIFICATION,
@@ -52,7 +52,7 @@ export function startSelling(startSelling: StartSelling, token: string) {
 }
 
 export function sellerVerification(
-  sellerVerification: SellerData,
+  sellerVerification: SellerVerification,
   token: string
 ) {
   return async function (dispatch: Dispatch) {
