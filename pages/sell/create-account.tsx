@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import "cleave.js/dist/addons/cleave-phone.ng";
+import Cleave from 'cleave.js/react';
+import CleavePhone from 'cleave.js/dist/addons/cleave-phone.i18n';
 
 import { Menu } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
@@ -24,6 +27,7 @@ const Page = function ({ data }) {
   const { user, seller } = useSelector((state: RootState) => state);
   const router = useRouter();
   const [callCode, setCallCode] = useState<number>(93);
+  const [countryName, setCountryName] = useState<string>("NG");
   const [flag, setFlag] = useState<string>(
     "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg"
   );
@@ -119,6 +123,11 @@ const Page = function ({ data }) {
     seller.sellerCreated.status && router.push("/seller/profile");
   }, [seller.sellerCreated]);
 
+  useEffect(() => {
+    console.log(CleavePhone)
+    console.log(data)
+  }, [])
+
   const bannerText = {
     lineOne: "Make Money &",
     lineTwo: "Grow your",
@@ -127,6 +136,10 @@ const Page = function ({ data }) {
 
   const subText =
     "Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!";
+
+  const handlePhoneCode = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value)
+  }
 
   return (
     <AuthLayout
@@ -226,8 +239,7 @@ const Page = function ({ data }) {
                       ) => (
                         <Menu.Item key={id}>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <button
                               key={id}
                               className={classNames(
                                 active
@@ -250,7 +262,7 @@ const Page = function ({ data }) {
                                 src={item.flag}
                               />
                               +{item.callingCodes} {item.name}
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       )
@@ -436,7 +448,7 @@ const Page = function ({ data }) {
                 name="hearAbout"
                 id="hearAbout"
                 className="tw-bg-red-50 tw-border-none focus:tw-ring-gray-300 focus:tw-bg-white-100 tw-flex-1 tw-block tw-w-full tw-rounded-l tw-rounded-r-md sm:tw-text-sm tw-border-gray-300 tw-p-4"
-                placeholder="Select one option"
+                placeholder="Type in how"
                 value={sellerData.howYouHeardAboutUs}
                 onChange={(e) => {
                   setSellerData({

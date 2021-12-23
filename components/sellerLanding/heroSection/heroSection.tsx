@@ -6,10 +6,14 @@ import Image from 'next/image';
 import { BsArrowRight } from 'react-icons/bs';
 import Styles from './heroSection.module.scss';
 import Button from '@/components/buttons/Button';
+import { RootState } from '@/store/rootReducer';
+import { useDispatch, useSelector } from 'react-redux';
 
 const heroSection = () => {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
+  const dispatch = useDispatch();
+  const { user, seller } = useSelector((state: RootState) => state);
 
   return (
     <div className={Styles.hero}>
@@ -35,11 +39,18 @@ const heroSection = () => {
               <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
             </a>
           </Link>
-          <Button
+          {!user.user.isSeller ? (<Button
             buttonStyle="tw-p-3 tw-text-white-100 tw-rounded-md tw-bg-red-kwek100"
             text="Register now"
             cmd={() => router.push('/sell/create-account')}
-          />
+          />)
+            :
+            (<Link href="/seller/profile">
+              <a className={Styles.sell}>
+                <span className="tw-mr-3 lg:tw-mr-5">Account</span>
+              </a>
+            </Link>)
+          }
         </div>
         <i className="fas fa-bars fa-2x tw-text-black-stock tw-block md:tw-hidden" onClick={() => setShowMenu(true)} />
         {showMenu && (
@@ -66,11 +77,18 @@ const heroSection = () => {
                   <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
                 </a>
               </Link>
-              <Button
+              {!user.user.isSeller ? (<Button
                 buttonStyle="tw-p-3 tw-text-white-100 tw-rounded-md tw-bg-red-kwek100"
                 text="Register now"
                 cmd={() => router.push('/sell/create-account')}
-              />
+              />)
+                :
+                (<Link href="/seller/profile">
+                  <a className={Styles.sell}>
+                    <span className="tw-mr-3 lg:tw-mr-5">Account</span>
+                  </a>
+                </Link>)
+              }
             </div>
           </div>
         )}
@@ -83,12 +101,12 @@ const heroSection = () => {
           <p className="tw-text-base md:tw-text-xl tw-text-black-stock tw-font-light tw-text-center md:tw-text-left tw-mt-3 tw-mb-5">
             Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!
           </p>
-          <button
+          {!user.user.isSeller && <button
             className="btn bg-primary tw-p-4 tw-font-medium tw-w-9/12 tw-m-auto md:tw-w-auto md:tw-m-0 tw-text-sm sm:tw-text-base tw-truncate"
             onClick={() => router.push('/sell/create-account')}
           >
             Start your free trial <i className="fas fa-long-arrow-alt-right fa-2x tw-ml-2" />
-          </button>
+          </button>}
         </div>
 
         <div className="md:tw-ml-36 lg:tw-ml-52">

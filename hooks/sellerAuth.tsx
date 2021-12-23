@@ -28,7 +28,7 @@ const sellerAuth = (WrappedComponent: any) => {
           const data = await verifyTokenFunc(user.token);
           // console.log({ data });
           // if token was verified we set the state.
-          if (data.verifyToken.status && user.isSeller) {
+          if (data.verifyToken.status && user.user.isSeller) {
             // console.log({data})
             setIsAuthenticated(data.verifyToken.status);
             setIsLoading(false);
@@ -45,6 +45,7 @@ const sellerAuth = (WrappedComponent: any) => {
     if (isLoading) {
       return (
         <>
+          <Skeleton active />
           <Skeleton active />
           <Skeleton active />
           <Skeleton active />

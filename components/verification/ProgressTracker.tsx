@@ -1,35 +1,67 @@
-import React from "react";
-import Style from "./tracker.module.scss";
+import React, { Fragment } from 'react';
+import { NavigationComponentProps } from 'react-step-builder';
+import Style from './tracker.module.scss';
 
-function ProgressTracker() {
+interface progressTrackerProps extends NavigationComponentProps {}
+
+const ProgressTracker: React.FC<progressTrackerProps> = props => {
+  const { allSteps, current: currentStep, size: stepLength } = props;
+
   return (
-    <section className="tw-bg-white-100 tw-py-10 tw-px-2 md:tw-px-8 tw-flex tw-justify-between tw-rounded-md">
-      <div
-        className={`tw-flex tw-flex-col tw-items-center tw-flex-1 tw-text-center tw-relative`}
-      >
-        <div className="tw-absolute tw-left-[115px] tw-top-[12px] tw-border-b-2 tw-border-dotted tw-border-gray-kwek100 tw-opacity-50 tw-w-[86%] "></div>
-        <div
-          className={`tw-border-2 tw-border-solid tw-border-brown-kwek400 tw-rounded-full tw-h-7 tw-w-7`}
-        ></div>
-        <p className="tw-text-xs tw-font-medium tw-mt-2">Vendor's Policy</p>
-      </div>
+    <section className="tw-bg-white-100 tw-py-10 tw-px-10 md:tw-px-[10rem] tw-flex tw-justify-around tw-items-center tw-rounded-md">
+      {allSteps.map(({ title }, index) => {
+        const currentProgress = currentStep - 1 > index;
 
-      <div className="tw-flex tw-flex-col tw-items-center tw-flex-1 tw-text-center">
-        <div className="tw-border-2 tw-border-solid tw-border-brown-kwek400 tw-rounded-full tw-h-7 tw-w-7"></div>
-        <p className="tw-text-xs tw-font-medium tw-mt-2">Valid ID</p>
-      </div>
+        const iconTheme = currentProgress
+          ? 'tw-border-green-success tw-text-green-success'
+          : 'tw-border-brown-kwek400 tw-border-2';
+        const textTheme = currentProgress
+          ? 'tw-text-green-success'
+          : currentStep === index + 1
+          ? 'tw-text-black'
+          : 'tw-text-gray-kwek400';
+        const barTheme = currentProgress
+          ? 'tw-border-green-success'
+          : 'tw-border-gray-kwek400';
 
-      <div className="tw-flex tw-flex-col tw-items-center tw-flex-1 tw-text-center">
-        <div className="tw-border-2 tw-border-solid tw-border-brown-kwek400 tw-rounded-full tw-h-7 tw-w-7"></div>
-        <p className="tw-text-xs tw-font-medium tw-mt-2">Verify BVN</p>
-      </div>
+        return (
+          <Fragment key={title}>
+            <div className="tw-flex tw-flex-col tw-items-center tw-text-center tw-relative tw-mb-5">
+              <div
+                className={`tw-border-solid tw-rounded-full tw-h-7 tw-w-7 ${iconTheme} `}
+              >
+                {currentProgress && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="tw-w-7 tw-h-7"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+              </div>
+              <p
+                className={`tw-text-xs tw-font-medium ${textTheme} tw-absolute tw-top-7 tw-w-[500%]`}
+              >
+                {title}
+              </p>
+            </div>
 
-      <div className="tw-flex tw-flex-col tw-items-center tw-flex-1 tw-text-center">
-        <div className="tw-border-2 tw-border-solid tw-border-brown-kwek400 tw-rounded-full tw-h-7 tw-w-7"></div>
-        <p className="tw-text-xs tw-font-medium tw-mt-2">Verify Bank Account</p>
-      </div>
+            {index + 1 < stepLength && (
+              <div
+                className={`tw-w-full ${barTheme} tw-border-b-4 tw-border-dotted tw-mb-5 tw-opacity-50`}
+              ></div>
+            )}
+          </Fragment>
+        );
+      })}
     </section>
   );
-}
+};
 
 export default ProgressTracker;
