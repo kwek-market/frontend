@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./reviews.module.scss";
 import Image from "next/image";
+import styles from "./Reviews.module.scss";
 
 function ReviewItem({ name, date, reviewBody, reviewerPic, sellerPic }) {
 	return (
