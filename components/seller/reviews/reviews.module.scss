@@ -51,6 +51,9 @@
 	// margin-left: 32px;
 	margin-bottom: 55px;
 	// margin: 27px 0 55px 32px;
+	@include respondMax("tablet") {
+		width: 100%;
+	}
 }
 
 .container {
@@ -68,23 +71,39 @@
 	box-sizing: border-box;
 	border-radius: 5px;
 	width: 206px;
+	font-weight: 500;
+	font-size: 15px;
 	@include flex(space-between, center, unset);
 	padding: 5px 25px;
 	margin-left: 10px;
 }
 
 .flex1 {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	@include flex(space-between, center, unset);
+	// display: flex;
+	// align-items: center;
+	// justify-content: space-between;
+	margin-bottom: 16px;
 
 	@include respondMax("tablet") {
 		flex-direction: column;
+		align-items: flex-start;
 	}
 }
 
 .flex {
 	@include flex(unset, center, unset);
+	font-weight: 500;
+	color: #574240;
+	font-size: 15px;
+	@include respondMax("tablet") {
+		display: none;
+	}
+}
+.dropdownIcon {
+	font-weight: 500;
+	font-size: 30px;
+	color: #1d1616;
 }
 
 .emptyReviews {
@@ -94,4 +113,65 @@
 	font-size: 32px;
 	color: $stock-color;
 	height: 50vh;
+}
+
+// .reviewsContainer {
+
+// }
+.reviewer {
+	@include flex(flex-start, flex-start, row);
+	margin-top: 32px;
+	.img {
+		border-radius: 9999px;
+	}
+	.reviewer_content {
+		margin-bottom: 16px;
+		margin-left: 32px;
+		width: 100%;
+	}
+	.user {
+		@include flex(flex-start, flex-start, row);
+		width: 100%;
+
+		.infouser {
+			margin-right: auto;
+
+			.name {
+				font-weight: 500;
+				font-size: 16px;
+				color: #1d1616;
+				margin-bottom: 2px;
+			}
+
+			.date {
+				font-size: 16px;
+				color: #bfa5a3;
+			}
+		}
+
+		.star_container {
+			@include flex(flex-start, center);
+			margin-left: auto;
+
+			span {
+				font-size: 1.2rem;
+				color: #ffc107;
+			}
+		}
+	}
+	.review_body {
+		font-size: 16px;
+		color: #574240;
+	}
+}
+
+.seller_reply {
+	@include flex(unset, center, unset);
+
+	.reply_box {
+		border: none;
+		font-size: 16px;
+		color: #574240;
+		opacity: 0.5;
+	}
 }
