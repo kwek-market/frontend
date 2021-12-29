@@ -6,20 +6,11 @@
   margin-bottom: 277px;
   width: 100%;
 
-  @media (min-width: 260px) and (max-width: 640px) {
+  @media (min-width: 260px) and (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }
 
-  @media (min-width: 641px) and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    display: flex;
-    flex-direction: column;
-  }
 
   .first_box {
     width: 70%;
@@ -216,7 +207,7 @@
         background: #f9f6f6;
 
 
-        @media (min-width: 320px) and (max-width: 640px) {
+        @media (min-width: 220px) and (max-width: 1024px) {
           padding-top: 10px;
         }
 
@@ -224,6 +215,9 @@
           @include flex(flex-start, center, row);
           margin-bottom: 4px;
 
+          @media (min-width: 220px) and (max-width: 320px) {
+            flex-direction: column;
+          }
           .name {
             font-size: 16px;
             margin-bottom: 0px;
@@ -287,7 +281,7 @@
           width: 100%;
           margin-bottom: 14px;
 
-          @media (min-width: 320px) and (max-width: 640px) {
+          @media (min-width: 220px) and (max-width: 640px) {
             grid-template-columns: repeat(1, minmax(0, 1fr));
           }
 
@@ -318,7 +312,11 @@
 
             .info {
               margin-left: 16px;
-
+ 
+              @media (min-width: 220px) and (max-width: 320px) {
+                margin-right: 8px;
+                margin-left: 1px;
+              }
               .head {
                 color: #1d1616;
                 font-size: 18px;
@@ -355,6 +353,11 @@
 
             .info {
               margin-left: 16px;
+
+              @media (min-width: 220px) and (max-width: 320px) {
+                margin-right: 8px;
+                margin-left: 1px;
+              }
 
               .header {
                 margin-bottom: 10px;
@@ -410,10 +413,17 @@
         border-radius: 5px;
         background: #f9f6f6;
 
+        @media (min-width: 220px) and (max-width: 1024px) {
+          padding-top: 10px;
+        }
+
         .top_head {
           @include flex(flex-start, center, row);
           margin-bottom: 4px;
-
+   
+          @media (min-width: 220px) and (max-width: 320px) {
+            flex-direction: column;
+          }
           .name {
             font-size: 16px;
             margin-bottom: 0px;
@@ -468,6 +478,10 @@
         border-top: 1px solid #bfa5a3;
         border-bottom: 1px solid #bfa5a3;
 
+        @media (min-width: 220px) and (max-width: 320px) {
+          flex-direction: column;
+        }
+
         .order_id {
           font-size: 16px;
           font-weight: 500;
@@ -481,6 +495,7 @@
           font-size: 22px;
           color: #1d1616;
           margin-bottom: 0;
+          padding-right: 5px;
         }
       }
 
@@ -491,7 +506,7 @@
         width: 100%;
         margin-bottom: 24px;
 
-        @media (min-width: 320px) and (max-width: 640px) {
+        @media (min-width: 220px) and (max-width: 640px) {
           grid-template-columns: repeat(1, minmax(0, 1fr));
         }
 
@@ -527,6 +542,10 @@
 
           .info {
             margin-left: 16px;
+
+            @media (min-width: 220px) and (max-width: 320px) {
+              margin-left: 4px;
+            }
 
             .head {
               font-weight: 600;
@@ -579,6 +598,10 @@
         .info {
           margin-left: 16px;
 
+          @media (min-width: 220px) and (max-width: 320px) {
+            margin-left: 4px;
+          }
+
           .seller {
             font-size: 12px;
             color: #bfa5a3;
@@ -608,6 +631,7 @@
               font-weight: 600;
               color: #574240;
               margin-bottom: 0;
+              padding-right: 5px
             }
           }
         }
@@ -633,6 +657,7 @@
         margin-left: auto;
         color: #574240;
         margin-bottom: 0;
+        padding-right: 5px;
       }
     }
 
@@ -654,6 +679,7 @@
         margin-left: auto;
         color: #574240;
         margin-bottom: 0;
+        padding-right: 5px;
       }
     }
 
@@ -676,6 +702,7 @@
         color: #1d1616;
         font-weight: bold;
         margin-bottom: 0;
+        padding-right: 5px;
       }
     }
   }
