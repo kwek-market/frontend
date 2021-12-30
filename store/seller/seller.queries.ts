@@ -92,3 +92,12 @@ export const SELLER_DATA = /* GRAPHQL */ `
   }
 }
 `;
+
+export const COMPLETE_SELLER_VERIFICATION = /* GraphQL */ `
+  mutation completeSellerVerification($email: String!) {
+    completeSellerVerification(email: $email) {
+      status
+      message
+    }
+  }
+`;
