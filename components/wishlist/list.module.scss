@@ -2,189 +2,222 @@
 @import "@/styles/mixins";
 
 .list_content {
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #bfa5a3;
-  background-color: #fff;
-  width: 100%;
-  margin-top: 40px;
-  margin-bottom: 100px;
+	border-radius: 10px 10px 0 0;
+	border: 1px solid #bfa5a3;
+	background-color: #fff;
+	width: 100%;
+	margin-top: 40px;
+	margin-bottom: 100px;
 
-  @include respondMax("tablet") {
-    border-radius: 0;
-    border: none;
-  }
+	@include respondMax("tablet") {
+		border-radius: 0;
+		border: none;
+	}
 
-  .list_grid {
-    @include flex(center, flex-end, row);
-    width: 100%;
-    background: #fff;
+	.list_grid {
+		@include flex(center, flex-end, row);
+		width: 100%;
+		background: #fff;
 
-    // on small screens this will work
-    @include respondMax("tablet") {
-      align-items: stretch;
-      justify-content: space-evenly;
-      border-top: 1px solid #bfa5a3;
-      border-bottom: 1px solid #bfa5a3;
-      padding: 0.75rem 0;
-      display: none;
-    }
+		// on small screens this will work
+		@include respondMax("tablet") {
+			align-items: stretch;
+			justify-content: space-evenly;
+			border-top: 1px solid #bfa5a3;
+			border-bottom: 1px solid #bfa5a3;
+			padding: 0.75rem 0;
+			display: none;
+		}
 
-    .first_grid {
-      width: 20%;
-      padding: 35px;
-      border-radius: 10px 0 0 0;
-      border-bottom: 1px solid #bfa5a3;
+		.first_grid {
+			width: 20%;
+			padding: 35px;
+			// border-radius: 1z0px;
+			border-radius: 10px 0 0 0;
+			border-bottom: 1px solid #bfa5a3;
 
-      @include respondMax("tablet") {
-        align-self: center;
-        border: none;
-        padding: 0;
-        width: auto;
-      }
+			@include respondMax("tablet") {
+				align-self: center;
+				border: none;
+				padding: 0;
+				width: auto;
+			}
 
-      .img {
-        margin: auto;
-      }
-    }
-    .second_grid {
-      width: 70%;
-      padding: 27px 40px;
-      border-bottom: 1px solid #bfa5a3;
-      border-left: 1px solid #bfa5a3;
-      border-right: 1px solid #bfa5a3;
+			.img {
+				margin: auto;
+				// border-radius: 50px;
+				@include respondMax("tablet") {
+					// display: none;
+					border-radius: 50%;
+				}
+			}
+		}
+		.second_grid {
+			width: 70%;
+			padding: 27px 40px;
+			border-bottom: 1px solid #bfa5a3;
+			border-left: 1px solid #bfa5a3;
+			border-right: 1px solid #bfa5a3;
 
-      @include respondMax("tablet") {
-        width: auto;
-        border: none;
-        padding: 0 1rem;
-      }
+			@include respondMax("tablet") {
+				width: auto;
+				border: none;
+				padding: 0 1rem;
+			}
 
-      .item_name {
-        font-weight: 600;
-        font-size: 22px;
-        color: #1d1616;
-        margin-bottom: 8px;
-      }
-      .item_price {
-        font-weight: 500;
-        font-size: 18px;
-        color: rgba(87, 66, 64, 0.6);
-        margin-bottom: 4px;
-      }
-      .date {
-        font-weight: 300;
-        font-size: 18px;
-        color: #1d1616;
-        margin-bottom: 0;
-      }
-    }
-    .third_grid {
-      width: 30%;
-      padding: 42px 25px;
-      border-bottom: 1px solid #bfa5a3;
-      border-radius: 0 10px 0 0;
+			.item_name {
+				font-weight: 600;
+				font-size: 22px;
+				color: #1d1616;
+				margin-bottom: 8px;
+			}
+			.item_price {
+				font-weight: 500;
+				font-size: 18px;
+				color: rgba(87, 66, 64, 0.6);
+				margin-bottom: 4px;
+			}
+			.date {
+				font-weight: 300;
+				font-size: 18px;
+				color: #1d1616;
+				margin-bottom: 0;
+			}
+		}
+		.third_grid {
+			width: 30%;
+			padding: 42px 25px;
+			border-bottom: 1px solid #bfa5a3;
+			border-radius: 0 10px 0 0;
 
-      @include respondMax("tablet") {
-        width: auto;
-        padding: 0;
-        border: none;
-      }
+			@include respondMax("tablet") {
+				width: auto;
+				padding: 0;
+				border: none;
+			}
 
-      .stock {
-        font-weight: 500;
-        font-size: 18px;
-        color: rgba(87, 66, 64, 0.6);
-        margin-bottom: 16px;
+			.stock {
+				font-weight: 500;
+				font-size: 18px;
+				color: rgba(87, 66, 64, 0.6);
+				margin-bottom: 16px;
 
-        &_out {
-          color: #ff6e82 !important;
-          font-weight: 500;
-          font-size: 18px;
-          color: rgba(87, 66, 64, 0.6);
-          margin-bottom: 16px;
-        }
-      }
-      .buy {
-        font-weight: 600;
-        font-size: 18px;
-        color: #1d1616;
-        margin-bottom: 0px;
-      }
-    }
-  }
+				&_out {
+					color: #ff6e82 !important;
+					font-weight: 500;
+					font-size: 18px;
+					color: rgba(87, 66, 64, 0.6);
+					margin-bottom: 16px;
+				}
+			}
+			.buy {
+				font-weight: 600;
+				font-size: 18px;
+				color: #1d1616;
+				margin-bottom: 0px;
+			}
+		}
+	}
 
-  .list_grid_out {
-    @extend .list_grid;
-    background: #fffbf0;
-  }
+	.list_grid_out {
+		@extend .list_grid;
+		background: #fffbf0;
+	}
 
-  .list_grid_mobile {
-    @include flex();
-    border-bottom: $border-bottom;
-    margin-bottom: 1.5rem;
+	.list_grid_mobile {
+		@include flex();
+		border-bottom: $border-bottom;
+		margin-bottom: 1.5rem;
 
-    @include respondMin("tablet") {
-      display: none;
-    }
+		@include respondMin("tablet") {
+			display: none;
+		}
 
-    .picture_grid {
-      width: 45%;
-    }
+		.picture_grid {
+			width: 45%;
+			margin-bottom: 16px;
+			position: relative;
 
-    .content_box {
-      width: 55%;
-      padding-left: 1.1rem;
+			.img {
+				border-radius: 5px;
+			}
 
-      .stock {
-        font-size: 0.5rem;
-        color: $stock-color;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 150%;
-        opacity: 0.5;
+			.heartImg {
+				position: absolute;
+				top: 12px;
+				right: 14px;
+				z-index: 100;
+			}
+			.heart {
+				color: #af1328;
+			}
+		}
 
-        &_out {
-          font-size: 0.5rem;
-          color: $error;
-          font-style: normal;
-          font-weight: normal;
-          line-height: 150%;
-        }
-      }
+		.picture_grid::after {
+			content: "";
+			position: absolute;
+			height: 24px;
+			width: 24px;
+			border-radius: 50%;
+			background-color: #fff;
+			top: 8px;
+			right: 8px;
+		}
 
-      .item_name {
-        font-size: 0.75rem;
-        color: $stock-color;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 150%;
-      }
+		.content_box {
+			width: 55%;
+			padding-left: 1.1rem;
 
-      .item_price {
-        font-size: 1.125rem;
-        color: $col-black;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 150%;
-      }
+			.stock {
+				font-size: 0.5rem;
+				color: $stock-color;
+				font-style: normal;
+				font-weight: normal;
+				line-height: 150%;
+				opacity: 0.5;
 
-      .star {
-        @include flex(flex-start, center);
+				&_out {
+					font-size: 0.5rem;
+					color: $error;
+					font-style: normal;
+					font-weight: normal;
+					line-height: 150%;
+				}
+			}
 
-        &_filled {
-          color: $star-filled;
-          font-size: 0.8rem;
-        }
+			.item_name {
+				font-size: 0.75rem;
+				color: $stock-color;
+				font-style: normal;
+				font-weight: normal;
+				line-height: 150%;
+			}
 
-        .reviews {
-          font-style: normal;
-          font-weight: normal;
-          font-size: 0.8rem;
-          line-height: 150%;
-          color: #c7c0bf;
-          margin-left: 0.3rem;
-        }
-      }
-    }
-  }
+			.item_price {
+				font-size: 1.125rem;
+				color: $col-black;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 150%;
+			}
+
+			.star {
+				@include flex(flex-start, center);
+
+				&_filled {
+					color: $star-filled;
+					font-size: 0.8rem;
+				}
+
+				.reviews {
+					font-style: normal;
+					font-weight: normal;
+					font-size: 0.8rem;
+					line-height: 150%;
+					color: #c7c0bf;
+					margin-left: 0.3rem;
+				}
+			}
+		}
+	}
 }
