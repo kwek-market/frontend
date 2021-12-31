@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-
-import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
-
 import Header from "@/shared/sellerHeader/Header";
-import { CategoryGrid } from "@/components/seller";
 
 import { RootState } from "@/store/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,13 +7,14 @@ import { getSellerData } from "@/store/seller/seller.action";
 import ShopLayout from "@/layouts/seller/ShopLayout";
 import { Modal } from "@/components/verification";
 import sellerAuth from "@/hooks/sellerAuth";
+import { Content } from "@/components/seller";
 
 const Page = function () {
   const dispatch = useDispatch();
   const { user, seller } = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    dispatch(getSellerData(user.token));
+    user.token && dispatch(getSellerData(user.token));
   }, []);
 
   return (
@@ -26,8 +23,7 @@ const Page = function () {
       <>
         {seller.seller.sellerIsVerified ? (
           <>
-            <CategoryGrid />
-            <ExtraInfo />
+            <Content />
           </>
         ) : (
           <>
@@ -39,4 +35,4 @@ const Page = function () {
   );
 };
 
-export default Page;
+export default sellerAuth(Page);
