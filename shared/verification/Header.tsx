@@ -1,8 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
 
 function Header() {
   const router = useRouter();
+  const { seller } = useSelector((state: RootState) => state);
 
   function goBack() {
     router.back();
@@ -26,7 +29,7 @@ function Header() {
         </div>
       </nav>
       <nav className="tw-text-white-100">
-        <i className="fas fa-user" /> Hi Allison{" "}
+        <i className="fas fa-user" /> Hi {seller.seller.firstname}{" "}
         <i className="fas fa-caret-down" />
       </nav>
     </header>

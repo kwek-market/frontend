@@ -27,7 +27,16 @@
         ],
         "@/public/*": [
           "public/*"
-        ]
+        ],
+        "@/helpers/*": [
+          "helpers/*"
+        ],
+        "@/layouts/*": [
+          "layouts/*"
+        ],
+        "@/hooks/*": [
+          "hooks/*"
+        ],
       },
     },
     "include": [
