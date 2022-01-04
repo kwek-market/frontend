@@ -2,33 +2,67 @@
 @import "@/styles/mixins";
 
 .empty_container {
-  @include flex(center, center, row);
-  margin-bottom: 100px;
-  padding: 150px 40px;
-  background: #fff;
-  border: 2px solid #bfa5a3;
-  border-radius: 5px;
-  width: 100%;
-  margin-top: 62px;
+	@include flex(center, center, row);
+	margin-bottom: 100px;
+	padding: 150px 40px;
+	background: #fff;
+	border: 2px solid #bfa5a3;
+	border-radius: 5px;
+	width: 100%;
+	margin-top: 62px;
+	@include respondMax("tablet") {
+		border: none;
+		margin-top: 40px;
+		padding: 0;
+	}
 
-  .empty_content {
-    .img {
-      @include flex(center, center, row);
-    }
+	.empty_content {
+		@include flex(center, center, column);
+		.img {
+			@include flex(center, center, row);
 
-    .head {
-      font-weight: 600;
-      margin-top: 48px;
-      font-size: 32px;
-      color: #574240;
-      text-align: center;
-      margin-bottom: 4px;
-    }
+			@include respondMax("tablet") {
+				width: 48px;
+			}
+		}
 
-    .sub {
-      font-size: 18px;
-      text-align: center;
-      color: #bfa5a3;
-    }
-  }
+		.head {
+			font-weight: 600;
+			margin-top: 48px;
+			font-size: 32px;
+			color: #574240;
+			text-align: center;
+			margin-bottom: 4px;
+			@include respondMax("tablet") {
+				font-size: 16px;
+				margin-top: 32px;
+			}
+		}
+
+		.sub {
+			font-size: 18px;
+			text-align: center;
+			color: #bfa5a3;
+
+			@include respondMax("tablet") {
+				font-size: 12px;
+			}
+		}
+
+		.shoppingBtn {
+			// width: 158px;
+			// height: 40px;
+			background: #af1328;
+			border-radius: 10px;
+			text-align: center;
+			padding: 10px 26px;
+			color: #fff;
+			font-size: 11px;
+margin-top: 15%;
+
+			@include respondMin("tablet") {
+				display: none;
+			}
+		}
+	}
 }
