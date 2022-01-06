@@ -55,7 +55,7 @@ module.exports = {
           kwek100: '#AF1328',
           kwek200: 'rgba(175, 19, 40, 0.6)',
         },
-        error: '#FF2D1A',
+        error: '#FF2D1A'
       },
       gridTemplateColumns: {
         'kwek-1': 'repeat(auto-fit, minmax(350px, 1fr))',
@@ -64,6 +64,9 @@ module.exports = {
         'kwek-4': 'repeat(auto-fit, minmax(50px, 1fr))',
         'kwek-5': 'repeat(auto-fit, minmax(200px, 1fr))',
       },
+      backgroundImage: {
+        "seller-header": "linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('/images/user-photo.svg')"
+      }
     },
   },
   variants: {
