@@ -1,7 +1,12 @@
 import { Dispatch } from "redux";
 import { userFetcherWithAuth } from "@/helpers";
-import { SellerData, SellerVerification, StartSelling } from "../../interfaces/commonTypes";
 import {
+  SellerData,
+  SellerVerification,
+  StartSelling,
+} from "../../interfaces/commonTypes";
+import {
+  COMPLETE_SELLER_VERIFICATION,
   SELLER_DATA,
   SELLER_VERIFICATION,
   START_SELLING,
@@ -72,7 +77,33 @@ export function sellerVerification(
       response.sellerVerification.status &&
         dispatch({
           type: SellerTypes.SELLER_VERIFICATION,
-          payload: sellerVerification,
+          payload: { ...sellerVerification, ...response.sellerVerification },
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function completeSellerVerification(email: string, token: string) {
+  return async function (dispatch: Dispatch) {
+    try {
+      sellerLoading();
+      const response = await userFetcherWithAuth(
+        COMPLETE_SELLER_VERIFICATION,
+        { email },
+        token
+      );
+      console.log(response);
+      import("antd").then(({ message }) => {
+        response.completeSellerVerification.status
+          ? message.success(response.completeSellerVerification.message)
+          : message.error(response.completeSellerVerification.message);
+      });
+      response.completeSellerVerification.status &&
+        dispatch({
+          type: SellerTypes.COMPLETE_SELLER_VERIFICATION,
+          payload: response.completeSellerVerification.data,
         });
     } catch (error) {
       console.log(error);
@@ -101,7 +132,6 @@ export function getSellerData(token: string) {
     }
   };
 }
-
 
 export const clearSeller = () => ({
   type: SellerTypes.CLEAR_SELLER,

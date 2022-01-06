@@ -32,37 +32,6 @@ const [reviewType, setReviewType] = useState<ReviewType>({
   name: ""
 });
 
-const prodRev =""
-// const [data, setData] = useState({
-//   comment: "",
-//   name: "",
-//   email: ""
-// })
-
-// function ksubmit(e: React.FormEvent<HTMLFormElement>) {
-//    e.preventDefault();
-//    Axios.post(url, {
-//    comment: data.comment,
-//    name: data.name,
-//    email: data.email
-//   })
-//     .then(res =>{
-//        console.log(res.data)
-//      })
-//  }
-
-// function submit(event: React.FormEvent<HTMLFormElement>) {
-//   event.preventDefault();
-//    if (!emailValidator(email) || email === "") {
-//      import("antd").then(({ message }) => {
-//        message.error("Invalid email");
-//      });
-//     return;
-//    }
-   
-//    console.log(email);
-//    dispatch(reviewProduct(Email, user.token));
-// }
 
 function submit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
@@ -79,14 +48,6 @@ function submit(e: React.FormEvent<HTMLFormElement>) {
 }
 
 
-
-
-// function handle(e){
-//   const newdata={...data}
-//   newdata[e.target.id] = e.target.value
-//   setData(newdata)
-//   console.log(newdata)
-// }
 
   return (
 
@@ -281,11 +242,6 @@ function submit(e: React.FormEvent<HTMLFormElement>) {
                         )
                       })}
                       
-                      {/* <span className="material-icons">star</span>
-                      <span className="material-icons" >star</span>
-                      <span className="material-icons" >star</span>
-                      <span className="material-icons">star</span>
-                      <span className="material-icons" >star</span>  */}
                     </div>
                   </div>
                   <div className={styles.inputs}>
