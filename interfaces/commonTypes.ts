@@ -129,3 +129,10 @@ export type SellerData = {
   bankAccountIsVerified: boolean;
   acceptedVendorPolicy: boolean;
 };
+
+export type ReviewType = {
+  comment: string
+  radio: any
+  email:string
+  name: string
+}

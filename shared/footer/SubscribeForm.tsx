@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { subscribeToNewsletter } from "@/store/newsletter/newsletter.actions";
 import { RootState } from "@/store/rootReducer";
 
-const Component = function () {
+const Component = function () {    
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [email, setEmail] = useState<string>("");

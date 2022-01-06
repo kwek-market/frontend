@@ -1,16 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { emailValidator } from "@/helpers";
 import Image from 'next/image';
 import { Tabs } from 'antd';
+import { FaStar } from "react-icons/fa"
 import styles from './productDesc.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { ReviewType } from "@/interfaces/commonTypes";
+
+import { reviewProduct } from "@/store/review/review.action";
+import { RootState } from "@/store/rootReducer";
+
+
 
 const { TabPane } = Tabs;
 
-function callback(key) {
+function callback(key: string) {
   console.log(key);
 }
 
 const ProductDesc = function () {
+   
+const [rating, setRating] = useState(null);
+const [hover, setHover] = useState(null);
+const [email, setEmail] = useState<string>("");
+const dispatch = useDispatch();
+const user = useSelector((state: RootState) => state.user);
+const [reviewType, setReviewType] = useState<ReviewType>({
+  comment: "",
+  radio:"",
+  email:"",
+  name: ""
+});
+
+const prodRev =""
+// const [data, setData] = useState({
+//   comment: "",
+//   name: "",
+//   email: ""
+// })
+
+// function ksubmit(e: React.FormEvent<HTMLFormElement>) {
+//    e.preventDefault();
+//    Axios.post(url, {
+//    comment: data.comment,
+//    name: data.name,
+//    email: data.email
+//   })
+//     .then(res =>{
+//        console.log(res.data)
+//      })
+//  }
+
+// function submit(event: React.FormEvent<HTMLFormElement>) {
+//   event.preventDefault();
+//    if (!emailValidator(email) || email === "") {
+//      import("antd").then(({ message }) => {
+//        message.error("Invalid email");
+//      });
+//     return;
+//    }
+   
+//    console.log(email);
+//    dispatch(reviewProduct(Email, user.token));
+// }
+
+function submit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  
+  // if (!emailValidator(email) || email === "") {
+  //   import("antd").then(({ message }) => {
+  //     message.error("Invalid email");
+  //   });
+  //   return;
+  // }
+  console.log(email);
+  dispatch(reviewProduct(reviewType, user.token));
+  return ('success');
+}
+
+
+
+
+// function handle(e){
+//   const newdata={...data}
+//   newdata[e.target.id] = e.target.value
+//   setData(newdata)
+//   console.log(newdata)
+// }
+
   return (
+
     <div className={styles.desc_container}>
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="Description" key="1">
@@ -175,30 +254,56 @@ const ProductDesc = function () {
                     Your email address will not be published, Required fields are marked *
                   </p>
                 </div>
-                <form className={styles.form}>
+                <form 
+                className={styles.form} onSubmit={(e)=> submit(e)}>
                   <div className={styles.ratebox}>
                     <p>Your Rating:</p>
                     <div className={styles.box_productRating}>
+                      {[ ...Array(5)].map((star, i) => {
+                        const ratingValue = i + 1;
+
+                        return (
+                          <label>
+                            <input 
+                            type="radio"
+                            name="rating"
+                            value={ratingValue}
+                            onClick={() => setRating(ratingValue)}
+                            />
+                          <FaStar
+                          className={styles.stars}
+                          color={ratingValue <= (hover || rating) ? "#ffc107" : "#bfa5a3" }
+                          onMouseOver={() => setHover(ratingValue)}
+                          onMouseLeave={() => setHover(null)}
+                    
+                            />
+                         </label>
+                        )
+                      })}
+                      
+                      {/* <span className="material-icons">star</span>
+                      <span className="material-icons" >star</span>
+                      <span className="material-icons" >star</span>
                       <span className="material-icons">star</span>
-                      <span className="material-icons">star</span>
-                      <span className="material-icons">star</span>
-                      <span className="material-icons">star</span>
-                      <span className="material-icons">star</span>
+                      <span className="material-icons" >star</span>  */}
                     </div>
                   </div>
                   <div className={styles.inputs}>
-                    <textarea placeholder="Comment *" name="Comment" required />
+                    <textarea onChange={(e) => setReviewType({ ...reviewType, comment: e.target.value })} id="comment" placeholder="comment *" name="Comment" required value={reviewType.comment} />
                     <div className={styles.input_grid}>
                       <div>
-                        <input placeholder="Name *" name="Name" type="text" required />
+                        <input onChange={(e) => setReviewType({ ...reviewType, name: e.target.value })} id="name" placeholder="name *" name="Name" type="text" required value={reviewType.name} />
                       </div>
                       <div>
-                        <input placeholder="Email *" name="Email" type="email" required />
+                        <input onChange={(e) => setReviewType({ ...reviewType, email: e.target.value })} id="email" placeholder="email *" name="Email" type="email" required value={reviewType.email} />
                       </div>
                     </div>
                   </div>
                   <div className={styles.button}>
-                    <button type="submit">SUBMIT</button>
+                    <button 
+                    // onClick={(e) => reviewProduct(e)}
+                    type="submit"
+                    >SUBMIT</button>
                   </div>
                 </form>
               </div>
