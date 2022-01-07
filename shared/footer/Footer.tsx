@@ -166,7 +166,7 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/privacyPolicy">
                 <a className={styles.nav_link}>Privacy Policy</a>
               </Link>
             </li>
@@ -174,7 +174,7 @@ const Component = function () {
             <li className={styles.nav_item}>
               <Link href="/">
                 <a className={styles.nav_link}>Authentic Items Policy</a>
-              </Link>
+              </Link> 
             </li>
 
             <li className={styles.nav_item}>

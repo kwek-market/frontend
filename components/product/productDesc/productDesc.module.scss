@@ -108,6 +108,10 @@
         .box_productRating {
           @include flex(flex-start, center);
           margin-left: 32px;
+      
+
+
+          
 
           span {
             font-size: 1.2rem;
@@ -203,10 +207,32 @@
           .box_productRating {
             @include flex(flex-start, center);
             margin-left: 24px;
+            // min-height: 100vh;
 
-            span {
-              font-size: 24px;
-              color: #bfa5a3;
+            input[type="radio"] {
+              display: none;
+            }
+
+            .box_productRating:hover{
+              color: #ffc107;
+            }
+
+            .box_productRating span:hover{
+              color: #ffc107;
+            }
+            .box_productRating span:hover ~ span {
+              color: #ffc107;
+            }
+
+            // span {
+            //   font-size: 24px;
+            //   color: #bfa5a3;
+            // }
+            .stars{
+              cursor: pointer;
+              transition: color 200ms;
+              font-size: 1.2rem;
+
             }
           }
         }
