@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Button from "../buttons/Button";
 
-function Header() {
+function Header({ submitDetails }) {
   const router = useRouter();
   const { seller } = useSelector((state: RootState) => state);
 
@@ -12,13 +12,15 @@ function Header() {
     router.back();
   }
 
-  function saveItem() {}
+  function saveItem() {
+    console.log(submitDetails);
+  }
 
   return (
     <header className="tw-bg-red-kwek100 tw-py-4 tw-px-2 md:tw-px-8 tw-flex tw-justify-between tw-items-center">
       <nav>
         <div
-          className="tw-flex tw-justify-center tw-items-center tw-rounded-full tw-h-7 tw-w-7"
+          className="tw-flex tw-justify-center tw-items-center tw-rounded-full tw-h-7 tw-w-7 hover:cursor-pointer"
           onClick={goBack}
         >
           <img src="/svg/left-arrow-long.svg" />
