@@ -24,6 +24,7 @@ module.exports = {
           kwek800: '#c4c4c4',
           kwek200a: 'rgba(29, 22, 22, 0.7)',
           kwek900: '#574240',
+          input: "#745858"
         },
         white: {
           100: '#FFF',

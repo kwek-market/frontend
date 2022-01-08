@@ -10,6 +10,7 @@ type TextInputProps = {
   max?: number;
   style?: string;
   children?: JSX.Element;
+  restStyles?: string;
 };
 
 const TextInput = function ({
@@ -22,9 +23,10 @@ const TextInput = function ({
   max,
   style,
   children,
+  restStyles,
 }: TextInputProps) {
   return (
-    <div className="tw-flex tw-flex-col tw-relative">
+    <div className={`tw-flex tw-flex-col tw-relative ${restStyles}`}>
       <label
         htmlFor={text}
         className={`tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 ${hide}`}
