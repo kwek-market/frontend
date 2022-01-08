@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "es2015",
       "lib": [
         "dom",
         "dom.iterable",
@@ -12,6 +12,7 @@
       "forceConsistentCasingInFileNames": true,
       "noEmit": true,
       "esModuleInterop": true,
+      "downlevelIteration": true,
       "module": "esnext",
       "moduleResolution": "node",
       "resolveJsonModule": true,

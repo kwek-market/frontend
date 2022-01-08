@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProductDetails() {
+function ProductDetails({ submitDetails, setSubmitDetails }) {
   return (
     <div className="tw-pt-3 tw-px-5 tw-pb-20 tw-mb-5 tw-bg-white-100 tw-rounded-md">
       <div className="tw-p-3 tw-border-b tw-border-grey-kwek700">
@@ -9,7 +9,7 @@ function ProductDetails() {
         </p>
       </div>
       <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-3 tw-mt-3">
-        <label className="tw-text-base tw-font-medium tw-capitalize">
+        <label className="tw-text-base tw-font-medium tw-capitalize tw-self-end">
           {" "}
           Brand{" "}
           <span className="tw-text-red-kwek100 tw-text-sm tw-italic tw-font-normal">
@@ -23,7 +23,7 @@ function ProductDetails() {
           />
         </label>
 
-        <label className="tw-text-base tw-font-medium tw-capitalize">
+        <label className="tw-text-base tw-font-medium tw-capitalize tw-self-end">
           {" "}
           Product weight (kg) <br />
           <input
@@ -37,7 +37,7 @@ function ProductDetails() {
         <label className="tw-text-base tw-font-medium tw-capitalize">
           {" "}
           Product title{" "}
-          <span className="tw-text-red-kwek100 tw-text-sm tw-italic tw-font-normal">
+          <span className="tw-text-red-kwek100 tw-text-sm tw-italic tw-font-normal tw-pt-1">
             (Do not add the brand name here)
           </span>{" "}
           <br />
@@ -48,7 +48,7 @@ function ProductDetails() {
           />
         </label>
 
-        <label className="tw-text-base tw-font-medium tw-capitalize tw-mt-3">
+        <label className="tw-text-base tw-font-medium tw-capitalize tw-pt-3">
           {" "}
           short description <br />
           <textarea
