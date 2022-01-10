@@ -1,27 +1,65 @@
-export const createProduct = /* GraphQL */ `
+export const CreateProduct = /* GraphQL */ `
   mutation createProduct(
-    $title: String!
-    $description: String!
-    $price: Float!
     $category: String!
+    $chargeFivePercentVat: Boolean!
+    $color: String
+    $gender: String
+    $keyword: [String]
+    $productImageUrl: [String]!
+    $productOptions: [String]
+    $productTitle: String!
+    $productWeight: String
+    $returnPolicy: String
+    $shortDescription: String
     $subcategory: String!
-    $image: String!
+    $token: String!
+    $warranty: String
   ) {
     createProduct(
-      title: $title
-      description: $description
-      price: $price
       category: $category
+      chargeFivePercentVat: $chargeFivePercentVat
+      color: $color
+      gender: $gender
+      keyword: $keyword
+      productImageUrl: $productImageUrl
+      productOptions: $productOptions
+      productTitle: $productTitle
+      productWeight: $productWeight
+      returnPolicy: $returnPolicy
+      shortDescription: $shortDescription
       subcategory: $subcategory
-      image: $image
+      token: $token
+      warranty: $warranty
     ) {
-      id
-      title
-      description
-      price
-      category
-      subcategory
-      image
+      product {
+        id
+        productTitle
+        user {
+          id
+          username
+        }
+        category {
+          name
+        }
+        subcategory {
+          name
+        }
+        dateCreated
+        image {
+          id
+          imageUrl
+        }
+        options {
+          id
+          size
+          quantity
+          price
+          discountedPrice
+          optionTotalPrice
+        }
+      }
+      status
+      boolean
     }
   }
 `;
