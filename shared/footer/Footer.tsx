@@ -52,8 +52,8 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Terms and condition</a>
+              <Link href="/terms-of-service">
+                <a className={styles.nav_link}>Terms of Service</a>
               </Link>
             </li>
           </ul>
@@ -98,6 +98,11 @@ const Component = function () {
                 <a className={styles.nav_link}>Buyer Safety Center</a>
               </Link>
             </li>
+            <li className={styles.nav_item}>
+              <Link href="/buyerPolicy">
+                <a className={styles.nav_link}>Buyer Policy</a>
+              </Link>
+            </li>
 
             <li className={styles.nav_item}>
               <Link href="/">
@@ -140,6 +145,11 @@ const Component = function () {
                 <a className={styles.nav_link}>Sell On Kwek</a>
               </Link>
             </li>
+            <li className={styles.nav_item}>
+              <Link href="/sellerPolicy">
+                <a className={styles.nav_link}>Seller Policy</a>
+              </Link>
+            </li>
 
             <li className={styles.nav_item}>
               <Link href="/">
@@ -178,7 +188,7 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/billingPolicy">
                 <a className={styles.nav_link}>Billing Policy</a>
               </Link>
             </li>
