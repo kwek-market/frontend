@@ -131,8 +131,31 @@ export type SellerData = {
 };
 
 export type ReviewType = {
-  comment: string
-  radio: any
-  email:string
-  name: string
-}
+  comment: string;
+  radio: any;
+  email: string;
+  name: string;
+};
+
+export type UploadProductType = {
+  brand: string;
+  category: string;
+  subcategory: string;
+  chargeFivePercentVat: boolean;
+  color: string;
+  gender: string;
+  keyword: string[];
+  productImageUrl: string[];
+  productOptions: string[];
+  productTitle: string;
+  productWeight: string;
+  returnPolicy: string;
+  shortDescription: string;
+  token: string;
+  warranty: string;
+};
+
+export type UploadProductProps = {
+  submitDetails: UploadProductType;
+  setSubmitDetails: React.Dispatch<React.SetStateAction<UploadProductType>>;
+};
