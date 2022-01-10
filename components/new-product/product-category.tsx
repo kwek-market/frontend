@@ -1,3 +1,4 @@
+import { UploadProductProps } from "@/interfaces/commonTypes";
 import {
   getCategories,
   getSubCategories,
@@ -6,19 +7,18 @@ import { RootState } from "@/store/rootReducer";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function ProductCategory({ submitDetails, setSubmitDetails }) {
+function ProductCategory({
+  submitDetails,
+  setSubmitDetails,
+}: UploadProductProps) {
   const dispatch = useDispatch();
   const { categories } = useSelector((state: RootState) => state);
   const [subCategories, setSubCategories] = useState([]);
-  const [uploadProduct, setUploadProduct] = useState({
-    mainCategory: "",
-    subCategory: "",
-  });
 
   function showSubCategories(): Array<{ id: ""; name: "" }> {
-    if (uploadProduct.mainCategory) {
+    if (submitDetails.category) {
       const main = categories.categories.find(
-        (subcat: { id: string }) => subcat.id === uploadProduct.mainCategory
+        (subcat: { id: string }) => subcat.id === submitDetails.category
       );
       // console.log(main);
       if (main !== undefined) {
@@ -32,13 +32,13 @@ function ProductCategory({ submitDetails, setSubmitDetails }) {
     if (val !== null && val !== undefined) {
       console.log(val);
       setSubCategories(val);
-      setUploadProduct({
-        ...uploadProduct,
-        subCategory: val[val.length - 1].id,
+      setSubmitDetails({
+        ...submitDetails,
+        subcategory: val[val.length - 1].id,
       });
-      console.log(uploadProduct.subCategory);
+      console.log(submitDetails.subcategory);
     }
-  }, [uploadProduct.mainCategory]);
+  }, [submitDetails.category]);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -59,13 +59,14 @@ function ProductCategory({ submitDetails, setSubmitDetails }) {
           <select
             placeholder="Select Main Category"
             className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
-            value={uploadProduct.mainCategory}
+            value={submitDetails.category}
             onChange={(e) =>
-              setUploadProduct({
-                ...uploadProduct,
-                mainCategory: e.target.value,
+              setSubmitDetails({
+                ...submitDetails,
+                category: e.target.value,
               })
             }
+            required
           >
             <option value="">Select Main Category</option>
             {categories.categories.map((cat) => (
@@ -88,11 +89,10 @@ function ProductCategory({ submitDetails, setSubmitDetails }) {
               <select
                 className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
                 placeholder="Select subcategory"
+                required
               >
                 <option value="">Select Sub Category</option>
-                <option key={subcat.id} value={subcat.id}>
-                  {subcat.name}
-                </option>
+                <option value={subcat.id}>{subcat.name}</option>
               </select>
             </label>
           ))}
