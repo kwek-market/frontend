@@ -27,14 +27,14 @@ const testimonials = () => {
 						</div>
 					</div>
 					<div>
-						<h3 className="tw-line-clamp-3 md:tw-line-clamp-4 lg:tw-line-clamp-5 xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm  tw-mt-6">
+						<h3 className="  xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6">
 							“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 							enim ad minim veniam, quis nostrud exercitation ullamco laboris
 							nisi ut aliquip ex ea commodo consequat."
 						</h3>
 					</div>
-					<div className="tw-absolute tw-bottom-14">
+					<div className="tw-absolute tw-bottom-[5%]  md:tw-bottom-[10%] ">
 						<img className="tw-h-5" src="/svg/FedEx-Logo.svg" />
 					</div>
 				</>
@@ -61,14 +61,14 @@ const testimonials = () => {
 						</div>
 					</div>
 					<div>
-						<h3 className="tw-line-clamp-3 md:tw-line-clamp-4 lg:tw-line-clamp-5 xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6">
+						<h3 className="  xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6">
 							“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 							enim ad minim veniam, quis nostrud exercitation ullamco laboris
 							nisi ut aliquip ex ea commodo consequat."
 						</h3>
 					</div>
-					<div className="tw-absolute tw-bottom-14">
+					<div className="tw-absolute tw-bottom-[5%]  md:tw-bottom-[10%]">
 						<img className="tw-h-5" src="/svg/FedEx-Logo.svg" />
 					</div>
 				</>

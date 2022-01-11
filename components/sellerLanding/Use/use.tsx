@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Styles from "./use.module.scss";
-
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import UseBox from "./UseBox";
 
 const use = () => {
@@ -32,11 +32,11 @@ const use = () => {
 		},
 	];
 	return (
-		<div className={`tw-py-16 md:tw-py-24 tw-px-8 md:tw-px-14 ${Styles.Use}`}>
+		<div className={`tw-py-16 md:tw-py-24 md:tw-px-14 ${Styles.Use}`}>
 			<div
 				className={` tw-flex md:tw-flex-row tw-flex-col tw-justify-between tw-w-full`}
 			>
-				<div className="tw-text-center md:tw-text-left tw-flex-1 tw-p-2 tw-my-3 md:tw-my-5 lg:tw-my-10">
+				<div className="tw-text-center md:tw-text-left tw-flex-1  tw-my-3 md:tw-my-5 lg:tw-my-10">
 					<h2 className="tw-font-semibold tw-text-gray-kwek200 tw-text-base md:tw-text-2xl lg:tw-text-5xl">
 						How it Works
 					</h2>
@@ -63,14 +63,15 @@ const use = () => {
 			<div className={Styles.useRegister}>
 				<div className={Styles.useRegister_content}>
 					<div className={Styles.useRegister_contentText}>
-						<h1 className="tw-font-semibold tw-text-lg md:tw-text-4xl lg:tw-text-6xl">
+						<h1 className="tw-font-semibold tw-text-2xl tw-w-[70%] lg:tw-w-[100%] tw-text-center md:tw-text-4xl lg:tw-text-6xl">
 							Sell Big, Sell Fast
 						</h1>
 						<button
-							className={`tw-p-2 tw-truncate tw-rounded-md tw-bg-red-kwek100 tw-text-white-100 tw-flex `}
+							className={`tw-text-center tw-p-2 tw-truncate tw-rounded-md tw-bg-red-kwek100 tw-text-white-100 tw-flex `}
 						>
-							Register Now{" "}
-							<i className="fas fa-long-arrow-alt-right fa-2x tw-ml-2"></i>
+							Register Now{"  "}
+							{/* <i className="fas fa-long-arrow-right fa-2x tw-ml-2"></i> */}
+							<HiOutlineArrowNarrowRight className="tw-text-lg tw-m-1" />
 						</button>
 					</div>
 					<div className={Styles.useRegister_contentImage}>

@@ -16,8 +16,11 @@
 }
 .UseGrayBox {
 	width: 100%;
-	height: 70%;
+	height: 184px;
 	// background-color: red;
+	@include respondMin("tablet") {
+		height: 70%;
+	}
 }
 .UseDesc_text {
 	font-weight: 600;
@@ -68,7 +71,10 @@
 	margin: auto;
 }
 .useRegister_contentText {
+	@include flex(center, center, unset);
+	flex-direction: column;
 	margin: auto 4rem;
+	margin-top: 24px;
 }
 .useRegister_contentText__head {
 	font-weight: 600;

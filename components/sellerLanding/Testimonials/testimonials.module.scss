@@ -6,6 +6,7 @@
 
 	@include respondMax("tablet") {
 		@include flex(flex-start, center, column nowrap);
+		padding-bottom: 16px;
 	}
 	height: 33rem;
 	width: 100%;
@@ -48,10 +49,10 @@
 	background-color: $col-white;
 	height: 85%;
 	width: 45%;
-	border: 2px solid red;
 	position: relative;
 	@include respondMax("tablet") {
 		width: 85%;
+		padding-bottom: 40px;
 	}
 }
 .feedbackBox {
