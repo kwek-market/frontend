@@ -2,98 +2,105 @@
 @import "@/styles/mixins";
 
 .testimonials {
-    @include flex(flex-start, center, row wrap);
+	@include flex(flex-start, center, row wrap);
 
-    @include respondMax("tablet") {
-        @include flex(flex-start, center, column nowrap);
-    }
-    height: 33rem;
-    width: 100%;
-    background-color: #FAD1D7;
+	@include respondMax("tablet") {
+		@include flex(flex-start, center, column nowrap);
+		padding-bottom: 16px;
+	}
+	height: 33rem;
+	width: 100%;
+	background-color: #fad1d7;
+
+	@include respondMin("tablet") {
+		margin-top: 5rem;
+	}
 }
 .testimonialsAssurance {
-    background-color: $col-primary;
-    text-align: center;
-    color: $col-white;
-    width: 50%;
-    @include respondMax("tablet") {
-        width: 100%;
-        padding: 50px;
-    }
-    height: 100%;
-    @include flex(center, center, nowrap);
-   flex-direction: column;
+	background-color: $col-primary;
+	text-align: center;
+	color: $col-white;
+	width: 50%;
+	@include respondMax("tablet") {
+		width: 100%;
+		padding: 50px;
+	}
+	height: 100%;
+	@include flex(center, center, nowrap);
+	flex-direction: column;
 }
 .testimonialsAssurance_text {
-   margin: 0 6rem;
-   text-align: left;
+	margin: 0 6rem;
+	text-align: left;
 }
 .testimonialsAssurance_textHead {
-    color: $col-white;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 56px;
-    text-align: left;
+	color: $col-white;
+	font-weight: 600;
+	font-size: 48px;
+	line-height: 56px;
+	text-align: left;
 }
 .testimonialsAssurance_textSub {
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 28px;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 28px;
 }
 .feedback {
-    background-color: $col-white;
-    height: 85%;
-    width: 45%;
-    @include respondMax("tablet") {
-        width: 85%;
-    }
+	background-color: $col-white;
+	height: 85%;
+	width: 45%;
+	position: relative;
+	@include respondMax("tablet") {
+		width: 85%;
+		padding-bottom: 40px;
+	}
 }
 .feedbackBox {
-    overflow: hidden;
-    margin: 2rem 1.5rem;
-    @include respondMax("tablet") {
-        margin: 10px 1.5rem;
-    }
+	overflow: hidden;
+	margin: 2rem 1.5rem;
+	@include respondMax("tablet") {
+		margin: 10px 1.5rem;
+	}
 }
 .feedbackBox_quote {
-    position: relative;
-    left: 35rem;
+	position: relative;
+	left: 35rem;
 }
 .feedbackBox_person {
-    @include flex(flex-start, center, nowrap);
+	@include flex(flex-start, center, nowrap);
 }
 .feedbackBox_personInfo {
-    margin-left: 0.9rem;
-    align-self: center;
-    line-height: 11px;
+	margin-left: 0.9rem;
+	align-self: center;
+	line-height: 11px;
 }
 .feedbackBox_personInfo__head {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    color: $col-primary-300;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 30px;
+	color: $col-primary-300;
 }
 .feedbackBox_personInfo__sub {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 24px;
-    color: rgba(29, 22, 22, 0.7);
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 24px;
+	color: rgba(29, 22, 22, 0.7);
 }
 .feedbackBox_message {
-    margin-top: 2.5rem;
-    @include respondMax("tablet") {
-        margin-top: 1rem;
-    }
+	margin-top: 2.5rem;
+	@include respondMax("tablet") {
+		margin-top: 1rem;
+	}
 }
 .feedbackBox_messageContent {
-    font-weight: normal;
-    font-size: 16px;
-    @include respondMax("tablet") {
-        font-size: 12px;
-    }
-    line-height: 28px;
-    color: $col-primary-300;
+	font-weight: normal;
+	font-size: 16px;
+	@include respondMax("tablet") {
+		font-size: 12px;
+	}
+	line-height: 28px;
+	color: $col-primary-300;
 }
 .feedbackBox_logo {
-    @include flex(space-between, center, nowrap);
+	@include flex(space-between, center, nowrap);
 }
