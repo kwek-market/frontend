@@ -1,0 +1,10 @@
+enum reviewTypes {
+    REVIEW_PRODUCT = 'PRODUCT_REVIEW',
+    PRODUCT_RATING = 'PRODUCT_RATING',
+    REVIEW_LOADING = 'REVIEW_LOADING',
+    ERROR = 'ERROR',
+    REVIEW_COMMENT = 'REVIEW_COMMENT'
+}
+
+export default reviewTypes
+
