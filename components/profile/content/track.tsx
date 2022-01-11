@@ -1,17 +1,85 @@
-import React from 'react';
-import Button from '@/components/buttons/Button';
-import TextInput from '@/components/input/textInput';
+import React, { useState } from "react";
+import "antd/dist/antd.css";
+import { Modal, Steps } from "antd";
+import Button from "@/components/buttons/Button";
+import TextInput from "@/components/input/textInput";
+import { BsJournalBookmarkFill, BsCheck2Circle } from "react-icons/bs";
+import { GiConfirmed } from "react-icons/gi";
+import { ImTruck } from "react-icons/im";
 
 const Track = function ({ activeBtn }) {
-  const [track, setTrack] = React.useState<string>('');
-  function checkOrder() {}
+  const [track, setTrack] = useState<string>("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const { Step } = Steps;
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  function checkOrder() {
+    showModal();
+  }
+
   return (
     <>
+      <Modal
+        title="Order: #334456"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={"auto"}
+        bodyStyle={{ margin: "30px 0" }}
+      >
+        <Steps
+          current={2}
+          responsive={true}
+          className={"tw-h-[60vh] md:tw-h-auto"}
+        >
+          <Step
+            title="Order Placed"
+            description="We have received your order"
+            icon={<BsJournalBookmarkFill />}
+          />
+          <Step
+            title="Order Confrimed"
+            description="Your order has been confirmed"
+            icon={<GiConfirmed />}
+          />
+          <Step
+            title="Order Processed"
+            description="We are preparing your order"
+            icon={<BsCheck2Circle />}
+          />
+          <Step
+            title="Ready For Pickup"
+            description="Your order is ready for pickup"
+            icon={<ImTruck />}
+          />
+        </Steps>
+      </Modal>
       <div className="tw-border-b tw-border-gray-500 tw-border-opacity-50">
-        <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl">{activeBtn}</h4>
+        <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl">
+          {activeBtn}
+        </h4>
       </div>
-      <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between md:tw-p-10 tw-p-3">
-        <TextInput hide="tw-hidden" text="Enter tracking number" type="text" value={track} setValue={setTrack} />
+      <div className="tw-flex tw-flex-col tw-gap-x-2 md:tw-flex-row tw-justify-between md:tw-p-10 tw-p-3">
+        <TextInput
+          restStyles="tw-flex-1"
+          hide="tw-hidden"
+          text="Enter tracking number"
+          type="text"
+          value={track}
+          setValue={setTrack}
+        />
         <Button
           buttonStyle="tw-p-2 tw-bg-green-success tw-rounded-sm tw-text-white-100 tw-mt-3 md:tw-mt-0"
           text="Track Order"
