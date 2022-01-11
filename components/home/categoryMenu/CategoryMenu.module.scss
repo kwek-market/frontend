@@ -87,12 +87,13 @@
   }
 
   .menu_link {
-    @include flex(flex-start, center);
+    @include flex(flex-start, center, row nowrap);
     color: #574240;
   }
 
   .menu_text {
     margin-left: 1rem;
     font-size: 0.7rem;
+    flex: 0.8;
   }
 }
