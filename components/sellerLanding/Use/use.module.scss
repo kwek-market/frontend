@@ -2,86 +2,92 @@
 @import "@/styles/mixins";
 
 .Use {
-  background-color: #fbf4f5;
-  background-image: url("/svg/bg-elipse2.svg");
-  background-repeat: no-repeat;
-  background-position: top;
-  width: 100%;
+	// background-color: #fbf4f5;
+	background-image: url("/svg/bg-elipse2.svg");
+	background-repeat: no-repeat;
+	background-position: top;
+	width: 90%;
+	margin: auto;
 }
 .UseDesc {
-  text-align: center;
-  padding: 1rem;
-  margin: 5rem 0;
+	text-align: center;
+	padding: 1rem;
+	margin: 5rem 0;
+}
+.UseGrayBox {
+	width: 100%;
+	height: 70%;
+	// background-color: red;
 }
 .UseDesc_text {
-  font-weight: 600;
-  font-size: 48px;
-  line-height: 56px;
-  color: $col-primary-300;
+	font-weight: 600;
+	font-size: 48px;
+	line-height: 56px;
+	color: $col-primary-300;
 }
 .UseList {
-  @include flex(space-between, center, nowrap);
-  margin: 6rem 0;
+	@include flex(space-between, center, nowrap);
+	margin: 6rem 0;
 }
 .UseList_contentLogo {
-  display: inline;
+	display: inline;
 }
 .UseList_contentText {
-  text-align: left;
+	text-align: left;
 }
 .UseList_contentText__head {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 28px;
-  color: #18191f;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 28px;
+	color: #18191f;
 }
 .UseList_contentText__sub {
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 32px;
-  color: #18191f;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 32px;
+	color: #18191f;
 }
 .useRegister {
-  background-image: url("/images/yellow-background.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%;
-  border-radius: 6px;
-  align-items: center;
-  margin: 8rem auto;
-  @include respondMax("tablet") {
-    margin: 3.5rem auto;
-  }
+	background-image: url("/images/yellow-background.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+	border-radius: 6px;
+	align-items: center;
+	margin: 8rem auto;
+	@include respondMax("tablet") {
+		margin: 3.5rem auto;
+	}
 }
 .useRegister_content {
-  @include flex(flex-start, center, nowrap);
-  @include respondMax("tablet") {
-    @include flex(flex-start, center, column nowrap);
-  }
-  width: 100%;
-  margin: auto;
+	@include flex(flex-start, center, nowrap);
+	@include respondMax("tablet") {
+		@include flex(flex-start, center, column nowrap);
+	}
+	width: 100%;
+	margin: auto;
 }
 .useRegister_contentText {
-  margin: auto 4rem;
+	margin: auto 4rem;
 }
 .useRegister_contentText__head {
-  font-weight: 600;
-  font-size: 64px;
-  line-height: 80px;
-  color: $col-primary-300;
+	font-weight: 600;
+	font-size: 64px;
+	line-height: 80px;
+	color: $col-primary-300;
 }
 .useRegister_contentText__sub {
-  padding: 1rem 7rem;
-  @include respondMax("tablet") {
-    padding: 1rem;
-  }
-  margin-bottom: 2rem;
+	padding: 1rem 7rem;
+	@include respondMax("tablet") {
+		padding: 1rem;
+	}
+	margin-bottom: 2rem;
 }
 .useRegister_contentImage {
-  position: relative;
-  left: 1rem;
+	position: relative;
+	left: 1rem;
 
-  @include respondMax("tablet") {
-      top: 2rem;
-  }
+	@include respondMax("tablet") {
+		top: 2rem;
+	}
 }
