@@ -1,53 +1,63 @@
-import { productType } from "./product.types";
+import { CartType } from "./cart.types";
 
 const initialState = {
   loading: false,
   error: null,
-  product: [],
+  cart: [],
   message: "",
   status: false,
 };
 
-export function productReducer(
+export default function cartReducer(
   state: typeof initialState = initialState,
   action: any
 ) {
   switch (action.type) {
-    case productType.CREATE_PRODUCT:
+    case CartType.GET_CART:
       return {
         ...state,
         loading: false,
         error: null,
-        product: action.payload.product,
+        cart: action.payload.cart,
         message: action.payload.message,
         status: action.payload.status,
       };
-    case productType.UPDATE_PRODUCT:
-      return {
-        ...state,
-      };
-    case productType.DELETE_PRODUCT:
-      return {
-        ...state,
-      };
-    case productType.GET_PRODUCTS:
-      return {
-        ...state,
-      };
-    case productType.GET_PRODUCT:
-      return {
-        ...state,
-      };
-    case productType.ERROR:
+    case CartType.ADD_CART:
       return {
         ...state,
         loading: false,
-        error: action.payload,
+        error: null,
+        cart: [...state.cart, action.payload.cart],
+        message: action.payload.message,
+        status: action.payload.status,
       };
-    case productType.LOADING:
+    case CartType.DELETE_CART:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+    case CartType.DELETE_CART_ITEM:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+    case CartType.CLEAR_CART:
+      return {
+        ...initialState,
+      };
+    case CartType.ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case CartType.LOADING:
       return {
         ...state,
         loading: true,
+        error: null,
       };
     default:
       return state;
