@@ -46,7 +46,7 @@ const featureSection = () => {
   return (
     <div className={Styles.features}>
       <div className={Styles.features_question}>
-        <h2 className="tw-text-xl md:tw-text-4xl lg:tw-text-6xl tw-text-gray-kwek200 tw-mb-6">
+        <h2 className="tw-text-xl md:tw-text-4xl lg:tw-text-6xl tw-text-gray-kwek200 ">
           Why Choose KwekMarketMall?
         </h2>
       </div>
