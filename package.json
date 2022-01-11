@@ -1,8 +1,8 @@
 {
   "name": "kwek-store",
   "version": "0.1.0",
-  "private": true, 
-   "scripts": {
+  "private": true,
+  "scripts": {
     "dev": "next dev --port 3100",
     "build": "next build",
     "start": "next start",
@@ -27,13 +27,15 @@
     "react-icons": "^4.3.1",
     "react-loader-spinner": "^4.0.0",
     "react-redux": "^7.2.3",
+    "react-star-rating-component": "^1.4.1",
     "react-step-builder": "^2.0.11",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sass": "^1.45.1",
-    "swr": "^0.5.5"
+    "swr": "^0.5.5",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.35",

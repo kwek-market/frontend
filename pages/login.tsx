@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AuthLayout } from "@/layouts";
@@ -28,36 +28,36 @@ const Page = function () {
       const myIp = await (await fetch("https://api.ipify.org")).text();
       //console.log(myIp)
     }
-    getIp()
-  }, [])
+    getIp();
+  }, []);
 
   const form = {
     title: "Welcome Back",
     isLoading,
     fields: [
       {
-        name: 'email',
-        placeholder: 'Email Address',
-        type: 'email',
+        name: "email",
+        placeholder: "Email Address",
+        type: "email",
       },
       {
-        name: 'password',
-        placeholder: 'Password',
-        type: 'password',
+        name: "password",
+        placeholder: "Password",
+        type: "password",
         sub: {
-          text: 'Forgot Password?',
-          url: '/forgot-password',
+          text: "Forgot Password?",
+          url: "/forgot-password",
         },
       },
     ],
     submit: {
-      text: 'Sign In',
+      text: "Sign In",
       action: signIn,
     },
     extra: {
-      text: 'Don’t have an account?',
-      linkText: 'Create an Account',
-      linkUrl: '/create-account',
+      text: "Don’t have an account?",
+      linkText: "Create an Account",
+      linkUrl: "/create-account",
     },
     userId: {
       id: user.id,
@@ -66,15 +66,15 @@ const Page = function () {
   };
 
   const bannerText = {
-    lineOne: 'A Fresh',
-    lineTwo: 'Approach to',
-    lineThree: 'Shopping',
+    lineOne: "A Fresh",
+    lineTwo: "Approach to",
+    lineThree: "Shopping",
   };
 
   useEffect(() => {
     // check if user is a seller or not and redirect to appropriate page
-    user.id !== null && router.push("/");
-  }, [user.id]);
+    user.user.isVerified !== false && router.push("/");
+  }, [user.user.isVerified]);
 
   return (
     <AuthLayout id="Login" withBanner bannerText={bannerText}>

@@ -3,6 +3,7 @@ import { categoriesType } from "./categories.types";
 const initialState = {
   loading: false,
   error: null,
+  category: {},
   categories: [{}],
   subCategories: [{}],
   message: "",
@@ -14,6 +15,12 @@ export function categoriesReducer(
   action: any
 ) {
   switch (action.type) {
+    case categoriesType.GET_CATEGORY:
+      return {
+        ...state,
+        category: action.payload,
+        error: null,
+      };
     case categoriesType.GET_CATEGORIES:
       return {
         ...state,
