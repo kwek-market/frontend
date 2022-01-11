@@ -5,6 +5,9 @@ import { Skeleton } from "antd";
 import { verifyTokenFunc } from "@/helpers";
 import { RootState } from "@/store/rootReducer";
 import { logout } from "@/store/user/user.actions";
+import { clearAccount } from "@/store/account/account.actions";
+import { clearSubs } from "@/store/newsletter/newsletter.actions";
+import { clearSeller } from "@/store/seller/seller.action";
 
 const withAuth = (WrappedComponent: any) => {
   return function (props: any) {
@@ -35,6 +38,9 @@ const withAuth = (WrappedComponent: any) => {
           } else {
             // If the token was fraud we first remove it from localStorage and then redirect to "/"
             dispatch(logout());
+            dispatch(clearSubs());
+            dispatch(clearAccount());
+            dispatch(clearSeller());
             router.push("/login");
           }
         }

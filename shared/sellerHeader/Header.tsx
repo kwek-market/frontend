@@ -5,86 +5,49 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
+import Button from "@/components/buttons/Button";
+import { Rate } from "antd";
+import { useRouter } from "next/router";
 
 const Component = () => {
   const seller = useSelector((state: RootState) => state.seller);
+  const router = useRouter();
+
+  function uploadHandler() {
+    router.push("/upload-new-product");
+  }
 
   return (
-    <div className={styles.header_container}>
-      <div className={styles.firstBox}>
-        <div className={styles.content}>
-          <div className={styles.profile}>
-            <Image
-              src="/images/store.png"
-              width="160"
-              height="160"
-              className={styles.img}
-            />
-            <div className={styles.info}>
-              <p className={styles.name}>Moda Stores</p>
-              <p className={styles.sub}>Clothings for all ages.</p>
-              <div className={styles.box_productRating}>
-                <span className="material-icons">star</span>
-                <span className="material-icons">star</span>
-                <span className="material-icons">star</span>
-                <span className="material-icons">star</span>
-                <span className="material-icons">star</span>
-              </div>
-            </div>
-          </div>
-          <div className={styles.contact}>
-            <a className={styles.reviewsbtn}>Read Reviews</a>
-            <a className={styles.contactbtn}>Contact Us</a>
+    <div className="tw-p-2 md: tw-py-7 md:tw-px-7 tw-flex tw-justify-between tw-items-center tw-bg-seller-header tw-bg-no-repeat tw-bg-center tw-bg-cover">
+      <div className="tw-flex tw-flex-col md:tw-flex-row">
+        <div className="md:tw-mr-4">
+          <img
+            src={"/images/user-photo.svg"}
+            className="tw-rounded-xl "
+            width={"150px"}
+          />
+        </div>
+        <div className="tw-self-end tw-mb-4">
+          <p className="tw-font-semibold tw-text-white-100 tw-text-4xl tw-mb-0">
+            Coco's Store
+          </p>
+          <div className="tw-text-md">
+            <Rate disabled defaultValue={2} className="tw-text-[12px]" />
+            <span className="tw-text-white-100 tw-text-[12px]">
+              (100 reviews)
+            </span>
           </div>
         </div>
       </div>
-      <div className={styles.secondBox}>
-        <div className={styles.content}>
-          <div className={styles.bars}>
-            <div className={styles.progressbox}>
-              <div>
-                <p>PRODUCT QUALITY</p>
-              </div>
-              <div className={styles.barbox}>
-                <div className={styles.progress}>
-                  <div className={styles.bar}>60%</div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.progressbox}>
-              <div>
-                <p>DELIVERY RATE</p>
-              </div>
-              <div className={styles.barbox}>
-                <div className={styles.progress}>
-                  <div className={styles.bar}>60%</div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.progressbox}>
-              <div>
-                <p>RESPONSE TIME</p>
-              </div>
-              <div className={styles.barbox}>
-                <div className={styles.progress}>
-                  <div className={styles.bar}>60%</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.orderbox}>
-            <Image
-              src="/svg/discount.svg"
-              width="40"
-              height="40"
-              className={styles.img}
-            />
-            <div className={styles.info}>
-              <p className={styles.numbers}>2312</p>
-              <p className={styles.sub}>Successful Orders</p>
-            </div>
-          </div>
-        </div>
+      <div className="tw-self-end tw-mb-7">
+        <Button
+          icon={"fa-plus"}
+          buttonStyle={
+            "tw-rounded-sm tw-p-3 tw-bg-yellow-filled hover:tw-shadow-md"
+          }
+          text={"New Product"}
+          cmd={uploadHandler}
+        />
       </div>
     </div>
   );

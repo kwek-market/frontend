@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import "cleave.js/dist/addons/cleave-phone.ng";
-import Cleave from 'cleave.js/react';
-import CleavePhone from 'cleave.js/dist/addons/cleave-phone.i18n';
 
 import { Menu } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
@@ -16,7 +13,9 @@ import styles from "./styles/sellers.module.css";
 import { AuthLayout } from "@/layouts";
 import { StartSelling } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
-import { startSelling } from "@/store/seller/seller.action";
+import { getSellerData, startSelling } from "@/store/seller/seller.action";
+import withAuth from "@/hooks/withAuth";
+import { getUserData } from "@/store/user/user.actions";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
@@ -120,13 +119,17 @@ const Page = function ({ data }) {
   };
 
   useEffect(() => {
-    seller.sellerCreated.status && router.push("/seller/profile");
-  }, [seller.sellerCreated]);
+    user.token && dispatch(getUserData(user.token));
+    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
+    if (seller.sellerCreated.status || seller.seller.sellerVerified)
+      router.push("/seller/profile");
+  }, [seller.sellerCreated.status]);
 
   useEffect(() => {
-    console.log(CleavePhone)
-    console.log(data)
-  }, [])
+    user.token && dispatch(getUserData(user.token));
+    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
+    // console.log(data)
+  }, []);
 
   const bannerText = {
     lineOne: "Make Money &",
@@ -138,8 +141,8 @@ const Page = function ({ data }) {
     "Reach millions of buyers in every state in Nigeria easily, get your store on KwekMarket today!";
 
   const handlePhoneCode = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value)
-  }
+    console.log(e.target.value);
+  };
 
   return (
     <AuthLayout
@@ -512,4 +515,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Page;
+export default withAuth(Page);
