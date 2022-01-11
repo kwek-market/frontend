@@ -25,6 +25,33 @@ export const CATEGORIES = /* GraphQL */ `
   }
 `;
 
+export const CATEGORY = /* GraphQL */ `
+  query categories($id: String!) {
+    categories(id: $id) {
+      id
+      name
+      parent {
+        id
+        name
+      }
+      child {
+        id
+        name
+      }
+      category {
+        id
+        productTitle
+        user {
+          id
+        }
+      }
+      subcategory {
+        id
+      }
+    }
+  }
+`;
+
 export const SUBCATEGORIES = /* GRAPHQL */ `
 query subcategories {
   subcategories {
