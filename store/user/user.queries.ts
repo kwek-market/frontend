@@ -36,6 +36,49 @@ export const LOGIN_USER = /* GraphQL */ `
         isVerified
         isSeller
         isSuperuser
+        sellerprofileSet {
+          id
+        }
+        productSet {
+          id
+          productTitle
+        }
+        ratingSet {
+          id
+          rating
+          review
+          likes
+          dislikes
+          ratedAt
+        }
+        userWish {
+          id
+          products {
+            id
+            productTitle
+            dateCreated
+            options {
+              size
+              quantity
+              price
+              discountedPrice
+              optionTotalPrice
+            }
+            image {
+              id
+              imageUrl
+            }
+          }
+          createdAt
+        }
+        billingSet {
+          id
+          fullName
+          contact
+          address
+          state
+          city
+        }
       }
       token
       status
@@ -60,8 +103,50 @@ export const GET_USER = /* GraphQL */ `
       phoneNumber
       isVerified
       isSeller
-      password
       isSuperuser
+      sellerprofileSet {
+        id
+      }
+      productSet {
+        id
+        productTitle
+      }
+      ratingSet {
+        id
+        rating
+        review
+        likes
+        dislikes
+        ratedAt
+      }
+      userWish {
+        id
+        products {
+          id
+          productTitle
+          dateCreated
+          options {
+            size
+            quantity
+            price
+            discountedPrice
+            optionTotalPrice
+          }
+          image {
+            id
+            imageUrl
+          }
+        }
+        createdAt
+      }
+      billingSet {
+        id
+        fullName
+        contact
+        address
+        state
+        city
+      }
     }
   }
 `;
@@ -122,4 +207,3 @@ export const RESET_PASSWORD = /* GraphQL */ `
     }
   }
 `;
-

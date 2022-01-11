@@ -64,7 +64,7 @@ export const CreateProduct = /* GraphQL */ `
   }
 `;
 
-export const updateProduct = /* GraphQL */ `
+export const UpdateProduct = /* GraphQL */ `
   mutation updateProduct(
     $id: ID!
     $title: String!
@@ -89,12 +89,15 @@ export const updateProduct = /* GraphQL */ `
       price
       category
       subcategory
-      image
+      image {
+        id
+        imageUrl
+      }
     }
   }
 `;
 
-export const deleteProduct = /* GraphQL */ `
+export const DeleteProduct = /* GraphQL */ `
   mutation deleteProduct($id: ID!) {
     deleteProduct(id: $id) {
       id
@@ -102,7 +105,7 @@ export const deleteProduct = /* GraphQL */ `
   }
 `;
 
-export const getProducts = /* GraphQL */ `
+export const GetProducts = /* GraphQL */ `
   query products {
     products {
       id
@@ -111,12 +114,15 @@ export const getProducts = /* GraphQL */ `
       price
       category
       subcategory
-      image
+      image {
+        id
+        imageUrl
+      }
     }
   }
 `;
 
-export const getProduct = /* GraphQL */ `
+export const GetProduct = /* GraphQL */ `
   query product($id: ID!) {
     product(id: $id) {
       id
@@ -125,7 +131,10 @@ export const getProduct = /* GraphQL */ `
       price
       category
       subcategory
-      image
+      image {
+        id
+        imageUrl
+      }
     }
   }
 `;
