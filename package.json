@@ -1,8 +1,8 @@
 {
   "name": "kwek-store",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
+  "private": true, 
+   "scripts": {
     "dev": "next dev --port 3100",
     "build": "next build",
     "start": "next start",
@@ -16,7 +16,7 @@
     "@tailwindcss/line-clamp": "^0.2.2",
     "add": "^2.0.6",
     "antd": "^4.14.1",
-    "cleave.js": "^1.6.0",
+    "axios": "^0.24.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "next": "10.0.9",

@@ -1,22 +1,25 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
 
 function Header() {
   const router = useRouter();
+  const { seller } = useSelector((state: RootState) => state);
 
   console.log(router.pathname);
 
   return (
     <header className="tw-bg-red-kwek100 tw-py-4 tw-px-8 tw-flex tw-justify-between">
-      <nav className="tw-flex-[2]">
+      <nav className="md:tw-flex-[3] lg:tw-flex-[5]">
         <Link href="/">
           <a>
             <img src="/svg/kwek-logo-white.svg" alt="logo" />
           </a>
         </Link>
       </nav>
-      <nav className="tw-flex tw-justify-between tw-flex-[4]">
+      <nav className="md:tw-flex tw-justify-between tw-flex-[4] tw-hidden">
         <nav>
           <Link href="/seller/profile">
             <a
@@ -48,7 +51,7 @@ function Header() {
             </span>
           </div>
           <div className="tw-text-white-100">
-            <i className="fas fa-user" /> Hi Allison{" "}
+            <i className="fas fa-user" /> Hi {seller.seller.firstname}{" "}
             <i className="fas fa-caret-down" />
           </div>
         </nav>
