@@ -32,7 +32,7 @@ const Switcher = function ({ slides }) {
 					{index === current && file.element}
 				</div>
 			))}
-			<div className="tw-absolute tw-right-20 tw-bottom-14  tw-flex">
+			<div className="tw-absolute tw-right-[10%] tw-bottom-[5%] md:tw-bottom-[10%] tw-flex">
 				<span onClick={prevSlide}>
 					<MdArrowBackIosNew className="tw-text-2xl tw-mr-5" />
 				</span>{" "}

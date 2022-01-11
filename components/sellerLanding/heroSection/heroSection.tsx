@@ -100,7 +100,7 @@ const heroSection = () => {
 			</div>
 			<div className={Styles.hero_split}>
 				<div className={Styles.hero_textContent}>
-					<h1 className="tw-text-3xl md:tw-text-6xl lg:tw-text-6xl tw-font-bold tw-text-gray-kwek200 tw-text-center md:tw-text-left">
+					<h1 className="tw-text-3xl tw-w-[90%] tw-mx-auto md:tw-w-[100%] md:tw-text-5xl lg:tw-text-6xl tw-font-bold tw-text-gray-kwek200 tw-text-center md:tw-text-left">
 						Make Money & Grow your Business Online
 					</h1>
 					<p className="tw-text-base md:tw-text-xl  tw-text-black-stock tw-font-light tw-text-center md:tw-text-left tw-mt-3 tw-mb-5">
@@ -109,7 +109,7 @@ const heroSection = () => {
 					</p>
 					{!user.user.isSeller && (
 						<button
-							className="btn bg-primary tw-p-4  tw-font-medium tw-w-9/12 tw-mx-auto tw-my-16 md:tw-w-auto md:tw-m-0 tw-text-sm sm:tw-text-base tw-truncate"
+							className="btn bg-primary tw-p-4  tw-font-medium tw-w-9/12 tw-mx-auto tw-my-10 md:tw-w-auto md:tw-m-0 tw-text-sm sm:tw-text-base tw-truncate"
 							onClick={() => router.push("/sell/create-account")}
 						>
 							Start your free trial{" "}
