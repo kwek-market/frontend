@@ -1,36 +1,48 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import styles from './GridContainer.module.scss';
+import React from "react";
+import { useRouter } from "next/router";
+import styles from "./GridContainer.module.scss";
 
-import { TitleBlock, Banner, Card, SideBar } from '../index';
-import { ProductBox } from '@/shared';
-import Button from '@/components/buttons/Button';
-import Carousel from '@/components/Carousel/Carousel';
-import Slider from '@/components/slider/slider';
+import { TitleBlock, Banner, Card, SideBar } from "../index";
+import { ProductBox } from "@/shared";
+import Button from "@/components/buttons/Button";
+import Carousel from "@/components/Carousel/Carousel";
+import Slider from "@/components/slider/slider";
 
-const GridContainer = function ({ title, timer, sidebar, cards, banners }: any) {
+const GridContainer = function ({
+  title,
+  timer,
+  sidebar,
+  cards,
+  banners,
+}: any) {
   const products = [1, 2, 3, 4];
   const router = useRouter();
 
-  const slides = [{ element: <Card /> }, { element: <Card /> }, { element: <Card /> }];
+  const slides = [
+    { element: <Card /> },
+    { element: <Card /> },
+    { element: <Card /> },
+  ];
 
   const banner = [{ element: <Banner /> }, { element: <Banner /> }];
 
   return (
     <div id={styles.categoryGrid}>
       <TitleBlock title={title} timer={timer} />
-      <div className={sidebar ? styles.mainContainer : styles.mainContainer__full}>
+      <div
+        className={sidebar ? styles.mainContainer : styles.mainContainer__full}
+      >
         <div className={styles.products}>
-          {products.map((product: any) => (
+          {products.map((product: any, index: number) => (
             <div key={product} className={styles.product}>
-              <ProductBox />
+              <ProductBox id={index} />
             </div>
           ))}
           <div className="tw-mx-auto tw-w-24 tw-flex md:tw-hidden">
             <Button
               buttonStyle="tw-bg-red-kwek100 tw-text-white-100 tw-p-2"
               text="view more"
-              cmd={() => router.push('/product')}
+              cmd={() => router.push("/product")}
             />
           </div>
         </div>

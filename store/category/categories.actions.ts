@@ -1,6 +1,6 @@
 import { userFetcher } from "@/helpers";
 import { Dispatch } from "redux";
-import { CATEGORIES, SUBCATEGORIES } from "./categories.queries";
+import { CATEGORIES, CATEGORY, SUBCATEGORIES } from "./categories.queries";
 import { categoriesType } from "./categories.types";
 
 export const clearCategories = () => ({
@@ -11,6 +11,28 @@ export const clearCategories = () => ({
 export function setLoading() {
   return {
     type: categoriesType.LOADING,
+  };
+}
+
+export function getCategory(id: string) {
+  return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
+    try {
+      setLoading();
+      const response = await userFetcher(CATEGORY, { id });
+      dispatch({
+        type: categoriesType.GET_CATEGORY,
+        payload: response.category,
+      });
+      console.log({ response });
+    } catch (error) {
+      console.log({ error });
+      message.error(error.message);
+      dispatch({
+        type: categoriesType.ERROR,
+        payload: error.message,
+      });
+    }
   };
 }
 
