@@ -11,9 +11,7 @@ const OrdersEmpty = function () {
 
 			<div className={styles.empty_content}>
 				<div className={styles.img}>
-					{/* <Image src="/svg/cartempty.svg" width="150" height="150" /> */}
 					<Image src="/svg/orderEmpty.svg" width="200" height="200" />
-					{/* <img src="/svg/order-empty.png" alt="" /> */}
 				</div>
 				<p className={styles.head}>You currently have no orders</p>
 				<p className={styles.sub}>Start selling now on Kwekmarketplace</p>
