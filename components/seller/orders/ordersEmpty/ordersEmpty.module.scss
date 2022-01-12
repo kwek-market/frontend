@@ -2,7 +2,6 @@
 @import "@/styles/mixins";
 
 .empty_container {
-	// @include flex(center, center, row);
 	margin-bottom: 100px;
 	padding: 150px 40px;
 	padding-top: 49px;
@@ -60,10 +59,6 @@
 		}
 
 		.setShopBtn {
-			// width: 158px;
-			// height: 40px;
-			// width: 214px;
-			// height: 64px;
 			background: #af1328;
 			border-radius: 5px;
 			text-align: center;
@@ -72,9 +67,7 @@
 			font-size: 16px;
 			margin-top: 5%;
 
-			// @include respondMin("tablet") {
-			// 	display: none;
-			// }
+			
 		}
 	}
 }
