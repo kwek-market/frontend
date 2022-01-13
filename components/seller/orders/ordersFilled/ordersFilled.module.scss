@@ -1,0 +1,195 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.empty_container {
+	margin-bottom: 100px;
+	padding: 150px 40px;
+	padding-top: 49px;
+	background: #fff;
+	border: 2px solid rgba(191, 165, 163, 0.2);
+	border-radius: 10px;
+	width: 100%;
+	margin-top: 62px;
+	@include respondMax("tablet") {
+		border: none;
+		margin-top: 40px;
+		padding: 0;
+	}
+
+	.ordersTab {
+		@include flex(space-between, center, unset);
+		margin-bottom: 56px;
+
+		position: relative;
+		@include respondMax("tablet") {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		.ordersTitle {
+			font-weight: 600;
+			font-size: 32px;
+			color: #1d1616;
+			@include flex(space-between, center, unset);
+
+			@include respondMax("tablet") {
+				font-size: 28px;
+			}
+
+			.ordersVal {
+				border: 1px solid #bfa5a3;
+				border-radius: 5px;
+				color: #bfa5a3;
+				padding: 6px 16px;
+				font-size: 12px;
+				display: inline-block;
+				margin-left: 16px;
+			}
+		}
+
+		.flex {
+			@include flex(unset, center, unset);
+			font-weight: 500;
+			color: #574240;
+			font-size: 15px;
+
+			@include respondMax("tablet") {
+				display: none;
+			}
+
+			.recent {
+				border: 1px solid #1d1616;
+				box-sizing: border-box;
+				border-radius: 5px;
+				width: 206px;
+				font-weight: 500;
+				font-size: 15px;
+				@include flex(space-between, center, unset);
+				padding: 5px 25px;
+				margin-left: 10px;
+			}
+		}
+
+		.dropdown {
+			position: absolute;
+			top: 70px;
+			right: 0;
+			width: 206px;
+			height: 267px;
+			background: #fff;
+			padding-left: 32px;
+			box-shadow: 0px 0px 20px rgba(138, 149, 158, 0.25);
+			border-radius: 5px;
+			align-items: center;
+			padding-top: 12px;
+
+			li {
+				padding: 12px 0px;
+				color: rgb(87, 66, 64, 0.6);
+			}
+			.active {
+				color: #574240;
+			}
+		}
+
+		.dropdownNot {
+			display: none;
+		}
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		border-style: none;
+
+		th {
+			padding-bottom: 13px;
+		}
+
+		td {
+			padding-top: 24px;
+			padding-bottom: 24px;
+		}
+		.grid {
+			border-bottom: 1px solid rgba(4, 8, 47, 0.2);
+			text-align: left;
+
+			.title {
+				font-weight: 500;
+				font-size: 18px;
+				color: #1d1616;
+			}
+		}
+
+		.itemGrid {
+			border-bottom: 1px solid rgba(4, 8, 47, 0.2);
+			text-align: left;
+
+			.orderId {
+				font-weight: 500;
+				color: #af1328;
+			}
+
+			.orderDate {
+				color: #574240;
+			}
+
+			.customer {
+				@include flex(flex-start, center, unset);
+				color: #574240;
+
+				.img {
+					border-radius: 50%;
+				}
+
+				span {
+					padding-left: 6px;
+				}
+			}
+
+			.orderProfit {
+				color: #009d19;
+			}
+
+			.orderPaymentUnpaid {
+				padding: 10px 26px;
+				color: #ff2d1a;
+				border: 1px solid #ff2d1a;
+				border-radius: 5px;
+				height: 40px;
+				min-width: 103px;
+				text-align: center;
+				width: fit-content;
+			}
+
+			.orderPaymentPaid {
+				border-radius: 5px;
+				background: #009d19;
+				color: #ffffff;
+				min-width: 103px;
+				text-align: center;
+				padding: 10px 26px;
+				width: fit-content;
+			}
+
+			.orderStatusConfirmed {
+				border: 1px solid #574240;
+				border-radius: 5px;
+				padding: 10px 26px;
+				color: #574240;
+				width: fit-content;
+				min-width: 128px;
+				text-align: center;
+			}
+
+			.orderStatusPending {
+				padding: 10px 26px;
+				background: #ffc107;
+				border-radius: 5px;
+				color: #ffffff;
+				width: fit-content;
+				text-align: center;
+				min-width: 128px;
+			}
+		}
+	}
+}
