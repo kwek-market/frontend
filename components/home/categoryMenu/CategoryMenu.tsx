@@ -6,6 +6,7 @@ import styles from "./CategoryMenu.module.scss";
 import CategoryMobile from "./CategoryMobile";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
+import { v4 as uuid } from "uuid";
 
 const CategoryMenu = function () {
   const [showCat, setShowCat] = useState<boolean>(false);
@@ -31,8 +32,8 @@ const CategoryMenu = function () {
           className={styles.category_list}
           style={{ maxHeight: showCat && "325px" }}
         >
-          {categories.categories.slice(0, 8).map((item, index) => (
-            <li key={index} className={styles.menu_item}>
+          {categories.categories.slice(0, 8).map((item) => (
+            <li key={uuid()} className={styles.menu_item}>
               <Link href={`/category/${item.name}`}>
                 <a className={styles.menu_link}>
                   <Image
@@ -54,9 +55,9 @@ const CategoryMenu = function () {
           text="All"
           style="tw-max-w-none"
         />
-        {categories.categories.slice(0, 8).map((item, index) => (
+        {categories.categories.slice(0, 8).map((item) => (
           <CategoryMobile
-            key={index}
+            key={uuid()}
             imgSrc={"/svg/cat-icon-electronics.svg"}
             text={item.name}
           />

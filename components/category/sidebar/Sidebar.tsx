@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from './Sidebar.module.scss';
+import React from "react";
+import Image from "next/image";
+import styles from "./Sidebar.module.scss";
 
 const Sidebar = function () {
   const products = [1, 2, 3, 4, 5];
@@ -115,12 +115,12 @@ const Sidebar = function () {
         <p className={styles.header}>PRICE ( ₦ )</p>
         <div className={styles.subMenu}>
           <div className={styles.sliderBox}>
-            <input type="range" min="1" max="100" value="1" className={styles.slider} />
+            <input type="range" min="1" max="100" className={styles.slider} />
           </div>
           <div className={styles.priceInput}>
-            <input type="text" value="0" />
+            <input type="text" />
             <p>-</p>
-            <input type="text" value="4000" />
+            <input type="text" />
           </div>
         </div>
       </div>

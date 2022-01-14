@@ -2,32 +2,31 @@ import React from "react";
 
 import Link from "next/link";
 import Image from "next/image";
+import dayjs from "dayjs";
 import styles from "./list.module.scss";
 import ListComponent from "./ListComponent";
+import { WishlistType } from "@/interfaces/commonTypes";
 
-const Component = function () {
-	return (
-		<div className={styles.list_content}>
-			<ListComponent
-				imgSrc="/images/shoe2.png"
-				listStyle={styles.list_grid}
-				altText="shoes"
-				itemName="Timberland MX-720-818"
-				itemPrice="230.00"
-				itemDate="January, 28, 2021"
-				inStock
-			/>
-			<ListComponent
-				imgSrc="/images/shoe2.png"
-				listStyle={styles.list_grid_out}
-				altText="shoes"
-				itemName="Timberland MX-720-818"
-				itemPrice="230.00"
-				itemDate="January, 28, 2021"
-				inStock={false}
-			/>
-		</div>
-	);
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
+
+export type WishlistProps = {
+  wishlists: WishlistType;
+};
+
+const Component = function ({ wishlists }: WishlistProps) {
+  console.log(wishlists);
+  return (
+    <ListComponent
+      imgSrc={wishlists.product.image[0].imageUrl}
+      listStyle={styles.list_grid}
+      altText={wishlists.product.productTitle}
+      itemName={wishlists.product.productTitle}
+      itemPrice={wishlists.product.options[0].price}
+      itemDate={dayjs(wishlists.wishlist.createdAt).format("LL")}
+      inStock={wishlists.product.options.length}
+    />
+  );
 };
 
 export default Component;

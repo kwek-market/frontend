@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { userFetcher, userFetcherWithAuth } from "@/helpers";
+import { getIp, userFetcher, userFetcherWithAuth } from "@/helpers";
 import { UserLogin, UserUpdate } from "@/interfaces/commonTypes";
 import {
   GET_USER,
@@ -39,7 +39,7 @@ export function getUserData(token: string) {
     try {
       setLoading();
       const response = await userFetcherWithAuth(GET_USER, { token }, token);
-      console.log(response);
+      // console.log(response);
       dispatch({
         type: GET_USER_DATA,
         payload: response.userData,
@@ -60,7 +60,7 @@ export function loginUser(user: UserLogin) {
         type: LOADING,
         payload: true,
       });
-      const myIp = await (await fetch("https://api.ipify.org")).text();
+      const myIp = await getIp();
       const response = await userFetcher(LOGIN_USER, { ...user, ip: myIp });
       import("antd").then(({ message }) => {
         response.loginUser.status

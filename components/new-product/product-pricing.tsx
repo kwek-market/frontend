@@ -17,7 +17,7 @@ function ProductPricing({
         } else if (e.target.value.toLowerCase().trim() === "no") {
           return false;
         } else {
-          return false;
+          return true;
         }
       })(),
     });
