@@ -1,16 +1,12 @@
 export const AddToCart = /* GraphQL */ `
   mutation addToCart(
     $ipAddress: String
-    $price: String
-    $productId: String!
-    $quantity: Int
+    $productOptionId: String!
     $token: String
   ) {
     addToCart(
       ipAddress: $ipAddress
-      price: $price
-      productId: $productId
-      quantity: $quantity
+      productOptionId: $productOptionId
       token: $token
     ) {
       status
@@ -23,8 +19,26 @@ export const GetCart = /* GraphQL */ `
   query userCart($token: String, $ip: String) {
     userCart(token: $token, ip: $ip) {
       id
-      ip
-      createdAt
+      product {
+        id
+        productTitle
+      }
+      quantity
+      price
+      cart {
+        id
+        ip
+        user {
+          id
+        }
+        createdAt
+        cartItem {
+          id
+          product {
+            id
+          }
+        }
+      }
     }
   }
 `;

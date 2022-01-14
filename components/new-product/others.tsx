@@ -1,5 +1,5 @@
 import { UploadProductProps } from "@/interfaces/commonTypes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const [seoKeywords, setSeoKeywords] = useState("");
@@ -44,20 +44,55 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
           4
         );
       }
+      if (formValues[i].totalPrice === "") {
+        return message.error("Please enter a total price for all variants", 4);
+      }
+      if (!Number(formValues[i].price)) {
+        return message.error(
+          "Please enter a valid price as a number for all variants",
+          4
+        );
+      }
+      if (!Number(formValues[i].discountPrice)) {
+        return message.error(
+          "Please enter a valid price as a number for all variants",
+          4
+        );
+      }
+      if (Number(formValues[i].discountPrice) > Number(formValues[i].price)) {
+        return message.error(
+          "Discount price cannot be greater than the price",
+          4
+        );
+      }
+      if (Number(formValues[i].discountPrice) < 0) {
+        return message.error("Discount price cannot be negative", 4);
+      }
+    }
+    console.log(formValues);
+    const val = [];
+    // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
+    for (let i = 0; i < formValues.length; i++) {
+      const emptyString = `{'size': ${formValues[i].size} , 'quantity': ${formValues[i].quantity} , 'price': ${formValues[i].price} , 'discounted_price': ${formValues[i].discountPrice} , 'option_total_price': ${formValues[i].totalPrice}}`;
+      val.push(emptyString);
     }
     setSubmitDetails({
       ...submitDetails,
-      productOptions: [JSON.stringify(formValues)],
+      productOptions: val,
     });
   };
 
   function handleSeo(e: React.ChangeEvent<HTMLInputElement>) {
     setSeoKeywords(e.target.value);
+  }
+
+  useEffect(() => {
+    seoKeywords.split(", ");
     setSubmitDetails({
       ...submitDetails,
-      keyword: [e.target.value],
+      keyword: seoKeywords.split(", "),
     });
-  }
+  }, [seoKeywords]);
 
   return (
     <>

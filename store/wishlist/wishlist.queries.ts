@@ -8,10 +8,10 @@ export const AddToWishlist = /* GraphQL */ `
 `;
 
 export const GetWishlists = /* GraphQL */ `
-  query wishlists($token: String) {
+  query wishlists($token: String!) {
     wishlists(token: $token) {
       id
-      products {
+      product {
         id
         productTitle
         dateCreated
@@ -22,13 +22,15 @@ export const GetWishlists = /* GraphQL */ `
           discountedPrice
           optionTotalPrice
         }
-        price
         image {
           id
           imageUrl
         }
       }
-      createdAt
+      wishlist {
+        id
+        createdAt
+      }
     }
   }
 `;

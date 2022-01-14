@@ -8,12 +8,13 @@ import {
   ProductPricing,
 } from "@/components/new-product";
 import { UploadProductType } from "@/interfaces/commonTypes";
+import sellerAuth from "@/hooks/sellerAuth";
 
 function page() {
   const [submitDetails, setSubmitDetails] = useState<UploadProductType>({
     brand: "",
     category: "",
-    chargeFivePercentVat: false,
+    chargeFivePercentVat: true,
     color: "",
     gender: "Male",
     keyword: [],
@@ -59,4 +60,4 @@ function page() {
   );
 }
 
-export default React.memo(page);
+export default sellerAuth(React.memo(page));

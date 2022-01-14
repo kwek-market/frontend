@@ -3,7 +3,8 @@ import { productType } from "./product.types";
 const initialState = {
   loading: false,
   error: null,
-  product: [],
+  product: {},
+  products: [],
   message: "",
   status: false,
 };
@@ -33,10 +34,16 @@ export function productReducer(
     case productType.GET_PRODUCTS:
       return {
         ...state,
+        products: action.payload,
+        loading: false,
+        error: null,
       };
     case productType.GET_PRODUCT:
       return {
         ...state,
+        product: action.payload,
+        loading: false,
+        error: null,
       };
     case productType.ERROR:
       return {

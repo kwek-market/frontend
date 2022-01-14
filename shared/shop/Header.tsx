@@ -10,6 +10,11 @@ function Header() {
 
   console.log(router.pathname);
 
+  const border =
+    router.pathname === "/seller/profile"
+      ? "tw-text-yellow-filled tw-border-b-2 tw-border-yellow-filled tw-pb-2"
+      : "tw-text-white-100";
+
   return (
     <header className="tw-bg-red-kwek100 tw-py-4 tw-px-8 tw-flex tw-justify-between">
       <nav className="md:tw-flex-[3] lg:tw-flex-[5]">
@@ -22,15 +27,7 @@ function Header() {
       <nav className="md:tw-flex tw-justify-between tw-flex-[4] tw-hidden">
         <nav>
           <Link href="/seller/profile">
-            <a
-              className={`tw-mr-5 ${
-                router.pathname === "/seller/profile"
-                  ? "tw-text-yellow-filled tw-border-b-2 tw-border-yellow-filled tw-pb-2"
-                  : "tw-text-white-100"
-              }  tw-capitalize `}
-            >
-              your store
-            </a>
+            <a className={`tw-mr-5 ${border}  tw-capitalize `}>your store</a>
           </Link>
           <Link href="/">
             <a className="tw-mr-5 tw-text-white-100 tw-capitalize tw-pb-2">

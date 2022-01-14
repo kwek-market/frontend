@@ -18,7 +18,7 @@ export default function wishlistReducer(
         ...state,
         loading: false,
         error: null,
-        wishlists: action.payload.wishlists,
+        wishlists: action.payload,
         message: action.payload.message,
         status: action.payload.status,
       };
@@ -27,12 +27,23 @@ export default function wishlistReducer(
         ...state,
         loading: false,
         error: null,
-        wishlist: action.payload.wishlist,
         message: action.payload.message,
         status: action.payload.status,
       };
     case WishlistType.CLEAR_WISHLIST:
       return initialState;
+    case WishlistType.ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case WishlistType.LOADING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
     default:
       return state;
   }
