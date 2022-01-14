@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import StarRatingComponent from "react-star-rating-component";
-import styles from "./ProductBox.module.scss";
+import styles from "@/shared/productBox/ProductBox.module.scss";
 import { RootState } from "@/store/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,14 +13,13 @@ import {
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { getIp } from "@/helpers";
 import { createWishlist } from "@/store/wishlist/wishlist.actions";
-import Loader from "react-loader-spinner";
 
 export type ProductBoxProps = {
-  id?: string;
-  product?: ProductType;
+  id: string;
+  product: ProductType;
 };
 
-const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
+const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state);
 
@@ -35,20 +34,13 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   }
 
   function addToWishlist(id: string) {
-    // console.log(id);
+    console.log(id);
     const payload: AddToWishlistPayload = {
       productId: id,
       token: user.token,
     };
     dispatch(createWishlist(payload, user.token));
   }
-
-  if (prod === undefined)
-    return (
-      <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
-        <Loader type="Rings" width={60} height={60} color="#FC476E" />
-      </div>
-    );
 
   return (
     <div className="tw-w-full">
@@ -136,4 +128,4 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   );
 };
 
-export default ProductBox;
+export default CategoryProducts;

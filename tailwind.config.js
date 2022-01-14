@@ -51,6 +51,9 @@ module.exports = {
         green: {
           success: '#009D19',
         },
+        orange: {
+          kwek100: '#DC8823'
+        },
         red: {
           notif: '#FC476E',
           kwek100: '#AF1328',

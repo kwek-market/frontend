@@ -4,4 +4,5 @@ export enum WishlistType {
   CLEAR_WISHLIST = "CLEAR_WISHLIST",
   ERROR = "ERROR",
   LOADING = "LOADING",
+  CLEAR = "CLEAR",
 }

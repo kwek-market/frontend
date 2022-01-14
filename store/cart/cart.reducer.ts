@@ -18,9 +18,7 @@ export default function cartReducer(
         ...state,
         loading: false,
         error: null,
-        cart: action.payload.cart,
-        message: action.payload.message,
-        status: action.payload.status,
+        cart: action.payload,
       };
     case CartType.ADD_CART:
       return {

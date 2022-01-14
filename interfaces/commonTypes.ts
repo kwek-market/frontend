@@ -159,3 +159,102 @@ export type UploadProductProps = {
   submitDetails: UploadProductType;
   setSubmitDetails: React.Dispatch<React.SetStateAction<UploadProductType>>;
 };
+
+export type ProductType = {
+  id: string;
+  productTitle: string;
+  chargeFivePercentVat: boolean;
+  productWeight: string;
+  shortDescription: string;
+  returnPolicy: string;
+  warranty: string;
+  gender: string;
+  keyword: string[];
+  clicks: number;
+  promoted: boolean;
+  productsWished: {
+    id: string;
+    product: {
+      id: string;
+      productTitle: string;
+    };
+  };
+  user: {
+    id: string;
+    username: string;
+    isSeller: boolean;
+    sellerprofileSet: {
+      shopName: string;
+    }[];
+  };
+  category: {
+    id: string;
+    name: string;
+  };
+  subcategory: {
+    id: string;
+    name: string;
+  };
+  sales: string;
+  options: {
+    id: string;
+    size: string;
+    quantity: string;
+    price: string;
+    discountedPrice: string;
+    optionTotalPrice: string;
+  }[];
+  dateCreated: string;
+  brand: string;
+  color: string;
+  image: {
+    id: string;
+    imageUrl: string;
+  }[];
+  productRating: {
+    id: string;
+    rating: number;
+    review: string;
+    likes: number;
+    dislikes: number;
+    user: {
+      id: string;
+    };
+    ratedAt: string;
+  }[];
+};
+
+export type AddToCartPayload = {
+  productOptionId: string;
+  token: string;
+  ipAddress: string;
+};
+
+export type AddToWishlistPayload = {
+  productId: string;
+  token: string;
+};
+
+export type WishlistType = {
+  id: string;
+  product: {
+    id: string;
+    productTitle: string;
+    dateCreated: Date;
+    options: {
+      size: string;
+      quantity: string;
+      price: string;
+      discountedPrice: string;
+      optionTotalPrice: string;
+    }[];
+    image: {
+      id: string;
+      imageUrl: string;
+    }[];
+  };
+  wishlist: {
+    id: string;
+    createdAt: Date;
+  };
+};

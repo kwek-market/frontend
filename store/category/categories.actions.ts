@@ -24,9 +24,9 @@ export function getCategory(id: string) {
         type: categoriesType.GET_CATEGORY,
         payload: response.category,
       });
-      console.log({ response });
+      //console.log({ response });
     } catch (error) {
-      console.log({ error });
+      //console.log({ error });
       message.error(error.message);
       dispatch({
         type: categoriesType.ERROR,
@@ -64,7 +64,7 @@ export function getSubCategories() {
     try {
       setLoading();
       const response = await userFetcher(SUBCATEGORIES);
-      console.log({ response });
+      //console.log({ response });
       dispatch({
         type: categoriesType.GET_SUB_CATEGORIES,
         payload: response.subcategories,

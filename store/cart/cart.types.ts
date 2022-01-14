@@ -6,4 +6,5 @@ export enum CartType {
   CLEAR_CART = "CLEAR_CART",
   ERROR = "ERROR",
   LOADING = "LOADING",
+  CLEAR = "CLEAR",
 }
