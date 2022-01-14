@@ -1,0 +1,73 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.empty_container {
+	margin-bottom: 100px;
+	padding: 150px 40px;
+	padding-top: 49px;
+	background: #fff;
+	border: 2px solid rgba(191, 165, 163, 0.2);
+	border-radius: 10px;
+	width: 100%;
+	margin-top: 62px;
+	@include respondMax("tablet") {
+		border: none;
+		margin-top: 40px;
+		padding: 0;
+	}
+	.title {
+		font-weight: 600;
+		font-size: 32px;
+		color: #574240;
+
+		@include respondMax("tablet") {
+			font-size: 28px;
+		}
+	}
+	.empty_content {
+		@include flex(center, center, column);
+		margin-top: 50px;
+		.img {
+			@include flex(center, center, row);
+
+			@include respondMax("tablet") {
+				width: 100px;
+			}
+		}
+
+		.head {
+			font-weight: 600;
+			margin-top: 48px;
+			font-size: 32px;
+			color: #574240;
+			text-align: center;
+			margin-bottom: 4px;
+			@include respondMax("tablet") {
+				font-size: 16px;
+				margin-top: 32px;
+			}
+		}
+
+		.sub {
+			font-size: 18px;
+			text-align: center;
+			color: #574240;
+
+			@include respondMax("tablet") {
+				font-size: 12px;
+			}
+		}
+
+		.setShopBtn {
+			background: #af1328;
+			border-radius: 5px;
+			text-align: center;
+			padding: 16px 26px;
+			color: #fff;
+			font-size: 16px;
+			margin-top: 5%;
+
+			
+		}
+	}
+}
