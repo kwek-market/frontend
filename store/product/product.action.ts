@@ -15,48 +15,6 @@ export function setLoading() {
   };
 }
 
-export function getProduct(id: string) {
-  return async function (dispatch: Dispatch) {
-    const { message } = await import("antd");
-    try {
-      setLoading();
-      const res = await userFetcher(GetProduct, { id });
-      console.log(res);
-      dispatch({
-        type: productType.GET_PRODUCT,
-        payload: res.product,
-      });
-    } catch (err) {
-      message.error(err.message.slice(0, err.message.indexOf(".") + 1));
-      dispatch({
-        type: productType.ERROR,
-        payload: err.message.slice(err.message.indexOf(".") + 1),
-      });
-    }
-  };
-}
-
-export function getProducts() {
-  return async function (dispatch: Dispatch) {
-    const { message } = await import("antd");
-    try {
-      setLoading();
-      const res = await userFetcher(GetProducts);
-      console.log(res);
-      dispatch({
-        type: productType.GET_PRODUCTS,
-        payload: res.products,
-      });
-    } catch (err) {
-      message.error(err.message.slice(0, err.message.indexOf(".") + 1));
-      dispatch({
-        type: productType.ERROR,
-        payload: err.message.slice(err.message.indexOf(".") + 1),
-      });
-    }
-  };
-}
-
 export function createProduct(Data: UploadProductType, token: string) {
   return async function (dispatch: Dispatch) {
     const { message } = await import("antd");
@@ -64,6 +22,10 @@ export function createProduct(Data: UploadProductType, token: string) {
       setLoading();
       const res = await userFetcherWithAuth(CreateProduct, Data, token);
       console.log(res);
+      dispatch({
+        type: productType.CREATE_PRODUCT,
+        payload: res.data.createProduct,
+      });
     } catch (err) {
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);
       dispatch({

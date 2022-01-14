@@ -23,14 +23,6 @@ const Page = function () {
     dispatch(loginUser(variables));
   };
 
-  useEffect(() => {
-    async function getIp() {
-      const myIp = await (await fetch("https://api.ipify.org")).text();
-      //console.log(myIp)
-    }
-    getIp();
-  }, []);
-
   const form = {
     title: "Welcome Back",
     isLoading,

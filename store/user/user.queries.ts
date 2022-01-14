@@ -53,23 +53,14 @@ export const LOGIN_USER = /* GraphQL */ `
         }
         userWish {
           id
-          products {
+          createdAt
+          wishlistItem {
             id
-            productTitle
-            dateCreated
-            options {
-              size
-              quantity
-              price
-              discountedPrice
-              optionTotalPrice
-            }
-            image {
+            product {
               id
-              imageUrl
+              productTitle
             }
           }
-          createdAt
         }
         billingSet {
           id
@@ -121,23 +112,14 @@ export const GET_USER = /* GraphQL */ `
       }
       userWish {
         id
-        products {
+        createdAt
+        wishlistItem {
           id
-          productTitle
-          dateCreated
-          options {
-            size
-            quantity
-            price
-            discountedPrice
-            optionTotalPrice
-          }
-          image {
+          product {
             id
-            imageUrl
+            productTitle
           }
         }
-        createdAt
       }
       billingSet {
         id

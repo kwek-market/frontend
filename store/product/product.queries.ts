@@ -1,5 +1,6 @@
 export const CreateProduct = /* GraphQL */ `
   mutation createProduct(
+    $brand: String!
     $category: String!
     $chargeFivePercentVat: Boolean!
     $color: String
@@ -16,6 +17,7 @@ export const CreateProduct = /* GraphQL */ `
     $warranty: String
   ) {
     createProduct(
+      brand: $brand
       category: $category
       chargeFivePercentVat: $chargeFivePercentVat
       color: $color
@@ -37,6 +39,10 @@ export const CreateProduct = /* GraphQL */ `
         user {
           id
           username
+          isSeller
+          sellerprofileSet {
+            shopName
+          }
         }
         category {
           name
@@ -59,7 +65,7 @@ export const CreateProduct = /* GraphQL */ `
         }
       }
       status
-      boolean
+      message
     }
   }
 `;
@@ -106,17 +112,77 @@ export const DeleteProduct = /* GraphQL */ `
 `;
 
 export const GetProducts = /* GraphQL */ `
-  query products {
-    products {
+  query products(
+    $search: String
+    $rating: Int
+    $keyword: [String]
+    $clicks: String
+    $sales: String
+  ) {
+    products(
+      search: $search
+      rating: $rating
+      keyword: $keyword
+      clicks: $clicks
+      sales: $sales
+    ) {
       id
-      title
-      description
-      price
-      category
-      subcategory
+      productTitle
+      chargeFivePercentVat
+      productWeight
+      shortDescription
+      returnPolicy
+      warranty
+      gender
+      keyword
+      clicks
+      promoted
+      productsWished {
+        id
+        product {
+          id
+          productTitle
+        }
+      }
+      user {
+        id
+        username
+        isSeller
+        sellerprofileSet {
+          shopName
+        }
+      }
+      category {
+        id
+        name
+      }
+      subcategory {
+        id
+        name
+      }
+      sales
+      options {
+        id
+        size
+        quantity
+        price
+        discountedPrice
+        optionTotalPrice
+      }
+      dateCreated
+      brand
+      color
       image {
         id
         imageUrl
+      }
+      productRating {
+        id
+        rating
+        review
+        likes
+        dislikes
+        ratedAt
       }
     }
   }
@@ -126,14 +192,66 @@ export const GetProduct = /* GraphQL */ `
   query product($id: ID!) {
     product(id: $id) {
       id
-      title
-      description
-      price
-      category
-      subcategory
+      productTitle
+      chargeFivePercentVat
+      productWeight
+      shortDescription
+      returnPolicy
+      warranty
+      gender
+      keyword
+      clicks
+      promoted
+      productsWished {
+        id
+        user {
+          id
+          username
+          isSeller
+          sellerprofileSet {
+            shopName
+          }
+        }
+        products {
+          id
+          productTitle
+        }
+      }
+      user {
+        id
+        username
+      }
+      category {
+        id
+        name
+      }
+      subcategory {
+        id
+        name
+      }
+      sales
+      options {
+        id
+        size
+        quantity
+        price
+        discountedPrice
+        optionTotalPrice
+      }
+      dateCreated
+      brand
+      color
       image {
         id
         imageUrl
+      }
+      productRating {
+        id
+        rating
+        review
+        likes
+        dislikes
+        ratedAt
       }
     }
   }

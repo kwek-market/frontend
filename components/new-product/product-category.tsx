@@ -1,8 +1,4 @@
 import { UploadProductProps } from "@/interfaces/commonTypes";
-import {
-  getCategories,
-  getSubCategories,
-} from "@/store/category/categories.actions";
 import { RootState } from "@/store/rootReducer";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,11 +35,6 @@ function ProductCategory({
       console.log(submitDetails.subcategory);
     }
   }, [submitDetails.category]);
-
-  useEffect(() => {
-    dispatch(getCategories());
-    dispatch(getSubCategories());
-  }, []);
 
   return (
     <div className="tw-pt-3 tw-px-5 tw-pb-20 tw-mb-5 tw-bg-white-100 tw-rounded-md">

@@ -45,7 +45,7 @@ function Header({ submitDetails }: Props) {
       return message.error("Add product options");
     }
     dispatch(createProduct(submitDetails, user.token));
-    console.log(submitDetails);
+    // console.log(submitDetails);
   }
 
   return (

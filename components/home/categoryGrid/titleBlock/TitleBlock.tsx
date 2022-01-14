@@ -1,10 +1,18 @@
-import React from 'react';
-import styles from './TitleBlock.module.scss';
+import { useRouter } from "next/router";
+import React from "react";
+import styles from "./TitleBlock.module.scss";
 
 const TitleBlock = function ({ title, timer }) {
+  const router = useRouter();
   return (
     <div className={styles.title}>
-      <h3 className={timer ? styles.title_heading : styles.title_heading__noBorder}>{title}</h3>
+      <h3
+        className={
+          timer ? styles.title_heading : styles.title_heading__noBorder
+        }
+      >
+        {title}
+      </h3>
 
       {timer && (
         <div className={styles.title_timer}>
@@ -30,7 +38,10 @@ const TitleBlock = function ({ title, timer }) {
         </div>
       )}
 
-      <button className={`btn btn--naked ${styles.title_btn}`}>
+      <button
+        onClick={() => router.push(`/category/${title}`)}
+        className={`btn btn--naked ${styles.title_btn}`}
+      >
         View More <i className="fas fa-chevron-right" />
       </button>
     </div>
