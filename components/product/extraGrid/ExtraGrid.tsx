@@ -14,7 +14,7 @@ const ExtraGrid = function ({ product }: { product: ProductType }) {
           className={styles.img}
         />
         <p>
-          Sold by <span>{product.user.sellerprofileSet[0].shopName}</span>
+          Sold by <span>{product?.user?.sellerprofileSet[0]?.shopName}</span>
         </p>
         <div className={styles.box_productRating}>
           <span className="material-icons">star</span>
