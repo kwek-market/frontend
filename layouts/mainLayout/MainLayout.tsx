@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSellerData } from "@/store/seller/seller.action";
 import { RootState } from "@/store/rootReducer";
 import { getUserData } from "@/store/user/user.actions";
-import {
-  getCategories,
-  getSubCategories,
-} from "@/store/category/categories.actions";
+import { getCategories } from "@/store/category/categories.actions";
+import { getCartFunc } from "@/store/cart/cart.actions";
 
 const MainLayout = function ({ children, title }: any) {
   const dispatch = useDispatch();
@@ -23,9 +21,9 @@ const MainLayout = function ({ children, title }: any) {
 
   useEffect(() => {
     dispatch(getCategories());
-    //dispatch(getSubCategories());
     user.token && dispatch(getUserData(user.token));
     user.token && user.user.isSeller && dispatch(getSellerData(user.token));
+    user.token && dispatch(getCartFunc(user.token));
   }, []);
 
   return (

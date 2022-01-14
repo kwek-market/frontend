@@ -5,7 +5,6 @@ const initialState = {
   error: null,
   category: {},
   categories: [{}],
-  subCategories: [{}],
   message: "",
   status: false,
 };
@@ -27,12 +26,12 @@ export function categoriesReducer(
         categories: action.payload,
         error: null,
       };
-    case categoriesType.GET_SUB_CATEGORIES:
-      return {
-        ...state,
-        subCategories: action.payload,
-        error: null,
-      };
+    // case categoriesType.GET_SUB_CATEGORIES:
+    //   return {
+    //     ...state,
+    //     subCategories: action.payload,
+    //     error: null,
+    //   };
     case categoriesType.LOADING:
       return {
         ...state,
