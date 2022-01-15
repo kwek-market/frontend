@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+
+.stock{
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    justify-content: center;
+    justify-content: center;
+    align-items: center;
+
+
+    .stocks{  
+        border: 2px solid #BFA5A333;
+        background-color: #ffffff;
+        width: 1300px;
+        height: 620px;
+        margin-left: 19px;
+        justify-content: center;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .stockle{
+        align-items: center;
+        padding-left: 500px;
+        padding-top: 90px;
+    }
+
+    button{
+        background-color: brown;
+    }
+    .current{
+        // width: 631px;
+        // height: 48px;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 48px;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        padding-top: 20px;
+    }
+    .sell{
+        font-weight: 400;
+        font-size: 18px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        padding-top: 10px;
+    }
+    button{
+        border: 1px solid transparent;
+        border-radius: 5px;
+        font-family: 'Poppins', sans-serif;
+        background: #AF1328;
+        width: 214px;
+        height: 64px;
+       margin-left: 530px;
+
+    }
+}
