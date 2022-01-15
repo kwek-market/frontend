@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+
+
+.place {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 60px;
+
+
+    h4{
+        color: #AF1328;
+        font-weight: 600;
+        line-height: 42px;
+        font-size: 24px;
+        // padding-top: 14px;
+    }
+    p{
+        font-weight: 400;
+        size: 16px;
+        line-height: 24px;
+    }
+    
+}
