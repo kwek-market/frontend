@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+
+
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+
+
+.overall{
+    background-color: rgb(206, 204, 204);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+    padding-bottom: 30px;
+
+    .template{
+        width: 600px;
+        background-color: #ffffff;
+        margin: 0 auto;
+    }
+
+    .email{
+        margin: 0 auto;
+        width: 100%;
+        max-width: 600px;
+        border-spacing: 0;
+        font-family: sans-serif;
+        color: #4a4a4a;
+    }
+
+    .table{
+        width: 100%;
+        border-spacing: 0;
+    }
+    .data{
+        padding: 30px 30px 20px 50px;
+        display: flex;
+        flex-direction: row;
+        width: 600px;
+        height: 102px;
+        background-color: #fefbfc;
+        
+    }
+    .logo{
+        margin-left: 40px;
+    }
+    .pink{
+        align-content: flex-end;
+        margin-left: 100px; 
+    }
+    h4{
+        height: 29px;
+        line-height: 28.8px;
+        font-weight: 700;
+        font-size: 24px;
+        font-family: 'Poppins', sans-serif;
+        padding: 20px 30px 30px 30px;
+    }
+    .hall{
+        width: 504px;
+        height: 24px;
+        font-weight: 400;
+        line-height: 21px;
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+        padding: 20px 30px 60px 30px;
+    }
+    .click{
+        padding-bottom: 10px;
+    }
+    
+    
+    .verify{
+        background-color: #fefbfc;
+        padding: 30px;
+        
+    }
+    button{
+        border: 1px solid transparent;
+        background: #3498DB;
+        width: 301px;
+        height: 50px;
+        border-radius: 5px;
+        margin-left: 120px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+        
+        
+    }
+    .border{
+        width: 200px;
+        border: 1px solid #12080F;
+        opacity: 10%;
+        margin: 0 auto;
+        width: 504px;
+        margin: 10px auto;
+    }
+    .datarow{
+        padding: 2px 30px 30px 50px;
+        background-color: #fefbfc;
+    }
+    .column{
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 36px;
+        font-family: 'Cookie', cursive;
+        text-align: center;
+    }
+    .touch{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        
+    }
+    .facebook{
+        margin-right: 20px;
+    }
+    .twitter{
+        margin-left: 20px;
+    }
+}
