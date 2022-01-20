@@ -131,10 +131,10 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <p className={styles.product_subtitle}>{product.shortDescription}</p>
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
-          <div className={styles.colorbox}>
-            <button />
-            <button />
-            <button />
+          <div
+            className={`tw-p-3 tw-bg-[yellow] tw-bg-[${product.color.toLowerCase()}]`}
+          >
+            {product.color}
           </div>
         </div>
         <div className={styles.product_option_size}>

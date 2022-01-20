@@ -1,17 +1,21 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import Button from '@/components/buttons/Button';
-import buttonStyle from '@/styles/buttons.module.scss';
-import menuStyle from './menu.module.scss';
-import MenuBox from '@/components/menu/MenuBox';
-import CategoryBox from '@/components/menu/CategoryBox';
-import { RootState } from '@/store/rootReducer';
-import { getInitials2 } from '@/helpers';
-import { logout } from '@/store/user/user.actions';
-import { clearAccount } from '@/store/account/account.actions';
-import { clearSubs } from '@/store/newsletter/newsletter.actions';
-import { clearSeller } from '@/store/seller/seller.action';
+import React from "react";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "@/components/buttons/Button";
+import buttonStyle from "@/styles/buttons.module.scss";
+import menuStyle from "./menu.module.scss";
+import MenuBox from "@/components/menu/MenuBox";
+import CategoryBox from "@/components/menu/CategoryBox";
+import { RootState } from "@/store/rootReducer";
+import { getInitials2 } from "@/helpers";
+import { logout } from "@/store/user/user.actions";
+import { clearAccount } from "@/store/account/account.actions";
+import { clearSubs } from "@/store/newsletter/newsletter.actions";
+import { clearSeller } from "@/store/seller/seller.action";
+import { clearCart } from "@/store/cart/cart.actions";
+import { clearCategories } from "@/store/category/categories.actions";
+import { clearProduct } from "@/store/product/product.action";
+import { clearWishlist } from "@/store/wishlist/wishlist.actions";
 
 const Menu = function ({}) {
   const dispatch = useDispatch();
@@ -22,56 +26,60 @@ const Menu = function ({}) {
     dispatch(clearSubs());
     dispatch(clearAccount());
     dispatch(clearSeller());
-    router.push('/login');
+    dispatch(clearCategories());
+    dispatch(clearProduct());
+    dispatch(clearWishlist());
+    dispatch(clearCart());
+    router.push("/login");
   }
   const menuBoxItems = {
     myCart: {
-      icon: 'fa-shopping-cart',
-      title: 'My Cart',
-      description: 'No items in the cart',
-      link: '/profile/account',
+      icon: "fa-shopping-cart",
+      title: "My Cart",
+      description: "No items in the cart",
+      link: "/profile/account",
     },
     trackOrder: {
-      icon: 'fa-map-marker-alt',
-      title: 'Track Order',
-      description: 'View order status',
-      link: '/profile/account',
+      icon: "fa-map-marker-alt",
+      title: "Track Order",
+      description: "View order status",
+      link: "/profile/account",
     },
     myOrders: {
-      icon: 'fa-shopping-bag',
-      title: 'My Orders',
-      description: 'No item ordered',
-      link: '/profile/account',
+      icon: "fa-shopping-bag",
+      title: "My Orders",
+      description: "No item ordered",
+      link: "/profile/account",
     },
     savedItems: {
-      icon: 'fa-heart',
-      title: 'Saved Items',
-      description: 'View saved items',
-      link: '/wishlist',
+      icon: "fa-heart",
+      title: "Saved Items",
+      description: "View saved items",
+      link: "/wishlist",
     },
     sell: {
-      icon: 'fa-shopping-cart',
-      title: 'Sell on Kwek',
-      description: 'Join other merchants',
-      link: '/sell',
+      icon: "fa-shopping-cart",
+      title: "Sell on Kwek",
+      description: "Join other merchants",
+      link: "/sell",
     },
     address: {
-      icon: 'fa-home',
-      title: 'My Addresses',
-      description: 'View saved addresses',
-      link: '/profile/account',
+      icon: "fa-home",
+      title: "My Addresses",
+      description: "View saved addresses",
+      link: "/profile/account",
     },
   };
 
   const categories: any[] = [
-    { name: 'Electronics', icon: '/svg/cat-icon-electronics.svg' },
-    { name: 'Beauty & Health', icon: '/svg/cat-icon-electronics.svg' },
-    { name: 'Toy & Kids', icon: '/svg/cat-icon-electronics.svg' },
-    { name: 'Fashion', icon: '/svg/cat-icon-electronics.svg' },
-    { name: 'Home & Garden', icon: '/svg/cat-icon-electronics.svg' },
-    { name: 'Sporting Goods', icon: '/svg/cat-icon-electronics.svg' },
-    { name: 'Automobile', icon: '/svg/cat-icon-electronics.svg' },
-    { name: 'Others', icon: '/svg/cat-icon-electronics.svg' },
+    { name: "Electronics", icon: "/svg/cat-icon-electronics.svg" },
+    { name: "Beauty & Health", icon: "/svg/cat-icon-electronics.svg" },
+    { name: "Toy & Kids", icon: "/svg/cat-icon-electronics.svg" },
+    { name: "Fashion", icon: "/svg/cat-icon-electronics.svg" },
+    { name: "Home & Garden", icon: "/svg/cat-icon-electronics.svg" },
+    { name: "Sporting Goods", icon: "/svg/cat-icon-electronics.svg" },
+    { name: "Automobile", icon: "/svg/cat-icon-electronics.svg" },
+    { name: "Others", icon: "/svg/cat-icon-electronics.svg" },
   ];
 
   return (
@@ -82,20 +90,22 @@ const Menu = function ({}) {
             buttonStyle={buttonStyle.red_border_button}
             text="Sign up"
             cmd={() => {
-              router.push('/create-account');
+              router.push("/create-account");
             }}
           />
           <Button
             buttonStyle={buttonStyle.red_filled_button}
             text="Sign in"
             cmd={() => {
-              router.push('/login');
+              router.push("/login");
             }}
           />
         </div>
       ) : (
         <div className={menuStyle.userDiv}>
-          <div className={menuStyle.userInitials}>{user.id !== null && getInitials2(user.user.fullName)}</div>
+          <div className={menuStyle.userInitials}>
+            {user.id !== null && getInitials2(user.user.fullName)}
+          </div>
           <div className={menuStyle.user}>
             <span>{user.user.fullName}</span>
             <span>{user.user.username}</span>
@@ -120,18 +130,22 @@ const Menu = function ({}) {
         <p>Categories</p>
         <div>
           {categories.map((category) => (
-            <CategoryBox key={category.name} name={category.name} icon={category.icon} />
+            <CategoryBox
+              key={category.name}
+              name={category.name}
+              icon={category.icon}
+            />
           ))}
         </div>
       </div>
-      <div style={{ margin: '15px 0' }}>
+      <div style={{ margin: "15px 0" }}>
         <hr />
       </div>
       <div>
         <Button
           buttonStyle={buttonStyle.btn_block}
           text="Contact Us"
-          cmd={() => router.push('/contact-us')}
+          cmd={() => router.push("/contact-us")}
           icon="fa-phone"
         />
         <Button

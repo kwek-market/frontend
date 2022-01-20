@@ -13,6 +13,7 @@ import { RootState } from "@/store/rootReducer";
 import { GetProducts } from "@/store/product/product.queries";
 import { userFetcher } from "@/helpers";
 import { Spin } from "antd";
+import useProduct from "@/hooks/useProduct";
 
 const GridContainer = function ({
   title,
@@ -21,14 +22,8 @@ const GridContainer = function ({
   cards,
   banners,
 }: any) {
-  const { product } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
-  const [err, setError] = useState("");
-  const [products, setProducts] = useState([]);
   const router = useRouter();
-
-  const prod = [1, 2, 3, 4];
 
   const slides = [
     { element: <Card /> },
@@ -38,34 +33,14 @@ const GridContainer = function ({
 
   const banner = [{ element: <Banner /> }, { element: <Banner /> }];
 
-  useEffect(() => {
-    let isCancelled = false;
-    (async () => {
-      const { message } = await import("antd");
-      try {
-        const payload = {
-          search: title,
-        };
-        const res = await userFetcher(GetProducts, payload);
-        if (!isCancelled) {
-          setLoading(false);
-          setError("");
-          setProducts(res.products);
-        }
-      } catch (error) {
-        message.error(error.message);
-        if (!isCancelled) {
-          setError(error.message);
-          setProducts([]);
-          setLoading(false);
-        }
-      }
-    })();
-
-    return () => {
-      isCancelled = true;
-    };
-  }, []);
+  const payload = {
+    search: title,
+  };
+  const {
+    status: categoryStatus,
+    data: categoryData,
+    error: categoryError,
+  } = useProduct(payload);
 
   return (
     <div id={styles.categoryGrid}>
@@ -74,27 +49,23 @@ const GridContainer = function ({
         className={sidebar ? styles.mainContainer : styles.mainContainer__full}
       >
         <div className={styles.products}>
-          {title === "Deals Of The day" &&
-            prod.map((item) => (
-              <div key={uuid()} className={styles.product}>
-                <ProductBox />
-              </div>
-            ))}
-          {!!err && (
+          {categoryStatus === "error" && (
             <div className="tw-py-5 tw-w-full tw-text-center">
-              <h1 className="tw-text-error tw-font-bold tw-text-2xl">{err}</h1>
+              <h1 className="tw-text-error tw-font-bold tw-text-2xl">
+                {categoryError}
+              </h1>
             </div>
           )}
-          {title !== "Deals Of The day" && loading ? (
+          {categoryStatus === "loading" ? (
             <div className="tw-py-5 tw-w-full tw-text-center">
               <Spin size="large" />
             </div>
-          ) : products.length === 0 ? (
+          ) : categoryData.products.length === 0 ? (
             <div className="tw-py-5 tw-w-full tw-text-center">
               <h1>No Products Found</h1>
             </div>
           ) : (
-            products.slice(0, 4).map((product: any) => (
+            categoryData.products.slice(0, 4).map((product: any) => (
               <div key={uuid()} className={styles.product}>
                 <ProductBox product={product} id={product.id} />
               </div>

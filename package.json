@@ -27,6 +27,8 @@
     "react-dom": "17.0.1",
     "react-icons": "^4.3.1",
     "react-loader-spinner": "^4.0.0",
+    "react-paginate": "^8.1.0",
+    "react-query": "^3.34.8",
     "react-redux": "^7.2.3",
     "react-star-rating-component": "^1.4.1",
     "react-step-builder": "^2.0.11",
@@ -35,7 +37,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sass": "^1.45.1",
-    "swr": "^0.5.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
