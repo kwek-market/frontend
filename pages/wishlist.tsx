@@ -14,16 +14,9 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { WishlistType } from "@/interfaces/commonTypes";
 
 const Page = function () {
-  const dispatch = useDispatch();
   const {
-    user,
     wishlist: { error, loading, wishlists },
   } = useSelector((state: RootState) => state);
-
-  useEffect(() => {
-    dispatch(getWishList(user.token));
-    console.log(wishlists);
-  }, []);
 
   const isLoading = !!loading && (
     <div>

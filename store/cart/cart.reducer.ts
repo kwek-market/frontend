@@ -34,6 +34,7 @@ export default function cartReducer(
         ...state,
         loading: false,
         error: null,
+        cart: [],
       };
     case CartType.DELETE_CART_ITEM:
       return {

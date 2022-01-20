@@ -1,18 +1,27 @@
-import React from 'react';
+import React from "react";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import styles from './cartTab.module.scss';
+import Link from "next/link";
+import styles from "./cartTab.module.scss";
 
 const CartTab = function () {
   return (
     <div className={styles.tab_container}>
       <div className={styles.tab_content}>
-        <a className={styles.active}>1. Shopping Cart</a>
-        <i className="fas fa-angle-right" />
-        <a className={styles.active}>2. Checkout</a>
-        <i className="fas fa-angle-right" />
-        <a>3. Order Complete</a>
+        <Link href="/cart">
+          <a className={styles.active}>
+            1. Shopping Cart
+            <i className="fas fa-angle-right" />
+          </a>
+        </Link>
+        <Link href={"/cart/checkout"}>
+          <a className={styles.active}>
+            2. Checkout
+            <i className="fas fa-angle-right" />
+          </a>
+        </Link>
+        <Link href="/cart/orderComplete">
+          <a>3. Order Complete</a>
+        </Link>
       </div>
     </div>
   );

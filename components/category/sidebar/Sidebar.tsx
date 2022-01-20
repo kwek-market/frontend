@@ -1,22 +1,34 @@
-import React from "react";
+import React, { memo } from "react";
 import Image from "next/image";
 import styles from "./Sidebar.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
+import useCategory from "@/hooks/useCategory";
+import Loader from "react-loader-spinner";
+import { v4 } from "uuid";
 
-const Sidebar = function () {
-  const products = [1, 2, 3, 4, 5];
+const Sidebar = function ({ category }) {
+  const { categories } = useSelector((state: RootState) => state);
+
+  const { id } = categories.categories.find((cat) => cat.name === category);
+  const payload = { id };
+  const { status, data, error } = useCategory(payload);
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar_content}>
         <p className={styles.header}>BROWSE CATEGORIES</p>
+        {status === "loading" && (
+          <Loader type="Bars" width="20" height="20" color="red" />
+        )}
+        {status === "error" && (
+          <div className="tw-py-3">
+            <p className="tw-text-error tw-text-lg tw-font-bold">{error}</p>
+          </div>
+        )}
         <div className={styles.subMenu}>
-          <p>Kids's Fashion</p>
-          <p>Luggage & Travel</p>
-          <p>Men's Fashion</p>
-          <p>Shoe, Jewerly & Watch Accessories</p>
-          <p>Weddings</p>
-          <p>Women's Fashion</p>
-          <p>Sport & Fitness Wears</p>
+          {status === "success" &&
+            data.category.child.map((cat) => <p key={v4()}>{cat.name}</p>)}
         </div>
       </div>
       <div className={styles.sidebar_content}>

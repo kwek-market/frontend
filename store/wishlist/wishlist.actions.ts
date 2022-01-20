@@ -43,14 +43,12 @@ export function getWishList(token: string) {
     try {
       setLoading();
       const res = await userFetcher(GetWishlists, { token });
-      console.log(res);
       dispatch({
         type: WishlistType.GET_WISHLISTS,
         payload: res.wishlists,
       });
     } catch (err) {
       message.error(err.message);
-      console.log(err.message);
       dispatch({
         type: WishlistType.ERROR,
         payload: err.message,
