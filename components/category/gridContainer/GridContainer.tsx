@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import styles from "./GridContainer.module.scss";
 
 import { ActiveTabbar, Card, SideBar } from "../index";
@@ -10,67 +10,72 @@ import { GetProducts } from "@/store/product/product.queries";
 import CategoryProducts from "../CategoryProducts";
 import { ProductType } from "@/interfaces/commonTypes";
 import Loader from "react-loader-spinner";
+import { useQuery } from "react-query";
+import ReactPaginate from "react-paginate";
+import useProduct from "@/hooks/useProduct";
+
+const itemsPerPage = 20;
 
 const GridContainer = function ({ cards, category }: any) {
   const [filter, setFilter] = useState(true);
 
-  const [loading, setLoading] = useState(true);
-  const [err, setError] = useState("");
-  const [products, setProducts] = useState([]);
+  // for pagination
+  const [currentItems, setCurrentItems] = useState<ProductType[]>(
+    [] as ProductType[]
+  );
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const payload = {
+    search: category,
+  };
+  const {
+    status: categoryStatus,
+    data: categoryData,
+    error: categoryError,
+  } = useProduct(payload);
 
   useEffect(() => {
-    let isCancelled = false;
-    (async () => {
-      const { message } = await import("antd");
-      try {
-        const payload = {
-          search: category,
-        };
-        const res = await userFetcher(GetProducts, payload);
-        if (!isCancelled) {
-          setLoading(false);
-          setError("");
-          setProducts(res.products);
-          console.log(res);
-        }
-      } catch (error) {
-        message.error(error.message);
-        if (!isCancelled) {
-          setError(error.message);
-          setProducts([]);
-          setLoading(false);
-        }
-      }
-    })();
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    if (categoryData === undefined) return;
+    setCurrentItems(categoryData.products.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(categoryData.products.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, categoryData]);
 
-    return () => {
-      isCancelled = true;
-    };
-  }, []);
+  // Invoke when user click to request another page.
+  const handlePageClick = (event: { selected: number }) => {
+    const newOffset =
+      (event.selected * itemsPerPage) % categoryData.products.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
 
-  const isLoading = !!loading && (
+  const isLoading = categoryStatus === "loading" && (
     <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
       <Loader type="Rings" width={60} height={60} color="#FC476E" />
     </div>
   );
 
-  const hasError = !!err && (
+  const hasError = categoryStatus === "error" && (
     <div className="tw-w-full tw-py-5">
       <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
-        {err}
+        {categoryError}
       </h1>
     </div>
   );
 
   const isEmpty =
-    products.length === 0 ? (
+    categoryStatus == "success" && currentItems.length === 0 ? (
       <div className="tw-w-full tw-py-5">
         <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
           No products
         </h1>
       </div>
     ) : (
-      products.map((product: ProductType) => (
+      currentItems.map((product: ProductType) => (
         <div key={uuid()} className={styles.product}>
           <CategoryProducts id={product.id} product={product} />
         </div>
@@ -83,20 +88,16 @@ const GridContainer = function ({ cards, category }: any) {
 
       {filter && (
         <aside className={styles.sidebarContainer}>
-          <SideBar />
+          <SideBar category={category} />
         </aside>
       )}
 
       <div
         className={filter ? styles.mainContainer : styles.mainContainer__full}
       >
-        {loading ? (
-          isLoading
-        ) : err ? (
-          hasError
-        ) : (
-          <div className={styles.products}>{isEmpty}</div>
-        )}
+        {isLoading}
+        {hasError}
+        <div className={styles.products}>{isEmpty}</div>
 
         {cards && (
           <div className={styles.cards}>
@@ -107,8 +108,27 @@ const GridContainer = function ({ cards, category }: any) {
             ))}
           </div>
         )}
+        <ReactPaginate
+          nextLabel="next >"
+          onPageChange={(e) => handlePageClick(e)}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={undefined}
+        />
       </div>
-      <Pagination />
     </div>
   );
 };

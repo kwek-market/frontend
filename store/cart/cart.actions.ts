@@ -1,10 +1,10 @@
 import { getIp, userFetcher, userFetcherWithAuth } from "@/helpers";
 import { AddToCartPayload } from "@/interfaces/commonTypes";
 import { Dispatch } from "redux";
-import { AddToCart, GetCart } from "./cart.queries";
+import { AddToCart, DeleteCart, DeleteCartItem, GetCart } from "./cart.queries";
 import { CartType } from "./cart.types";
 
-export const clearProduct = () => ({
+export const clearCart = () => ({
   type: CartType.CLEAR,
   payload: null,
 });
@@ -21,10 +21,8 @@ export function addToCartFunc(payload: AddToCartPayload, token: string) {
     setLoading();
     try {
       const res = await userFetcherWithAuth(AddToCart, payload, token);
-      //console.log(res);
       message.success(res.addToCart.message, 5);
     } catch (err) {
-      console.log(err.message);
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);
       dispatch({
         type: CartType.ERROR,
@@ -41,13 +39,49 @@ export function getCartFunc(token: string) {
       setLoading();
       const ip = await getIp();
       const res = await userFetcherWithAuth(GetCart, { token, ip }, token);
-      //console.log(res);
       dispatch({
         type: CartType.GET_CART,
         payload: res.userCart,
       });
     } catch (err) {
-      console.log(err.message);
+      message.error(err.message.slice(0, err.message.indexOf(".")), 5);
+      dispatch({
+        type: CartType.ERROR,
+        payload: err.message.slice(0, err.message.indexOf(".")),
+      });
+    }
+  };
+}
+
+export function deleteCartItem(payload: {
+  itemId: string;
+  cartId: string;
+  token: string;
+}) {
+  return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
+    try {
+      setLoading();
+      const res = await userFetcher(DeleteCartItem, payload);
+      message.success(res.deleteCartItem.message, 5);
+    } catch (err) {
+      message.error(err.message.slice(0, err.message.indexOf(".")), 5);
+      dispatch({
+        type: CartType.ERROR,
+        payload: err.message.slice(0, err.message.indexOf(".")),
+      });
+    }
+  };
+}
+
+export function deleteCart(payload: {}) {
+  return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
+    try {
+      setLoading();
+      const res = await userFetcher(DeleteCart, payload);
+      console.log(res);
+    } catch (err) {
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);
       dispatch({
         type: CartType.ERROR,

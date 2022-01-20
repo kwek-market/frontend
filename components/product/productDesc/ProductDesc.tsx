@@ -32,7 +32,6 @@ const ProductDesc = function ({ product }) {
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(email);
     dispatch(reviewProduct(reviewType, user.token));
   }
 

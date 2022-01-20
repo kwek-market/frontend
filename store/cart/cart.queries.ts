@@ -22,6 +22,20 @@ export const GetCart = /* GraphQL */ `
       product {
         id
         productTitle
+        user {
+          sellerprofileSet {
+            shopName
+          }
+        }
+        image {
+          imageUrl
+        }
+        options {
+          id
+          price
+          discountedPrice
+          optionTotalPrice
+        }
       }
       quantity
       price
@@ -56,10 +70,10 @@ export const DeleteCartItem = /* GraphQL */ `
   mutation deleteCartItem(
     $cartId: String!
     $ip: String
-    $itemID: String!
+    $itemId: String!
     $token: String
   ) {
-    deleteCartItem(cartId: $cartId, ip: $ip, itemID: $itemID, token: $token) {
+    deleteCartItem(cartId: $cartId, ip: $ip, itemId: $itemId, token: $token) {
       status
       message
     }

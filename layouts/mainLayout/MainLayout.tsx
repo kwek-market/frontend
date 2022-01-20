@@ -4,9 +4,11 @@ import { Topbar, Header, Navbar, Footer, PageTitle, Menu } from "@/shared";
 import { useDispatch, useSelector } from "react-redux";
 import { getSellerData } from "@/store/seller/seller.action";
 import { RootState } from "@/store/rootReducer";
-import { getUserData } from "@/store/user/user.actions";
+import { getUserData, logout } from "@/store/user/user.actions";
 import { getCategories } from "@/store/category/categories.actions";
-import { getCartFunc } from "@/store/cart/cart.actions";
+import { clearCart, getCartFunc } from "@/store/cart/cart.actions";
+import { verifyTokenFunc } from "@/helpers";
+import { clearWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 
 const MainLayout = function ({ children, title }: any) {
   const dispatch = useDispatch();
@@ -21,10 +23,27 @@ const MainLayout = function ({ children, title }: any) {
 
   useEffect(() => {
     dispatch(getCategories());
-    user.token && dispatch(getUserData(user.token));
-    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
-    user.token && dispatch(getCartFunc(user.token));
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await verifyTokenFunc(user.token);
+        if (data.verifyToken.status) {
+          user.token && dispatch(getUserData(user.token));
+          user.token &&
+            user.user.isSeller &&
+            dispatch(getSellerData(user.token));
+          user.token && dispatch(getCartFunc(user.token));
+          user.token && dispatch(getWishList(user.token));
+        } else {
+          dispatch(logout());
+          dispatch(clearCart());
+          dispatch(clearWishlist());
+        }
+      } catch (err) {}
+    })();
+  }, [user.token]);
 
   return (
     <div>
