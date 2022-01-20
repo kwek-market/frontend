@@ -7,6 +7,7 @@ import {
   RESEND_VERIFICATION_EMAIL,
   RESET_PASSWORD,
   USER_ACCOUNT_UPDATE,
+  VERIFY_TOKEN,
 } from "./user.queries";
 import {
   SET_USER,
@@ -33,6 +34,31 @@ export const setUser = (user: any) => ({
   type: SET_USER,
   payload: user,
 });
+
+export function logout() {
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: CLEAR_USER,
+      payload: null,
+    });
+  };
+}
+
+export function verifyUserToken(token: string) {
+  return async function (dispatch: Dispatch) {
+    try {
+      const res = await userFetcher(VERIFY_TOKEN, { token });
+      console.log(res);
+      res.verifyToken.status === false &&
+        dispatch({
+          type: CLEAR_USER,
+          payload: null,
+        });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+}
 
 export function getUserData(token: string) {
   return async function (dispatch: Dispatch) {
@@ -179,8 +205,3 @@ export function changePassword(
     }
   };
 }
-
-export const logout = () => ({
-  type: CLEAR_USER,
-  payload: null,
-});

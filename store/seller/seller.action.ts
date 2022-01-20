@@ -116,7 +116,6 @@ export function getSellerData(token: string) {
     try {
       sellerLoading();
       const response = await userFetcherWithAuth(SELLER_DATA, { token }, token);
-      console.log(response);
       dispatch({
         type: SellerTypes.GET_SELLER,
         payload: response.sellerData,

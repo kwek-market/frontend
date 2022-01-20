@@ -119,10 +119,11 @@ const Page = function ({ data }) {
   };
 
   useEffect(() => {
+    // if you don't have an account, you can't come to this page
+    !user.token && router.push("/login");
     user.token && dispatch(getUserData(user.token));
     user.token && user.user.isSeller && dispatch(getSellerData(user.token));
-    if (seller.sellerCreated.status || seller.seller.sellerVerified)
-      router.push("/seller/profile");
+    if (seller.seller.sellerVerified) router.push("/seller/profile");
   }, [seller.sellerCreated.status]);
 
   useEffect(() => {

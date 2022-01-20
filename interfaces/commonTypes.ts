@@ -258,3 +258,33 @@ export type WishlistType = {
     createdAt: Date;
   };
 };
+
+export type BillingAddressType = {
+  fullName: string;
+  contact: string;
+  address: string;
+  city: string;
+  state: string;
+  token: string;
+};
+
+export type PlaceOrder = {
+  addressId: string;
+  cartId: string;
+  couponId?: string;
+  couponType?: string;
+  deliveryMethod: string;
+  paymentMethod: string;
+  token: string;
+};
+
+export type PaymentLinkType = {
+  amount: number;
+  currency: string;
+  description: string;
+  token: string;
+};
+
+export type VerifyPaymentType = {
+  transactionId: string;
+};

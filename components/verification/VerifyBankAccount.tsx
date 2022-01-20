@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { SellerVerification } from "@/interfaces/commonTypes";
 import VerifiedModal from "./VerifiedModal";
+import { setLoading } from "@/store/user/user.actions";
+import Loader from "react-loader-spinner";
 
 interface T extends StepComponentProps {
   submit: (data: any) => void;
@@ -19,6 +21,7 @@ interface T extends StepComponentProps {
 function VerifyBankAccount(props: T) {
   const dispatch = useDispatch();
   const { user, seller } = useSelector((state: RootState) => state);
+  const [loading, setLoading] = useState(false);
   const fetchFromState = (value: string, defaultValue: string = "") => {
     const checkThis = props.getState(value, defaultValue);
     if (!!checkThis && typeof checkThis === "string") {
@@ -116,12 +119,14 @@ function VerifyBankAccount(props: T) {
       props.state.bankAccountNumber &&
       (async () => {
         try {
+          setLoading(true);
           const res = await (
             await fetch(
               `https://api.paystack.co/bank/resolve?account_number=${accountNumber}&bank_code=${bankCode}`,
               options
             )
           ).json();
+          setLoading(false);
           setBankAccountName(res.data.account_name);
           props.setState("bankAccountName", res.data.account_name);
           // get bank sort code from bank name
@@ -132,6 +137,7 @@ function VerifyBankAccount(props: T) {
           console.log({ res });
         } catch (err) {
           console.log({ err });
+          setLoading(false);
         }
       })();
     return () => controller.abort();
@@ -242,6 +248,14 @@ function VerifyBankAccount(props: T) {
             value={props.getState("bankAccountNumber", "")}
             onChange={props.handleChange}
           />
+          {loading && (
+            <Loader
+              type="CradleLoader"
+              width={20}
+              height={20}
+              color="#FC476E"
+            />
+          )}
           {props.state.bankName && props.state.bankAccountNumber && (
             <p className="tw-font-medium">{bankAccountName}</p>
           )}
@@ -251,7 +265,8 @@ function VerifyBankAccount(props: T) {
           <Button
             isDisabled={
               props.state.bankName === "" ||
-              props.state.bankAccountNumber === ""
+              props.state.bankAccountNumber === "" ||
+              bankAccountName === ""
             }
             buttonStyle={`tw-rounded-sm tw-py-3 tw-px-10 tw-bg-green-success tw-text-white-100 tw-text-xs disabled:tw-bg-gray-kwek100`}
             text={"Verify"}

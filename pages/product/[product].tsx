@@ -12,74 +12,46 @@ import { userFetcher } from "@/helpers";
 import { ProductType } from "@/interfaces/commonTypes";
 import { GetProducts } from "@/store/product/product.queries";
 import Loader from "react-loader-spinner";
+import useProduct from "@/hooks/useProduct";
 
 const Page = function () {
   const router = useRouter();
   const { product } = router.query;
 
-  const [loading, setLoading] = useState(true);
-  const [err, setError] = useState("");
-  const [products, setProducts] = useState<ProductType>({} as ProductType);
+  const payload = {
+    search: product,
+  };
+  const {
+    status: categoryStatus,
+    data: categoryData,
+    error: categoryError,
+  } = useProduct(payload);
 
-  useEffect(() => {
-    let isCancelled: boolean = false;
-    (async () => {
-      const { message } = await import("antd");
-      try {
-        const payload = {
-          search: product,
-        };
-        console.log(payload.search);
-        const res = await userFetcher(GetProducts, payload);
-        if (!isCancelled) {
-          console.log(res);
-          setLoading(false);
-          setError("");
-          setProducts(res.products[0]);
-        }
-      } catch (error) {
-        console.log(error.message);
-        message.error(error.message);
-        if (!isCancelled) {
-          setLoading(false);
-          setError(error.message);
-          setProducts({} as ProductType);
-        }
-      }
-    })();
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [product]);
-
-  const isLoading = !!loading && (
+  const isLoading = categoryStatus === "loading" && (
     <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
       <Loader type="Audio" width={60} height={60} color="#FC476E" />
     </div>
   );
 
-  const hasError = !!err && (
+  const hasError = categoryStatus === "error" && (
     <div className="tw-w-full tw-py-5">
       <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
-        {err}
+        {categoryError}
       </h1>
     </div>
   );
 
   return (
     <MainLayout title={product}>
-      {loading ? (
-        isLoading
-      ) : err ? (
-        hasError
-      ) : (
+      {isLoading}
+      {hasError}
+      {categoryStatus === "success" && (
         <>
-          <ProductHead product={products} />
-          <ExtraGrid product={products} />
-          <ProductDesc product={products} />
+          <ProductHead product={categoryData.products[0]} />
+          <ExtraGrid product={categoryData.products[0]} />
+          <ProductDesc product={categoryData.products[0]} />
           <MoreCard
-            similar={products?.category?.name}
+            similar={categoryData.products[0]?.category?.name}
             title="Similar Items you might Like"
           />
         </>

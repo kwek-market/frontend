@@ -1,4 +1,4 @@
-import { userFetcherWithAuth } from "./userFetcher";
+import { userFetcher, userFetcherWithAuth } from "./userFetcher";
 import { VERIFY_TOKEN } from "@/store/user/user.queries";
 
 export function getInitials(name: string) {
@@ -12,7 +12,7 @@ export function getInitials2(str: string) {
 }
 
 export function verifyTokenFunc(token: string) {
-  return userFetcherWithAuth(VERIFY_TOKEN, { token }, token);
+  return userFetcher(VERIFY_TOKEN, { token });
 }
 
 export function emailValidator(email: string) {

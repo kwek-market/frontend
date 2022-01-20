@@ -24,15 +24,62 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .disabled {
+    background: #E2DFDE !important;
+  }
+
+  .active {
+    border: 1px solid $col-primary;
+    border-radius: 10px;
+
+    a {
+      color: $col-primary !important;
+    }
+  }
+
+  li {
+    padding: 6px 10px;
+
+    &:first-child,
+    &:last-child {
+      border-radius: 10px;
+      background: $col-primary;
+      width: 92px;
+      text-align: center;
+
+      a {
+        color: white
+      }
+    }
+
+    &:first-child {
+      margin-right: 15px;
+    }
+
+    &:last-child {
+      margin-left: 15px;
+    }
+
+    a {
+      color: black;
+    }
+  }
 }

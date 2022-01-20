@@ -26,8 +26,8 @@ export const CATEGORIES = /* GraphQL */ `
 `;
 
 export const CATEGORY = /* GraphQL */ `
-  query categories($id: String!) {
-    categories(id: $id) {
+  query category($id: String!) {
+    category(id: $id) {
       id
       name
       parent {

@@ -66,6 +66,7 @@ const userReducer = (
         error: null,
       };
     case CLEAR_USER:
+      window.localStorage.removeItem("kwek");
       return {
         ...initialState,
       };

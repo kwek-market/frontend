@@ -1,15 +1,15 @@
-import React from 'react';
-import styles from './Header.module.scss';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { FiHeart } from 'react-icons/fi';
+import React from "react";
+import styles from "./Header.module.scss";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FiHeart } from "react-icons/fi";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 
 import { Menu, Dropdown } from "antd";
 import SearchBar from "./SearchBar";
@@ -18,6 +18,10 @@ import { RootState } from "@/store/rootReducer";
 import { clearAccount } from "@/store/account/account.actions";
 import { clearSubs } from "@/store/newsletter/newsletter.actions";
 import { clearSeller } from "@/store/seller/seller.action";
+import { clearWishlist } from "@/store/wishlist/wishlist.actions";
+import { clearProduct } from "@/store/product/product.action";
+import { clearCategories } from "@/store/category/categories.actions";
+import { clearCart } from "@/store/cart/cart.actions";
 
 interface HeaderProps {
   userNav: boolean;
@@ -40,6 +44,10 @@ const Header = function ({
     dispatch(clearSubs());
     dispatch(clearAccount());
     dispatch(clearSeller());
+    dispatch(clearCategories());
+    dispatch(clearProduct());
+    dispatch(clearWishlist());
+    dispatch(clearCart());
     router.push("/login");
   }
   const menu = (
@@ -70,24 +78,39 @@ const Header = function ({
 
       <Link href="/">
         <a className={`${styles.logo} tw-px-2`}>
-          <Image width="180" height="30" src="/svg/kweklogo.svg" alt="Kwek logo" className={styles.logo_image} />
+          <Image
+            width="180"
+            height="30"
+            src="/svg/kweklogo.svg"
+            alt="Kwek logo"
+            className={styles.logo_image}
+          />
         </a>
       </Link>
 
       <div className={`${styles.headerControls} tw-flex`}>
         <Link href="/wishlist">
           <a>
-            <FiHeart className="tw-text-black-stock" style={{ height: '28px', width: '30px' }} />
+            <FiHeart
+              className="tw-text-black-stock"
+              style={{ height: "28px", width: "30px" }}
+            />
           </a>
         </Link>
         <Link href="/cart">
           <a>
-            <AiOutlineShoppingCart className="tw-text-black-stock" style={{ height: '28px', width: '30px' }} />
+            <AiOutlineShoppingCart
+              className="tw-text-black-stock"
+              style={{ height: "28px", width: "30px" }}
+            />
           </a>
         </Link>
       </div>
 
-      <div className={styles.headerNav} style={{ transform: userNav && 'translateX(0)' }}>
+      <div
+        className={styles.headerNav}
+        style={{ transform: userNav && "translateX(0)" }}
+      >
         <div className={styles.close} onClick={() => setUserNav(false)}>
           <i className={`fas fa-times ${styles.close_icon}`} />
         </div>
@@ -97,7 +120,12 @@ const Header = function ({
         <div className={styles.shortcuts}>
           {user.id ? (
             <div className={styles.shortcuts_item}>
-              <Image width="16" height="18" src="/svg/user.svg" className={styles.shortcuts_icon} />
+              <Image
+                width="16"
+                height="18"
+                src="/svg/user.svg"
+                className={styles.shortcuts_icon}
+              />
               <Dropdown overlay={menu} className={styles.shortcuts_label}>
                 <a
                   className="ant-dropdown-link"
@@ -111,7 +139,12 @@ const Header = function ({
           ) : (
             <Link href="/login">
               <a className={styles.shortcuts_item}>
-                <Image width="16" height="18" src="/svg/user.svg" className={styles.shortcuts_icon} />
+                <Image
+                  width="16"
+                  height="18"
+                  src="/svg/user.svg"
+                  className={styles.shortcuts_icon}
+                />
                 <p className={styles.shortcuts_label}>Sign In</p>
               </a>
             </Link>
@@ -119,14 +152,24 @@ const Header = function ({
 
           <Link href="/wishlist">
             <a className={styles.shortcuts_item}>
-              <Image width="16" height="18" src="/svg/heart-filled.svg" className={styles.shortcuts_icon} />
+              <Image
+                width="16"
+                height="18"
+                src="/svg/heart-filled.svg"
+                className={styles.shortcuts_icon}
+              />
               <p className={styles.shortcuts_label}>Saved</p>
             </a>
           </Link>
           <Link href="/cart">
             <a className={styles.shortcuts_item}>
               <div className={styles.shortcuts_iconWrap}>
-                <Image width="16" height="18" src="/svg/cart.svg" className={styles.shortcuts_icon} />
+                <Image
+                  width="16"
+                  height="18"
+                  src="/svg/cart.svg"
+                  className={styles.shortcuts_icon}
+                />
                 <span className={styles.shortcuts_iconSuper}>4</span>
               </div>
               <p className={styles.shortcuts_label}>Cart</p>
