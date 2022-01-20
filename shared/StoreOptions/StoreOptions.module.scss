@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+
+.store_options{
+
+    .options{
+      height: 88px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: row;
+      font-family: 'Poppins', sans-serif;
+    }
+    .list{
+        margin-left: 90px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+    .link{
+      text-decoration: none;
+      color: black;
+    }
+    .link:hover{
+      text-decoration: underline;
+      color: #AF1328;
+    }
+    .link::after{
+      text-decoration: underline;
+      color: #AF1328;
+    }
+
+    .build {
+        padding: 2rem 6%;
+        background-color: #fefbfc;
+        width: 100%;
+        margin: 0 auto;
+      }
+      
+      .build ::-webkit-input-placeholder {
+        color: #bfa5a3 !important;
+      }
+      
+      .build :-ms-input-placeholder {
+        color: #bfa5a3 !important;
+      }
+      
+      .build ::-ms-input-placeholder {
+        color: #bfa5a3 !important;
+      }
+      
+      .build ::placeholder {
+        color: #bfa5a3 !important;
+      }
+}
+
+
