@@ -222,7 +222,7 @@ const Component = function () {
         <div className={styles.copyright}>
           <p className={styles.copyright_text}>
             Kwekmarket eCommerce{" "}
-            <span className={styles.copyright_symbol}>&copy;</span> 2020 . All
+            <span className={styles.copyright_symbol}>&copy;</span> 2022 . All
             Rights Reserved
           </p>
         </div>
