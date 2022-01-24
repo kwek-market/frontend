@@ -107,7 +107,7 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/returnpolicy">
                 <a className={styles.nav_link}>Kwek Return Policy</a>
               </Link>
             </li>
