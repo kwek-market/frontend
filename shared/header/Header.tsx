@@ -37,7 +37,7 @@ const Header = function ({
   openMenu,
 }: HeaderProps) {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const { user, cart } = useSelector((state: RootState) => state);
   const router = useRouter();
   function handleLogout() {
     dispatch(logout());
@@ -170,7 +170,9 @@ const Header = function ({
                   src="/svg/cart.svg"
                   className={styles.shortcuts_icon}
                 />
-                <span className={styles.shortcuts_iconSuper}>4</span>
+                <span className={styles.shortcuts_iconSuper}>
+                  {cart.cart?.length}
+                </span>
               </div>
               <p className={styles.shortcuts_label}>Cart</p>
             </a>

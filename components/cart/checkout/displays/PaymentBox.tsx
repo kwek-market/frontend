@@ -39,6 +39,7 @@ function PaymentBox({ step, addressId }) {
         amount: result + 100,
         currency: "NGN",
         description: `Order payment for ${user.user.username}`,
+        redirectUrl: "https://kwekmarket.com/order-complete",
         token: user.token,
       };
       paymentMutate(payload);

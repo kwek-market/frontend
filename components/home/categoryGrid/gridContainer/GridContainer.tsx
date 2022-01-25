@@ -65,6 +65,7 @@ const GridContainer = function ({
               <h1>No Products Found</h1>
             </div>
           ) : (
+            categoryData.products !== undefined &&
             categoryData.products.slice(0, 4).map((product: any) => (
               <div key={uuid()} className={styles.product}>
                 <ProductBox product={product} id={product.id} />
