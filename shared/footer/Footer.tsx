@@ -107,7 +107,7 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/returnPolicy">
+              <Link href="/returnpolicy">
                 <a className={styles.nav_link}>Kwek Return Policy</a>
               </Link>
             </li>
@@ -222,7 +222,7 @@ const Component = function () {
         <div className={styles.copyright}>
           <p className={styles.copyright_text}>
             Kwekmarket eCommerce{" "}
-            <span className={styles.copyright_symbol}>&copy;</span> 2020 . All
+            <span className={styles.copyright_symbol}>&copy;</span> 2022 . All
             Rights Reserved
           </p>
         </div>
