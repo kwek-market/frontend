@@ -15,16 +15,16 @@ const StoreOptions = function({children} :any) {
               <Link href="/"><a className={styles.link}>Home</a></Link>
             </p>
             <p className={styles.list}>
-              <Link href="/seller/productsEmpty"><a className={styles.link}>Products</a></Link>
+              <Link href="/seller-product/productsFilled"><a className={styles.link}>Products</a></Link>
             </p>
             <p className={styles.list}>
-              <Link href="/"><a className={styles.link}>Orders</a></Link>
+              <Link href="/seller/orders/empty"><a className={styles.link}>Orders</a></Link>
             </p>
             <p className={styles.list}>
-              <Link href="/"><a className={styles.link}>Reviews</a></Link>
+              <Link href="/reviews"><a className={styles.link}>Reviews</a></Link>
             </p>
             <p className={styles.list}>
-              <Link href="/"><a className={styles.link}>Promotions</a></Link>
+              <Link href="/seller-product/promoteProduct"><a className={styles.link}>Promotions</a></Link>
             </p>
             <p className={styles.list}>
               <Link href="/"><a className={styles.link}>Settings</a></Link>
