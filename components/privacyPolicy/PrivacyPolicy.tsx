@@ -109,7 +109,9 @@ these changes. </p>
 <p>
     <b>Contact us:</b> 
     
-    <Link href="mailto:support@kwekmarketmall.com"><a className={styles.link}>support@kwekmarketmall.com</a></Link>
+    <Link href="mailto:support@kwekmarketmall.com">
+        <a className={styles.link}>support@kwekmarketmall.com</a>
+    </Link>
 </p>
 
 <p>If you have questions or suggestions about personal information, you can contact kwekmarket support team

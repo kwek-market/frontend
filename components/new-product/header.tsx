@@ -3,6 +3,7 @@ import { createProduct } from "@/store/product/product.action";
 import { RootState } from "@/store/rootReducer";
 import { useRouter } from "next/router";
 import React from "react";
+import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../buttons/Button";
 
@@ -66,6 +67,8 @@ function Header({ submitDetails }: Props) {
         </div>
       </nav>
       <nav className="tw-text-white-100">
+      <Link href="/seller-product/singleProduct">
+        <a>
         <Button
           buttonStyle={
             "tw-bg-green-success tw-text-white-100 tw-text-xs tw-py-2 tw-px-5 tw-rounded-sm tw-capitalize hover:tw-text-yellow-filled"
@@ -73,6 +76,8 @@ function Header({ submitDetails }: Props) {
           text={"save item"}
           cmd={saveItem}
         />
+        </a>
+        </Link>
       </nav>
     </header>
   );

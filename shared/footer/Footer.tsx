@@ -36,7 +36,7 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/aboutUs">
                 <a className={styles.nav_link}>About Us</a>
               </Link>
             </li>
@@ -107,7 +107,7 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/returnPolicy">
                 <a className={styles.nav_link}>Kwek Return Policy</a>
               </Link>
             </li>
@@ -154,7 +154,7 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/sitemap.xml">
                 <a className={styles.nav_link}>Site Map</a>
               </Link>
             </li>
