@@ -23,7 +23,7 @@ const sellerAuth = (WrappedComponent: any) => {
         // if no accessToken was found,then we redirect to "/" page.
         if (!user.token) {
           // console.log("no token found");
-          message.error("You are not a authenticated");
+          // message.error("You are not a authenticated");
           router.push("/login");
         } else {
           // we call the api that verifies the token.
@@ -37,7 +37,7 @@ const sellerAuth = (WrappedComponent: any) => {
               setIsLoading(false);
             } else {
               // person is not a seller
-              message.error("You are not a seller");
+              // message.error("You are not a seller");
               router.push("/sell/create-account");
             }
           } else {

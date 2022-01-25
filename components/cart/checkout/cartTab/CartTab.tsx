@@ -19,9 +19,7 @@ const CartTab = function () {
             <i className="fas fa-angle-right" />
           </a>
         </Link>
-        <Link href="/cart/orderComplete">
-          <a>3. Order Complete</a>
-        </Link>
+        <a>3. Order Complete</a>
       </div>
     </div>
   );

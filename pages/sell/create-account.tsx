@@ -123,13 +123,13 @@ const Page = function ({ data }) {
     !user.token && router.push("/login");
     user.token && dispatch(getUserData(user.token));
     user.token && user.user.isSeller && dispatch(getSellerData(user.token));
-    if (seller.seller.sellerVerified) router.push("/seller/profile");
+    if (seller.seller.sellerVerified || user.user.isSeller)
+      router.push("/seller/profile");
   }, [seller.sellerCreated.status]);
 
   useEffect(() => {
     user.token && dispatch(getUserData(user.token));
     user.token && user.user.isSeller && dispatch(getSellerData(user.token));
-    // console.log(data)
   }, []);
 
   const bannerText = {

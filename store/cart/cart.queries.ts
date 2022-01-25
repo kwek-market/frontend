@@ -79,3 +79,17 @@ export const DeleteCartItem = /* GraphQL */ `
     }
   }
 `;
+
+export const ReduceItemQuantity = `
+  mutation decreaseCartItemQuantity(
+    $cartId: String!
+    $ip: String
+    $itemId: String!
+    $token: String
+  ) {
+    decreaseCartItemQuantity(cartId: $cartId, ip: $ip, itemId: $itemId, token: $token) {
+      status
+      message
+    }
+  }
+`;
