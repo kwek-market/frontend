@@ -44,11 +44,10 @@ export function getCartFunc(token: string) {
     try {
       setLoading();
       const ip = await getIp();
-      const res = await userFetcherWithAuth(
-        GetCart,
-        token !== "" ? { token } : { ip },
-        token
-      );
+      let variable: { ip?: string; token?: string } = !token
+        ? { ip }
+        : { token };
+      const res = await userFetcher(GetCart, variable);
       dispatch({
         type: CartType.GET_CART,
         payload: res.userCart,

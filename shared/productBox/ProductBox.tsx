@@ -22,7 +22,7 @@ export type ProductBoxProps = {
 
 const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state);
+  const { user, cart } = useSelector((state: RootState) => state);
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
@@ -42,22 +42,18 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
     dispatch(createWishlist(payload, user.token));
   }
 
-  const stuff = useCallback(() => {
-    function checkIfItemInCart(id: string) {
-      if (prod === undefined) return;
-      const isFound = prod?.options[0]?.id === id;
-      console.log(isFound);
-      return isFound;
-    }
-  }, [prod]);
-  stuff();
-
-  function checkIfItemInCart(id: string) {
-    if (prod === undefined) return;
-    const isFound = prod?.options[0]?.id === id;
-    console.log(isFound);
-    return isFound;
-  }
+  const checkIfItemInCart = useCallback(
+    (id: string) => {
+      if (prod !== undefined && cart.cart) {
+        const isFound = cart.cart.find(
+          (item) => item.product.options[0].id === id
+        );
+        console.log(isFound);
+        return isFound;
+      }
+    },
+    [prod, cart.cart]
+  );
 
   if (prod === undefined)
     return (
@@ -96,7 +92,11 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
         <div className="tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300">
           <span className="tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2">
             <i
-              className="fas fa-shopping-cart tw-bg-white-100 tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100"
+              className={`fas fa-shopping-cart ${
+                !checkIfItemInCart(prod?.options[0]?.id)
+                  ? "tw-bg-white-100"
+                  : "tw-bg-red-kwek100"
+              } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
               style={{ padding: "5px" }}
               onClick={() => addToCart(prod?.options[0]?.id)}
             />

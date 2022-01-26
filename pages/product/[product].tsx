@@ -8,9 +8,6 @@ import {
   MoreCard,
 } from "@/components/product";
 import { MainLayout } from "@/layouts";
-import { userFetcher } from "@/helpers";
-import { ProductType } from "@/interfaces/commonTypes";
-import { GetProducts } from "@/store/product/product.queries";
 import Loader from "react-loader-spinner";
 import useProduct from "@/hooks/useProduct";
 
