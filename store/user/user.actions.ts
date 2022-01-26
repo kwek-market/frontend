@@ -55,6 +55,7 @@ export function verifyUserToken(token: string) {
           payload: null,
         });
     } catch (err) {
+      logout();
       console.log(err.message);
     }
   };
@@ -71,6 +72,7 @@ export function getUserData(token: string) {
         payload: response.userData,
       });
     } catch (error) {
+      logout();
       dispatch({
         type: SET_ERROR,
         payload: error.message,
@@ -98,6 +100,7 @@ export function loginUser(user: UserLogin) {
         payload: response.loginUser,
       });
     } catch (error) {
+      logout();
       dispatch({
         type: SET_ERROR,
         payload: error.message,
@@ -128,9 +131,7 @@ export function updateUser(user: UserUpdate, token: string) {
           payload: user,
         });
     } catch (err) {
-      import("antd").then((antd) => {
-        antd.message.error(err.message);
-      });
+      logout();
       dispatch({
         type: SET_ERROR,
         payload: err.message,
@@ -164,9 +165,7 @@ export function sendPasswordResetEmail(email: string, token: string) {
           payload: result.sendPasswordResetEmail,
         });
     } catch (err) {
-      import("antd").then((antd) => {
-        antd.message.error(err.message);
-      });
+      logout();
     }
   };
 }
@@ -195,9 +194,7 @@ export function changePassword(
           payload: result.changePassword,
         });
     } catch (err) {
-      import("antd").then((antd) => {
-        antd.message.error(err.message);
-      });
+      logout();
       dispatch({
         type: SET_ERROR,
         payload: err.message,

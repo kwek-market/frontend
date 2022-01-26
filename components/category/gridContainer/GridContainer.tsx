@@ -3,16 +3,11 @@ import styles from "./GridContainer.module.scss";
 
 import { ActiveTabbar, Card, SideBar } from "../index";
 import { v4 as uuid } from "uuid";
-import Pagination from "../../../shared/pagination/Pagination";
-import { ProductBox } from "@/shared";
-import { userFetcher } from "@/helpers";
-import { GetProducts } from "@/store/product/product.queries";
 import CategoryProducts from "../CategoryProducts";
 import { ProductType } from "@/interfaces/commonTypes";
 import Loader from "react-loader-spinner";
-import { useQuery } from "react-query";
 import ReactPaginate from "react-paginate";
-import useProduct from "@/hooks/useProduct";
+import useProducts from "@/hooks/useProducts";
 
 const itemsPerPage = 20;
 
@@ -33,7 +28,7 @@ const GridContainer = function ({ cards, category }: any) {
     status: categoryStatus,
     data: categoryData,
     error: categoryError,
-  } = useProduct(payload);
+  } = useProducts(payload);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
