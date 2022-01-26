@@ -26,6 +26,7 @@ const MainLayout = function ({ children, title }: any) {
   }, []);
 
   useEffect(() => {
+    dispatch(getCartFunc(user.token));
     (async () => {
       try {
         const data = await verifyTokenFunc(user.token);
@@ -34,7 +35,6 @@ const MainLayout = function ({ children, title }: any) {
           user.token &&
             user.user.isSeller &&
             dispatch(getSellerData(user.token));
-          user.token && dispatch(getCartFunc(user.token));
           user.token && dispatch(getWishList(user.token));
         } else {
           dispatch(logout());

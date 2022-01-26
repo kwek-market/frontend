@@ -16,6 +16,8 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
+        cacheTime: 1000 * 60 * 20,
+        staleTime: Infinity,
       },
     },
   });
