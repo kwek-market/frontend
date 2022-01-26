@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import styles from "./GridContainer.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 
 import { TitleBlock, Banner, Card, SideBar } from "../index";
 import { ProductBox } from "@/shared";
 import Button from "@/components/buttons/Button";
-import Carousel from "@/components/Carousel/Carousel";
 import Slider from "@/components/slider/slider";
 import { v4 as uuid } from "uuid";
-import { RootState } from "@/store/rootReducer";
-import { GetProducts } from "@/store/product/product.queries";
-import { userFetcher } from "@/helpers";
 import { Spin } from "antd";
-import useProduct from "@/hooks/useProduct";
+import useProduct from "@/hooks/useProducts";
 
 const GridContainer = function ({
   title,
@@ -22,7 +17,6 @@ const GridContainer = function ({
   cards,
   banners,
 }: any) {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const slides = [
@@ -65,6 +59,7 @@ const GridContainer = function ({
               <h1>No Products Found</h1>
             </div>
           ) : (
+            categoryData.products !== undefined &&
             categoryData.products.slice(0, 4).map((product: any) => (
               <div key={uuid()} className={styles.product}>
                 <ProductBox product={product} id={product.id} />

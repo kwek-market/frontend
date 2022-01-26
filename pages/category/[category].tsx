@@ -16,7 +16,7 @@ const Page = function () {
   return (
     <MainLayout title={category}>
       {/* <Header /> */}
-      <GridContainer category={category} />
+      {category && <GridContainer category={category} />}
       <ExtraInfo />
     </MainLayout>
   );

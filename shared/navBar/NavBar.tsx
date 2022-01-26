@@ -34,10 +34,6 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
       url: "/customer-service",
     },
     {
-      title: "Reviews",
-      url: "/reviews",
-    },
-    {
       title: "Vendors",
       url: "/vendors",
     },

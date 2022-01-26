@@ -22,9 +22,9 @@ const withAuth = (WrappedComponent: any) => {
         // if no accessToken was found,then we redirect to "/" page.
         if (!user.token) {
           // console.log("no token found");
-          import("antd").then((antd) => {
-            antd.message.error("You are not authenticated");
-          });
+          // import("antd").then((antd) => {
+          //   antd.message.error("You are not authenticated");
+          // });
           router.push("/login");
         } else {
           // we call the api that verifies the token.
