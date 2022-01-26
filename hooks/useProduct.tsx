@@ -6,6 +6,7 @@ function useProduct(payload: { id: string }) {
   return useQuery(["product"], () => userFetcher(GetProduct, payload), {
     staleTime: Infinity,
     cacheTime: 1000 * 60 * 20,
+    enabled: payload.id !== undefined,
   });
 }
 
