@@ -15,7 +15,6 @@ export type WishlistProps = {
 };
 
 const Component = function ({ wishlists }: WishlistProps) {
-  console.log(wishlists);
   return (
     <ListComponent
       imgSrc={wishlists.product.image[0].imageUrl}
@@ -25,6 +24,7 @@ const Component = function ({ wishlists }: WishlistProps) {
       itemPrice={wishlists.product.options[0].price}
       itemDate={dayjs(wishlists.wishlist.createdAt).format("LL")}
       inStock={wishlists.product.options.length}
+      itemId={wishlists.product.options[0].id}
     />
   );
 };

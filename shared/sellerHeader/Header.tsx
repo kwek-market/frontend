@@ -14,7 +14,7 @@ const Component = () => {
   const router = useRouter();
 
   function uploadHandler() {
-    router.push("/upload-new-product");
+    router.push("/seller/upload-new-product");
   }
 
   return (
