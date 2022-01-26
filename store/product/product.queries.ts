@@ -189,7 +189,7 @@ export const GetProducts = /* GraphQL */ `
 `;
 
 export const GetProduct = /* GraphQL */ `
-  query product($id: ID!) {
+  query product($id: String!) {
     product(id: $id) {
       id
       productTitle
@@ -202,24 +202,16 @@ export const GetProduct = /* GraphQL */ `
       keyword
       clicks
       promoted
-      productsWished {
-        id
-        user {
-          id
-          username
-          isSeller
-          sellerprofileSet {
-            shopName
-          }
-        }
-        products {
-          id
-          productTitle
-        }
-      }
       user {
         id
         username
+        isSeller
+        sellerprofileSet {
+          shopName
+        }
+      }
+      productsWished {
+        id
       }
       category {
         id

@@ -51,6 +51,7 @@ export default function cartReducer(
         ...state,
         error: action.payload,
         loading: false,
+        cart: [],
       };
     case CartType.LOADING:
       return {

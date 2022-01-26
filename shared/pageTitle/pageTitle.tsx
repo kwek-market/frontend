@@ -1,10 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Link from 'next/link';
-import Image from 'next/image';
-
-import { useRouter } from 'next/router';
-import styles from './pageTitle.module.scss';
+import styles from "./pageTitle.module.scss";
 
 const Component = function ({ title }: { title: string }) {
   return (

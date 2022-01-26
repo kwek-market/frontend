@@ -16,6 +16,7 @@ export const GetWishlists = /* GraphQL */ `
         productTitle
         dateCreated
         options {
+          id
           size
           quantity
           price
