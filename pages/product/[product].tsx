@@ -13,8 +13,8 @@ import useProduct from "@/hooks/useProduct";
 
 const Page = function () {
   const router = useRouter();
-  console.log(router.query);
   const { id, product } = router.query;
+  console.log(product, id);
 
   const payload = {
     id: id as unknown as string,
