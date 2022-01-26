@@ -14,6 +14,8 @@ import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { getIp } from "@/helpers";
 import { createWishlist } from "@/store/wishlist/wishlist.actions";
 import Loader from "react-loader-spinner";
+import useItemInCart from "@/hooks/useItemInCart";
+import useItemInWishlist from "@/hooks/useItemInWishlist";
 
 export type ProductBoxProps = {
   id?: string;
@@ -42,29 +44,9 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
     dispatch(createWishlist(payload, user.token));
   }
 
-  const checkIfItemInCart = useCallback(
-    (id: string) => {
-      if (prod !== undefined && cart.cart) {
-        const isFound = cart.cart.find(
-          (item) => item.product.options[0].id === id
-        );
-        return isFound;
-      }
-    },
-    [prod, cart.cart]
-  );
+  const checkIfItemInCart = useItemInCart(prod, cart.cart);
 
-  const checkIfItemInWIshlist = useCallback(
-    (id: string) => {
-      if (prod !== undefined && wishlist.wishlists) {
-        const isFound = wishlist.wishlists.find(
-          (item) => item.product.id === id
-        );
-        return isFound;
-      }
-    },
-    [prod, cart.cart]
-  );
+  const checkIfItemInWIshlist = useItemInWishlist(prod, wishlist.wishlists);
 
   if (prod === undefined)
     return (
