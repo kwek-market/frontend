@@ -123,7 +123,11 @@ const Page = function ({ data }) {
     !user.token && router.push("/login");
     user.token && dispatch(getUserData(user.token));
     user.token && user.user.isSeller && dispatch(getSellerData(user.token));
-    if (seller.seller.sellerVerified || user.user.isSeller)
+    if (
+      seller.seller.sellerVerified ||
+      user.user.isSeller ||
+      seller.sellerCreated.status
+    )
       router.push("/seller/profile");
   }, [seller.sellerCreated.status]);
 

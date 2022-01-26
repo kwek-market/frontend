@@ -22,7 +22,7 @@ export type ProductBoxProps = {
 
 const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   const dispatch = useDispatch();
-  const { user, cart } = useSelector((state: RootState) => state);
+  const { user, cart, wishlist } = useSelector((state: RootState) => state);
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
@@ -48,7 +48,18 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
         const isFound = cart.cart.find(
           (item) => item.product.options[0].id === id
         );
-        console.log(isFound);
+        return isFound;
+      }
+    },
+    [prod, cart.cart]
+  );
+
+  const checkIfItemInWIshlist = useCallback(
+    (id: string) => {
+      if (prod !== undefined && wishlist.wishlists) {
+        const isFound = wishlist.wishlists.find(
+          (item) => item.product.id === id
+        );
         return isFound;
       }
     },
@@ -83,7 +94,11 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           />
           {user.token && (
             <i
-              className="fas fa-heart tw-p-1 tw-bg-white-100 tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs"
+              className={`fas fa-heart tw-p-1 ${
+                !checkIfItemInWIshlist(id)
+                  ? "tw-bg-white-100"
+                  : "tw-bg-gray-kwek700"
+              } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
               style={{ padding: "5px" }}
               onClick={() => addToWishlist(id)}
             />
@@ -102,13 +117,17 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             />
             {user.token && (
               <i
-                className="fas fa-heart tw-p-1 tw-bg-white-100 tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs"
+                className={`fas fa-heart tw-p-1 ${
+                  !checkIfItemInWIshlist(id)
+                    ? "tw-bg-white-100"
+                    : "tw-bg-gray-kwek700"
+                } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
                 style={{ padding: "5px" }}
                 onClick={() => addToWishlist(id)}
               />
             )}
           </span>
-          <Link href={`/product/${prod.productTitle}`}>
+          <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
             <a className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
               details
             </a>
@@ -116,7 +135,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
         </div>
       </div>
 
-      <Link href={`/product/${prod.productTitle}`}>
+      <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
         <a>
           <div className={styles.box_details}>
             <p className={styles.box_productCategory}>{prod?.productTitle}</p>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
+import { Button, Dropdown, Menu } from "antd";
 
 function Header() {
   const router = useRouter();
@@ -14,6 +15,19 @@ function Header() {
     router.pathname === "/seller/profile"
       ? "tw-text-yellow-filled tw-border-b-2 tw-border-yellow-filled tw-pb-2"
       : "tw-text-white-100";
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <Link href="/seller/profile/#settings">
+          <a>account</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item>
+        <button>logout</button>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <header className="tw-bg-red-kwek100 tw-py-4 tw-px-8 tw-flex tw-justify-between">
@@ -47,10 +61,12 @@ function Header() {
               1
             </span>
           </div>
-          <div className="tw-text-white-100">
-            <i className="fas fa-user" /> Hi {seller.seller.firstname}{" "}
-            <i className="fas fa-caret-down" />
-          </div>
+          <Dropdown overlay={menu} placement="bottomLeft" arrow>
+            <div className="tw-text-white-100 tw-bg-none">
+              <i className="fas fa-user tw-mr-2" /> Hi {seller.seller.firstname}{" "}
+              <i className="fas fa-caret-down" />
+            </div>
+          </Dropdown>
         </nav>
       </nav>
     </header>

@@ -8,7 +8,7 @@ import Button from "@/components/buttons/Button";
 import Slider from "@/components/slider/slider";
 import { v4 as uuid } from "uuid";
 import { Spin } from "antd";
-import useProduct from "@/hooks/useProduct";
+import useProduct from "@/hooks/useProducts";
 
 const GridContainer = function ({
   title,

@@ -26,7 +26,7 @@ const ListComponent = function ({
         </div>
         <div className={styles.second_grid}>
           <p className={styles.item_name}>{itemName}</p>
-          <p className={styles.item_price}>${itemPrice}</p>
+          <p className={styles.item_price}>₦{itemPrice}</p>
           <p className={styles.date}>{itemDate}</p>
         </div>
         <div className={styles.third_grid}>
@@ -62,7 +62,7 @@ const ListComponent = function ({
             {inStock ? "In Stock" : "Out Of Stock"}
           </p>
           <p className={styles.item_name}>{itemName}</p>
-          <p className={styles.item_price}>${itemPrice}</p>
+          <p className={styles.item_price}>₦{itemPrice}</p>
           <p className={styles.star}>
             <span className={`material-icons ${styles.star_filled}`}>star</span>
             <span className={`material-icons ${styles.star_filled}`}>star</span>
