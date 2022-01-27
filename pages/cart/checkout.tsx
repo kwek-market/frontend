@@ -1,10 +1,9 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
 
-import { CheckGrid } from '@/components/cart';
+import { CheckGrid } from "@/components/cart";
 
-import ExtraInfo from '@/shared/extraInfo/ExtraInfo';
-import { MainLayout } from '@/layouts';
+import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
+import { MainLayout } from "@/layouts";
 
 const Page = function () {
   return (

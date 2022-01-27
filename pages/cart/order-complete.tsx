@@ -11,8 +11,7 @@ function OrderComplete() {
   const router = useRouter();
   const { transaction_id } = router.query;
 
-  const order = window.localStorage.getItem("order");
-  const { mutate } = usePaymentVerify(user.token, JSON.parse(order));
+  const { mutate } = usePaymentVerify(user.token);
 
   useEffect(() => {
     if (transaction_id === null || transaction_id == undefined) return;
