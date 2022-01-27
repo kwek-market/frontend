@@ -1,6 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./list.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { getIp } from "@/helpers";
+import { AddToCartPayload } from "@/interfaces/commonTypes";
+import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
+import { RootState } from "@/store/rootReducer";
 
 const ListComponent = function ({
   listStyle,
@@ -12,6 +17,19 @@ const ListComponent = function ({
   inStock,
   itemId,
 }) {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state);
+
+  async function addToCart(id: string) {
+    const payload: AddToCartPayload = {
+      ipAddress: await getIp(),
+      productOptionId: id,
+      token: user.token,
+    };
+    dispatch(addToCartFunc(payload, user.token));
+    dispatch(getCartFunc(user.token));
+  }
+
   return (
     <>
       <div className={listStyle}>
@@ -33,7 +51,9 @@ const ListComponent = function ({
           <p className={inStock ? styles.stock : styles.stock_out}>
             {inStock ? "In Stock" : "Out Of Stock"}
           </p>
-          <a className={styles.buy}>Buy Product</a>
+          <a className={styles.buy} onClick={() => addToCart(itemId)}>
+            Buy Product
+          </a>
         </div>
       </div>
       <div className={styles.list_grid_mobile}>

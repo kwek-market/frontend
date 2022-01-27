@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Carousel } from "antd";
 import styles from "./productHead.module.scss";
@@ -12,7 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { getIp } from "@/helpers";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
-import { createWishlist } from "@/store/wishlist/wishlist.actions";
+import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
+import StarRatingComponent from "react-star-rating-component";
 
 const SampleNextArrow = function (props) {
   const { className, style, onClick } = props;
@@ -53,6 +54,9 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   const { user } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
+  const [numItem, incNumItem] = useState(1);
+  console.log(product);
+
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
       ipAddress: await getIp(),
@@ -64,13 +68,22 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   }
 
   function addToWishlist(id: string) {
-    // console.log(id);
     const payload: AddToWishlistPayload = {
       productId: id,
       token: user.token,
     };
     dispatch(createWishlist(payload, user.token));
+    dispatch(getWishList(user.token));
   }
+
+  // When increasing items, ensure it's not more than the quantity market has
+  const increaseQuantity = useCallback(() => {
+    incNumItem((prev) => prev + 1);
+  }, [numItem]);
+
+  const decreaseQuantity = useCallback(() => {
+    incNumItem((prev) => (prev === 0 ? 0 : prev - 1));
+  }, [numItem]);
 
   return (
     <div className={styles.product_container}>
@@ -120,20 +133,32 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           <p className={styles.product_Code}>Product Code: {product?.id}</p>
         </div>
         <p className={styles.product_price}>₦25.00</p>
-        <div className={styles.box_productRating}>
-          <span className="material-icons">star</span>
-          <span className="material-icons">star</span>
-          <span className="material-icons">star</span>
-          <span className="material-icons">star</span>
-          <span className="material-icons">star</span>
-          <small>(6 Reviews)</small>
-        </div>
+        {!product.productRating.length ? (
+          <div className={styles.box_productRating}>
+            <StarRatingComponent
+              name="rate1"
+              starCount={5}
+              value={0}
+              editing={false}
+              emptyStarColor="#c4c4c4"
+              starColor="#ffc107"
+            />
+            <small>(0 Review)</small>
+          </div>
+        ) : (
+          <StarRatingComponent
+            name="rate1"
+            starCount={5}
+            value={0}
+            editing={false}
+            emptyStarColor="#c4c4c4"
+            starColor="#ffc107"
+          />
+        )}
         <p className={styles.product_subtitle}>{product.shortDescription}</p>
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
-          <div
-            className={`tw-p-3 tw-bg-[yellow] tw-bg-[${product.color.toLowerCase()}]`}
-          >
+          <div className={`tw-p-3 tw-bg-${product.color.toLowerCase()}`}>
             {product.color}
           </div>
         </div>
@@ -151,9 +176,9 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           <div className={styles.product_qty}>
             <p>QTY:</p>
             <div className={styles.product_addToCart}>
-              <button>-</button>
-              <p>1</p>
-              <button>+</button>
+              <button onClick={() => decreaseQuantity()}>-</button>
+              <p>{numItem}</p>
+              <button onClick={() => increaseQuantity()}>+</button>
             </div>
           </div>
           <div className={styles.product_buttonbox}>
@@ -164,13 +189,15 @@ const ProductHead = function ({ product }: ProductHeadProps) {
               <i className="fas fa-shopping-cart" />
               <p>Buy Now</p>
             </button>
-            <button
-              onClick={() => addToWishlist(product.id)}
-              className={styles.product_saveButton}
-            >
-              <i className="far fa-heart" />
-              <p>Save for Later</p>
-            </button>
+            {user.token && (
+              <button
+                onClick={() => addToWishlist(product.id)}
+                className={styles.product_saveButton}
+              >
+                <i className="far fa-heart" />
+                <p>Save for Later</p>
+              </button>
+            )}
           </div>
         </div>
         <div className={styles.product_option_details}>

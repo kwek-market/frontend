@@ -31,7 +31,7 @@ function PaymentBox({ step, addressId }) {
         cartId: cart.cart[0].cart.id,
         deliveryMethod: "door step",
         paymentMethod,
-        productOptionsId: [],
+        productOptionsId: cart.cart.map((item) => item.product.options[0].id),
         token: user.token,
       };
       placeOrderMutate(payload);
@@ -40,9 +40,18 @@ function PaymentBox({ step, addressId }) {
         amount: result + 100,
         currency: "NGN",
         description: `Order payment for ${user.user.username}`,
-        redirectUrl: "https://kwekmarket.com/order-complete",
+        redirectUrl: "https://kwekmarket.com/cart/order-complete",
         token: user.token,
       };
+      const placeOrder: PlaceOrder = {
+        addressId,
+        cartId: cart.cart[0].cart.id,
+        deliveryMethod: "pickup",
+        paymentMethod,
+        productOptionsId: cart.cart.map((item) => item.product.options[0].id),
+        token: user.token,
+      };
+      window.localStorage.setItem("order", JSON.stringify(placeOrder));
       paymentMutate(payload);
     }
   }, [paymentMethod]);
