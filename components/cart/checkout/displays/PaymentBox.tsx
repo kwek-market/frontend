@@ -51,7 +51,7 @@ function PaymentBox({ step, addressId }) {
         productOptionsId: cart.cart.map((item) => item.product.options[0].id),
         token: user.token,
       };
-      window.localStorage.setItem("order", JSON.stringify(placeOrder));
+      window.sessionStorage.setItem("order", JSON.stringify(placeOrder));
       paymentMutate(payload);
     }
   }, [paymentMethod]);
