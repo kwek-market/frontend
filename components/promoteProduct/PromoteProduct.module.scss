@@ -10,6 +10,17 @@
     color: #000000;
     font-family: 'Poppins', sans-serif;
 
+    @media (min-width: 220px) and (max-width: 640px) {
+        flex-direction: column;
+      }
+
+      @media (min-width: 641px) and (max-width: 768px) {
+        flex-direction: column;
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        flex-direction: row;
+      }
     .form{
         background-color: #ffffff;
         width: 700px;
@@ -143,7 +154,7 @@
     }
     .promoted{
         position: absolute;
-        bottom: 350px;
+        bottom: 410px;
         right: 247px;
     }
     .money{
