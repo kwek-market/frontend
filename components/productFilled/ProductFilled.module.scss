@@ -18,6 +18,7 @@
     .filledpro{
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        
         @media (min-width: 220px) and (max-width: 640px) {
             grid-template-columns: repeat(1, minmax(0, 1fr));
           }
