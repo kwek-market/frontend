@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import Head from "next/head";
 
 import { CartEmpty, CartGrid } from "@/components/cart";
@@ -26,7 +26,15 @@ const Page = function () {
   );
 
   const hasCart =
-    cart.cart && cart.cart.length > 0 ? <CartGrid /> : <CartEmpty />;
+    cart.cart && cart.cart.length > 0 ? (
+      <Fragment>
+        <CartGrid />
+      </Fragment>
+    ) : (
+      <Fragment>
+        <CartEmpty />
+      </Fragment>
+    );
 
   return (
     <MainLayout title="Cart">
