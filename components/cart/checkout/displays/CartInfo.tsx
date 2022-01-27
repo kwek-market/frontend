@@ -11,7 +11,7 @@ function CartInfo() {
   const result = useMemo(() => {
     let initial = 0;
     cart.cart.forEach((item) => {
-      const current = item.price * item.quantity;
+      const current = item.price;
       initial += current;
     });
     return initial;
@@ -36,7 +36,7 @@ function CartInfo() {
               <p className={styles.name}>{item.product.productTitle}</p>
               <div className={styles.item_info}>
                 <p className={styles.qty}>Qty: {item.quantity}</p>
-                <p className={styles.price}>₦{item.price * item.quantity}</p>
+                <p className={styles.price}>₦{item.price}</p>
               </div>
             </div>
           </div>

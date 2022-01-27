@@ -230,6 +230,13 @@ export type AddToCartPayload = {
   ipAddress?: string;
 };
 
+export type DeleteFromCartPayload = {
+  cartId: string;
+  token?: string;
+  ip?: string;
+  itemId: string;
+};
+
 export type AddToWishlistPayload = {
   productId: string;
   token: string;
