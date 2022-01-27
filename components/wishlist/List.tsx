@@ -15,16 +15,16 @@ export type WishlistProps = {
 };
 
 const Component = function ({ wishlists }: WishlistProps) {
-  console.log(wishlists);
   return (
     <ListComponent
       imgSrc={wishlists.product.image[0].imageUrl}
       listStyle={styles.list_grid}
       altText={wishlists.product.productTitle}
       itemName={wishlists.product.productTitle}
-      itemPrice={wishlists.product.options[0].price}
+      itemPrice={wishlists.product.options[0].discountedPrice}
       itemDate={dayjs(wishlists.wishlist.createdAt).format("LL")}
       inStock={wishlists.product.options.length}
+      itemId={wishlists.product.options[0].id}
     />
   );
 };

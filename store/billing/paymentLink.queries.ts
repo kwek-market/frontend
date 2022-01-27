@@ -3,9 +3,10 @@ export const PAYMENTLINK = /* GRAPHQL */ `
     $amount: Int!
     $currency: String
     $description: String!
+    $redirectUrl: String!
     $token: String!
     ) {
-      paymentLink(amount: $amount, currency: $currency, description: $description, token: $token) {
+      paymentLink(amount: $amount, currency: $currency, description: $description, redirectUrl: $redirectUrl, token: $token) {
         status
         message
         paymentLink

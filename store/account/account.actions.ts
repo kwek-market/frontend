@@ -27,7 +27,7 @@ export function createUserAccount(account: AccountType) {
       });
       const result = await userFetcher(CREATE_USER, account);
       console.log({ result });
-      import('antd').then((antd) => {
+      import("antd").then((antd) => {
         antd.message.success(result.createUser.message);
       });
       dispatch({
@@ -35,8 +35,8 @@ export function createUserAccount(account: AccountType) {
         payload: { ...result.createUser, email: account.email },
       });
     } catch (err) {
-      import('antd').then((antd) => {
-        antd.message.error(err.message);
+      import("antd").then((antd) => {
+        antd.message.error(err.message.slice(0, err.message.indexOf(".")));
       });
     }
   };

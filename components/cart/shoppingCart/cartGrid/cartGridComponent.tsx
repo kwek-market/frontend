@@ -8,9 +8,13 @@ import { RootState } from "@/store/rootReducer";
 import {
   addToCartFunc,
   deleteCartItem,
+  deleteItemInCart,
   getCartFunc,
 } from "@/store/cart/cart.actions";
-import { AddToCartPayload } from "@/interfaces/commonTypes";
+import {
+  AddToCartPayload,
+  DeleteFromCartPayload,
+} from "@/interfaces/commonTypes";
 import { getIp } from "@/helpers";
 import { v4 } from "uuid";
 
@@ -38,7 +42,15 @@ const CartGridComponent = function () {
     dispatch(getCartFunc(user.token));
   }
 
-  function decreaseQuantity() {
+  async function decreaseQuantity(itemId: string, cartId: string) {
+    const payload: DeleteFromCartPayload = {
+      itemId,
+      cartId,
+    };
+    user.token
+      ? (payload["token"] = user.token)
+      : (payload["ip"] = await getIp());
+    dispatch(deleteItemInCart(payload));
     dispatch(getCartFunc(user.token));
   }
 
@@ -71,12 +83,18 @@ const CartGridComponent = function () {
               </div>
             </div>
             <div className={styles.secondBox}>
-              <p className={styles.discount_price}>$129.99</p>
-              <p className={styles.current_price}>₦{item.price}</p>
+              <p className={styles.discount_price}>
+                ₦{item.product.options[0].price}
+              </p>
+              <p className={styles.current_price}>
+                ₦{item.product.options[0].discountedPrice}
+              </p>
             </div>
             <div className={styles.thirdBox}>
               <div className={styles.addbtn}>
-                <button onClick={() => decreaseQuantity()}>-</button>
+                <button onClick={() => decreaseQuantity(item.id, item.cart.id)}>
+                  -
+                </button>
                 <p className={styles.qty}>{item.quantity}</p>
                 <button
                   onClick={() => increaseQuantity(item.product.options[0].id)}
@@ -86,7 +104,7 @@ const CartGridComponent = function () {
               </div>
             </div>
             <div className={styles.forthBox}>
-              <p className={styles.subtotal}>₦{item.quantity * item.price}</p>
+              <p className={styles.subtotal}>₦{item.price}</p>
             </div>
           </div>
         ))}
@@ -133,7 +151,7 @@ const CartGridComponent = function () {
           </div>
           <div className="tw-flex tw-flex-col">
             <span className="tw-text-base tw-text-black-stock tw-font-semibold">
-              ₦{item.quantity * item.price}
+              ₦{item.price}
             </span>
           </div>
         </div>

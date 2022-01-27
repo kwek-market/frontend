@@ -8,18 +8,15 @@ import {
   MoreCard,
 } from "@/components/product";
 import { MainLayout } from "@/layouts";
-import { userFetcher } from "@/helpers";
-import { ProductType } from "@/interfaces/commonTypes";
-import { GetProducts } from "@/store/product/product.queries";
 import Loader from "react-loader-spinner";
 import useProduct from "@/hooks/useProduct";
 
 const Page = function () {
   const router = useRouter();
-  const { product } = router.query;
+  const { id, product } = router.query;
 
   const payload = {
-    search: product,
+    id: id as unknown as string,
   };
   const {
     status: categoryStatus,
@@ -47,11 +44,11 @@ const Page = function () {
       {hasError}
       {categoryStatus === "success" && (
         <>
-          <ProductHead product={categoryData.products[0]} />
-          <ExtraGrid product={categoryData.products[0]} />
-          <ProductDesc product={categoryData.products[0]} />
+          <ProductHead product={categoryData.product} />
+          <ExtraGrid product={categoryData.product} />
+          <ProductDesc product={categoryData.product} />
           <MoreCard
-            similar={categoryData.products[0]?.category?.name}
+            similar={categoryData.product?.category?.name}
             title="Similar Items you might Like"
           />
         </>

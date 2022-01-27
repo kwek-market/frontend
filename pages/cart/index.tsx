@@ -12,16 +12,16 @@ const Page = function () {
   const { user, cart } = useSelector((state: RootState) => state);
 
   const isLoading = cart.loading && (
-    <div className="text-center">
-      <div className="spinner-border text-primary" role="status">
+    <div className="tw-text-center">
+      <div className="tw-text-primary" role="status">
         <span className="sr-only">Loading...</span>
       </div>
     </div>
   );
 
   const hasError = cart.error && (
-    <div className="text-center">
-      <p className="text-danger">{cart.error}</p>
+    <div className="tw-text-center">
+      <p className="tw-text-danger">{cart.error}</p>
     </div>
   );
 

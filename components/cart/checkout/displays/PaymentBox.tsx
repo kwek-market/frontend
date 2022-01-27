@@ -26,21 +26,32 @@ function PaymentBox({ step, addressId }) {
 
   useEffect(() => {
     if (paymentMethod === "pay on delivery") {
-      // const payload: PlaceOrder = {
-      //   addressId,
-      //   cartId: cart.cart[0].cart.id,
-      //   deliveryMethod: "door step",
-      //   paymentMethod,
-      //   token: user.token,
-      // };
-      // placeOrderMutate(payload);
+      const payload: PlaceOrder = {
+        addressId,
+        cartId: cart.cart[0].cart.id,
+        deliveryMethod: "door step",
+        paymentMethod,
+        productOptionsId: cart.cart.map((item) => item.product.options[0].id),
+        token: user.token,
+      };
+      placeOrderMutate(payload);
     } else if (paymentMethod === "card") {
       const payload: PaymentLinkType = {
         amount: result + 100,
         currency: "NGN",
         description: `Order payment for ${user.user.username}`,
+        redirectUrl: "https://kwekmarket.com/cart/order-complete",
         token: user.token,
       };
+      const placeOrder: PlaceOrder = {
+        addressId,
+        cartId: cart.cart[0].cart.id,
+        deliveryMethod: "pickup",
+        paymentMethod,
+        productOptionsId: cart.cart.map((item) => item.product.options[0].id),
+        token: user.token,
+      };
+      window.localStorage.setItem("order", JSON.stringify(placeOrder));
       paymentMutate(payload);
     }
   }, [paymentMethod]);

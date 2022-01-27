@@ -15,7 +15,7 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
     },
     {
       title: "About Us",
-      url: "/about-us",
+      url: "/aboutUs",
     },
     {
       title: "Sell On Kwek",
@@ -32,10 +32,6 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
     {
       title: "Customer Service",
       url: "/customer-service",
-    },
-    {
-      title: "Reviews",
-      url: "/reviews",
     },
     {
       title: "Vendors",

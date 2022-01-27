@@ -226,8 +226,15 @@ export type ProductType = {
 
 export type AddToCartPayload = {
   productOptionId: string;
-  token: string;
-  ipAddress: string;
+  token?: string;
+  ipAddress?: string;
+};
+
+export type DeleteFromCartPayload = {
+  cartId: string;
+  token?: string;
+  ip?: string;
+  itemId: string;
 };
 
 export type AddToWishlistPayload = {
@@ -242,6 +249,7 @@ export type WishlistType = {
     productTitle: string;
     dateCreated: Date;
     options: {
+      id: string;
       size: string;
       quantity: string;
       price: string;
@@ -275,6 +283,7 @@ export type PlaceOrder = {
   couponType?: string;
   deliveryMethod: string;
   paymentMethod: string;
+  productOptionsId: string[];
   token: string;
 };
 
@@ -282,6 +291,7 @@ export type PaymentLinkType = {
   amount: number;
   currency: string;
   description: string;
+  redirectUrl: string;
   token: string;
 };
 

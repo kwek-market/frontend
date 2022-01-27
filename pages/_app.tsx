@@ -8,11 +8,19 @@ import { Provider } from "react-redux";
 
 import { createWrapper } from "next-redux-wrapper";
 import store from "@/store";
-import { useQueryClient, QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 const MyApp = function ({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        cacheTime: 1000 * 60 * 20,
+        staleTime: Infinity,
+      },
+    },
+  });
 
   return (
     <>
