@@ -1,5 +1,8 @@
 import { getIp, userFetcher, userFetcherWithAuth } from "@/helpers";
-import { AddToCartPayload } from "@/interfaces/commonTypes";
+import {
+  AddToCartPayload,
+  DeleteFromCartPayload,
+} from "@/interfaces/commonTypes";
 import { Dispatch } from "redux";
 import {
   AddToCart,
@@ -100,12 +103,12 @@ export function deleteCart(payload: {}) {
   };
 }
 
-export function deleteItemInCart(payload: {}, token: string) {
+export function deleteItemInCart(payload: DeleteFromCartPayload) {
   return async function (dispatch: Dispatch) {
     const { message } = await import("antd");
     try {
       setLoading();
-      const res = await userFetcherWithAuth(ReduceItemQuantity, payload, token);
+      const res = await userFetcher(ReduceItemQuantity, payload);
       message.success(res.decreaseCartItemQuantity.message);
     } catch (err) {
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);
