@@ -6,7 +6,7 @@ import React from "react";
 import { useMutation } from "react-query";
 import usePlaceOrder from "./usePlaceOrder";
 
-function usePaymentVerify(token: string, order?: PlaceOrder) {
+function usePaymentVerify(token: string, order: PlaceOrder) {
   const { mutate } = usePlaceOrder(token);
 
   return useMutation(
@@ -15,7 +15,7 @@ function usePaymentVerify(token: string, order?: PlaceOrder) {
     {
       onSuccess: (data) => {
         message.success(data.verifyPayment.message);
-        // data.verifyPayment.success && mutate(order);
+        data.verifyPayment.success && mutate(order);
       },
       onError: (error) => {
         message.error(error);
