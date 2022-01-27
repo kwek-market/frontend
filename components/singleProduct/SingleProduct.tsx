@@ -6,8 +6,6 @@ import styles from './SingleProduct.module.scss'
 const SingleProduct = function () {
     return (
         <div className={styles.product}>
-            
-                 
 
                 <div className={styles.holder}>
                     <div className={styles.key}>
