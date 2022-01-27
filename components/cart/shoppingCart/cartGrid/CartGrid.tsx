@@ -17,7 +17,7 @@ const CartGrid = function () {
   const result = useMemo(() => {
     let initial = 0;
     cart.cart.forEach((item) => {
-      const current = item.price * item.quantity;
+      const current = item.price;
       initial += current;
     });
     return initial;
