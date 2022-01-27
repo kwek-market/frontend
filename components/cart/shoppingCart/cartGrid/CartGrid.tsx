@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { Fragment, useEffect, useMemo } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -24,7 +24,7 @@ const CartGrid = function () {
   }, [cart.cart]);
 
   return (
-    <div>
+    <div className="tw-flex tw-flex-col">
       <CartTab />
       <div className={`${styles.items_container}`}>
         <div className={`${styles.items_content} ${styles.hideShow}`}>

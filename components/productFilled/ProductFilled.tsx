@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from "next/image";
+import Link from 'next/link';
 import styles from './ProductFilled.module.scss'
 
 const ProductFilled = function (){
@@ -11,7 +12,24 @@ const ProductFilled = function (){
                     <div className={styles.sort}>
                         <p className={styles.line}>Sort by:</p>
                         <div className={styles.pop}>
-                            <div className={styles.drop}>Most Popular</div>
+                            <div className={styles.drop}>
+                                Most Popular
+                               <div className={styles.dropdown}>
+                               <Link href="/">
+                                        <a className={styles.link}><p>Category</p></a>
+                               </Link>
+                               <Link href="/">
+                                        <a className={styles.link}><p>Price</p></a>
+                               </Link>
+                               <Link href="/">
+                                        <a className={styles.link}><p>Rating</p></a>
+                               </Link>
+                               <Link href="/">
+                                        <a className={styles.link}><p>Discount</p></a>
+                               </Link>
+
+                               </div>
+                            </div>
                             <div className={styles.image}>
                                 <Image src="/images/dropdown.png" width="16" height="9.12" className={styles.img} />
                             </div>
