@@ -14,7 +14,6 @@ import useProduct from "@/hooks/useProduct";
 const Page = function () {
   const router = useRouter();
   const { id, product } = router.query;
-  console.log(product, id);
 
   const payload = {
     id: id as unknown as string,
@@ -24,8 +23,6 @@ const Page = function () {
     data: categoryData,
     error: categoryError,
   } = useProduct(payload);
-
-  console.log(categoryData);
 
   const isLoading = categoryStatus === "loading" && (
     <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">

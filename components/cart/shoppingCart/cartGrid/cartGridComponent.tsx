@@ -8,9 +8,13 @@ import { RootState } from "@/store/rootReducer";
 import {
   addToCartFunc,
   deleteCartItem,
+  deleteItemInCart,
   getCartFunc,
 } from "@/store/cart/cart.actions";
-import { AddToCartPayload } from "@/interfaces/commonTypes";
+import {
+  AddToCartPayload,
+  DeleteFromCartPayload,
+} from "@/interfaces/commonTypes";
 import { getIp } from "@/helpers";
 import { v4 } from "uuid";
 
@@ -38,7 +42,15 @@ const CartGridComponent = function () {
     dispatch(getCartFunc(user.token));
   }
 
-  function decreaseQuantity() {
+  async function decreaseQuantity(itemId: string, cartId: string) {
+    const payload: DeleteFromCartPayload = {
+      itemId,
+      cartId,
+    };
+    user.token
+      ? (payload["token"] = user.token)
+      : (payload["ip"] = await getIp());
+    dispatch(deleteItemInCart(payload));
     dispatch(getCartFunc(user.token));
   }
 
@@ -80,7 +92,9 @@ const CartGridComponent = function () {
             </div>
             <div className={styles.thirdBox}>
               <div className={styles.addbtn}>
-                <button onClick={() => decreaseQuantity()}>-</button>
+                <button onClick={() => decreaseQuantity(item.id, item.cart.id)}>
+                  -
+                </button>
                 <p className={styles.qty}>{item.quantity}</p>
                 <button
                   onClick={() => increaseQuantity(item.product.options[0].id)}
@@ -137,7 +151,7 @@ const CartGridComponent = function () {
           </div>
           <div className="tw-flex tw-flex-col">
             <span className="tw-text-base tw-text-black-stock tw-font-semibold">
-              ₦{item.quantity * item.price}
+              ₦{item.price}
             </span>
           </div>
         </div>
