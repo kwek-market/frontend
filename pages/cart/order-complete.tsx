@@ -9,7 +9,7 @@ import { MainLayout } from "@/layouts";
 function OrderComplete() {
   const { user } = useSelector((state: RootState) => state);
   const router = useRouter();
-  const { transaction_id } = router.query;
+  const { transaction_id, tx_ref } = router.query;
 
   const { mutate } = usePaymentVerify(user.token);
 
@@ -17,6 +17,7 @@ function OrderComplete() {
     if (transaction_id === null || transaction_id == undefined) return;
     const payload: VerifyPaymentType = {
       transactionId: transaction_id as string,
+      paymentRef: tx_ref as string,
     };
     mutate(payload);
   }, [transaction_id]);

@@ -297,4 +297,5 @@ export type PaymentLinkType = {
 
 export type VerifyPaymentType = {
   transactionId: string;
+  paymentRef: string;
 };
