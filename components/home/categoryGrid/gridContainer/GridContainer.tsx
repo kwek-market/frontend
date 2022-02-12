@@ -28,6 +28,7 @@ const GridContainer = function ({
   const banner = [{ element: <Banner /> }, { element: <Banner /> }];
 
   const payload = {
+    page: 1,
     search: title,
   };
   const {
@@ -35,6 +36,7 @@ const GridContainer = function ({
     data: categoryData,
     error: categoryError,
   } = useProduct(payload);
+  console.log(categoryData);
 
   return (
     <div id={styles.categoryGrid}>
@@ -54,13 +56,13 @@ const GridContainer = function ({
             <div className="tw-py-5 tw-w-full tw-text-center">
               <Spin size="large" />
             </div>
-          ) : categoryData.products.length === 0 ? (
+          ) : categoryData.products.objects.length === 0 ? (
             <div className="tw-py-5 tw-w-full tw-text-center">
               <h1>No Products Found</h1>
             </div>
           ) : (
-            categoryData.products !== undefined &&
-            categoryData.products.slice(0, 4).map((product: any) => (
+            categoryData.products.objects !== undefined &&
+            categoryData.products.objects.slice(0, 4).map((product: any) => (
               <div key={uuid()} className={styles.product}>
                 <ProductBox product={product} id={product.id} />
               </div>
