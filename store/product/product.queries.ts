@@ -113,6 +113,7 @@ export const DeleteProduct = /* GraphQL */ `
 
 export const GetProducts = /* GraphQL */ `
   query products(
+    $page: Int
     $search: String
     $rating: Int
     $keyword: [String]
@@ -120,69 +121,83 @@ export const GetProducts = /* GraphQL */ `
     $sales: String
   ) {
     products(
+      page: $page
       search: $search
       rating: $rating
       keyword: $keyword
       clicks: $clicks
       sales: $sales
     ) {
-      id
-      productTitle
-      chargeFivePercentVat
-      productWeight
-      shortDescription
-      returnPolicy
-      warranty
-      gender
-      keyword
-      clicks
-      promoted
-      productsWished {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
         id
-        product {
+        productTitle
+        chargeFivePercentVat
+        productWeight
+        shortDescription
+        returnPolicy
+        warranty
+        gender
+        keyword
+        clicks
+        promoted
+        productsWished {
           id
-          productTitle
+          product {
+            id
+            productTitle
+          }
         }
-      }
-      user {
-        id
-        username
-        isSeller
-        sellerprofileSet {
-          shopName
+        user {
+          id
+          username
+          isSeller
+          sellerprofileSet {
+            shopName
+          }
         }
-      }
-      category {
-        id
-        name
-      }
-      subcategory {
-        id
-        name
-      }
-      sales
-      options {
-        id
-        size
-        quantity
-        price
-        discountedPrice
-        optionTotalPrice
-      }
-      dateCreated
-      brand
-      color
-      image {
-        id
-        imageUrl
-      }
-      productRating {
-        id
-        rating
-        review
-        likes
-        dislikes
-        ratedAt
+        category {
+          id
+          name
+        }
+        subcategory {
+          id
+          name
+        }
+        sales {
+          id
+          amount
+          date
+          product {
+            id
+          }
+        }
+        options {
+          id
+          size
+          quantity
+          price
+          discountedPrice
+          optionTotalPrice
+        }
+        dateCreated
+        brand
+        color
+        image {
+          id
+          imageUrl
+        }
+        productRating {
+          id
+          rating
+          review
+          likes
+          dislikes
+          ratedAt
+        }
       }
     }
   }

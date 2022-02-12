@@ -8,44 +8,50 @@ import { ProductType } from "@/interfaces/commonTypes";
 import Loader from "react-loader-spinner";
 import ReactPaginate from "react-paginate";
 import useProducts from "@/hooks/useProducts";
+import { useQueryClient } from "react-query";
+import { userFetcher } from "@/helpers";
+import { GetProducts } from "@/store/product/product.queries";
 
-const itemsPerPage = 20;
+const itemsPerPage = 50;
 
 const GridContainer = function ({ cards, category }: any) {
+  const queryClient = useQueryClient();
   const [filter, setFilter] = useState(true);
-
-  // for pagination
   const [currentItems, setCurrentItems] = useState<ProductType[]>(
     [] as ProductType[]
   );
   const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const payload = {
+    page: currentPage,
     search: category,
   };
   const {
     status: categoryStatus,
     data: categoryData,
     error: categoryError,
+    isFetching,
   } = useProducts(payload);
 
   useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    if (categoryData?.products.hasNext) {
+      console.log("has more");
+      console.log(payload);
+      queryClient.prefetchQuery(["category-items", payload], () =>
+        userFetcher(GetProducts, payload)
+      );
+    }
     if (categoryData === undefined) return;
-    setCurrentItems(categoryData.products.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(categoryData.products.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, categoryData]);
+    console.log(categoryData.products);
+    setPageCount(categoryData.products.pages);
+    setCurrentItems(categoryData.products.objects);
+    console.log(`current page: ${currentPage}`);
+  }, [categoryData, currentPage, queryClient]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset =
-      (event.selected * itemsPerPage) % categoryData.products.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+    setCurrentPage(event.selected + 1);
   };
 
   const isLoading = categoryStatus === "loading" && (
@@ -93,7 +99,6 @@ const GridContainer = function ({ cards, category }: any) {
         {isLoading}
         {hasError}
         <div className={styles.products}>{isEmpty}</div>
-
         {cards && (
           <div className={styles.cards}>
             {cards.map((card: any) => (
@@ -123,6 +128,11 @@ const GridContainer = function ({ cards, category }: any) {
           activeClassName="active"
           renderOnZeroPageCount={undefined}
         />
+        {isFetching ? (
+          <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
+            <Loader type="Rings" width={60} height={60} color="#FC476E" />
+          </div>
+        ) : null}{" "}
       </div>
     </div>
   );
