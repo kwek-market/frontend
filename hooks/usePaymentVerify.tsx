@@ -22,7 +22,7 @@ function usePaymentVerify(token: string) {
         data.verifyPayment.success && mutate(order);
       },
       onError: (error) => {
-        message.error(error);
+        message.error((error as any).message);
       },
     }
   );

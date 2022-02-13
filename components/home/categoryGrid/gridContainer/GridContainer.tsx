@@ -29,6 +29,7 @@ const GridContainer = function ({
 
   const payload = {
     page: 1,
+    pageSize: 4,
     search: title,
   };
   const {
