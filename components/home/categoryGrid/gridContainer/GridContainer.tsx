@@ -8,7 +8,7 @@ import Button from "@/components/buttons/Button";
 import Slider from "@/components/slider/slider";
 import { v4 as uuid } from "uuid";
 import { Spin } from "antd";
-import useProduct from "@/hooks/useProducts";
+import useProducts from "@/hooks/useProducts";
 
 const GridContainer = function ({
   title,
@@ -35,7 +35,7 @@ const GridContainer = function ({
     status: categoryStatus,
     data: categoryData,
     error: categoryError,
-  } = useProduct(payload);
+  } = useProducts(payload);
   console.log(categoryData);
 
   return (

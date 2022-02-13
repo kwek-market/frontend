@@ -2,8 +2,7 @@ export const PLACEORDER = /* GRAPHQL */ `
   mutation placeOrder(
     $addressId: String!
     $cartId: String!
-    $couponId: String
-    $couponType: String
+    $couponIds: [String]
     $deliveryMethod: String!
     $paymentMethod: String!
     $productOptionsId: [String]!
@@ -12,8 +11,7 @@ export const PLACEORDER = /* GRAPHQL */ `
     placeOrder(
       addressId: $addressId
       cartId: $cartId
-      couponId: $couponId
-      couponType: $couponType
+      couponIds: $couponIds
       deliveryMethod: $deliveryMethod
       paymentMethod: $paymentMethod
       productOptionsId: $productOptionsId

@@ -40,7 +40,7 @@ function PaymentBox({ step, addressId }) {
         amount: result + 100,
         currency: "NGN",
         description: `Order payment for ${user.user.username}`,
-        redirectUrl: "https://kwekmarket.com/cart/order-complete",
+        redirectUrl: "https://kwekmarket.com/cart/order-confirmation",
         token: user.token,
       };
       const placeOrder: PlaceOrder = {
