@@ -9,6 +9,7 @@ import useBilling from "@/hooks/useBilling";
 
 function Billing({ setStep, setAddressId }) {
   const { user } = useSelector((state: RootState) => state);
+  const { user: { billingSet }} = user;
   const [editStatus, setEditStatus] = useState(true);
   const [billingInfo, setBillingInfo] = useState({
     firstname: "",

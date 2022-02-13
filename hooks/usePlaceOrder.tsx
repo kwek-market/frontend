@@ -12,10 +12,11 @@ function usePlaceOrder(token: string) {
     (data: PlaceOrder) => userFetcherWithAuth(PLACEORDER, data, token),
     {
       onSuccess: (data) => {
-        data.placeOrder.status && router.push("/orderComplete");
+        data.placeOrder.status &&
+          router.push(`/cart/order-complete?orderId=${data.placeOrder.orderId}`);
       },
       onError: (error) => {
-        message.error(error);
+        message.error((error as any).message);
       },
     }
   );
