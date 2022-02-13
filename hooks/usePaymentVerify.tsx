@@ -14,6 +14,7 @@ function usePaymentVerify(token: string) {
       userFetcherWithAuth(VERIFYPAYMENT, data, token),
     {
       onSuccess: (data) => {
+        // add paymentRef to place order
         const store = window.sessionStorage.getItem("order");
         const order = JSON.parse(store);
         console.log(order);

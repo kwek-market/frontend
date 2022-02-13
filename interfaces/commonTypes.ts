@@ -279,10 +279,10 @@ export type BillingAddressType = {
 export type PlaceOrder = {
   addressId: string;
   cartId: string;
-  couponId?: string;
-  couponType?: string;
+  couponIds?: string[];
   deliveryMethod: string;
   paymentMethod: string;
+  paymentRef?: string;
   productOptionsId: string[];
   token: string;
 };
