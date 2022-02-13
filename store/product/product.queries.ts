@@ -114,6 +114,7 @@ export const DeleteProduct = /* GraphQL */ `
 export const GetProducts = /* GraphQL */ `
   query products(
     $page: Int
+    $pageSize: Int
     $search: String
     $rating: Int
     $keyword: [String]
@@ -122,6 +123,7 @@ export const GetProducts = /* GraphQL */ `
   ) {
     products(
       page: $page
+      pageSize: $pageSize
       search: $search
       rating: $rating
       keyword: $keyword

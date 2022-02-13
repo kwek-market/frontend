@@ -21,7 +21,7 @@ function OrderComplete() {
       paymentRef: tx_ref as string,
     };
     mutate(payload);
-  }, [transaction_id]);
+  }, [transaction_id, tx_ref]);
 
   return (
     <MainLayout>

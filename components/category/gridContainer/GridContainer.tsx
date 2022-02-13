@@ -25,6 +25,7 @@ const GridContainer = function ({ cards, category }: any) {
 
   const payload = {
     page: currentPage,
+    pageSize: 20,
     search: category,
   };
   const {
