@@ -95,8 +95,8 @@ const GridContainer = function ({
         {banners && (
           <>
             <div className={styles.banners}>
-              {categoryData.products.objects !== undefined &&
-                categoryData.products.objects.slice(0, 2).map((banner: ProductType) => (
+              {categoryData?.products.objects !== undefined &&
+                categoryData?.products.objects.slice(0, 2).map((banner: ProductType) => (
                   <div key={banner.id} className={styles.banner}>
                     <Banner product={banner} />
                   </div>
