@@ -5,8 +5,10 @@ import Carousel from '@/components/Carousel/Carousel';
 
 import { CategoryMenu } from '../index';
 import { Topbar } from '@/shared';
+import { useRouter } from 'next/router';
 
 const Hero = function () {
+  const router = useRouter();
   const carouselEl = [
     {
       element: (
@@ -81,7 +83,7 @@ const Hero = function () {
           </div>
 
           <div className={styles.banner_textContainer}>
-            <button className={`${styles.btn} btn`}>
+            <button className={`${styles.btn} btn`} onClick={() => router.push("/")}>
               SHOP NOW <i className="fas fa-chevron-right" />
             </button>
           </div>

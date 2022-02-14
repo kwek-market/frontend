@@ -125,23 +125,25 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             <p className={styles.box_productPrice}>
               {!!prod.options[0]?.discountedPrice && (
                 <span>
-                  #{""} {prod.options[0].optionTotalPrice}
+                  ₦{""} {prod.options[0].optionTotalPrice}
                 </span>
               )}
-              <span>{prod.options[0]?.price}</span>
+              <span>₦{prod.options[0]?.price}</span>
             </p>
 
             {prod.productRating.length > 0 ? (
-              <div>
+              <div className="tw-flex">
                 <StarRatingComponent
                   name="rate1"
                   starCount={5}
-                  value={0}
+                  value={prod.productRating[0].rating}
                   editing={false}
                   emptyStarColor="#c4c4c4"
                   starColor="#ffc107"
                 />
-                <small>(6 Reviews)</small>
+                <small className="tw-text-gray-kwek400">
+                  ({prod.productRating[0].likes} reviews)
+                </small>
               </div>
             ) : (
               <div className={styles.box_productRating}>
