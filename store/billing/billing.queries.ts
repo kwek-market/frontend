@@ -23,3 +23,35 @@ export const BILLINGADDRESS = /* GraphQL */ `
     }
   }
 `;
+
+export const BILLINGADDRESSDELETE = `
+  mutation billingAddressDelete($addressId: String!) {
+    billingAddressDelete(addressId: $addressId) {
+      status
+      message
+    }
+  }
+`
+
+export const BILLINGADDRESSUPDATE = `
+mutation billingAddressUpdate(
+  $address: String
+  $addressId: String!
+  $city: String
+  $contact: String
+  $fullName: String
+  $state: String
+) {
+  billingAddressUpdate(
+    address: $address
+    addressId: $addressId
+    city: $city
+    contact: $contact
+    fullName: $fullName
+    state: $state
+  ) {
+    status
+    message
+  }
+}
+`

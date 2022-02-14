@@ -9,6 +9,7 @@ import Slider from "@/components/slider/slider";
 import { v4 as uuid } from "uuid";
 import { Spin } from "antd";
 import useProducts from "@/hooks/useProducts";
+import { ProductType } from "@/interfaces/commonTypes";
 
 const GridContainer = function ({
   title,
@@ -25,10 +26,11 @@ const GridContainer = function ({
     { element: <Card /> },
   ];
 
-  const banner = [{ element: <Banner /> }, { element: <Banner /> }];
+  // const banner = [{ element: <Banner /> }, { element: <Banner /> }];
 
   const payload = {
     page: 1,
+    pageSize: 4,
     search: title,
   };
   const {
@@ -36,7 +38,6 @@ const GridContainer = function ({
     data: categoryData,
     error: categoryError,
   } = useProducts(payload);
-  console.log(categoryData);
 
   return (
     <div id={styles.categoryGrid}>
@@ -62,7 +63,7 @@ const GridContainer = function ({
             </div>
           ) : (
             categoryData.products.objects !== undefined &&
-            categoryData.products.objects.slice(0, 4).map((product: any) => (
+            categoryData.products.objects.map((product: ProductType) => (
               <div key={uuid()} className={styles.product}>
                 <ProductBox product={product} id={product.id} />
               </div>
@@ -94,19 +95,20 @@ const GridContainer = function ({
         {banners && (
           <>
             <div className={styles.banners}>
-              {banners.map((banner: any) => (
-                <div key={banner} className={styles.banner}>
-                  <Banner />
-                </div>
-              ))}
+              {categoryData.products.objects !== undefined &&
+                categoryData.products.objects.slice(0, 2).map((banner: ProductType) => (
+                  <div key={banner.id} className={styles.banner}>
+                    <Banner product={banner} />
+                  </div>
+                ))}
             </div>
-            <Slider element={banner} />
+            {/* <Slider element={banner} /> */}
           </>
         )}
       </div>
       {sidebar && (
         <aside className={styles.sidebarContainer}>
-          <SideBar />
+          <SideBar title={title} />
         </aside>
       )}
     </div>

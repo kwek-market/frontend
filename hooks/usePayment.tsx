@@ -13,7 +13,7 @@ function usePayment(token: string) {
           window.location.assign(data.paymentLink.paymentLink);
       },
       onError: (error) => {
-        message.error(error);
+        message.error((error as any).message);
       },
     }
   );

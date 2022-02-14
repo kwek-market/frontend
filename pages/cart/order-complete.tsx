@@ -29,38 +29,83 @@ function OrderComplete() {
               Successful!
             </p>
             <p className="tw-text-green-success tw-font-medium tw-text-base">
-              Order No.: <span className="tw-text-black-kwek100">{orderId}</span>
+              Order No.:{" "}
+              <span className="tw-text-black-kwek100">{orderId}</span>
             </p>
           </div>
         </section>
-        <section className="tw-bg-white-100 tw-shadow-lg tw-w-3/5 tw-p-5">
-          <p>Next Steps</p>
-          <ul className="tw-list-disc">
-            <li>confirmation</li>
+        
+        <section className="tw-bg-white-100 tw-shadow-lg tw-mx-auto tw-w-[75%] tw-p-5">
+          <p className="tw-font-semibold tw-text-xl tw-capitalize">
+            Next Steps
+          </p>
+          <ul className="tw-list-disc tw-px-5">
+            <li className="tw-font-medium tw-text-lg tw-capitalize">
+              confirmation
+            </li>
             <ul className="tw-list-none">
-              <li>
+              <li className="tw-text-opacity-70 tw-text-gray-kwek900 tw-text-base">
                 Congratulations! Your order was successfully submitted. A
                 confirmation email has just been sent to you and our Customer
                 Service may contact you shortly to verify your order.
               </li>
             </ul>
-            <li>shipping</li>
+            <li className="tw-font-medium tw-text-lg tw-capitalize tw-mt-3">
+              shipping
+            </li>
             <ul className="tw-list-none">
-              <li>
+              <li className="tw-text-opacity-70 tw-text-gray-kwek900 tw-text-base">
                 You will receive an update about your order when it has been
                 shipped.
               </li>
             </ul>
-            <li>My Account</li>
+            <li className="tw-font-medium tw-text-lg tw-capitalize tw-mt-3">
+              My Account
+            </li>
             <ul className="tw-list-none">
-              <li>
+              <li className="tw-text-opacity-70 tw-text-gray-kwek900 tw-text-base">
                 You can follow the status of your order by clicking on ‘My
                 orders’ in your account page.
               </li>
             </ul>
           </ul>
         </section>
-        <section></section>
+
+        <section className="tw-bg-white-100 tw-shadow-lg tw-mx-auto tw-w-[75%] tw-p-5 tw-mt-5">
+          <p className="tw-font-semibold tw-text-xl tw-capitalize">
+            Track your order
+          </p>
+          <ul className="tw-list-disc tw-px-5">
+            <li className="tw-font-medium tw-text-lg tw-capitalize">
+              confirmation
+            </li>
+            <ul className="tw-list-none">
+              <li className="tw-text-opacity-70 tw-text-gray-kwek900 tw-text-base">
+                Congratulations! Your order was successfully submitted. A
+                confirmation email has just been sent to you and our Customer
+                Service may contact you shortly to verify your order.
+              </li>
+            </ul>
+            <li className="tw-font-medium tw-text-lg tw-capitalize tw-mt-3">
+              shipping
+            </li>
+            <ul className="tw-list-none">
+              <li className="tw-text-opacity-70 tw-text-gray-kwek900 tw-text-base">
+                You will receive an update about your order when it has been
+                shipped.
+              </li>
+            </ul>
+            <li className="tw-font-medium tw-text-lg tw-capitalize tw-mt-3">
+              My Account
+            </li>
+            <ul className="tw-list-none">
+              <li className="tw-text-opacity-70 tw-text-gray-kwek900 tw-text-base">
+                You can follow the status of your order by clicking on ‘My
+                orders’ in your account page.
+              </li>
+            </ul>
+          </ul>
+        </section>
       </main>
     </MainLayout>
   );
