@@ -10,7 +10,6 @@ import { updateUser } from '@/store/user/user.actions';
 const Account = function ({ activeBtn }) {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state.user);
-  console.log({ selector });
   const [firstName, setFirstName] = React.useState<string>(selector.user.fullName?.split(' ')[0]);
   const [lastName, setLastName] = React.useState<string>(selector.user.fullName?.split(' ')[1]);
   const [email, setEmail] = React.useState<string>(selector.user.username);

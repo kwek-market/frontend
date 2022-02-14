@@ -19,7 +19,7 @@ function usePaymentVerify(token: string) {
         const order = JSON.parse(store);
         console.log(order);
         message.success(data.verifyPayment.message);
-        data.verifyPayment.success && mutate(order);
+        data.verifyPayment.status && mutate(order);
       },
       onError: (error) => {
         message.error((error as any).message);

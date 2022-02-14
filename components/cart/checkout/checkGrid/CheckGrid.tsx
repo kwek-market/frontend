@@ -31,7 +31,7 @@ function CheckGrid() {
       <CartTab />
       <div className={styles.checkout_container}>
         <div className={`${styles.first_box} `}>
-          <Billing setStep={setStep} setAddressId={setAddressId} />
+          <Billing setStep={setStep} addressId={addressId} setAddressId={setAddressId} />
           <Delivery
             showModalone={showModalone}
             step={step}
