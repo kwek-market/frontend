@@ -6,6 +6,7 @@ import { getIp } from "@/helpers";
 import { AddToCartPayload } from "@/interfaces/commonTypes";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
+import StarRatingComponent from "react-star-rating-component";
 
 const ListComponent = function ({
   listStyle,
@@ -16,6 +17,7 @@ const ListComponent = function ({
   itemDate,
   inStock,
   itemId,
+  options
 }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state);
@@ -83,14 +85,31 @@ const ListComponent = function ({
           </p>
           <p className={styles.item_name}>{itemName}</p>
           <p className={styles.item_price}>₦{itemPrice}</p>
-          <p className={styles.star}>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={styles.reviews}>(6 reviews)</span>
-          </p>
+          {options[0]?.productRating?.length > 0 ? (
+            <div className="tw-flex">
+              <StarRatingComponent
+                name="rate1"
+                starCount={5}
+                value={options[0].productRating[0].rating}
+                editing={false}
+                emptyStarColor="#c4c4c4"
+                starColor="#ffc107"
+              />
+              <small className="tw-text-gray-kwek400">
+                ({options[0].productRating[0].likes} Reviews)
+              </small>
+            </div>
+          ) : (
+            <div className={styles.box_productRating}>
+              <StarRatingComponent
+                name="rate2"
+                starCount={5}
+                value={0}
+                editing={false}
+              />
+              <small className="tw-text-gray-kwek400">(0 Reviews)</small>
+            </div>
+          )}
         </div>
       </div>
     </>

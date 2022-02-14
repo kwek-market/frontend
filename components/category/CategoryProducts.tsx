@@ -125,16 +125,18 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
             </p>
 
             {prod.productRating.length > 0 ? (
-              <div>
+              <div className="tw-flex">
                 <StarRatingComponent
                   name="rate1"
                   starCount={5}
-                  value={0}
+                  value={prod.productRating[0].rating}
                   editing={false}
                   emptyStarColor="#c4c4c4"
                   starColor="#ffc107"
                 />
-                <small>(6 Reviews)</small>
+                <small className="tw-text-gray-kwek400">
+                  ({prod.productRating[0].likes} Reviews)
+                </small>
               </div>
             ) : (
               <div className={styles.box_productRating}>
@@ -144,7 +146,7 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
                   value={0}
                   editing={false}
                 />
-                <small>(0 Reviews)</small>
+                <small className="tw-text-gray-kwek400">(0 Reviews)</small>
               </div>
             )}
           </div>

@@ -18,7 +18,6 @@ const Sidebar = function ({ title }) {
     data: categoryData,
     error: categoryError,
   } = useProducts(payload);
-  console.log(categoryData);
 
   return (
     <div className={styles.sidebar}>
@@ -51,12 +50,11 @@ const Sidebar = function ({ title }) {
               <div className={styles.product_details}>
                 <p className={styles.textSm}>{product?.productTitle}</p>
                 <p className={styles.textMd}>
-                  {!!product.options[0]?.discountedPrice && (
-                    <span>
-                      ₦{""} {product.options[0].optionTotalPrice}
-                    </span>
+                  {product.options[0]?.discountedPrice ? (
+                    <span>₦{product.options[0].optionTotalPrice}</span>
+                  ) : (
+                    <span>₦{product.options[0]?.price}</span>
                   )}
-                  <span>₦{product.options[0]?.price}</span>
                 </p>
                 {product.productRating.length > 0 ? (
                   <div>
