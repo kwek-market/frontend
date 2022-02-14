@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import styles from "../checkGrid/checkGrid.module.scss";
 import Image from "next/image";
 import { useSelector } from "react-redux";
@@ -7,10 +7,13 @@ import { BillingAddressType } from "@/interfaces/commonTypes";
 import { message } from "antd";
 import useBilling from "@/hooks/useBilling";
 
-function Billing({ setStep, setAddressId }) {
+function Billing({ setStep, addressId, setAddressId }) {
   const { user } = useSelector((state: RootState) => state);
-  const { user: { billingSet }} = user;
+  const {
+    user: { billingSet },
+  } = user;
   const [editStatus, setEditStatus] = useState(true);
+  const [oldAddress, setOldAddress] = useState(false);
   const [billingInfo, setBillingInfo] = useState({
     firstname: "",
     lastname: "",
@@ -61,6 +64,21 @@ function Billing({ setStep, setAddressId }) {
     setStep(2);
   }
 
+  function handleCheckBox() {
+    setEditStatus(oldAddress);
+    setOldAddress(!oldAddress);
+    setStep(1);
+  }
+
+  function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+    setAddressId(e.target.value);
+    setStep(2);
+  }
+
+  function getAddressDetails(id: number) {
+    return billingSet.find((item: any) => item.id === id);
+  }
+
   return (
     <div className={styles.billing_container}>
       <div className={styles.title_box}>
@@ -71,18 +89,31 @@ function Billing({ setStep, setAddressId }) {
         />
         <p>1. BILLING DETAILS</p>
       </div>
-      {/* <div className="">
-        {billingSet.length > 0 && (
+      <div className="tw-ml-7 tw-mb-5">
+        {billingSet?.length > 0 && (
           <div>
-            <label>
-              use old Address <br />
-              <input type="radio" name="billing-address" value="yes" /> Yes
-              <input type="radio" name="billing-address" value="no" />
-              No
+            <label className="tw-font-medium tw-text-lg tw-capitalize">
+              use old Address{" "}
+              <input
+                type="checkbox"
+                name="billing-address"
+                checked={oldAddress}
+                onChange={() => handleCheckBox()}
+              />
             </label>
           </div>
         )}
-      </div> */}
+        {oldAddress && (
+          <select onChange={(e) => handleSelect(e)}>
+            <option>select address</option>
+            {billingSet.map((item: any) => (
+              <option key={item.id} value={item.id}>
+                {item.fullName} - {item.address} - {item.city} - {item.state}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
       {editStatus ? (
         <form>
           <div className={styles.input_grid}>
@@ -179,9 +210,13 @@ function Billing({ setStep, setAddressId }) {
               }
             />
           </div>
-          <button type="submit" onClick={(e) => saveAddress(e)}>
-            Save & Continue
-          </button>
+          {!oldAddress ? (
+            <button type="submit" onClick={(e) => saveAddress(e)}>
+              Save & Continue
+            </button>
+          ) : (
+            <button onClick={() => setEditStatus(false)}>Proceed</button>
+          )}
         </form>
       ) : (
         <div className={styles.form_content}>
@@ -193,10 +228,28 @@ function Billing({ setStep, setAddressId }) {
               Edit Information
             </a>
           </div>
-          <p className={styles.contact}>
-            {billingInfo.address}, {billingInfo.city}, {billingInfo.state}
-          </p>
-          <p className={styles.contact}>+234 {billingInfo.contact}</p>
+          {oldAddress ? (
+            <Fragment>
+              <p className={styles.contact}>
+                {addressId &&
+                  `
+                ${getAddressDetails(addressId).address}, 
+                ${getAddressDetails(addressId).city}, 
+                ${getAddressDetails(addressId).state}
+                `}
+              </p>
+              <p className={styles.contact}>
+                +234 {addressId && getAddressDetails(addressId).contact}{" "}
+              </p>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <p className={styles.contact}>
+                {billingInfo.address}, {billingInfo.city}, {billingInfo.state}
+              </p>
+              <p className={styles.contact}>+234 {billingInfo.contact}</p>
+            </Fragment>
+          )}
         </div>
       )}
     </div>

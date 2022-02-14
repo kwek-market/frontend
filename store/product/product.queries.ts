@@ -238,7 +238,14 @@ export const GetProduct = /* GraphQL */ `
         id
         name
       }
-      sales
+      sales {
+        id
+        amount
+        date
+        product {
+          id
+        }
+      }
       options {
         id
         size

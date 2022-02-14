@@ -1,6 +1,6 @@
 export const PAYMENTLINK = /* GRAPHQL */ `
   mutation paymentLink(    
-    $amount: Int!
+    $amount: Float!
     $currency: String
     $description: String!
     $redirectUrl: String!
