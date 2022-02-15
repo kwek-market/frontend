@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import Link from "next/link";
-import Image from "next/image";
 import styles from "./cartGrid.module.scss";
 import CartTab from "../cartTab/CartTab";
 import CartGridComponent from "./cartGridComponent";

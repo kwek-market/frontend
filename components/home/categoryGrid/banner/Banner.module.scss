@@ -6,6 +6,7 @@
   padding: 2rem 1.5rem 2rem 2rem;
   background: linear-gradient(101.17deg, #cf162f 0%, #810e1d 99.71%);
   border-radius: 5px;
+  height: 250px;
 
   @include respondMax("tablet") {
     padding: 1.6rem 1.2rem 1.6rem 1.6rem;
@@ -28,6 +29,10 @@
 }
 
 .textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
   width: 50%;
   padding: 1rem 0;
   color: $col-white;

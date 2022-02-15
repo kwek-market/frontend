@@ -87,7 +87,7 @@ function ValidID(props: StepComponentProps) {
           props.next();
         } else message.error("An error has occured. Please try again");
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
         message.error("An error has occured. Please try again", err);
       }
     })();

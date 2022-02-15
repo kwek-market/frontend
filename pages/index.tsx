@@ -1,52 +1,61 @@
-import Head from "next/head";
-import { useEffect, Suspense, memo } from "react";
-import { parseCookies } from "nookies";
-import { GetServerSideProps } from "next";
+import { memo, useEffect } from "react";
 import { MainLayout } from "@/layouts";
 import { Hero, Features, CategoryGrid, Brands } from "@/components/home";
-// import { userFetcherWithAuth } from '@/helpers'
 
 import MobileSearchBar from "@/shared/header/MobileSearchBar";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { Spin } from "antd";
-import { v4 as uuid } from "uuid";
-// import { GET_USER } from '@/store/user/user.queries'
 
-const Home = function ({ cookies }) {
-  const { product } = useSelector((state: RootState) => state);
+const Home = function () {
+  const {
+    categories: { error, loading, categories },
+  } = useSelector((state: RootState) => state);
+
+  function sortArray(array: any[]) {
+    let arr = array;
+    let n = arr.length;
+    let tempArr = [];
+    for (let i = 0; i < n - 1; i++) {
+      tempArr.push(arr.splice(Math.floor(Math.random() * arr.length), 1)[0]);
+    }
+    console.log(tempArr);
+    tempArr.push(arr[0]);
+    arr = tempArr;
+    return arr;
+  }
+
   const cards = [1, 2, 3];
-  const banners = [1, 2];
-
-  useEffect(() => {
-    console.log(cookies);
-  }, []);
 
   return (
     <MainLayout>
       <MobileSearchBar />
       <Hero />
       <Features />
-      {/* <CategoryGrid title="Deals Of The day" timer cards={cards} /> */}
-      <CategoryGrid
-        title="Computer Electronics and Accessories"
-        sidebar
-        banners={banners}
-      />
-      <CategoryGrid title="Kwek Fashion and Style" sidebar banners={banners} />
+      <CategoryGrid title="Deals Of The day" timer cards={cards} />
+      {loading && (
+        <div className="tw-flex tw-justify-center tw-items-center tw-py-5">
+          <Spin size="large" />
+        </div>
+      )}
+      {error && (
+        <div className="tw-flex tw-justify-center tw-items-center tw-py-5">
+          <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
+            {error}
+          </h1>
+        </div>
+      )}
+      {categories !== undefined &&
+        categories.length > 0 &&
+        categories
+          .slice(0, 6)
+          .map(
+            ({ id, name }) =>
+              name && <CategoryGrid key={id} title={name} sidebar />
+          )}
       <Brands />
     </MainLayout>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const cookies = parseCookies(ctx);
-
-  return {
-    props: {
-      cookies,
-    },
-  };
 };
 
 export default memo(Home);

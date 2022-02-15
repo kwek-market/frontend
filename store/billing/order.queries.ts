@@ -2,14 +2,24 @@ export const GETORDER = `
   query orders($token: String!) {
     orders(token: $token) {
       id
-      orderId
-      paymentMethod
-      deliveryMethod
-      deliveryStatus
-      closed
-      coupon
-      paid
-      dateCreated
+    closed
+    orderId
+    user {
+      username
+    }
+    cartItems
+    doorStep {
+      fullName
+    }
+    pickup {
+      name
+    }
+    paid
+    coupon
+    paymentMethod
+    deliveryMethod
+    deliveryStatus
+    dateCreated
     }
   }
 `

@@ -101,3 +101,35 @@ export const COMPLETE_SELLER_VERIFICATION = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_SELLER_PRODUCTS = `
+  query getSellerProducts($token: String!) {
+    getSellerProducts(token: $token) {
+      id
+      productTitle
+      promoted
+      image {
+        imageUrl
+      }
+      options {
+        price
+        discountedPrice
+        discountedPrice
+      }
+      productRating {
+        rating
+        review
+        likes
+      }
+    }
+  }
+`;
+
+export const GET_SELLER_ORDERS = `
+  query getSellerOrders($token: String!) {
+    getSellerOrders(token: $token) {
+      id
+    }
+  }
+`;
+

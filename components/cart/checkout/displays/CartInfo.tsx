@@ -48,7 +48,7 @@ function CartInfo() {
       </div>
       <div className={styles.charge_box}>
         <p className={styles.head}>Delivery Charges</p>
-        <p className={styles.price}>₦100.00</p>
+        <p className={styles.price}>₦100</p>
       </div>
       <div className={styles.total_box}>
         <p className={styles.head}>Total</p>
