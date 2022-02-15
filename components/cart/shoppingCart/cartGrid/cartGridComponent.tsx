@@ -138,15 +138,23 @@ const CartGridComponent = function () {
                 {item.product.productTitle}
               </span>
             </div>
-            <div className="">
-              <span className="tw-border tw-py-2 tw-px-2.5 tw-rounded-l">
+            <div className="tw-flex">
+              <button
+                onClick={() => decreaseQuantity(item.id, item.cart.id)}
+                className="tw-border tw-py-2 tw-px-2.5 tw-rounded-l"
+              >
                 {" "}
                 -
-              </span>
+              </button>
               <span className="tw-border tw-py-2 tw-px-6 tw-font-semibold">
                 {item.quantity}
               </span>
-              <span className="tw-border tw-p-2 tw-px-2.5 tw-rounded-r">+</span>
+              <button
+                onClick={() => increaseQuantity(item.product.options[0].id)}
+                className="tw-border tw-p-2 tw-px-2.5 tw-rounded-r"
+              >
+                +
+              </button>
             </div>
           </div>
           <div className="tw-flex tw-flex-col">

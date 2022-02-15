@@ -39,6 +39,9 @@ export const LOGIN_USER = /* GraphQL */ `
         sellerprofileSet {
           id
         }
+        orderSet {
+          orderId
+        }
         productSet {
           id
           productTitle
@@ -97,6 +100,9 @@ export const GET_USER = /* GraphQL */ `
       isSuperuser
       sellerprofileSet {
         id
+      }
+      orderSet {
+        orderId
       }
       productSet {
         id

@@ -15,7 +15,7 @@ function PaymentBox({ step, addressId }) {
   const result = useMemo(() => {
     let initial = 0;
     cart.cart.forEach((item) => {
-      const current = item.price * item.quantity;
+      const current = item.price;
       initial += current;
     });
     return initial;
@@ -65,8 +65,8 @@ function PaymentBox({ step, addressId }) {
       {step === 3 && (
         <div className={styles.payment_box}>
           <div className={styles.info_box}>
-            <p className={styles.order_id}>KWEK3553767777</p>
-            <p className={styles.price}>₦{result + 100}</p>
+            {/* <p className={styles.order_id}>KWEK3553767777</p> */}
+            <p className={styles.price}>Total: ₦{result + 100}</p>
           </div>
           <div className={styles.option_grid}>
             <div className={styles.option_box}>

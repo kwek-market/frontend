@@ -29,7 +29,7 @@ const Component = () => {
         </div>
         <div className="tw-self-end tw-mb-4">
           <p className="tw-font-semibold tw-text-white-100 tw-text-4xl tw-mb-0">
-            Coco's Store
+            {seller.seller.shopName}
           </p>
           <div className="tw-text-md">
             <Rate disabled defaultValue={2} className="tw-text-[12px]" />

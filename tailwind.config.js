@@ -67,6 +67,7 @@ module.exports = {
         'kwek-3': '2fr 6fr',
         'kwek-4': 'repeat(auto-fit, minmax(50px, 1fr))',
         'kwek-5': 'repeat(auto-fit, minmax(200px, 1fr))',
+        'kwek-6': 'repeat(auto-fit, minmax(250px, 350px))',
       },
       backgroundImage: {
         "seller-header": "linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('/images/user-photo.svg')"

@@ -7,7 +7,7 @@ export const CreateProduct = /* GraphQL */ `
     $gender: String
     $keyword: [String]
     $productImageUrl: [String]!
-    $productOptions: [String]
+    $productOptions: [String]!
     $productTitle: String!
     $productWeight: String
     $returnPolicy: String
