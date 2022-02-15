@@ -118,7 +118,7 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
             <p className={styles.box_productPrice}>
               {!!prod.options[0]?.discountedPrice && (
                 <span>
-                  #{""} {prod.options[0].optionTotalPrice}
+                  ₦{""} {prod.options[0].optionTotalPrice}
                 </span>
               )}
               <span>{prod.options[0]?.price}</span>
