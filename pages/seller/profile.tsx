@@ -18,23 +18,20 @@ const Page = function () {
   }, []);
 
   return (
-    <div>
-      <ShopLayout />
+    <ShopLayout>
       <Header />
-      <StoreOptions>
-        <>
-          {seller.seller.sellerIsVerified ? (
-            <>
-              <Content />
-            </>
-          ) : (
-            <>
-              <Modal />
-            </>
-          )}
-        </>
-      </StoreOptions>
-    </div>
+      <>
+        {seller.seller.sellerIsVerified ? (
+          <>
+            <Content />
+          </>
+        ) : (
+          <>
+            <Modal />
+          </>
+        )}
+      </>
+    </ShopLayout>
   );
 };
 

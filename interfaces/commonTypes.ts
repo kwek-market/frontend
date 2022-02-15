@@ -299,3 +299,27 @@ export type VerifyPaymentType = {
   transactionId: string;
   paymentRef: string;
 };
+
+export type Order = {
+  id: string;
+  closed: boolean;
+  orderId: string;
+  orderPrice: number;
+  orderPriceTotal: number;
+  user: {
+    username: string;
+  };
+  cartItems: string[];
+  doorStep: {
+    fullName: string;
+  };
+  pickup: {
+    name: string;
+  };
+  paid: boolean;
+  coupon: any;
+  paymentMethod: string;
+  deliveryMethod: string;
+  deliveryStatus: string;
+  dateCreated: Date;
+};

@@ -1,11 +1,18 @@
-import React from 'react';
-import Button from '@/components/buttons/Button';
-import Badge from '@/components/badge/Badge';
+import React from "react";
+import Button from "@/components/buttons/Button";
+import Badge from "@/components/badge/Badge";
+import { Order as OrderType } from "@/interfaces/commonTypes";
 
-const Order = function ({ setActiveBtn }) {
+type Props = {
+  setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
+  order: OrderType;
+};
+
+const Order = function ({ setActiveBtn, order }: Props) {
   function checkDetails() {
-    setActiveBtn('Open Order Details');
+    setActiveBtn("Open Order Details");
   }
+
   return (
     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-border tw-border-gray-kwek700 tw-rounded-md tw-p-2 tw-mb-2">
       <div className="tw-flex tw-flex-col md:tw-flex-row">
@@ -18,19 +25,27 @@ const Order = function ({ setActiveBtn }) {
         <div className="tw-ml-0 md:tw-ml-2 tw-flex tw-flex-col tw-justify-between">
           <div>
             <h3 className="tw-text-base md:tw-text-lg lg:tw-text-2xl tw-font-medium tw-text-gray-kwek200">
-              Order KWK12345357398
+              Order {order.orderId}
             </h3>
-            <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">4 Items</span>
+            <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">
+              {order.cartItems.length} Items
+            </span>
           </div>
           <span className="tw-opacity-90 tw-text-sm tw-font-medium tw-text-black-stock">
-            Delivered by, Friday, 6 June
+            {order.deliveryStatus === " delivered" && (
+              <>Delivered by, Friday, 6 June</>
+            )}
           </span>
         </div>
       </div>
       <div className="tw-flex tw-flex-col">
         <Badge
-          badgeStyle="tw-bg-green-success tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-mb-2"
-          text="Delivered"
+          badgeStyle={`${
+            order.deliveryStatus === " delivered"
+              ? "tw-bg-green-success"
+              : "tw-bg-yellow-filled"
+          } tw-uppercase tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-mb-2`}
+          text={order.deliveryStatus}
         />
         <Button
           buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
