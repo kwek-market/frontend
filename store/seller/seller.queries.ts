@@ -108,13 +108,15 @@ export const GET_SELLER_PRODUCTS = `
       id
       productTitle
       promoted
+      shortDescription
+      color
       image {
         imageUrl
       }
       options {
         price
         discountedPrice
-        discountedPrice
+        size
       }
       productRating {
         rating
@@ -132,4 +134,3 @@ export const GET_SELLER_ORDERS = `
     }
   }
 `;
-

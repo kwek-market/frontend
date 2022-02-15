@@ -1,205 +1,155 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @import "@/styles/variables";
 @import "@/styles/mixins";
 
-.product{
-    width: 100%;
-    background-color: white;
+.product {
+  width: 100%;
+  background-color: white;
 
-    .holder{
-        display: flex;
-        flex-direction: row;
-        padding: 40px 50px 60px 50px;
-    }
-    .key{
-        color: black;
-    }
-    .greenly{
-        margin-left: 920px;
-        display: flex;
-        flex-direction: row;
-    }
-    .key{
-        color: #574240;
+  .holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+  .key {
+    color: black;
+  }
+  .greenly {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .key {
+    color: #574240;
+  }
+  .white {
+    margin-left: 20px;
+  }
 
-    }
-    .white{
-        margin-left: 20px;
-    }
+  .single {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 
-    .single{
-        display:flex;
-        flex-direction: row;
-    }
+  .images {
+    flex: 1;
+  }
 
-    .images{
-        padding-left: 63.35px;
-        padding-bottom: 20px;
-        padding-top: 10px;
-    }
-    
+  .element {
+    flex: 1;
+  }
+  .masky {
+    display: flex;
+    flex-direction: row;
+  }
+  .name {
+    padding-top: 0;
+  }
+  h4 {
+    line-height: 44px;
+    font-weight: 600;
+    font-size: 32px;
+  }
+  h2 {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 40px;
+    padding-top: 10px;
+    color: #1d1616;
+  }
+  .review {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 15px;
+    justify-content: space-between;
+  }
+  .revs {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
+  .box_productRating {
+    display: flex;
 
-    .element{
-        width: 715px;
-        padding: 0 57.11px 57.11px 57.11px;
+    span {
+      font-size: 1.2rem;
+      color: #ffc107;
     }
-    .masky{
-        display: flex;
-        flex-direction: row;
-    }
-    .name{
-        padding-top: 0;
-    }
-    h4{
-        width: 566px;
-        line-height: 44px;
-        font-weight: 600;
-        font-size: 32px;
-    }
-    h2{
-        width: 165px;
-        font-weight: 600;
-        font-size: 48px;
-        line-height: 40px;
-        padding-top: 10px;
-        color: #1D1616;
-    }
-    .review{
-        display: flex;
-        flex-direction: row;
-        padding-bottom: 15px;
-    }
-    .revs{
-        display: flex;
-        flex-direction: row;
-        margin-left: 57px;
-    }
-    .box_productRating {
-        display: flex;
+  }
+  .six {
+    padding-left: 13px;
+  }
+  .colors {
+    display: flex;
+    flex-direction: row;
+    margin: 30px 0 10px 0;
+  }
+  .paint {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+  }
+  .yellow {
+    background: #ffc107;
+    width: 32px;
+    height: 32px;
+  }
+  .maroon {
+    background: #c80f0f;
+    width: 32px;
+    height: 32px;
+    margin-left: 10px;
+  }
+  .pink {
+    background: #ff007f;
+    width: 32px;
+    height: 32px;
+    margin-left: 10px;
+  }
+  .size {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 65px;
+  }
+  .fort {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 20px 40px;
+  }
+  .forty {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #574240;
+    text-align: center;
+    padding-top: 2px;
+  }
+  .line {
+    border: 1px solid #bfa5a3;
+  }
 
-        span {
-          font-size: 1.2rem;
-          color: #ffc107;
-        }
-      }
-      .six{
-          padding-left: 13px;
-      }
-      .colors{
-        display: flex;
-        flex-direction: row;
-        margin: 30px 0 10px 10px;
-    }
-    .paint{
-        display: flex;
-        flex-direction: row;
-        margin-left: 10px;
-    }
-    .yellow{
-        background: #FFC107;
-        width: 32px;
-        height: 32px;
-
-    }
-    .maroon{
-        background: #C80F0F;
-        width: 32px;
-        height: 32px;
-        margin-left: 10px;
-
-    }
-    .pink{
-        background: #FF007F;
-        width: 32px;
-        height: 32px;
-        margin-left: 10px;
-
-    }
-    .size{
-        display: flex;
-        flex-direction: row;
-        padding-bottom: 65px;
-    }
-    .fort{
-        display: flex;
-        flex-direction: row;
-        margin: 0 0 20px 40px;
-
-    }
-    .forty{
-        width: 32px;
-        height: 32px;
-        border: 1px solid #574240;
-        text-align: center;
-        padding-top: 2px;
-    }
-    .fortyone{
-        width: 32px;
-        height: 32px;
-        border: 1px solid #574240;
-        margin-left: 10px;
-        text-align: center;
-        padding-top: 2px;
-    }
-    .fortytwo{
-        width: 32px;
-        height: 32px;
-        border: 1px solid #574240;
-        margin-left: 10px;
-        text-align: center;
-        padding-top: 2px;
-    }
-    .fortythree{
-        width: 32px;
-        height: 32px;
-        border: 1px solid #574240;
-        margin-left: 10px;
-        text-align: center;
-        padding-top: 2px;
-    }
-    .fortyfour{
-        width: 32px;
-        height: 32px;
-        border: 1px solid #574240;
-        margin-left: 10px;
-        text-align: center;
-        padding-top: 2px;
-    }
-    .fortyfive{
-        width: 32px;
-        height: 32px;
-        border: 1px solid #574240;
-        margin-left: 10px;
-        text-align: center;
-        padding-top: 2px;
-    }
-    .line{
-        border: 1px solid #BFA5A3;
-        width: 605px;
-    }
-   
-    .share{
-        display: flex;
-        flex-direction: row;
-        margin-top: 25px;
-    }
-    .book{
-        margin-left: 20px;
-        display: flex;
-        flex-direction: row;
-    }
-    .twitter{
-        margin-left: 10px;
-    }
-    .whatsapp{
-        margin-left: 10px;
-    }
-    .copy{
-        margin-left: 10px;
-    }
-    .shareon{
-        line-height: 40px;
-    }
+  .share {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+  }
+  .book {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+  }
+  .twitter {
+    margin-left: 10px;
+  }
+  .whatsapp {
+    margin-left: 10px;
+  }
+  .copy {
+    margin-left: 10px;
+  }
+  .shareon {
+    line-height: 40px;
+  }
 }

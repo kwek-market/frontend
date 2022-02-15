@@ -3,9 +3,14 @@ import Image from "next/image";
 import styles from "./ProductFilled.module.scss";
 import StarRatingComponent from "react-star-rating-component";
 
-const ProductFilled = function ({ product }) {
+const ProductFilled = function ({ product, setShowProduct, setProduct }) {
+  function displayProductDetails(prod: any) {
+    setShowProduct(true);
+    setProduct(prod);
+  }
+
   return (
-    <section className="tw-py-5 tw-px-3">
+    <section className="tw-py-5 tw-px-3 tw-shadow-lg">
       <div className={styles.filled}>
         <div className={styles.products}>
           <div className="tw-text-lg tw-font-semibold">
@@ -24,16 +29,21 @@ const ProductFilled = function ({ product }) {
         </div>
         <div className="tw-grid tw-gap-3 tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4">
           {product.map((prod) => (
-            <div className="">
+            <div
+              key={prod.id}
+              className="tw-shadow-lg tw-cursor-pointer"
+              onClick={() => displayProductDetails(prod)}
+            >
               <Image
                 src={prod.image[0].imageUrl}
                 alt={prod.productTitle}
-                width="100%"
-                height="100%"
+                layout="responsive"
+                width={200}
+                height={200}
               />
-              <div className="tw-flex tw-justify-between">
+              <div className="tw-flex tw-justify-between tw-p-3">
                 <div>
-                  <p className="tw-text-lg tw-font-semibold">
+                  <p className="tw-text-lg tw-font-semibold tw-mb-0">
                     {prod.productTitle}
                   </p>
                   <StarRatingComponent
@@ -46,7 +56,7 @@ const ProductFilled = function ({ product }) {
                   />
                 </div>
                 <div>
-                  <p className="tw-text-lg tw-font-semibold">
+                  <p className="tw-text-lg tw-font-semibold tw-mb-0">
                     {prod.options[0].price}
                   </p>
                   <p>{prod?.productRating[0]?.likes} reviews</p>
