@@ -104,7 +104,7 @@ function Billing({ setStep, addressId, setAddressId }) {
           </div>
         )}
         {oldAddress && (
-          <select onChange={(e) => handleSelect(e)}>
+          <select className="tw-w-full" onChange={(e) => handleSelect(e)}>
             <option>select address</option>
             {billingSet.map((item: any) => (
               <option key={item.id} value={item.id}>

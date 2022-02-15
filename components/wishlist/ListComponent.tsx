@@ -17,7 +17,7 @@ const ListComponent = function ({
   itemDate,
   inStock,
   itemId,
-  options
+  options,
 }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state);
@@ -53,9 +53,11 @@ const ListComponent = function ({
           <p className={inStock ? styles.stock : styles.stock_out}>
             {inStock ? "In Stock" : "Out Of Stock"}
           </p>
-          <a className={styles.buy} onClick={() => addToCart(itemId)}>
-            Buy Product
-          </a>
+          {inStock && (
+            <a className={styles.buy} onClick={() => addToCart(itemId)}>
+              Buy Product
+            </a>
+          )}
         </div>
       </div>
       <div className={styles.list_grid_mobile}>

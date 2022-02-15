@@ -1,336 +1,63 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
-import Link from 'next/link';
-import styles from './ProductFilled.module.scss'
+import styles from "./ProductFilled.module.scss";
+import StarRatingComponent from "react-star-rating-component";
 
-const ProductFilled = function (){
-    return (
-        <div className={styles.sub}>
-            <div className={styles.filled}>
-                <div className={styles.products}>
-                    <div className={styles.all}>All Products - 320</div>
-                    <div className={styles.sort}>
-                        <p className={styles.line}>Sort by:</p>
-                        <div className={styles.pop}>
-                            <div className={styles.drop}>
-                                Most Popular
-                               <div className={styles.dropdown}>
-                               <Link href="/">
-                                        <a className={styles.link}><p>Category</p></a>
-                               </Link>
-                               <Link href="/">
-                                        <a className={styles.link}><p>Price</p></a>
-                               </Link>
-                               <Link href="/">
-                                        <a className={styles.link}><p>Rating</p></a>
-                               </Link>
-                               <Link href="/">
-                                        <a className={styles.link}><p>Discount</p></a>
-                               </Link>
-
-                               </div>
-                            </div>
-                            <div className={styles.image}>
-                                <Image src="/images/dropdown.png" width="16" height="9.12" className={styles.img} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.filledpro}>
-                    <div className={`${styles.bord} ${styles.bordly}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                       </div>
-
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div><p>$25.00</p>
-                        <p className={styles.number}>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.bord} ${styles.border}`}>
-                        <div className={styles.heels}>
-                        <p className={styles.fash}>Women' s fashion Shiny High Heels</p>
-                        <div className={styles.number}><p>$25.00</p>
-                        <p>$35.00</p></div>
-                        </div>
-
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+const ProductFilled = function ({ product }) {
+  return (
+    <section className="tw-py-5 tw-px-3">
+      <div className={styles.filled}>
+        <div className={styles.products}>
+          <div className="tw-text-lg tw-font-semibold">
+            All Products - {product.length}
+          </div>
+          <div className={styles.sort}>
+            <p className="">Sort by: </p>
+            <select className="tw-ml-2" value="" onChange={() => null}>
+              <option>Most Popular</option>
+              <option>Recent</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Product Rating</option>
+            </select>
+          </div>
         </div>
-    )
-}
+        <div className="tw-grid tw-gap-3 tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4">
+          {product.map((prod) => (
+            <div className="">
+              <Image
+                src={prod.image[0].imageUrl}
+                alt={prod.productTitle}
+                width="100%"
+                height="100%"
+              />
+              <div className="tw-flex tw-justify-between">
+                <div>
+                  <p className="tw-text-lg tw-font-semibold">
+                    {prod.productTitle}
+                  </p>
+                  <StarRatingComponent
+                    name="seller-product"
+                    starCount={5}
+                    value={prod?.productRating[0]?.rating}
+                    editing={false}
+                    emptyStarColor="#c4c4c4"
+                    starColor="#ffc107"
+                  />
+                </div>
+                <div>
+                  <p className="tw-text-lg tw-font-semibold">
+                    {prod.options[0].price}
+                  </p>
+                  <p>{prod?.productRating[0]?.likes} reviews</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-export default ProductFilled
+export default ProductFilled;

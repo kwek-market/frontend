@@ -87,7 +87,7 @@ function Delivery({
                   Edit Information
                 </a>
               </div>
-              <p className={styles.contact}>Deliver within 24hrs for $20</p>
+              <p className={styles.contact}>Deliver within 24hrs for ₦100</p>
             </div>
           )}
         </Fragment>
