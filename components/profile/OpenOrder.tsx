@@ -3,12 +3,12 @@ import Button from "@/components/buttons/Button";
 import Badge from "@/components/badge/Badge";
 import { Order as OrderType } from "@/interfaces/commonTypes";
 
-type Props = {
+export type OrderProps = {
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
   order: OrderType;
 };
 
-const Order = function ({ setActiveBtn, order }: Props) {
+const Order = function ({ setActiveBtn, order }: OrderProps) {
   function checkDetails() {
     setActiveBtn("Open Order Details");
   }

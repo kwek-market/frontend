@@ -9,8 +9,8 @@
 .mainContainer {
   @include flex();
   margin-top: 2rem;
-  // width: 78%;
-  flex: 3;
+  width: 78%;
+  // flex: 3;
 
   @include respondMax("tablet") {
     width: 100%;
@@ -24,8 +24,8 @@
 }
 
 .sidebarContainer {
-  // width: 20%;
-  flex: 1;
+  width: 20%;
+  // flex: 1;
   margin-top: 2rem;
 
   @include respondMax("tablet") {

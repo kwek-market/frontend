@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { Fragment, memo, useEffect } from "react";
 import { MainLayout } from "@/layouts";
 import { Hero, Features, CategoryGrid, Brands } from "@/components/home";
 
@@ -45,14 +45,17 @@ const Home = function () {
           </h1>
         </div>
       )}
-      {categories !== undefined &&
+      {!loading &&
+        !error &&
+        categories !== undefined &&
         categories.length > 0 &&
         categories
           .slice(0, 6)
-          .map(
-            ({ id, name }) =>
-              name && <CategoryGrid key={id} title={name} sidebar />
-          )}
+          .map(({ id, name }) => (
+            <Fragment key={id}>
+              {name !== undefined && <CategoryGrid title={name} sidebar />}
+            </Fragment>
+          ))}
       <Brands />
     </MainLayout>
   );
