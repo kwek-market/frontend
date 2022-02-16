@@ -52,10 +52,8 @@ const Home = function () {
         categories
           .slice(0, 6)
           .map(({ id, name }) => (
-            <Fragment>
-              {name !== undefined && (
-                <CategoryGrid key={id} title={name} sidebar />
-              )}
+            <Fragment key={id}>
+              {name !== undefined && <CategoryGrid title={name} sidebar />}
             </Fragment>
           ))}
       <Brands />

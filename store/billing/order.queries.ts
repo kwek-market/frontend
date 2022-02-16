@@ -22,4 +22,13 @@ export const GETORDER = `
     dateCreated
     }
   }
-`
+`;
+
+export const TRACK_ORDER = `
+  query trackOrder($token: String!) {
+    trackOrder(token: $token) {
+      status
+      message
+    }
+  }
+`;

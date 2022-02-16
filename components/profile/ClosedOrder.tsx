@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from '@/components/buttons/Button';
 import Badge from '@/components/badge/Badge';
+import { OrderProps } from './OpenOrder';
 
-const ClosedOrder = function ({ setActiveBtn }) {
+const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
   function checkDetails() {
     setActiveBtn('Closed Order Details');
   }

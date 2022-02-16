@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Modal, Steps } from "antd";
+import { message, Modal, Steps } from "antd";
 import Button from "@/components/buttons/Button";
 import TextInput from "@/components/input/textInput";
 import { BsJournalBookmarkFill, BsCheck2Circle } from "react-icons/bs";
 import { GiConfirmed } from "react-icons/gi";
 import { ImTruck } from "react-icons/im";
+import useTrackOrder from "@/hooks/useTrackOrder";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
 
 const Track = function ({ activeBtn }) {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
   const [track, setTrack] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -25,8 +31,17 @@ const Track = function ({ activeBtn }) {
     setIsModalVisible(false);
   };
 
+  const { mutate, isLoading, data } = useTrackOrder();
+
   function checkOrder() {
-    showModal();
+    if (track === "" || track === null) {
+      return message.error("Enter your order id");
+    }
+    mutate(track, {
+      onSuccess: () => {
+        showModal();
+      },
+    });
   }
 
   return (
@@ -40,7 +55,7 @@ const Track = function ({ activeBtn }) {
         bodyStyle={{ margin: "30px 0" }}
       >
         <Steps
-          current={2}
+          current={0}
           responsive={true}
           className={"tw-h-[60vh] md:tw-h-auto"}
         >
@@ -50,7 +65,7 @@ const Track = function ({ activeBtn }) {
             icon={<BsJournalBookmarkFill />}
           />
           <Step
-            title="Order Confrimed"
+            title="Order Confirmed"
             description="Your order has been confirmed"
             icon={<GiConfirmed />}
           />
