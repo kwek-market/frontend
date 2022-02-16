@@ -51,7 +51,9 @@ const Home = function () {
           .slice(0, 6)
           .map(
             ({ id, name }) =>
-              name && <CategoryGrid key={id} title={name} sidebar />
+              name !== undefined && (
+                <CategoryGrid key={id} title={name} sidebar />
+              )
           )}
       <Brands />
     </MainLayout>

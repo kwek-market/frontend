@@ -7,7 +7,7 @@ const PromoteHeader = function ({ children }: any) {
   const router = useRouter();
   return (
     <nav className={styles.store_option}>
-      <div className={styles.option}>
+      <div className="tw-bg-red-kwek100 tw-flex tw-justify-between tw-py-4 md:tw-px-36 tw-px-2">
         <div onClick={() => router.back()}>
           <Image
             src="/images/keyboard.png"
