@@ -6,7 +6,6 @@
 .promote {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
   color: #000000;
@@ -25,29 +24,34 @@
   }
   .form {
     background-color: #ffffff;
-    width: 700px;
-    height: 562px;
-    padding-left: 50px;
+    padding: 2rem 3rem;
+    @include respondMax("tablet") {
+      padding: 2rem 1rem;
+    }
     border-radius: 10px;
   }
   .method {
     height: 184px;
-    width: 700px;
     background-color: #ffffff;
     margin-top: 20px;
     border-radius: 10px;
+    padding: 0.5rem 1.5rem;
   }
   .parallel {
     display: flex;
     flex-direction: row;
-    padding-left: 10px;
-    padding-bottom: 0px;
+    justify-content: space-between;
+    gap: 1rem;
+    @include respondMax("tablet") {
+      flex-direction: column;
+    }
   }
   .count {
     line-height: 24px;
     font-weight: 500;
     font-size: 16px;
     color: #1d1616;
+    display: block;
   }
   h4 {
     font-weight: 600;
@@ -56,28 +60,23 @@
   }
 
   .number {
-    width: 284px;
     height: 54px;
     border: 1px solid #bfa5a3;
     margin-bottom: 20px;
     border-radius: 5px;
+    width: 100%;
   }
-  .date {
-    padding-left: 15px;
-  }
+
   .board {
     display: flex;
     flex-direction: row;
-    padding-top: 35px;
     padding-bottom: 12px;
-    padding-left: 10px;
   }
   .boarder {
     display: flex;
     flex-direction: row;
     padding-top: 30px;
     padding-bottom: 10px;
-    padding-left: 10px;
   }
   .key {
     padding-left: 8px;
@@ -94,16 +93,16 @@
   }
   .line {
     border: 1px solid #bfa5a366;
-    width: 577px;
-    margin-top: 0 auto;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
   }
 
   h2 {
     font-weight: 600;
     font-size: 56px;
+    @include respondMax("tablet") {
+      font-size: 40px;
+    }
     line-height: 84px;
     color: #af1328;
     text-align: center;
@@ -112,7 +111,7 @@
     display: flex;
     flex-direction: row;
     text-align: center;
-    padding-left: 170px;
+    justify-content: center;
   }
   .spaner {
     color: #af1328;
@@ -128,10 +127,8 @@
     color: #1d1616;
     padding-top: 25px;
     padding-bottom: 10px;
-    padding-left: 60px;
   }
   .range {
-    width: 529px;
     height: 6px;
     color: #af1328;
     background-color: #af1328;
@@ -142,21 +139,16 @@
     flex: 1;
   }
   .add {
-    padding-left: 280px;
     padding-top: 10px;
   }
   .product {
     position: relative;
   }
-  .promoted {
-    position: absolute;
-    bottom: 410px;
-    right: 247px;
-  }
+  
   .money {
     display: flex;
     flex-direction: row;
-    padding-left: 60px;
+    justify-content: space-between;
   }
   .preview {
     padding-bottom: 15px;
@@ -198,11 +190,8 @@
   }
   .liner {
     border: 1px solid #bfa5a366;
-    width: 461px;
-    margin-top: 0 auto;
     align-items: center;
     justify-content: center;
-    margin-left: 0px;
   }
   .summary {
     padding-top: 30px;
@@ -211,17 +200,15 @@
   .budget {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding-top: 13px;
-  }
-  .ad {
-    padding-left: 270px;
   }
 
   /*Chrome*/
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
     input[type="range"] {
       overflow: hidden;
-      width: 600px;
+      width: 100%;
       margin: 0 auto;
       height: 6px;
       border-radius: 5px;

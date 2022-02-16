@@ -16,6 +16,15 @@ const PromoteProduct = function ({ id }) {
     days: 0,
     endDate: new Date().toISOString(),
   });
+
+  function submitPromotion() {
+
+  }  
+
+  function addMoneyToWallet() {
+
+  }
+  
   return (
     <div className={styles.promote}>
       <div className="tw-flex-[2]">
@@ -32,9 +41,12 @@ const PromoteProduct = function ({ id }) {
             </div>
           </div>
           <div className={styles.parallel}>
-            <div className={styles.day}>
-              <p className={styles.count}>Days</p>
+            <div className="">
+              <label htmlFor="day" className={styles.count}>
+                Days
+              </label>
               <input
+                id="day"
                 placeholder="Day"
                 type={"number"}
                 value={promoteData.days}
@@ -47,9 +59,12 @@ const PromoteProduct = function ({ id }) {
                 className={styles.number}
               ></input>
             </div>
-            <div className={styles.date}>
-              <p className={styles.count}>End date</p>
+            <div className="">
+              <label htmlFor="date" className={styles.count}>
+                End date
+              </label>
               <input
+                id="date"
                 type={"date"}
                 value={promoteData.endDate}
                 onChange={(e) =>
@@ -95,6 +110,7 @@ const PromoteProduct = function ({ id }) {
             ></input>
           </div>
         </form>
+
         <div className={styles.method}>
           <h4 className={styles.pay}>Payment Method</h4>
           <div className={styles.money}>
@@ -114,14 +130,14 @@ const PromoteProduct = function ({ id }) {
         {status === "loading" && <Load />}
         {status === "error" && <ErrorInfo error={error} />}
         {data !== undefined && status === "success" && (
-          <div className="tw-w-1/2 lg:tw-w-full tw-mx-auto lg:tw-mr-auto">
+          <div className="">
             <div className={styles.product}>
               <Image
                 src={data.product.image[0].imageUrl}
                 width="500"
                 height="284"
               />
-              <span className="tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-3/4 tw-top-[5%]">
+              <span className="tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[60%] tw-top-[5%]">
                 promoted
               </span>
             </div>
@@ -155,7 +171,7 @@ const PromoteProduct = function ({ id }) {
         <p className={styles.run}>Your ad will run for 4 days</p>
         <div className={styles.budget}>
           <p>Total budget</p>
-          <p className={styles.ad}>
+          <p className="">
             NGN {Number(promoteData.range).toLocaleString()}.00
           </p>
         </div>

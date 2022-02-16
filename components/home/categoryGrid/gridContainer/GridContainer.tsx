@@ -42,6 +42,7 @@ const GridContainer = function ({
     data: categoryData,
     error: categoryError,
   } = useProducts(payload);
+  console.log(categoryData);
 
   const newBanner =
     !!categoryData?.products.objects !== undefined &&
@@ -69,17 +70,19 @@ const GridContainer = function ({
                 </h1>
               </div>
             )}
-            {categoryStatus === "loading" ? (
+            {categoryStatus === "loading" && (
               <div className="tw-py-5 tw-w-full tw-text-center">
                 <Spin size="large" />
               </div>
-            ) : categoryData.products.objects.length === 0 ? (
+            )}
+            {categoryData?.products.objects !== undefined &&
+            categoryData?.products.objects.length === 0 ? (
               <div className="tw-py-5 tw-w-full tw-text-center">
                 <h1>No Products Found</h1>
               </div>
             ) : (
-              categoryData.products.objects !== undefined &&
-              categoryData.products.objects.map((product: ProductType) => (
+              categoryData?.products.objects !== undefined &&
+              categoryData?.products.objects.map((product: ProductType) => (
                 <div key={uuid()} className={styles.product}>
                   <ProductBox product={product} id={product.id} />
                 </div>
