@@ -1,16 +1,20 @@
-import React from 'react';
-import Badge from '../badge/Badge';
-import Button from '../buttons/Button';
+import router from "next/router";
+import React from "react";
+import Badge from "../badge/Badge";
+import Button from "../buttons/Button";
 
-const Details = function ({ show }) {
-  function cancelItem() {}
+const Details = function ({ show, order, item }) {
+  const deliveryStatus =
+    order.deliveryStatus === " delivered"
+      ? "tw-bg-green-success"
+      : "tw-bg-yellow-filled";
 
-  function trackItem() {}
+  function cancelItem(id: string) {}
 
-  function statusHistory() {}
+  function trackItem(id: string) {}
 
   return (
-    <div className="tw-border tw-border-gray-kwek700 tw-bg-opacity-50 tw-rounded-lg tw-p-2 tw-flex tw-flex-row tw-justify-between">
+    <div className="tw-border tw-border-gray-kwek700 tw-bg-opacity-50 tw-rounded-lg tw-p-2 tw-flex tw-flex-row tw-justify-between tw-mb-2">
       <div className="tw-flex md:tw-flex-row tw-flex-col">
         <div>
           <img src="/images/order.png" alt="order" className="tw-rounded-md" />
@@ -29,12 +33,12 @@ const Details = function ({ show }) {
               <Button
                 buttonStyle="tw-p-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-sm tw-border tw-border-red-kwek100 hover:tw-opacity-50"
                 text="Cancel Item"
-                cmd={cancelItem}
+                cmd={() => cancelItem(order.id)}
               />
               <Button
                 buttonStyle="tw-p-2 tw-text-red-kwek100 tw-border tw-border-red-kwek100 tw-rounded-sm"
                 text="Track Item"
-                cmd={trackItem}
+                cmd={() => trackItem(order.id)}
               />
               {/* <Button
               buttonStyle={
@@ -61,8 +65,12 @@ const Details = function ({ show }) {
           </div>
         )}
         <div className="tw-flex tw-flex-col tw-justify-between tw-items-end">
-          <span className="tw-uppercase tw-opacity-60 tw-text-black-stock tw-text-base tw-font-normal">qty:1</span>
-          <span className="tw-uppercase tw-text-black-stock tw-font-medium tw-text-lg">NGN 3000</span>
+          <span className="tw-uppercase tw-opacity-60 tw-text-black-stock tw-text-base tw-font-normal">
+            qty:1
+          </span>
+          <span className="tw-uppercase tw-text-black-stock tw-font-medium tw-text-lg">
+            NGN 3000
+          </span>
         </div>
       </div>
     </div>
