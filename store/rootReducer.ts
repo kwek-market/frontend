@@ -3,6 +3,7 @@ import { createAccountReducer } from "./account/account.reducer";
 import cartReducer from "./cart/cart.reducer";
 import { categoriesReducer } from "./category/categories.reducer";
 import { subcribeReducer } from "./newsletter/newsletter.reducer";
+import { orderReducer } from "./order/order.reducer";
 import { productReducer } from "./product/product.reducer";
 import sellerReducer from "./seller/seller.reducer";
 import userReducer from "./user/user.reducer";
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   product: productReducer,
   cart: cartReducer,
   wishlist: wishlistReducer,
+  order: orderReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

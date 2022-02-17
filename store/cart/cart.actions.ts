@@ -56,7 +56,6 @@ export function getCartFunc(token: string) {
         payload: res.userCart,
       });
     } catch (err) {
-      message.error(err.message.slice(0, err.message.indexOf(".")), 5);
       dispatch({
         type: CartType.ERROR,
         payload: err.message.slice(0, err.message.indexOf(".")),

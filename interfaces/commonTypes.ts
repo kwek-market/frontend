@@ -312,6 +312,9 @@ export type Order = {
   cartItems: string[];
   doorStep: {
     fullName: string;
+    address: string;
+    state: string;
+    city: string;
   };
   pickup: {
     name: string;

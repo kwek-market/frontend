@@ -2,6 +2,12 @@ import React from "react";
 import Button from "@/components/buttons/Button";
 import Badge from "@/components/badge/Badge";
 import { Order as OrderType } from "@/interfaces/commonTypes";
+import { RootState } from "@/store/rootReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { QueryClient } from "react-query";
+import { GETORDER } from "@/store/billing/order.queries";
+import { userFetcherWithAuth } from "@/helpers";
+import { setOrderDetails } from "@/store/order/order.action";
 
 export type OrderProps = {
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
@@ -9,8 +15,28 @@ export type OrderProps = {
 };
 
 const Order = function ({ setActiveBtn, order }: OrderProps) {
-  function checkDetails() {
-    setActiveBtn("Open Order Details");
+  const dispatch = useDispatch();
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+  const queryClient = new QueryClient();
+
+  const deliveryStatus =
+    order.deliveryStatus === " delivered"
+      ? "tw-bg-green-success"
+      : "tw-bg-yellow-filled";
+
+  async function checkDetails(id: string) {
+    const { message } = await import("antd");
+    try {
+      const data = await queryClient.fetchQuery("order", () =>
+        userFetcherWithAuth(GETORDER, { token, id }, token)
+      );
+      dispatch(setOrderDetails(data.order));
+      setActiveBtn("Open Order Details");
+    } catch (err) {
+      message.error(err.message);
+    }
   }
 
   return (
@@ -40,17 +66,13 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
       </div>
       <div className="tw-flex tw-flex-col">
         <Badge
-          badgeStyle={`${
-            order.deliveryStatus === " delivered"
-              ? "tw-bg-green-success"
-              : "tw-bg-yellow-filled"
-          } tw-uppercase tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-mb-2`}
+          badgeStyle={`${deliveryStatus} tw-uppercase tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-mb-2`}
           text={order.deliveryStatus}
         />
         <Button
           buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
           text="See Details"
-          cmd={() => checkDetails()}
+          cmd={() => checkDetails(order.id)}
         />
       </div>
     </div>

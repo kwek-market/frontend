@@ -9,6 +9,7 @@ import Load from "@/components/Loader/Loader";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import { OrdersEmpty, OrdersFilled } from "../orders";
 import SingleProduct from "@/components/singleProduct/SingleProduct";
+import useSellerOrders from "@/hooks/useSellerOrders";
 
 const { TabPane } = Tabs;
 
@@ -21,6 +22,11 @@ function Content() {
     data: productsData,
     error: productError,
   } = useSellerProducts(token);
+  const {
+    status: ordersStatus,
+    data: ordersData,
+    error: ordersError,
+  } = useSellerOrders(token);
   const [showProduct, setShowProduct] = useState(false);
   const [product, setProduct] = useState({});
 
@@ -54,8 +60,15 @@ function Content() {
           )}
         </TabPane>
         <TabPane tab="Order" key="3">
-          <OrdersEmpty />
-          <OrdersFilled />
+          {ordersStatus === "loading" && <Load />}
+          {ordersStatus === "error" && <ErrorInfo error={productError} />}
+          {ordersStatus === "success" &&
+          ordersData !== undefined &&
+          ordersData.getSellerOrders.length > 0 ? (
+            <OrdersFilled orders={ordersData.getSellerOrders} />
+          ) : (
+            <OrdersEmpty />
+          )}
         </TabPane>
         <TabPane tab="Reviews" key="4">
           Content of Tab Pane 3

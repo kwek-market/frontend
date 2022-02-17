@@ -1,12 +1,35 @@
-import React from 'react';
-import Button from '@/components/buttons/Button';
-import Badge from '@/components/badge/Badge';
-import { OrderProps } from './OpenOrder';
+import React from "react";
+import Button from "@/components/buttons/Button";
+import Badge from "@/components/badge/Badge";
+import { OrderProps } from "./OpenOrder";
+import { userFetcherWithAuth } from "@/helpers";
+import { GETORDER } from "@/store/billing/order.queries";
+import { setOrderDetails } from "@/store/order/order.action";
+import { RootState } from "@/store/rootReducer";
+import { QueryClient } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 
 const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
-  function checkDetails() {
-    setActiveBtn('Closed Order Details');
+  const dispatch = useDispatch();
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+  const queryClient = new QueryClient();
+
+  async function checkDetails(id: string) {
+    const { message } = await import("antd");
+    try {
+      const data = await queryClient.fetchQuery("order", () =>
+        userFetcherWithAuth(GETORDER, { token, id }, token)
+      );
+      dispatch(setOrderDetails(data.order));
+      console.log(data);
+      setActiveBtn("Open Closed Details");
+    } catch (err) {
+      message.error(err.message);
+    }
   }
+
   return (
     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-border tw-border-gray-kwek700 tw-rounded-md tw-p-2">
       <div className="tw-flex tw-flex-col md:tw-flex-row">
@@ -19,7 +42,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
               Men’s Winter Wool Jackets - Brown
             </h3>
             <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">
-              Order KWK12345357398
+              Order {order.orderId}
             </span>
           </div>
         </div>
@@ -32,7 +55,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
         <Button
           buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
           text="See Details"
-          cmd={() => checkDetails()}
+          cmd={() => checkDetails(order.id)}
         />
       </div>
     </div>
