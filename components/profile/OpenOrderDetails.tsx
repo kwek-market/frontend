@@ -5,14 +5,12 @@ import Details from "./Details";
 import Payment from "./Payment";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
+import { v4 } from "uuid";
+import { OrderDetailsProps } from "./ClosedOrderDetails";
 dayjs.extend(LocalizedFormat);
 
-const OpenOrderDetails = function ({ setActiveBtn }) {
+const OpenOrderDetails = function ({ setActiveBtn }: OrderDetailsProps) {
   const { order } = useSelector((state: RootState) => state.order);
-  const deliveryStatus =
-    order.deliveryStatus === " delivered"
-      ? "tw-bg-green-success"
-      : "tw-bg-yellow-filled";
 
   return (
     <div className="tw-p-2 md:tw-p-5 tw-bg-white-100">
@@ -29,7 +27,7 @@ const OpenOrderDetails = function ({ setActiveBtn }) {
         <tbody>
           <tr className="">
             <td className="tw-text-left tw-font-semibold tw-text-base lg:tw-text-xl tw-text-black-stock tw-w-2/4">
-              Order No. {order.orderId}
+              Order No. {order.id}
             </td>
             <td className="tw-text-right tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock tw-w-2/4">
               {order.cartItems.length} items
@@ -60,12 +58,13 @@ const OpenOrderDetails = function ({ setActiveBtn }) {
           </span>
         </div>
         <div className="tw-pt-5">
-          {order.cartItems.map((item: any) => (
+          {order.cartItems.map((item: any, index: number) => (
             <Details
-              key={item.id}
-              item={item}
+              key={v4()}
               order={order}
+              idx={index}
               show={order.deliveryStatus === "delivered"}
+              setActiveBtn={setActiveBtn}
             />
           ))}
         </div>

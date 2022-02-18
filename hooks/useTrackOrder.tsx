@@ -5,7 +5,8 @@ import { message } from "antd";
 
 function useTrackOrder() {
   return useMutation(
-    (orderId: string) => userFetcherWithAuth(TRACK_ORDER, { orderId }, orderId),
+    (data: { orderId: string; token: string }) =>
+      userFetcherWithAuth(TRACK_ORDER, { orderId: data.orderId }, data.token),
     {
       onSuccess: (data) => {
         message.success(data.trackOrder.message);

@@ -45,17 +45,17 @@ const Home = function () {
           </h1>
         </div>
       )}
-      {!loading &&
-        !error &&
-        categories !== undefined &&
-        categories.length > 0 &&
-        categories
-          .slice(0, 6)
-          .map(({ id, name }) => (
-            <Fragment key={id}>
-              {name !== undefined && <CategoryGrid title={name} sidebar />}
-            </Fragment>
-          ))}
+      <div>
+        {categories !== undefined &&
+          categories.length > 0 &&
+          categories
+            .slice(0, 6)
+            .map(({ id, name }) => (
+              <Fragment key={id}>
+                {name !== undefined && <CategoryGrid title={name} sidebar />}
+              </Fragment>
+            ))}
+      </div>
       <Brands />
     </MainLayout>
   );
