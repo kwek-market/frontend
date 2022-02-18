@@ -1,7 +1,12 @@
-import React from 'react';
-import PaymentCard from './PaymentCard';
+import { Order } from "@/interfaces/commonTypes";
+import React from "react";
+import PaymentCard from "./PaymentCard";
 
-const Payment = function () {
+const Payment = function ({ order }: { order: Order }) {
+  const subtotal = Number(order.orderPrice).toLocaleString();
+  const totalPrice = Number(order.orderPriceTotal).toLocaleString();
+  const shippingAddress = `${order.doorStep.fullName} ${order.doorStep.address} ${order.doorStep.city} ${order.doorStep.state}`;
+
   return (
     <>
       <div className="tw-rounded-md tw-bg-gray-kwek700 tw-p-3 tw-w-full">
@@ -11,10 +16,11 @@ const Payment = function () {
           </p>
         </div>
         <div className="tw-ml-2">
-          <PaymentCard title="Payment Method" desc="cash on delivery" />
+          <PaymentCard title="Payment Method" desc={order.paymentMethod} />
+          <br />
           <PaymentCard
             title="Payment Details"
-            desc="Items subtotal: NGN 9,700 Shipping Fees: NGN 3,400 Total: NGN 13, 100"
+            desc={`Items subtotal: NGN ${subtotal} Shipping Fees: NGN 100 Total: NGN ${totalPrice}`}
           />
         </div>
       </div>
@@ -25,11 +31,9 @@ const Payment = function () {
           </p>
         </div>
         <div className="tw-ml-2">
-          <PaymentCard title="Delivery Method" desc="Standar Door Delivery" />
-          <PaymentCard
-            title="Shipping Address"
-            desc="Alison Eyo Suite 5, OGB Plaza, Obafemi Awolowo Way, Utako,Abuja."
-          />
+          <PaymentCard title="Delivery Method" desc={order.deliveryMethod} />
+          <br />
+          <PaymentCard title="Shipping Address" desc={shippingAddress} />
         </div>
       </div>
     </>

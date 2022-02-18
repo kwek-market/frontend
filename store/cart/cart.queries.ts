@@ -93,3 +93,33 @@ export const ReduceItemQuantity = `
     }
   }
 `;
+
+export const GETCARTITEM = `
+  query cartitem($id: String!) {
+    cartitem(id: $id) {
+      id
+      quantity
+      price
+      ordered
+      product {
+        productTitle
+        image {
+          id
+          imageUrl
+        }
+      }
+      cart {
+        createdAt
+      }
+    }
+  }
+`;
+
+export const CANCELORDER = `
+  mutation cancelOrder($orderId: String!) {
+    cancelOrder(orderId: $orderId) {
+      status
+      message
+    }
+  }
+`;

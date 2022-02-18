@@ -128,8 +128,8 @@ export const GET_SELLER_PRODUCTS = `
 `;
 
 export const GET_SELLER_ORDERS = `
-  query getSellerOrders($token: String!) {
-    getSellerOrders(token: $token) {
+  query getSellerOrders($token: String!, $thisMonth: Boolean) {
+    getSellerOrders(token: $token, thisMonth: $thisMonth) {
       id
     }
   }
