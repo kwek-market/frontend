@@ -1,9 +1,10 @@
 import React from "react";
 import ClosedOrderDetails from "./ClosedOrderDetails";
 import { Account, Addresses, Empty, Orders, Track } from "./content";
+import { MenuProps } from "./Menu";
 import OpenOrderDetails from "./OpenOrderDetails";
 
-const ProfileContent = function ({ activeBtn, setActiveBtn }) {
+const ProfileContent = function ({ activeBtn, setActiveBtn }: MenuProps) {
   return (
     <div className="tw-border tw-border-gray-500 tw-border-opacity-50 tw-rounded tw-p-2 md:tw-p-5 tw-relative">
       {/* <div className="tw-flex tw-justify-between"> */}

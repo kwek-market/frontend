@@ -77,7 +77,7 @@ function Content() {
           Content of Tab Pane 3
         </TabPane>
         <TabPane tab="Settings" key="6">
-          Content of Tab Pane 3
+          settings
         </TabPane>
         <TabPane tab="Wallet" key="7">
           Content of Tab Pane 3

@@ -326,3 +326,20 @@ export type Order = {
   deliveryStatus: string;
   dateCreated: Date;
 };
+
+export type CartItemType = {
+  id: string;
+  quantity: number;
+  price: number;
+  ordered: boolean;
+  product: {
+    productTitle: string;
+    image: {
+      id: string;
+      imageUrl: string;
+    }[];
+  };
+  cart: {
+    createdAt: Date;
+  }[];
+};

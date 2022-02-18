@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Button from "@/components/buttons/Button";
 import Badge from "@/components/badge/Badge";
 import { Order as OrderType } from "@/interfaces/commonTypes";
@@ -8,6 +8,10 @@ import { QueryClient } from "react-query";
 import { GETORDER } from "@/store/billing/order.queries";
 import { userFetcherWithAuth } from "@/helpers";
 import { setOrderDetails } from "@/store/order/order.action";
+import useCartItems from "@/hooks/useCartItems";
+import Load from "../Loader/Loader";
+import { v4 } from "uuid";
+import Image from "next/image";
 
 export type OrderProps = {
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
@@ -19,6 +23,7 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
+  const { items, loading } = useCartItems(order);
   const queryClient = new QueryClient();
 
   const deliveryStatus =
@@ -42,16 +47,28 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
   return (
     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-border tw-border-gray-kwek700 tw-rounded-md tw-p-2 tw-mb-2">
       <div className="tw-flex tw-flex-col md:tw-flex-row">
-        <div className="tw-grid tw-grid-cols-kwek-4 tw-gap-[5px]">
-          <img src="/images/order.png" alt="" className="tw-rounded-md" />
-          <img src="/images/order.png" alt="" className="tw-rounded-md" />
-          <img src="/images/order.png" alt="" className="tw-rounded-md" />
-          <img src="/images/order.png" alt="" className="tw-rounded-md" />
+        <div className="tw-grid tw-grid-cols-kwek-7 tw-gap-[5px]">
+          {loading ? (
+            <Load />
+          ) : (
+            <Fragment>
+              {items.slice(0, 4).map((item) => (
+                <Image
+                  key={v4()}
+                  src={item.product.image[0].imageUrl}
+                  alt="order-img"
+                  width="60"
+                  height="60"
+                  className="tw-rounded-md"
+                />
+              ))}
+            </Fragment>
+          )}
         </div>
         <div className="tw-ml-0 md:tw-ml-2 tw-flex tw-flex-col tw-justify-between">
           <div>
             <h3 className="tw-text-base md:tw-text-lg lg:tw-text-2xl tw-font-medium tw-text-gray-kwek200">
-              Order {order.orderId}
+              Order {order.id}
             </h3>
             <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">
               {order.cartItems.length} Items

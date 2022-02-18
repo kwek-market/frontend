@@ -3,7 +3,7 @@ import { FaUser } from 'react-icons/fa';
 import { IoBagCheckSharp, IoLocationSharp, IoBagAdd, IoHome } from 'react-icons/io5';
 import MenuButton from './MenuButton';
 
-type MenuProps = {
+export type MenuProps = {
   activeBtn: string;
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
 };

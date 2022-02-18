@@ -39,8 +39,8 @@ export const GETORDER = `
 `;
 
 export const TRACK_ORDER = `
-  query trackOrder($token: String!) {
-    trackOrder(token: $token) {
+  mutation trackOrder($orderId: String!) {
+    trackOrder(orderId: $orderId) {
       status
       message
     }
