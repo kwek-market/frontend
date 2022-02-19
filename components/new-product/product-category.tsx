@@ -1,23 +1,15 @@
 import { userFetcher } from "@/helpers";
-import { UploadProductProps } from "@/interfaces/commonTypes";
+import {
+  SubCategoriesType,
+  UploadProductProps,
+} from "@/interfaces/commonTypes";
 import { CATEGORY } from "@/store/category/categories.queries";
 import { RootState } from "@/store/rootReducer";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { QueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { v4 } from "uuid";
-
-export type SubCategoriesType = {
-  id: string;
-  name: string;
-  categories: any[];
-  child: [
-    {
-      id: string;
-      name: string;
-    }
-  ];
-};
+import Load from "../Loader/Loader";
 
 function ProductCategory({
   submitDetails,
@@ -25,7 +17,7 @@ function ProductCategory({
 }: UploadProductProps) {
   const { categories } = useSelector((state: RootState) => state);
   const queryClient = new QueryClient();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [category, setCategory] = useState<string>("");
   const [subCategoryValue, setSubCategoryValue] = useState<string[]>(
     [] as string[]
@@ -34,26 +26,70 @@ function ProductCategory({
     [] as SubCategoriesType[]
   );
 
-  console.log(subCategoryValue);
-  console.log(submitDetails);
-  async function getSubCategories(id: string) {
+  async function getSubCategories(id: string, index?: number) {
     const { message } = await import("antd");
     try {
+      setLoading(true);
       const data =
         id &&
         (await queryClient.fetchQuery("sub-category", () =>
           userFetcher(CATEGORY, { id })
         ));
-      console.log(data.category);
+      setLoading(false);
       data.category.child.length > 0
-        ? setSubCategories([...subCategories, data.category])
+        ? setSubCategories((prev) => {
+            // find the one that was clicked, then replace the values, 
+            // and clear the values in the array after it
+            if (index === undefined) {
+              return [data.category];
+            }
+            if (prev[index + 1]) {
+              subCategories.splice(
+                index + 1,
+                subCategories.length - 1,
+                data.category
+              );
+              return subCategories;
+            }
+            return [...prev, data.category];
+          })
         : setSubmitDetails({
             ...submitDetails,
-            subcategory: subCategoryValue[subCategoryValue.length - 1],
+            subcategory: data.category.id,
           });
     } catch (error) {
+      setLoading(false);
       message.error(error.message);
     }
+  }
+
+  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setCategory(e.target.value);
+    setSubmitDetails({
+      ...submitDetails,
+      category: e.target.value,
+    });
+    getSubCategories(e.target.value);
+  }
+
+  function handleSubCategoryChange(
+    e: React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) {
+    setSubCategoryValue((prev) => {
+      // replace the value in the array if there's an existing value and 
+      // remove the values after it
+      if (subCategoryValue[index]) {
+        subCategoryValue.splice(
+          index,
+          subCategories.length - 1,
+          e.target.value
+        );
+        return subCategoryValue;
+      }
+      return [...prev, e.target.value];
+    });
+    getSubCategories(e.target.value, index);
   }
 
   return (
@@ -71,14 +107,7 @@ function ProductCategory({
             placeholder="Select Main Category"
             className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
             value={category}
-            onChange={(e) => {
-              setCategory(e.target.value);
-              setSubmitDetails({
-                ...submitDetails,
-                category: e.target.value,
-              });
-              getSubCategories(e.target.value);
-            }}
+            onChange={(e) => handleCategoryChange(e)}
             required
           >
             <option>Select Main Category</option>
@@ -102,15 +131,8 @@ function ProductCategory({
                 className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
                 placeholder="Select subcategory"
                 required
-                value={subCategoryValue[index] ?? ""}
-                onChange={(e) => {
-                  setSubCategoryValue([...subCategoryValue, e.target.value]);
-                  setSubmitDetails({
-                    ...submitDetails,
-                    subcategory: e.target.value,
-                  });
-                  getSubCategories(e.target.value);
-                }}
+                value={subCategoryValue[index]}
+                onChange={(e) => handleSubCategoryChange(e, index)}
               >
                 <option>select subcategory</option>
                 {cat?.child.map((subcat) => (
@@ -122,6 +144,7 @@ function ProductCategory({
             </label>
           ))}
       </div>
+      {loading && <Load />}
     </div>
   );
 }

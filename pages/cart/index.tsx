@@ -19,9 +19,11 @@ const Page = function () {
 
   return (
     <MainLayout title="Cart">
-      {isLoading}
-      {hasError}
-      {hasCart}
+      <section>
+        {isLoading}
+        {hasError}
+        {hasCart}
+      </section>
       <ExtraInfo />
     </MainLayout>
   );
