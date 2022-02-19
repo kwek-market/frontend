@@ -56,7 +56,7 @@ const Home = function () {
               </Fragment>
             ))}
       </div>
-      <Brands />
+      {/* <Brands /> */}
     </MainLayout>
   );
 };

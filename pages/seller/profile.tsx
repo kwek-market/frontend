@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Header from "@/shared/sellerHeader/Header";
-import StoreOptions from "@/shared/StoreOptions/StoreOptions";
 import { RootState } from "@/store/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { getSellerData } from "@/store/seller/seller.action";
