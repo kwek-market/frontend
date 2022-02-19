@@ -16,9 +16,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  console.log(order);
   const { items, loading } = useCartItems(order);
-  console.log(items);
   const queryClient = new QueryClient();
 
   async function checkDetails(id: string) {

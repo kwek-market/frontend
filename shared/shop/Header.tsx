@@ -9,8 +9,6 @@ function Header() {
   const router = useRouter();
   const { seller } = useSelector((state: RootState) => state);
 
-  console.log(router.pathname);
-
   const border =
     router.pathname === "/seller/profile"
       ? "tw-text-yellow-filled tw-border-b-2 tw-border-yellow-filled tw-pb-2"
