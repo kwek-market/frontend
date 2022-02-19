@@ -344,6 +344,14 @@ export type CartItemType = {
   }[];
 };
 
-export type CategoryType = {
-  
-}
+export type SubCategoriesType = {
+  id: string;
+  name: string;
+  categories: any[];
+  child: [
+    {
+      id: string;
+      name: string;
+    }
+  ];
+};
