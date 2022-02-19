@@ -43,9 +43,11 @@ const Page = function () {
 
   return (
     <MainLayout title="Wishlist">
-      {isLoading}
-      {hasError}
-      {hasWishlist}
+      <section>
+        {isLoading}
+        {hasError}
+        {hasWishlist}
+      </section>
       <ExtraInfo />
     </MainLayout>
   );
