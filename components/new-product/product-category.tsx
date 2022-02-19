@@ -1,40 +1,60 @@
+import { userFetcher } from "@/helpers";
 import { UploadProductProps } from "@/interfaces/commonTypes";
+import { CATEGORY } from "@/store/category/categories.queries";
 import { RootState } from "@/store/rootReducer";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { QueryClient } from "react-query";
+import { useSelector } from "react-redux";
+import { v4 } from "uuid";
+
+export type SubCategoriesType = {
+  id: string;
+  name: string;
+  categories: any[];
+  child: [
+    {
+      id: string;
+      name: string;
+    }
+  ];
+};
 
 function ProductCategory({
   submitDetails,
   setSubmitDetails,
 }: UploadProductProps) {
-  const dispatch = useDispatch();
   const { categories } = useSelector((state: RootState) => state);
-  const [subCategories, setSubCategories] = useState([]);
+  const queryClient = new QueryClient();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [category, setCategory] = useState<string>("");
+  const [subCategoryValue, setSubCategoryValue] = useState<string[]>(
+    [] as string[]
+  );
+  const [subCategories, setSubCategories] = useState<SubCategoriesType[]>(
+    [] as SubCategoriesType[]
+  );
 
-  function showSubCategories(): Array<{ id: ""; name: "" }> {
-    if (submitDetails.category) {
-      const main = categories.categories.find(
-        (subcat: { id: string }) => subcat.id === submitDetails.category
-      );
-      // console.log(main);
-      if (main !== undefined) {
-        return main.child;
-      }
+  console.log(subCategoryValue);
+  console.log(submitDetails);
+  async function getSubCategories(id: string) {
+    const { message } = await import("antd");
+    try {
+      const data =
+        id &&
+        (await queryClient.fetchQuery("sub-category", () =>
+          userFetcher(CATEGORY, { id })
+        ));
+      console.log(data.category);
+      data.category.child.length > 0
+        ? setSubCategories([...subCategories, data.category])
+        : setSubmitDetails({
+            ...submitDetails,
+            subcategory: subCategoryValue[subCategoryValue.length - 1],
+          });
+    } catch (error) {
+      message.error(error.message);
     }
   }
-
-  useEffect(() => {
-    const val = showSubCategories();
-    if (val !== null && val !== undefined) {
-      console.log(val);
-      setSubCategories(val);
-      setSubmitDetails({
-        ...submitDetails,
-        subcategory: val[val.length - 1].id,
-      });
-      console.log(submitDetails.subcategory);
-    }
-  }, [submitDetails.category]);
 
   return (
     <div className="tw-pt-3 tw-px-5 tw-pb-20 tw-mb-5 tw-bg-white-100 tw-rounded-md">
@@ -50,16 +70,18 @@ function ProductCategory({
           <select
             placeholder="Select Main Category"
             className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
-            value={submitDetails.category}
-            onChange={(e) =>
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
               setSubmitDetails({
                 ...submitDetails,
                 category: e.target.value,
-              })
-            }
+              });
+              getSubCategories(e.target.value);
+            }}
             required
           >
-            <option value="">Select Main Category</option>
+            <option>Select Main Category</option>
             {categories.categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
@@ -68,11 +90,10 @@ function ProductCategory({
           </select>
         </label>
 
-        {!!subCategories &&
-          subCategories.length > 0 &&
-          subCategories.map((subcat, index) => (
+        {subCategories.length > 0 &&
+          subCategories?.map((cat, index) => (
             <label
-              key={subcat.id}
+              key={v4()}
               className="tw-text-base tw-font-medium tw-capitalize"
             >
               {" "}
@@ -81,9 +102,22 @@ function ProductCategory({
                 className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
                 placeholder="Select subcategory"
                 required
+                value={subCategoryValue[index]}
+                onChange={(e) => {
+                  setSubCategoryValue([...subCategoryValue, e.target.value]);
+                  setSubmitDetails({
+                    ...submitDetails,
+                    subcategory: e.target.value,
+                  });
+                  getSubCategories(e.target.value);
+                }}
               >
-                <option value="">Select Sub Category</option>
-                <option value={subcat.id}>{subcat.name}</option>
+                <option>select subcategory</option>
+                {cat?.child.map((subcat) => (
+                  <option key={v4()} value={subcat.id}>
+                    {subcat.name}
+                  </option>
+                ))}
               </select>
             </label>
           ))}
