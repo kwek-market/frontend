@@ -109,7 +109,7 @@ const CartGridComponent = function () {
           </div>
         ))}
       </div>
-      {cart.cart.map((item, index: number) => (
+      {cart.cart.map((item) => (
         <div
           key={v4()}
           className={`${mobileStyles.cartContainer} tw-border-b tw-pb-5 tw-mt-5 tw-border-gray-kwek100 tw-flex md:tw-hidden `}
@@ -127,7 +127,7 @@ const CartGridComponent = function () {
               <i className="fas fa-times" />
             </button>
           </div>
-          <div className="tw-ml-7">
+          <div className="tw-ml-7 tw-flex-[2]">
             <div>
               <span className="tw-text-xs tw-text-gray-kwek100">
                 Seller: {item.product.user.sellerprofileSet[0].shopName}
@@ -157,7 +157,7 @@ const CartGridComponent = function () {
               </button>
             </div>
           </div>
-          <div className="tw-flex tw-flex-col">
+          <div className="tw-flex tw-flex-col tw-flex-[1]">
             <span className="tw-text-base tw-text-black-stock tw-font-semibold">
               ₦{item.price}
             </span>

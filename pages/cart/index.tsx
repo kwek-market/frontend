@@ -1,40 +1,21 @@
-import React, { Fragment, useEffect } from "react";
-import Head from "next/head";
-
+import React from "react";
 import { CartEmpty, CartGrid } from "@/components/cart";
-
 import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
 import { MainLayout } from "@/layouts";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
+import Load from "@/components/Loader/Loader";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
 
 const Page = function () {
-  const { user, cart } = useSelector((state: RootState) => state);
+  const { cart } = useSelector((state: RootState) => state);
 
-  const isLoading = cart.loading && (
-    <div className="tw-text-center">
-      <div className="tw-text-primary" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-    </div>
-  );
+  const isLoading = cart.loading && <Load />;
 
-  const hasError = cart.error && (
-    <div className="tw-text-center">
-      <p className="tw-text-danger">{cart.error}</p>
-    </div>
-  );
+  const hasError = cart.error && <ErrorInfo error={cart.error} />;
 
   const hasCart =
-    cart.cart && cart.cart.length > 0 ? (
-      <Fragment>
-        <CartGrid />
-      </Fragment>
-    ) : (
-      <Fragment>
-        <CartEmpty />
-      </Fragment>
-    );
+    Array.isArray(cart.cart) && cart.cart.length ? <CartGrid /> : <CartEmpty />;
 
   return (
     <MainLayout title="Cart">

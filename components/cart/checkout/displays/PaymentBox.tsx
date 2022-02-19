@@ -46,7 +46,7 @@ function PaymentBox({ step, addressId }) {
       const placeOrder: PlaceOrder = {
         addressId,
         cartId: cart.cart[0].cart.id,
-        deliveryMethod: "pickup",
+        deliveryMethod: "door step",
         paymentMethod,
         productOptionsId: cart.cart.map((item) => item.product.options[0].id),
         token: user.token,

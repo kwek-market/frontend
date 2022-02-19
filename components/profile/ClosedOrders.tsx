@@ -20,7 +20,7 @@ const ClosedOrders = function ({ setActiveBtn }) {
       {hasError}
       {data !== undefined &&
         data.orders.filter((order) => order.closed === true).length < 1 && (
-          <ErrorInfo error={"No closed order"} />
+          <ErrorInfo error={"No closed orders"} />
         )}
       {data !== undefined &&
         data.orders.map(
