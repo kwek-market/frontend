@@ -131,7 +131,7 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
         </div>
         <Button
           buttonStyle={"tw-text-error hover:cursor-pointer"}
-          text={"upload image"}
+          text={"upload image(s)"}
           cmd={handleImageUpload}
         />
       </div>
