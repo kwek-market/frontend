@@ -27,7 +27,7 @@ const OpenOrderDetails = function ({ setActiveBtn }: OrderDetailsProps) {
         <tbody>
           <tr className="">
             <td className="tw-text-left tw-font-semibold tw-text-base lg:tw-text-xl tw-text-black-stock tw-w-2/4">
-              Order No. {order.id}
+              Order No. {order.orderId}
             </td>
             <td className="tw-text-right tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock tw-w-2/4">
               {order.cartItems.length} items

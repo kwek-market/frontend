@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@/components/buttons/Button";
 import Badge from "@/components/badge/Badge";
 import { OrderProps } from "./OpenOrder";
@@ -17,14 +17,17 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
     user: { token },
   } = useSelector((state: RootState) => state);
   const { items, loading } = useCartItems(order);
+  const [load, setLoading] = useState(false);
   const queryClient = new QueryClient();
 
   async function checkDetails(id: string) {
     const { message } = await import("antd");
     try {
+      setLoading(true);
       const data = await queryClient.fetchQuery("order", () =>
         userFetcherWithAuth(GETORDER, { token, id }, token)
       );
+      setLoading(false);
       dispatch(setOrderDetails(data.order));
       console.log(data);
       setActiveBtn("Closed Order Details");
@@ -53,7 +56,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
               {loading ? <Load /> : items[0]?.product.productTitle}
             </h3>
             <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">
-              Order {order.id}
+              Order {order.orderId}
             </span>
           </div>
         </div>
@@ -65,7 +68,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
         />
         <Button
           buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
-          text="See Details"
+          text={load ? "loading..." : "See Details"}
           cmd={() => checkDetails(order.id)}
         />
       </div>

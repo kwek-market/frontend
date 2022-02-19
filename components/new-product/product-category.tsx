@@ -102,7 +102,7 @@ function ProductCategory({
                 className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
                 placeholder="Select subcategory"
                 required
-                value={subCategoryValue[index]}
+                value={subCategoryValue[index] ?? ""}
                 onChange={(e) => {
                   setSubCategoryValue([...subCategoryValue, e.target.value]);
                   setSubmitDetails({
