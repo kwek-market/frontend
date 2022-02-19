@@ -1,4 +1,4 @@
-import { QueryClient, useQuery } from "react-query";
+import { QueryClient } from "react-query";
 import { userFetcher } from "@/helpers";
 import { GETCARTITEM } from "@/store/cart/cart.queries";
 import { CartItemType, Order } from "@/interfaces/commonTypes";
@@ -12,7 +12,6 @@ export default function useCartItems(order: Order) {
   useEffect(() => {
     const itemsArray = [];
     (async () => {
-      const { message } = await import("antd");
       try {
         setLoading(true);
         for (let i = 0; i < order.cartItems.length; i++) {
@@ -25,7 +24,6 @@ export default function useCartItems(order: Order) {
         setItems(itemsArray);
       } catch (err) {
         itemsArray.push({});
-        message.error(err.message);
       }
     })();
     return () => {

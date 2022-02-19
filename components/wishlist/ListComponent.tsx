@@ -109,7 +109,9 @@ const ListComponent = function ({
                 value={0}
                 editing={false}
               />
-              <small className="tw-text-gray-kwek400">(0 Reviews)</small>
+              <p>
+                <small className="tw-text-gray-kwek400">(0 Reviews)</small>
+              </p>
             </div>
           )}
         </div>

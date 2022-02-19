@@ -10,6 +10,8 @@ import useTrackOrder from "@/hooks/useTrackOrder";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import TrackModal from "../modals/TrackModal";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
+import Load from "@/components/Loader/Loader";
 
 const Track = function ({ activeBtn }: { activeBtn: string }) {
   const {
@@ -17,6 +19,8 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
   } = useSelector((state: RootState) => state);
   const [track, setTrack] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -30,7 +34,7 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
     setIsModalVisible(false);
   };
 
-  const { mutate } = useTrackOrder();
+  const { mutate, isLoading } = useTrackOrder();
 
   function checkOrder() {
     if (track === "" || track === null) {
@@ -39,8 +43,17 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
     mutate(
       { orderId: track, token },
       {
-        onSuccess: () => {
-          showModal();
+        onSuccess: (data) => {
+          if (data.trackOrder.message.toLowerCase() === "invalid order id") {
+            setError("Invalid order id");
+          } else {
+            setInfo(data.trackOrder.message);
+            showModal();
+            setError("");
+          }
+        },
+        onError: () => {
+          setError("An error occurred");
         },
       }
     );
@@ -52,6 +65,7 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
         isModalVisible={isModalVisible}
         handleOk={handleOk}
         handleCancel={handleCancel}
+        info={info}
       />
       <div className="tw-border-b tw-border-gray-500 tw-border-opacity-50">
         <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl">
@@ -73,6 +87,8 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
           cmd={checkOrder}
         />
       </div>
+      {isLoading && <Load />}
+      {error && <ErrorInfo error={error} />}
     </>
   );
 };

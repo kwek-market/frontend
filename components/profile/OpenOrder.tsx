@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Button from "@/components/buttons/Button";
 import Badge from "@/components/badge/Badge";
 import { Order as OrderType } from "@/interfaces/commonTypes";
@@ -24,6 +24,7 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
     user: { token },
   } = useSelector((state: RootState) => state);
   const { items, loading } = useCartItems(order);
+  const [load, setLoading] = useState(false);
   const queryClient = new QueryClient();
 
   const deliveryStatus =
@@ -34,9 +35,11 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
   async function checkDetails(id: string) {
     const { message } = await import("antd");
     try {
+      setLoading(true);
       const data = await queryClient.fetchQuery("order", () =>
         userFetcherWithAuth(GETORDER, { token, id }, token)
       );
+      setLoading(false);
       dispatch(setOrderDetails(data.order));
       setActiveBtn("Open Order Details");
     } catch (err) {
@@ -68,7 +71,7 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
         <div className="tw-ml-0 md:tw-ml-2 tw-flex tw-flex-col tw-justify-between">
           <div>
             <h3 className="tw-text-base md:tw-text-lg lg:tw-text-2xl tw-font-medium tw-text-gray-kwek200">
-              Order {order.id}
+              Order {order.orderId}
             </h3>
             <span className="tw-opacity-60 tw-font-normal tw-text-sm md:tw-text-base tw-text-black-stock">
               {order.cartItems.length} Items
@@ -88,7 +91,7 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
         />
         <Button
           buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
-          text="See Details"
+          text={load ? "loading..." : "See Details"}
           cmd={() => checkDetails(order.id)}
         />
       </div>

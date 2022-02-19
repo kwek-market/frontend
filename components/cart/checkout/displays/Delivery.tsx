@@ -3,21 +3,25 @@ import styles from "../checkGrid/checkGrid.module.scss";
 import Image from "next/image";
 import { message } from "antd";
 
+export type DeliveryType = {
+  showModalone: () => void;
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+  deliveryMethod: string;
+  setDeliveryMethod: React.Dispatch<React.SetStateAction<string>>;
+};
+
 function Delivery({
   showModalone,
   step,
   setStep,
   deliveryMethod,
   setDeliveryMethod,
-}) {
+}: DeliveryType) {
   const [editStatus, setEditStatus] = useState(true);
 
   function deliverFunc() {
-    if (deliveryMethod === "door step") {
-      console.log("door step");
-    } else if (deliveryMethod === "pickup") {
-      console.log("pickup");
-    } else {
+    if (deliveryMethod === "" || deliveryMethod === null) {
       return message.error("Select an option for delivery", 5);
     }
     setEditStatus(false);
