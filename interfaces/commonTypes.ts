@@ -343,3 +343,7 @@ export type CartItemType = {
     createdAt: Date;
   }[];
 };
+
+export type CategoryType = {
+  
+}

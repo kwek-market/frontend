@@ -53,7 +53,7 @@ const ListComponent = function ({
           <p className={inStock ? styles.stock : styles.stock_out}>
             {inStock ? "In Stock" : "Out Of Stock"}
           </p>
-          {inStock && (
+          {!!inStock && (
             <a className={styles.buy} onClick={() => addToCart(itemId)}>
               Buy Product
             </a>

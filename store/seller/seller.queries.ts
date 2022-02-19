@@ -129,8 +129,6 @@ export const GET_SELLER_PRODUCTS = `
 
 export const GET_SELLER_ORDERS = `
   query getSellerOrders($token: String!, $thisMonth: Boolean) {
-    getSellerOrders(token: $token, thisMonth: $thisMonth) {
-      id
-    }
+    getSellerOrders(token: $token, thisMonth: $thisMonth)
   }
 `;
