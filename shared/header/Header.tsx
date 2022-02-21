@@ -30,6 +30,7 @@ interface HeaderProps {
   openMenu: any;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setCheck: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Header = function ({
@@ -39,6 +40,7 @@ const Header = function ({
   openMenu,
   search,
   setSearch,
+  setCheck
 }: HeaderProps) {
   const dispatch = useDispatch();
   const { user, cart } = useSelector((state: RootState) => state);
@@ -119,7 +121,7 @@ const Header = function ({
           <i className={`fas fa-times ${styles.close_icon}`} />
         </div>
 
-        <SearchBar search={search} setSearch={setSearch} />
+        <SearchBar search={search} setSearch={setSearch} setCheck={setCheck} />
 
         <div className={styles.shortcuts}>
           {user.id ? (

@@ -9,6 +9,7 @@ import { getCategories } from "@/store/category/categories.actions";
 import { clearCart, getCartFunc } from "@/store/cart/cart.actions";
 import { verifyTokenFunc } from "@/helpers";
 import { clearWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
+import Search from "@/components/search/Search";
 
 const MainLayout = function ({ children, title }: any) {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const MainLayout = function ({ children, title }: any) {
   const [userNav, setUserNav] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [search, setSearch] = useState("");
+  const [check, setCheck] = useState<boolean>(false);
 
   function openMenu() {
     setShowMenu(!showMenu);
@@ -56,12 +58,19 @@ const MainLayout = function ({ children, title }: any) {
         openMenu={openMenu}
         search={search}
         setSearch={setSearch}
+        setCheck={setCheck}
       />
       <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
       {showMenu && <Menu />}
 
       {title && <PageTitle title={title} />}
-      <main className={styles.main_container}>{children}</main>
+      {search ? (
+        <Search search={search} check={check} />
+      ) : (
+        <main id="main-container">
+          <main className={styles.main_container}>{children}</main>
+        </main>
+      )}
       <Footer />
     </div>
   );
