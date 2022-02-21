@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import usePaymentVerify from "@/hooks/usePaymentVerify";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { VerifyPaymentType } from "@/interfaces/commonTypes";

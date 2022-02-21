@@ -17,6 +17,7 @@ function usePaymentVerify(token: string) {
         // add paymentRef to place order
         const store = window.sessionStorage.getItem("order");
         const order = JSON.parse(store);
+        order.paymentRef = data.verifyPayment.paymentRef;
         console.log(order);
         message.success(data.verifyPayment.message);
         mutate(order);
