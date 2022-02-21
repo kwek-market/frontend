@@ -13,7 +13,8 @@ function usePlaceOrder(token: string) {
     (data: PlaceOrder) => userFetcherWithAuth(PLACEORDER, data, token),
     {
       onSuccess: (data) => {
-        router.push(`/cart/order-complete?orderId=${data.placeOrder.orderId}`);
+        console.log(data)
+        data.placeOrder.status && router.push(`/cart/order-complete?orderId=${data.placeOrder.orderId}`);
         queryClient.invalidateQueries("orders");
       },
       onError: (error) => {
