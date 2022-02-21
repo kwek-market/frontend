@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "./Header.module.scss";
-import useProducts from "@/hooks/useProducts";
 
-type SearchProps = {
+type SearchBarProps = {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setCheck: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SearchBar = function ({ search, setSearch }: SearchProps) {
-  const { status, data, error } = useProducts({
-    page: 1,
-    pageSize: 20,
-    search,
-  });
-
+const SearchBar = function ({ search, setSearch, setCheck }: SearchBarProps) {
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
+  }
+
+  function handleForm(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+    if (search === "" || search === null) return;
+    setCheck(true);
   }
 
   return (
@@ -35,7 +35,10 @@ const SearchBar = function ({ search, setSearch }: SearchProps) {
           value={search}
           onChange={(e) => handleSearch(e)}
         />
-        <button className={`btn bg-primary ${styles.searchForm_btn}`}>
+        <button
+          className={`btn bg-primary ${styles.searchForm_btn}`}
+          onClick={(e) => handleForm(e)}
+        >
           Search
         </button>
       </form>
