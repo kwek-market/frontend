@@ -31,6 +31,7 @@ module.exports = {
           light: "#f4f1f0",
           200: "rgba(255,255,255,0.25)",
           300: "rgba(175, 19, 40, 0.1)",
+          400: "#EDEDED"
         },
         black: {
           kwek100: "#000000",
