@@ -16,6 +16,7 @@ const MainLayout = function ({ children, title }: any) {
   const [showNavBar, setShowNavBar] = useState<boolean>(false);
   const [userNav, setUserNav] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [search, setSearch] = useState("");
 
   function openMenu() {
     setShowMenu(!showMenu);
@@ -53,6 +54,8 @@ const MainLayout = function ({ children, title }: any) {
         userNav={userNav}
         showMenu={showMenu}
         openMenu={openMenu}
+        search={search}
+        setSearch={setSearch}
       />
       <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
       {showMenu && <Menu />}
