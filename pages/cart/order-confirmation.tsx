@@ -12,7 +12,7 @@ function OrderComplete() {
   const router = useRouter();
   const { transaction_id, tx_ref } = router.query;
 
-  const { mutate } = usePaymentVerify(user.token);
+  const { mutate } = usePaymentVerify(user.token, tx_ref);
 
   useEffect(() => {
     if (transaction_id === null || transaction_id == undefined) return;
