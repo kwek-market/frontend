@@ -21,7 +21,7 @@ function PaymentBox({ step, addressId }) {
     return initial;
   }, [cart.cart]);
 
-  const { mutate: placeOrderMutate } = usePlaceOrder(user.token);
+  const { mutate: placeOrderMutate,  } = usePlaceOrder(user.token);
   const { mutate: paymentMutate } = usePayment(user.token);
 
   useEffect(() => {

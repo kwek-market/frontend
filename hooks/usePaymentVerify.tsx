@@ -9,6 +9,7 @@ import usePlaceOrder from "./usePlaceOrder";
 function usePaymentVerify(token: string, ref: string | string[]) {
   const { mutate } = usePlaceOrder(token);
   const txRef = ref;
+  console.log(txRef);
 
   return useMutation(
     (data: VerifyPaymentType) =>
