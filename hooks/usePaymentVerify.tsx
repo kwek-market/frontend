@@ -8,16 +8,17 @@ import usePlaceOrder from "./usePlaceOrder";
 
 function usePaymentVerify(token: string, ref: string | string[]) {
   const { mutate } = usePlaceOrder(token);
+  const txRef = ref;
 
   return useMutation(
     (data: VerifyPaymentType) =>
       userFetcherWithAuth(VERIFYPAYMENT, data, token),
     {
       onSuccess: (res) => {
-        // add paymentRef to place order
         const store = window.sessionStorage.getItem("order");
         const order = JSON.parse(store);
-        order.paymentRef = ref;
+        console.log(txRef);
+        order.paymentRef = txRef;
         console.log(order);
         message.success(res.verifyPayment.message);
         mutate(order);

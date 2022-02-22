@@ -10,6 +10,7 @@ import { clearCart, getCartFunc } from "@/store/cart/cart.actions";
 import { verifyTokenFunc } from "@/helpers";
 import { clearWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import Search from "@/components/search/Search";
+import MobileSearchBar from "@/shared/header/MobileSearchBar";
 
 const MainLayout = function ({ children, title }: any) {
   const dispatch = useDispatch();
@@ -58,13 +59,24 @@ const MainLayout = function ({ children, title }: any) {
         openMenu={openMenu}
         search={search}
         setSearch={setSearch}
+        check={check}
         setCheck={setCheck}
       />
       <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
       {showMenu && <Menu />}
 
       {title && <PageTitle title={title} />}
-      {search ? (
+
+      <div className="tw-px-4 tw-mt-4">
+        <MobileSearchBar
+          search={search}
+          setSearch={setSearch}
+          check={check}
+          setCheck={setCheck}
+        />
+      </div>
+
+      {check ? (
         <Search search={search} check={check} />
       ) : (
         <main id="main-container">

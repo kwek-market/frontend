@@ -3,6 +3,7 @@
 
 #hero {
   @include flex(space-between, flex-start);
+  gap: 2rem;
 
   @include respondMax("tablet") {
     display: block;
