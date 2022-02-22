@@ -6,13 +6,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { VerifyPaymentType } from "@/interfaces/commonTypes";
 import { MainLayout } from "@/layouts";
+import usePlaceOrder from "@/hooks/usePlaceOrder";
 
 function OrderComplete() {
   const { user } = useSelector((state: RootState) => state);
+  const { mutate: post } = usePlaceOrder(user.token);
   const router = useRouter();
   const { transaction_id, tx_ref } = router.query;
 
-  const { mutate } = tx_ref && usePaymentVerify(user.token, tx_ref);
+  const { mutate } = usePaymentVerify(user.token);
 
   useEffect(() => {
     if (transaction_id === null || transaction_id == undefined) return;
@@ -20,7 +22,15 @@ function OrderComplete() {
       transactionId: transaction_id as string,
       paymentRef: tx_ref as string,
     };
-    mutate(payload);
+    mutate(payload),
+      {
+        onSuccess: () => {
+          const store = window.sessionStorage.getItem("order");
+          const order = JSON.parse(store);
+          order.paymentRef = tx_ref;
+          post(order);
+        },
+      };
   }, [transaction_id, tx_ref]);
 
   return (
