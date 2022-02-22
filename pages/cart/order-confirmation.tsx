@@ -9,12 +9,14 @@ import { MainLayout } from "@/layouts";
 import usePlaceOrder from "@/hooks/usePlaceOrder";
 
 function OrderComplete() {
-  const { user } = useSelector((state: RootState) => state);
-  const { mutate: post } = usePlaceOrder(user.token);
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
   const router = useRouter();
   const { transaction_id, tx_ref } = router.query;
 
-  const { mutate } = usePaymentVerify(user.token);
+  const { mutate: post } = usePlaceOrder(token);
+  const { mutate } = usePaymentVerify(token);
 
   useEffect(() => {
     if (transaction_id === null || transaction_id == undefined) return;

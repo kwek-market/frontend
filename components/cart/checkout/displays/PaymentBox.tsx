@@ -7,6 +7,7 @@ import { message } from "antd";
 import usePlaceOrder from "@/hooks/usePlaceOrder";
 import { PaymentLinkType, PlaceOrder } from "@/interfaces/commonTypes";
 import usePayment from "@/hooks/usePayment";
+import Load from "@/components/Loader/Loader";
 
 function PaymentBox({ step, addressId }) {
   const { user, cart } = useSelector((state: RootState) => state);
@@ -21,8 +22,8 @@ function PaymentBox({ step, addressId }) {
     return initial;
   }, [cart.cart]);
 
-  const { mutate: placeOrderMutate,  } = usePlaceOrder(user.token);
-  const { mutate: paymentMutate } = usePayment(user.token);
+  const { mutate: placeOrderMutate, isLoading } = usePlaceOrder(user.token);
+  const { mutate: paymentMutate, status } = usePayment(user.token);
 
   useEffect(() => {
     if (paymentMethod === "pay on delivery") {
@@ -83,6 +84,7 @@ function PaymentBox({ step, addressId }) {
                   Pay cash when order gets delivered to you
                 </p>
               </div>
+              {isLoading && <Load />}
             </div>
             <div className={styles.option_box}>
               <input
@@ -98,6 +100,7 @@ function PaymentBox({ step, addressId }) {
                   Make Payments using your Credit or Debit Card
                 </p>
               </div>
+              {status === "loading" && <Load />}
             </div>
           </div>
         </div>
