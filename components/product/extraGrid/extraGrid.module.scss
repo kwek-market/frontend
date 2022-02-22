@@ -35,11 +35,12 @@
 
     .box_productRating {
       @include flex(flex-start, center);
-      margin-left: 32px;
+      margin-left: 2rem;
 
-      span {
-        font-size: 1.2rem;
-        color: #ffc107;
+      label {
+        i {
+          font-size: 1.75rem;
+        }
       }
 
       small {
@@ -53,8 +54,8 @@
     margin-left: auto;
 
     @include respondMax("mobile") {
-    margin-top: 1.5rem;
-  }
+      margin-top: 1.5rem;
+    }
 
     a {
       text-decoration: underline;
