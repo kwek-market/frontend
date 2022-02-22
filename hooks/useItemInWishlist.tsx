@@ -1,6 +1,7 @@
+import { ProductType } from "@/interfaces/commonTypes";
 import { useCallback } from "react";
 
-export default function useItemInWishlist(prod: any, wishlists: any[]) {
+export default function useItemInWishlist(prod: ProductType, wishlists: any[]) {
   return useCallback(
     (id: string) => {
       if (prod !== undefined && wishlists) {
