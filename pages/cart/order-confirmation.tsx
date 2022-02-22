@@ -30,6 +30,7 @@ function OrderComplete() {
           const store = window.sessionStorage.getItem("order");
           const order = JSON.parse(store);
           order.paymentRef = tx_ref;
+          console.log(order);
           post(order);
         },
       };
