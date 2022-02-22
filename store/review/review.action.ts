@@ -25,14 +25,12 @@ export function reviewProduct(reviewProduct: ReviewType, token: string) {
         reviewProduct,
         token
       );
-
-      console.log(response);
       message.success(response.review.message);
-      queryClient.invalidateQueries("product");
-      // dispatch({
-      //   type: reviewTypes.REVIEW_PRODUCT,
-      //   payload: response.review,
-      // });
+      queryClient.invalidateQueries(["product"]);
+      dispatch({
+        type: reviewTypes.REVIEW_PRODUCT,
+        payload: response.review,
+      });
     } catch (error) {
       dispatch({
         type: reviewTypes.ERROR,

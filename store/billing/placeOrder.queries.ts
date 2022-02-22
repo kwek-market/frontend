@@ -5,6 +5,7 @@ export const PLACEORDER = /* GRAPHQL */ `
     $couponIds: [String]
     $deliveryMethod: String!
     $paymentMethod: String!
+    $paymentRef: String
     $productOptionsId: [String]!
     $token: String!
   ) {
@@ -14,6 +15,7 @@ export const PLACEORDER = /* GRAPHQL */ `
       couponIds: $couponIds
       deliveryMethod: $deliveryMethod
       paymentMethod: $paymentMethod
+      paymentRef: $paymentRef
       productOptionsId: $productOptionsId
       token: $token
     ) {

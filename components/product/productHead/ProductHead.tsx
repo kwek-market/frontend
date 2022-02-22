@@ -149,7 +149,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           <p className={styles.product_Code}>Product Code: {product?.id}</p>
         </div>
         <p className={styles.product_price}>
-          ₦{product.options[0].optionTotalPrice}
+          ₦{product.options[0]?.optionTotalPrice}
         </p>
         {!product.productRating.length ? (
           <div className={styles.box_productRating}>

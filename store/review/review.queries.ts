@@ -1,6 +1,5 @@
 export const PRODUCT_REVIEW = /*GRAPHQL*/ `
 mutation review(
-    $comment: String
     $productId: String
     $rating: Int
     $review: String
@@ -9,7 +8,6 @@ mutation review(
     $vote: String
 ) {
     review(
-        comment: $comment
         productId: $productId
         rating: $rating
         review: $review

@@ -81,7 +81,6 @@ export const SELLER_DATA = /* GRAPHQL */ `
       storeDescription
       preferedId
       preferedIdUrl
-      bvn
       bankName
       bankSortCode
       bankAccountNumber

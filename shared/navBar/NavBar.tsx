@@ -11,7 +11,7 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
   const menu = [
     {
       title: "Shop",
-      url: "/shop",
+      url: "/seller/profile",
     },
     {
       title: "About Us",
