@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import styles from './activeTabbar.module.scss';
 
 const ActiveTabbar = function ({ filter, setFilter }) {
