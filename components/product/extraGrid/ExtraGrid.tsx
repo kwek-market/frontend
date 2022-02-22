@@ -4,14 +4,9 @@ import Link from "next/link";
 import styles from "./extraGrid.module.scss";
 import { ProductType } from "@/interfaces/commonTypes";
 import StarRatingComponent from "react-star-rating-component";
+import useAvgRating from "@/hooks/useAvgRating";
 
 const ExtraGrid = function ({ product }: { product: ProductType }) {
-  const avgRating = useMemo(() => {
-    const totalRating = product.productRating.reduce((a, b) => a + b.rating, 0);
-    const avg = totalRating / product.productRating.length;
-    return avg;
-  }, product.productRating);
-
   return (
     <div className={styles.extra_container}>
       <div className={styles.extra_info}>
@@ -32,7 +27,7 @@ const ExtraGrid = function ({ product }: { product: ProductType }) {
           <StarRatingComponent
             name="avg-rating"
             starCount={5}
-            value={avgRating}
+            value={useAvgRating(product)}
             editing={false}
           />
           <small>({product.productRating.length} Reviews)</small>

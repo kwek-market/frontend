@@ -46,7 +46,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
 
   const checkIfItemInCart = useItemInCart(prod, cart.cart);
 
-  const checkIfItemInWIshlist = useItemInWishlist(prod, wishlist.wishlists);
+  const checkIfItemInWishlist = useItemInWishlist(prod, wishlist.wishlists);
 
   if (prod === undefined)
     return (
@@ -77,7 +77,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           {user.token && (
             <i
               className={`fas fa-heart tw-p-1 ${
-                !checkIfItemInWIshlist(id)
+                !checkIfItemInWishlist(id)
                   ? "tw-bg-white-100"
                   : "tw-bg-gray-kwek700"
               } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
@@ -100,7 +100,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             {user.token && (
               <i
                 className={`fas fa-heart tw-p-1 ${
-                  !checkIfItemInWIshlist(id)
+                  !checkIfItemInWishlist(id)
                     ? "tw-bg-white-100"
                     : "tw-bg-gray-kwek700"
                 } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}

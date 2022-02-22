@@ -13,6 +13,7 @@ import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { reviewProduct } from "@/store/review/review.action";
 import { RootState } from "@/store/rootReducer";
 import { v4 as uuid } from "uuid";
+import useAvgRating from "@/hooks/useAvgRating";
 
 dayjs.extend(LocalizedFormat);
 
@@ -51,12 +52,6 @@ const ProductDesc = function ({ product }: ProductDescProps) {
       )
     );
   }
-
-  const avgRating = useMemo(() => {
-    const totalRating = product.productRating.reduce((a, b) => a + b.rating, 0);
-    const avg = totalRating / product.productRating.length;
-    return avg;
-  }, product.productRating);
 
   return (
     <div className={styles.desc_container}>
@@ -155,7 +150,7 @@ const ProductDesc = function ({ product }: ProductDescProps) {
                 <StarRatingComponent
                   name="avg-rating"
                   starCount={5}
-                  value={avgRating}
+                  value={useAvgRating(product)}
                   editing={false}
                 />
               </div>
