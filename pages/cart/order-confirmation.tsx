@@ -24,16 +24,15 @@ function OrderComplete() {
       transactionId: transaction_id as string,
       paymentRef: tx_ref as string,
     };
-    mutate(payload),
-      {
-        onSuccess: () => {
-          const store = window.sessionStorage.getItem("order");
-          const order = JSON.parse(store);
-          order.paymentRef = tx_ref;
-          console.log(order);
-          post(order);
-        },
-      };
+    mutate(payload, {
+      onSuccess: () => {
+        const store = window.sessionStorage.getItem("order");
+        const order = JSON.parse(store);
+        order.paymentRef = tx_ref;
+        console.log(order);
+        post(order);
+      },
+    });
   }, [transaction_id, tx_ref]);
 
   return (

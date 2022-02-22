@@ -1,13 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import { VerifyPaymentType } from "@/interfaces/commonTypes";
 import { MainLayout } from "@/layouts";
 
 function OrderComplete() {
-  const { user } = useSelector((state: RootState) => state);
   const router = useRouter();
   const { orderId } = router.query;
 
