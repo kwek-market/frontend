@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Carousel } from "antd";
 import styles from "./productHead.module.scss";
@@ -7,7 +7,7 @@ import {
   AddToWishlistPayload,
   ProductType,
 } from "@/interfaces/commonTypes";
-import { v4 as uuid } from "uuid";
+import { v4 as uuid, v4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { getIp } from "@/helpers";
@@ -85,6 +85,12 @@ const ProductHead = function ({ product }: ProductHeadProps) {
     incNumItem((prev) => (prev === 0 ? 0 : prev - 1));
   }, [numItem]);
 
+  const avgRating = useMemo(() => {
+    const totalRating = product.productRating.reduce((a, b) => a + b.rating, 0);
+    const avg = totalRating / product.productRating.length;
+    return avg;
+  }, product.productRating);
+
   return (
     <div className={styles.product_container}>
       <div className={styles.product_carousel}>
@@ -132,7 +138,9 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           </p>
           <p className={styles.product_Code}>Product Code: {product?.id}</p>
         </div>
-        <p className={styles.product_price}>₦25.00</p>
+        <p className={styles.product_price}>
+          ₦{product.options[0].optionTotalPrice}
+        </p>
         {!product.productRating.length ? (
           <div className={styles.box_productRating}>
             <StarRatingComponent
@@ -143,12 +151,11 @@ const ProductHead = function ({ product }: ProductHeadProps) {
               emptyStarColor="#c4c4c4"
               starColor="#ffc107"
             />
-            <small>(0 Review)</small>
           </div>
         ) : (
           <StarRatingComponent
             name="rate1"
-            starCount={5}
+            starCount={avgRating}
             value={0}
             editing={false}
             emptyStarColor="#c4c4c4"
@@ -165,11 +172,9 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <div className={styles.product_option_size}>
           <p>SIZE:</p>
           <div className={styles.product_sizebox}>
-            <button>40</button>
-            <button>41</button>
-            <button>43</button>
-            <button>44</button>
-            <button>45</button>
+            {product.options.map((option) => (
+              <button key={v4()}>{option.size}</button>
+            ))}
           </div>
         </div>
         <div className={styles.product_option_order}>
@@ -212,23 +217,23 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         </div>
         <div className={styles.product_option_share}>
           <p>Share:</p>
-          <div className={styles.socialbox}>
-            <a>
-              <i className="fab fa-facebook-f" />
-              <p>Facebook</p>
-            </a>
-            <a>
-              <i className="fab fa-twitter" />
-              <p>Twitter</p>
-            </a>
-            <a>
-              <i className="fab fa-whatsapp" />
-              <p>Whatsapp</p>
-            </a>
-            <a>
-              <i className="fas fa-link" />
-              <p>Copy Link</p>
-            </a>
+          <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-1 tw-justify-center tw-items-center tw-gap-2 ">
+            <button className="tw-bg-[#3b5998] tw-p-2">
+              <i className="fab fa-facebook-f tw-mr-2" />
+              Facebook
+            </button>
+            <button className="tw-bg-[#1da1f2 tw-p-2]">
+              <i className="fab fa-twitter tw-mr-2" />
+              Twitter
+            </button>
+            <button className="tw-bg-[#25d366] tw-p-2">
+              <i className="fab fa-whatsapp tw-mr-2" />
+              Whatsapp
+            </button>
+            <button>
+              <i className="fas fa-link tw-mr-2" />
+              Copy Link
+            </button>
           </div>
         </div>
       </div>
