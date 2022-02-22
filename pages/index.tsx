@@ -1,4 +1,4 @@
-import { Fragment, memo, useEffect } from "react";
+import { Fragment, memo } from "react";
 import { MainLayout } from "@/layouts";
 import { Hero, Features, CategoryGrid, Brands } from "@/components/home";
 
@@ -29,7 +29,7 @@ const Home = function () {
 
   return (
     <MainLayout>
-      <MobileSearchBar />
+      {/* <MobileSearchBar /> */}
       <Hero />
       <Features />
       <CategoryGrid title="Deals Of The day" timer cards={cards} />

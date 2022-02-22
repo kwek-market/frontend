@@ -2,13 +2,19 @@ import React from "react";
 import Image from "next/image";
 import styles from "./Header.module.scss";
 
-type SearchBarProps = {
+export type SearchBarProps = {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  check: boolean;
   setCheck: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SearchBar = function ({ search, setSearch, setCheck }: SearchBarProps) {
+const SearchBar = function ({
+  search,
+  setSearch,
+  check,
+  setCheck,
+}: SearchBarProps) {
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
   }
@@ -16,7 +22,7 @@ const SearchBar = function ({ search, setSearch, setCheck }: SearchBarProps) {
   function handleForm(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     if (search === "" || search === null) return;
-    setCheck(true);
+    setCheck(!check);
   }
 
   return (
