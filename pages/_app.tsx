@@ -36,6 +36,24 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
         />
         <title>Kwek</title>
         <meta name="description" content="Online Shop" />
+        {/* twitter meta-tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="https://www.kwekmarket.com" />
+        <meta name="twitter:creator" content="@kwekmarket" />
+        <meta name="twitter:title" content="Kwek Market" />
+        <meta name="twitter:description" content="Online Market Site" />
+        <meta name="twitter:image" content="" />
+        <meta
+          name="twitter:image:alt"
+          content="kwekmarket"
+        ></meta>
+        {/* facebook meta-tags */}
+        <meta property="og:url" content="https://www.kwekmarket.com" />
+        <meta property="og:type" content="Web App" />
+        <meta property="og:title" content="KwekMarket" />
+        <meta property="og:description" content="Online Market Site" />
+        <meta property="og:image" content="" />
+        <meta property="og:image:alt" content="kwekmarket" />
       </Head>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>

@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import Image from "next/image";
-import { Carousel } from "antd";
+import { Carousel, message } from "antd";
 import styles from "./productHead.module.scss";
 import {
   AddToCartPayload,
@@ -14,6 +14,8 @@ import { getIp } from "@/helpers";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import StarRatingComponent from "react-star-rating-component";
+import useItemInWishlist from "@/hooks/useItemInWishlist";
+import useAvgRating from "@/hooks/useAvgRating";
 
 const SampleNextArrow = function (props) {
   const { className, style, onClick } = props;
@@ -51,11 +53,13 @@ type ProductHeadProps = {
 };
 
 const ProductHead = function ({ product }: ProductHeadProps) {
-  const { user } = useSelector((state: RootState) => state);
+  const {
+    user,
+    wishlist: { wishlists },
+  } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
   const [numItem, incNumItem] = useState(1);
-  console.log(product);
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
@@ -85,11 +89,17 @@ const ProductHead = function ({ product }: ProductHeadProps) {
     incNumItem((prev) => (prev === 0 ? 0 : prev - 1));
   }, [numItem]);
 
-  const avgRating = useMemo(() => {
-    const totalRating = product.productRating.reduce((a, b) => a + b.rating, 0);
-    const avg = totalRating / product.productRating.length;
-    return avg;
-  }, product.productRating);
+  function copyLink() {
+    const link = window.location.href;
+    navigator.clipboard.writeText(link);
+    message.success("Link copied to clipboard");
+  }
+
+  function shareOnWhatsapp() {
+    window.open(`https://web.whatsapp.com://send?text=${window.location.href}`);
+  }
+
+  const checkIfItemInWishlist = useItemInWishlist(product, wishlists);
 
   return (
     <div className={styles.product_container}>
@@ -155,7 +165,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         ) : (
           <StarRatingComponent
             name="rate1"
-            starCount={avgRating}
+            starCount={useAvgRating(product)}
             value={0}
             editing={false}
             emptyStarColor="#c4c4c4"
@@ -165,9 +175,10 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <p className={styles.product_subtitle}>{product.shortDescription}</p>
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
-          <div className={`tw-p-3 tw-bg-${product.color.toLowerCase()}`}>
-            {product.color}
-          </div>
+          <div
+            style={{ backgroundColor: `${product.color.toLowerCase()}` }}
+            className="tw-p-3"
+          ></div>
         </div>
         <div className={styles.product_option_size}>
           <p>SIZE:</p>
@@ -195,13 +206,22 @@ const ProductHead = function ({ product }: ProductHeadProps) {
               <p>Buy Now</p>
             </button>
             {user.token && (
-              <button
-                onClick={() => addToWishlist(product.id)}
-                className={styles.product_saveButton}
-              >
-                <i className="far fa-heart" />
-                <p>Save for Later</p>
-              </button>
+              <Fragment>
+                {!checkIfItemInWishlist(product.id) ? (
+                  <button
+                    onClick={() => addToWishlist(product.id)}
+                    className={styles.product_saveButton}
+                  >
+                    <i className="far fa-heart" />
+                    <p>Save for Later</p>
+                  </button>
+                ) : (
+                  <button className="tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10">
+                    <i className="fas fa-heart tw-mr-2 tw-text-white-100" />
+                    Saved
+                  </button>
+                )}
+              </Fragment>
             )}
           </div>
         </div>
@@ -218,20 +238,34 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <div className={styles.product_option_share}>
           <p>Share:</p>
           <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-1 tw-justify-center tw-items-center tw-gap-2 ">
-            <button className="tw-bg-[#3b5998] tw-p-2">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+              target="_blank noreferer noopener"
+              className="tw-bg-[#3b5998] tw-text-white-100 tw-rounded-md tw-p-2"
+            >
               <i className="fab fa-facebook-f tw-mr-2" />
               Facebook
-            </button>
-            <button className="tw-bg-[#1da1f2 tw-p-2]">
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+              target="_blank noreferer noopener"
+              className="tw-bg-[#1da1f2] tw-text-white-100 tw-rounded-md tw-p-2"
+            >
               <i className="fab fa-twitter tw-mr-2" />
               Twitter
-            </button>
-            <button className="tw-bg-[#25d366] tw-p-2">
+            </a>
+            <button
+              className="tw-bg-[#25d366] tw-text-white-100 tw-rounded-md tw-p-2"
+              onClick={() => shareOnWhatsapp()}
+            >
               <i className="fab fa-whatsapp tw-mr-2" />
               Whatsapp
             </button>
-            <button>
-              <i className="fas fa-link tw-mr-2" />
+            <button
+              className="tw-border tw-border-gray-kwek100 tw-text-gray-kwek100 tw-rounded-md tw-p-2"
+              onClick={() => copyLink()}
+            >
+              <i className="fas fa-link tw-mr-2 " />
               Copy Link
             </button>
           </div>
