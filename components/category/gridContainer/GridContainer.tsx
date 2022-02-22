@@ -86,7 +86,7 @@ const GridContainer = function ({ cards, category }: any) {
     <div id={styles.categoryGrid}>
       <ActiveTabbar filter={filter} setFilter={setFilter} />
 
-      <div className="tw-flex tw-gap-3">
+      <div className="tw-flex tw-gap-5 tw-w-full">
         {filter && (
           <aside className={styles.sidebarContainer}>
             <SideBar category={category} />

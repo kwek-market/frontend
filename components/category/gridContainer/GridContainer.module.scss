@@ -8,12 +8,11 @@
 
 .mainContainer {
   margin-top: 2rem;
-  // width: 78%;
+  width: 50%;
   flex: 5;
 }
 
 .mainContainer__full {
-  @include flex();
   margin-top: 2rem;
   width: 100%;
 }
