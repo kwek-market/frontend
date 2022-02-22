@@ -46,6 +46,7 @@ const ProductDesc = function ({ product }: ProductDescProps) {
         {
           rating: rating,
           token,
+          review: comment,
           productId,
         },
         user.token
@@ -154,8 +155,8 @@ const ProductDesc = function ({ product }: ProductDescProps) {
                   editing={false}
                 />
               </div>
-              <div className={styles.review_content}>
-                {product.productRating.map((item) => (
+              {product.productRating.map((item) => (
+                <div key={item.id} className={styles.review_content}>
                   <div className={styles.reviewer}>
                     <Image
                       src="/images/store.png"
@@ -180,13 +181,11 @@ const ProductDesc = function ({ product }: ProductDescProps) {
                           />
                         </div>
                       </div>
-                      <p className={styles.reviewer_review}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </p>
+                      <p className={styles.reviewer_review}>{item.review}</p>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
               <div className={styles.formbox}>
                 <div className={styles.form_content}>
                   <p className={styles.form_head}>Add a Review</p>

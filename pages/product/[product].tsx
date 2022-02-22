@@ -14,26 +14,21 @@ import useProduct from "@/hooks/useProduct";
 const Page = function () {
   const router = useRouter();
   const { id, product } = router.query;
-
   const payload = {
     id: id as unknown as string,
   };
-  const {
-    status: categoryStatus,
-    data: categoryData,
-    error: categoryError,
-  } = useProduct(payload);
+  const productData = useProduct(payload);
 
-  const isLoading = categoryStatus === "loading" && (
+  const isLoading = productData.loading && (
     <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
       <Loader type="Audio" width={60} height={60} color="#FC476E" />
     </div>
   );
 
-  const hasError = categoryStatus === "error" && (
+  const hasError = productData.error && (
     <div className="tw-w-full tw-py-5">
       <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
-        {categoryError}
+        {productData.error.message}
       </h1>
     </div>
   );
@@ -42,17 +37,19 @@ const Page = function () {
     <MainLayout title={product}>
       {isLoading}
       {hasError}
-      {categoryStatus === "success" && (
-        <>
-          <ProductHead product={categoryData.product} />
-          <ExtraGrid product={categoryData.product} />
-          <ProductDesc product={categoryData.product} />
-          <MoreCard
-            similar={categoryData.product?.category?.name}
-            title="Similar Items you might Like"
-          />
-        </>
-      )}
+      {productData.loading === false &&
+        productData.error === null &&
+        Object.keys(productData.product).length && (
+          <>
+            <ProductHead product={productData.product} />
+            <ExtraGrid product={productData.product} />
+            <ProductDesc product={productData.product} />
+            <MoreCard
+              similar={productData.product?.category?.name}
+              title="Similar Items you might Like"
+            />
+          </>
+        )}
       <ExtraInfo />
     </MainLayout>
   );

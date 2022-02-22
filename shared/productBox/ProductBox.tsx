@@ -109,7 +109,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
               />
             )}
           </span>
-          <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
+          <Link href={`/product/${prod.productTitle}?id=${prod.id}`} replace>
             <a className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
               details
             </a>
@@ -117,7 +117,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
         </div>
       </div>
 
-      <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
+      <Link href={`/product/${prod.productTitle}?id=${prod.id}`} replace>
         <a>
           <div className={styles.box_details}>
             <p className={styles.box_productCategory}>{prod?.productTitle}</p>

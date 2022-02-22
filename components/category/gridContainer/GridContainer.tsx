@@ -35,17 +35,18 @@ const GridContainer = function ({ cards, category }: any) {
 
   useEffect(() => {
     if (categoryData?.products.hasNext) {
-      console.log("has more");
-      console.log(payload);
+      // console.log("has more");
       queryClient.prefetchQuery(["category-items", payload], () =>
         userFetcher(GetProducts, payload)
       );
     }
     if (categoryData === undefined) return;
-    console.log(categoryData.products);
     setPageCount(categoryData.products.pages);
     setCurrentItems(categoryData.products.objects);
-    console.log(`current page: ${currentPage}`);
+    // console.log(`current page: ${currentPage}`);
+    return () => {
+      queryClient.cancelQueries(["category-items", payload]);
+    };
   }, [categoryData, currentPage, queryClient]);
 
   // Invoke when user click to request another page.
