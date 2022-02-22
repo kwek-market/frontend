@@ -19,7 +19,6 @@ mutation review(
     ) {
         status
         message
-        productReview
     }
 }
 `;

@@ -105,13 +105,15 @@
           margin-bottom: 0;
         }
 
+        label {
+          i {
+            font-size: 1.5rem;
+          }
+        }
+
         .box_productRating {
           @include flex(flex-start, center);
           margin-left: 32px;
-      
-
-
-          
 
           span {
             font-size: 1.2rem;
@@ -213,11 +215,11 @@
               display: none;
             }
 
-            .box_productRating:hover{
+            .box_productRating:hover {
               color: #ffc107;
             }
 
-            .box_productRating span:hover{
+            .box_productRating span:hover {
               color: #ffc107;
             }
             .box_productRating span:hover ~ span {
@@ -228,11 +230,10 @@
             //   font-size: 24px;
             //   color: #bfa5a3;
             // }
-            .stars{
+            .stars {
               cursor: pointer;
               transition: color 200ms;
               font-size: 1.2rem;
-
             }
           }
         }

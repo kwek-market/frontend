@@ -131,10 +131,12 @@ export type SellerData = {
 };
 
 export type ReviewType = {
-  comment: string;
-  radio: any;
-  email: string;
-  name: string;
+  comment?: string;
+  rating: number;
+  productId: string;
+  email?: string;
+  name?: string;
+  token: string;
 };
 
 export type UploadProductType = {
@@ -185,6 +187,7 @@ export type ProductType = {
     isSeller: boolean;
     sellerprofileSet: {
       shopName: string;
+      storeBannerUrl: string;
     }[];
   };
   category: {
@@ -219,6 +222,7 @@ export type ProductType = {
     dislikes: number;
     user: {
       id: string;
+      username: string;
     };
     ratedAt: string;
   }[];
