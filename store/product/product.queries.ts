@@ -225,6 +225,7 @@ export const GetProduct = /* GraphQL */ `
         isSeller
         sellerprofileSet {
           shopName
+          storeBannerUrl
         }
       }
       productsWished {
@@ -268,6 +269,9 @@ export const GetProduct = /* GraphQL */ `
         likes
         dislikes
         ratedAt
+        user {
+          username
+        }
       }
     }
   }
