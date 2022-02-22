@@ -17,7 +17,7 @@ function usePaymentVerify(token: string, ref: string | string[]) {
       onSuccess: (res) => {
         const store = window.sessionStorage.getItem("order");
         const order = JSON.parse(store);
-        console.log(ref);
+        console.log(txRef);
         order.paymentRef = txRef;
         console.log(order);
         message.success(res.verifyPayment.message);
