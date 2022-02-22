@@ -132,6 +132,7 @@ export type SellerData = {
 
 export type ReviewType = {
   comment?: string;
+  review?: string;
   rating: number;
   productId: string;
   email?: string;

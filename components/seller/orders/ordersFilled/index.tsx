@@ -9,12 +9,12 @@ import OrderHeader from "./OrderHeader";
 
 const OrdersFilled = function ({ orders }) {
   const [dropDown, setDropDown] = useState(false);
-  console.log(orders);
+  console.log(JSON.parse(orders));
 
   const onClick = () => {
     setDropDown(!dropDown);
   };
-	
+
   return (
     <div className={styles.empty_container}>
       <div className={styles.ordersTab}>

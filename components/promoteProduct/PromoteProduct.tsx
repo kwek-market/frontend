@@ -10,21 +10,17 @@ const PromoteProduct = function ({ id }) {
   const payload = {
     id: id as string,
   };
-  const { status, data, error } = useProduct(payload);
+  const { error, loading, product } = useProduct(payload);
   const [promoteData, setPromoteData] = useState({
     range: 4590,
     days: 0,
     endDate: new Date().toISOString(),
   });
 
-  function submitPromotion() {
+  function submitPromotion() {}
 
-  }  
+  function addMoneyToWallet() {}
 
-  function addMoneyToWallet() {
-
-  }
-  
   return (
     <div className={styles.promote}>
       <div className="tw-flex-[2]">
@@ -127,39 +123,35 @@ const PromoteProduct = function ({ id }) {
 
       <div className={styles.session2}>
         <h4 className={styles.preview}>Ad Preview</h4>
-        {status === "loading" && <Load />}
-        {status === "error" && <ErrorInfo error={error} />}
-        {data !== undefined && status === "success" && (
+        {loading && <Load />}
+        {error && <ErrorInfo error={error} />}
+        {Object.keys(product).length && (
           <div className="">
             <div className={styles.product}>
-              <Image
-                src={data.product.image[0].imageUrl}
-                width="500"
-                height="284"
-              />
+              <Image src={product.image[0].imageUrl} width="500" height="284" />
               <span className="tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[60%] tw-top-[5%]">
                 promoted
               </span>
             </div>
             <div className="tw-text-center">
-              <p className={styles.fash}>{data.product.productTitle}</p>
+              <p className={styles.fash}>{product.productTitle}</p>
               <p className={styles.shiny}>
-                ₦{data?.product.options[0].discountedPrice}
+                ₦{product.options[0]?.discountedPrice}
                 <span className={styles.heel}>
-                  ₦{data?.product.options[0].price}
+                  ₦{product.options[0]?.price}
                 </span>
               </p>
               <div className={styles.revs}>
                 <StarRatingComponent
                   name="seller-product"
                   starCount={5}
-                  value={data?.product.productRating[0]?.rating}
+                  value={product.productRating[0]?.rating}
                   editing={false}
                   emptyStarColor="#c4c4c4"
                   starColor="#ffc107"
                 />
                 <p className={styles.six}>
-                  ({data?.product.productRating[0]?.likes} Reviews)
+                  ({product.productRating[0]?.likes} Reviews)
                 </p>
               </div>
             </div>
