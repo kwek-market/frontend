@@ -31,7 +31,7 @@ module.exports = {
           light: "#f4f1f0",
           200: "rgba(255,255,255,0.25)",
           300: "rgba(175, 19, 40, 0.1)",
-          400: "#EDEDED"
+          400: "#EDEDED",
         },
         black: {
           kwek100: "#000000",
@@ -70,6 +70,7 @@ module.exports = {
         "kwek-5": "repeat(auto-fit, minmax(200px, 1fr))",
         "kwek-6": "repeat(auto-fit, minmax(250px, 350px))",
         "kwek-7": "repeat(2, 60px)",
+        "kwek-8": "repeat(auto-fit, minmax(200px, 350px))",
       },
       backgroundImage: {
         "seller-header":

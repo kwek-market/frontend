@@ -1,6 +1,10 @@
+import { userFetcher } from "@/helpers";
 import useProducts from "@/hooks/useProducts";
 import { ProductType } from "@/interfaces/commonTypes";
-import React, { Fragment } from "react";
+import { GetProducts } from "@/store/product/product.queries";
+import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { QueryClient } from "react-query";
 import { v4 } from "uuid";
 import { CategoryMenu } from "../home";
 import ErrorInfo from "../Loader/ErrorInfo";
@@ -13,26 +17,58 @@ type SearchProps = {
 };
 
 export default function Search({ search, check }: SearchProps) {
-  const { status, data, error } =
-    check &&
-    useProducts({
-      page: 1,
-      pageSize: 20,
-      search,
-    });
-  console.log(data, status);
+  const payload = {
+    page: 1,
+    pageSize: 20,
+    search,
+  };
+  const { status, data } = check && useProducts(payload);
+  const queryClient = new QueryClient();
+  const [currentItems, setCurrentItems] = useState<ProductType[]>(
+    [] as ProductType[]
+  );
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const num =
     status === "success" &&
     Number(data.products.objects.length).toLocaleString();
 
+  const handlePageClick = (event: { selected: number }) => {
+    setCurrentPage(event.selected + 1);
+  };
+
+  useEffect(() => {
+    if (data?.products.hasNext) {
+      console.log("has more");
+      queryClient.prefetchQuery(["category-items", payload], () =>
+        userFetcher(GetProducts, payload)
+      );
+    }
+    if (data === undefined) return;
+    console.log(data.products);
+    setPageCount(data.products.pages);
+    setCurrentItems(data.products.objects);
+    console.log(`current page: ${currentPage}`);
+  }, [data, currentPage, queryClient]);
+
   return (
-    <section className="tw-px-2 md:tw-px-5 lg:tw-px-12 tw-flex md:tw-flex-row tw-flex-col tw-mt-5">
+    <section className="tw-px-2 md:tw-px-5 lg:tw-px-12 tw-flex md:tw-flex-row tw-flex-col tw-my-5 tw-gap-3 md:tw-gap-5 lg:tw-gap-12">
       <section className="tw-flex-1">
-        <div className="tw-hidden md:tw-block">
-          <span>Home</span>
-          <span>All Products</span>
-          <span>{search}</span>
+        <div className="tw-hidden md:tw-block tw-mb-3">
+          <span className="tw-font-medium tw-text-sm tw-text-gray-900 tw-mr-2">
+            Home
+          </span>
+          <i className="fas fa-angle-right tw-mr-2" />
+          <span className="tw-font-medium tw-text-sm tw-text-gray-900 tw-mr-2">
+            All Products
+          </span>
+          <i className="fas fa-angle-right tw-mr-2" />
+          <span className="tw-font-medium tw-text-sm tw-text-gray-900 tw-mr-2 tw-capitalize">
+            {search}
+          </span>
         </div>
+        <CategoryMenu />
       </section>
       <section className="tw-flex-[3]">
         <header className="tw-flex tw-text-center md:tw-text-justify md:tw-flex-row tw-flex-col tw-justify-between">
@@ -44,16 +80,16 @@ export default function Search({ search, check }: SearchProps) {
           </p>
         </header>
         <nav className="tw-flex tw-justify-between">
-          <button className="tw-bg-red-kwek100 tw-rounded-md tw-font-medium tw-text-white-400 tw-text-base tw-py-1 tw-px-4">
-            Filters
+          <button className="tw-bg-red-kwek100 tw-rounded-md tw-font-medium tw-text-white-400 tw-text-base tw-py-2 tw-px-4">
+            Filters <i className="fas fa-angle-right tw-ml-2" />
           </button>
           <label>
-            <select className="tw-rounded-md tw-py-1 tw-px-8">
+            <select className="tw-rounded-md tw-py-2 tw-px-8">
               <option>Most Popular</option>
             </select>
           </label>
         </nav>
-        <main className="tw-grid tw-mt-5">
+        <main className="tw-grid tw-my-5">
           {status === "loading" && <Load />}
           {status === "error" && (
             <ErrorInfo error="An error occurred, try again" />
@@ -61,7 +97,7 @@ export default function Search({ search, check }: SearchProps) {
           {status === "success" &&
           data !== undefined &&
           data.products.objects.length > 0 ? (
-            <div className="tw-grid tw-grid-cols-kwek-6 tw-gap-2">
+            <div className="tw-grid tw-grid-cols-kwek-5 tw-gap-2 tw-justify-center">
               {data.products.objects.map((product: ProductType) => (
                 <Product key={v4()} product={product} />
               ))}
@@ -70,6 +106,26 @@ export default function Search({ search, check }: SearchProps) {
             <ErrorInfo error="No items found" />
           )}
         </main>
+        <ReactPaginate
+          nextLabel="next >"
+          onPageChange={(e) => handlePageClick(e)}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={undefined}
+        />
       </section>
     </section>
   );

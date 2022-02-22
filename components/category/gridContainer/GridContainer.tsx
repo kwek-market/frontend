@@ -12,8 +12,6 @@ import { useQueryClient } from "react-query";
 import { userFetcher } from "@/helpers";
 import { GetProducts } from "@/store/product/product.queries";
 
-const itemsPerPage = 50;
-
 const GridContainer = function ({ cards, category }: any) {
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState(true);
@@ -88,52 +86,54 @@ const GridContainer = function ({ cards, category }: any) {
     <div id={styles.categoryGrid}>
       <ActiveTabbar filter={filter} setFilter={setFilter} />
 
-      {filter && (
-        <aside className={styles.sidebarContainer}>
-          <SideBar category={category} />
-        </aside>
-      )}
-
-      <div
-        className={filter ? styles.mainContainer : styles.mainContainer__full}
-      >
-        {isLoading}
-        {hasError}
-        <div className={styles.products}>{isEmpty}</div>
-        {cards && (
-          <div className={styles.cards}>
-            {cards.map((card: any) => (
-              <div key={card} className={styles.card}>
-                <Card />
-              </div>
-            ))}
-          </div>
+      <div className="tw-flex tw-gap-3">
+        {filter && (
+          <aside className={styles.sidebarContainer}>
+            <SideBar category={category} />
+          </aside>
         )}
-        <ReactPaginate
-          nextLabel="next >"
-          onPageChange={(e) => handlePageClick(e)}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={pageCount}
-          previousLabel="< previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={undefined}
-        />
-        {isFetching ? (
-          <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
-            <Loader type="Rings" width={60} height={60} color="#FC476E" />
-          </div>
-        ) : null}{" "}
+
+        <div
+          className={filter ? styles.mainContainer : styles.mainContainer__full}
+        >
+          {isLoading}
+          {hasError}
+          <div className={styles.products}>{isEmpty}</div>
+          {cards && (
+            <div className={styles.cards}>
+              {cards.map((card: any) => (
+                <div key={card} className={styles.card}>
+                  <Card />
+                </div>
+              ))}
+            </div>
+          )}
+          <ReactPaginate
+            nextLabel="next >"
+            onPageChange={(e) => handlePageClick(e)}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={undefined}
+          />
+          {isFetching ? (
+            <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
+              <Loader type="Rings" width={60} height={60} color="#FC476E" />
+            </div>
+          ) : null}{" "}
+        </div>
       </div>
     </div>
   );
