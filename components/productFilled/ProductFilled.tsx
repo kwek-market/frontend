@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import styles from "./ProductFilled.module.scss";
 import StarRatingComponent from "react-star-rating-component";
+import { ProductType } from "@/interfaces/commonTypes";
+import useAvgRating from "@/hooks/useAvgRating";
 
 const ProductFilled = function ({ product, setShowProduct, setProduct }) {
   function displayProductDetails(prod: any) {
@@ -27,8 +29,8 @@ const ProductFilled = function ({ product, setShowProduct, setProduct }) {
             </select>
           </div>
         </div>
-        <div className="tw-grid tw-gap-3 tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4">
-          {product.map((prod) => (
+        <div className="tw-grid tw-gap-3 tw-grid-cols-3 lg:tw-grid-cols-4 tw-mt-2">
+          {product.map((prod: ProductType) => (
             <div
               key={prod.id}
               className="tw-shadow-lg tw-cursor-pointer"
@@ -49,7 +51,7 @@ const ProductFilled = function ({ product, setShowProduct, setProduct }) {
                   <StarRatingComponent
                     name="seller-product"
                     starCount={5}
-                    value={prod?.productRating[0]?.rating}
+                    value={useAvgRating(prod)}
                     editing={false}
                     emptyStarColor="#c4c4c4"
                     starColor="#ffc107"
@@ -59,7 +61,7 @@ const ProductFilled = function ({ product, setShowProduct, setProduct }) {
                   <p className="tw-text-lg tw-font-semibold tw-mb-0">
                     {prod.options[0].price}
                   </p>
-                  <p>{prod?.productRating[0]?.likes} reviews</p>
+                  <p>{prod?.productRating.length} reviews</p>
                 </div>
               </div>
             </div>

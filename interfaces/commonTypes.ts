@@ -360,3 +360,56 @@ export type SubCategoriesType = {
     }
   ];
 };
+
+// fix
+export type OrderList = {
+  [key: string]: {
+    created: string;
+    imgSrc: string;
+    customer_id: string;
+    total: number;
+    profit: number;
+    status: string;
+    paid: boolean;
+  };
+};
+
+export type SellerWallet = {
+  id: string;
+  balance: number;
+  owner: {
+    firstName: string;
+    lastName: string;
+  };
+  transaction: {
+    amount: number;
+    date: string;
+    remark: string;
+  };
+};
+
+export type CouponType = {
+  id: string;
+  code: string;
+  value: number;
+  createdAt: string;
+  validUntil: string;
+  userList?: string[];
+};
+
+export type UserNotificationType = {
+  id: string;
+  notification: {
+    id: string;
+  };
+  message: string;
+  subject: string;
+  read: boolean;
+  createdAt: Date;
+};
+
+export type ReadNotificationType = {
+  messageId: string;
+  notificationId: string;
+  token: string;
+};

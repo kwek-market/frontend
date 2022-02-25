@@ -161,6 +161,21 @@ export const USER_ACCOUNT_UPDATE = /* GraphQL */ `
   }
 `;
 
+export const USER_PASSWORD_UPDATE = `
+  mutation userPasswordUpdate(
+    $currentPassword: String!,
+    $newPassword: String!,
+    $token: String!
+  ) {
+    userPasswordUpdate(
+      currentPassword: $currentPassword, 
+      newPassword: $newPassword, 
+      token: $token) {
+        status
+        message
+    }
+  }`;
+
 export const VERIFY_TOKEN = /* GraphQL */ `
   mutation verifyToken($token: String!) {
     verifyToken(token: $token) {
@@ -192,6 +207,39 @@ export const RESET_PASSWORD = /* GraphQL */ `
     ) {
       message
       status
+    }
+  }
+`;
+
+export const USER_NOTIFICATIONS = `
+  query userNotifications($token: String!) {
+    userNotifications(token: $token) {
+      id
+      message
+      subject
+      read
+      createdAt
+      notification {
+        id
+      }
+    }
+  }
+`;
+
+export const READ_NOTIFICATIONS = `
+  mutation readNotification(
+    $messageId: String!
+    $notificationId: String!
+    $token: String!
+    ) {
+      readNotification(
+        messageId: $messageId
+        notificationId: $notificationId
+        token: $token
+      ) {
+        status
+        message
+      }
     }
   }
 `;

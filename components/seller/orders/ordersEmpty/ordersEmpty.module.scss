@@ -3,13 +3,11 @@
 
 .empty_container {
   margin-bottom: 100px;
-  padding: 150px 40px;
-  padding-top: 49px;
+  padding: 2rem 1.25rem;
   background: #fff;
   border: 2px solid rgba(191, 165, 163, 0.2);
   border-radius: 10px;
   width: 100%;
-  margin-top: 62px;
   @include respondMax("tablet") {
     border: none;
     margin-top: 40px;
