@@ -2,6 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
+import { Dropdown, Menu } from "antd";
+import Link from "next/link";
 
 function Header() {
   const router = useRouter();
@@ -10,6 +12,19 @@ function Header() {
   function goBack() {
     router.back();
   }
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <Link href="/seller/profile/#settings">
+          <a>account</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item>
+        <button>logout</button>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <header className="tw-bg-red-kwek100 tw-py-4 tw-px-8 tw-flex tw-justify-between">
@@ -28,10 +43,12 @@ function Header() {
           </p>
         </div>
       </nav>
-      <nav className="tw-text-white-100">
-        <i className="fas fa-user" /> Hi {seller.seller.firstname}{" "}
-        <i className="fas fa-caret-down" />
-      </nav>
+      <Dropdown overlay={menu} placement="bottomLeft" arrow>
+        <div className="tw-text-white-100 tw-bg-none">
+          <i className="fas fa-user tw-mr-2" /> Hi {seller.seller.firstname}{" "}
+          <i className="fas fa-caret-down" />
+        </div>
+      </Dropdown>
     </header>
   );
 }

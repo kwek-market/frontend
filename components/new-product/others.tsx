@@ -1,8 +1,10 @@
 import { UploadProductProps } from "@/interfaces/commonTypes";
+import { Select } from "antd";
+import { SelectValue } from "antd/lib/select";
 import React, { useEffect, useState } from "react";
 
 function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
-  const [seoKeywords, setSeoKeywords] = useState("");
+  const [seoKeywords, setSeoKeywords] = useState([]);
   const [formValues, setFormValues] = useState([
     { size: "", quantity: "", price: "", discountPrice: "", totalPrice: "" },
   ]);
@@ -69,7 +71,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         return message.error("Discount price cannot be negative", 4);
       }
     }
-    console.log(formValues);
+    // console.log(formValues);
     const val = [];
     // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
@@ -82,17 +84,13 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     });
   };
 
-  function handleSeo(e: React.ChangeEvent<HTMLInputElement>) {
-    setSeoKeywords(e.target.value);
-  }
-
-  useEffect(() => {
-    seoKeywords.split(", ");
+  function handleSeo(e: SelectValue) {
+    setSeoKeywords([e]);
     setSubmitDetails({
       ...submitDetails,
-      keyword: seoKeywords.split(", "),
+      keyword: e as unknown as string[],
     });
-  }, [seoKeywords]);
+  }
 
   return (
     <>
@@ -201,14 +199,14 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         <div className="tw-mt-3 tw-flex tw-justify-between">
           <button
             className="tw-font-medium tw-text-sm tw-text-green-success tw-bg-green-success tw-bg-opacity-20 tw-p-3 hover:tw-text-green-800"
-            onClick={addNewVariant}
+            onClick={() => addNewVariant()}
           >
             <i className="fas fa-plus" /> Add new variant
           </button>
 
           <button
             className="tw-font-medium tw-text-sm tw-text-red-700 tw-bg-red-700 tw-bg-opacity-20 tw-py-3 tw-px-5 hover:tw-text-red-800"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
           >
             done
           </button>
@@ -310,13 +308,20 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             {" "}
             Keywords (SEO meta tags describes your store to search engine.
             Separate each tag with comma (,)) <br />
-            <input
+            {/* <input
               type="text"
               required
               className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
               value={seoKeywords}
               onChange={(e) => handleSeo(e)}
-            />
+            /> */}
+            <Select
+              mode="tags"
+              placeholder="Please enter your keywords"
+              onChange={(e) => handleSeo(e)}
+              size="large"
+              style={{ width: "100%" }}
+            ></Select>
           </label>
         </div>
       </div>

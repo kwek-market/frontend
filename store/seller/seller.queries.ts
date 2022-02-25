@@ -128,6 +128,189 @@ export const GET_SELLER_PRODUCTS = `
 
 export const GET_SELLER_ORDERS = `
   query getSellerOrders($token: String!, $thisMonth: Boolean) {
-    getSellerOrders(token: $token, thisMonth: $thisMonth)
+    getSellerOrders(token: $token, thisMonth: $thisMonth) {
+      order {
+        id
+      }
+      created
+      customer {
+        fullName
+      }
+      profit
+      paid
+      status
+    }
   }
 `;
+
+export const FUND_WALLET = `
+  mutation fundWallet($paymentRef: String!, $remark: String!, $token: String!) {
+    fundWallet(paymentRef: $paymentRef, remark: $remark, token: $token) {
+      status
+      message
+    }
+  }
+`;
+
+export const WITHDRAW_FROM_WALLET = `
+  mutation withdrawFromWallet($amount: Int!, $password: String!, $token: String!) {
+    withdrawFromWallet(amount: $amount, password: $password, token: $token) {
+      status
+      message
+    }
+  }
+`;
+
+export const GET_SELLER_WALLET = `
+  query getSellerWallet($token: String!) {
+    getSellerWallet(token: $token) {
+      id
+      owner {
+        firstName
+        lastName
+      }
+      balance
+      wallet {
+        amount
+        date
+        remark
+      }
+    }
+  }
+`;
+
+export const GET_SELLER_TRANSACTIONS = `
+  query getSellerTransactions($token: String!) {
+    getSellerTransactions(token: $token) {
+      id
+      status
+      remark
+      amount
+      date
+      transactionType
+    }
+  }
+`;
+
+export const GET_SELLER_REVENUE_CHART_DATA = `
+  query getSellerRevenueChartData($token: String!) {
+    getSellerRevenueChartData(token: $token) 
+  }
+`;
+
+export const WALLET_TRANSACTION_SUCCESS = `
+  mutation walletTransactionSuccess($token: String!) {
+    walletTransactionSuccess(token: $token) {
+      status
+      message
+    }
+  }
+`;
+
+export const CREATE_COUPON = `
+  mutation createCoupon($code: String!, $days: Int!, $validUntil: DateTime, $value: Int! ) { 
+    createCoupon(code: $code, days: $days, validUntil: $validUntil, value: $value) {
+      status
+      message
+    }
+  }
+`;
+
+export const APPLY_COUPON = `
+  mutation applyCoupon($couponId: String!, $token: String!) {
+    applyCoupon(couponId: $couponId, token: $token) {
+      status
+      message
+    }
+   }
+`;
+
+export const UNAPPLY_COUPON = `
+  mutation unapplyCoupon($couponId: [String]!, $token: String!) {
+    unapplyCoupon(couponId: $couponId, token: $token) {
+      status
+      message
+    }
+   }
+`;
+
+export const STORE_BANNER = `
+  mutation storeBanner($imageUrl: String!, $storeDescription: String!, $token: String!) {
+    storeBanner(imageUrl: $imageUrl, storeDescription: $storeDescription, token: $token) {
+      status
+      message
+    }
+  }
+`;
+
+export const STORE_LOCATION_UPDATE = `
+  mutation storeLocationUpdate(
+    $city: String!
+    $landmark: String!
+    $lga: String!
+    $shopAddress: String!
+    $state: String!
+    $token: String!
+  ) {
+    storeLocationUpdate(
+      city: $city
+      landmark: $landmark
+      lga: $lga
+      shopAddress: $shopAddress
+      state: $state
+      token:$token
+    ) {
+      status
+      message
+    }
+  }
+`;
+
+export const GET_SELLER_REVIEW =  `
+  query getSellerReview($token: String!) {
+    getSellerReview(token: $token) {
+      id
+      product {
+        sales {
+          id
+          date
+        }
+      }
+      rating
+      review
+      likes
+      dislikes
+      ratedAt
+      comment {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_SELLER_PROMOTED_PRODUCTS =  `
+  query getSellerPromotedProducts($token: String!) {
+    getSellerPromotedProducts(token: $token) {
+      id
+      clicks
+      productTitle
+      image {
+        id
+        imageUrl
+      }
+      options {
+        id
+        price
+        discountedPrice
+        optionTotalPrice
+      }
+      promo {
+        active
+        reach
+        linkClicks
+        days
+      }
+    }
+  }
+`;
+

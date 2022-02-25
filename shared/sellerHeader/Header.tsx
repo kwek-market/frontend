@@ -13,16 +13,31 @@ const Component = () => {
   const seller = useSelector((state: RootState) => state.seller);
   const router = useRouter();
 
+  const bgImg = seller.seller.storeBannerUrl
+    ? `linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('${seller.seller.storeBannerUrl}')`
+    : "linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('/images/user-photo.svg')";
+
   function uploadHandler() {
     router.push("/seller/upload-new-product");
   }
 
   return (
-    <div className="tw-p-2 md: tw-py-7 md:tw-px-7 tw-flex tw-justify-between tw-items-center tw-bg-seller-header tw-bg-no-repeat tw-bg-center tw-bg-cover">
+    <div
+      style={{
+        background: bgImg,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="tw-p-2 md: tw-py-7 md:tw-px-7 tw-flex tw-justify-between tw-items-center tw-bg-seller-header tw-bg-no-repeat tw-bg-center tw-bg-cover"
+    >
       <div className="tw-flex tw-flex-col md:tw-flex-row">
         <div className="md:tw-mr-4">
           <img
-            src={"/images/user-photo.svg"}
+            src={
+              seller.seller.storeBannerUrl
+                ? seller.seller.storeBannerUrl
+                : "/images/user-photo.svg"
+            }
             className="tw-rounded-xl "
             width={"150px"}
           />

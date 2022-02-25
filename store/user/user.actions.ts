@@ -21,14 +21,12 @@ import {
   GET_USER_DATA,
 } from "./user.types";
 
-export function setLoading() {
-  return function (dispatch: Dispatch) {
-    dispatch({
-      type: LOADING,
-      payload: true,
-    });
-  };
-}
+export const setLoading = () => (dispatch: Dispatch) => {
+  dispatch({
+    type: LOADING,
+    payload: true,
+  });
+};
 
 export const setUser = (user: any) => ({
   type: SET_USER,
@@ -55,8 +53,10 @@ export function verifyUserToken(token: string) {
           payload: null,
         });
     } catch (err) {
-      logout();
-      console.log(err.message);
+      dispatch({
+        type: CLEAR_USER,
+        payload: null,
+      });
     }
   };
 }
@@ -64,7 +64,7 @@ export function verifyUserToken(token: string) {
 export function getUserData(token: string) {
   return async function (dispatch: Dispatch) {
     try {
-      setLoading();
+      setLoading()(dispatch);
       const response = await userFetcherWithAuth(GET_USER, { token }, token);
       // console.log(response);
       dispatch({
@@ -72,7 +72,7 @@ export function getUserData(token: string) {
         payload: response.userData,
       });
     } catch (error) {
-      logout();
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: error.message,
@@ -83,24 +83,19 @@ export function getUserData(token: string) {
 
 export function loginUser(user: UserLogin) {
   return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
     try {
-      dispatch({
-        type: LOADING,
-        payload: true,
-      });
+      setLoading()(dispatch);
       const myIp = await getIp();
       const response = await userFetcher(LOGIN_USER, { ...user, ip: myIp });
-      import("antd").then(({ message }) => {
-        response.loginUser.status
-          ? message.success(response.loginUser.message)
-          : message.error(response.loginUser.message);
-      });
+      message.success(response.loginUser.message);
       dispatch({
         type: USERLOGIN,
         payload: response.loginUser,
       });
     } catch (error) {
-      logout();
+      message.error(error.message);
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: error.message,
@@ -113,7 +108,7 @@ export function loginUser(user: UserLogin) {
 export function updateUser(user: UserUpdate, token: string) {
   return async function (dispatch: Dispatch) {
     try {
-      setLoading();
+      setLoading()(dispatch);
       const result = await userFetcherWithAuth(
         USER_ACCOUNT_UPDATE,
         user,
@@ -131,7 +126,7 @@ export function updateUser(user: UserUpdate, token: string) {
           payload: user,
         });
     } catch (err) {
-      logout();
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: err.message,
@@ -144,10 +139,7 @@ export function updateUser(user: UserUpdate, token: string) {
 export function sendPasswordResetEmail(email: string, token: string) {
   return async function (dispatch: Dispatch) {
     try {
-      dispatch({
-        type: LOADING,
-        payload: true,
-      });
+      setLoading()(dispatch);
       const result = await userFetcherWithAuth(
         RESEND_VERIFICATION_EMAIL,
         { email },
@@ -165,7 +157,7 @@ export function sendPasswordResetEmail(email: string, token: string) {
           payload: result.sendPasswordResetEmail,
         });
     } catch (err) {
-      logout();
+      logout()(dispatch);
     }
   };
 }
@@ -177,7 +169,7 @@ export function changePassword(
 ) {
   return async function (dispatch: Dispatch) {
     try {
-      setLoading();
+      setLoading()(dispatch);
       const result = await userFetcherWithAuth(
         RESET_PASSWORD,
         changeData,
@@ -194,7 +186,7 @@ export function changePassword(
           payload: result.changePassword,
         });
     } catch (err) {
-      logout();
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: err.message,
