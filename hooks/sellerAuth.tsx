@@ -18,6 +18,21 @@ const sellerAuth = (WrappedComponent: any) => {
     const { user, seller } = useSelector((state: RootState) => state);
 
     useEffect(() => {
+      const beforeHistoryChange = (url: string, { shallow }) => {
+        console.log(
+          `App is changing to ${url} ${
+            shallow ? "with" : "without"
+          } shallow routing`
+        );
+      };
+      router.events.on("beforeHistoryChange", beforeHistoryChange);
+
+      return () => {
+        router.events.off("beforeHistoryChange", beforeHistoryChange);
+      };
+    }, []);
+
+    useEffect(() => {
       (async () => {
         const { message } = await import("antd");
         // if no accessToken was found,then we redirect to "/" page.

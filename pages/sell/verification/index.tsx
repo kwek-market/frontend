@@ -7,22 +7,18 @@ import {
 } from "@/components/verification";
 import VerificationLayout from "@/layouts/seller/VerificationLayout";
 import { RootState } from "@/store/rootReducer";
-import { sellerVerification } from "@/store/seller/seller.action";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Steps, Step, StepComponentProps } from "react-step-builder";
 import { useRouter } from "next/router";
 import withAuth from "@/hooks/withAuth";
 
 function index(props: StepComponentProps) {
-  const dispatch = useDispatch();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const { seller } = useSelector((state: RootState) => state);
   const router = useRouter();
-  // find last element in the array
 
   const submitDetails = (details: any) => {
-    console.log(details);
-    //  not sure about the function to send to the backend
+    // console.log(details);
     //dispatch(sellerVerification(details, user.token))
   };
 
@@ -31,7 +27,7 @@ function index(props: StepComponentProps) {
     if (seller.seller.sellerIsVerified) {
       router.push("/seller/profile");
     }
-  }, []);
+  }, [seller.seller.sellerIsVerified]);
 
   interface configProps {
     navigation: {

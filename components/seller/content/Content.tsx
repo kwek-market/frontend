@@ -10,6 +10,9 @@ import ErrorInfo from "@/components/Loader/ErrorInfo";
 import { OrdersEmpty, OrdersFilled } from "../orders";
 import SingleProduct from "@/components/singleProduct/SingleProduct";
 import useSellerOrders from "@/hooks/useSellerOrders";
+import { ProductType } from "@/interfaces/commonTypes";
+import Settings from "../settings/Settings";
+import Wallet from "../wallet/Wallet";
 
 const { TabPane } = Tabs;
 
@@ -28,14 +31,12 @@ function Content() {
     error: ordersError,
   } = useSellerOrders(token);
   const [showProduct, setShowProduct] = useState(false);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState<ProductType>({} as ProductType);
 
   return (
     <div className="tw-py-3 tw-px-6">
       <Tabs
         defaultActiveKey="1"
-        color="tw-text-error"
-        className="tw-text-error tw-border-0"
         animated
       >
         <TabPane tab="Home" key="1">
@@ -61,7 +62,7 @@ function Content() {
         </TabPane>
         <TabPane tab="Order" key="3">
           {ordersStatus === "loading" && <Load />}
-          {ordersStatus === "error" && <ErrorInfo error={productError} />}
+          {ordersStatus === "error" && <ErrorInfo error={ordersError} />}
           {ordersStatus === "success" &&
           ordersData !== undefined &&
           ordersData.getSellerOrders.length > 0 ? (
@@ -77,10 +78,10 @@ function Content() {
           Content of Tab Pane 3
         </TabPane>
         <TabPane tab="Settings" key="6">
-          settings
+          <Settings />
         </TabPane>
         <TabPane tab="Wallet" key="7">
-          Content of Tab Pane 3
+          <Wallet />
         </TabPane>
       </Tabs>
     </div>
