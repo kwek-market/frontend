@@ -1,102 +1,59 @@
-import React, { useState } from "react";
+import React from "react";
 
-import Link from "next/link";
-import Image from "next/image";
+import dayjs from "dayjs";
+import localizedformat from "dayjs/plugin/localizedFormat";
 import styles from "./ordersFilled.module.scss";
-import { FaChevronDown } from "react-icons/fa";
 import OrderItem from "./OrderItem";
 import OrderHeader from "./OrderHeader";
+import { v4 } from "uuid";
+import { OrderList } from "@/interfaces/commonTypes";
+
+dayjs.extend(localizedformat);
 
 const OrdersFilled = function ({ orders }) {
-  const [dropDown, setDropDown] = useState(false);
-  console.log(JSON.parse(orders));
-
-  const onClick = () => {
-    setDropDown(!dropDown);
-  };
+  const ordersList: OrderList = JSON.parse(orders);
 
   return (
     <div className={styles.empty_container}>
       <div className={styles.ordersTab}>
         <div className={styles.ordersTitle}>
-          Orders <span className={styles.ordersVal}>11,600</span>
+          Orders{" "}
+          <span className={styles.ordersVal}>
+            {Object.keys(ordersList).length}
+          </span>
         </div>
 
-        <div className={styles.flex}>
-          Sort by:{" "}
-          <div className={styles.recent}>
-            All Orders{" "}
-            <span style={{ color: "#1D1616" }} onClick={onClick}>
-              <FaChevronDown />
-            </span>
-          </div>
-        </div>
-
-        <div className={dropDown ? styles.dropdown : styles.dropdownNot}>
-          {/* <div className={styles.dropdownNot}> */}
-          <ul>
-            <li className={styles.active}>All Orders</li>
-            <li>Pending</li>
-            <li>Completed</li>
-            <li>Authorized</li>
-            <li>Product Rating</li>
-          </ul>
-        </div>
+        <label htmlFor="dropDown" className="tw-capitalize">
+          Sort by:
+          <select id="dropDown" className="tw-ml-2 tw-rounded-md">
+            <option>All Orders</option>
+            <option>Pending</option>
+            <option>Completed</option>
+            <option>Authorized</option>
+            <option>Product Rating</option>
+          </select>
+        </label>
       </div>
 
       <table>
         <OrderHeader />
-
-        <OrderItem
-          orderId="KWK3209A"
-          orderDate="Apr 22, 2021"
-          imgSrc="/images/seller1.png"
-          customerName="Mary-Jane Anthony"
-          orderTotal="NGN 23,000"
-          orderProfit="NGN 2,300"
-          status="confirmed"
-          payment="unpaid"
-        />
-        <OrderItem
-          orderId="KWK3209"
-          orderDate="Apr 22, 2021"
-          imgSrc="/images/seller2.png"
-          customerName="Giana George"
-          orderTotal="NGN 23,000"
-          orderProfit="NGN 2,300"
-          status="pending"
-          payment="paid"
-        />
-        <OrderItem
-          orderId="KWK3209"
-          orderDate="Apr 22, 2021"
-          imgSrc="/images/seller3.png"
-          customerName="Carla Stanton"
-          orderTotal="NGN 23,000"
-          orderProfit="NGN 2,300"
-          status="confirmed"
-          payment="unpaid"
-        />
-        <OrderItem
-          orderId="KWK3209"
-          orderDate="Apr 22, 2021"
-          imgSrc="/images/seller4.png"
-          customerName="Jocelyn Franci"
-          orderTotal="NGN 23,000"
-          orderProfit="NGN 2,300"
-          status="confirmed"
-          payment="unpaid"
-        />
-        <OrderItem
-          orderId="KWK3209"
-          orderDate="Apr 22, 2021"
-          imgSrc="/images/seller5.png"
-          customerName="Makenna Culhane"
-          orderTotal="NGN 23,000"
-          orderProfit="NGN 2,300"
-          status="confirmed"
-          payment="paid"
-        />
+        <tbody>
+          {Object.entries(ordersList).map((order) => (
+            <OrderItem
+              key={v4()}
+              orderId={order[0]}
+              orderDate={dayjs(order[1].created).format("MMM DD, YYYY")}
+              imgSrc="/images/seller1.png"
+              customerName="Mary-Jane Anthony"
+              orderTotal={`NGN ${Number(order[1].total).toLocaleString()}`}
+              orderProfit={`NGN ${Number(order[1].profit).toLocaleString()}`}
+              status={
+                order[1].status === "order delivered" ? "confirmed" : "pending"
+              }
+              payment={order[1].paid ? "paid" : "unpaid"}
+            />
+          ))}
+        </tbody>
       </table>
     </div>
   );

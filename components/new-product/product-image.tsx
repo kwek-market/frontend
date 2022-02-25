@@ -84,7 +84,7 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
     const formData = new FormData();
     const uploadedUrls: string[] = [];
     let loading = "uploading images";
-    message.info(loading, 3);
+    message.loading(loading);
     for (let x = 0; x < files.length; x++) {
       formData.append("file", files[x]);
       formData.append(

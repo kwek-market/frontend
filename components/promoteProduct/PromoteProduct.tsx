@@ -5,6 +5,7 @@ import useProduct from "@/hooks/useProduct";
 import Load from "../Loader/Loader";
 import ErrorInfo from "../Loader/ErrorInfo";
 import StarRatingComponent from "react-star-rating-component";
+import useAvgRating from "@/hooks/useAvgRating";
 
 const PromoteProduct = function ({ id }) {
   const payload = {
@@ -16,6 +17,8 @@ const PromoteProduct = function ({ id }) {
     days: 0,
     endDate: new Date().toISOString(),
   });
+
+  const avgRating = useAvgRating(product);
 
   function submitPromotion() {}
 
@@ -114,9 +117,12 @@ const PromoteProduct = function ({ id }) {
               <p>Available Balance</p>
               <h6>NGN 4.49</h6>
             </div>
-            <div className={styles.add}>
-              <Image src="/images/money.png" width="168" height="48" />
-            </div>
+            <button
+              className="tw-rounded-md tw-px-5 tw-bg-red-kwek100 tw-text-white-100"
+              onClick={() => addMoneyToWallet()}
+            >
+              Add Money
+            </button>
           </div>
         </div>
       </div>
@@ -145,13 +151,13 @@ const PromoteProduct = function ({ id }) {
                 <StarRatingComponent
                   name="seller-product"
                   starCount={5}
-                  value={product.productRating[0]?.rating}
+                  value={avgRating}
                   editing={false}
                   emptyStarColor="#c4c4c4"
                   starColor="#ffc107"
                 />
                 <p className={styles.six}>
-                  ({product.productRating[0]?.likes} Reviews)
+                  ({product.productRating?.length} Reviews)
                 </p>
               </div>
             </div>

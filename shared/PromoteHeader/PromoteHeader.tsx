@@ -3,8 +3,11 @@ import Image from "next/image";
 import styles from "./PromoteHeader.module.scss";
 import { useRouter } from "next/router";
 
-const PromoteHeader = function ({ children }: any) {
+const PromoteHeader = function ({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+
+  function promoteProduct() {}
+
   return (
     <nav className={styles.store_option}>
       <div className="tw-bg-red-kwek100 tw-flex tw-justify-between tw-py-4 md:tw-px-36 tw-px-2">
@@ -24,7 +27,10 @@ const PromoteHeader = function ({ children }: any) {
           By clicking the button, you agree to Kwek’s{" "}
           <span>Terms & Conditions</span>
         </p>
-        <button className="tw-bg-green-success tw-text-white-100 tw-py-2 tw-px-3 tw-rounded-sm">
+        <button
+          className="tw-bg-green-success tw-text-white-100 tw-py-2 tw-px-3 tw-rounded-sm"
+          onClick={() => promoteProduct()}
+        >
           Promote Product
         </button>
       </div>

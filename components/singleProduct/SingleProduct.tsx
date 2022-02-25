@@ -5,8 +5,19 @@ import styles from "./SingleProduct.module.scss";
 import { useRouter } from "next/router";
 import StarRatingComponent from "react-star-rating-component";
 import { v4 } from "uuid";
+import { ProductType } from "@/interfaces/commonTypes";
+import useAvgRating from "@/hooks/useAvgRating";
+import { message } from "antd";
 
-const SingleProduct = function ({ product, setShowProduct }) {
+type SingleProductProps = {
+  product: ProductType;
+  setShowProduct: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const SingleProduct = function ({
+  product,
+  setShowProduct,
+}: SingleProductProps) {
   const router = useRouter();
 
   function promote(id: string) {
@@ -15,6 +26,16 @@ const SingleProduct = function ({ product, setShowProduct }) {
 
   function edit() {
     router.push("#");
+  }
+
+  function copyLink() {
+    const link = window.location.href;
+    navigator.clipboard.writeText(link);
+    message.success("Link copied to clipboard");
+  }
+
+  function shareOnWhatsapp() {
+    window.open(`https://web.whatsapp.com://send?text=${window.location.href}`);
   }
 
   return (
@@ -76,13 +97,13 @@ const SingleProduct = function ({ product, setShowProduct }) {
                 <StarRatingComponent
                   name="seller-product"
                   starCount={5}
-                  value={product?.productRating[0]?.rating}
+                  value={useAvgRating(product)}
                   editing={false}
                   emptyStarColor="#c4c4c4"
                   starColor="#ffc107"
                 />
                 <p className={styles.six}>
-                  ({product?.productRating?.likes} Reviews)
+                  ({product?.productRating?.length} Reviews)
                 </p>
               </div>
             </div>
@@ -92,8 +113,15 @@ const SingleProduct = function ({ product, setShowProduct }) {
 
           <div className={styles.colors}>
             <p>COLOR: </p>
-            <div className={styles.paint}>
-              <div className="tw-w=[32px] tw-h=[32px]">{product.color}</div>
+            <div
+              style={{ backgroundColor: product.color }}
+              className={styles.paint}
+            >
+              <div
+                style={{ backgroundColor: product.color }}
+                className="tw-w-[32px] tw-h-[32px]"
+              >
+              </div>
             </div>
           </div>
           <div className={styles.size}>
@@ -111,57 +139,37 @@ const SingleProduct = function ({ product, setShowProduct }) {
 
           <div className={styles.share}>
             <p className={styles.shareon}>Share on:</p>
-            <div>
-              <div className={styles.book}>
-                <div className={styles.facebook}>
-                  <Link href="/">
-                    <a className={styles.link}>
-                      <Image
-                        src="/images/facebooktime.png"
-                        width="121"
-                        height="42"
-                        className={styles.facebook}
-                      />
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.twitter}>
-                  <Link href="/">
-                    <a className={styles.link}>
-                      <Image
-                        src="/images/tweet.png"
-                        width="121"
-                        height="42"
-                        className={styles.twitter}
-                      />
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.whatsapp}>
-                  <Link href="/">
-                    <a className={styles.link}>
-                      <Image
-                        src="/images/whatsapp.png"
-                        width="121"
-                        height="42"
-                        className={styles.whatsapp}
-                      />
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.copy}>
-                  <Link href="/">
-                    <a className={styles.link}>
-                      <Image
-                        src="/images/copy.png"
-                        width="121"
-                        height="42"
-                        className={styles.copy}
-                      />
-                    </a>
-                  </Link>
-                </div>
-              </div>
+            <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-1 tw-justify-center tw-items-center tw-gap-2 tw-ml-2">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                target="_blank noreferer noopener"
+                className="tw-bg-[#3b5998] tw-text-white-100 tw-rounded-md tw-p-2 tw-truncate"
+              >
+                <i className="fab fa-facebook-f tw-mr-2" />
+                Facebook
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                target="_blank noreferer noopener"
+                className="tw-bg-[#1da1f2] tw-text-white-100 tw-rounded-md tw-p-2"
+              >
+                <i className="fab fa-twitter tw-mr-2" />
+                Twitter
+              </a>
+              <button
+                className="tw-bg-[#25d366] tw-text-white-100 tw-rounded-md tw-p-2 tw-truncate"
+                onClick={() => shareOnWhatsapp()}
+              >
+                <i className="fab fa-whatsapp tw-mr-2" />
+                Whatsapp
+              </button>
+              <button
+                className="tw-border tw-border-gray-kwek100 tw-text-gray-kwek100 tw-rounded-md tw-p-2 tw-truncate"
+                onClick={() => copyLink()}
+              >
+                <i className="fas fa-link tw-mr-2 " />
+                Copy Link
+              </button>
             </div>
           </div>
         </div>
