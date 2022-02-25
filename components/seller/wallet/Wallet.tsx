@@ -13,12 +13,10 @@ export default function Wallet() {
       <Drawer
         title="Withdraw Funds"
         placement={"right"}
-        closable={false}
         onClose={() => setVisible(false)}
         visible={visible}
         key={"right"}
         closable={true}
-        size="large"
         width="75%"
         className="tw-w-3/4 lg:tw-w-1/2"
       >
