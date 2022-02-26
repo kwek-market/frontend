@@ -1,7 +1,10 @@
 import { GraphQLClient, request } from "graphql-request";
 
+const oldUrl = "https://kwekapi.com/v1/kwekql";
+const newUrl = "https://kwekapi.herokuapp.com/v1/graphql";
+
 export const userFetcher = async (query: string, variables?: any) => {
-  return await request(`https://kwekapi.com/v1/kwekql`, query, variables);
+  return await request(newUrl, query, variables);
 };
 
 export const userFetcherWithAuth = async (
@@ -9,7 +12,7 @@ export const userFetcherWithAuth = async (
   variables: any,
   token: string
 ) => {
-  const endpoint = "https://kwekapi.com/v1/kwekql";
+  const endpoint = newUrl;
 
   if (token === "" || token === undefined) {
     throw new Error("No token provided");
