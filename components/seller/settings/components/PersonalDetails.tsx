@@ -94,7 +94,7 @@ export default function PersonalDetails({}) {
   };
 
   return (
-    <section className="tw-mb-7 md:tw-px-12 lg:tw-px-36">
+    <section className="tw-mb-7">
       <div className="">
         <section className="tw-grid tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-7">
           <div className="tw-flex tw-flex-col tw-relative">
