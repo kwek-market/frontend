@@ -7,7 +7,7 @@ const { TabPane } = Tabs;
 
 export default function Settings() {
   return (
-    <section className="tw-rounded-md">
+    <section className="tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md">
       <p className="tw-capitalize tw-font-semibold tw-text-lg tw-text-gray-kwek900">
         Settings
       </p>

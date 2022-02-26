@@ -9,7 +9,7 @@ export default function Wallet() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <section className="tw-mt-4 tw-p-4 tw-shadow-sm">
+    <section className="tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md">
       <Drawer
         title="Withdraw Funds"
         placement={"right"}
