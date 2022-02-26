@@ -266,7 +266,7 @@ export const STORE_LOCATION_UPDATE = `
   }
 `;
 
-export const GET_SELLER_REVIEW =  `
+export const GET_SELLER_REVIEW = `
   query getSellerReview($token: String!) {
     getSellerReview(token: $token) {
       id
@@ -288,7 +288,7 @@ export const GET_SELLER_REVIEW =  `
   }
 `;
 
-export const GET_SELLER_PROMOTED_PRODUCTS =  `
+export const GET_SELLER_PROMOTED_PRODUCTS = `
   query getSellerPromotedProducts($token: String!) {
     getSellerPromotedProducts(token: $token) {
       id
@@ -314,3 +314,68 @@ export const GET_SELLER_PROMOTED_PRODUCTS =  `
   }
 `;
 
+export const CREATE_INVOICE = `
+  mutation createInvoice(
+    $customerAddress: String!
+    $customerEmail: String!
+    $customerName: String!
+    $deliveryFee: Int!
+    $note: String
+    $purchasedItem: [String]!
+    $subtotal: Int!
+    $token: String!
+    $total: Int!
+    ) {
+      createInvoice(
+        customerAddress: $customerAddress
+        customerEmail: $customerEmail
+        customerName: $customerName
+        deliveryFee: $deliveryFee
+        note: $note
+        purchasedItem: $purchasedItem
+        subtotal: $subtotal
+        token: $token
+        total: $total
+        ) {
+          status
+          message
+          invoice {
+            id
+          }
+        }
+      }
+    
+`;
+
+export const GET_SELLER_INVOICE = `
+  query getSellerInvoices($token: String!) {
+    getSellerInvoices(token: $token) {
+      invoice {
+        id
+        store {
+          id
+          storeName
+          email
+          address
+        }
+        customerName
+        customerEmail
+        customerAddress
+        deliveryFee
+        subtotal
+        total
+        invoiceNumber
+        issueDate
+        note
+        purchasedItem {
+          id
+          item
+          description
+          quantity
+          unitCost
+          total
+        }
+      }
+    }
+  }
+`;
