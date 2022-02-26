@@ -15,22 +15,22 @@ const sellerAuth = (WrappedComponent: any) => {
     const dispatch = useDispatch();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const { user, seller } = useSelector((state: RootState) => state);
+    const { user } = useSelector((state: RootState) => state);
 
-    useEffect(() => {
-      const beforeHistoryChange = (url: string, { shallow }) => {
-        console.log(
-          `App is changing to ${url} ${
-            shallow ? "with" : "without"
-          } shallow routing`
-        );
-      };
-      router.events.on("beforeHistoryChange", beforeHistoryChange);
+    // useEffect(() => {
+    //   const beforeHistoryChange = (url: string, { shallow }) => {
+    //     console.log(
+    //       `App is changing to ${url} ${
+    //         shallow ? "with" : "without"
+    //       } shallow routing`
+    //     );
+    //   };
+    //   router.events.on("beforeHistoryChange", beforeHistoryChange);
 
-      return () => {
-        router.events.off("beforeHistoryChange", beforeHistoryChange);
-      };
-    }, []);
+    //   return () => {
+    //     router.events.off("beforeHistoryChange", beforeHistoryChange);
+    //   };
+    // }, []);
 
     useEffect(() => {
       (async () => {

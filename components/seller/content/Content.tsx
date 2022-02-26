@@ -1,87 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
 import { Tabs } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import useSellerProducts from "@/hooks/useSellerProducts";
-import ProductFilled from "@/components/productFilled/ProductFilled";
-import ProductEmpty from "@/components/emptyProduct/EmptyProduct";
-import Load from "@/components/Loader/Loader";
-import ErrorInfo from "@/components/Loader/ErrorInfo";
-import { OrdersEmpty, OrdersFilled } from "../orders";
-import SingleProduct from "@/components/singleProduct/SingleProduct";
-import useSellerOrders from "@/hooks/useSellerOrders";
-import { ProductType } from "@/interfaces/commonTypes";
 import Settings from "../settings/Settings";
 import Wallet from "../wallet/Wallet";
+import Order from "../orders/Order";
+import Product from "../product/Product";
+import Promotions from "../promotions/Promotions";
+import Home from "../home/Home";
+import Reviews from "../reviews/Reviews";
 
 const { TabPane } = Tabs;
 
-function Content() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
-  const {
-    status,
-    data: productsData,
-    error: productError,
-  } = useSellerProducts(token);
-  const {
-    status: ordersStatus,
-    data: ordersData,
-    error: ordersError,
-  } = useSellerOrders(token);
-  const [showProduct, setShowProduct] = useState(false);
-  const [product, setProduct] = useState<ProductType>({} as ProductType);
-
+function Container({ children }: { children: React.ReactNode }) {
   return (
-    <div className="tw-py-3 tw-px-6">
+    <section className="tw-p-3 md:tw-px-14 lg:tw-px-20 tw-bg-red-300 tw-bg-opacity-10 ">
+      {children}
+    </section>
+  );
+}
+
+function Content() {
+  return (
+    <div className="tw-py-3">
       <Tabs
         defaultActiveKey="1"
         animated
+        tabBarStyle={{ margin: "0 3rem", borderColor: "red" }}
       >
         <TabPane tab="Home" key="1">
-          Content of Tab Pane 1
+          <Container>
+            <Home />
+          </Container>
         </TabPane>
         <TabPane tab="Products" key="2">
-          {status === "loading" && <Load />}
-          {status === "error" && <ErrorInfo error={productError} />}
-          {status === "success" &&
-          productsData.getSellerProducts !== undefined &&
-          productsData.getSellerProducts.length > 0
-            ? !showProduct && (
-                <ProductFilled
-                  product={productsData.getSellerProducts}
-                  setShowProduct={setShowProduct}
-                  setProduct={setProduct}
-                />
-              )
-            : !showProduct && <ProductEmpty />}
-          {showProduct && (
-            <SingleProduct setShowProduct={setShowProduct} product={product} />
-          )}
+          <Container>
+            <Product />
+          </Container>
         </TabPane>
         <TabPane tab="Order" key="3">
-          {ordersStatus === "loading" && <Load />}
-          {ordersStatus === "error" && <ErrorInfo error={ordersError} />}
-          {ordersStatus === "success" &&
-          ordersData !== undefined &&
-          ordersData.getSellerOrders.length > 0 ? (
-            <OrdersFilled orders={ordersData.getSellerOrders} />
-          ) : (
-            <OrdersEmpty />
-          )}
+          <Container>
+            <Order />
+          </Container>
         </TabPane>
         <TabPane tab="Reviews" key="4">
-          Content of Tab Pane 3
+          <Container>
+            <Reviews />
+          </Container>
         </TabPane>
         <TabPane tab="Promotions" key="5">
-          Content of Tab Pane 3
+          <Container>
+            <Promotions />
+          </Container>
         </TabPane>
         <TabPane tab="Settings" key="6">
-          <Settings />
+          <Container>
+            <Settings />
+          </Container>
         </TabPane>
         <TabPane tab="Wallet" key="7">
-          <Wallet />
+          <Container>
+            <Wallet />
+          </Container>
         </TabPane>
       </Tabs>
     </div>
