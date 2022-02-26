@@ -1,14 +1,13 @@
 // abstracts
-@import 'variables';
-@import 'functions';
-@import 'mixins';
-@import 'helpers';
-
+@import "variables";
+@import "functions";
+@import "mixins";
+@import "helpers";
 
 // base
-@import 'reset';
-@import 'typography';
-@import 'global';
+@import "reset";
+@import "typography";
+@import "global";
 
 // add some basic styles here
 @tailwind base;
@@ -37,13 +36,20 @@
   background: #555;
 }
 
+progress[value]::-webkit-progress-bar {
+  background-color: #f5f0f0;
+  border-radius: 2px;
+  border: 1px solid rgba(191, 165, 163, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
   width: 100%;
 
   .disabled {
-    background: #E2DFDE !important;
+    background: #e2dfde !important;
   }
 
   .active {
@@ -66,7 +72,7 @@
       text-align: center;
 
       a {
-        color: white
+        color: white;
       }
     }
 
