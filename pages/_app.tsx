@@ -43,10 +43,7 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
         <meta name="twitter:title" content="Kwek Market" />
         <meta name="twitter:description" content="Online Market Site" />
         <meta name="twitter:image" content="" />
-        <meta
-          name="twitter:image:alt"
-          content="kwekmarket"
-        ></meta>
+        <meta name="twitter:image:alt" content="kwekmarket"></meta>
         {/* facebook meta-tags */}
         <meta property="og:url" content="https://www.kwekmarket.com" />
         <meta property="og:type" content="Web App" />
@@ -54,6 +51,12 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
         <meta property="og:description" content="Online Market Site" />
         <meta property="og:image" content="" />
         <meta property="og:image:alt" content="kwekmarket" />
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+          integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        ></script>
       </Head>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
