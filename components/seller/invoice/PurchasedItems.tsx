@@ -181,7 +181,7 @@ export default function PurchasedItems() {
           done
         </button>
       </div>
-      <div className="tw-mt-7 tw-flex tw-flex-row md:tw-flex-col tw-justify-between">
+      <div className="tw-mt-7 tw-flex md:tw-flex-row tw-flex-col tw-justify-between">
         <div>
           <p className="tw-mb-0 tw-uppercase tw-text-xl tw-font-semibold tw-text-gray-kwek200">
             note
@@ -194,19 +194,19 @@ export default function PurchasedItems() {
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   subtotal:
                 </td>
-                <td className="tw-text-right">0</td>
+                <td className="tw-text-right tw-p-3">0</td>
               </tr>
               <tr>
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   delivery:
                 </td>
-                <td className="tw-text-right">0</td>
+                <td className="tw-text-right tw-p-3">0</td>
               </tr>
               <tr className="tw-bg-opacity-20 tw-bg-gray-kwek100 ">
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   total
                 </td>
-                <td className="tw-text-right">NGN 0</td>
+                <td className="tw-text-right tw-p-3">NGN 0</td>
               </tr>
             </tbody>
           </table>

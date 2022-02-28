@@ -1,7 +1,7 @@
 import { GraphQLClient, request } from "graphql-request";
 
 const oldUrl = "https://kwekapi.com/v1/kwekql";
-const newUrl = "https://kwekapi.herokuapp.com/v1/graphql";
+const newUrl = "https://kwekapi.herokuapp.com/v1/kwekql";
 
 export const userFetcher = async (query: string, variables?: any) => {
   return await request(newUrl, query, variables);

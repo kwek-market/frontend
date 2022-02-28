@@ -27,9 +27,9 @@ export default function Store() {
   const dispatch = useDispatch();
   const { mutate, isLoading } = useStoreBanner();
   const { mutate: post, isLoading: loading } = useStoreLocationUpdate();
-  const address = `${seller.shopAddress} ${seller.city}  ${seller.state}  `;
+  const address = `${seller.shopAddress} ${seller.city}  ${seller.state}`;
   const { data, status, error } = useLocation(address);
-  
+
   const [store, setStore] = useState({
     storeBannerUrl: "",
     storeDescription: seller.storeDescription ?? "",
