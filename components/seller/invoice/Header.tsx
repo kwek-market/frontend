@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 type HeaderProps = {
   title: string;
@@ -9,22 +9,15 @@ type HeaderProps = {
 
 export default function Header({ title, btn, element }: HeaderProps) {
   const router = useRouter();
-  const [worker, setWorker] = useState(null);
+  const { invoice } = router.query;
+  console.log(invoice);
 
   function download() {
-    if (worker === null) return "null";
-    // worker().from(element.current).save();
-    console.log(worker());
-    console.log(element.current);
-  }
-
-  useEffect(() => {
-    const pdf = async () => {
-      const html2pdf = await import("html2pdf.js");
-      setWorker(html2pdf);
+    const opt = {
+      filename: `invoice-${invoice}.pdf`,
     };
-    pdf();
-  }, []);
+    html2pdf().set(opt).from(element.current).save();
+  }
 
   return (
     <header className="tw-flex tw-justify-between tw-bg-red-kwek100 tw-p-3 md:tw-px-12">
