@@ -16,7 +16,7 @@ export default function Header({ title, btn, element }: HeaderProps) {
     const opt = {
       filename: `invoice-${invoice}.pdf`,
     };
-    html2pdf().set(opt).from(element.current).save();
+    //html2pdf().set(opt).from(element.current).save();
   }
 
   return (
