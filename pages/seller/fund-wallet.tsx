@@ -52,7 +52,7 @@ export default function fundWallet() {
       <div>
         {isLoading && <Load />}
         <p className="tw-uppercase tw-font-bold tw-text-center tw-text-2xl">
-          funding yuor wallet...
+          funding your wallet...
         </p>
       </div>
     </MainLayout>
