@@ -363,15 +363,18 @@ export type SubCategoriesType = {
 
 // fix
 export type OrderList = {
-  [key: string]: {
-    created: string;
-    imgSrc: string;
-    customer_id: string;
-    total: number;
-    profit: number;
-    status: string;
-    paid: boolean;
+  created: string;
+  customer: {
+    fullName: string;
   };
+  order: {
+    id: string;
+    deliveryStatus: string;
+  };
+  total: number;
+  profit: number;
+  status: string;
+  paid: boolean;
 };
 
 export type SellerWallet = {

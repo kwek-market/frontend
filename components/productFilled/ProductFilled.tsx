@@ -12,7 +12,7 @@ const ProductFilled = function ({ product, setShowProduct, setProduct }) {
   }
 
   return (
-    <section className="tw-py-5 tw-px-3 tw-shadow-lg">
+    <section className="tw-shadow-lg">
       <div className={styles.filled}>
         <div className={styles.products}>
           <div className="tw-text-lg tw-font-semibold">

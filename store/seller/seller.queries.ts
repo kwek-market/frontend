@@ -131,11 +131,13 @@ export const GET_SELLER_ORDERS = `
     getSellerOrders(token: $token, thisMonth: $thisMonth) {
       order {
         id
+        deliveryStatus
       }
       created
       customer {
         fullName
       }
+      total
       profit
       paid
       status
