@@ -4,7 +4,13 @@ query orders($token: String!) {
     id
     closed
     orderId
-    cartItems
+    cartItems {
+      id
+      productOptionId
+      quantity
+      price
+      ordered
+    }
     deliveryStatus
   }
 }

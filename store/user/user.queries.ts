@@ -241,5 +241,4 @@ export const READ_NOTIFICATIONS = `
         message
       }
     }
-  }
 `;

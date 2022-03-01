@@ -52,6 +52,7 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
         <meta property="og:image" content="" />
         <meta property="og:image:alt" content="kwekmarket" />
         <script
+          defer
           src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
           integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
           crossOrigin="anonymous"

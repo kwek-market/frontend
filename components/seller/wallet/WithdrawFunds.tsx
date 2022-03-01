@@ -1,3 +1,7 @@
+import Load from "@/components/Loader/Loader";
+import useWithdrawFromWallet, {
+  WithdrawFromWalletType,
+} from "@/hooks/useWithdrawFromWallet";
 import { RootState } from "@/store/rootReducer";
 import { Input, message } from "antd";
 import Image from "next/image";
@@ -6,8 +10,10 @@ import { useSelector } from "react-redux";
 
 export default function WithdrawFunds() {
   const {
+    user: { token },
     seller: { seller },
   } = useSelector((state: RootState) => state);
+  const { mutate, isLoading } = useWithdrawFromWallet();
   const [eye, setEye] = useState(false);
   const [withdrawFunds, setWithdrawFunds] = useState({
     amount: "",
@@ -20,6 +26,19 @@ export default function WithdrawFunds() {
     if (amount === "") return message.error("input an amount");
     if (!Number(amount)) return message.error("Input a number as the amount");
     if (password === "") return message.error("input your password");
+    const payload: WithdrawFromWalletType = {
+      amount: Number(amount),
+      password,
+      token,
+    };
+    mutate(payload, {
+      onSuccess: (data) => {
+        message.success(data.withdrawFromWallet.message);
+      },
+      onError: (err: any) => {
+        message.error(err.message);
+      },
+    });
   }
 
   return (
@@ -91,12 +110,16 @@ export default function WithdrawFunds() {
           />
         </div>
         <br />
-        <button
-          className="tw-rounded-md tw-block tw-capitalize tw-bg-red-kwek100 tw-text-white-100 tw-p-3 tw-w-full tw-mt-3"
-          onClick={() => withdraw()}
-        >
-          withdraw funds
-        </button>
+        {isLoading ? (
+          <Load />
+        ) : (
+          <button
+            className="tw-rounded-md tw-block tw-capitalize tw-bg-red-kwek100 tw-text-white-100 tw-p-3 tw-w-full tw-mt-3"
+            onClick={() => withdraw()}
+          >
+            withdraw funds
+          </button>
+        )}
       </div>
     </main>
   );

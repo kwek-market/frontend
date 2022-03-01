@@ -4,15 +4,24 @@ import styles from "./ProductFilled.module.scss";
 import StarRatingComponent from "react-star-rating-component";
 import { ProductType } from "@/interfaces/commonTypes";
 import useAvgRating from "@/hooks/useAvgRating";
+import usePromotions from "@/hooks/usePromotions";
+import { RootState } from "@/store/rootReducer";
+import { useSelector } from "react-redux";
 
 const ProductFilled = function ({ product, setShowProduct, setProduct }) {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+  const { status, data, error } = usePromotions(token);
+  console.log(data);
+
   function displayProductDetails(prod: any) {
     setShowProduct(true);
     setProduct(prod);
   }
 
   return (
-    <section className="tw-py-5 tw-px-3 tw-shadow-lg">
+    <section className="tw-shadow-lg">
       <div className={styles.filled}>
         <div className={styles.products}>
           <div className="tw-text-lg tw-font-semibold">
