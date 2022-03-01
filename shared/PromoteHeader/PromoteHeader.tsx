@@ -3,10 +3,13 @@ import Image from "next/image";
 import styles from "./PromoteHeader.module.scss";
 import { useRouter } from "next/router";
 
-const PromoteHeader = function ({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
+type PromoteHeaderProps = {
+  children: React.ReactNode;
+  promoteProduct: () => void;
+}
 
-  function promoteProduct() {}
+const PromoteHeader = function ({ children, promoteProduct }: PromoteHeaderProps) {
+  const router = useRouter();
 
   return (
     <nav className={styles.store_option}>

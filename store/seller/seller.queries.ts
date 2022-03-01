@@ -452,3 +452,25 @@ export const GET_SELLERS_INVOICE = `
     }
   }
 `;
+
+export const PROMOTE_PRODUCT = `
+  mutation promoteProduct(
+    $amount: Float!
+    $days: Int!
+    $productId: String!
+    $token: String!
+    ) {
+      promoteProduct(
+        amount: $amount
+        days: $days
+        productId: $productId
+        token: $token
+      ) {
+          status
+          message
+          product {
+            id
+          }
+        }
+    }
+`;

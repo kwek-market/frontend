@@ -71,7 +71,7 @@ export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
     const val: string[] = [];
     // "{'item': 12, 'description':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
-      const emptyString = `{'item': ${formValues[i].item} , 'description': ${formValues[i].description} , 'price': ${formValues[i].quantity} , 'discounted_price': ${formValues[i].unitCost} , 'option_total_price': ${formValues[i].total}}`;
+      const emptyString = `{'item': ${formValues[i].item} , 'description': ${formValues[i].description} , 'quantity': ${formValues[i].quantity} , 'unitCost': ${formValues[i].unitCost} , 'total': ${formValues[i].total}}`;
       val.push(emptyString);
     }
     setInvoice({
@@ -80,7 +80,7 @@ export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
       deliveryFee: DELIVERYFEE,
       subtotal: SUBTOTAL,
       total: TOTAL,
-      note: "invoice"
+      note: "invoice",
     });
   };
 

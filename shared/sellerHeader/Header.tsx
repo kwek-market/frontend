@@ -1,17 +1,17 @@
 import React from "react";
-import styles from "./Header.module.scss";
-
-import Link from "next/link";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import Button from "@/components/buttons/Button";
 import { Rate } from "antd";
 import { useRouter } from "next/router";
+import useReviews from "@/hooks/useReviews";
 
 const Component = () => {
-  const seller = useSelector((state: RootState) => state.seller);
+  const { seller, user } = useSelector((state: RootState) => state);
   const router = useRouter();
+
+  const { status, data, error } = useReviews(user.token);
+  console.log(data);
 
   const bgImg = seller.seller.storeBannerUrl
     ? `linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('${seller.seller.storeBannerUrl}')`
@@ -48,9 +48,16 @@ const Component = () => {
           </p>
           <div className="tw-text-md">
             <Rate disabled defaultValue={2} className="tw-text-[12px]" />
-            <span className="tw-text-white-100 tw-text-[12px]">
-              (100 reviews)
-            </span>
+
+            {data !== undefined && data.getSellerReview.length > 0 ? (
+              <span className="tw-text-white-100 tw-text-[12px]">
+                ( reviews)
+              </span>
+            ) : (
+              <span className="tw-text-white-100 tw-text-[12px]">
+                (0 reviews)
+              </span>
+            )}
           </div>
         </div>
       </div>
