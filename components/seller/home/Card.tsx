@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export type CardType = {
   name: string;
-  content?: string;
+  content?: string | number;
   num: number | string;
   imgSrc?: string;
   imgAlt?: string;

@@ -363,15 +363,18 @@ export type SubCategoriesType = {
 
 // fix
 export type OrderList = {
-  [key: string]: {
-    created: string;
-    imgSrc: string;
-    customer_id: string;
-    total: number;
-    profit: number;
-    status: string;
-    paid: boolean;
+  created: string;
+  customer: {
+    fullName: string;
   };
+  order: {
+    id: string;
+    deliveryStatus: string;
+  };
+  total: number;
+  profit: number;
+  status: string;
+  paid: boolean;
 };
 
 export type SellerWallet = {
@@ -412,4 +415,21 @@ export type ReadNotificationType = {
   messageId: string;
   notificationId: string;
   token: string;
+};
+
+export type InvoiceDetails = {
+  customerAddress: string;
+  customerEmail: string;
+  customerName: string;
+  deliveryFee: number;
+  note: string;
+  purchasedItem: string[];
+  subtotal: number;
+  token: string;
+  total: number;
+};
+
+export type InvoiceProps = {
+  invoice: InvoiceDetails;
+  setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetails>>;
 };

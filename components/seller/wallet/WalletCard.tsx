@@ -3,13 +3,19 @@ import Image from "next/image";
 
 export type WalletCardType = {
   name: string;
-  content?: string;
+  content?: string | number;
   num: number | string;
   imgSrc: string;
   imgAlt: string;
 };
 
-export default function WalletCard({ name, content, num, imgSrc, imgAlt }: WalletCardType) {
+export default function WalletCard({
+  name,
+  content,
+  num,
+  imgSrc,
+  imgAlt,
+}: WalletCardType) {
   return (
     <div className="tw-rounded-md tw-p-3 tw-flex tw-justify-between tw-border tw-border-gray-kwek700 tw-bg-white-100">
       <div>

@@ -36,3 +36,5 @@ export async function getIp() {
   const myIp = await (await fetch("https://api.ipify.org")).text();
   return myIp;
 }
+
+export const even = (index: number) => (index % 2 !== 0 ? "tw-bg-gray-kwek700" : "");

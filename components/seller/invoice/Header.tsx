@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 type HeaderProps = {
   title: string;
@@ -9,22 +11,22 @@ type HeaderProps = {
 
 export default function Header({ title, btn, element }: HeaderProps) {
   const router = useRouter();
-  const [worker, setWorker] = useState(null);
+  const { invoice } = router.query;
 
-  function download() {
-    if (worker === null) return "null";
-    // worker().from(element.current).save();
-    console.log(worker());
-    console.log(element.current);
+  async function download() {
+    const filename = `invoice-${invoice}.pdf`;
+
+    const canvas = await html2canvas(element.current);
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(filename);
   }
-
-  useEffect(() => {
-    const pdf = async () => {
-      const html2pdf = await import("html2pdf.js");
-      setWorker(html2pdf);
-    };
-    pdf();
-  }, []);
 
   return (
     <header className="tw-flex tw-justify-between tw-bg-red-kwek100 tw-p-3 md:tw-px-12">

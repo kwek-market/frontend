@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { Dropdown, Menu, Drawer, message } from "antd";
 import useNotifications from "@/hooks/useNotifications";
@@ -15,10 +15,14 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import useReadNotifications from "@/hooks/useReadNotifications";
 import { QueryClient } from "react-query";
+import { clearCart } from "@/store/cart/cart.actions";
+import { clearWishlist } from "@/store/wishlist/wishlist.actions";
+import { logout } from "@/store/user/user.actions";
 
 dayjs.extend(relativeTime);
 
 function Header() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { seller, user } = useSelector((state: RootState) => state);
   const [visible, setVisible] = useState(false);
@@ -31,6 +35,12 @@ function Header() {
       ? "tw-text-yellow-filled tw-border-b-2 tw-border-yellow-filled tw-pb-2"
       : "tw-text-white-100";
 
+  function logOut() {
+    dispatch(logout());
+    dispatch(clearCart());
+    dispatch(clearWishlist());
+  }
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -39,7 +49,7 @@ function Header() {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <button>logout</button>
+        <button onClick={() => logOut()}>logout</button>
       </Menu.Item>
     </Menu>
   );
@@ -47,7 +57,7 @@ function Header() {
   function readNotifications(payload: ReadNotificationType) {
     mutate(payload, {
       onSuccess: (data) => {
-        message.success(data.readNotifications.message);
+        message.success(data.readNotification.message);
         queryClient.invalidateQueries(["notifications"]);
       },
       onError: (error: any) => {
@@ -125,8 +135,7 @@ function Header() {
             >
               <i className="fas fa-bell fa-lg tw-text-yellow-kwek100" />
               <span className="tw-absolute tw--top-1 tw-left-2 tw-text-white-100 tw-h-[0.15rem] tw-w-[0.15rem] tw-p-1.5 tw-z-20 tw-bg-red-notif tw-rounded-full tw-text-[10px] tw-flex tw-justify-center tw-items-center">
-                {data !== undefined &&
-                  data.userNotifications.length}
+                {data !== undefined && data.userNotifications.length}
               </span>
             </div>
             <Dropdown overlay={menu} placement="bottomLeft" arrow>

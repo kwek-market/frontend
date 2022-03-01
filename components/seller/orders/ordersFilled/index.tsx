@@ -10,17 +10,14 @@ import { OrderList } from "@/interfaces/commonTypes";
 
 dayjs.extend(localizedformat);
 
-const OrdersFilled = function ({ orders }) {
-  const ordersList: OrderList = JSON.parse(orders);
+const OrdersFilled = function ({ orders }: { orders: OrderList[] }) {
+  console.log(orders);
 
   return (
     <div className={styles.empty_container}>
       <div className={styles.ordersTab}>
         <div className={styles.ordersTitle}>
-          Orders{" "}
-          <span className={styles.ordersVal}>
-            {Object.keys(ordersList).length}
-          </span>
+          Orders <span className={styles.ordersVal}>{orders.length}</span>
         </div>
 
         <label htmlFor="dropDown" className="tw-capitalize">
@@ -38,19 +35,21 @@ const OrdersFilled = function ({ orders }) {
       <table>
         <OrderHeader />
         <tbody>
-          {Object.entries(ordersList).map((order) => (
+          {orders.map((order) => (
             <OrderItem
               key={v4()}
-              orderId={order[0]}
-              orderDate={dayjs(order[1].created).format("MMM DD, YYYY")}
+              orderId={order.order.id}
+              orderDate={dayjs(order.created).format("MMM DD, YYYY")}
               imgSrc="/images/seller1.png"
-              customerName="Mary-Jane Anthony"
-              orderTotal={`NGN ${Number(order[1].total).toLocaleString()}`}
-              orderProfit={`NGN ${Number(order[1].profit).toLocaleString()}`}
+              customerName={order.customer.fullName}
+              orderTotal={`NGN ${Number(order.total).toLocaleString()}`}
+              orderProfit={`NGN ${Number(order.profit).toLocaleString()}`}
               status={
-                order[1].status === "order delivered" ? "confirmed" : "pending"
+                order.order.deliveryStatus === "order delivered"
+                  ? "confirmed"
+                  : "pending"
               }
-              payment={order[1].paid ? "paid" : "unpaid"}
+              payment={order.paid ? "paid" : "unpaid"}
             />
           ))}
         </tbody>

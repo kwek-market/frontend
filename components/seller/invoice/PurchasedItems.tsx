@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import { InvoiceProps } from "@/interfaces/commonTypes";
+import React, { useMemo, useState } from "react";
 
-export default function PurchasedItems() {
+const DELIVERYFEE = 200;
+
+export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
   const [formValues, setFormValues] = useState([
     { item: "", description: "", quantity: "", unitCost: "", total: "" },
   ]);
+
+  const SUBTOTAL = useMemo(() => {
+    return formValues.reduce((a, b) => a + +b.total, 0);
+  }, [formValues]);
+
+  const TOTAL = SUBTOTAL + DELIVERYFEE;
 
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormValues = [...formValues];
@@ -59,12 +68,20 @@ export default function PurchasedItems() {
       }
     }
     console.log(formValues);
-    const val = [];
+    const val: string[] = [];
     // "{'item': 12, 'description':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
-      const emptyString = `{'item': ${formValues[i].item} , 'description': ${formValues[i].description} , 'price': ${formValues[i].quantity} , 'discounted_price': ${formValues[i].unitCost} , 'option_total_price': ${formValues[i].total}}`;
+      const emptyString = `{'item': ${formValues[i].item} , 'description': ${formValues[i].description} , 'quantity': ${formValues[i].quantity} , 'unitCost': ${formValues[i].unitCost} , 'total': ${formValues[i].total}}`;
       val.push(emptyString);
     }
+    setInvoice({
+      ...invoice,
+      purchasedItem: val,
+      deliveryFee: DELIVERYFEE,
+      subtotal: SUBTOTAL,
+      total: TOTAL,
+      note: "invoice",
+    });
   };
 
   return (
@@ -181,7 +198,7 @@ export default function PurchasedItems() {
           done
         </button>
       </div>
-      <div className="tw-mt-7 tw-flex tw-flex-row md:tw-flex-col tw-justify-between">
+      <div className="tw-mt-7 tw-flex md:tw-flex-row tw-flex-col tw-justify-between">
         <div>
           <p className="tw-mb-0 tw-uppercase tw-text-xl tw-font-semibold tw-text-gray-kwek200">
             note
@@ -194,19 +211,19 @@ export default function PurchasedItems() {
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   subtotal:
                 </td>
-                <td className="tw-text-right">0</td>
+                <td className="tw-text-right tw-p-3">{SUBTOTAL}</td>
               </tr>
               <tr>
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   delivery:
                 </td>
-                <td className="tw-text-right">0</td>
+                <td className="tw-text-right tw-p-3">{DELIVERYFEE}</td>
               </tr>
               <tr className="tw-bg-opacity-20 tw-bg-gray-kwek100 ">
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   total
                 </td>
-                <td className="tw-text-right">NGN 0</td>
+                <td className="tw-text-right tw-p-3">NGN {TOTAL}</td>
               </tr>
             </tbody>
           </table>
