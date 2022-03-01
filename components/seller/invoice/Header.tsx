@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 type HeaderProps = {
   title: string;
@@ -10,13 +12,20 @@ type HeaderProps = {
 export default function Header({ title, btn, element }: HeaderProps) {
   const router = useRouter();
   const { invoice } = router.query;
-  console.log(invoice);
 
-  function download() {
-    const opt = {
-      filename: `invoice-${invoice}.pdf`,
-    };
-    //html2pdf().set(opt).from(element.current).save();
+  async function download() {
+    const filename = `invoice-${invoice}.pdf`;
+
+    const canvas = await html2canvas(document.getElementById("invoice"));
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(filename);
   }
 
   return (

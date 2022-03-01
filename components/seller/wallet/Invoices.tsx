@@ -1,9 +1,24 @@
+import ErrorInfo from "@/components/Loader/ErrorInfo";
+import Load from "@/components/Loader/Loader";
+import useInvoice from "@/hooks/useInvoice";
+import { RootState } from "@/store/rootReducer";
 import { Input, Select } from "antd";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import dayjs from "dayjs";
+import { even } from "@/helpers/helper";
 
 const { Option } = Select;
 
 export default function Invoices() {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+  const {
+    data: invoiceData,
+    error: invoiceError,
+    status: invoiceStatus,
+  } = useInvoice(token);
   const [invoice, setInvoice] = useState({
     search: "",
     sort: "",
@@ -12,7 +27,7 @@ export default function Invoices() {
 
   return (
     <section className="">
-      <div className="tw-flex tw-flex-row sm:tw-flex-col tw-justify-between">
+      <div className="tw-flex md:tw-flex-row tw-flex-col tw-justify-between">
         <div className="tw-flex-[3]">
           <Input.Search
             placeholder="Search transaction history"
@@ -46,6 +61,8 @@ export default function Invoices() {
         </div>
       </div>
       <div className="tw-mt-4">
+        {invoiceStatus === "loading" && <Load />}
+        {invoiceStatus === "error" && <ErrorInfo error={"An error occurred"} />}
         <table className="tw-table-auto tw-w-full">
           <thead>
             <tr className="tw-border-b tw-border-gray-kwek700">
@@ -64,12 +81,21 @@ export default function Invoices() {
             </tr>
           </thead>
           <tbody>
-            <tr className=" tw-bg-gray-kwek700 tw-bg-opacity-10">
-              <td className="tw-p-3">remarks</td>
-              <td>date</td>
-              <td>amount</td>
-              <td>status</td>
-            </tr>
+            {invoiceStatus === "success" &&
+            invoiceData !== undefined &&
+            invoiceData.getSellerInvoices.length > 0
+              ? invoiceData.getSellerInvoices.map((item, index: number) => (
+                  <tr
+                    key={item.id}
+                    className={`${even(index)} tw-bg-opacity-10`}
+                  >
+                    <td className="tw-p-3">{item.customerName}</td>
+                    <td>{item.customerEmail}</td>
+                    <td>{item.invoiceNumber}</td>
+                    <td>{dayjs(item.issueDate).format("DD/MM/YYYY")}</td>
+                  </tr>
+                ))
+              : null}
           </tbody>
         </table>
       </div>

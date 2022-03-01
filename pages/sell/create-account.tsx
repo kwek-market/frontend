@@ -129,7 +129,11 @@ const Page = function ({ data }) {
       seller.sellerCreated.status
     )
       router.push("/seller/profile");
-  }, [seller.sellerCreated.status]);
+  }, [
+    seller.sellerCreated.status,
+    user.user.isSeller,
+    seller.seller.sellerVerified,
+  ]);
 
   useEffect(() => {
     user.token && dispatch(getUserData(user.token));

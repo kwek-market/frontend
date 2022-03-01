@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 export default function WalletContent() {
   const router = useRouter();
   function issueInvoice() {
-    router.push("/seller/invoice");
+    router.push("/seller/create-invoice");
   }
   const operation = (
     <button
