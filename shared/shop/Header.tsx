@@ -57,7 +57,7 @@ function Header() {
   function readNotifications(payload: ReadNotificationType) {
     mutate(payload, {
       onSuccess: (data) => {
-        message.success(data.readNotifications.message);
+        message.success(data.readNotification.message);
         queryClient.invalidateQueries(["notifications"]);
       },
       onError: (error: any) => {

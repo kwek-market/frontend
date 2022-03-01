@@ -39,16 +39,6 @@ export default function Home() {
     },
     "3": { data: revenueData, status: revenueStatus, error: revenueError },
   } = useHomeCard(token);
-  console.log({
-    ordersData,
-    productData,
-    earningsData,
-    daysData,
-    customersData,
-    salesData,
-    rateData,
-    revenueData,
-  });
 
   const total = useMemo(() => {
     return ordersData?.getSellerOrders.reduce((a, b) => a + b.profit, 0);

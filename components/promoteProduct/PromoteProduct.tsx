@@ -11,26 +11,37 @@ import { message } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import usePayment from "@/hooks/usePayment";
+import useGetSellerWallet from "@/hooks/useGetSellerWallet";
 
-const PromoteProduct = function ({ id }) {
+type PromoteData = {
+  range: number;
+  days: number;
+  endDate: string;
+};
+
+type PromoteProductProps = {
+  id: string;
+  promoteData: PromoteData;
+  setPromoteData: React.Dispatch<React.SetStateAction<PromoteData>>;
+};
+
+const PromoteProduct = function ({
+  id,
+  promoteData,
+  setPromoteData,
+}: PromoteProductProps) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
   const payload = {
     id: id as string,
   };
+  const { status, data } = useGetSellerWallet(token);
   const { mutate, isLoading } = usePayment(token);
   const { error, loading, product } = useProduct(payload);
-  const [promoteData, setPromoteData] = useState({
-    range: 4590,
-    days: 0,
-    endDate: new Date().toISOString(),
-  });
   const [amount, setAmount] = useState(0);
 
   const avgRating = useAvgRating(product);
-
-  function submitPromotion() {}
 
   function addMoneyToWallet() {
     if (amount === 0) return message.error("Please enter amount");
@@ -180,7 +191,9 @@ const PromoteProduct = function ({ id }) {
             <div className={styles.money}>
               <div className={styles.balance}>
                 <p>Available Balance</p>
-                <h6>NGN 4.49</h6>
+                <h6>
+                  NGN {data !== undefined && data.getSellerWallet[0].balance}
+                </h6>
               </div>
               <button
                 className="tw-rounded-md tw-px-5 tw-bg-red-kwek100 tw-text-white-100"
@@ -235,7 +248,9 @@ const PromoteProduct = function ({ id }) {
 
           <div className={styles.liner}></div>
           <h4 className={styles.summary}>Payment Summary</h4>
-          <p className={styles.run}>Your ad will run for 4 days</p>
+          <p className={styles.run}>
+            Your ad will run for {promoteData.days} days
+          </p>
           <div className={styles.budget}>
             <p>Total budget</p>
             <p className="">
