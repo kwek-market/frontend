@@ -413,3 +413,20 @@ export type ReadNotificationType = {
   notificationId: string;
   token: string;
 };
+
+export type InvoiceDetails = {
+  customerAddress: string;
+  customerEmail: string;
+  customerName: string;
+  deliveryFee: number;
+  note: string;
+  purchasedItem: string[];
+  subtotal: number;
+  token: string;
+  total: number;
+};
+
+export type InvoiceProps = {
+  invoice: InvoiceDetails;
+  setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetails>>;
+};

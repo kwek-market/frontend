@@ -170,24 +170,30 @@ export const GET_SELLER_WALLET = `
         lastName
       }
       balance
-      wallet {
+      transaction {
+        id
         amount
         date
         remark
-      }
+        transactionType
+        status
+      }    
     }
   }
 `;
 
 export const GET_SELLER_TRANSACTIONS = `
-  query getSellerTransactions($token: String!) {
-    getSellerTransactions(token: $token) {
+  query getSellerWalletTransactions($token: String!) {
+    getSellerWalletTransactions(token: $token) {
       id
       status
       remark
       amount
       date
       transactionType
+      wallet {
+        balance
+      }
     }
   }
 `;
@@ -350,7 +356,7 @@ export const CREATE_INVOICE = `
 export const GET_SELLER_INVOICE = `
   query getSellerInvoices($token: String!) {
     getSellerInvoices(token: $token) {
-      invoice {
+      
         id
         store {
           id
@@ -375,7 +381,50 @@ export const GET_SELLER_INVOICE = `
           unitCost
           total
         }
-      }
+      
     }
+  }
+`;
+
+export const GET_SELLER_PRODUCT_QUALITY = `
+  query getSellerProductQuality($token: String!) {
+    getSellerProductQuality(token: $token)
+  }
+`;
+
+export const GET_SELLER_DELIVERY_RATE = `
+  query getSellerDeliveryRate($token: String!) {
+    getSellerDeliveryRate(token: $token)
+  }
+`;
+
+export const GET_SELLER_SUCCESSFUL_SALES = `
+  query getSellerSuccessfulSales($token: String!) {
+    getSellerSuccessfulSales(token: $token) {
+      id
+      product{
+        id
+      }
+      amount
+      date
+    }
+  }
+`;
+
+export const GET_SELLER_DAYS_SELLING = `
+  query getSellerDaysSelling($token: String!) {
+    getSellerDaysSelling(token: $token)
+  }
+`;
+
+export const GET_SELLER_SALES_EARNINGS = `
+  query getSellerSalesEarnings($token: String!) {
+    getSellerSalesEarnings(token: $token)
+  }
+`;
+
+export const GET_SELLER_CUSTOMERS = `
+  query getSellerCustomers($token: String!) {
+    getSellerCustomers(token: $token)
   }
 `;

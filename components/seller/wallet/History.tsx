@@ -1,9 +1,20 @@
+import ErrorInfo from "@/components/Loader/ErrorInfo";
+import Load from "@/components/Loader/Loader";
+import useWalletTransaction from "@/hooks/useWalletTransaction";
+import { RootState } from "@/store/rootReducer";
 import { Input, Select } from "antd";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import dayjs from "dayjs";
+import { even } from "@/helpers/helper";
 
 const { Option } = Select;
 
 export default function History() {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+  const { status, error, data } = useWalletTransaction(token);
   const [history, setHistory] = useState({
     search: "",
     sort: "",
@@ -12,7 +23,7 @@ export default function History() {
 
   return (
     <section className="">
-      <div className="tw-flex tw-flex-row sm:tw-flex-col tw-justify-between">
+      <div className="tw-flex md:tw-flex-row tw-flex-col tw-justify-between">
         <div className="tw-flex-[3]">
           <Input.Search
             placeholder="Search transaction history"
@@ -46,6 +57,8 @@ export default function History() {
         </div>
       </div>
       <div className="tw-mt-4">
+        {status === "loading" && <Load />}
+        {status === "error" && <ErrorInfo error={"An error occurred"} />}
         <table className="tw-table-auto tw-w-full">
           <thead>
             <tr className="tw-border-b tw-border-gray-kwek700">
@@ -67,13 +80,22 @@ export default function History() {
             </tr>
           </thead>
           <tbody>
-            <tr className=" tw-bg-gray-kwek700 tw-bg-opacity-10">
-              <td className="tw-p-3">remarks</td>
-              <td>date</td>
-              <td>amount</td>
-              <td>status</td>
-              <td>balance</td>
-            </tr>
+            {status === "success" &&
+            data !== undefined &&
+            data.getSellerWalletTransactions.length > 0
+              ? data.getSellerWalletTransactions.map((item, index: number) => (
+                  <tr
+                    key={item.id}
+                    className={`${even(index)} tw-bg-opacity-10`}
+                  >
+                    <td className="tw-p-3">{item.remark}</td>
+                    <td>{dayjs(item.date).format('DD/MM/YYYY')}</td>
+                    <td>{item.amount}</td>
+                    <td>{item.status}</td>
+                    <td>{item.wallet.balance}</td>
+                  </tr>
+                ))
+              : null}
           </tbody>
         </table>
       </div>

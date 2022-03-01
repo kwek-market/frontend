@@ -18,7 +18,7 @@ export default function EmptyInfo({
   link,
 }: EmptyInfoProps) {
   return (
-    <section className="tw-shadow-sm tw-bg-white-100 tw-m-5">
+    <section className="tw-shadow-sm tw-bg-white-100 tw-m-5 tw-p-5">
       <h3 className="tw-left tw-capitalize tw-font-semibold tw-text-gray-kwek900 tw-text-xl">
         {title}
       </h3>

@@ -308,13 +308,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             {" "}
             Keywords (SEO meta tags describes your store to search engine.
             Separate each tag with comma (,)) <br />
-            {/* <input
-              type="text"
-              required
-              className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
-              value={seoKeywords}
-              onChange={(e) => handleSeo(e)}
-            /> */}
             <Select
               mode="tags"
               placeholder="Please enter your keywords"

@@ -6,6 +6,7 @@ import { RootState } from "@/store/rootReducer";
 import { message, Modal } from "antd";
 import useBilling from "@/hooks/useBilling";
 import { getUserData } from "@/store/user/user.actions";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
 
 const Addresses = function ({ activeBtn }) {
   const { user } = useSelector((state: RootState) => state);
@@ -166,9 +167,13 @@ const Addresses = function ({ activeBtn }) {
         />
       </div>
       <div className="tw-flex tw-flex-col tw-flex-wrap md:tw-flex-row tw-gap-5 tw-justify-center tw-items-center tw-p-5 tw-rounded-lg tw-bg-gray-kwek700 tw-mt-3">
-        {billingSet.map((address: any) => (
-          <AddressCard key={address.id} address={address} />
-        ))}
+        {billingSet.length === 0 ? (
+          <ErrorInfo error="No address found" />
+        ) : (
+          billingSet.map((address: any) => (
+            <AddressCard key={address.id} address={address} />
+          ))
+        )}
       </div>
     </>
   );

@@ -21,7 +21,7 @@ export default function BillFrom() {
         <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0">
           {address}
         </p>
-        <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0">
+        <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0 tw-break-words">
           {user.email}
         </p>
       </article>

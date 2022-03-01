@@ -1,10 +1,9 @@
 import { userFetcher } from "@/helpers";
-import { CREATE_INVOICE, GET_SELLER_INVOICE } from "@/store/seller/seller.queries";
+import { InvoiceDetails } from "@/interfaces/commonTypes";
+import { CREATE_INVOICE } from "@/store/seller/seller.queries";
 import { useMutation } from "react-query";
 
-export type CreateInvoiceType = {
-  token: string;
-};
+export type CreateInvoiceType = InvoiceDetails;
 
 export default function useCreateInvoice() {
   return useMutation((payload: CreateInvoiceType) =>

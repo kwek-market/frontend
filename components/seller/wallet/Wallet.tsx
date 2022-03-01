@@ -1,12 +1,38 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Drawer } from "antd";
 import WithdrawFunds from "./WithdrawFunds";
 import WalletHeader from "./WalletHeader";
 import WalletCard from "./WalletCard";
 import WalletContent from "./WalletContent";
+import useGetSellerWallet from "@/hooks/useGetSellerWallet";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
+import Load from "@/components/Loader/Loader";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
+import useInvoice from "@/hooks/useInvoice";
 
 export default function Wallet() {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
   const [visible, setVisible] = useState(false);
+  const {
+    data: walletData,
+    error: walletError,
+    status: walletStatus,
+  } = useGetSellerWallet(token);
+  const {
+    data: invoiceData,
+    error: invoiceError,
+    status: invoiceStatus,
+  } = useInvoice(token);
+
+  const invoiceNum =
+    invoiceStatus === "success" &&
+    invoiceData !== undefined &&
+    invoiceData.getSellerInvoices.length > 0
+      ? invoiceData.getSellerInvoices.length
+      : 0;
 
   return (
     <section className="tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md">
@@ -24,26 +50,32 @@ export default function Wallet() {
       </Drawer>
       <WalletHeader setVisible={setVisible} />
       <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-5 tw-mt-4">
-        <WalletCard
-          name="Balance"
-          num="0"
-          imgSrc="/svg/wallet.svg"
-          imgAlt="wallet"
-        />
-        <WalletCard
-          name="Invoice"
-          content="0"
-          num="0"
-          imgSrc="/svg/invoice.svg"
-          imgAlt="invoice"
-        />
-        <WalletCard
-          name="Balance"
-          content="0"
-          num="0"
-          imgSrc="/svg/income.svg"
-          imgAlt="income"
-        />
+        {walletStatus === "loading" && <Load />}
+        {walletStatus === "error" && <ErrorInfo error="An error occurred" />}
+        {walletStatus === "success" && walletData !== undefined && (
+          <Fragment>
+            <WalletCard
+              name="Balance"
+              num={walletData.getSellerWallet[0].balance}
+              imgSrc="/svg/wallet.svg"
+              imgAlt="wallet"
+            />
+            <WalletCard
+              name="Invoice"
+              content={invoiceNum}
+              num={invoiceNum}
+              imgSrc="/svg/invoice.svg"
+              imgAlt="invoice"
+            />
+            <WalletCard
+              name="Total Income"
+              content={walletData.getSellerWallet[0].balance}
+              num={walletData.getSellerWallet[0].balance}
+              imgSrc="/svg/income.svg"
+              imgAlt="income"
+            />
+          </Fragment>
+        )}
       </div>
       <WalletContent />
     </section>
