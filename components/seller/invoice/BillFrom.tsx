@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 
-export default function BillFrom() {
+export default function BillFrom({ data }) {
   const {
     seller: { seller },
     user: { user },
@@ -16,13 +16,13 @@ export default function BillFrom() {
           bill from:
         </h2>
         <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0">
-          {seller.shopName}
+          {data.store.storeName}
         </p>
         <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0">
-          {address}
+          {data.store.address}
         </p>
         <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0 tw-break-words">
-          {user.email}
+          {data.store.email}
         </p>
       </article>
       <Image src="/svg/kweklogo.svg" alt="kweklogo" width="250" height="200" />

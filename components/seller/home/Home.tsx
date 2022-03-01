@@ -5,7 +5,7 @@ import useReviewCard from "@/hooks/useReviewCards";
 import useSellerOrders from "@/hooks/useSellerOrders";
 import useSellerProducts from "@/hooks/useSellerProducts";
 import { RootState } from "@/store/rootReducer";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import ProgressText from "./ProgressText";
@@ -49,6 +49,11 @@ export default function Home() {
     rateData,
     revenueData,
   });
+
+  const total = useMemo(() => {
+    return ordersData?.getSellerOrders.reduce((a, b) => a + b.profit, 0);
+  }, [ordersData]);
+
   return (
     <section className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[5fr,2fr] tw-gap-3 tw-my-4">
       <section className="">
@@ -63,8 +68,8 @@ export default function Home() {
             ordersData.getSellerOrders.length > 0 ? (
               <Card
                 name="order sales"
-                content="NGN 13,000"
-                num={"NGN 100,000"}
+                content={`NGN ${total}`}
+                num={`NGN ${total}`}
                 imgSrc={"/svg/bag.svg"}
                 imgAlt={"order"}
               />
@@ -107,7 +112,7 @@ export default function Home() {
             {customersStatus === "success" && customersData !== undefined && (
               <Card
                 name="customers"
-                content="30"
+                content={`${customersData.getSellerCustomers ?? 0}`}
                 num={customersData.getSellerCustomers ?? 0}
                 imgSrc={"/svg/customer-review.svg"}
                 imgAlt={"customers"}
@@ -143,7 +148,6 @@ export default function Home() {
             text={"delivery rate"}
             val={rateData !== undefined && rateData.getSellerDeliveryRate}
           />
-          <ProgressText text={"response time"} val="50" />
         </div>
         <div className="tw-grid tw-grid-cols-1 tw-gap-3 tw-mt-4">
           <Fragment>

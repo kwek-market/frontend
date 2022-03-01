@@ -16,7 +16,7 @@ export default function Header({ title, btn, element }: HeaderProps) {
   async function download() {
     const filename = `invoice-${invoice}.pdf`;
 
-    const canvas = await html2canvas(document.getElementById("invoice"));
+    const canvas = await html2canvas(element.current);
     const data = canvas.toDataURL("image/png");
 
     const pdf = new jsPDF();
