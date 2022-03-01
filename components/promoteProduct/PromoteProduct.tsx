@@ -39,7 +39,7 @@ const PromoteProduct = function ({ id }) {
       amount,
       currency: "NGN",
       description: "Fund Wallet",
-      redirectUrl: "https:kwekmarket.com/seller/fund-wallet",
+      redirectUrl: "https://kwekmarket.com/seller/fund-wallet",
       token,
     };
     mutate(payload, {
@@ -195,7 +195,7 @@ const PromoteProduct = function ({ id }) {
         <div className={styles.session2}>
           <h4 className={styles.preview}>Ad Preview</h4>
           {loading && <Load />}
-          {error && <ErrorInfo error={error} />}
+          {error && <ErrorInfo error={error.message} />}
           {Object.keys(product).length && (
             <div className="">
               <div className={styles.product}>
