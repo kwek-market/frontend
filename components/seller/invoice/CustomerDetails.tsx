@@ -11,7 +11,7 @@ export default function CustomerDetails({ invoice, setInvoice }: InvoiceProps) {
         </p>
       </div>
       <div className="">
-        <div className="tw-flex tw-gap-3 tw-justify-between tw-mt-3">
+        <div className="tw-flex tw-gap-3 tw-justify-between tw-items-end tw-mt-3">
           <label className="tw-font-medium tw-text-base tw-text-gray-kwek200 tw-capitalize tw-w-full">
             customer name <br />
             <Input

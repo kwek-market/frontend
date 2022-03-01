@@ -402,14 +402,7 @@ export const GET_SELLER_DELIVERY_RATE = `
 
 export const GET_SELLER_SUCCESSFUL_SALES = `
   query getSellerSuccessfulSales($token: String!) {
-    getSellerSuccessfulSales(token: $token) {
-      id
-      product{
-        id
-      }
-      amount
-      date
-    }
+    getSellerSuccessfulSales(token: $token)
   }
 `;
 
