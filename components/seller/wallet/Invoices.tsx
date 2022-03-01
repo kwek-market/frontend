@@ -19,6 +19,7 @@ export default function Invoices() {
     error: invoiceError,
     status: invoiceStatus,
   } = useInvoice(token);
+  console.log(invoiceData);
   const [invoice, setInvoice] = useState({
     search: "",
     sort: "",

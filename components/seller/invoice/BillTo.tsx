@@ -1,6 +1,7 @@
+import dayjs from "dayjs";
 import React, { Fragment } from "react";
 
-export default function BillTo() {
+export default function BillTo({ data }) {
   return (
     <Fragment>
       <div className="tw-flex md:tw-flex-row tw-flex-col tw-justify-between tw-items-center tw-my-4">
@@ -9,13 +10,13 @@ export default function BillTo() {
             bill to:
           </h2>
           <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0">
-            Komolafe Deborah
+            {data.customerName}
           </p>
           <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0">
-            22 Jump street, New York, America
+            {data.customerAddress}
           </p>
           <p className="tw-font-normal tw-text-lg tw-text-opacity-70 tw-text-gray-kwek200 tw-mb-0">
-            billmal071@gmail.com
+            {data.customerEmail}
           </p>
         </article>
         <div className="tw-w-full tw-py-3">
@@ -25,19 +26,19 @@ export default function BillTo() {
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   invoice no:
                 </td>
-                <td className="tw-text-right">0</td>
+                <td className="tw-text-right">{data.invoiceNumber}</td>
               </tr>
               <tr>
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   issue date:
                 </td>
-                <td className="tw-text-right">0</td>
+                <td className="tw-text-right">{dayjs(data.issueDate).format("DD/MM/YYYY")}</td>
               </tr>
               <tr className="tw-bg-opacity-20 tw-bg-gray-kwek100 ">
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   amount due
                 </td>
-                <td className="tw-text-right">NGN 0</td>
+                <td className="tw-text-right">NGN {data.total}</td>
               </tr>
             </tbody>
           </table>

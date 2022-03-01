@@ -430,3 +430,32 @@ export const GET_SELLER_CUSTOMERS = `
     getSellerCustomers(token: $token)
   }
 `;
+
+export const GET_SELLERS_INVOICE = `
+  query getSellerInvoice($invoiceId: String!, $token: String!) {
+    getSellerInvoice(invoiceId: $invoiceId, token: $token) {
+      id
+      store {
+        storeName
+        email
+        address
+      }
+      customerName
+      customerEmail
+      customerAddress
+      deliveryFee
+      subtotal
+      total
+      invoiceNumber
+      issueDate
+      note
+      purchasedItem {
+        item
+        description
+        quantity
+        unitCost
+        total
+      }
+    }
+  }
+`;

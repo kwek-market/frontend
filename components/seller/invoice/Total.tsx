@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Total() {
+export default function Total({ data }) {
   return (
     <div className="tw-mt-12 tw-flex md:tw-flex-row tw-flex-col tw-justify-between">
       <div className="tw-w-full">
@@ -16,19 +16,19 @@ export default function Total() {
               <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                 subtotal:
               </td>
-              <td className="tw-text-right tw-p-3">0</td>
+              <td className="tw-text-right tw-p-3">{data.subtotal}</td>
             </tr>
             <tr>
               <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                 delivery:
               </td>
-              <td className="tw-text-right tw-p-3">0</td>
+              <td className="tw-text-right tw-p-3">{data.deliveryFee}</td>
             </tr>
             <tr className="tw-bg-opacity-20 tw-bg-gray-kwek100 ">
               <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                 total
               </td>
-              <td className="tw-text-right tw-p-3">NGN 0</td>
+              <td className="tw-text-right tw-p-3">NGN {data.total}</td>
             </tr>
           </tbody>
         </table>
