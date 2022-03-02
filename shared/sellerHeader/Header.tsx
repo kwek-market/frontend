@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import Button from "@/components/buttons/Button";
@@ -20,6 +20,19 @@ const Component = () => {
   function uploadHandler() {
     router.push("/seller/upload-new-product");
   }
+
+  const rating = useMemo(() => {
+    if (data) {
+      const ratings = data.getSellerReview.map(
+        (review: { rating: number }) => review.rating
+      );
+      const total = ratings.reduce((acc, cur) => acc + cur, 0);
+      const avg = total / ratings.length;
+      return avg;
+    }
+    return 0;
+  }, [data]);
+  console.log(rating)
 
   return (
     <div
@@ -51,7 +64,7 @@ const Component = () => {
 
             {data !== undefined && data.getSellerReview.length > 0 ? (
               <span className="tw-text-white-100 tw-text-[12px]">
-                ( reviews)
+                ({rating} reviews)
               </span>
             ) : (
               <span className="tw-text-white-100 tw-text-[12px]">

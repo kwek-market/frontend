@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./reviews.module.scss";
+import { Rate } from "antd";
 
-function ReviewItem({ name, date, reviewBody, sellerPic }) {
+function ReviewItem({ name, date, reviewBody, rating, sellerPic }) {
   return (
     <div className={styles.reviewer}>
       <Image
-        src="/images/reviewer.png"
+        src="https://via.placeholder.com/150"
         alt="reviewer"
         width="80"
         height="80"
@@ -18,18 +19,12 @@ function ReviewItem({ name, date, reviewBody, sellerPic }) {
             <p className={styles.name}>{name}</p>
             <p className={styles.date}>{date}</p>
           </div>
-          <div className={styles.star_container}>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-            <span className={`material-icons ${styles.star_filled}`}>star</span>
-          </div>
+          <Rate disabled value={rating} defaultValue={rating} />
         </div>
         <p className={styles.review_body}>{reviewBody}</p>
         <div className={styles.seller_reply}>
           <Image
-            src={"/images/reviewer1.png"}
+            src="https://via.placeholder.com/150"
             width="24"
             height="24"
             className={styles.img}
