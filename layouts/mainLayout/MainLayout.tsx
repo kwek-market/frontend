@@ -11,6 +11,8 @@ import { verifyTokenFunc } from "@/helpers";
 import { clearWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import Search from "@/components/search/Search";
 import MobileSearchBar from "@/shared/header/MobileSearchBar";
+// import Pusher from "react-pusher";
+import Pusher from "pusher-js";
 
 const MainLayout = function ({ children, title }: any) {
   const dispatch = useDispatch();
@@ -25,7 +27,17 @@ const MainLayout = function ({ children, title }: any) {
     setShowMenu(!showMenu);
   }
 
+  const userId = user.id;
+  const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
+  // Pusher.logToConsole = true;
+  const pusherClient = new Pusher(key, {
+    cluster: "mt1",
+  });
   useEffect(() => {
+    const channel = pusherClient.subscribe(userId);
+    channel.bind(userId, (data) => {
+      console.log(data.message);
+    });
     dispatch(getCategories());
   }, []);
 
@@ -51,6 +63,7 @@ const MainLayout = function ({ children, title }: any) {
 
   return (
     <div>
+      {/* <Pusher channel={userId || ""} event={userId} onUpdate={(e) => log(e)} /> */}
       {/* <Topbar withLogo={false} /> */}
       <Header
         setUserNav={setUserNav}
