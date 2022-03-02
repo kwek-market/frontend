@@ -117,11 +117,11 @@ function Header() {
             <Link href="/seller/profile">
               <a className={`tw-mr-5 ${border}  tw-capitalize `}>your store</a>
             </Link>
-            <Link href="/sell/pricing">
+            {/* <Link href="/sell/pricing">
               <a className="tw-mr-5 tw-text-white-100 tw-capitalize tw-pb-2">
                 pricing
               </a>
-            </Link>
+            </Link> */}
             <Link href="/">
               <a className="tw-mr-5  tw-text-white-100 tw-capitalize  tw-pb-2">
                 buy on kwek
