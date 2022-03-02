@@ -102,8 +102,22 @@ export const COMPLETE_SELLER_VERIFICATION = /* GraphQL */ `
 `;
 
 export const GET_SELLER_PRODUCTS = `
-  query getSellerProducts($token: String!) {
-    getSellerProducts(token: $token) {
+  query getSellerProducts(
+    $token: String!
+    $thisMonth: Boolean
+    $rating: Boolean
+    $price: String
+    $popular: Boolean
+    $recent: Boolean
+    ) {
+    getSellerProducts(
+      token: $token
+      thisMonth: $thisMonth
+      rating: $rating
+      price: $price
+      popular: $popular
+      recent: $recent
+      ) {
       id
       productTitle
       promoted
@@ -317,6 +331,7 @@ export const GET_SELLER_PROMOTED_PRODUCTS = `
         optionTotalPrice
       }
       promo {
+        amount
         active
         reach
         linkClicks
