@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import React, { Fragment } from "react";
+import { v4 } from "uuid";
 
 export default function BillTo({ data }) {
   return (
@@ -32,7 +33,9 @@ export default function BillTo({ data }) {
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
                   issue date:
                 </td>
-                <td className="tw-text-right">{dayjs(data.issueDate).format("DD/MM/YYYY")}</td>
+                <td className="tw-text-right">
+                  {dayjs(data.issueDate).format("DD/MM/YYYY")}
+                </td>
               </tr>
               <tr className="tw-bg-opacity-20 tw-bg-gray-kwek100 ">
                 <td className="tw-p-3 tw-uppercase tw-text-left tw-font-semibold tw-text-gray-kwek200">
@@ -66,13 +69,15 @@ export default function BillTo({ data }) {
             </tr>
           </thead>
           <tbody>
-            <tr className="tw-border-b tw-border-gray-kwek700">
-              <td className="tw-p-3 tw-capitalize">item</td>
-              <td className="tw-p-3 tw-capitalize">description</td>
-              <td className="tw-p-3">quantity</td>
-              <td className="tw-p-3">unit cost</td>
-              <td className="tw-p-3">total</td>
-            </tr>
+            {data.purchasedItem.map((item) => (
+              <tr key={v4()} className="tw-border-b tw-border-gray-kwek700">
+                <td className="tw-p-3 tw-capitalize">{item.item}</td>
+                <td className="tw-p-3 tw-capitalize">{item.description}</td>
+                <td className="tw-p-3">{item.quantity}</td>
+                <td className="tw-p-3">{item.unitCost}</td>
+                <td className="tw-p-3">{item.total}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

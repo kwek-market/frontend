@@ -66,6 +66,10 @@ function Header() {
     });
   }
 
+  function read(read: boolean) {
+    if (read) return "tw-bg-gray-200";
+  }
+
   return (
     <Fragment>
       <Drawer
@@ -86,7 +90,9 @@ function Header() {
           data.userNotifications.map((notification: UserNotificationType) => (
             <div
               key={notification.id}
-              className="tw-mb-2 hover:tw-bg-yellow-200 tw-cursor-pointer tw-p-2"
+              className={`tw-mb-2 hover:tw-bg-yellow-200 ${read(
+                notification.read
+              )} tw-cursor-pointer tw-p-2`}
               onClick={() =>
                 readNotifications({
                   messageId: notification.id,
@@ -135,7 +141,11 @@ function Header() {
             >
               <i className="fas fa-bell fa-lg tw-text-yellow-kwek100" />
               <span className="tw-absolute tw--top-1 tw-left-2 tw-text-white-100 tw-h-[0.15rem] tw-w-[0.15rem] tw-p-1.5 tw-z-20 tw-bg-red-notif tw-rounded-full tw-text-[10px] tw-flex tw-justify-center tw-items-center">
-                {data !== undefined && data.userNotifications.length}
+                {data !== undefined &&
+                  data.userNotifications.filter(
+                    (notification: UserNotificationType) =>
+                      notification.read === false
+                  ).length}
               </span>
             </div>
             <Dropdown overlay={menu} placement="bottomLeft" arrow>

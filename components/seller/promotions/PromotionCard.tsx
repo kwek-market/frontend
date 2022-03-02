@@ -11,12 +11,15 @@ export type PromotionCardProps = {
   id: string;
 };
 
-export default function PromotionCard({}) {
+export default function PromotionCard({ promotion }) {
+  const active = promotion.promo[0].active
+    ? "tw-bg-yellow-filled"
+    : "tw-bg-green-success";
   return (
     <div className="tw-border tw-border-gray-kwek700 tw-rounded-md tw-bg-gray-kwek700 tw-bg-opacity-5 tw-flex tw-justify-between tw-items-center tw-p-3">
       <div>
         <Image
-          src="/images/product.png"
+          src={promotion.image[0].imageUrl}
           alt="product"
           width="120"
           height="100"
@@ -24,19 +27,21 @@ export default function PromotionCard({}) {
       </div>
       <div className="">
         <p className="tw-text-base md:tw-text-2xl tw-font-normal tw-text-gray-kwek900 tw-mb-0">
-          Women’s Fashion Shiny High Heels
+          {promotion.productTitle}
         </p>
         <span className="tw-font-semibold tw-text-base md:tw-font-3xl tw-text-gray-kwek900">
-          ₦250.00
+          ₦{Number(promotion.options[0].discountedPrice).toLocaleString()}
         </span>
         <span className="tw-text-sm tw-font-medium tw-line-through tw-opacity-50 tw-text-gray-kwek900 tw-ml-2">
-          ₦25.00
+          ₦{Number(promotion.options[0].price).toLocaleString()}
         </span>
       </div>
       <div>
-        <span className="tw-rounded-full tw-inline-block tw-h-4 tw-w-4 tw-bg-yellow-filled"></span>
+        <span
+          className={`tw-rounded-full tw-inline-block tw-h-4 tw-w-4  ${active}`}
+        ></span>
         <span className="tw-font-medium tw-text-base tw-text-gray-kwek900 tw-ml-2">
-          ongoing
+          {promotion.promo[0].active ? "Ongoing" : "Completed"}
         </span>
       </div>
       <div>

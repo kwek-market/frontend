@@ -10,6 +10,16 @@ import { createWrapper } from "next-redux-wrapper";
 import store from "@/store";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+// import { setPusherClient } from "react-pusher";
+// import Pusher from "pusher-js";
+
+// const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
+// Pusher.logToConsole = true;
+// const pusherClient = new Pusher(key, {
+//   cluster: "mt1",
+// });
+
+// setPusherClient(pusherClient);
 
 const MyApp = function ({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
