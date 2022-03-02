@@ -105,6 +105,7 @@ export default function Review() {
                 name={review.user.firstName + " " + review.user.lastName}
                 date={dayjs(review.ratedAt).format("DD/MM/YYYY")}
                 reviewBody={review.review}
+                rating={review.rating}
                 sellerPic={undefined}
               />
             ))

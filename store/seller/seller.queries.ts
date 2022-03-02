@@ -278,6 +278,10 @@ export const GET_SELLER_REVIEW = `
   query getSellerReview($token: String!) {
     getSellerReview(token: $token) {
       id
+      user {
+        firstName
+        lastName
+      }
       product {
         sales {
           id

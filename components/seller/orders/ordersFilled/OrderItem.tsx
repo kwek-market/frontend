@@ -24,7 +24,7 @@ const OrderItem = ({
         </td>
         <td>
           <div className={styles.customer}>
-            <img src={imgSrc} alt="" className={styles.img} />
+            {/* <img src={imgSrc} alt="" className={styles.img} /> */}
             <span>{customerName}</span>
           </div>
         </td>
