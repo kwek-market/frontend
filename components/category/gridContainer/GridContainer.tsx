@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./GridContainer.module.scss";
 
 import { ActiveTabbar, Card, SideBar } from "../index";
