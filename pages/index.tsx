@@ -32,7 +32,7 @@ const Home = function () {
       {/* <MobileSearchBar /> */}
       <Hero />
       <Features />
-      <CategoryGrid title="Deals Of The day" timer cards={cards} />
+      {/* <CategoryGrid title="Deals Of The day" timer cards={cards} /> */}
       {loading && (
         <div className="tw-flex tw-justify-center tw-items-center tw-py-5">
           <Spin size="large" />
