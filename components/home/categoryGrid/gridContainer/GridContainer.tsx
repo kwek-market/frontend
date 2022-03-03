@@ -94,7 +94,7 @@ const GridContainer = function ({
           </div>
         </div>
 
-        {cards && (
+        {/* {cards && (
           <>
             <div className={styles.cards}>
               {categoryData !== undefined
@@ -107,7 +107,7 @@ const GridContainer = function ({
             </div>
             <Slider element={slides} />
           </>
-        )}
+        )} */}
 
         <>
           <div className={styles.banners}>
