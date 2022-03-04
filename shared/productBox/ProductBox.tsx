@@ -12,7 +12,7 @@ import {
 } from "@/interfaces/commonTypes";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { getIp } from "@/helpers";
-import { createWishlist } from "@/store/wishlist/wishlist.actions";
+import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import Loader from "react-loader-spinner";
 import useItemInCart from "@/hooks/useItemInCart";
 import useItemInWishlist from "@/hooks/useItemInWishlist";
@@ -42,6 +42,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
       token: user.token,
     };
     dispatch(createWishlist(payload, user.token));
+    dispatch(getWishList(user.token));
   }
 
   const checkIfItemInCart = useItemInCart(prod, cart.cart);

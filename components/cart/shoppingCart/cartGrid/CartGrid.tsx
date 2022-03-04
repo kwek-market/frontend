@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 
 import Link from "next/link";
 import styles from "./cartGrid.module.scss";
@@ -8,10 +8,17 @@ import Button from "@/components/buttons/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { useRouter } from "next/router";
+import { useApplyCoupon } from "@/hooks/coupon";
+import { message } from "antd";
 
 const CartGrid = function () {
-  const { cart } = useSelector((state: RootState) => state);
+  const {
+    cart,
+    user: { token },
+  } = useSelector((state: RootState) => state);
   const router = useRouter();
+  const [coupon, setCoupon] = useState<string>("");
+  const { mutate, isLoading } = useApplyCoupon();
 
   const result = useMemo(() => {
     let initial = 0;
@@ -21,6 +28,24 @@ const CartGrid = function () {
     });
     return initial;
   }, [cart.cart]);
+
+  function applyCoupon(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (coupon === "" || coupon === null)
+      return message.error("enter a coupon");
+    const payload = {
+      token,
+      couponId: coupon,
+    };
+    mutate(payload, {
+      onSuccess: (data) => {
+        message.success(data.applyCoupon.message);
+      },
+      onError: (err) => {
+        message.error(err.message);
+      },
+    });
+  }
 
   return (
     <section>
@@ -49,11 +74,16 @@ const CartGrid = function () {
             <CartGridComponent />
             <div className={styles.bottom_part}>
               <div className={styles.content}>
-                <form className={styles.coupon_box}>
+                <form
+                  onSubmit={(e) => applyCoupon(e)}
+                  className={styles.coupon_box}
+                >
                   <input
                     type="text"
                     name="Coupon Code"
                     placeholder="Coupon Code"
+                    value={coupon}
+                    onChange={(e) => setCoupon(e.target.value)}
                   />
                   <button type="submit">Apply Coupon</button>
                 </form>

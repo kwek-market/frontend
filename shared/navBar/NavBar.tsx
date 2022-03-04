@@ -21,22 +21,6 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
       title: "Sell On Kwek",
       url: "/sell",
     },
-    {
-      title: "Registry",
-      url: "/registry",
-    },
-    {
-      title: "Gift Cards",
-      url: "/gift-cards",
-    },
-    {
-      title: "Customer Service",
-      url: "/customer-service",
-    },
-    {
-      title: "Vendors",
-      url: "/vendors",
-    },
   ];
   return (
     <nav
@@ -58,11 +42,11 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
         ))}
       </ul>
 
-      <div className={styles.extra}>
+      {/* <div className={styles.extra}>
         <Link href="/">
           <a className={styles.extra_link}>Kwek’s Response to COVID-19</a>
         </Link>
-      </div>
+      </div> */}
     </nav>
   );
 };
