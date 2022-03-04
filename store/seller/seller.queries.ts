@@ -103,14 +103,18 @@ export const COMPLETE_SELLER_VERIFICATION = /* GraphQL */ `
 
 export const GET_SELLER_PRODUCTS = `
   query getSellerProducts(
+    $page: Int
+    $pageSize: Int
     $token: String!
     $thisMonth: Boolean
-    $rating: Boolean
+    $rating: Int
     $price: String
     $popular: Boolean
     $recent: Boolean
     ) {
     getSellerProducts(
+      page: $page
+      pageSize: $pageSize
       token: $token
       thisMonth: $thisMonth
       rating: $rating
@@ -118,24 +122,30 @@ export const GET_SELLER_PRODUCTS = `
       popular: $popular
       recent: $recent
       ) {
-      id
-      productTitle
-      promoted
-      shortDescription
-      color
-      image {
-        imageUrl
-      }
-      options {
-        price
-        discountedPrice
-        size
-      }
-      productRating {
-        rating
-        review
-        likes
-      }
+        page
+        pages
+        hasNext
+        hasPrev
+        objects {
+          id
+          productTitle
+          promoted
+          shortDescription
+          color
+          image {
+            imageUrl
+          }
+          options {
+            price
+            discountedPrice
+            size
+          }
+          productRating {
+            rating
+            review
+            likes
+          }
+        }
     }
   }
 `;
@@ -289,26 +299,32 @@ export const STORE_LOCATION_UPDATE = `
 `;
 
 export const GET_SELLER_REVIEW = `
-  query getSellerReview($token: String!) {
-    getSellerReview(token: $token) {
-      id
-      user {
-        firstName
-        lastName
-      }
-      product {
-        sales {
-          id
-          date
-        }
-      }
-      rating
-      review
-      likes
-      dislikes
-      ratedAt
-      comment {
+  query getSellerReview($page: Int, $pageSize: Int, $token: String!) {
+    getSellerReview(page: $page, pageSize: $pageSize, token: $token) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
         id
+        user {
+          firstName
+          lastName
+        }
+        product {
+          sales {
+            id
+            date
+          }
+        }
+        rating
+        review
+        likes
+        dislikes
+        ratedAt
+        comment {
+          id
+        }
       }
     }
   }

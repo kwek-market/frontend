@@ -7,17 +7,22 @@ import usePromotions from "@/hooks/usePromotions";
 import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
 import { Rate } from "antd";
+import ReactPaginate from "react-paginate";
 
 type ProductFilledProps = {
   product: ProductType[];
   setShowProduct: React.Dispatch<React.SetStateAction<boolean>>;
   setProduct: React.Dispatch<React.SetStateAction<ProductType>>;
+  pageCount: number;
+  handlePageClick: (event: { selected: number }) => void;
 };
 
 const ProductFilled = function ({
   product,
   setShowProduct,
   setProduct,
+  pageCount,
+  handlePageClick,
 }: ProductFilledProps) {
   const {
     user: { token },
@@ -93,6 +98,26 @@ const ProductFilled = function ({
             </div>
           ))}
         </div>
+        <ReactPaginate
+          nextLabel="next >"
+          onPageChange={(e) => handlePageClick(e)}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={undefined}
+        />
       </div>
     </section>
   );
