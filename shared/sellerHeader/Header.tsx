@@ -10,8 +10,11 @@ const Component = () => {
   const { seller, user } = useSelector((state: RootState) => state);
   const router = useRouter();
 
-  const { status, data, error } = useReviews(user.token);
-  console.log(data);
+  const { status, data, error } = useReviews({
+    token: user.token,
+    page: 1,
+    pageSize: 20,
+  });
 
   const bgImg = seller.seller.storeBannerUrl
     ? `linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('${seller.seller.storeBannerUrl}')`
@@ -23,7 +26,7 @@ const Component = () => {
 
   const rating = useMemo(() => {
     if (data) {
-      const ratings = data.getSellerReview.map(
+      const ratings = data.getSellerReview.objects.map(
         (review: { rating: number }) => review.rating
       );
       const total = ratings.reduce((acc, cur) => acc + cur, 0);
@@ -32,7 +35,6 @@ const Component = () => {
     }
     return 0;
   }, [data]);
-  console.log(rating)
 
   return (
     <div
@@ -60,9 +62,13 @@ const Component = () => {
             {seller.seller.shopName}
           </p>
           <div className="tw-text-md">
-            <Rate disabled defaultValue={2} className="tw-text-[12px]" />
-
-            {data !== undefined && data.getSellerReview.length > 0 ? (
+            <Rate
+              disabled
+              allowHalf
+              value={rating}
+              className="tw-text-[12px]"
+            />
+            {data !== undefined && data.getSellerReview.objects.length > 0 ? (
               <span className="tw-text-white-100 tw-text-[12px]">
                 ({rating} reviews)
               </span>

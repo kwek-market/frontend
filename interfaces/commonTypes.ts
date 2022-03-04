@@ -433,3 +433,26 @@ export type InvoiceProps = {
   invoice: InvoiceDetails;
   setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetails>>;
 };
+
+export type PagePayload = {
+  page?: number;
+  pageSize?: number;
+  token: string;
+};
+
+export type SellerReview = {
+  id: string;
+  product: ProductType;
+  rating: number;
+  review: String;
+  user: {
+    firstName: string;
+    lastName: string;
+  };
+  likes: number;
+  dislikes: number;
+  ratedAt: Date;
+  comment: {
+    id: number;
+  };
+};

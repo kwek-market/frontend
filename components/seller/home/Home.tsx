@@ -18,7 +18,7 @@ export default function Home() {
     status: productStatus,
     data: productData,
     error: productError,
-  } = useSellerProducts(token);
+  } = useSellerProducts({ token, page: 1, pageSize: 100 });
   const {
     status: ordersStatus,
     data: ordersData,
@@ -39,6 +39,7 @@ export default function Home() {
     },
     "3": { data: revenueData, status: revenueStatus, error: revenueError },
   } = useHomeCard(token);
+  console.log(revenueData);
 
   const total = useMemo(() => {
     return ordersData?.getSellerOrders.reduce((a, b) => a + b.profit, 0);
@@ -179,11 +180,11 @@ export default function Home() {
             )}
             {productStatus === "success" &&
             productData !== undefined &&
-            productData.getSellerProducts.length > 0 ? (
+            productData.getSellerProducts.objects.length > 0 ? (
               <Card
                 name="products"
-                content={productData.getSellerProducts.length}
-                num={productData.getSellerProducts.length}
+                content={productData.getSellerProducts.objects.length}
+                num={productData.getSellerProducts.objects.length}
                 imgSrc={"/svg/received.svg"}
                 imgAlt={"products"}
               />

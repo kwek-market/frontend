@@ -1,29 +1,64 @@
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import Load from "@/components/Loader/Loader";
+import { userFetcher } from "@/helpers";
 import useReviewCard from "@/hooks/useReviewCards";
 import useReviews from "@/hooks/useReviews";
+import { PagePayload, SellerReview } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
+import { GET_SELLER_REVIEW } from "@/store/seller/seller.queries";
 import dayjs from "dayjs";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import Card from "../home/Card";
+import ReactPaginate from "react-paginate";
 import ReviewItem from "./ReviewItem";
 
 export default function Review() {
+  const queryClient = useQueryClient();
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentItems, setCurrentItems] = useState<SellerReview[]>(
+    [] as SellerReview[]
+  );
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
+  const payload: PagePayload = {
+    token,
+    page: currentPage,
+    pageSize: 20,
+  };
   const {
     status: reviewStatus,
     data: reviewData,
     error: reviewError,
-  } = useReviews(token);
+  } = useReviews(payload);
   const {
     "0": { data: salesData, status: salesStatus, error: salesError },
     "1": { data: qualityData, status: qualityStatus, error: qualityError },
     "2": { data: rateData, status: rateStatus, error: rateError },
   } = useReviewCard(token);
-  console.log(salesData, qualityData, rateData);
+  // console.log(salesData, qualityData, rateData);
+
+  useEffect(() => {
+    if (reviewData?.getSellerReview.hasNext) {
+      queryClient.prefetchQuery(["reviews", payload], () =>
+        userFetcher(GET_SELLER_REVIEW, payload)
+      );
+    }
+    if (reviewData === undefined) return;
+    setPageCount(reviewData.getSellerReview.pages);
+    setCurrentItems(reviewData.getSellerReview.objects);
+    // console.log(`current page: ${currentPage}`);
+    return () => {
+      queryClient.cancelQueries(["reviews", payload]);
+    };
+  }, [queryClient, currentPage, reviewData]);
+
+  const handlePageClick = (event: { selected: number }) => {
+    setCurrentPage(event.selected + 1);
+  };
 
   return (
     <section className="tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md">
@@ -98,8 +133,8 @@ export default function Review() {
           )}
           {reviewStatus === "success" &&
           reviewData !== undefined &&
-          reviewData.getSellerReview.length > 0 ? (
-            reviewData.getSellerReview.map((review) => (
+          currentItems.length > 0 ? (
+            currentItems.map((review) => (
               <ReviewItem
                 key={review.id}
                 name={review.user.firstName + " " + review.user.lastName}
@@ -118,6 +153,26 @@ export default function Review() {
           )}
         </div>
       </div>
+      <ReactPaginate
+        nextLabel="next >"
+        onPageChange={(e) => handlePageClick(e)}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={undefined}
+      />
     </section>
   );
 }
