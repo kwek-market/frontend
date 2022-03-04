@@ -27,7 +27,7 @@ const MainLayout = function ({ children, title }: any) {
     setShowMenu(!showMenu);
   }
 
-  const userId = user.id;
+  const userId = user.id ? user.id : "";
   const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
   // Pusher.logToConsole = true;
   const pusherClient = new Pusher(key, {

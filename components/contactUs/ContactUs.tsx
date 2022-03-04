@@ -1,12 +1,9 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
-import styles from './ContactUs.module.scss'
+import styles from "./ContactUs.module.scss";
 
 const ContactUs = function () {
-    return (
-        <div></div>
-    )
-}
+  return <div></div>;
+};
 
-
-export default ContactUs
+export default ContactUs;

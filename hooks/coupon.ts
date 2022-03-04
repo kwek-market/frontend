@@ -1,12 +1,18 @@
-import { userFetcher, userFetcherWithAuth } from "@/helpers";
+import { userFetcherWithAuth } from "@/helpers";
 import { CouponType } from "@/interfaces/commonTypes";
 import { APPLY_COUPON, CREATE_COUPON } from "@/store/seller/seller.queries";
 import { message } from "antd";
 import { useMutation } from "react-query";
 
-export function createCoupon(token: string) {
+type Coupon = {
+  code: string;
+  days: number;
+  value: number;
+}
+
+export function useCreateCoupon(token: string) {
   return useMutation(
-    (payload: CouponType) => userFetcherWithAuth(CREATE_COUPON, payload, token),
+    (payload: Coupon) => userFetcherWithAuth(CREATE_COUPON, payload, token),
     {
       onSuccess: (data) => {
         message.success(data.createCoupon.message);
@@ -18,10 +24,10 @@ export function createCoupon(token: string) {
   );
 }
 
-export function applyCoupon(token: string) {
+export function useApplyCoupon() {
   return useMutation(
     (payload: { couponId: string; token: string }) =>
-      userFetcherWithAuth(APPLY_COUPON, payload, token),
+      userFetcherWithAuth(APPLY_COUPON, payload, payload.token),
     {
       onSuccess: (data) => {
         message.success(data.applyCoupon.message);
@@ -33,10 +39,10 @@ export function applyCoupon(token: string) {
   );
 }
 
-export function unapplyCoupon(token: string) {
+export function useUnapplyCoupon() {
   return useMutation(
     (payload: { couponId: string; token: string }) =>
-      userFetcherWithAuth(APPLY_COUPON, payload, token),
+      userFetcherWithAuth(APPLY_COUPON, payload, payload.token),
     {
       onSuccess: (data) => {
         message.success(data.applyCoupon.message);
