@@ -116,19 +116,21 @@ export const GetProducts = /* GraphQL */ `
     $page: Int
     $pageSize: Int
     $search: String
+    $sortBy: String
     $rating: Int
     $keyword: [String]
-    $clicks: String
-    $sales: String
+    $priceRange: [Float]
+    $sizes: [String]
   ) {
     products(
       page: $page
       pageSize: $pageSize
       search: $search
+      sortBy: $sortBy
       rating: $rating
       keyword: $keyword
-      clicks: $clicks
-      sales: $sales
+      priceRange: $priceRange
+      sizes: $sizes
     ) {
       page
       pages

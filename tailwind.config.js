@@ -56,6 +56,7 @@ module.exports = {
           kwek100: "#DC8823",
         },
         red: {
+          bg: "#fbeff3",
           notif: "#FC476E",
           kwek100: "#AF1328",
           kwek200: "rgba(175, 19, 40, 0.6)",

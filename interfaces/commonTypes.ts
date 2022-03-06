@@ -433,3 +433,75 @@ export type InvoiceProps = {
   invoice: InvoiceDetails;
   setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetails>>;
 };
+
+export type PagePayload = {
+  page?: number;
+  pageSize?: number;
+  token: string;
+  search?: string;
+  sortBy: string;
+  priceRange?: number[];
+  sizes?: string[];
+  keyword?: string[];
+  rating?: number;
+  thisMonth?: boolean;
+};
+
+export type SellerReview = {
+  id: string;
+  product: ProductType;
+  rating: number;
+  review: String;
+  user: {
+    firstName: string;
+    lastName: string;
+  };
+  likes: number;
+  dislikes: number;
+  ratedAt: Date;
+  comment: {
+    id: number;
+  };
+};
+
+export type ContactUs = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+export type ClicksPayload = {
+  productId: string;
+  token: string;
+};
+
+export type WalletHistory = {
+  id: string;
+  remark: string;
+  amount: string;
+  date: Date;
+  status: boolean;
+  wallet: {
+    balance: number;
+  };
+};
+
+export type InvoiceResult = {
+  id: string;
+  customerName: string;
+  customerEmail: string;
+  invoiceNumber: string;
+  issueDate: Date;
+};
+
+export type Filtering = {
+  priceRange: number[];
+  sizes: string[];
+  keyword: string[];
+  rating: number;
+};
+
+export type SidebarProps = {
+  filtering: Filtering;
+  setFiltering: React.Dispatch<React.SetStateAction<Filtering>>;
+};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "./ProductFilled.module.scss";
 import { ProductType } from "@/interfaces/commonTypes";
@@ -7,23 +7,31 @@ import usePromotions from "@/hooks/usePromotions";
 import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
 import { Rate } from "antd";
+import ReactPaginate from "react-paginate";
 
 type ProductFilledProps = {
   product: ProductType[];
   setShowProduct: React.Dispatch<React.SetStateAction<boolean>>;
   setProduct: React.Dispatch<React.SetStateAction<ProductType>>;
+  pageCount: number;
+  handlePageClick: (event: { selected: number }) => void;
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const ProductFilled = function ({
   product,
   setShowProduct,
   setProduct,
+  pageCount,
+  handlePageClick,
+  filter,
+  setFilter,
 }: ProductFilledProps) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
   const { status, data, error } = usePromotions(token);
-  const [filter, setFilter] = useState<string>("popular");
   console.log(data);
 
   function isPromoted(id: string) {
@@ -49,11 +57,11 @@ const ProductFilled = function ({
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             >
-              <option value="popular">Most Popular</option>
-              <option value="recent">Recent</option>
-              <option value="price">Price: Low to High</option>
-              <option value="price">Price: High to Low</option>
-              <option value="rating">Product Rating</option>
+              <option value="-clicks">Most Popular</option>
+              <option value="-date_created">Recent</option>
+              <option value="sales">Price: Low to High</option>
+              <option value="-sales">Price: High to Low</option>
+              <option value="-rating">Product Rating</option>
             </select>
           </div>
         </div>
@@ -93,6 +101,26 @@ const ProductFilled = function ({
             </div>
           ))}
         </div>
+        <ReactPaginate
+          nextLabel="next >"
+          onPageChange={(e) => handlePageClick(e)}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={undefined}
+        />
       </div>
     </section>
   );

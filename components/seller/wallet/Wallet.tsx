@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import Load from "@/components/Loader/Loader";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
-import useInvoice from "@/hooks/useInvoice";
+import useInvoice, { Payload } from "@/hooks/useInvoice";
 
 export default function Wallet() {
   const {
@@ -21,17 +21,18 @@ export default function Wallet() {
     error: walletError,
     status: walletStatus,
   } = useGetSellerWallet(token);
+  const payload: Payload = { token: token, page: 1, pageSize: 100 };
   const {
     data: invoiceData,
     error: invoiceError,
     status: invoiceStatus,
-  } = useInvoice(token);
+  } = useInvoice(payload);
 
   const invoiceNum =
     invoiceStatus === "success" &&
     invoiceData !== undefined &&
-    invoiceData.getSellerInvoices.length > 0
-      ? invoiceData.getSellerInvoices.length
+    invoiceData.getSellerInvoices.objects.length > 0
+      ? invoiceData.getSellerInvoices.objects.length
       : 0;
 
   return (
