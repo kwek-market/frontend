@@ -6,7 +6,7 @@ import { MainLayout } from "@/layouts";
 
 const Page = function () {
   return (
-    <MainLayout title="Privacy Policy">
+    <MainLayout title="Contact Us">
       <ContactUs />
     </MainLayout>
   );

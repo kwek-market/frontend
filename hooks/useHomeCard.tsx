@@ -7,8 +7,8 @@ import {
 } from "@/store/seller/seller.queries";
 import { useQueries } from "react-query";
 
-export default function useHomeCard(token: string) {
-  const payload = { token };
+export default function useHomeCard(token: string, thisMonth?: boolean) {
+  const payload = { token, thisMonth };
   return useQueries([
     {
       queryKey: "sales-earnings",
@@ -16,7 +16,7 @@ export default function useHomeCard(token: string) {
     },
     {
       queryKey: "days-selling",
-      queryFn: () => userFetcher(GET_SELLER_DAYS_SELLING, payload),
+      queryFn: () => userFetcher(GET_SELLER_DAYS_SELLING, {token: payload.token }),
     },
     {
       queryKey: "customers",
@@ -24,7 +24,7 @@ export default function useHomeCard(token: string) {
     },
     {
       queryKey: "revenu-data",
-      queryFn: () => userFetcher(GET_SELLER_REVENUE_CHART_DATA, payload),
+      queryFn: () => userFetcher(GET_SELLER_REVENUE_CHART_DATA, {token: payload.token }),
     },
   ]);
 }

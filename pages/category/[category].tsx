@@ -1,5 +1,4 @@
 import React from "react";
-// import Head from "next/head";
 
 import { useRouter } from "next/router";
 import Header from "@/shared/categoryHead/Header";
@@ -10,7 +9,6 @@ import { MainLayout } from "@/layouts";
 
 const Page = function () {
   const router = useRouter();
-
   const { category } = router.query;
 
   return (

@@ -42,10 +42,10 @@ const Header = function ({
   search,
   setSearch,
   check,
-  setCheck
+  setCheck,
 }: HeaderProps) {
   const dispatch = useDispatch();
-  const { user, cart } = useSelector((state: RootState) => state);
+  const { user, cart, wishlist } = useSelector((state: RootState) => state);
   const router = useRouter();
   function handleLogout() {
     dispatch(logout());
@@ -123,7 +123,12 @@ const Header = function ({
           <i className={`fas fa-times ${styles.close_icon}`} />
         </div>
 
-        <SearchBar search={search} setSearch={setSearch} check={check} setCheck={setCheck} />
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          check={check}
+          setCheck={setCheck}
+        />
 
         <div className={styles.shortcuts}>
           {user.id ? (
@@ -160,12 +165,17 @@ const Header = function ({
 
           <Link href="/wishlist">
             <a className={styles.shortcuts_item}>
-              <Image
-                width="16"
-                height="18"
-                src="/svg/heart-filled.svg"
-                className={styles.shortcuts_icon}
-              />
+              <div className={styles.shortcuts_iconWrap}>
+                <Image
+                  width="16"
+                  height="18"
+                  src="/svg/heart-filled.svg"
+                  className={styles.shortcuts_icon}
+                />
+                <span className={styles.shortcuts_iconSuper}>
+                  {wishlist.wishlists?.length}
+                </span>
+              </div>
               <p className={styles.shortcuts_label}>Saved</p>
             </a>
           </Link>

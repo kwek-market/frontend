@@ -4,10 +4,10 @@ import styles from "./GridContainer.module.scss";
 import { ActiveTabbar, Card, SideBar } from "../index";
 import { v4 as uuid } from "uuid";
 import CategoryProducts from "../CategoryProducts";
-import { ProductType } from "@/interfaces/commonTypes";
+import { Filtering, PagePayload, ProductType } from "@/interfaces/commonTypes";
 import Loader from "react-loader-spinner";
 import ReactPaginate from "react-paginate";
-import useProducts from "@/hooks/useProducts";
+import useProducts, { PayloadType } from "@/hooks/useProducts";
 import { useQueryClient } from "react-query";
 import { userFetcher } from "@/helpers";
 import { GetProducts } from "@/store/product/product.queries";
@@ -15,16 +15,24 @@ import { GetProducts } from "@/store/product/product.queries";
 const GridContainer = function ({ cards, category }: any) {
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState(true);
+  const [filtering, setFiltering] = useState<Filtering>({
+    priceRange: [Number.MAX_SAFE_INTEGER, 0],
+    sizes: ["xxxl"],
+    keyword: ["all"],
+    rating: 5,
+  });
+  const [sort, setSort] = useState("-clicks");
   const [currentItems, setCurrentItems] = useState<ProductType[]>(
     [] as ProductType[]
   );
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const payload = {
+  const payload: PayloadType = {
     page: currentPage,
     pageSize: 20,
     search: category,
+    sortBy: sort,
   };
   const {
     status: categoryStatus,
@@ -34,15 +42,40 @@ const GridContainer = function ({ cards, category }: any) {
   } = useProducts(payload);
 
   useEffect(() => {
-    if (categoryData?.products.hasNext) {
-      // console.log("has more");
+    const { keyword, priceRange, rating, sizes } = filtering;
+    const sub = {
+      ...payload,
+      priceRange,
+      rating,
+      keyword,
+      sizes,
+    };
+    (async () => {
+      try {
+        const data = await queryClient.fetchQuery(
+          ["category-items", payload],
+          () => userFetcher(GetProducts, sub)
+        );
+        console.log(data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    })();
+
+    return () => {
+      queryClient.cancelQueries(["category-items", payload]);
+    };
+  }, [sort, filtering.priceRange, filtering.rating, filtering.sizes]);
+
+  useEffect(() => {
+    if (categoryData?.products?.hasNext) {
       queryClient.prefetchQuery(["category-items", payload], () =>
         userFetcher(GetProducts, payload)
       );
     }
     if (categoryData === undefined) return;
-    setPageCount(categoryData.products.pages);
-    setCurrentItems(categoryData.products.objects);
+    setPageCount(categoryData?.products?.pages);
+    setCurrentItems(categoryData?.products?.objects);
     // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries(["category-items", payload]);
@@ -63,7 +96,7 @@ const GridContainer = function ({ cards, category }: any) {
   const hasError = categoryStatus === "error" && (
     <div className="tw-w-full tw-py-5">
       <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
-        {categoryError}
+        {(categoryError as { message: string }).message}
       </h1>
     </div>
   );
@@ -85,12 +118,21 @@ const GridContainer = function ({ cards, category }: any) {
 
   return (
     <div id={styles.categoryGrid}>
-      <ActiveTabbar filter={filter} setFilter={setFilter} />
+      <ActiveTabbar
+        filter={filter}
+        setFilter={setFilter}
+        sort={sort}
+        setSort={setSort}
+      />
 
       <div className="tw-flex tw-gap-5 tw-w-full">
         {filter && (
           <aside className={styles.sidebarContainer}>
-            <SideBar category={category} />
+            <SideBar
+              category={category}
+              filtering={filtering}
+              setFiltering={setFiltering}
+            />
           </aside>
         )}
 

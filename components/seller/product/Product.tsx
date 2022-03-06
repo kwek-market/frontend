@@ -22,10 +22,12 @@ export default function Product() {
   const [currentItems, setCurrentItems] = useState<ProductType[]>(
     [] as ProductType[]
   );
+  const [filter, setFilter] = useState<string>("-clicks");
   const payload: PagePayload = {
     token,
     page: currentPage,
     pageSize: 20,
+    sortBy: filter,
   };
   const {
     status,
@@ -38,6 +40,10 @@ export default function Product() {
   const handlePageClick = (event: { selected: number }) => {
     setCurrentPage(event.selected + 1);
   };
+
+  useEffect(() => {
+    queryClient.fetchQuery(["sellerProducts", payload]);
+  }, [filter]);
 
   useEffect(() => {
     if (productsData?.getSellerProducts.hasNext) {
@@ -53,12 +59,14 @@ export default function Product() {
     return () => {
       queryClient.cancelQueries(["sellerProducts", payload]);
     };
-  }, [productsData, currentPage, queryClient]);
+  }, [productsData, currentPage, queryClient, filter]);
 
   return (
     <Fragment>
       {status === "loading" && <Load />}
-      {status === "error" && <ErrorInfo error={(productError as { message: string}).message} />}
+      {status === "error" && (
+        <ErrorInfo error={(productError as { message: string }).message} />
+      )}
       {status === "success" &&
       currentItems !== undefined &&
       currentItems.length > 0
@@ -69,6 +77,8 @@ export default function Product() {
               setProduct={setProduct}
               handlePageClick={handlePageClick}
               pageCount={pageCount}
+              filter={filter}
+              setFilter={setFilter}
             />
           )
         : !showProduct && <ProductEmpty />}

@@ -26,16 +26,11 @@ const GridContainer = function ({
 }: GridContainerProps) {
   const router = useRouter();
 
-  const slides = [
-    { element: <Card /> },
-    { element: <Card /> },
-    { element: <Card /> },
-  ];
-
   const payload = {
     page: 1,
     pageSize: 4,
     search: title,
+    sortBy: "-sales",
   };
   const {
     status: categoryStatus,
@@ -62,7 +57,7 @@ const GridContainer = function ({
           {categoryStatus === "error" && (
             <div className="tw-py-5 tw-w-full tw-text-center">
               <h1 className="tw-text-error tw-font-bold tw-text-2xl">
-                {categoryError}
+                {(categoryError as { message: string }).message}
               </h1>
             </div>
           )}
@@ -73,9 +68,17 @@ const GridContainer = function ({
           )}
           {categoryData?.products.objects !== undefined &&
           categoryData?.products.objects.length === 0 ? (
-            <div className="tw-py-5 tw-w-full tw-text-center">
-              <h1>No Products Found</h1>
-            </div>
+            cards ? (
+              cards.slice(0, 4).map((card) => (
+                <div key={uuid()} className={styles.product}>
+                  <ProductBox product={card} id={card.id} />
+                </div>
+              ))
+            ) : (
+              <div className="tw-py-5 tw-w-full tw-text-center">
+                <h1>No Products Found</h1>
+              </div>
+            )
           ) : (
             categoryData?.products.objects !== undefined &&
             categoryData.products.objects.map((product: ProductType) => (
@@ -94,20 +97,20 @@ const GridContainer = function ({
           </div>
         </div>
 
-        {/* {cards && (
+        {cards && (
           <>
             <div className={styles.cards}>
-              {categoryData !== undefined
-                ? cards.map((card: any) => (
-                    <div key={card} className={styles.card}>
-                      <Card />
-                    </div>
-                  ))
-                : null}
+              {cards.slice(0, 3).map((card: any) => (
+                <div key={card.id} className={styles.card}>
+                  <Card card={card} />
+                </div>
+              ))}
             </div>
-            <Slider element={slides} />
+            <Slider
+              element={cards.map((card) => ({ element: <Card card={card} /> }))}
+            />
           </>
-        )} */}
+        )}
 
         <>
           <div className={styles.banners}>

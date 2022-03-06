@@ -21,6 +21,7 @@ export default function Search({ search, check }: SearchProps) {
     page: 1,
     pageSize: 20,
     search,
+    sortBy: "-sales",
   };
   const { status, data } = check && useProducts(payload);
   const queryClient = new QueryClient();

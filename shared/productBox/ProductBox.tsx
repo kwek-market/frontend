@@ -16,6 +16,8 @@ import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import Loader from "react-loader-spinner";
 import useItemInCart from "@/hooks/useItemInCart";
 import useItemInWishlist from "@/hooks/useItemInWishlist";
+import useClicksUpdate from "@/hooks/useClicksUpdate";
+import { Rate } from "antd";
 
 export type ProductBoxProps = {
   id?: string;
@@ -25,6 +27,7 @@ export type ProductBoxProps = {
 const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   const dispatch = useDispatch();
   const { user, cart, wishlist } = useSelector((state: RootState) => state);
+  const { mutate } = useClicksUpdate();
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
@@ -48,6 +51,10 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   const checkIfItemInCart = useItemInCart(prod, cart.cart);
 
   const checkIfItemInWishlist = useItemInWishlist(prod, wishlist.wishlists);
+
+  function updateClicks(productId: string, token: string) {
+    mutate({ productId, token });
+  }
 
   if (prod === undefined)
     return (
@@ -111,7 +118,10 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             )}
           </span>
           <Link href={`/product/${prod.productTitle}?id=${prod.id}`} replace>
-            <a className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
+            <a
+              onClick={() => updateClicks(prod.id, user.token)}
+              className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"
+            >
               details
             </a>
           </Link>
@@ -126,33 +136,31 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             <p className={styles.box_productPrice}>
               {!!prod.options[0]?.discountedPrice && (
                 <span>
-                  ₦{""} {prod.options[0].optionTotalPrice}
+                  ₦{""} {prod.options[0].discountedPrice}
                 </span>
               )}
               <span>₦{prod.options[0]?.price}</span>
             </p>
 
             {prod.productRating.length > 0 ? (
-              <div className="tw-flex">
-                <StarRatingComponent
-                  name="rate1"
-                  starCount={5}
+              <div className="tw-flex tw-flex-wrap tw-justify-center">
+                <Rate
+                  style={{ fontSize: "0.75rem" }}
+                  allowHalf
+                  disabled
                   value={prod.productRating[0].rating}
-                  editing={false}
-                  emptyStarColor="#c4c4c4"
-                  starColor="#ffc107"
                 />
                 <small className="tw-text-gray-kwek400">
                   ({prod.productRating[0].likes} reviews)
                 </small>
               </div>
             ) : (
-              <div className={styles.box_productRating}>
-                <StarRatingComponent
-                  name="rate2"
-                  starCount={5}
-                  value={0}
-                  editing={false}
+              <div className="tw-flex tw-flex-wrap tw-justify-center">
+                <Rate
+                  style={{ fontSize: "0.75rem" }}
+                  allowHalf
+                  disabled
+                  value={prod.productRating[0].rating}
                 />
                 <small>(0 Reviews)</small>
               </div>

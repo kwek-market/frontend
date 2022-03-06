@@ -38,3 +38,7 @@ export async function getIp() {
 }
 
 export const even = (index: number) => (index % 2 !== 0 ? "tw-bg-gray-kwek700" : "");
+
+export function updateClicks(productId: string, token: string, mutate: any) {
+  mutate({ productId, token });
+}

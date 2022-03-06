@@ -13,9 +13,9 @@ const OrderItem = ({
 }) => {
   return (
       <tr className={styles.itemGrid}>
-        <td>
+        {/* <td>
           <input type="checkbox" name="" id="" />
-        </td>
+        </td> */}
         <td className={styles.orderId}>
           <span>{orderId}</span>
         </td>

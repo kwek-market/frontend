@@ -1,3 +1,4 @@
+import Revenue from "./Revenue";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import Load from "@/components/Loader/Loader";
 import useHomeCard from "@/hooks/useHomeCard";
@@ -18,17 +19,36 @@ export default function Home() {
     status: productStatus,
     data: productData,
     error: productError,
-  } = useSellerProducts({ token, page: 1, pageSize: 100 });
+  } = useSellerProducts({ token, page: 1, pageSize: 100, sortBy: "-clicks" });
+  const {
+    status: prodStatus,
+    data: prodData,
+    error: prodErr,
+  } = useSellerProducts({
+    token,
+    page: 1,
+    pageSize: 100,
+    thisMonth: true,
+    sortBy: "-clicks",
+  });
   const {
     status: ordersStatus,
     data: ordersData,
     error: ordersError,
-  } = useSellerOrders(token);
+  } = useSellerOrders({ token, thisMonth: false, page: 1, pageSize: 100 });
+  const {
+    status: ordStatus,
+    data: ordData,
+    error: ordError,
+  } = useSellerOrders({ token, thisMonth: true, page: 1, pageSize: 100 });
   const {
     "0": { data: salesData, status: salesStatus, error: salesError },
     "1": { data: qualityData, status: qualityStatus, error: qualityError },
     "2": { data: rateData, status: rateStatus, error: rateError },
-  } = useReviewCard(token);
+  } = useReviewCard(token, false);
+  const {
+    "0": { data: saleData, status: saleStatus, error: saleError },
+  } = useReviewCard(token, true);
   const {
     "0": { data: earningsData, status: earningsStatus, error: earningsError },
     "1": { data: daysData, status: daysStatus, error: daysError },
@@ -38,12 +58,22 @@ export default function Home() {
       error: customersError,
     },
     "3": { data: revenueData, status: revenueStatus, error: revenueError },
-  } = useHomeCard(token);
-  console.log(revenueData);
+  } = useHomeCard(token, false);
+  const {
+    "0": { data: earningData, status: earningStatus, error: earningError },
+    "2": { data: customerData, status: customerStatus, error: customerError },
+  } = useHomeCard(token, true);
 
   const total = useMemo(() => {
-    return ordersData?.getSellerOrders.reduce((a, b) => a + b.profit, 0);
+    return ordersData?.getSellerOrders.objects.reduce(
+      (a, b) => a + b.profit,
+      0
+    );
   }, [ordersData]);
+
+  const thisMonthTotal = useMemo(() => {
+    return ordData?.getSellerOrders.objects.reduce((a, b) => a + b.profit, 0);
+  }, [ordData]);
 
   return (
     <section className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[5fr,2fr] tw-gap-3 tw-my-4">
@@ -56,10 +86,10 @@ export default function Home() {
             )}
             {ordersStatus === "success" &&
             ordersData !== undefined &&
-            ordersData.getSellerOrders.length > 0 ? (
+            ordersData.getSellerOrders.objects.length > 0 ? (
               <Card
                 name="order sales"
-                content={`NGN ${total}`}
+                content={`NGN ${thisMonthTotal}`}
                 num={`NGN ${total}`}
                 imgSrc={"/svg/bag.svg"}
                 imgAlt={"order"}
@@ -85,7 +115,7 @@ export default function Home() {
             {earningsStatus === "success" && earningsData !== undefined && (
               <Card
                 name="sales earnings"
-                content={`NGN ${earningsData.getSellerSalesEarnings}`}
+                content={`NGN ${earningData.getSellerSalesEarnings}`}
                 num={`NGN ${earningsData.getSellerSalesEarnings}`}
                 imgSrc={"/svg/profits.svg"}
                 imgAlt={"earnings"}
@@ -93,7 +123,7 @@ export default function Home() {
             )}
           </Fragment>
 
-          <Fragment>
+          {/* <Fragment>
             {customersStatus === "loading" && <Load />}
             {customersStatus === "error" && (
               <ErrorInfo
@@ -103,29 +133,19 @@ export default function Home() {
             {customersStatus === "success" && customersData !== undefined && (
               <Card
                 name="customers"
-                content={`${customersData.getSellerCustomers ?? 0}`}
+                content={`${customerData.getSellerCustomers ?? 0}`}
                 num={customersData.getSellerCustomers ?? 0}
                 imgSrc={"/svg/customer-review.svg"}
                 imgAlt={"customers"}
               />
             )}
-          </Fragment>
+          </Fragment> */}
         </div>
-        <section className="tw-p-2 tw-bg-white-100 tw-mt-3 tw-border tw-border-gray-kwek700 tw-rounded-md">
-          <div className="tw-flex tw-justify-between tw-items-center tw-p-3">
-            <p className="tw-uppercase tw-text-sm tw-text-gray-kwek900 tw-font-semibold tw-mb-0 tw-flex">
-              revenue
-              <img
-                src="/svg/rise.svg"
-                alt="vector"
-                className="tw-w-5 tw-h-5 tw-ml-2"
-              />
-            </p>
-            <select className="tw-border-0 tw-py-0 tw-outline-none">
-              <option value="this year">This year</option>
-            </select>
-          </div>
-        </section>
+        <Revenue
+          revenue={revenueData}
+          status={revenueStatus}
+          err={revenueError}
+        />
       </section>
       <aside>
         <div className="tw-mb-4">
@@ -149,7 +169,7 @@ export default function Home() {
             {salesStatus === "success" && salesData !== undefined && (
               <Card
                 name="successful sales"
-                content={salesData.getSellerSuccessfulSales ?? 0}
+                content={saleData.getSellerSuccessfulSales ?? 0}
                 num={salesData.getSellerSuccessfulSales ?? 0}
                 imgSrc={"/svg/sale.svg"}
                 imgAlt={"sales"}
@@ -183,7 +203,7 @@ export default function Home() {
             productData.getSellerProducts.objects.length > 0 ? (
               <Card
                 name="products"
-                content={productData.getSellerProducts.objects.length}
+                content={prodData?.getSellerProducts.objects.length}
                 num={productData.getSellerProducts.objects.length}
                 imgSrc={"/svg/received.svg"}
                 imgAlt={"products"}

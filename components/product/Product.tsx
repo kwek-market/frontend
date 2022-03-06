@@ -3,15 +3,21 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StarRatingComponent from "react-star-rating-component";
+import { updateClicks } from "@/helpers";
+import useClicksUpdate from "@/hooks/useClicksUpdate";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
 
 type ProductProps = {
   product: ProductType;
 };
 
 export default function Product({ product }: ProductProps) {
+  const { user: { token } } = useSelector((state: RootState) => state);
+  const { mutate } = useClicksUpdate();
   return (
     <Link href={`/product/${product.productTitle}?id=${product.id}`}>
-      <a>
+      <a onClick={() => updateClicks(product.id, token, mutate)}>
         <section className="tw-flex tw-flex-col">
           <div className="tw-rounded-md">
             <Image
