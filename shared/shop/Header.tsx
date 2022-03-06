@@ -54,11 +54,17 @@ function Header() {
     </Menu>
   );
 
-  function readNotifications(payload: ReadNotificationType) {
-    mutate(payload, {
-      onSuccess: (data) => {
-        message.success(data.readNotification.message);
-        queryClient.invalidateQueries(["notifications"]);
+  function readNotifications(payload: ReadNotificationType & { msg: string }) {
+    const { messageId, msg, notificationId, token } = payload;
+    const data = {
+      token,
+      messageId,
+      notificationId,
+    };
+    mutate(data, {
+      onSuccess: async () => {
+        message.success(msg, 10);
+        await queryClient.invalidateQueries("notifications");
       },
       onError: (error: any) => {
         message.error(error.message);
@@ -96,12 +102,13 @@ function Header() {
               onClick={() =>
                 readNotifications({
                   messageId: notification.id,
+                  msg: notification.message,
                   notificationId: notification.notification.id,
                   token: user.token,
                 })
               }
             >
-              <p className="tw-mb-0 tw-font-semibold tw-text-gray-kwek200">
+              <p className="tw-mb-0 tw-font-semibold tw-text-gray-kwek200 tw-truncate">
                 {notification.message}
               </p>
               <p className="tw-mb-0 tw-text-brown-kwek200 tw-text-sm">

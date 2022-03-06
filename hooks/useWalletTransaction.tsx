@@ -2,8 +2,10 @@ import { userFetcher } from "@/helpers";
 import { GET_SELLER_TRANSACTIONS } from "@/store/seller/seller.queries";
 import { useQuery } from "react-query";
 
-export default function useWalletTransaction(token: string) {
+type Payload = { token: string; page: number; pageSize: number };
+
+export default function useWalletTransaction(payload: Payload) {
   return useQuery("wallet-transaction", () =>
-    userFetcher(GET_SELLER_TRANSACTIONS, { token: token })
+    userFetcher(GET_SELLER_TRANSACTIONS, payload)
   );
 }

@@ -6,9 +6,9 @@ const OrderHeader = function () {
   return (
     <thead>
       <tr className={styles.grid}>
-        <th>
+        {/* <th>
           <input type="checkbox" name="" id="" />
-        </th>
+        </th> */}
         <th>
           <span className={styles.title}>Order ID</span>
         </th>

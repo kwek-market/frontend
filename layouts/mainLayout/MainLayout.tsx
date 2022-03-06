@@ -27,7 +27,7 @@ const MainLayout = function ({ children, title }: any) {
     setShowMenu(!showMenu);
   }
 
-  const userId = user.id;
+  const userId = user.id ? user.id : "";
   const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
   // Pusher.logToConsole = true;
   const pusherClient = new Pusher(key, {
@@ -45,7 +45,7 @@ const MainLayout = function ({ children, title }: any) {
     dispatch(getCartFunc(user.token));
     (async () => {
       try {
-        const data = await verifyTokenFunc(user.token);
+        const data = await verifyTokenFunc(user.token ? user.token : "");
         if (data.verifyToken.status) {
           user.token && dispatch(getUserData(user.token));
           user.token &&

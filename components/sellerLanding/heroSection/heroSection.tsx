@@ -29,11 +29,11 @@ const heroSection = () => {
 							<span className="tw-mr-3 lg:tw-mr-5">Marketplace</span>
 						</a>
 					</Link>
-					<Link href="/">
+					{/* <Link href="/">
 						<a className={Styles.sell}>
 							<span className="tw-mr-3 lg:tw-mr-5">Pricing</span>
 						</a>
-					</Link>
+					</Link> */}
 					<Link href="/">
 						<a className={Styles.sell}>
 							<span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
@@ -71,11 +71,11 @@ const heroSection = () => {
 									</span>
 								</a>
 							</Link>
-							<Link href="/">
+							{/* <Link href="/">
 								<a className={Styles.sell}>
 									<span className="tw-mr-3 lg:tw-mr-5">Pricing</span>
 								</a>
-							</Link>
+							</Link> */}
 							<Link href="/">
 								<a className={Styles.sell}>
 									<span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>

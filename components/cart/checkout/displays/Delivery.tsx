@@ -59,7 +59,7 @@ function Delivery({
                       </p>
                     </div>
                   </button>
-                  <button
+                  {/* <button
                     className={styles.option_two}
                     onClick={() => setDeliveryMethod("pickup")}
                   >
@@ -76,7 +76,7 @@ function Delivery({
                         locations nationwide
                       </p>
                     </div>
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <button type="submit" onClick={() => deliverFunc()}>

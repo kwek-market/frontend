@@ -8,6 +8,7 @@ import {
   PASSWORDREGEX,
   passwordValidator,
   getIp,
+  updateClicks,
 } from "./helper";
 
 export {
@@ -21,4 +22,5 @@ export {
   PASSWORDREGEX,
   passwordValidator,
   getIp,
+  updateClicks,
 };

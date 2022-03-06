@@ -103,7 +103,7 @@ export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
               <br />
               <input
                 type="text"
-                placeholder="0"
+                placeholder="book"
                 name="item"
                 required
                 value={element.item || ""}

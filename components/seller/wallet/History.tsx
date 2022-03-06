@@ -1,61 +1,59 @@
+import { Top } from "./Top";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import Load from "@/components/Loader/Loader";
 import useWalletTransaction from "@/hooks/useWalletTransaction";
 import { RootState } from "@/store/rootReducer";
 import { Input, Select } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import { even } from "@/helpers/helper";
-
-const { Option } = Select;
+import { useQueryClient } from "react-query";
+import { userFetcher } from "@/helpers";
+import { GET_SELLER_TRANSACTIONS } from "@/store/seller/seller.queries";
+import ReactPaginate from "react-paginate";
+import { WalletHistory } from "@/interfaces/commonTypes";
 
 export default function History() {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  const { status, error, data } = useWalletTransaction(token);
+  const queryClient = useQueryClient();
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentItems, setCurrentItems] = useState<WalletHistory[]>(
+    [] as WalletHistory[]
+  );
+  const payload = { token, page: currentPage, pageSize: 20 };
+  const { status, error, data } = useWalletTransaction(payload);
   const [history, setHistory] = useState({
     search: "",
     sort: "",
     filter: "",
   });
 
+  useEffect(() => {
+    if (data?.getSellerWalletTransactions.hasNext) {
+      queryClient.prefetchQuery("wallet-transaction", () =>
+        userFetcher(GET_SELLER_TRANSACTIONS, payload)
+      );
+    }
+    if (data === undefined) return;
+    setPageCount(data.getSellerWalletTransactions.pages);
+    setCurrentItems(data.getSellerWalletTransactions.objects);
+    // console.log(`current page: ${currentPage}`);
+    return () => {
+      queryClient.cancelQueries("wallet-transaction");
+    };
+  }, [queryClient, currentPage, data]);
+
+  const handlePageClick = (event: { selected: number }) => {
+    setCurrentPage(event.selected + 1);
+  };
+
   return (
     <section className="">
-      <div className="tw-flex md:tw-flex-row tw-flex-col tw-justify-between">
-        <div className="tw-flex-[3]">
-          <Input.Search
-            placeholder="Search transaction history"
-            size="large"
-            className="tw-rounded-md"
-            value={history.search}
-            onChange={(e) =>
-              setHistory((prev) => ({ ...prev, search: e.target.value }))
-            }
-          />
-        </div>
-        <div className="tw-flex-[2] tw-flex tw-gap-2 tw-ml-2">
-          <Select
-            value={history.sort}
-            placeholder="Sort:Most Recent"
-            onChange={(e) => setHistory((prev) => ({ ...prev, sort: e }))}
-            size="large"
-            className="tw-rounded-md tw-w-full"
-          >
-            <Option value="most recent">Most Recent</Option>
-          </Select>
-          <Select
-            value={history.filter}
-            placeholder="Filter:None"
-            onChange={(e) => setHistory((prev) => ({ ...prev, filter: e }))}
-            size="large"
-            className="tw-w-full tw-ml-2"
-          >
-            <Option value="successful">Successful</Option>
-          </Select>
-        </div>
-      </div>
+      {/* <Top history={history} setHistory={setHistory}   /> */}
       <div className="tw-mt-4">
         {status === "loading" && <Load />}
         {status === "error" && <ErrorInfo error={"An error occurred"} />}
@@ -80,24 +78,54 @@ export default function History() {
             </tr>
           </thead>
           <tbody>
-            {status === "success" &&
-            data !== undefined &&
-            data.getSellerWalletTransactions.length > 0
-              ? data.getSellerWalletTransactions.map((item, index: number) => (
+            {status === "success" && currentItems.length > 0
+              ? currentItems.map((item, index: number) => (
                   <tr
                     key={item.id}
                     className={`${even(index)} tw-bg-opacity-10`}
                   >
                     <td className="tw-p-3">{item.remark}</td>
-                    <td>{dayjs(item.date).format('DD/MM/YYYY')}</td>
-                    <td>{item.amount}</td>
-                    <td>{item.status}</td>
-                    <td>{item.wallet.balance}</td>
+                    <td>{dayjs(item.date).format("DD/MM/YYYY")}</td>
+                    <td>NGN {item.amount}</td>
+                    <td>
+                      {item.status ? (
+                        <span className="tw-border tw-border-green-success tw-rounded-md tw-text-green-success">
+                          Successful
+                        </span>
+                      ) : (
+                        <span className="tw-border tw-border-error tw-rounded-md tw-text-error tw-px-3 tw-py-1">
+                          Failed
+                        </span>
+                      )}
+                    </td>
+                    <td>NGN {item.wallet.balance}</td>
                   </tr>
                 ))
               : null}
           </tbody>
         </table>
+        <div className="tw-mt-4">
+          <ReactPaginate
+            nextLabel="next >"
+            onPageChange={(e) => handlePageClick(e)}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={undefined}
+          />
+        </div>
       </div>
     </section>
   );
