@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "./ProductFilled.module.scss";
 import { ProductType } from "@/interfaces/commonTypes";
@@ -15,6 +15,8 @@ type ProductFilledProps = {
   setProduct: React.Dispatch<React.SetStateAction<ProductType>>;
   pageCount: number;
   handlePageClick: (event: { selected: number }) => void;
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const ProductFilled = function ({
@@ -23,12 +25,13 @@ const ProductFilled = function ({
   setProduct,
   pageCount,
   handlePageClick,
+  filter,
+  setFilter,
 }: ProductFilledProps) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
   const { status, data, error } = usePromotions(token);
-  const [filter, setFilter] = useState<string>("popular");
   console.log(data);
 
   function isPromoted(id: string) {
@@ -54,11 +57,11 @@ const ProductFilled = function ({
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             >
-              <option value="popular">Most Popular</option>
-              <option value="recent">Recent</option>
-              <option value="price">Price: Low to High</option>
-              <option value="price">Price: High to Low</option>
-              <option value="rating">Product Rating</option>
+              <option value="-clicks">Most Popular</option>
+              <option value="-date_created">Recent</option>
+              <option value="sales">Price: Low to High</option>
+              <option value="-sales">Price: High to Low</option>
+              <option value="-rating">Product Rating</option>
             </select>
           </div>
         </div>

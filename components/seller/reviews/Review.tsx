@@ -16,6 +16,7 @@ import ReviewItem from "./ReviewItem";
 
 export default function Review() {
   const queryClient = useQueryClient();
+  const [sort, setSort] = useState("recent");
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<SellerReview[]>(
@@ -24,10 +25,11 @@ export default function Review() {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  const payload: PagePayload = {
+  const payload = {
     token,
     page: currentPage,
     pageSize: 20,
+    sortBy: sort,
   };
   const {
     status: reviewStatus,
@@ -38,8 +40,14 @@ export default function Review() {
     "0": { data: salesData, status: salesStatus, error: salesError },
     "1": { data: qualityData, status: qualityStatus, error: qualityError },
     "2": { data: rateData, status: rateStatus, error: rateError },
-  } = useReviewCard(token);
-  // console.log(salesData, qualityData, rateData);
+  } = useReviewCard(token, false);
+  const {
+    "0": { data: saleData, status: saleStatus, error: saleError },
+  } = useReviewCard(token, true);
+
+  useEffect(() => {
+    queryClient.fetchQuery(["reviews", payload]);
+  }, [sort]);
 
   useEffect(() => {
     if (reviewData?.getSellerReview.hasNext) {
@@ -77,7 +85,11 @@ export default function Review() {
             <ErrorInfo error={(salesError as { message: string }).message} />
           )}
           {salesStatus === "success" && salesData !== undefined && (
-            <Card name={"successful sales"} num={"0"} content="NGN 0" />
+            <Card
+              name={"successful sales"}
+              num={salesData.getSellerSuccessfulSales}
+              content={`NGN ${saleData.getSellerSuccessfulSales}`}
+            />
           )}
         </Fragment>
         <Fragment>
@@ -89,7 +101,7 @@ export default function Review() {
             <Card
               name={"product quality"}
               num={`${qualityData.getSellerProductQuality}%`}
-              content="0%"
+              content={`${qualityData.getSellerProductQuality}%`}
             />
           )}
         </Fragment>
@@ -102,11 +114,11 @@ export default function Review() {
             <Card
               name={"delivery rate"}
               num={`${rateData.getSellerDeliveryRate}%`}
-              content="NGN 0"
+              content={`NGN ${rateData.getSellerDeliveryRate}%`}
             />
           )}
         </Fragment>
-        <Card name={"communication"} num={"0"} content="NGN 0" />
+        {/* <Card name={"communication"} num={"0"} content="NGN 0" /> */}
       </div>
       <div className="tw-mt-4">
         <div className="tw-flex tw-justify-between tw-items-center tw-border-b tw-border-gray-kwek700 tw-pb-2">
@@ -119,10 +131,13 @@ export default function Review() {
             <select
               placeholder="All time"
               className=""
-              value=""
-              onChange={() => null}
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
             >
-              <option>Recent</option>
+              <option value="-date_created">recent</option>
+              <option value="date_created">oldest</option>
+              <option value="rating">raing:low to high</option>
+              <option value="-rating">rating:high to low</option>
             </select>
           </label>
         </div>

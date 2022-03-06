@@ -22,7 +22,7 @@ export function createWishlist(payload: AddToWishlistPayload, token: string) {
       setLoading();
       const res = await userFetcherWithAuth(AddToWishlist, payload, token);
       // console.log(res);
-      message.success(res.addToWishlist.message, 5);
+      message.success("added to wishlist", 5);
       dispatch({
         type: WishlistType.ADD_WISHLIST,
         payload: res.addToWishlist,

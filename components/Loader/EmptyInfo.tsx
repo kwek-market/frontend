@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export type EmptyInfoProps = {
   title: string;
-  btnText: string;
   desc: string;
   extraDesc?: string;
   link: string;
@@ -12,7 +11,6 @@ export type EmptyInfoProps = {
 
 export default function EmptyInfo({
   title,
-  btnText,
   desc,
   extraDesc,
   link,
@@ -31,11 +29,7 @@ export default function EmptyInfo({
         </p>
         {extraDesc && <p className="">{extraDesc}</p>}
 
-        <Link href={`/seller/${link}`}>
-          <a className="tw-bg-red-kwek100 tw-text-white-100 tw-capitalize tw-rounded-md tw-p-3">
-            {btnText}
-          </a>
-        </Link>
+        <p className="tw-capitalize tw-rounded-md tw-p-3">{link}</p>
       </div>
     </section>
   );

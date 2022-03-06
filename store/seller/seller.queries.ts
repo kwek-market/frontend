@@ -106,21 +106,25 @@ export const GET_SELLER_PRODUCTS = `
     $page: Int
     $pageSize: Int
     $token: String!
-    $thisMonth: Boolean
+    $search: String
+    $sortBy: String
+    $keyword: [String]
+    $priceRange: [Float]
     $rating: Int
-    $price: String
-    $popular: Boolean
-    $recent: Boolean
+    $sizes: [String]
+    $thisMonth: Boolean
     ) {
     getSellerProducts(
       page: $page
       pageSize: $pageSize
       token: $token
-      thisMonth: $thisMonth
+      search: $search
+      sortBy: $sortBy
+      keyword: $keyword
+      priceRange: $priceRange
       rating: $rating
-      price: $price
-      popular: $popular
-      recent: $recent
+      sizes: $sizes
+      thisMonth: $thisMonth
       ) {
         page
         pages
@@ -151,8 +155,13 @@ export const GET_SELLER_PRODUCTS = `
 `;
 
 export const GET_SELLER_ORDERS = `
-  query getSellerOrders($token: String!, $thisMonth: Boolean) {
-    getSellerOrders(token: $token, thisMonth: $thisMonth) {
+  query getSellerOrders($token: String!, $page: Int, $pageSize: Int, $thisMonth: Boolean) {
+    getSellerOrders(token: $token, page: $page, pageSize: $pageSize, thisMonth: $thisMonth) {
+     page
+     pages
+     hasNext
+     hasPrev
+     objects {
       order {
         id
         deliveryStatus
@@ -165,6 +174,7 @@ export const GET_SELLER_ORDERS = `
       profit
       paid
       status
+     }
     }
   }
 `;
@@ -209,16 +219,21 @@ export const GET_SELLER_WALLET = `
 `;
 
 export const GET_SELLER_TRANSACTIONS = `
-  query getSellerWalletTransactions($token: String!) {
-    getSellerWalletTransactions(token: $token) {
-      id
-      status
-      remark
-      amount
-      date
-      transactionType
-      wallet {
-        balance
+  query getSellerWalletTransactions($token: String!, $page: Int, $pageSize: Int) {
+    getSellerWalletTransactions(token: $token, page: $page, pageSize: $pageSize) {
+      page
+      pages
+      hasNext
+      objects {
+        id
+        status
+        remark
+        amount
+        date
+        transactionType
+        wallet {
+          balance
+        }
       }
     }
   }
@@ -299,8 +314,8 @@ export const STORE_LOCATION_UPDATE = `
 `;
 
 export const GET_SELLER_REVIEW = `
-  query getSellerReview($page: Int, $pageSize: Int, $token: String!) {
-    getSellerReview(page: $page, pageSize: $pageSize, token: $token) {
+  query getSellerReview($page: Int, $pageSize: Int, $token: String!, $sortBy: String) {
+    getSellerReview(page: $page, pageSize: $pageSize, token: $token, sortBy: $sortBy) {
       page
       pages
       hasNext
@@ -391,34 +406,37 @@ export const CREATE_INVOICE = `
 `;
 
 export const GET_SELLER_INVOICE = `
-  query getSellerInvoices($token: String!) {
-    getSellerInvoices(token: $token) {
-      
-        id
-        store {
+  query getSellerInvoices($token: String!, $page: Int, $pageSize: Int) {
+    getSellerInvoices(token: $token, page: $page, pageSize: $pageSize) {
+        page
+        pages
+        hasNext
+        objects {
           id
-          storeName
-          email
-          address
-        }
-        customerName
-        customerEmail
-        customerAddress
-        deliveryFee
-        subtotal
-        total
-        invoiceNumber
-        issueDate
-        note
-        purchasedItem {
-          id
-          item
-          description
-          quantity
-          unitCost
+          store {
+            id
+            storeName
+            email
+            address
+          }
+          customerName
+          customerEmail
+          customerAddress
+          deliveryFee
+          subtotal
           total
+          invoiceNumber
+          issueDate
+          note
+          purchasedItem {
+            id
+            item
+            description
+            quantity
+            unitCost
+            total
+          }
         }
-      
     }
   }
 `;
@@ -436,8 +454,8 @@ export const GET_SELLER_DELIVERY_RATE = `
 `;
 
 export const GET_SELLER_SUCCESSFUL_SALES = `
-  query getSellerSuccessfulSales($token: String!) {
-    getSellerSuccessfulSales(token: $token)
+  query getSellerSuccessfulSales($token: String!, $thisMonth: Boolean) {
+    getSellerSuccessfulSales(token: $token, thisMonth: $thisMonth) 
   }
 `;
 
@@ -448,14 +466,14 @@ export const GET_SELLER_DAYS_SELLING = `
 `;
 
 export const GET_SELLER_SALES_EARNINGS = `
-  query getSellerSalesEarnings($token: String!) {
-    getSellerSalesEarnings(token: $token)
+  query getSellerSalesEarnings($token: String!, $thisMonth: Boolean) {
+    getSellerSalesEarnings(token: $token, thisMonth: $thisMonth)
   }
 `;
 
 export const GET_SELLER_CUSTOMERS = `
-  query getSellerCustomers($token: String!) {
-    getSellerCustomers(token: $token)
+  query getSellerCustomers($token: String!, $thisMonth: Boolean) {
+    getSellerCustomers(token: $token, thisMonth: $thisMonth)
   }
 `;
 
@@ -508,4 +526,42 @@ export const PROMOTE_PRODUCT = `
           }
         }
     }
+`;
+
+export const UPDATE_DELIVERY_STATUS = `
+  mutation updateDeliveryStatus($deliveryStatus: String!, $orderId: String!) {
+    updateDeliveryStatus(deliveryStatus: $deliveryStatus, orderId: $orderId) {
+      status
+      message
+    }
+  }
+`;
+
+export const CLICKS_UPDATE = `
+  mutation clicksUpdate($productId: String!, $token: String!) {
+    clicksUpdate(productId: $productId, token: $token) {
+      status
+      message
+    }
+  }
+`;
+
+export const DEALS_OF_THE_DAY = `
+  query dealsOfTheDay {
+    dealsOfTheDay {
+      id
+      productTitle
+      image {
+        id
+        imageUrl
+      }
+      options {
+        price
+        discountedPrice
+      }
+      productRating {
+        rating
+      }
+    }
+  }
 `;

@@ -2,15 +2,20 @@ import { Fragment, memo } from "react";
 import { MainLayout } from "@/layouts";
 import { Hero, Features, CategoryGrid, Brands } from "@/components/home";
 
-import MobileSearchBar from "@/shared/header/MobileSearchBar";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { Spin } from "antd";
+import { v4 } from "uuid";
+import useDealsOfTheDay from "@/hooks/useDealsOfTheDay";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
+import Load from "@/components/Loader/Loader";
 
 const Home = function () {
   const {
     categories: { error, loading, categories },
   } = useSelector((state: RootState) => state);
+  const { status, error: err, data } = useDealsOfTheDay();
+  console.log(data);
 
   function sortArray(array: any[]) {
     let arr = array;
@@ -25,14 +30,21 @@ const Home = function () {
     return arr;
   }
 
-  const cards = [1, 2, 3];
-
   return (
     <MainLayout>
-      {/* <MobileSearchBar /> */}
       <Hero />
       <Features />
-      {/* <CategoryGrid title="Deals Of The day" timer cards={cards} /> */}
+      {status === "loading" || data === undefined ? (
+        <Load />
+      ) : status === "error" ? (
+        <ErrorInfo error={(err as { message: string }).message} />
+      ) : data.dealsOfTheDay.length > 0 ? (
+        <CategoryGrid
+          title="Deals Of The day"
+          timer
+          cards={data.dealsOfTheDay}
+        />
+      ) : null}
       {loading && (
         <div className="tw-flex tw-justify-center tw-items-center tw-py-5">
           <Spin size="large" />
@@ -51,7 +63,7 @@ const Home = function () {
           categories
             .slice(0, 6)
             .map(({ id, name }) => (
-              <Fragment key={id}>
+              <Fragment key={v4()}>
                 {name !== undefined && <CategoryGrid title={name} sidebar />}
               </Fragment>
             ))}

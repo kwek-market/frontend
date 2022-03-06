@@ -242,3 +242,12 @@ export const READ_NOTIFICATIONS = `
       }
     }
 `;
+
+export const CONTACT_US = `
+  mutation contactUs($name: String!, $email: String!, $message: String!) {
+    contactUs(name: $name, email: $email, message: $message) {
+      message
+      status
+    }
+  }
+`;

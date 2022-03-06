@@ -7,10 +7,25 @@ import OrderItem from "./OrderItem";
 import OrderHeader from "./OrderHeader";
 import { v4 } from "uuid";
 import { OrderList } from "@/interfaces/commonTypes";
+import ReactPaginate from "react-paginate";
 
 dayjs.extend(localizedformat);
 
-const OrdersFilled = function ({ orders }: { orders: OrderList[] }) {
+type OrdersFilledProps = {
+  orders: OrderList[];
+  pageCount: number;
+  handlePageClick: (event: { selected: number }) => void;
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const OrdersFilled = function ({
+  orders,
+  pageCount,
+  handlePageClick,
+  filter,
+  setFilter,
+}: OrdersFilledProps) {
   console.log(orders);
 
   return (
@@ -32,7 +47,7 @@ const OrdersFilled = function ({ orders }: { orders: OrderList[] }) {
         </label>
       </div>
 
-      <table>
+      <table className="tw-mb-4">
         <OrderHeader />
         <tbody>
           {orders.map((order) => (
@@ -54,6 +69,26 @@ const OrdersFilled = function ({ orders }: { orders: OrderList[] }) {
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+        nextLabel="next >"
+        onPageChange={(e) => handlePageClick(e)}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={undefined}
+      />
     </div>
   );
 };

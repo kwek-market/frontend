@@ -10,7 +10,7 @@ const Sidebar = function ({ title }) {
   const payload = {
     page: 1,
     pageSize: 5,
-    sales: "selling",
+    sortBy: "-sales",
     search: title,
   };
   const {
@@ -27,7 +27,7 @@ const Sidebar = function ({ title }) {
         {categoryStatus === "error" && (
           <div className="tw-py-5 tw-w-full tw-text-center">
             <h1 className="tw-text-error tw-font-bold tw-text-2xl">
-              {categoryError}
+              {(categoryError as { message: string }).message}
             </h1>
           </div>
         )}
@@ -51,7 +51,7 @@ const Sidebar = function ({ title }) {
                 <p className={styles.textSm}>{product?.productTitle}</p>
                 <p className={styles.textMd}>
                   {product.options[0]?.discountedPrice ? (
-                    <span>₦{product.options[0].optionTotalPrice}</span>
+                    <span>₦{product.options[0].discountedPrice}</span>
                   ) : (
                     <span>₦{product.options[0]?.price}</span>
                   )}

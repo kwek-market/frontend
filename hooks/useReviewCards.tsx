@@ -6,8 +6,8 @@ import {
 } from "@/store/seller/seller.queries";
 import { useQueries } from "react-query";
 
-export default function useReviewCard(token: string) {
-  const payload = { token };
+export default function useReviewCard(token: string, thisMonth?: boolean ) {
+  const payload = { token, thisMonth };
   return useQueries([
     {
       queryKey: "successful-sales",
@@ -15,11 +15,11 @@ export default function useReviewCard(token: string) {
     },
     {
       queryKey: "product-quality",
-      queryFn: () => userFetcher(GET_SELLER_PRODUCT_QUALITY, payload),
+      queryFn: () => userFetcher(GET_SELLER_PRODUCT_QUALITY, { token: payload.token }),
     },
     {
       queryKey: "delivery-rate",
-      queryFn: () => userFetcher(GET_SELLER_DELIVERY_RATE, payload),
+      queryFn: () => userFetcher(GET_SELLER_DELIVERY_RATE, { token: payload.token }),
     },
   ]);
 }

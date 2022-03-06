@@ -6,8 +6,9 @@ export type PayloadType = {
   page: number;
   pageSize: number;
   search?: string;
-  sales?: string;
-  clicks?: string;
+  sortBy: string;
+  priceRange?: number[];
+  sizes?: string[];
   keyword?: string[];
   rating?: number;
 };

@@ -23,9 +23,8 @@ export default function Promotions() {
       data.getSellerPromotedProducts.length === 0 ? (
         <EmptyInfo
           title={"promotions"}
-          btnText={"create promotion"}
           desc={"you currently have no promotions"}
-          link={"profile"}
+          link={"Go to products tab to promote products"}
         />
       ) : (
         <Filled />
