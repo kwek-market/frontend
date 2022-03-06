@@ -21,6 +21,7 @@ const Sidebar = function ({ category, filtering, setFiltering }: SidebarProps) {
   const { id } = categories.categories.find((cat) => cat.name === category);
   const payload = { id };
   const { status, data, error } = useCategory(payload);
+  console.log(filtering);
 
   return (
     <div className={styles.sidebar}>

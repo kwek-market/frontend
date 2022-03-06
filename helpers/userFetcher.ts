@@ -4,7 +4,7 @@ const oldUrl = "https://kwekapi.com/v1/kwekql";
 const newUrl = "https://kwekapi.herokuapp.com/v1/kwekql";
 
 export const userFetcher = async (query: string, variables?: any) => {
-  return await request(oldUrl, query, variables);
+  return await request(newUrl, query, variables);
 };
 
 export const userFetcherWithAuth = async (
@@ -12,7 +12,7 @@ export const userFetcherWithAuth = async (
   variables: any,
   token: string
 ) => {
-  const endpoint = oldUrl;
+  const endpoint = newUrl;
 
   if (token === "" || token === undefined) {
     throw new Error("No token provided");
