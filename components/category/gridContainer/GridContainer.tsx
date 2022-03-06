@@ -16,10 +16,10 @@ const GridContainer = function ({ cards, category }: any) {
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState(true);
   const [filtering, setFiltering] = useState<Filtering>({
-    priceRange: [Number.MAX_SAFE_INTEGER, 0],
-    sizes: ["xxxl"],
-    keyword: ["all"],
-    rating: 5,
+    priceRange: [],
+    sizes: [],
+    keyword: [],
+    rating: -5,
   });
   const [sort, setSort] = useState("-clicks");
   const [currentItems, setCurrentItems] = useState<ProductType[]>(
@@ -43,19 +43,17 @@ const GridContainer = function ({ cards, category }: any) {
 
   useEffect(() => {
     const { keyword, priceRange, rating, sizes } = filtering;
-    const sub = {
-      ...payload,
-      priceRange,
-      rating,
-      keyword,
-      sizes,
-    };
+    // check for the ones that have values and add them to the payload object, else remove them
+    if (keyword.length > 0) payload.keyword = keyword;
+    //if (priceRange.length > 0) payload.priceRange = priceRange;
+    if (sizes.length > 0) payload.sizes = sizes;
+    payload.rating = rating;
     (async () => {
       try {
-        const data = await queryClient.fetchQuery(
-          ["category-items", payload],
-          () => userFetcher(GetProducts, sub)
-        );
+        const data = await queryClient.refetchQueries([
+          "category-items",
+          payload,
+        ]);
         console.log(data);
       } catch (err) {
         console.error(err.message);
@@ -65,7 +63,13 @@ const GridContainer = function ({ cards, category }: any) {
     return () => {
       queryClient.cancelQueries(["category-items", payload]);
     };
-  }, [sort, filtering.priceRange, filtering.rating, filtering.sizes]);
+  }, [
+    sort,
+    filtering.priceRange,
+    filtering.rating,
+    filtering.sizes,
+    filtering.keyword,
+  ]);
 
   useEffect(() => {
     if (categoryData?.products?.hasNext) {

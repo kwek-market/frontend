@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import Loader from "react-loader-spinner";
 import { v4 } from "uuid";
 import styles from "./Sidebar.module.scss";
+
 type CategoryProps = SidebarProps & {
   category: string;
   status: string;
@@ -39,6 +40,7 @@ export function Category({
                 type="checkbox"
                 name="category"
                 value={cat.name}
+                checked={filtering.keyword.includes(cat.name)}
                 onChange={(e) => {
                   if (e.target.checked) {
                     setFiltering({
