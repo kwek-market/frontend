@@ -13,7 +13,7 @@ export function Rating({ setFiltering, filtering }: SidebarProps) {
             className={styles.inputRound}
             name="rating"
             type="radio"
-            value={5}
+            value={-5}
             onChange={(e) =>
               setFiltering({ ...filtering, rating: parseInt(e.target.value) })
             }
@@ -27,7 +27,7 @@ export function Rating({ setFiltering, filtering }: SidebarProps) {
             className={styles.inputRound}
             name="rating"
             type="radio"
-            value={4}
+            value={-4}
             onChange={(e) =>
               setFiltering({ ...filtering, rating: parseInt(e.target.value) })
             }
@@ -42,7 +42,7 @@ export function Rating({ setFiltering, filtering }: SidebarProps) {
             className={styles.inputRound}
             name="rating"
             type="radio"
-            value={3}
+            value={-3}
             onChange={(e) =>
               setFiltering({ ...filtering, rating: parseInt(e.target.value) })
             }
@@ -57,7 +57,7 @@ export function Rating({ setFiltering, filtering }: SidebarProps) {
             className={styles.inputRound}
             name="rating"
             type="radio"
-            value={2}
+            value={-2}
             onChange={(e) =>
               setFiltering({ ...filtering, rating: parseInt(e.target.value) })
             }
@@ -72,7 +72,7 @@ export function Rating({ setFiltering, filtering }: SidebarProps) {
             className={styles.inputRound}
             name="rating"
             type="radio"
-            value={1}
+            value={-1}
             onChange={(e) =>
               setFiltering({ ...filtering, rating: parseInt(e.target.value) })
             }
