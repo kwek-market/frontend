@@ -32,7 +32,6 @@ const ProductFilled = function ({
     user: { token },
   } = useSelector((state: RootState) => state);
   const { status, data, error } = usePromotions(token);
-  console.log(data);
 
   function isPromoted(id: string) {
     return data?.getSellerPromotedProducts.find((item) => item.id === id);

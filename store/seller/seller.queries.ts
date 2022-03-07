@@ -565,3 +565,22 @@ export const DEALS_OF_THE_DAY = `
     }
   }
 `;
+
+export const UPDATE_PRODUCT = `
+  mutation updateProduct($id: Int!, $productData: ProductInput!) {
+    updateProduct(id: #id, productData: $productData) {
+      product {
+        id
+      }
+    }
+  }
+`;
+
+export const UPDATE_ORDER_PROGRESS = `
+  mutation updateOrderProgress($orderId: String!, $progress: String!) {
+    updateOrderProgress(orderId: $orderId, progress: $progress) {
+      status
+      message
+    }
+  }
+`;
