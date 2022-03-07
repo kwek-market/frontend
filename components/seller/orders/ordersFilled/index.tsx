@@ -26,7 +26,6 @@ const OrdersFilled = function ({
   filter,
   setFilter,
 }: OrdersFilledProps) {
-  console.log(orders);
 
   return (
     <div className={styles.empty_container}>

@@ -46,7 +46,9 @@ export default function Review() {
   } = useReviewCard(token, true);
 
   useEffect(() => {
-    queryClient.fetchQuery(["reviews", payload]);
+    queryClient.fetchQuery(["reviews", payload], () =>
+      userFetcher(GET_SELLER_REVIEW, payload)
+    );
   }, [sort]);
 
   useEffect(() => {
