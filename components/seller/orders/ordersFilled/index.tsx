@@ -35,7 +35,7 @@ const OrdersFilled = function ({
           Orders <span className={styles.ordersVal}>{orders.length}</span>
         </div>
 
-        <label htmlFor="dropDown" className="tw-capitalize">
+        {/* <label htmlFor="dropDown" className="tw-capitalize">
           Sort by:
           <select id="dropDown" className="tw-ml-2 tw-rounded-md">
             <option>All Orders</option>
@@ -44,16 +44,16 @@ const OrdersFilled = function ({
             <option>Authorized</option>
             <option>Product Rating</option>
           </select>
-        </label>
+        </label> */}
       </div>
 
       <table className="tw-mb-4">
         <OrderHeader />
         <tbody>
-          {orders.map((order) => (
+          {orders.map((order, index) => (
             <OrderItem
               key={v4()}
-              orderId={order.order.id}
+              orderId={index+1}
               orderDate={dayjs(order.created).format("MMM DD, YYYY")}
               imgSrc="/images/seller1.png"
               customerName={order.customer.fullName}
