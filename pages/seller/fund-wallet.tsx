@@ -39,9 +39,14 @@ export default function fundWallet() {
               },
               onError: (err: { message: string }) => {
                 message.error(err.message);
+                router.push("/seller/profile");
               },
             }
           );
+        },
+        onError: (err: { message: string }) => {
+          message.error(err.message);
+          router.push("/seller/profile");
         },
       });
     }
