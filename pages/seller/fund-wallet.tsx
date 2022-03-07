@@ -22,6 +22,7 @@ export default function fundWallet() {
     if (status === "cancelled") {
       message.error("Payment was cancelled, redirecting to profile page");
       router.push("/seller/profile");
+      return;
     }
     if (tx_ref && transaction_id) {
       const payload: VerifyPaymentType = {
