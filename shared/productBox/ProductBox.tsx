@@ -148,7 +148,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                   style={{ fontSize: "0.75rem" }}
                   allowHalf
                   disabled
-                  value={prod.productRating[0].rating}
+                  value={prod.productRating[0]?.rating}
                 />
                 <small className="tw-text-gray-kwek400">
                   ({prod.productRating[0].likes} reviews)
@@ -160,7 +160,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                   style={{ fontSize: "0.75rem" }}
                   allowHalf
                   disabled
-                  value={prod.productRating[0].rating}
+                  value={0}
                 />
                 <small>(0 Reviews)</small>
               </div>

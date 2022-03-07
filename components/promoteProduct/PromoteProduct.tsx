@@ -55,7 +55,7 @@ const PromoteProduct = function ({
     };
     mutate(payload, {
       onSuccess: (data) => {
-        message.success(data.paymentLink.message);
+        //message.success(data.paymentLink.message);
       },
       onError: (err: any) => {
         message.error(err.message);

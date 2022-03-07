@@ -11,6 +11,7 @@ import GoogleMapReact from "google-map-react";
 import { LocationInfo, LocationMarker } from "@/components/map";
 import useLocation from "@/hooks/useLocation";
 import { v4 } from "uuid";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
 
 export default function Store() {
   const defaultProps = {
@@ -168,7 +169,9 @@ export default function Store() {
   }
 
   useEffect(() => {
-    if (data !== undefined) {
+    console.log(data);
+    console.log(error);
+    if (data !== undefined && data.results.length > 0) {
       setLocations({
         lat: data.results[0].geometry.lat,
         lng: data.results[0].geometry.lng,
@@ -288,6 +291,7 @@ export default function Store() {
             />
           </div>
           <div className="tw-my-4 tw-w-full tw-h-[50vh] tw-relative">
+            {data?.error_message && <ErrorInfo error={data.error_message} />}
             <GoogleMapReact
               bootstrapURLKeys={{
                 key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
