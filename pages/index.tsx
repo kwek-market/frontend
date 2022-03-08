@@ -1,4 +1,4 @@
-import { Fragment, memo } from "react";
+import { Fragment, memo, useMemo } from "react";
 import { MainLayout } from "@/layouts";
 import { Hero, Features, CategoryGrid, Brands } from "@/components/home";
 
@@ -15,7 +15,10 @@ const Home = function () {
     categories: { error, loading, categories },
   } = useSelector((state: RootState) => state);
   const { status, error: err, data } = useDealsOfTheDay();
-  console.log(data);
+
+  const category = useMemo(() => {
+    return categories.slice();
+  }, [categories]);
 
   function sortArray(array: any[]) {
     let arr = array;
@@ -24,10 +27,11 @@ const Home = function () {
     for (let i = 0; i < n - 1; i++) {
       tempArr.push(arr.splice(Math.floor(Math.random() * arr.length), 1)[0]);
     }
-    console.log(tempArr);
+    // console.log(tempArr);
+    // console.log(arr[0]);
     tempArr.push(arr[0]);
     arr = tempArr;
-    return arr;
+    return tempArr;
   }
 
   return (
@@ -60,8 +64,8 @@ const Home = function () {
       <div>
         {categories !== undefined &&
           categories.length > 0 &&
-          categories
-            .slice(0, 6)
+          sortArray(category)
+            .slice(0, 8)
             .map(({ id, name }) => (
               <Fragment key={v4()}>
                 {name !== undefined && <CategoryGrid title={name} sidebar />}
