@@ -42,6 +42,9 @@
 
     &_link {
       color: $col-white;
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 
@@ -54,7 +57,7 @@
       position: absolute;
       right: 2.5rem;
       top: 2rem;
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
     }
 
     &_icon {

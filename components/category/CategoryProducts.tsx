@@ -39,7 +39,6 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
   }
 
   function addToWishlist(id: string) {
-    console.log(id);
     const payload: AddToWishlistPayload = {
       productId: id,
       token: user.token,

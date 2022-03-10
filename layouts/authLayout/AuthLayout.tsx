@@ -52,6 +52,7 @@ const AuthLayout = function ({
                         src="/svg/arrow-right-red.svg"
                         width="24"
                         height="11.6"
+                        placeholder="blur"
                       />
                     </button>
                   </a>

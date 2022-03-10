@@ -112,6 +112,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                 src={image.imageUrl}
                 width="848"
                 height="765"
+                placeholder="blur"
               />
             </div>
           ))}
@@ -125,6 +126,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                   src={image.imageUrl}
                   width="200"
                   height="200"
+                  placeholder="blur"
                 />
               </button>
             </div>
@@ -148,9 +150,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           </p>
           <p className={styles.product_Code}>Product Code: {product?.id}</p>
         </div>
-        <p className={styles.product_price}>
-          ₦{product.options[0]?.optionTotalPrice}
-        </p>
+        <p className={styles.product_price}>₦{product.options[0]?.price}</p>
         {!product.productRating.length ? (
           <div className={styles.box_productRating}>
             <StarRatingComponent
@@ -165,8 +165,8 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         ) : (
           <StarRatingComponent
             name="rate1"
-            starCount={useAvgRating(product)}
-            value={0}
+            starCount={5}
+            value={useAvgRating(product)}
             editing={false}
             emptyStarColor="#c4c4c4"
             starColor="#ffc107"

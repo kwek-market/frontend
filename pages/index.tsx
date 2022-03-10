@@ -38,7 +38,7 @@ const Home = function () {
     <MainLayout>
       <Hero />
       <Features />
-      {status === "loading" || data === undefined ? (
+      {/* {status === "loading" || data === undefined ? (
         <Load />
       ) : status === "error" ? (
         <ErrorInfo error={(err as { message: string }).message} />
@@ -48,7 +48,7 @@ const Home = function () {
           timer
           cards={data.dealsOfTheDay}
         />
-      ) : null}
+      ) : null} */}
       {loading && (
         <div className="tw-flex tw-justify-center tw-items-center tw-py-5">
           <Spin size="large" />
@@ -64,7 +64,7 @@ const Home = function () {
       <div>
         {categories !== undefined &&
           categories.length > 0 &&
-          sortArray(category)
+          categories
             .slice(0, 8)
             .map(({ id, name }) => (
               <Fragment key={v4()}>
