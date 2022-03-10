@@ -68,6 +68,8 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
       <div className="tw-relative tw-w-full">
         <Image
           src={prod?.image[0].imageUrl}
+          
+          placeholder="blur"
           width="329"
           height="284"
           alt="product"

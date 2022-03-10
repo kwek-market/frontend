@@ -28,6 +28,7 @@ export default function Product() {
     page: currentPage,
     pageSize: 20,
     sortBy: filter,
+    rating: -5
   };
   const {
     status,
