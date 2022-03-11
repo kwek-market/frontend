@@ -40,27 +40,27 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
       if (formValues[i].price === "") {
         return message.error("Please enter a price for all variants", 4);
       }
-      if (formValues[i].discountPrice === "") {
-        return message.error(
-          "Please enter a discount price for all variants",
-          4
-        );
-      }
-      if (formValues[i].totalPrice === "") {
-        return message.error("Please enter a total price for all variants", 4);
-      }
+      // if (formValues[i].discountPrice === "") {
+      //   return message.error(
+      //     "Please enter a discount price for all variants",
+      //     4
+      //   );
+      // }
+      // if (formValues[i].totalPrice === "") {
+      //   return message.error("Please enter a total price for all variants", 4);
+      // }
       if (!Number(formValues[i].price)) {
         return message.error(
           "Please enter a valid price as a number for all variants",
           4
         );
       }
-      if (!Number(formValues[i].discountPrice)) {
-        return message.error(
-          "Please enter a valid price as a number for all variants",
-          4
-        );
-      }
+      // if (!Number(formValues[i].discountPrice)) {
+      //   return message.error(
+      //     "Please enter a valid price as a number for all variants",
+      //     4
+      //   );
+      // }
       if (Number(formValues[i].discountPrice) > Number(formValues[i].price)) {
         return message.error(
           "Discount price cannot be greater than the price",
@@ -162,7 +162,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   type="text"
                   placeholder="0"
                   name="discountPrice"
-                  required
                   value={element.discountPrice || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -177,7 +176,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   type="text"
                   placeholder="0"
                   name="totalPrice"
-                  required
                   value={element.totalPrice || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"

@@ -68,11 +68,11 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
       <div className="tw-relative tw-w-full">
         <Image
           src={prod?.image[0].imageUrl}
-          
           placeholder="blur"
           width="329"
           height="284"
           alt="product"
+          quality={"auto"}
         />
         <span className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden">
           <i
@@ -164,7 +164,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                   disabled
                   value={0}
                 />
-                <small>(0 Reviews)</small>
+                <small className="tw-text-gray-kwek400">(0 Reviews)</small>
               </div>
             )}
           </div>

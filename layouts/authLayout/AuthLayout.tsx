@@ -32,6 +32,7 @@ const AuthLayout = function ({
                     src="/svg/kwek-logo-white.svg"
                     width="150"
                     height="25"
+                    placeholder="blur"
                   />
                 </a>
               </Link>
