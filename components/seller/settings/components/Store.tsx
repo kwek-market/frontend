@@ -19,7 +19,7 @@ export default function Store() {
       lat: 59.95,
       lng: 30.33,
     },
-    zoom: 2,
+    zoom: 10,
   };
   const {
     user,
@@ -173,8 +173,8 @@ export default function Store() {
     console.log(error);
     if (data !== undefined && data.results.length > 0) {
       setLocations({
-        lat: data.results[0].geometry.lat,
-        lng: data.results[0].geometry.lng,
+        lat: data.results[0].geometry.location.lat,
+        lng: data.results[0].geometry.location.lng,
       });
     }
   }, [data, status, error]);
