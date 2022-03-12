@@ -7,7 +7,7 @@ function ReviewItem({ name, date, reviewBody, rating, sellerPic }) {
   return (
     <div className={styles.reviewer}>
       <Image
-        src="https://via.placeholder.com/150"
+        src="https://randomuser.me/api/portraits/women/10.jpg"
         alt="reviewer"
         width="80"
         height="80"
