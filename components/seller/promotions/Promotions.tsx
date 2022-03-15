@@ -10,7 +10,6 @@ import Filled from "./Filled";
 export default function Promotions() {
   const { user } = useSelector((state: RootState) => state);
   const { status, data, error } = usePromotions(user.token);
-  console.log(data);
 
   return (
     <Fragment>

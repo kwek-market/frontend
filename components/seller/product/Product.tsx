@@ -28,6 +28,7 @@ export default function Product() {
     page: currentPage,
     pageSize: 20,
     sortBy: filter,
+    rating: -5
   };
   const {
     status,
@@ -42,7 +43,9 @@ export default function Product() {
   };
 
   useEffect(() => {
-    queryClient.fetchQuery(["sellerProducts", payload]);
+    queryClient.fetchQuery(["sellerProducts", payload], () =>
+      userFetcher(GET_SELLER_PRODUCTS, payload)
+    );
   }, [filter]);
 
   useEffect(() => {

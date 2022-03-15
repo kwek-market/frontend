@@ -44,7 +44,7 @@ const ActiveTabbar = function ({
               <option value="-date_created">Newest Arrivals</option>
               <option value="sales">Price: Low to High</option>
               <option value="-sales">Price: High to Low</option>
-              <option value="-5">Product Rating</option>
+              <option value="-rating">Product Rating</option>
             </select>
             <div className={styles.arrow_down}>
               <i className="fas fa-angle-down" />

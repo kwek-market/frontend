@@ -8,6 +8,8 @@ import PromotionCard from "./PromotionCard";
 export default function FilledContent() {
   const { user } = useSelector((state: RootState) => state);
   const { status, data, error } = usePromotions(user.token);
+  console.log(data);
+  
   return (
     <section className="tw-mt-5">
       <div className="tw-flex tw-justify-between tw-items-center tw-border-b tw-border-gray-kwek700 tw-pb-2">

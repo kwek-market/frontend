@@ -7,7 +7,7 @@ function ReviewItem({ name, date, reviewBody, rating, sellerPic }) {
   return (
     <div className={styles.reviewer}>
       <Image
-        src="https://via.placeholder.com/150"
+        src="https://randomuser.me/api/portraits/women/10.jpg"
         alt="reviewer"
         width="80"
         height="80"
@@ -22,7 +22,7 @@ function ReviewItem({ name, date, reviewBody, rating, sellerPic }) {
           <Rate disabled value={rating} defaultValue={rating} />
         </div>
         <p className={styles.review_body}>{reviewBody}</p>
-        <div className={styles.seller_reply}>
+        {/* <div className={styles.seller_reply}>
           <Image
             src="https://via.placeholder.com/150"
             width="24"
@@ -34,7 +34,7 @@ function ReviewItem({ name, date, reviewBody, rating, sellerPic }) {
             placeholder="Write a reply..."
             className={styles.reply_box}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

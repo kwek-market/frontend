@@ -16,6 +16,7 @@ import { clearCart } from "@/store/cart/cart.actions";
 import { clearCategories } from "@/store/category/categories.actions";
 import { clearProduct } from "@/store/product/product.action";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
+import Link from "next/link";
 
 const Menu = function ({}) {
   const dispatch = useDispatch();
@@ -131,11 +132,15 @@ const Menu = function ({}) {
         <p>Categories</p>
         <div>
           {categories.slice(0, 7).map((category) => (
-            <CategoryBox
-              key={category.id}
-              name={category.name}
-              icon="/svg/cat-icon-electronics.svg"
-            />
+            <Link href={`/category/${category.name}`}>
+              <a>
+                <CategoryBox
+                  key={category.id}
+                  name={category.name}
+                  icon="/svg/cat-icon-electronics.svg"
+                />
+              </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -149,12 +154,14 @@ const Menu = function ({}) {
           cmd={() => router.push("/contact-us")}
           icon="fa-phone"
         />
-        <Button
-          buttonStyle={buttonStyle.btn_block_red}
-          text="Log out"
-          cmd={() => handleLogout()}
-          icon="fa-sign-out-alt"
-        />
+        {user.id && (
+          <Button
+            buttonStyle={buttonStyle.btn_block_red}
+            text="Log out"
+            cmd={() => handleLogout()}
+            icon="fa-sign-out-alt"
+          />
+        )}
       </div>
     </div>
   );

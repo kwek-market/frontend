@@ -14,9 +14,9 @@ export function Price({ setFiltering, filtering }: SidebarProps) {
     <div className={styles.sidebar_content}>
       <p className={styles.header}>PRICE ( ₦ )</p>
       <div className={styles.subMenu}>
-        <div className={styles.sliderBox}>
+        {/* <div className={styles.sliderBox}>
           <input type="range" min="1" max="100" className={styles.slider} />
-        </div>
+        </div> */}
         <div className={styles.priceInput}>
           <input
             type="number"

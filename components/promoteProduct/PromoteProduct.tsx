@@ -55,7 +55,7 @@ const PromoteProduct = function ({
     };
     mutate(payload, {
       onSuccess: (data) => {
-        message.success(data.paymentLink.message);
+        //message.success(data.paymentLink.message);
       },
       onError: (err: any) => {
         message.error(err.message);
@@ -134,7 +134,7 @@ const PromoteProduct = function ({
                   className={styles.number}
                 ></input>
               </div>
-              <div className="">
+              {/* <div className="">
                 <label htmlFor="date" className={styles.count}>
                   End date
                 </label>
@@ -147,7 +147,7 @@ const PromoteProduct = function ({
                   }
                   className={styles.number}
                 ></input>
-              </div>
+              </div> */}
             </div>
             <div className={styles.line}></div>
             <div className={styles.boarder}>

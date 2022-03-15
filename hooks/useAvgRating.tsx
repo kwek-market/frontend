@@ -9,5 +9,5 @@ export default function useAvgRating(product: ProductType) {
     );
     const avg = totalRating / product.productRating?.length;
     return avg;
-  }, product.productRating);
+  }, [product.productRating]);
 }

@@ -9,6 +9,7 @@ import {
   passwordValidator,
   getIp,
   updateClicks,
+  countdown,
 } from "./helper";
 
 export {
@@ -23,4 +24,5 @@ export {
   passwordValidator,
   getIp,
   updateClicks,
+  countdown,
 };

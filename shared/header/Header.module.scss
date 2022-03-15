@@ -84,6 +84,10 @@
     width: fit-content;
     margin-left: 1.2rem;
 
+    &:hover {
+      opacity: 0.3;
+    }
+
     @include respondMax("tablet") {
       margin: 2.25rem 0;
     }

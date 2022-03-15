@@ -14,7 +14,12 @@ import MobileSearchBar from "@/shared/header/MobileSearchBar";
 // import Pusher from "react-pusher";
 import Pusher from "pusher-js";
 
-const MainLayout = function ({ children, title }: any) {
+type MainLayoutType = {
+  children: React.ReactNode;
+  title?: string | string[];
+};
+
+const MainLayout = function ({ children, title }: MainLayoutType) {
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state);
   const [showNavBar, setShowNavBar] = useState<boolean>(false);
@@ -78,7 +83,7 @@ const MainLayout = function ({ children, title }: any) {
       <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
       {showMenu && <Menu />}
 
-      {title && <PageTitle title={title} />}
+      {title && <PageTitle title={title as string} />}
 
       <div className="tw-px-4 tw-mt-4">
         <MobileSearchBar
