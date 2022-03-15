@@ -49,7 +49,7 @@ const GridContainer = function ({
 
   return (
     <div id={styles.categoryGrid}>
-      <TitleBlock title={title} timer={timer} />
+      <TitleBlock title={title} timer={timer} cards={cards} />
       <div
         className={sidebar ? styles.mainContainer : styles.mainContainer__full}
       >
@@ -92,7 +92,11 @@ const GridContainer = function ({
             <Button
               buttonStyle="tw-bg-red-kwek100 tw-text-white-100 tw-p-2"
               text="view more"
-              cmd={() => router.push(`/category/${title}`)}
+              cmd={
+                cards?.length > 0
+                  ? () => router.push("/deals-of-the-day/1")
+                  : () => router.push(`/category/${title}`)
+              }
             />
           </div>
         </div>

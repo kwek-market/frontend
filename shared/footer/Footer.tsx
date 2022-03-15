@@ -182,7 +182,10 @@ const Component = function () {
 
         <div className={styles.social}>
           <Link href="https://www.facebook.com/Kwekmarket/">
-            <a className={styles.social_link}>
+            <a
+              className={styles.social_link}
+              target="_blank noreferer noopener"
+            >
               <Image
                 width="28"
                 height="28"
@@ -194,7 +197,10 @@ const Component = function () {
           </Link>
 
           <Link href="https://www.instagram.com/invites/contact/?i=lthbstut4tp&utm_content=6szcidd">
-            <a className={styles.social_link}>
+            <a
+              className={styles.social_link}
+              target="_blank noreferer noopener"
+            >
               <Image
                 width="28"
                 height="28"
@@ -206,7 +212,10 @@ const Component = function () {
           </Link>
 
           <Link href="https://twitter.com/kwekmarket?t=gFj8_Lp-EA2gJEZ0QZkEFQ&s=09">
-            <a className={styles.social_link}>
+            <a
+              className={styles.social_link}
+              target="_blank noreferer noopener"
+            >
               <Image
                 width="28"
                 height="28"

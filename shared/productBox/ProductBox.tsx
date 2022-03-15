@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import StarRatingComponent from "react-star-rating-component";
 import styles from "./ProductBox.module.scss";
 import { RootState } from "@/store/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,11 +67,16 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
       <div className="tw-relative tw-w-full">
         <Image
           src={prod?.image[0].imageUrl}
+          placeholder="blur"
           width="329"
           height="284"
           alt="product"
+          quality={"auto"}
         />
-        <span className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden">
+        <span
+          id="cart-wishlist"
+          className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden"
+        >
           <i
             className={`fas fa-shopping-cart ${
               !checkIfItemInCart(prod?.options[0]?.id)
@@ -117,7 +121,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
               />
             )}
           </span>
-          <Link href={`/product/${prod.productTitle}?id=${prod.id}`} replace>
+          <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
             <a
               onClick={() => updateClicks(prod.id, user.token)}
               className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"
@@ -128,7 +132,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
         </div>
       </div>
 
-      <Link href={`/product/${prod.productTitle}?id=${prod.id}`} replace>
+      <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
         <a>
           <div className={styles.box_details}>
             <p className={styles.box_productCategory}>{prod?.productTitle}</p>
@@ -148,7 +152,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                   style={{ fontSize: "0.75rem" }}
                   allowHalf
                   disabled
-                  value={prod.productRating[0].rating}
+                  value={prod.productRating[0]?.rating}
                 />
                 <small className="tw-text-gray-kwek400">
                   ({prod.productRating[0].likes} reviews)
@@ -160,9 +164,9 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                   style={{ fontSize: "0.75rem" }}
                   allowHalf
                   disabled
-                  value={prod.productRating[0].rating}
+                  value={0}
                 />
-                <small>(0 Reviews)</small>
+                <small className="tw-text-gray-kwek400">(0 Reviews)</small>
               </div>
             )}
           </div>

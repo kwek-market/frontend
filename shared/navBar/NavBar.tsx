@@ -18,8 +18,8 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
       url: "/aboutUs",
     },
     {
-      title: "Sell On Kwek",
-      url: "/sell",
+      title: "Contact Us",
+      url: "/contact-us",
     },
   ];
   return (

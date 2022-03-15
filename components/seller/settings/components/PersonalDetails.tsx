@@ -96,7 +96,7 @@ export default function PersonalDetails({}) {
   return (
     <section className="tw-mb-7">
       <div className="">
-        <section className="tw-grid tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-7">
+        <section className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-7">
           <div className="tw-flex tw-flex-col tw-relative">
             <label
               htmlFor="firstname"
@@ -208,7 +208,7 @@ export default function PersonalDetails({}) {
           </p>
         </div>
 
-        <section className="tw-grid tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-12 tw-mt-5">
+        <section className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-12 tw-mt-5">
           <div className="tw-flex tw-flex-col tw-relative">
             <label
               htmlFor="currentPassword"

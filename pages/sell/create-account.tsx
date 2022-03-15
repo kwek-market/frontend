@@ -188,7 +188,7 @@ const Page = function ({ data }) {
                 name="firstname"
                 id="firstname"
                 className="tw-bg-red-50 focus:tw-bg-white-100 tw-border-none focus:tw-ring-gray-300 focus:tw-border-gray-300 tw-flex-1 tw-block tw-w-full tw-rounded-l tw-rounded-r-md sm:tw-text-sm tw-p-4"
-                placeholder="Alison"
+                placeholder="firstname"
                 value={sellerData.firstname}
                 onChange={(e) =>
                   setSellerData({
@@ -202,7 +202,7 @@ const Page = function ({ data }) {
                 name="lastname"
                 id="lastname"
                 className="tw-bg-red-50 tw-border-none focus:tw-ring-gray-300 focus:tw-bg-white-100 tw-flex-1 tw-block tw-w-full tw-rounded-l tw-rounded-r-md sm:tw-text-sm tw-border-gray-300 tw-p-4"
-                placeholder="Eyo"
+                placeholder="lastname"
                 value={sellerData.lastname}
                 onChange={(e) =>
                   setSellerData({

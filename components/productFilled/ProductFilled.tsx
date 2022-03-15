@@ -32,7 +32,6 @@ const ProductFilled = function ({
     user: { token },
   } = useSelector((state: RootState) => state);
   const { status, data, error } = usePromotions(token);
-  console.log(data);
 
   function isPromoted(id: string) {
     return data?.getSellerPromotedProducts.find((item) => item.id === id);
@@ -101,26 +100,28 @@ const ProductFilled = function ({
             </div>
           ))}
         </div>
-        <ReactPaginate
-          nextLabel="next >"
-          onPageChange={(e) => handlePageClick(e)}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={pageCount}
-          previousLabel="< previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={undefined}
-        />
+        <div className="tw-mt-4">
+          <ReactPaginate
+            nextLabel="next >"
+            onPageChange={(e) => handlePageClick(e)}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={undefined}
+          />
+        </div>
       </div>
     </section>
   );

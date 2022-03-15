@@ -1,16 +1,26 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { Dropdown, Menu } from "antd";
 import Link from "next/link";
+import { clearCart } from "@/store/cart/cart.actions";
+import { logout } from "@/store/user/user.actions";
+import { clearWishlist } from "@/store/wishlist/wishlist.actions";
 
 function Header() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { seller } = useSelector((state: RootState) => state);
 
   function goBack() {
     router.back();
+  }
+
+  function handleLogout() {
+    dispatch(logout());
+    dispatch(clearCart());
+    dispatch(clearWishlist());
   }
 
   const menu = (
@@ -21,7 +31,7 @@ function Header() {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <button>logout</button>
+        <button onClick={handleLogout}>logout</button>
       </Menu.Item>
     </Menu>
   );

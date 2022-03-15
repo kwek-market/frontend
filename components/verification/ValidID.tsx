@@ -168,6 +168,20 @@ function ValidID(props: StepComponentProps) {
               National Passport
             </div>
           </label>
+          <label htmlFor="national-passport" className="tw-mb-2">
+            <div>
+              <input
+                type="radio"
+                id="voters-card"
+                name="validID"
+                checked={selectedId === "voters-card"}
+                value={"voters-card"}
+                onChange={IdChangeHandler}
+                className="tw-mr-2"
+              />{" "}
+              National Passport
+            </div>
+          </label>
           {selectedId && (
             <label
               htmlFor="id-upload"

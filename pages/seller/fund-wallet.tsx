@@ -14,11 +14,16 @@ export default function fundWallet() {
     user: { token, user },
   } = useSelector((state: RootState) => state);
   const router = useRouter();
-  const { transaction_id, tx_ref } = router.query;
+  const { transaction_id, tx_ref, status } = router.query;
   const { mutate, isLoading } = useFundWallet();
   const { mutate: post, isLoading: loading } = usePaymentVerify(token);
 
   useEffect(() => {
+    if (status === "cancelled") {
+      message.error("Payment was cancelled, redirecting to profile page");
+      router.push("/seller/profile");
+      return;
+    }
     if (tx_ref && transaction_id) {
       const payload: VerifyPaymentType = {
         transactionId: transaction_id as string,
@@ -39,9 +44,14 @@ export default function fundWallet() {
               },
               onError: (err: { message: string }) => {
                 message.error(err.message);
+                router.push("/seller/profile");
               },
             }
           );
+        },
+        onError: (err: { message: string }) => {
+          message.error(err.message);
+          router.push("/seller/profile");
         },
       });
     }

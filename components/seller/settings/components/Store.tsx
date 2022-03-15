@@ -11,14 +11,15 @@ import GoogleMapReact from "google-map-react";
 import { LocationInfo, LocationMarker } from "@/components/map";
 import useLocation from "@/hooks/useLocation";
 import { v4 } from "uuid";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
 
 export default function Store() {
   const defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33,
+      lat: 6.1329419,
+      lng: 6.7923994,
     },
-    zoom: 2,
+    zoom: 8,
   };
   const {
     user,
@@ -168,13 +169,33 @@ export default function Store() {
   }
 
   useEffect(() => {
-    if (data !== undefined) {
+    if (data !== undefined && data.results.length > 0) {
       setLocations({
-        lat: data.results[0].geometry.lat,
-        lng: data.results[0].geometry.lng,
+        lat: data.results[0].geometry.location.lat,
+        lng: data.results[0].geometry.location.lng,
       });
     }
   }, [data, status, error]);
+
+  const getMapBounds = (map, maps) => {
+    const bounds = new maps.LatLngBounds();
+    bounds.extend(new maps.LatLng(locations.lat, locations.lng));
+    return bounds;
+  };
+
+  const bindResizeListener = (map, maps, bounds) => {
+    maps.event.addDomListenerOnce(map, "idle", () => {
+      maps.event.addDomListener(window, "resize", () => {
+        map.fitBounds(bounds);
+      });
+    });
+  };
+
+  function handleApiLoaded(map, maps) {
+    const bounds = getMapBounds(map, maps);
+    map.fitBounds(bounds);
+    bindResizeListener(map, maps, bounds);
+  }
 
   return (
     <section className="tw-mb-7 md:tw-px-12 lg:tw-px-36">
@@ -288,12 +309,15 @@ export default function Store() {
             />
           </div>
           <div className="tw-my-4 tw-w-full tw-h-[50vh] tw-relative">
+            {data?.error_message && <ErrorInfo error={data.error_message} />}
             <GoogleMapReact
               bootstrapURLKeys={{
                 key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
               }}
               defaultCenter={defaultProps.center}
               defaultZoom={defaultProps.zoom}
+              yesIWantToUseGoogleMapApiInternals
+              onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
             >
               {
                 <LocationMarker

@@ -30,6 +30,7 @@ export default function Review() {
     page: currentPage,
     pageSize: 20,
     sortBy: sort,
+    rating: -5,
   };
   const {
     status: reviewStatus,
@@ -46,7 +47,9 @@ export default function Review() {
   } = useReviewCard(token, true);
 
   useEffect(() => {
-    queryClient.fetchQuery(["reviews", payload]);
+    queryClient.fetchQuery(["reviews", payload], () =>
+      userFetcher(GET_SELLER_REVIEW, payload)
+    );
   }, [sort]);
 
   useEffect(() => {
@@ -132,7 +135,14 @@ export default function Review() {
               placeholder="All time"
               className=""
               value={sort}
-              onChange={(e) => setSort(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value === "rating") {
+                  payload.rating = -5;
+                } else if (e.target.value === "-rating") {
+                  payload.rating = 5;
+                }
+                setSort(e.target.value);
+              }}
             >
               <option value="-date_created">recent</option>
               <option value="date_created">oldest</option>

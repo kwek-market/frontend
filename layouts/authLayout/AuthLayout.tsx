@@ -32,6 +32,7 @@ const AuthLayout = function ({
                     src="/svg/kwek-logo-white.svg"
                     width="150"
                     height="25"
+                    placeholder="blur"
                   />
                 </a>
               </Link>
@@ -52,6 +53,7 @@ const AuthLayout = function ({
                         src="/svg/arrow-right-red.svg"
                         width="24"
                         height="11.6"
+                        placeholder="blur"
                       />
                     </button>
                   </a>
@@ -66,7 +68,10 @@ const AuthLayout = function ({
             withBanner ? styles.formContainer : styles.formContainer__full
           }
         >
-          <i className="fas fa-arrow-left tw-text-left" onClick={() => router.back()} />
+          <button className="" onClick={() => router.push("/")}>
+            <i className="fas fa-arrow-left tw-text-left tw-text-lg" />
+          </button>
+
           {children}
         </div>
       </div>

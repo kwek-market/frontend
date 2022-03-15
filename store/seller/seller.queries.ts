@@ -547,21 +547,55 @@ export const CLICKS_UPDATE = `
 `;
 
 export const DEALS_OF_THE_DAY = `
-  query dealsOfTheDay {
-    dealsOfTheDay {
-      id
-      productTitle
-      image {
+  query dealsOfTheDay($page: Int, $pageSize: Int) {
+    dealsOfTheDay(page: $page, pageSize: $pageSize) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
         id
-        imageUrl
+        productTitle
+        image {
+          id
+          imageUrl
+        }
+        options {
+          price
+          discountedPrice
+        }
+        productRating {
+          rating
+        }
       }
-      options {
-        price
-        discountedPrice
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT = `
+  mutation updateProduct($id: Int!, $productData: ProductInput!) {
+    updateProduct(id: #id, productData: $productData) {
+      product {
+        id
       }
-      productRating {
-        rating
-      }
+    }
+  }
+`;
+
+export const UPDATE_ORDER_PROGRESS = `
+  mutation updateOrderProgress($orderId: String!, $progress: String!) {
+    updateOrderProgress(orderId: $orderId, progress: $progress) {
+      status
+      message
+    }
+  }
+`;
+
+export const CANCEL_PROMOTION = `
+  mutation cancelProductPromotion($productId: String!, $token: String!) {
+    cancelProductPromotion(productId: $productId, token: $token) {
+      status
+      message
     }
   }
 `;

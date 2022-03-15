@@ -5,6 +5,8 @@ import useProducts from "@/hooks/useProducts";
 import { Spin } from "antd";
 import StarRatingComponent from "react-star-rating-component";
 import { ProductType } from "@/interfaces/commonTypes";
+import Link from "next/link";
+import { v4 } from "uuid";
 
 const Sidebar = function ({ title }) {
   const payload = {
@@ -38,47 +40,54 @@ const Sidebar = function ({ title }) {
         )}
         {categoryData?.products.objects.length &&
           categoryData?.products.objects.map((product: ProductType) => (
-            <div key={product.id} className={styles.product}>
-              <div className={styles.product_imageContainer}>
-                <Image
-                  src={product?.image[0].imageUrl}
-                  width="96"
-                  height="110"
-                />
-              </div>
+            <Link
+              key={v4()}
+              href={`/product/${product.productTitle}?id=${product.id}`}
+            >
+              <a className="hover:tw-text-opacity-25">
+                <div className={styles.product}>
+                  <div className={styles.product_imageContainer}>
+                    <Image
+                      src={product?.image[0].imageUrl}
+                      width="96"
+                      height="110"
+                    />
+                  </div>
 
-              <div className={styles.product_details}>
-                <p className={styles.textSm}>{product?.productTitle}</p>
-                <p className={styles.textMd}>
-                  {product.options[0]?.discountedPrice ? (
-                    <span>₦{product.options[0].discountedPrice}</span>
-                  ) : (
-                    <span>₦{product.options[0]?.price}</span>
-                  )}
-                </p>
-                {product.productRating.length > 0 ? (
-                  <div>
-                    <StarRatingComponent
-                      name="rate1"
-                      starCount={5}
-                      value={product.productRating[0].rating}
-                      editing={false}
-                      emptyStarColor="#c4c4c4"
-                      starColor="#ffc107"
-                    />
+                  <div className={styles.product_details}>
+                    <p className={styles.textSm}>{product?.productTitle}</p>
+                    <p className={styles.textMd}>
+                      {product.options[0]?.discountedPrice ? (
+                        <span>₦{product.options[0].discountedPrice}</span>
+                      ) : (
+                        <span>₦{product.options[0]?.price}</span>
+                      )}
+                    </p>
+                    {product.productRating.length > 0 ? (
+                      <div>
+                        <StarRatingComponent
+                          name="rate1"
+                          starCount={5}
+                          value={product.productRating[0].rating}
+                          editing={false}
+                          emptyStarColor="#c4c4c4"
+                          starColor="#ffc107"
+                        />
+                      </div>
+                    ) : (
+                      <div className={styles.box_productRating}>
+                        <StarRatingComponent
+                          name="rate2"
+                          starCount={5}
+                          value={0}
+                          editing={false}
+                        />
+                      </div>
+                    )}
                   </div>
-                ) : (
-                  <div className={styles.box_productRating}>
-                    <StarRatingComponent
-                      name="rate2"
-                      starCount={5}
-                      value={0}
-                      editing={false}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
+                </div>
+              </a>
+            </Link>
           ))}
       </div>
     </div>

@@ -4,16 +4,17 @@ import styles from "./GridContainer.module.scss";
 import { ActiveTabbar, Card, SideBar } from "../index";
 import { v4 as uuid } from "uuid";
 import CategoryProducts from "../CategoryProducts";
-import { Filtering, PagePayload, ProductType } from "@/interfaces/commonTypes";
+import { Filtering, ProductType } from "@/interfaces/commonTypes";
 import Loader from "react-loader-spinner";
 import ReactPaginate from "react-paginate";
 import useProducts, { PayloadType } from "@/hooks/useProducts";
-import { useQueryClient } from "react-query";
+import { QueryClient, useQueryClient } from "react-query";
 import { userFetcher } from "@/helpers";
 import { GetProducts } from "@/store/product/product.queries";
 
 const GridContainer = function ({ cards, category }: any) {
   const queryClient = useQueryClient();
+  const queryClient2 = new QueryClient();
   const [filter, setFilter] = useState(true);
   const [filtering, setFiltering] = useState<Filtering>({
     priceRange: [],
@@ -45,23 +46,29 @@ const GridContainer = function ({ cards, category }: any) {
     const { keyword, priceRange, rating, sizes } = filtering;
     // check for the ones that have values and add them to the payload object, else remove them
     if (keyword.length > 0) payload.keyword = keyword;
-    //if (priceRange.length > 0) payload.priceRange = priceRange;
+    if (priceRange.length > 0) payload.priceRange = priceRange;
     if (sizes.length > 0) payload.sizes = sizes;
     payload.rating = rating;
     (async () => {
       try {
-        const data = await queryClient.refetchQueries([
-          "category-items",
-          payload,
-        ]);
-        console.log(data);
+        const data = await queryClient2.fetchQuery(
+          ["category-items", payload],
+          () => userFetcher(GetProducts, payload)
+        );
+        if (data?.products?.hasNext) {
+          queryClient.prefetchQuery(["category-items", payload], () =>
+            userFetcher(GetProducts, payload)
+          );
+        }
+        setPageCount(data?.products.pages);
+        setCurrentItems(data?.products.objects);
       } catch (err) {
         console.error(err.message);
       }
     })();
 
     return () => {
-      queryClient.cancelQueries(["category-items", payload]);
+      queryClient2.cancelQueries(["category-items", payload]);
     };
   }, [
     sort,
