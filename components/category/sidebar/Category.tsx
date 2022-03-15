@@ -1,5 +1,6 @@
+import ErrorInfo from "@/components/Loader/ErrorInfo";
 import { SidebarProps } from "@/interfaces/commonTypes";
-import React, { Fragment } from "react";
+import React from "react";
 import Loader from "react-loader-spinner";
 import { v4 } from "uuid";
 import styles from "./Sidebar.module.scss";
@@ -33,7 +34,9 @@ export function Category({
         </div>
       )}
       <div className={styles.subMenu}>
-        {status === "success" &&
+        {status === "success" && data.category.child.length === 0 ? (
+          <ErrorInfo error="No sub categories" />
+        ) : (
           data.category.child.map((cat) => (
             <div key={v4()} className="tw-flex tw-items-center">
               <input
@@ -59,7 +62,8 @@ export function Category({
               />
               <p className="tw-ml-2">{cat.name}</p>
             </div>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

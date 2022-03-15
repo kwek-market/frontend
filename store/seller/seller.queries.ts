@@ -592,8 +592,8 @@ export const UPDATE_ORDER_PROGRESS = `
 `;
 
 export const CANCEL_PROMOTION = `
-  mutation cancelProductPromotion($promotionId: String!, $token: String!) {
-    cancelProductPromotion(promotionId: $promotionId, token: $token) {
+  mutation cancelProductPromotion($productId: String!, $token: String!) {
+    cancelProductPromotion(productId: $productId, token: $token) {
       status
       message
     }
