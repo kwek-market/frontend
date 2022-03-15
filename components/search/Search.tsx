@@ -17,11 +17,12 @@ type SearchProps = {
 };
 
 export default function Search({ search, check }: SearchProps) {
+  const [sort, setSort] = useState("-clicks");
   const payload = {
     page: 1,
     pageSize: 20,
     search,
-    sortBy: "-sales",
+    sortBy: sort,
   };
   const { status, data } = check && useProducts(payload);
   const queryClient = new QueryClient();
@@ -81,12 +82,20 @@ export default function Search({ search, check }: SearchProps) {
           </p>
         </header>
         <nav className="tw-flex tw-justify-between">
-          <button className="tw-bg-red-kwek100 tw-rounded-md tw-font-medium tw-text-white-400 tw-text-base tw-py-2 tw-px-4">
+          {/* <button className="tw-bg-red-kwek100 tw-rounded-md tw-font-medium tw-text-white-400 tw-text-base tw-py-2 tw-px-4">
             Filters <i className="fas fa-angle-right tw-ml-2" />
-          </button>
+          </button> */}
           <label>
-            <select className="tw-rounded-md tw-py-2 tw-px-8">
-              <option>Most Popular</option>
+            <select
+              className="tw-rounded-md tw-py-2 tw-px-8"
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+            >
+              <option value="-clicks">Most Popular</option>
+              <option value="-date_created">Newest Arrivals</option>
+              <option value="sales">Price: Low to High</option>
+              <option value="-sales">Price: High to Low</option>
+              <option value="-rating">Product Rating</option>
             </select>
           </label>
         </nav>
@@ -96,10 +105,10 @@ export default function Search({ search, check }: SearchProps) {
             <ErrorInfo error="An error occurred, try again" />
           )}
           {status === "success" &&
-          data !== undefined &&
-          data.products.objects.length > 0 ? (
+          currentItems !== undefined &&
+          currentItems.length > 0 ? (
             <div className="tw-grid tw-grid-cols-kwek-8 tw-gap-2 tw-justify-center">
-              {data.products.objects.map((product: ProductType) => (
+              {currentItems.map((product: ProductType) => (
                 <Product key={v4()} product={product} />
               ))}
             </div>

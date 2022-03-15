@@ -68,7 +68,7 @@ const AuthLayout = function ({
             withBanner ? styles.formContainer : styles.formContainer__full
           }
         >
-          <i className="fas fa-arrow-left tw-text-left" onClick={() => router.back()} />
+          <i className="fas fa-arrow-left tw-text-left tw-text-lg" onClick={() => router.push("/")} />
           {children}
         </div>
       </div>
