@@ -54,6 +54,19 @@ export default function Search({ search, check }: SearchProps) {
     console.log(`current page: ${currentPage}`);
   }, [data, currentPage, queryClient]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        await queryClient.refetchQueries(["category-items", payload], {
+          active: true,
+          exact: true,
+        });
+      } catch (err) {
+        console.error(err.message);
+      }
+    })();
+  }, [sort]);
+
   return (
     <section className="tw-px-2 md:tw-px-5 lg:tw-px-12 tw-flex md:tw-flex-row tw-flex-col tw-my-5 tw-gap-3 md:tw-gap-5 lg:tw-gap-12">
       <section className="tw-flex-1">
