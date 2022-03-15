@@ -105,7 +105,7 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
               />
             )}
           </span>
-          <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
+          <Link href={`/product/${prod.id}?id=${prod.productTitle}`}>
             <a
               onClick={() => updateClicks(prod.id, user.token, mutate)}
               className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"

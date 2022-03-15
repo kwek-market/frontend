@@ -135,7 +135,7 @@ function Header() {
                 pricing
               </a>
             </Link> */}
-            <Link href="/">
+            <Link href="/all">
               <a className="tw-mr-5  tw-text-white-100 tw-capitalize  tw-pb-2">
                 buy on kwek
               </a>

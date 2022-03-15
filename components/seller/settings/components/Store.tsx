@@ -19,7 +19,7 @@ export default function Store() {
       lat: 59.95,
       lng: 30.33,
     },
-    zoom: 10,
+    zoom: 2,
   };
   const {
     user,

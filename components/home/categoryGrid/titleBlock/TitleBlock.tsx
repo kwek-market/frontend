@@ -2,7 +2,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import styles from "./TitleBlock.module.scss";
 
-const TitleBlock = function ({ title, timer }) {
+type TitleBlockType = {
+  title: string;
+  timer?: boolean;
+  cards?: any[];
+};
+
+const TitleBlock = function ({ title, timer, cards }: TitleBlockType) {
   const router = useRouter();
   return (
     <div className={styles.title}>
@@ -39,7 +45,11 @@ const TitleBlock = function ({ title, timer }) {
       )}
 
       <button
-        onClick={() => router.push(`/category/${title}`)}
+        onClick={
+          cards?.length > 0
+            ? () => router.push("/deals-of-the-day")
+            : () => router.push(`/category/${title}`)
+        }
         className={`btn btn--naked ${styles.title_btn}`}
       >
         View More <i className="fas fa-chevron-right" />
