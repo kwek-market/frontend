@@ -314,7 +314,12 @@ export type Order = {
   user: {
     username: string;
   };
-  cartItems: string[];
+  cartItems: {
+    id: string;
+    ordered: boolean;
+    price: number;
+    productOptionId: string;
+  }[];
   doorStep: {
     fullName: string;
     address: string;

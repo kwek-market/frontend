@@ -22,7 +22,10 @@ export const GETORDER = `
       id
       closed
       orderId
-      cartItems
+      cartItems {
+        id
+        productOptionId
+      }
       doorStep {
         fullName
         address
