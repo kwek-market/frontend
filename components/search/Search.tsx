@@ -1,5 +1,5 @@
 import { userFetcher } from "@/helpers";
-import useProducts from "@/hooks/useProducts";
+import useProducts, { PayloadType } from "@/hooks/useProducts";
 import { ProductType } from "@/interfaces/commonTypes";
 import { GetProducts } from "@/store/product/product.queries";
 import React, { useEffect, useState } from "react";
@@ -18,11 +18,12 @@ type SearchProps = {
 
 export default function Search({ search, check }: SearchProps) {
   const [sort, setSort] = useState("-clicks");
-  const payload = {
+  const payload: PayloadType = {
     page: 1,
     pageSize: 20,
     search,
     sortBy: sort,
+    rating: -5,
   };
   const { status, data } = check && useProducts(payload);
   const queryClient = new QueryClient();
@@ -48,10 +49,8 @@ export default function Search({ search, check }: SearchProps) {
       );
     }
     if (data === undefined) return;
-    console.log(data.products);
     setPageCount(data.products.pages);
     setCurrentItems(data.products.objects);
-    console.log(`current page: ${currentPage}`);
   }, [data, currentPage, queryClient]);
 
   useEffect(() => {
@@ -120,7 +119,7 @@ export default function Search({ search, check }: SearchProps) {
           {status === "success" &&
           currentItems !== undefined &&
           currentItems.length > 0 ? (
-            <div className="tw-grid tw-grid-cols-kwek-8 tw-gap-2 tw-justify-center">
+            <div className="tw-grid tw-grid-cols-3 md:tw-grid-cols-5 tw-gap-2 tw-justify-center">
               {currentItems.map((product: ProductType) => (
                 <Product key={v4()} product={product} />
               ))}

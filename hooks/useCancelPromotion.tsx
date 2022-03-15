@@ -3,7 +3,7 @@ import { CANCEL_PROMOTION } from "@/store/seller/seller.queries";
 import { useMutation } from "react-query";
 
 export type CancelPromotionPayload = {
-  promotionId: string;
+  productId: string;
   token: string;
 };
 

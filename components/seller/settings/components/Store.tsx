@@ -16,10 +16,10 @@ import ErrorInfo from "@/components/Loader/ErrorInfo";
 export default function Store() {
   const defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33,
+      lat: 6.1329419,
+      lng: 6.7923994,
     },
-    zoom: 2,
+    zoom: 8,
   };
   const {
     user,
@@ -169,8 +169,6 @@ export default function Store() {
   }
 
   useEffect(() => {
-    console.log(data);
-    console.log(error);
     if (data !== undefined && data.results.length > 0) {
       setLocations({
         lat: data.results[0].geometry.location.lat,
@@ -178,6 +176,26 @@ export default function Store() {
       });
     }
   }, [data, status, error]);
+
+  const getMapBounds = (map, maps) => {
+    const bounds = new maps.LatLngBounds();
+    bounds.extend(new maps.LatLng(locations.lat, locations.lng));
+    return bounds;
+  };
+
+  const bindResizeListener = (map, maps, bounds) => {
+    maps.event.addDomListenerOnce(map, "idle", () => {
+      maps.event.addDomListener(window, "resize", () => {
+        map.fitBounds(bounds);
+      });
+    });
+  };
+
+  function handleApiLoaded(map, maps) {
+    const bounds = getMapBounds(map, maps);
+    map.fitBounds(bounds);
+    bindResizeListener(map, maps, bounds);
+  }
 
   return (
     <section className="tw-mb-7 md:tw-px-12 lg:tw-px-36">
@@ -298,6 +316,8 @@ export default function Store() {
               }}
               defaultCenter={defaultProps.center}
               defaultZoom={defaultProps.zoom}
+              yesIWantToUseGoogleMapApiInternals
+              onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
             >
               {
                 <LocationMarker

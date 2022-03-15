@@ -46,7 +46,7 @@ const GridContainer = function ({ cards, category }: any) {
     const { keyword, priceRange, rating, sizes } = filtering;
     // check for the ones that have values and add them to the payload object, else remove them
     if (keyword.length > 0) payload.keyword = keyword;
-    //if (priceRange.length > 0) payload.priceRange = priceRange;
+    if (priceRange.length > 0) payload.priceRange = priceRange;
     if (sizes.length > 0) payload.sizes = sizes;
     payload.rating = rating;
     (async () => {

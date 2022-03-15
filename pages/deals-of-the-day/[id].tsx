@@ -24,14 +24,11 @@ export default function page({ dealsOfTheDay, pageCount }) {
       {router.isFallback ? (
         <Load />
       ) : dealsOfTheDay.objects.length > 0 ? (
-        dealsOfTheDay.objects.map((product: ProductType) => (
-          <div
-            key={v4()}
-            className="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-5 tw-mb-8"
-          >
-            <CategoryProducts id={product.id} product={product} />
-          </div>
-        ))
+        <div className="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-5 tw-mb-8">
+          {dealsOfTheDay.objects.map((product: ProductType) => (
+            <CategoryProducts key={v4()} id={product.id} product={product} />
+          ))}
+        </div>
       ) : (
         <ErrorInfo error="No product" />
       )}

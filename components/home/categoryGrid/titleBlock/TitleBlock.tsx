@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./TitleBlock.module.scss";
+import { countdown } from "@/helpers/index";
 
 type TitleBlockType = {
   title: string;
@@ -10,6 +11,11 @@ type TitleBlockType = {
 
 const TitleBlock = function ({ title, timer, cards }: TitleBlockType) {
   const router = useRouter();
+
+  const { days, hours, minutes, seconds } = useMemo(() => {
+    return countdown(new Date(2022, 3, 15), new Date(2022, 3, 27));
+  }, []);
+
   return (
     <div className={styles.title}>
       <h3
@@ -23,22 +29,22 @@ const TitleBlock = function ({ title, timer, cards }: TitleBlockType) {
       {timer && (
         <div className={styles.title_timer}>
           <div className={styles.title_timerSection}>
-            <p className={styles.title_timerCount}>00</p>
+            <p className={styles.title_timerCount}>{days}</p>
             <small className={styles.title_timerPeriod}>Days</small>
           </div>
 
           <div className={styles.title_timerSection}>
-            <p className={styles.title_timerCount}>12</p>
+            <p className={styles.title_timerCount}>{hours}</p>
             <small className={styles.title_timerPeriod}>Hours</small>
           </div>
 
           <div className={styles.title_timerSection}>
-            <p className={styles.title_timerCount}>04</p>
+            <p className={styles.title_timerCount}>{minutes}</p>
             <small className={styles.title_timerPeriod}>Minutes</small>
           </div>
 
           <div className={styles.title_timerSection}>
-            <p className={styles.title_timerCount}>03</p>
+            <p className={styles.title_timerCount}>{seconds}</p>
             <small className={styles.title_timerPeriod}>Seconds</small>
           </div>
         </div>
