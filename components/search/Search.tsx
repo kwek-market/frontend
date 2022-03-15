@@ -98,7 +98,7 @@ export default function Search({ search, check }: SearchProps) {
           {status === "success" &&
           data !== undefined &&
           data.products.objects.length > 0 ? (
-            <div className="tw-grid tw-grid-cols-kwek-5 tw-gap-2 tw-justify-center">
+            <div className="tw-grid tw-grid-cols-kwek-8 tw-gap-2 tw-justify-center">
               {data.products.objects.map((product: ProductType) => (
                 <Product key={v4()} product={product} />
               ))}

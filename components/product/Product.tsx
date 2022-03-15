@@ -13,10 +13,12 @@ type ProductProps = {
 };
 
 export default function Product({ product }: ProductProps) {
-  const { user: { token } } = useSelector((state: RootState) => state);
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
   const { mutate } = useClicksUpdate();
   return (
-    <Link href={`/product/${product.productTitle}?id=${product.id}`}>
+    <Link href={`/product/${product.id}?id=${product.productTitle}`}>
       <a onClick={() => updateClicks(product.id, token, mutate)}>
         <section className="tw-flex tw-flex-col">
           <div className="tw-rounded-md">

@@ -16,6 +16,7 @@ import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import StarRatingComponent from "react-star-rating-component";
 import useItemInWishlist from "@/hooks/useItemInWishlist";
 import useAvgRating from "@/hooks/useAvgRating";
+import { useRouter } from "next/router";
 
 const SampleNextArrow = function (props) {
   const { className, style, onClick } = props;
@@ -53,6 +54,7 @@ type ProductHeadProps = {
 };
 
 const ProductHead = function ({ product }: ProductHeadProps) {
+  const router = useRouter();
   const {
     user,
     wishlist: { wishlists },
@@ -239,7 +241,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           <p>Share:</p>
           <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-1 tw-justify-center tw-items-center tw-gap-2 ">
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=https://kwekmarket.com/${router.pathname}`}
               target="_blank noreferer noopener"
               className="tw-bg-[#3b5998] tw-text-white-100 tw-rounded-md tw-p-2"
             >
@@ -247,7 +249,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
               Facebook
             </a>
             <a
-              href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+              href={`https://twitter.com/intent/tweet?url=https://kwekmarket.com/${router.pathname}`}
               target="_blank noreferer noopener"
               className="tw-bg-[#1da1f2] tw-text-white-100 tw-rounded-md tw-p-2"
             >

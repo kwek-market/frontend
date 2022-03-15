@@ -73,7 +73,10 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           alt="product"
           quality={"auto"}
         />
-        <span className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden">
+        <span
+          id="cart-wishlist"
+          className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden"
+        >
           <i
             className={`fas fa-shopping-cart ${
               !checkIfItemInCart(prod?.options[0]?.id)
@@ -118,7 +121,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
               />
             )}
           </span>
-          <Link href={`/product/${prod.productTitle}?id=${prod.id}`} replace>
+          <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
             <a
               onClick={() => updateClicks(prod.id, user.token)}
               className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"
@@ -129,7 +132,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
         </div>
       </div>
 
-      <Link href={`/product/${prod.productTitle}?id=${prod.id}`} replace>
+      <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
         <a>
           <div className={styles.box_details}>
             <p className={styles.box_productCategory}>{prod?.productTitle}</p>
