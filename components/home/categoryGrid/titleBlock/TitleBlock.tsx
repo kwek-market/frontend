@@ -47,7 +47,7 @@ const TitleBlock = function ({ title, timer, cards }: TitleBlockType) {
       <button
         onClick={
           cards?.length > 0
-            ? () => router.push("/deals-of-the-day")
+            ? () => router.push("/deals-of-the-day/1")
             : () => router.push(`/category/${title}`)
         }
         className={`btn btn--naked ${styles.title_btn}`}

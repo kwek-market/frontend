@@ -94,7 +94,7 @@ const GridContainer = function ({
               text="view more"
               cmd={
                 cards?.length > 0
-                  ? () => router.push("/deals-of-the-day")
+                  ? () => router.push("/deals-of-the-day/1")
                   : () => router.push(`/category/${title}`)
               }
             />
