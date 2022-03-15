@@ -20,10 +20,11 @@ export function Category({
   setFiltering,
   filtering,
 }: CategoryProps) {
+  console.log(data);
   return (
     <div className={styles.sidebar_content}>
       <p className={styles.header}>BROWSE CATEGORIES</p>
-      {status === "loading" && (
+      {status === "loading" && data === undefined && (
         <Loader type="Bars" width="20" height="20" color="red" />
       )}
       {status === "error" && (
@@ -34,10 +35,12 @@ export function Category({
         </div>
       )}
       <div className={styles.subMenu}>
-        {status === "success" && data.category.child.length === 0 ? (
+        {status === "success" &&
+        data !== undefined &&
+        data.category.child.length === 0 ? (
           <ErrorInfo error="No sub categories" />
         ) : (
-          data.category.child.map((cat) => (
+          data?.category.child.map((cat) => (
             <div key={v4()} className="tw-flex tw-items-center">
               <input
                 type="checkbox"
