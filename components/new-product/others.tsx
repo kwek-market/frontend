@@ -251,11 +251,11 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               }
             >
               <option value="no">No warranty</option>
-              <option value="1">1yr warranty</option>
-              <option value="2">2yrs warranty</option>
-              <option value="3">3yrs warranty</option>
-              <option value="4">4yrs warranty</option>
-              <option value="5">5yrs warranty</option>
+              <option value="1 year">1yr warranty</option>
+              <option value="2 years">2yrs warranty</option>
+              <option value="3 years">3yrs warranty</option>
+              <option value="4 years">4yrs warranty</option>
+              <option value="5 years">5yrs warranty</option>
             </select>
           </label>
 
