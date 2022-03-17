@@ -31,9 +31,9 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const handleSubmit = async () => {
     const { message } = await import("antd");
     for (let i = 0; i < formValues.length; i++) {
-      if (formValues[i].size === "") {
-        return message.error("Please enter a size for all variants", 4);
-      }
+      // if (formValues[i].size === "") {
+      //   return message.error("Please enter a size for all variants", 4);
+      // }
       if (formValues[i].quantity === "") {
         return message.error("Please enter a quantity for all variants", 4);
       }
