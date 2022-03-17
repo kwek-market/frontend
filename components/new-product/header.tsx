@@ -3,7 +3,6 @@ import { createProduct } from "@/store/product/product.action";
 import { RootState } from "@/store/rootReducer";
 import { useRouter } from "next/router";
 import React from "react";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../buttons/Button";
 
@@ -14,7 +13,7 @@ type Props = {
 function Header({ submitDetails }: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const { user } = useSelector((state: RootState) => state);
 
   function goBack() {
     router.back();

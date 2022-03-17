@@ -16,7 +16,7 @@ const Home = function ({ categories, dealsOfTheDay }) {
         <CategoryGrid
           title="Deals Of The day"
           timer
-          cards={dealsOfTheDay.objects}
+          cards={dealsOfTheDay.objects.slice(0, 4)}
         />
       ) : null}
       <div>
