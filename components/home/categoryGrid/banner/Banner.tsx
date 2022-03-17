@@ -13,7 +13,7 @@ const Banner = function ({ product }: { product: ProductType }) {
         <h3 className={styles.textLg}>{product?.subcategory.name}</h3>
         <button
           onClick={() =>
-            router.push(`/product/${product?.productTitle}?id=${product?.id}`)
+            router.push(`/product/${product?.id}?id=${product?.productTitle}`)
           }
           className={`btn ${styles.btn}`}
         >
