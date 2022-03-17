@@ -75,7 +75,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     const val = [];
     // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
-      const emptyString = `{'size': ${formValues[i].size} , 'quantity': ${formValues[i].quantity} , 'price': ${formValues[i].price} , 'discounted_price': ${formValues[i].discountPrice} , 'option_total_price': ${formValues[i].totalPrice}}`;
+      const emptyString = `{'size': ${formValues[i].size}, 'quantity': ${formValues[i].quantity}, 'price': ${formValues[i].price}, 'discounted_price': ${formValues[i].discountPrice}, 'option_total_price': ${formValues[i].totalPrice}}`;
       val.push(emptyString);
     }
     setSubmitDetails({
