@@ -73,7 +73,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           alt="product"
           quality={"auto"}
         />
-        <span
+        {/* <span
           id="cart-wishlist"
           className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden"
         >
@@ -97,7 +97,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
               onClick={() => addToWishlist(id)}
             />
           )}
-        </span>
+        </span> */}
         <div className="tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300">
           <span className="tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2">
             <i

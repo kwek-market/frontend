@@ -117,7 +117,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   type="text"
                   placeholder="0"
                   name="size"
-                  required
                   value={element.size || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -233,6 +232,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               }
             >
               <option value="no">no return policy</option>
+              <option value="yes">Can be returned</option>
             </select>
           </label>
 
@@ -251,6 +251,11 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               }
             >
               <option value="no">No warranty</option>
+              <option value="1">1yr warranty</option>
+              <option value="2">2yrs warranty</option>
+              <option value="3">3yrs warranty</option>
+              <option value="4">4yrs warranty</option>
+              <option value="5">5yrs warranty</option>
             </select>
           </label>
 
@@ -260,7 +265,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             <input
               type="text"
               placeholder="what is the color of this item?"
-              required
               className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
               value={submitDetails.color}
               onChange={(e) =>
@@ -276,7 +280,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             {" "}
             gender <br />
             <select
-              required
               value={submitDetails.gender}
               onChange={(e) =>
                 setSubmitDetails({

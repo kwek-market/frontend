@@ -41,7 +41,6 @@ function ProductDetails({
           <input
             type="text"
             placeholder="e.g 70"
-            required
             className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
             value={submitDetails.productWeight}
             onChange={(e) =>

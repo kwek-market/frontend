@@ -190,6 +190,12 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             ))}
           </div>
         </div>
+        <div className="">
+          <p className="tw-capitalize tw-textbase">
+            <span className="tw-font-medium">Warranty</span>:{" "}
+            {product.warranty}
+          </p>
+        </div>
         <div className={styles.product_option_order}>
           <div className={styles.product_qty}>
             <p>QTY:</p>
