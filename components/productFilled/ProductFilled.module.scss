@@ -8,6 +8,10 @@
   width: 100%;
   padding: 2rem;
 
+  @include respondMax("tablet") {
+    padding: 1rem;
+  }
+
   .products {
     display: flex;
     flex-direction: row;
