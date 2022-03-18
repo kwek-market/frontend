@@ -26,6 +26,7 @@ function Header() {
   const router = useRouter();
   const { seller, user } = useSelector((state: RootState) => state);
   const [visible, setVisible] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const { data, status, error } = useNotifications(user.token);
   const { mutate, isLoading } = useReadNotifications();
   const queryClient = new QueryClient();
@@ -128,7 +129,7 @@ function Header() {
         <nav className="md:tw-flex tw-justify-between tw-flex-[4] tw-hidden">
           <nav>
             <Link href="/seller/profile">
-              <a className={`tw-mr-5 ${border}  tw-capitalize `}>your store</a>
+              <a className={`tw-mr-5 ${border} tw-capitalize `}>your store</a>
             </Link>
             {/* <Link href="/sell/pricing">
               <a className="tw-mr-5 tw-text-white-100 tw-capitalize tw-pb-2">
@@ -162,6 +163,56 @@ function Header() {
               </div>
             </Dropdown>
           </nav>
+        </nav>
+        <nav>
+          <div onClick={() => setShowMenu(true)}>
+            <i
+              className="fas fa-bars fa-2x tw-text-black-stock tw-block md:tw-hidden"
+              style={{ color: "white" }}
+            />
+          </div>
+          {showMenu && (
+            <div className="tw-fixed tw-top-0 tw-right-0 tw-bottom-0 tw-z-30 tw-bg-white-light tw-w-7/12">
+              <div className="tw-flex tw-flex-col tw-items-center tw-h-full tw-py-4 md:tw-hidden">
+                <div className="tw-mb-5">
+                  <i
+                    className="fas fa-times fa-2x tw-text-black-stock tw-block md:tw-hidden"
+                    onClick={() => setShowMenu(false)}
+                  />
+                </div>
+                <div className="tw-mb-5">
+                  <Link href="/">
+                    <a className="tw-text-black-kwek100 hover:tw-text-blue-400">
+                      <span className="tw-mr-3 lg:tw-mr-5">buy on kwek</span>
+                    </a>
+                  </Link>
+                </div>
+                <div
+                  className="tw-relative tw-mr-5 tw-mb-5"
+                  onClick={() => setVisible(true)}
+                >
+                  <i className="fas fa-bell fa-lg tw-text-yellow-kwek100 " />
+                  <span className="tw-absolute tw--top-1 tw-left-2 tw-text-white-100 tw-h-[0.15rem] tw-w-[0.15rem] tw-p-1.5 tw-z-20 tw-bg-red-notif tw-rounded-full tw-text-[10px] tw-flex tw-justify-center tw-items-center">
+                    {data !== undefined &&
+                      data.userNotifications.filter(
+                        (notification: UserNotificationType) =>
+                          notification.read === false
+                      ).length}
+                  </span>
+                </div>
+                <div className="tw-mb-5">
+                  <Link href="/seller/profile/#settings">
+                    <a className="tw-text-black-kwek100 hover:tw-text-blue-400">
+                      account
+                    </a>
+                  </Link>
+                </div>
+                <div className="tw-mb-5">
+                  <button onClick={() => logOut()}>logout</button>
+                </div>
+              </div>
+            </div>
+          )}
         </nav>
       </header>
     </Fragment>

@@ -64,7 +64,7 @@ const ProductFilled = function ({
             </select>
           </div>
         </div>
-        <div className="tw-grid tw-gap-3 tw-grid-cols-3 lg:tw-grid-cols-4 tw-mt-2">
+        <div className="tw-grid tw-gap-3 tw-grid-cols-2 lg:tw-grid-cols-4 tw-mt-2">
           {product.map((prod: ProductType) => (
             <div
               key={prod.id}
@@ -79,11 +79,11 @@ const ProductFilled = function ({
                 height={200}
               />
               {!!isPromoted(prod.id) && (
-                <span className="tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[60%] tw-top-[5%]">
+                <span className="tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[35%] md:tw-left-[60%] tw-top-[5%]">
                   promoted
                 </span>
               )}
-              <div className="tw-flex tw-justify-between tw-p-3">
+              <div className="tw-flex tw-flex-wrap tw-justify-between tw-p-3">
                 <div>
                   <p className="tw-text-lg tw-font-semibold tw-mb-0">
                     {prod.productTitle}

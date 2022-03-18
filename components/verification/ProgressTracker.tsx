@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
-import { NavigationComponentProps } from 'react-step-builder';
-import Style from './tracker.module.scss';
+import React, { Fragment } from "react";
+import { NavigationComponentProps } from "react-step-builder";
+import Style from "./tracker.module.scss";
 
 interface progressTrackerProps extends NavigationComponentProps {}
 
-const ProgressTracker: React.FC<progressTrackerProps> = props => {
+const ProgressTracker: React.FC<progressTrackerProps> = (props) => {
   const { allSteps, current: currentStep, size: stepLength } = props;
 
   return (
@@ -13,16 +13,16 @@ const ProgressTracker: React.FC<progressTrackerProps> = props => {
         const currentProgress = currentStep - 1 > index;
 
         const iconTheme = currentProgress
-          ? 'tw-border-green-success tw-text-green-success'
-          : 'tw-border-brown-kwek400 tw-border-2';
+          ? "tw-border-green-success tw-text-green-success"
+          : "tw-border-brown-kwek400 tw-border-2";
         const textTheme = currentProgress
-          ? 'tw-text-green-success'
+          ? "tw-text-green-success"
           : currentStep === index + 1
-          ? 'tw-text-black'
-          : 'tw-text-gray-kwek400';
+          ? "tw-text-black"
+          : "tw-text-gray-kwek400";
         const barTheme = currentProgress
-          ? 'tw-border-green-success'
-          : 'tw-border-gray-kwek400';
+          ? "tw-border-green-success"
+          : "tw-border-gray-kwek400";
 
         return (
           <Fragment key={title}>
@@ -46,7 +46,7 @@ const ProgressTracker: React.FC<progressTrackerProps> = props => {
                 )}
               </div>
               <p
-                className={`tw-text-xs tw-font-medium ${textTheme} tw-absolute tw-top-7 tw-w-[500%]`}
+                className={`tw-text-xs tw-font-medium ${textTheme} tw-absolute tw-top-7 tw-truncate`}
               >
                 {title}
               </p>
