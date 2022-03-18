@@ -112,9 +112,9 @@ const Menu = function ({}) {
             <span>{user.user.fullName}</span>
             <span>{user.user.username}</span>
           </div>
-          <div>
+          <button onClick={() => router.push("/profile/account")}>
             <i className="fas fa-cog fa-2x" />
-          </div>
+          </button>
         </div>
       )}
       <div className={menuStyle.menuItems}>
