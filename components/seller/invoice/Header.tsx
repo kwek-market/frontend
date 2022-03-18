@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
-import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+import { toPng } from "html-to-image";
 
 type HeaderProps = {
   title: string;
@@ -16,17 +16,11 @@ export default function Header({ title, btn, element }: HeaderProps) {
   async function download() {
     const filename = `invoice-${invoice}.pdf`;
 
-    const canvas = await html2canvas(element.current);
-    console.log(canvas.innerHTML);
-    const data = canvas.toDataURL("image/png");
+    const image = await toPng(element.current, { quality: 0.95 });
+    const doc = new jsPDF();
 
-    const pdf = new jsPDF();
-    const imgProperties = pdf.getImageProperties(data);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-
-    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(filename);
+    doc.addImage(image, "JPEG", 5, 22, 200, 160);
+    doc.save(filename);
   }
 
   return (
