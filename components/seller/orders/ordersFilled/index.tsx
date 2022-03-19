@@ -27,7 +27,6 @@ const OrdersFilled = function ({
   filter,
   setFilter,
 }: OrdersFilledProps) {
-  
   return (
     <div className={styles.empty_container}>
       <div className={styles.ordersTab}>
@@ -53,8 +52,10 @@ const OrdersFilled = function ({
           {orders.map((order, index) => (
             <OrderItem
               key={v4()}
-              orderId={index+1}
-              orderDate={DateTime.fromISO(order.created).toFormat("dd LLL yyyy")}
+              orderId={index + 1}
+              orderDate={DateTime.fromJSDate(new Date(order.created)).toFormat(
+                "dd LLL yyyy"
+              )}
               imgSrc="/images/seller1.png"
               customerName={order.customer.fullName}
               orderTotal={`NGN ${Number(order.total).toLocaleString()}`}
