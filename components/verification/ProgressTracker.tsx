@@ -8,7 +8,7 @@ const ProgressTracker: React.FC<progressTrackerProps> = (props) => {
   const { allSteps, current: currentStep, size: stepLength } = props;
 
   return (
-    <section className="tw-bg-white-100 tw-py-10 tw-px-10 md:tw-px-[10rem] tw-flex tw-justify-around tw-items-center tw-rounded-md">
+    <section className="tw-bg-white-100 tw-py-10 tw-px-0 md:tw-px-[10rem] tw-flex tw-justify-around tw-items-center tw-rounded-md tw-overflow-auto">
       {allSteps.map(({ title }, index) => {
         const currentProgress = currentStep - 1 > index;
 
@@ -46,7 +46,9 @@ const ProgressTracker: React.FC<progressTrackerProps> = (props) => {
                 )}
               </div>
               <p
-                className={`tw-text-xs tw-font-medium ${textTheme} tw-absolute tw-top-7 tw-truncate`}
+                className={`tw-text-xs tw-font-medium ${textTheme} ${
+                  index === 0 ? "tw-mr-2" : "tw-mr-0"
+                } tw-absolute tw-top-7 tw-truncate`}
               >
                 {title}
               </p>
