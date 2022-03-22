@@ -1,20 +1,28 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from './Banner.module.scss';
+import React from "react";
+import Image from "next/image";
+import styles from "./Banner.module.scss";
+import { useRouter } from "next/router";
+import { ProductType } from "@/interfaces/commonTypes";
 
-const Banner = function () {
+const Banner = function ({ product }: { product: ProductType }) {
+  const router = useRouter();
   return (
     <div className={styles.banner}>
       <div className={styles.textContainer}>
         <p className={styles.textSm}>New Products</p>
-        <h3 className={styles.textLg}>Quality Laptops & Desktops</h3>
-        <button className={`btn ${styles.btn}`}>
+        <h3 className={styles.textLg}>{product?.subcategory.name}</h3>
+        <button
+          onClick={() =>
+            router.push(`/product/${product?.id}?id=${product?.productTitle}`)
+          }
+          className={`btn ${styles.btn}`}
+        >
           Shop Now <span className="material-icons">chevron_right</span>
         </button>
       </div>
 
       <div className={styles.imageContainer}>
-        <Image src="/images/banner-img.png" width="300" height="160" />
+        <Image src={product?.image[0].imageUrl} width="300" height="160" />
       </div>
     </div>
   );

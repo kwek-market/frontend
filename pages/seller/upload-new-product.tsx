@@ -33,28 +33,26 @@ function page() {
     <section>
       <Header submitDetails={submitDetails} />
       <section className="tw-bg-primary tw-mx-auto tw-py-6 tw-px-3 md:tw-px-20 lg:tw-px-56">
-        <form>
-          <ProductCategory
-            submitDetails={submitDetails}
-            setSubmitDetails={setSubmitDetails}
-          />
-          <ProductImage
-            submitDetails={submitDetails}
-            setSubmitDetails={setSubmitDetails}
-          />
-          <ProductDetails
-            submitDetails={submitDetails}
-            setSubmitDetails={setSubmitDetails}
-          />
-          <ProductPricing
-            submitDetails={submitDetails}
-            setSubmitDetails={setSubmitDetails}
-          />
-          <Others
-            submitDetails={submitDetails}
-            setSubmitDetails={setSubmitDetails}
-          />
-        </form>
+        <ProductCategory
+          submitDetails={submitDetails}
+          setSubmitDetails={setSubmitDetails}
+        />
+        <ProductImage
+          submitDetails={submitDetails}
+          setSubmitDetails={setSubmitDetails}
+        />
+        <ProductDetails
+          submitDetails={submitDetails}
+          setSubmitDetails={setSubmitDetails}
+        />
+        <ProductPricing
+          submitDetails={submitDetails}
+          setSubmitDetails={setSubmitDetails}
+        />
+        <Others
+          submitDetails={submitDetails}
+          setSubmitDetails={setSubmitDetails}
+        />
       </section>
     </section>
   );

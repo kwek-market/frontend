@@ -7,29 +7,30 @@
 }
 
 .mainContainer {
-  @include flex();
   margin-top: 2rem;
-  width: 78%;
+  width: 50%;
+  flex: 5;
 }
 
 .mainContainer__full {
-  @include flex();
   margin-top: 2rem;
   width: 100%;
 }
 
 .sidebarContainer {
-  width: 20%;
+  // width: 20%;
+  flex: 2;
   margin-top: 2rem;
 }
 
 .products {
-  @include flex(space-between, flex-start);
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.25rem;
   margin-bottom: 2rem;
 
   .product {
-    width: 24%;
+    width: 100%;
   }
 }
 

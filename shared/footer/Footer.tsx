@@ -42,20 +42,8 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/">
+              <Link href="/contact-us">
                 <a className={styles.nav_link}>Contact Us</a>
-              </Link>
-            </li>
-
-            <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Career</a>
-              </Link>
-            </li>
-
-            <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Blog</a>
               </Link>
             </li>
 
@@ -84,43 +72,26 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Buyer Safety Center</a>
-              </Link>
-            </li>
-            <li className={styles.nav_item}>
               <Link href="/buyerPolicy">
                 <a className={styles.nav_link}>Buyer Policy</a>
               </Link>
             </li>
 
-            <li className={styles.nav_item}>
+            {/* <li className={styles.nav_item}>
               <Link href="/">
                 <a className={styles.nav_link}>FAQ</a>
               </Link>
-            </li>
+            </li> */}
 
-            <li className={styles.nav_item}>
+            {/* <li className={styles.nav_item}>
               <Link href="/">
                 <a className={styles.nav_link}>Delivery</a>
               </Link>
-            </li>
+            </li> */}
 
             <li className={styles.nav_item}>
               <Link href="/returnpolicy">
                 <a className={styles.nav_link}>Kwek Return Policy</a>
-              </Link>
-            </li>
-
-            <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Digital Services</a>
-              </Link>
-            </li>
-
-            <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Bulk Purchase</a>
               </Link>
             </li>
           </ul>
@@ -140,12 +111,6 @@ const Component = function () {
                 <a className={styles.nav_link}>Seller Policy</a>
               </Link>
             </li>
-
-            <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Become A Kwek Affiliate</a>
-              </Link>
-            </li>
           </ul>
         </nav>
 
@@ -160,20 +125,8 @@ const Component = function () {
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Track My Order</a>
-              </Link>
-            </li>
-
-            <li className={styles.nav_item}>
               <Link href="/privacyPolicy">
                 <a className={styles.nav_link}>Privacy Policy</a>
-              </Link>
-            </li>
-
-            <li className={styles.nav_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Authentic Items Policy</a>
               </Link>
             </li>
 
@@ -229,7 +182,10 @@ const Component = function () {
 
         <div className={styles.social}>
           <Link href="https://www.facebook.com/Kwekmarket/">
-            <a className={styles.social_link}>
+            <a
+              className={styles.social_link}
+              target="_blank noreferer noopener"
+            >
               <Image
                 width="28"
                 height="28"
@@ -240,8 +196,11 @@ const Component = function () {
             </a>
           </Link>
 
-          <Link href="/">
-            <a className={styles.social_link}>
+          <Link href="https://www.instagram.com/invites/contact/?i=lthbstut4tp&utm_content=6szcidd">
+            <a
+              className={styles.social_link}
+              target="_blank noreferer noopener"
+            >
               <Image
                 width="28"
                 height="28"
@@ -253,7 +212,10 @@ const Component = function () {
           </Link>
 
           <Link href="https://twitter.com/kwekmarket?t=gFj8_Lp-EA2gJEZ0QZkEFQ&s=09">
-            <a className={styles.social_link}>
+            <a
+              className={styles.social_link}
+              target="_blank noreferer noopener"
+            >
               <Image
                 width="28"
                 height="28"

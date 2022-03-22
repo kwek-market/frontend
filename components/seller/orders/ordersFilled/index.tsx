@@ -1,102 +1,97 @@
-import React, { useState } from "react";
+import React from "react";
 
-import Link from "next/link";
-import Image from "next/image";
+import { DateTime } from "luxon";
+import dayjs from "dayjs";
+import localizedformat from "dayjs/plugin/localizedFormat";
 import styles from "./ordersFilled.module.scss";
-import { FaChevronDown } from "react-icons/fa";
 import OrderItem from "./OrderItem";
 import OrderHeader from "./OrderHeader";
+import { v4 } from "uuid";
+import { OrderList } from "@/interfaces/commonTypes";
+import ReactPaginate from "react-paginate";
 
-const OrdersFilled = function () {
-	const [dropDown, setDropDown] = useState(false);
-	const onClick = () => {
-		setDropDown(!dropDown);
-	};
-	return (
-		<div className={styles.empty_container}>
-			<div className={styles.ordersTab}>
-				<div className={styles.ordersTitle}>
-					Orders <span className={styles.ordersVal}>11,600</span>
-				</div>
+dayjs.extend(localizedformat);
 
-				<div className={styles.flex}>
-					Sort by:{" "}
-					<div className={styles.recent}>
-						All Orders{" "}
-						<span style={{ color: "#1D1616" }} onClick={onClick}>
-							<FaChevronDown />
-						</span>
-					</div>
-				</div>
+type OrdersFilledProps = {
+  orders: OrderList[];
+  pageCount: number;
+  handlePageClick: (event: { selected: number }) => void;
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+};
 
-				<div className={dropDown ? styles.dropdown : styles.dropdownNot}>
-				{/* <div className={styles.dropdownNot}> */}
-					<ul>
-						<li className={styles.active}>All Orders</li>
-						<li>Pending</li>
-						<li>Completed</li>
-						<li>Authorized</li>
-						<li>Product Rating</li>
-					</ul>
-				</div>
-			</div>
+const OrdersFilled = function ({
+  orders,
+  pageCount,
+  handlePageClick,
+  filter,
+  setFilter,
+}: OrdersFilledProps) {
+  return (
+    <div className={styles.empty_container}>
+      <div className={styles.ordersTab}>
+        <div className={styles.ordersTitle}>
+          Orders <span className={styles.ordersVal}>{orders.length}</span>
+        </div>
 
-			<table>
-				<OrderHeader />
+        {/* <label htmlFor="dropDown" className="tw-capitalize">
+          Sort by:
+          <select id="dropDown" className="tw-ml-2 tw-rounded-md">
+            <option>All Orders</option>
+            <option>Pending</option>
+            <option>Completed</option>
+            <option>Authorized</option>
+            <option>Product Rating</option>
+          </select>
+        </label> */}
+      </div>
 
-				<OrderItem
-					orderId="KWK3209A"
-					orderDate="Apr 22, 2021"
-					imgSrc="/images/seller1.png"
-					customerName="Mary-Jane Anthony"
-					orderTotal="NGN 23,000"
-					orderProfit="NGN 2,300"
-					status="confirmed"
-					payment="unpaid"
-				/>
-				<OrderItem
-					orderId="KWK3209"
-					orderDate="Apr 22, 2021"
-					imgSrc="/images/seller2.png"
-					customerName="Giana George"
-					orderTotal="NGN 23,000"
-					orderProfit="NGN 2,300"
-					status="pending"
-					payment="paid"
-				/>
-				<OrderItem
-					orderId="KWK3209"
-					orderDate="Apr 22, 2021"
-					imgSrc="/images/seller3.png"
-					customerName="Carla Stanton"
-					orderTotal="NGN 23,000"
-					orderProfit="NGN 2,300"
-					status="confirmed"
-					payment="unpaid"
-				/>
-				<OrderItem
-					orderId="KWK3209"
-					orderDate="Apr 22, 2021"
-					imgSrc="/images/seller4.png"
-					customerName="Jocelyn Franci"
-					orderTotal="NGN 23,000"
-					orderProfit="NGN 2,300"
-					status="confirmed"
-					payment="unpaid"
-				/>
-				<OrderItem
-					orderId="KWK3209"
-					orderDate="Apr 22, 2021"
-					imgSrc="/images/seller5.png"
-					customerName="Makenna Culhane"
-					orderTotal="NGN 23,000"
-					orderProfit="NGN 2,300"
-					status="confirmed"
-					payment="paid"
-				/>
-			</table>
-		</div>
-	);
+      <table className="tw-mb-4">
+        <OrderHeader />
+        <tbody>
+          {orders.map((order, index) => (
+            <OrderItem
+              key={v4()}
+              orderId={index + 1}
+              orderDate={DateTime.fromJSDate(new Date(order.created)).toFormat(
+                "dd LLL yyyy"
+              )}
+              imgSrc="/images/seller1.png"
+              customerName={order.customer.fullName}
+              orderTotal={`NGN ${Number(order.total).toLocaleString()}`}
+              orderProfit={`NGN ${Number(order.profit).toLocaleString()}`}
+              status={
+                order.order.deliveryStatus === "order delivered"
+                  ? "confirmed"
+                  : "pending"
+              }
+              payment={order.paid ? "paid" : "unpaid"}
+            />
+          ))}
+        </tbody>
+      </table>
+      <ReactPaginate
+        nextLabel="next >"
+        onPageChange={(e) => handlePageClick(e)}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={undefined}
+      />
+    </div>
+  );
 };
 
 export default OrdersFilled;

@@ -22,6 +22,7 @@ export const GetCart = /* GraphQL */ `
       product {
         id
         productTitle
+        color
         user {
           sellerprofileSet {
             shopName
@@ -32,6 +33,7 @@ export const GetCart = /* GraphQL */ `
         }
         options {
           id
+          size
           price
           discountedPrice
           optionTotalPrice
@@ -88,6 +90,36 @@ export const ReduceItemQuantity = `
     $token: String
   ) {
     decreaseCartItemQuantity(cartId: $cartId, ip: $ip, itemId: $itemId, token: $token) {
+      status
+      message
+    }
+  }
+`;
+
+export const GETCARTITEM = `
+  query cartitem($id: String!) {
+    cartitem(id: $id) {
+      id
+      quantity
+      price
+      ordered
+      product {
+        productTitle
+        image {
+          id
+          imageUrl
+        }
+      }
+      cart {
+        createdAt
+      }
+    }
+  }
+`;
+
+export const CANCELORDER = `
+  mutation cancelOrder($orderId: String!) {
+    cancelOrder(orderId: $orderId) {
       status
       message
     }

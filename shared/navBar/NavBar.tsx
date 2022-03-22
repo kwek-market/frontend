@@ -11,31 +11,19 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
   const menu = [
     {
       title: "Shop",
-      url: "/shop",
+      url: "/seller/profile",
     },
     {
       title: "About Us",
       url: "/aboutUs",
     },
     {
-      title: "Sell On Kwek",
-      url: "/sell",
+      title: "Contact Us",
+      url: "/contact-us",
     },
     {
-      title: "Registry",
-      url: "/registry",
-    },
-    {
-      title: "Gift Cards",
-      url: "/gift-cards",
-    },
-    {
-      title: "Customer Service",
-      url: "/customer-service",
-    },
-    {
-      title: "Vendors",
-      url: "/vendors",
+      title: "All Categories",
+      url: "/all",
     },
   ];
   return (
@@ -58,11 +46,11 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
         ))}
       </ul>
 
-      <div className={styles.extra}>
+      {/* <div className={styles.extra}>
         <Link href="/">
           <a className={styles.extra_link}>Kwek’s Response to COVID-19</a>
         </Link>
-      </div>
+      </div> */}
     </nav>
   );
 };

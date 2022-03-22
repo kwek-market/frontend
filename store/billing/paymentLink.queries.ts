@@ -1,6 +1,6 @@
 export const PAYMENTLINK = /* GRAPHQL */ `
   mutation paymentLink(    
-    $amount: Int!
+    $amount: Float!
     $currency: String
     $description: String!
     $redirectUrl: String!
@@ -15,8 +15,8 @@ export const PAYMENTLINK = /* GRAPHQL */ `
 `;
 
 export const VERIFYPAYMENT = /* GRAPHQL */ `
-  mutation verifyPayment($transactionId: Int!) {
-    verifyPayment(transactionId: $transactionId) {
+  mutation verifyPayment($paymentRef: String!, $transactionId: Int!) {
+    verifyPayment(transactionId: $transactionId, paymentRef: $paymentRef) {
       status
       message
       transactionInfo

@@ -28,6 +28,10 @@ interface HeaderProps {
   setUserNav: (showNavBar: boolean) => void;
   showMenu: boolean;
   openMenu: any;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  check: boolean;
+  setCheck: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Header = function ({
@@ -35,9 +39,13 @@ const Header = function ({
   userNav,
   showMenu,
   openMenu,
+  search,
+  setSearch,
+  check,
+  setCheck,
 }: HeaderProps) {
   const dispatch = useDispatch();
-  const { user, cart } = useSelector((state: RootState) => state);
+  const { user, cart, wishlist } = useSelector((state: RootState) => state);
   const router = useRouter();
   function handleLogout() {
     dispatch(logout());
@@ -115,7 +123,12 @@ const Header = function ({
           <i className={`fas fa-times ${styles.close_icon}`} />
         </div>
 
-        <SearchBar />
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          check={check}
+          setCheck={setCheck}
+        />
 
         <div className={styles.shortcuts}>
           {user.id ? (
@@ -152,12 +165,17 @@ const Header = function ({
 
           <Link href="/wishlist">
             <a className={styles.shortcuts_item}>
-              <Image
-                width="16"
-                height="18"
-                src="/svg/heart-filled.svg"
-                className={styles.shortcuts_icon}
-              />
+              <div className={styles.shortcuts_iconWrap}>
+                <Image
+                  width="16"
+                  height="18"
+                  src="/svg/heart-filled.svg"
+                  className={styles.shortcuts_icon}
+                />
+                <span className={styles.shortcuts_iconSuper}>
+                  {wishlist.wishlists?.length}
+                </span>
+              </div>
               <p className={styles.shortcuts_label}>Saved</p>
             </a>
           </Link>

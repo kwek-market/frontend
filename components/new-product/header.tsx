@@ -3,7 +3,6 @@ import { createProduct } from "@/store/product/product.action";
 import { RootState } from "@/store/rootReducer";
 import { useRouter } from "next/router";
 import React from "react";
-import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../buttons/Button";
 
@@ -14,7 +13,7 @@ type Props = {
 function Header({ submitDetails }: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const { user } = useSelector((state: RootState) => state);
 
   function goBack() {
     router.back();
@@ -46,7 +45,6 @@ function Header({ submitDetails }: Props) {
       return message.error("Add product options");
     }
     dispatch(createProduct(submitDetails, user.token));
-    // console.log(submitDetails);
   }
 
   return (
@@ -67,8 +65,6 @@ function Header({ submitDetails }: Props) {
         </div>
       </nav>
       <nav className="tw-text-white-100">
-      <Link href="/seller-product/singleProduct">
-        <a>
         <Button
           buttonStyle={
             "tw-bg-green-success tw-text-white-100 tw-text-xs tw-py-2 tw-px-5 tw-rounded-sm tw-capitalize hover:tw-text-yellow-filled"
@@ -76,8 +72,6 @@ function Header({ submitDetails }: Props) {
           text={"save item"}
           cmd={saveItem}
         />
-        </a>
-        </Link>
       </nav>
     </header>
   );

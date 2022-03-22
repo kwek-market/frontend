@@ -87,7 +87,7 @@ function ValidID(props: StepComponentProps) {
           props.next();
         } else message.error("An error has occured. Please try again");
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
         message.error("An error has occured. Please try again", err);
       }
     })();
@@ -162,6 +162,20 @@ function ValidID(props: StepComponentProps) {
                 name="validID"
                 checked={selectedId === "national-passport"}
                 value={"national-passport"}
+                onChange={IdChangeHandler}
+                className="tw-mr-2"
+              />{" "}
+              National Passport
+            </div>
+          </label>
+          <label htmlFor="national-passport" className="tw-mb-2">
+            <div>
+              <input
+                type="radio"
+                id="voters-card"
+                name="validID"
+                checked={selectedId === "voters-card"}
+                value={"voters-card"}
                 onChange={IdChangeHandler}
                 className="tw-mr-2"
               />{" "}

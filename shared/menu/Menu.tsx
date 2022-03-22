@@ -16,11 +16,18 @@ import { clearCart } from "@/store/cart/cart.actions";
 import { clearCategories } from "@/store/category/categories.actions";
 import { clearProduct } from "@/store/product/product.action";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
+import Link from "next/link";
 
 const Menu = function ({}) {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const {
+    user,
+    cart: { cart },
+    categories: { categories },
+    wishlist: { wishlists },
+  } = useSelector((state: RootState) => state);
   const router = useRouter();
+
   function handleLogout() {
     dispatch(logout());
     dispatch(clearSubs());
@@ -32,12 +39,16 @@ const Menu = function ({}) {
     dispatch(clearCart());
     router.push("/login");
   }
+
   const menuBoxItems = {
     myCart: {
       icon: "fa-shopping-cart",
       title: "My Cart",
-      description: "No items in the cart",
-      link: "/profile/account",
+      description:
+        cart?.length < 0
+          ? "No items in the cart"
+          : `${cart.length} items in the cart`,
+      link: "/cart",
     },
     trackOrder: {
       icon: "fa-map-marker-alt",
@@ -48,7 +59,9 @@ const Menu = function ({}) {
     myOrders: {
       icon: "fa-shopping-bag",
       title: "My Orders",
-      description: "No item ordered",
+      description: user.user?.orderSet?.length
+        ? `${user.user.orderSet.length} items ordered`
+        : "No item ordered",
       link: "/profile/account",
     },
     savedItems: {
@@ -70,17 +83,6 @@ const Menu = function ({}) {
       link: "/profile/account",
     },
   };
-
-  const categories: any[] = [
-    { name: "Electronics", icon: "/svg/cat-icon-electronics.svg" },
-    { name: "Beauty & Health", icon: "/svg/cat-icon-electronics.svg" },
-    { name: "Toy & Kids", icon: "/svg/cat-icon-electronics.svg" },
-    { name: "Fashion", icon: "/svg/cat-icon-electronics.svg" },
-    { name: "Home & Garden", icon: "/svg/cat-icon-electronics.svg" },
-    { name: "Sporting Goods", icon: "/svg/cat-icon-electronics.svg" },
-    { name: "Automobile", icon: "/svg/cat-icon-electronics.svg" },
-    { name: "Others", icon: "/svg/cat-icon-electronics.svg" },
-  ];
 
   return (
     <div className={`${menuStyle.menu} md:tw-hidden tw-block`}>
@@ -110,9 +112,9 @@ const Menu = function ({}) {
             <span>{user.user.fullName}</span>
             <span>{user.user.username}</span>
           </div>
-          <div>
+          <button onClick={() => router.push("/profile/account")}>
             <i className="fas fa-cog fa-2x" />
-          </div>
+          </button>
         </div>
       )}
       <div className={menuStyle.menuItems}>
@@ -129,12 +131,16 @@ const Menu = function ({}) {
       <div className={menuStyle.categories}>
         <p>Categories</p>
         <div>
-          {categories.map((category) => (
-            <CategoryBox
-              key={category.name}
-              name={category.name}
-              icon={category.icon}
-            />
+          {categories.slice(0, 7).map((category) => (
+            <Link href={`/category/${category.name}`}>
+              <a>
+                <CategoryBox
+                  key={category.id}
+                  name={category.name}
+                  icon="/svg/cat-icon-electronics.svg"
+                />
+              </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -148,12 +154,14 @@ const Menu = function ({}) {
           cmd={() => router.push("/contact-us")}
           icon="fa-phone"
         />
-        <Button
-          buttonStyle={buttonStyle.btn_block_red}
-          text="Log out"
-          cmd={() => handleLogout()}
-          icon="fa-sign-out-alt"
-        />
+        {user.id && (
+          <Button
+            buttonStyle={buttonStyle.btn_block_red}
+            text="Log out"
+            cmd={() => handleLogout()}
+            icon="fa-sign-out-alt"
+          />
+        )}
       </div>
     </div>
   );

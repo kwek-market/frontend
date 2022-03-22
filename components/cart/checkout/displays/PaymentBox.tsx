@@ -7,6 +7,7 @@ import { message } from "antd";
 import usePlaceOrder from "@/hooks/usePlaceOrder";
 import { PaymentLinkType, PlaceOrder } from "@/interfaces/commonTypes";
 import usePayment from "@/hooks/usePayment";
+import Load from "@/components/Loader/Loader";
 
 function PaymentBox({ step, addressId }) {
   const { user, cart } = useSelector((state: RootState) => state);
@@ -15,14 +16,14 @@ function PaymentBox({ step, addressId }) {
   const result = useMemo(() => {
     let initial = 0;
     cart.cart.forEach((item) => {
-      const current = item.price * item.quantity;
+      const current = item.price;
       initial += current;
     });
     return initial;
   }, [cart.cart]);
 
-  const { mutate: placeOrderMutate } = usePlaceOrder(user.token);
-  const { mutate: paymentMutate } = usePayment(user.token);
+  const { mutate: placeOrderMutate, isLoading } = usePlaceOrder(user.token);
+  const { mutate: paymentMutate, status } = usePayment(user.token);
 
   useEffect(() => {
     if (paymentMethod === "pay on delivery") {
@@ -40,13 +41,13 @@ function PaymentBox({ step, addressId }) {
         amount: result + 100,
         currency: "NGN",
         description: `Order payment for ${user.user.username}`,
-        redirectUrl: "https://kwekmarket.com/cart/order-complete",
+        redirectUrl: "https://kwekmarket.com/cart/order-confirmation",
         token: user.token,
       };
       const placeOrder: PlaceOrder = {
         addressId,
         cartId: cart.cart[0].cart.id,
-        deliveryMethod: "pickup",
+        deliveryMethod: "door step",
         paymentMethod,
         productOptionsId: cart.cart.map((item) => item.product.options[0].id),
         token: user.token,
@@ -65,8 +66,8 @@ function PaymentBox({ step, addressId }) {
       {step === 3 && (
         <div className={styles.payment_box}>
           <div className={styles.info_box}>
-            <p className={styles.order_id}>KWEK3553767777</p>
-            <p className={styles.price}>₦{result + 100}</p>
+            {/* <p className={styles.order_id}>KWEK3553767777</p> */}
+            <p className={styles.price}>Total: ₦{result + 100}</p>
           </div>
           <div className={styles.option_grid}>
             <div className={styles.option_box}>
@@ -83,6 +84,7 @@ function PaymentBox({ step, addressId }) {
                   Pay cash when order gets delivered to you
                 </p>
               </div>
+              {isLoading && <Load />}
             </div>
             <div className={styles.option_box}>
               <input
@@ -98,6 +100,7 @@ function PaymentBox({ step, addressId }) {
                   Make Payments using your Credit or Debit Card
                 </p>
               </div>
+              {status === "loading" && <Load />}
             </div>
           </div>
         </div>

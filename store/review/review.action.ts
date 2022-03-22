@@ -1,3 +1,4 @@
+import { QueryClient } from "react-query";
 import { Dispatch } from "redux";
 import { userFetcherWithAuth } from "@/helpers";
 import { PRODUCT_REVIEW } from "./review.queries";
@@ -15,24 +16,21 @@ export function setLoading() {
 
 export function reviewProduct(reviewProduct: ReviewType, token: string) {
   return async function (dispatch: Dispatch) {
+    const queryClient = new QueryClient();
+    const { message } = await import("antd");
     try {
-      setLoading();
+      setLoading()(dispatch);
       const response = await userFetcherWithAuth(
         PRODUCT_REVIEW,
         reviewProduct,
         token
       );
-
-      import("antd").then(({ message }) => {
-        response.createSubscriber.status
-          ? message.success(response.getReview.message)
-          : message.error(response.getReview.message);
+      message.success(response.review.message);
+      queryClient.invalidateQueries(["product"]);
+      dispatch({
+        type: reviewTypes.REVIEW_PRODUCT,
+        payload: response.review,
       });
-      response.getReview.status &&
-        dispatch({
-          type: reviewTypes.REVIEW_PRODUCT,
-          payload: response.getReview,
-        });
     } catch (error) {
       dispatch({
         type: reviewTypes.ERROR,

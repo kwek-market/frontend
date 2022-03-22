@@ -6,45 +6,28 @@ import TextInput from '@/components/input/textInput';
 import { emailValidator } from '@/helpers';
 import { RootState } from '@/store/rootReducer';
 import { updateUser } from '@/store/user/user.actions';
+import { message } from 'antd';
 
 const Account = function ({ activeBtn }) {
   const dispatch = useDispatch();
   const selector = useSelector((state: RootState) => state.user);
-  console.log({ selector });
   const [firstName, setFirstName] = React.useState<string>(selector.user.fullName?.split(' ')[0]);
   const [lastName, setLastName] = React.useState<string>(selector.user.fullName?.split(' ')[1]);
   const [email, setEmail] = React.useState<string>(selector.user.username);
   const [phoneNumber, setPhoneNumber] = React.useState<number>(selector.user.phoneNumber);
   const router = useRouter();
   function saveChanges() {
-    // check firstName, lastName, email and phoneNumber and ensure they're not empty and invalid
-    if (firstName !== '' && firstName.length > 0) {
-      // setFirstName(firstName);
-    } else {
-      import('antd').then((antd) => {
-        antd.message.error('Invalid firstName');
-      });
+    if (firstName === "" || firstName.length === 0) {
+      return message.error("Invalid firstname");
     }
-    if (lastName !== '' && lastName.length > 0) {
-      // setLastName(lastName);
-    } else {
-      import('antd').then((antd) => {
-        antd.message.error('Invalid lastName');
-      });
+    if (lastName === "" && lastName.length === 0) {
+      return message.error("Invalid lastname");
     }
-    if (email !== '' && emailValidator(email)) {
-      // setEmail(email);
-    } else {
-      import('antd').then((antd) => {
-        antd.message.error('Invalid email');
-      });
+    if (email === "" && !emailValidator(email)) {
+      return message.error("Invalid email");
     }
-    if (phoneNumber !== 0 && phoneNumber.toString().length > 7) {
-      // setPhoneNumber(phoneNumber);
-    } else {
-      import('antd').then((antd) => {
-        antd.message.error('Invalid phoneNumber');
-      });
+    if (phoneNumber === 0) {
+      return message.error("Invalid phoneNumber");
     }
     dispatch(
       updateUser(

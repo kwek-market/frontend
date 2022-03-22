@@ -1,52 +1,64 @@
-import Head from "next/head";
-import { useEffect, memo } from "react";
-import { parseCookies } from "nookies";
-import { GetServerSideProps } from "next";
+import { Fragment, memo } from "react";
 import { MainLayout } from "@/layouts";
 import { Hero, Features, CategoryGrid, Brands } from "@/components/home";
-// import { userFetcherWithAuth } from '@/helpers'
 
-import MobileSearchBar from "@/shared/header/MobileSearchBar";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import { Spin } from "antd";
-import { v4 as uuid } from "uuid";
-// import { GET_USER } from '@/store/user/user.queries'
+import { v4 } from "uuid";
+import { userFetcher } from "@/helpers";
+import { CATEGORIES } from "@/store/category/categories.queries";
+import { DEALS_OF_THE_DAY } from "@/store/seller/seller.queries";
 
-const Home = function ({ cookies }) {
-  const { product } = useSelector((state: RootState) => state);
-  const cards = [1, 2, 3];
-  const banners = [1, 2];
-
-  useEffect(() => {
-    console.log(cookies);
-  }, []);
-
+const Home = function ({ categories, dealsOfTheDay }) {
   return (
     <MainLayout>
-      <MobileSearchBar />
       <Hero />
       <Features />
-      {/* <CategoryGrid title="Deals Of The day" timer cards={cards} /> */}
-      <CategoryGrid
-        title="Computer Electronics and Accessories"
-        sidebar
-        banners={banners}
-      />
-      <CategoryGrid title="Kwek Fashion and Style" sidebar banners={banners} />
-      <Brands />
+      {dealsOfTheDay.objects.length > 0 ? (
+        <CategoryGrid
+          title="Deals Of The day"
+          timer
+          cards={dealsOfTheDay.objects.slice(0, 4)}
+        />
+      ) : null}
+      <div>
+        {categories !== undefined &&
+          categories.length > 0 &&
+          categories
+            .slice(0, 8)
+            .map(({ id, name }) => (
+              <Fragment key={v4()}>
+                {name !== undefined && <CategoryGrid title={name} sidebar />}
+              </Fragment>
+            ))}
+      </div>
+      {/* <Brands /> */}
     </MainLayout>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const cookies = parseCookies(ctx);
+export default memo(Home);
 
+export async function getStaticProps() {
+  const { categories } = await userFetcher(CATEGORIES);
+  const variables = { page: 1, pageSize: 4 };
+  const { dealsOfTheDay } = await userFetcher(DEALS_OF_THE_DAY, variables);
+
+  function sortArray(array: any[]) {
+    let arr = array;
+    let n = arr.length;
+    let tempArr = [];
+    for (let i = 0; i < n - 1; i++) {
+      tempArr.push(arr.splice(Math.floor(Math.random() * arr.length), 1)[0]);
+    }
+    tempArr.push(arr[0]);
+    arr = tempArr;
+    return arr;
+  }
+
+  const sortedCategories = sortArray(categories);
   return {
     props: {
-      cookies,
+      categories: sortedCategories,
+      dealsOfTheDay: dealsOfTheDay,
     },
   };
-};
-
-export default memo(Home);
+}

@@ -1,129 +1,181 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
-import Link from 'next/link';
-import styles from './SingleProduct.module.scss'
+import Link from "next/link";
+import styles from "./SingleProduct.module.scss";
+import { useRouter } from "next/router";
+import StarRatingComponent from "react-star-rating-component";
+import { v4 } from "uuid";
+import { ProductType } from "@/interfaces/commonTypes";
+import useAvgRating from "@/hooks/useAvgRating";
+import { message } from "antd";
 
-const SingleProduct = function () {
-    return (
-        <div className={styles.product}>
+type SingleProductProps = {
+  product: ProductType;
+  setShowProduct: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-                <div className={styles.holder}>
-                    <div className={styles.key}>
-                    <Image src="/images/key.png" width="30" height="20" className={styles.key} />
-                    </div>
-                    <div className={styles.greenly}>
-                         <div className={styles.green}><Link href="/">
-                                <a className={styles.link}>
-                                <Image src="/images/buttonGreen.png" width="149" height="64" className={styles.green} />
-                                </a>
-                            </Link>
-                         </div>
-                            <div className={styles.white}><Link href="/">
-                                <a className={styles.link}>
-                                <Image src="/images/buttonWhite.png" width="110" height="64" className={styles.white} />
-                                </a>
-                            </Link></div>
-                    </div>
-                </div>
-                <div className={styles.single}>
-                <div className={styles.images}>
-                <div className={styles.mask}>
-                    <Image src="/images/mask.png" width="722" height="693.41" className={styles.img} />
-                </div>
-                <div className={styles.masky}>
-                <div>
-                    <Image src="/images/masky.png" width="163.22" height="156.54" className={styles.img} />
-                </div>
-                <div>
-                    <Image src="/images/masky.png" width="163.22" height="156.54" className={styles.img} />
-                </div>
-                <div>
-                    <Image src="/images/masky.png" width="163.22" height="156.54" className={styles.img} />
-                </div>
-                <div>
-                    <Image src="/images/masky.png" width="163.22" height="156.54" className={styles.img} />
-                </div>
-                </div>
-                </div>
+const SingleProduct = function ({
+  product,
+  setShowProduct,
+}: SingleProductProps) {
+  const router = useRouter();
 
-                
-                <div className={styles.element}>
-                    
-                    <div>
-                        <h4>Women's Fashion Shiny High Heels</h4>
-                        <div className={styles.review}>
-                            <p><b>Product Code:</b> MODA124323</p>
+  function promote(id: string) {
+    router.push(`/seller/promote-product/${id}`);
+  }
 
-                        <div className={styles.revs}>
-                        <div className={styles.box_productRating}>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                        <span className="material-icons">star</span>
-                      </div>
-                            <p className={styles.six}>(6 Reviews)</p>
-                        </div></div>
-                    </div>
-                    <h2 >$25.00</h2>
-                    <p className={styles.name}>
-                    “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                      cillum dolore eu fugiat nulla pariatur. 
-                    </p>
+  function edit() {
+    router.push("#");
+  }
 
-                    <div className={styles.colors}>
-                        <p>COLOR: </p>
-                        <div className={styles.paint}><div className={styles.yellow}></div>
-                        <div className={styles.maroon}></div>
-                        <div className={styles.pink}></div></div>
-                    </div>
-                    <div className={styles.size}>
-                        <p>SIZE:</p>
-                        <div className={styles.fort}>
-                        <div className={styles.forty}>40</div>
-                        <div className={styles.fortyone}>41</div>
-                        <div className={styles.fortythree}>43</div>
-                        <div className={styles.fortyfour}>44</div>
-                        <div className={styles.fortyfive}>45</div></div>
-                    </div>
+  function copyLink() {
+    const link = window.location.href;
+    navigator.clipboard.writeText(link);
+    message.success("Link copied to clipboard");
+  }
 
-                    <div className={styles.line}></div>
+  function shareOnWhatsapp() {
+    window.open(`https://web.whatsapp.com://send?text=${window.location.href}`);
+  }
 
-                    <div className={styles.share}>
-                        <p className={styles.shareon}>Share on:</p>
-                        <div>
-                            <div className={styles.book}>
-                            <div className={styles.facebook}>
-                             <Link href="/">
-                                <a className={styles.link}>
-                                <Image src="/images/facebooktime.png" width="121" height="42" className={styles.facebook} />
-                                </a>
-                             </Link></div>
-                            <div className={styles.twitter}><Link href="/">
-                                <a className={styles.link}>
-                                <Image src="/images/tweet.png" width="121" height="42" className={styles.twitter} />
-                                </a>
-                            </Link></div>
-                            <div className={styles.whatsapp}><Link href="/">
-                                <a className={styles.link}>
-                                <Image src="/images/whatsapp.png" width="121" height="42" className={styles.whatsapp} />
-                                </a>
-                            </Link></div>
-                            <div className={styles.copy}><Link href="/">
-                                <a className={styles.link}>
-                                <Image src="/images/copy.png" width="121" height="42" className={styles.copy} />
-                                </a>
-                            </Link></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className={styles.product}>
+      <div className={styles.holder}>
+        <div className={styles.key}>
+          <i
+            className="fas fa-arrow-left tw-cursor-pointer"
+            onClick={() => setShowProduct(false)}
+          />
         </div>
-    )
-}
+        <div className={styles.greenly}>
+          <button
+            className="tw-bg-green-success tw-text-white-100 tw-rounded-sm tw-py-2 tw-px-3"
+            onClick={() => promote(product.id)}
+          >
+            Promote
+          </button>
+          <button
+            className="tw-border-2 tw-border-gray-kwek900 tw-rounded-sm tw-py-2 tw-px-3"
+            onClick={() => edit()}
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+      <div className={styles.single}>
+        <div className={styles.images}>
+          <div className={styles.mask}>
+            <Image
+              src={product.image[0].imageUrl}
+              width="722"
+              height="693.41"
+              className={styles.img}
+            />
+          </div>
+          <div className={styles.masky}>
+            {product.image.map((image) => (
+              <Image
+                key={v4()}
+                src={image.imageUrl}
+                width="163.22"
+                height="156.54"
+                className={styles.img}
+              />
+            ))}
+          </div>
+        </div>
 
-export default SingleProduct
+        <div className={styles.element}>
+          <div>
+            <h4>{product.productTitle}</h4>
+            <div className={styles.review}>
+              <div className="tw-flex-1">
+                <strong>Product Code:</strong> {product.id}
+              </div>
+
+              <div className={styles.revs}>
+                <StarRatingComponent
+                  name="seller-product"
+                  starCount={5}
+                  value={useAvgRating(product)}
+                  editing={false}
+                  emptyStarColor="#c4c4c4"
+                  starColor="#ffc107"
+                />
+                <p className={styles.six}>
+                  ({product?.productRating?.length} Reviews)
+                </p>
+              </div>
+            </div>
+          </div>
+          <h2>₦{product.options[0].price}</h2>
+          <p className={styles.name}>{product.shortDescription}</p>
+
+          <div className={styles.colors}>
+            <p>COLOR: </p>
+            <div
+              style={{ backgroundColor: product.color }}
+              className={styles.paint}
+            >
+              <div
+                style={{ backgroundColor: product.color }}
+                className="tw-w-[32px] tw-h-[32px]"
+              >
+              </div>
+            </div>
+          </div>
+          <div className={styles.size}>
+            <p>SIZE:</p>
+            <div className={styles.fort}>
+              {product.options.map((option) => (
+                <div key={v4()} className={styles.forty}>
+                  {option.size}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.line}></div>
+
+          <div className={styles.share}>
+            <p className={styles.shareon}>Share on:</p>
+            <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-1 tw-justify-center tw-items-center tw-gap-2 tw-ml-2">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                target="_blank noreferer noopener"
+                className="tw-bg-[#3b5998] tw-text-white-100 tw-rounded-md tw-p-2 tw-truncate"
+              >
+                <i className="fab fa-facebook-f tw-mr-2" />
+                Facebook
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                target="_blank noreferer noopener"
+                className="tw-bg-[#1da1f2] tw-text-white-100 tw-rounded-md tw-p-2"
+              >
+                <i className="fab fa-twitter tw-mr-2" />
+                Twitter
+              </a>
+              <button
+                className="tw-bg-[#25d366] tw-text-white-100 tw-rounded-md tw-p-2 tw-truncate"
+                onClick={() => shareOnWhatsapp()}
+              >
+                <i className="fab fa-whatsapp tw-mr-2" />
+                Whatsapp
+              </button>
+              <button
+                className="tw-border tw-border-gray-kwek100 tw-text-gray-kwek100 tw-rounded-md tw-p-2 tw-truncate"
+                onClick={() => copyLink()}
+              >
+                <i className="fas fa-link tw-mr-2 " />
+                Copy Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SingleProduct;

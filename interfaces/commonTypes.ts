@@ -131,10 +131,13 @@ export type SellerData = {
 };
 
 export type ReviewType = {
-  comment: string;
-  radio: any;
-  email: string;
-  name: string;
+  comment?: string;
+  review?: string;
+  rating: number;
+  productId: string;
+  email?: string;
+  name?: string;
+  token: string;
 };
 
 export type UploadProductType = {
@@ -185,6 +188,7 @@ export type ProductType = {
     isSeller: boolean;
     sellerprofileSet: {
       shopName: string;
+      storeBannerUrl: string;
     }[];
   };
   category: {
@@ -219,6 +223,7 @@ export type ProductType = {
     dislikes: number;
     user: {
       id: string;
+      username: string;
     };
     ratedAt: string;
   }[];
@@ -279,10 +284,10 @@ export type BillingAddressType = {
 export type PlaceOrder = {
   addressId: string;
   cartId: string;
-  couponId?: string;
-  couponType?: string;
+  couponIds?: string[];
   deliveryMethod: string;
   paymentMethod: string;
+  paymentRef?: string;
   productOptionsId: string[];
   token: string;
 };
@@ -297,4 +302,211 @@ export type PaymentLinkType = {
 
 export type VerifyPaymentType = {
   transactionId: string;
+  paymentRef: string;
+};
+
+export type Order = {
+  id: string;
+  closed: boolean;
+  orderId: string;
+  orderPrice: number;
+  orderPriceTotal: number;
+  user: {
+    username: string;
+  };
+  cartItems: {
+    id: string;
+    ordered: boolean;
+    price: number;
+    productOptionId: string;
+  }[];
+  doorStep: {
+    fullName: string;
+    address: string;
+    state: string;
+    city: string;
+  };
+  pickup: {
+    name: string;
+  };
+  paid: boolean;
+  coupon: any;
+  paymentMethod: string;
+  deliveryMethod: string;
+  deliveryStatus: string;
+  dateCreated: Date;
+};
+
+export type CartItemType = {
+  id: string;
+  quantity: number;
+  price: number;
+  ordered: boolean;
+  product: {
+    productTitle: string;
+    image: {
+      id: string;
+      imageUrl: string;
+    }[];
+  };
+  cart: {
+    createdAt: Date;
+  }[];
+};
+
+export type SubCategoriesType = {
+  id: string;
+  name: string;
+  categories: any[];
+  child: [
+    {
+      id: string;
+      name: string;
+    }
+  ];
+};
+
+// fix
+export type OrderList = {
+  created: string;
+  customer: {
+    fullName: string;
+  };
+  order: {
+    id: string;
+    deliveryStatus: string;
+  };
+  total: number;
+  profit: number;
+  status: string;
+  paid: boolean;
+};
+
+export type SellerWallet = {
+  id: string;
+  balance: number;
+  owner: {
+    firstName: string;
+    lastName: string;
+  };
+  transaction: {
+    amount: number;
+    date: string;
+    remark: string;
+  };
+};
+
+export type CouponType = {
+  id: string;
+  code: string;
+  value: number;
+  createdAt: string;
+  validUntil: string;
+  userList?: string[];
+};
+
+export type UserNotificationType = {
+  id: string;
+  notification: {
+    id: string;
+  };
+  message: string;
+  subject: string;
+  read: boolean;
+  createdAt: Date;
+};
+
+export type ReadNotificationType = {
+  messageId: string;
+  notificationId: string;
+  token: string;
+};
+
+export type InvoiceDetails = {
+  customerAddress: string;
+  customerEmail: string;
+  customerName: string;
+  deliveryFee: number;
+  note: string;
+  purchasedItem: string[];
+  subtotal: number;
+  token: string;
+  total: number;
+};
+
+export type InvoiceProps = {
+  invoice: InvoiceDetails;
+  setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetails>>;
+};
+
+export type PagePayload = {
+  page?: number;
+  pageSize?: number;
+  token: string;
+  search?: string;
+  sortBy: string;
+  priceRange?: number[];
+  sizes?: string[];
+  keyword?: string[];
+  rating?: number;
+  thisMonth?: boolean;
+};
+
+export type SellerReview = {
+  id: string;
+  product: ProductType;
+  rating: number;
+  review: String;
+  user: {
+    firstName: string;
+    lastName: string;
+  };
+  likes: number;
+  dislikes: number;
+  ratedAt: Date;
+  comment: {
+    id: number;
+  };
+};
+
+export type ContactUs = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+export type ClicksPayload = {
+  productId: string;
+  token: string;
+};
+
+export type WalletHistory = {
+  id: string;
+  remark: string;
+  amount: string;
+  date: Date;
+  status: boolean;
+  wallet: {
+    balance: number;
+  };
+};
+
+export type InvoiceResult = {
+  id: string;
+  customerName: string;
+  customerEmail: string;
+  invoiceNumber: string;
+  issueDate: Date;
+};
+
+export type Filtering = {
+  priceRange: number[];
+  sizes: string[];
+  keyword: string[];
+  rating: number;
+};
+
+export type SidebarProps = {
+  filtering: Filtering;
+  setFiltering: React.Dispatch<React.SetStateAction<Filtering>>;
 };

@@ -8,6 +8,8 @@ import {
   PASSWORDREGEX,
   passwordValidator,
   getIp,
+  updateClicks,
+  countdown,
 } from "./helper";
 
 export {
@@ -21,4 +23,6 @@ export {
   PASSWORDREGEX,
   passwordValidator,
   getIp,
+  updateClicks,
+  countdown,
 };

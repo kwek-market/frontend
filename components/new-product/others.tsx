@@ -1,8 +1,10 @@
 import { UploadProductProps } from "@/interfaces/commonTypes";
+import { Select } from "antd";
+import { SelectValue } from "antd/lib/select";
 import React, { useEffect, useState } from "react";
 
 function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
-  const [seoKeywords, setSeoKeywords] = useState("");
+  const [seoKeywords, setSeoKeywords] = useState([]);
   const [formValues, setFormValues] = useState([
     { size: "", quantity: "", price: "", discountPrice: "", totalPrice: "" },
   ]);
@@ -29,36 +31,36 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const handleSubmit = async () => {
     const { message } = await import("antd");
     for (let i = 0; i < formValues.length; i++) {
-      if (formValues[i].size === "") {
-        return message.error("Please enter a size for all variants", 4);
-      }
+      // if (formValues[i].size === "") {
+      //   return message.error("Please enter a size for all variants", 4);
+      // }
       if (formValues[i].quantity === "") {
         return message.error("Please enter a quantity for all variants", 4);
       }
       if (formValues[i].price === "") {
         return message.error("Please enter a price for all variants", 4);
       }
-      if (formValues[i].discountPrice === "") {
-        return message.error(
-          "Please enter a discount price for all variants",
-          4
-        );
-      }
-      if (formValues[i].totalPrice === "") {
-        return message.error("Please enter a total price for all variants", 4);
-      }
+      // if (formValues[i].discountPrice === "") {
+      //   return message.error(
+      //     "Please enter a discount price for all variants",
+      //     4
+      //   );
+      // }
+      // if (formValues[i].totalPrice === "") {
+      //   return message.error("Please enter a total price for all variants", 4);
+      // }
       if (!Number(formValues[i].price)) {
         return message.error(
           "Please enter a valid price as a number for all variants",
           4
         );
       }
-      if (!Number(formValues[i].discountPrice)) {
-        return message.error(
-          "Please enter a valid price as a number for all variants",
-          4
-        );
-      }
+      // if (!Number(formValues[i].discountPrice)) {
+      //   return message.error(
+      //     "Please enter a valid price as a number for all variants",
+      //     4
+      //   );
+      // }
       if (Number(formValues[i].discountPrice) > Number(formValues[i].price)) {
         return message.error(
           "Discount price cannot be greater than the price",
@@ -69,11 +71,11 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         return message.error("Discount price cannot be negative", 4);
       }
     }
-    console.log(formValues);
+    // console.log(formValues);
     const val = [];
     // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
-      const emptyString = `{'size': ${formValues[i].size} , 'quantity': ${formValues[i].quantity} , 'price': ${formValues[i].price} , 'discounted_price': ${formValues[i].discountPrice} , 'option_total_price': ${formValues[i].totalPrice}}`;
+      const emptyString = `{'size': ${formValues[i].size}, 'quantity': ${formValues[i].quantity}, 'price': ${formValues[i].price}, 'discounted_price': ${formValues[i].discountPrice}, 'option_total_price': ${formValues[i].totalPrice}}`;
       val.push(emptyString);
     }
     setSubmitDetails({
@@ -82,17 +84,13 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     });
   };
 
-  function handleSeo(e: React.ChangeEvent<HTMLInputElement>) {
-    setSeoKeywords(e.target.value);
-  }
-
-  useEffect(() => {
-    seoKeywords.split(", ");
+  function handleSeo(e: SelectValue) {
+    setSeoKeywords([e]);
     setSubmitDetails({
       ...submitDetails,
-      keyword: seoKeywords.split(", "),
+      keyword: e as unknown as string[],
     });
-  }, [seoKeywords]);
+  }
 
   return (
     <>
@@ -119,7 +117,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   type="text"
                   placeholder="0"
                   name="size"
-                  required
                   value={element.size || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -164,7 +161,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   type="text"
                   placeholder="0"
                   name="discountPrice"
-                  required
                   value={element.discountPrice || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -179,7 +175,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   type="text"
                   placeholder="0"
                   name="totalPrice"
-                  required
                   value={element.totalPrice || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -201,14 +196,14 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         <div className="tw-mt-3 tw-flex tw-justify-between">
           <button
             className="tw-font-medium tw-text-sm tw-text-green-success tw-bg-green-success tw-bg-opacity-20 tw-p-3 hover:tw-text-green-800"
-            onClick={addNewVariant}
+            onClick={() => addNewVariant()}
           >
             <i className="fas fa-plus" /> Add new variant
           </button>
 
           <button
             className="tw-font-medium tw-text-sm tw-text-red-700 tw-bg-red-700 tw-bg-opacity-20 tw-py-3 tw-px-5 hover:tw-text-red-800"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
           >
             done
           </button>
@@ -237,6 +232,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               }
             >
               <option value="no">no return policy</option>
+              <option value="yes">Can be returned</option>
             </select>
           </label>
 
@@ -255,6 +251,11 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               }
             >
               <option value="no">No warranty</option>
+              <option value="1 year">1yr warranty</option>
+              <option value="2 years">2yrs warranty</option>
+              <option value="3 years">3yrs warranty</option>
+              <option value="4 years">4yrs warranty</option>
+              <option value="5 years">5yrs warranty</option>
             </select>
           </label>
 
@@ -264,7 +265,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             <input
               type="text"
               placeholder="what is the color of this item?"
-              required
               className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
               value={submitDetails.color}
               onChange={(e) =>
@@ -280,7 +280,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             {" "}
             gender <br />
             <select
-              required
               value={submitDetails.gender}
               onChange={(e) =>
                 setSubmitDetails({
@@ -310,13 +309,13 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             {" "}
             Keywords (SEO meta tags describes your store to search engine.
             Separate each tag with comma (,)) <br />
-            <input
-              type="text"
-              required
-              className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
-              value={seoKeywords}
+            <Select
+              mode="tags"
+              placeholder="Please enter your keywords"
               onChange={(e) => handleSeo(e)}
-            />
+              size="large"
+              style={{ width: "100%" }}
+            ></Select>
           </label>
         </div>
       </div>

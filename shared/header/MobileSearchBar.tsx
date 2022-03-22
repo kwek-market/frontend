@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
-import styles from './mobilesearchbar.module.scss';
+import React, { useState } from "react";
+import styles from "./mobilesearchbar.module.scss";
+import { SearchBarProps } from "./SearchBar";
 
-const MobileSearchBar = function () {
-  const [searchValue, setSearchValue] = useState<string>('');
-
+const MobileSearchBar = function ({
+  search,
+  setSearch,
+  check,
+  setCheck,
+}: SearchBarProps) {
   return (
     <div className={styles.searchBox}>
-      <i className={`${styles.searchIcon} fas fa-search fa-2x`} />
+      <button onClick={() => setCheck(!check)}>
+        <i className={`${styles.searchIcon} fas fa-search fa-2x`} />
+      </button>
+
       <input
         className={styles.searchInput}
         type="text"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
         placeholder="search for products, brands and categories"
       />
     </div>
