@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, Suspense, memo } from "react";
+import { useEffect, memo } from "react";
 import { parseCookies } from "nookies";
 import { GetServerSideProps } from "next";
 import { MainLayout } from "@/layouts";

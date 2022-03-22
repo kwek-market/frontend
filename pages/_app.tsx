@@ -36,6 +36,11 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
         />
         <title>Kwek</title>
         <meta name="description" content="Online Shop" />
+        <meta
+          name="description"
+          content="Online market for buying and selling"
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>

@@ -83,6 +83,7 @@ export function getUserData(token: string) {
 
 export function loginUser(user: UserLogin) {
   return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
     try {
       dispatch({
         type: LOADING,
@@ -90,16 +91,13 @@ export function loginUser(user: UserLogin) {
       });
       const myIp = await getIp();
       const response = await userFetcher(LOGIN_USER, { ...user, ip: myIp });
-      import("antd").then(({ message }) => {
-        response.loginUser.status
-          ? message.success(response.loginUser.message)
-          : message.error(response.loginUser.message);
-      });
+      message.success(response.loginUser.message);
       dispatch({
         type: USERLOGIN,
         payload: response.loginUser,
       });
     } catch (error) {
+      message.error(error.message);
       logout();
       dispatch({
         type: SET_ERROR,
