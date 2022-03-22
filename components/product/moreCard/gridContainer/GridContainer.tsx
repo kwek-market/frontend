@@ -8,6 +8,7 @@ import { userFetcher } from "@/helpers";
 import { GetProducts } from "@/store/product/product.queries";
 import Loader from "react-loader-spinner";
 import { ProductType } from "@/interfaces/commonTypes";
+import { QueryClient } from "react-query";
 
 interface GridContainerProps {
   title: string;
@@ -16,40 +17,32 @@ interface GridContainerProps {
 }
 
 const GridContainer = function ({ title, cards, similar }: GridContainerProps) {
+  const queryClient = new QueryClient();
   const [products, setProducts] = useState([] as ProductType[]);
   const [loading, setLoading] = useState(true);
   const [err, setError] = useState("");
 
   // check for the product by the category name
   useEffect(() => {
-    let isCancelled = false;
     (async () => {
       const { message } = await import("antd");
+      const payload = {
+        search: similar,
+        page: 1,
+        pageSize: 5,
+      };
       try {
-        const payload = {
-          search: similar,
-        };
-        const res = await userFetcher(GetProducts, payload);
-        if (!isCancelled) {
-          setLoading(false);
-          setError("");
-          setProducts(res.products);
-          console.log(res);
-        }
-      } catch (error) {
-        console.log(error.message);
-        message.error(error.message);
-        if (!isCancelled) {
-          setLoading(false);
-          setError(error.message);
-          setProducts([] as ProductType[]);
-        }
+        setLoading(true);
+        const data = await queryClient.fetchQuery("category-items", () =>
+          userFetcher(GetProducts, payload)
+        );
+        setLoading(false);
+        setProducts(data.products.objects);
+      } catch (err) {
+        message.error(err.message);
+        setError(err.message);
       }
     })();
-
-    return () => {
-      isCancelled = true;
-    };
   }, []);
 
   const isLoading = !!loading && (

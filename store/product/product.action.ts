@@ -21,7 +21,7 @@ export function createProduct(Data: UploadProductType, token: string) {
     try {
       setLoading();
       const res = await userFetcherWithAuth(CreateProduct, Data, token);
-      console.log(res);
+      message.success("Product uploaded successfully");
       dispatch({
         type: productType.CREATE_PRODUCT,
         payload: res.data.createProduct,

@@ -1,51 +1,101 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./GridContainer.module.scss";
 
 import { ActiveTabbar, Card, SideBar } from "../index";
 import { v4 as uuid } from "uuid";
 import CategoryProducts from "../CategoryProducts";
-import { ProductType } from "@/interfaces/commonTypes";
+import { Filtering, ProductType } from "@/interfaces/commonTypes";
 import Loader from "react-loader-spinner";
 import ReactPaginate from "react-paginate";
-import useProducts from "@/hooks/useProducts";
-
-const itemsPerPage = 20;
+import useProducts, { PayloadType } from "@/hooks/useProducts";
+import { QueryClient, useQueryClient } from "react-query";
+import { userFetcher } from "@/helpers";
+import { GetProducts } from "@/store/product/product.queries";
 
 const GridContainer = function ({ cards, category }: any) {
+  const queryClient = useQueryClient();
+  const queryClient2 = new QueryClient();
   const [filter, setFilter] = useState(true);
-
-  // for pagination
+  const [filtering, setFiltering] = useState<Filtering>({
+    priceRange: [],
+    sizes: [],
+    keyword: [],
+    rating: -5,
+  });
+  const [sort, setSort] = useState("-clicks");
   const [currentItems, setCurrentItems] = useState<ProductType[]>(
     [] as ProductType[]
   );
   const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const payload = {
+  const payload: PayloadType = {
+    page: currentPage,
+    pageSize: 20,
     search: category,
+    sortBy: sort,
   };
   const {
     status: categoryStatus,
     data: categoryData,
     error: categoryError,
+    isFetching,
   } = useProducts(payload);
 
   useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const { keyword, priceRange, rating, sizes } = filtering;
+    // check for the ones that have values and add them to the payload object, else remove them
+    if (keyword.length > 0) payload.keyword = keyword;
+    if (priceRange.length > 0) payload.priceRange = priceRange;
+    if (sizes.length > 0) payload.sizes = sizes;
+    payload.rating = rating;
+    (async () => {
+      try {
+        const data = await queryClient2.fetchQuery(
+          ["category-items", payload],
+          () => userFetcher(GetProducts, payload)
+        );
+        if (data?.products?.hasNext) {
+          queryClient.prefetchQuery(["category-items", payload], () =>
+            userFetcher(GetProducts, payload)
+          );
+        }
+        setPageCount(data?.products.pages);
+        setCurrentItems(data?.products.objects);
+      } catch (err) {
+        console.error(err.message);
+      }
+    })();
+
+    return () => {
+      queryClient2.cancelQueries(["category-items", payload]);
+    };
+  }, [
+    sort,
+    filtering.priceRange,
+    filtering.rating,
+    filtering.sizes,
+    filtering.keyword,
+  ]);
+
+  useEffect(() => {
+    if (categoryData?.products?.hasNext) {
+      queryClient.prefetchQuery(["category-items", payload], () =>
+        userFetcher(GetProducts, payload)
+      );
+    }
     if (categoryData === undefined) return;
-    setCurrentItems(categoryData.products.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(categoryData.products.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, categoryData]);
+    setPageCount(categoryData?.products?.pages);
+    setCurrentItems(categoryData?.products?.objects);
+    // console.log(`current page: ${currentPage}`);
+    return () => {
+      queryClient.cancelQueries(["category-items", payload]);
+    };
+  }, [categoryData, currentPage, queryClient]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset =
-      (event.selected * itemsPerPage) % categoryData.products.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+    setCurrentPage(event.selected + 1);
   };
 
   const isLoading = categoryStatus === "loading" && (
@@ -57,7 +107,7 @@ const GridContainer = function ({ cards, category }: any) {
   const hasError = categoryStatus === "error" && (
     <div className="tw-w-full tw-py-5">
       <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
-        {categoryError}
+        {(categoryError as { message: string }).message}
       </h1>
     </div>
   );
@@ -79,50 +129,65 @@ const GridContainer = function ({ cards, category }: any) {
 
   return (
     <div id={styles.categoryGrid}>
-      <ActiveTabbar filter={filter} setFilter={setFilter} />
+      <ActiveTabbar
+        filter={filter}
+        setFilter={setFilter}
+        sort={sort}
+        setSort={setSort}
+      />
 
-      {filter && (
-        <aside className={styles.sidebarContainer}>
-          <SideBar category={category} />
-        </aside>
-      )}
-
-      <div
-        className={filter ? styles.mainContainer : styles.mainContainer__full}
-      >
-        {isLoading}
-        {hasError}
-        <div className={styles.products}>{isEmpty}</div>
-
-        {cards && (
-          <div className={styles.cards}>
-            {cards.map((card: any) => (
-              <div key={card} className={styles.card}>
-                <Card />
-              </div>
-            ))}
-          </div>
+      <div className="tw-flex tw-gap-5 tw-w-full">
+        {filter && (
+          <aside className={styles.sidebarContainer}>
+            <SideBar
+              category={category}
+              filtering={filtering}
+              setFiltering={setFiltering}
+            />
+          </aside>
         )}
-        <ReactPaginate
-          nextLabel="next >"
-          onPageChange={(e) => handlePageClick(e)}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={pageCount}
-          previousLabel="< previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={undefined}
-        />
+
+        <div
+          className={filter ? styles.mainContainer : styles.mainContainer__full}
+        >
+          {isLoading}
+          {hasError}
+          <div className={styles.products}>{isEmpty}</div>
+          {cards && (
+            <div className={styles.cards}>
+              {cards.map((card: any) => (
+                <div key={card} className={styles.card}>
+                  <Card />
+                </div>
+              ))}
+            </div>
+          )}
+          <ReactPaginate
+            nextLabel="next >"
+            onPageChange={(e) => handlePageClick(e)}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={undefined}
+          />
+          {isFetching ? (
+            <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
+              <Loader type="Rings" width={60} height={60} color="#FC476E" />
+            </div>
+          ) : null}{" "}
+        </div>
       </div>
     </div>
   );

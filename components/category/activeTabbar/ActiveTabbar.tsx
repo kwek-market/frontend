@@ -1,8 +1,19 @@
-import React from 'react';
-import Link from 'next/link';
-import styles from './activeTabbar.module.scss';
+import React from "react";
+import styles from "./activeTabbar.module.scss";
 
-const ActiveTabbar = function ({ filter, setFilter }) {
+type ActiveTabbarProps = {
+  filter: boolean;
+  setFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  sort: string;
+  setSort: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const ActiveTabbar = function ({
+  filter,
+  setFilter,
+  sort,
+  setSort,
+}: ActiveTabbarProps) {
   return (
     <div className={styles.bar_container}>
       <div className={styles.bar_content}>
@@ -14,7 +25,10 @@ const ActiveTabbar = function ({ filter, setFilter }) {
             </a>
           </div>
         ) : (
-          <div className={styles.filter__red} onClick={() => setFilter(!filter)}>
+          <div
+            className={styles.filter__red}
+            onClick={() => setFilter(!filter)}
+          >
             <a>
               Filters
               <i className="fas fa-angle-right" />
@@ -25,12 +39,12 @@ const ActiveTabbar = function ({ filter, setFilter }) {
         <div className={styles.sortPart}>
           <p>Sort By:</p>
           <div className={styles.select}>
-            <select>
-              <option>Popularity</option>
-              <option>Newest Arrivals</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Product Rating</option>
+            <select value={sort} onChange={(e) => setSort(e.target.value)}>
+              <option value="-clicks">Popularity</option>
+              <option value="-date_created">Newest Arrivals</option>
+              <option value="sales">Price: Low to High</option>
+              <option value="-sales">Price: High to Low</option>
+              <option value="-rating">Product Rating</option>
             </select>
             <div className={styles.arrow_down}>
               <i className="fas fa-angle-down" />

@@ -3,21 +3,25 @@ import styles from "../checkGrid/checkGrid.module.scss";
 import Image from "next/image";
 import { message } from "antd";
 
+export type DeliveryType = {
+  showModalone: () => void;
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+  deliveryMethod: string;
+  setDeliveryMethod: React.Dispatch<React.SetStateAction<string>>;
+};
+
 function Delivery({
   showModalone,
   step,
   setStep,
   deliveryMethod,
   setDeliveryMethod,
-}) {
+}: DeliveryType) {
   const [editStatus, setEditStatus] = useState(true);
 
   function deliverFunc() {
-    if (deliveryMethod === "door step") {
-      console.log("door step");
-    } else if (deliveryMethod === "pickup") {
-      console.log("pickup");
-    } else {
+    if (deliveryMethod === "" || deliveryMethod === null) {
       return message.error("Select an option for delivery", 5);
     }
     setEditStatus(false);
@@ -55,7 +59,7 @@ function Delivery({
                       </p>
                     </div>
                   </button>
-                  <button
+                  {/* <button
                     className={styles.option_two}
                     onClick={() => setDeliveryMethod("pickup")}
                   >
@@ -72,7 +76,7 @@ function Delivery({
                         locations nationwide
                       </p>
                     </div>
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <button type="submit" onClick={() => deliverFunc()}>
@@ -87,7 +91,7 @@ function Delivery({
                   Edit Information
                 </a>
               </div>
-              <p className={styles.contact}>Deliver within 24hrs for $20</p>
+              <p className={styles.contact}>Deliver within 24hrs for ₦100</p>
             </div>
           )}
         </Fragment>

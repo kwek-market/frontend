@@ -29,7 +29,8 @@ const Emailverification = function () {
         <p className="tw-text-black-stock tw-text-sm md:tw-text-base">Thank you for choosing Kwek</p>
         <p className="tw-text-black-stock tw-text-sm md:tw-text-base">
           Please confirm that <strong>{account.email} </strong>is your email address by clicking on the link sent to
-          your email within the next 24 hours
+          your email within the next 24 hours.
+          Also check your spam.
         </p>
         <Button
           buttonStyle="tw-py-2 tw-px-4 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-capitalize"

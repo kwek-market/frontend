@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import styles from './AuthLayout.module.scss';
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./AuthLayout.module.scss";
 
-import { Topbar } from '@/shared';
+import { Topbar } from "@/shared";
+import { useRouter } from "next/router";
 
 const AuthLayout = function ({
   children,
@@ -16,6 +17,7 @@ const AuthLayout = function ({
   bannerLink,
   withLogo,
 }: any) {
+  const router = useRouter();
   return (
     <div id={styles[id]} className={styles.authPage}>
       {/* <Topbar withLogo={withLogo} /> */}
@@ -26,12 +28,18 @@ const AuthLayout = function ({
             {withLogo && (
               <Link href="/">
                 <a className={styles.logo}>
-                  <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
+                  <Image
+                    src="/svg/kwek-logo-white.svg"
+                    width="150"
+                    height="25"
+                    placeholder="blur"
+                  />
                 </a>
               </Link>
             )}
             <h1 className={styles.banner_text}>
-              {bannerText.lineOne} <br /> {bannerText.lineTwo} <br /> {bannerText.lineThree}
+              {bannerText.lineOne} <br /> {bannerText.lineTwo} <br />{" "}
+              {bannerText.lineThree}
             </h1>
             {withSubText && <h2 className={styles.subText}>{subText}</h2>}
             {bannerLink && (
@@ -40,7 +48,13 @@ const AuthLayout = function ({
                   <a className={styles.banner_link}>
                     <button className={`btn ${styles.btn}`}>
                       <div className={styles.btn_text}>Shop with Kwek</div>
-                      <Image className={styles.btn_icon} src="/svg/arrow-right-red.svg" width="24" height="11.6" />
+                      <Image
+                        className={styles.btn_icon}
+                        src="/svg/arrow-right-red.svg"
+                        width="24"
+                        height="11.6"
+                        placeholder="blur"
+                      />
                     </button>
                   </a>
                 </Link>
@@ -49,7 +63,17 @@ const AuthLayout = function ({
           </div>
         )}
 
-        <div className={withBanner ? styles.formContainer : styles.formContainer__full}>{children}</div>
+        <div
+          className={
+            withBanner ? styles.formContainer : styles.formContainer__full
+          }
+        >
+          <button className="" onClick={() => router.push("/")}>
+            <i className="fas fa-arrow-left tw-text-left tw-text-lg" />
+          </button>
+
+          {children}
+        </div>
       </div>
     </div>
   );

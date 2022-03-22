@@ -8,6 +8,10 @@
   .bar_content {
     @include flex(flex-start, center, row);
 
+    @include respondMax("tablet") {
+      flex-direction: column
+    }
+
     .filter {
       @include flex(flex-start, center, row);
       margin-right: auto;
@@ -58,6 +62,10 @@
     .sortPart {
       @include flex(flex-start, center, row);
       margin-left: auto;
+
+      @include respondMax("tablet") {
+        flex-direction: column
+      }
 
       p {
         font-style: normal;

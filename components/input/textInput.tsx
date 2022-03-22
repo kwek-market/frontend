@@ -1,10 +1,16 @@
 import React from "react";
+import {
+  UserDataType,
+  UserPasswordType,
+} from "../seller/settings/components/PersonalDetails";
 
 type TextInputProps = {
   text: string;
   type: string;
   value: string | number;
-  setValue: React.Dispatch<React.SetStateAction<string | number>>;
+  setValue: React.Dispatch<
+    React.SetStateAction<string | number | UserDataType | UserPasswordType>
+  >;
   hide?: string;
   min?: number;
   max?: number;

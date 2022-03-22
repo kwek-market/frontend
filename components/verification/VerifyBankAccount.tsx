@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { SellerVerification } from "@/interfaces/commonTypes";
 import VerifiedModal from "./VerifiedModal";
-import { setLoading } from "@/store/user/user.actions";
 import Loader from "react-loader-spinner";
 
 interface T extends StepComponentProps {
@@ -62,7 +61,7 @@ function VerifyBankAccount(props: T) {
       preferedIdUrl: props.state.uploadedID as unknown as string,
       token: user.token,
     };
-    console.log(details);
+    // console.log(details);
     dispatch(sellerVerification(details, user.token));
     //dispatch(completeSellerVerification(user.user.email, user.token));
     setIsModalVisible(false);
@@ -80,9 +79,9 @@ function VerifyBankAccount(props: T) {
       return message.error("Please enter your bank name");
     if (props.state.bankAccountNumber === "")
       return message.error("Please enter your bank account number");
-    console.log(props.state);
-    console.log(props.submit(props.state));
-    console.log(bankSortCode);
+    // console.log(props.state);
+    // console.log(props.submit(props.state));
+    // console.log(bankSortCode);
     showModal();
   }
 

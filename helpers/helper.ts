@@ -36,3 +36,19 @@ export async function getIp() {
   const myIp = await (await fetch("https://api.ipify.org")).text();
   return myIp;
 }
+
+export const even = (index: number) => (index % 2 !== 0 ? "tw-bg-gray-kwek700" : "");
+
+export function updateClicks(productId: string, token: string, mutate: any) {
+  mutate({ productId, token });
+}
+
+// create a countdown timer given two dates to count from
+export function countdown(start: Date, end: Date) {
+  const diff = end.getTime() - start.getTime();
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  return { days, hours, minutes, seconds };
+}

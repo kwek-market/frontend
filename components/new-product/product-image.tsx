@@ -80,11 +80,11 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
   async function handleImageUpload() {
     const { message } = await import("antd");
     if (!files) return message.error("No file selected", 4);
-    console.log({ files });
+    // console.log({ files });
     const formData = new FormData();
     const uploadedUrls: string[] = [];
     let loading = "uploading images";
-    message.info(loading, 3);
+    message.loading(loading);
     for (let x = 0; x < files.length; x++) {
       formData.append("file", files[x]);
       formData.append(
@@ -99,12 +99,12 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
             onUploadProgress: (progressEvent) => {
               const { loaded, total } = progressEvent;
               const loading = Math.round((loaded / total) * 100);
-              console.log(`${loading}%`);
+              // console.log(`${loading}%`);
               setUploadPercent(loading);
             },
           }
         );
-        console.log({ response });
+        // console.log({ response });
         const {
           data: { secure_url },
         } = response;
@@ -123,7 +123,7 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
       <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-p-3 tw-border-b tw-border-grey-kwek700">
         <div className="tw-flex tw-flex-col">
           <p className="tw-font-semibold tw-capitalize tw-text-lg tw-mb-0">
-            product image 0/5
+            product image {files ? files.length : 0}/5
           </p>
           <p className="tw-text-gray-kwek200 tw-text-sm md:tw-text-base tw-font-normal tw-mb-0">
             Recommended Image dimention is 500px by 500px
@@ -131,7 +131,7 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
         </div>
         <Button
           buttonStyle={"tw-text-error hover:cursor-pointer"}
-          text={"upload image"}
+          text={"upload image(s)"}
           cmd={handleImageUpload}
         />
       </div>

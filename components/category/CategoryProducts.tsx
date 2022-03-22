@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import StarRatingComponent from "react-star-rating-component";
@@ -11,10 +11,12 @@ import {
   ProductType,
 } from "@/interfaces/commonTypes";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
-import { getIp } from "@/helpers";
-import { createWishlist } from "@/store/wishlist/wishlist.actions";
+import { getIp, updateClicks } from "@/helpers";
+import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import useItemInCart from "@/hooks/useItemInCart";
 import useItemInWishlist from "@/hooks/useItemInWishlist";
+import useClicksUpdate from "@/hooks/useClicksUpdate";
+import { Rate } from "antd";
 
 export type ProductBoxProps = {
   id: string;
@@ -24,6 +26,7 @@ export type ProductBoxProps = {
 const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
   const dispatch = useDispatch();
   const { user, cart, wishlist } = useSelector((state: RootState) => state);
+  const { mutate } = useClicksUpdate();
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
@@ -36,12 +39,12 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
   }
 
   function addToWishlist(id: string) {
-    console.log(id);
     const payload: AddToWishlistPayload = {
       productId: id,
       token: user.token,
     };
     dispatch(createWishlist(payload, user.token));
+    dispatch(getWishList(user.token));
   }
 
   const checkIfItemInCart = useItemInCart(prod, cart.cart);
@@ -102,8 +105,11 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
               />
             )}
           </span>
-          <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
-            <a className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
+          <Link href={`/product/${prod.id}?id=${prod.productTitle}`}>
+            <a
+              onClick={() => updateClicks(prod.id, user.token, mutate)}
+              className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"
+            >
               details
             </a>
           </Link>
@@ -111,40 +117,44 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
       </div>
 
       <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
-        <a>
+        <a onClick={() => updateClicks(prod.id, user.token, mutate)}>
           <div className={styles.box_details}>
             <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
             <p className={styles.box_productPrice}>
-              {!!prod.options[0]?.discountedPrice && (
-                <span>
-                  #{""} {prod.options[0].optionTotalPrice}
-                </span>
+              {prod.options[0]?.discountedPrice ? (
+                <Fragment>
+                  <span>
+                    ₦{""} {prod.options[0].discountedPrice}
+                  </span>
+                  <span>{prod.options[0]?.price}</span>
+                </Fragment>
+              ) : (
+                <span>{prod.options[0]?.price}</span>
               )}
-              <span>{prod.options[0]?.price}</span>
             </p>
 
             {prod.productRating.length > 0 ? (
-              <div>
-                <StarRatingComponent
-                  name="rate1"
-                  starCount={5}
-                  value={0}
-                  editing={false}
-                  emptyStarColor="#c4c4c4"
-                  starColor="#ffc107"
+              <div className="tw-flex tw-flex-wrap tw-justify-center">
+                <Rate
+                  style={{ fontSize: "0.75rem" }}
+                  allowHalf
+                  disabled
+                  value={prod?.productRating[0]?.rating}
                 />
-                <small>(6 Reviews)</small>
+                <small className="tw-text-gray-kwek400">
+                  ({prod.productRating[0].likes} Reviews)
+                </small>
               </div>
             ) : (
-              <div className={styles.box_productRating}>
-                <StarRatingComponent
-                  name="rate2"
-                  starCount={5}
-                  value={0}
-                  editing={false}
+              <div className="tw-flex tw-flex-wrap tw-justify-center">
+                <Rate
+                  style={{ fontSize: "0.75rem" }}
+                  allowHalf
+                  disabled
+                  value={prod?.productRating[0]?.rating}
                 />
-                <small>(0 Reviews)</small>
+                <small className="tw-text-gray-kwek400">(0 Reviews)</small>
               </div>
             )}
           </div>
