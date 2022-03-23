@@ -67,9 +67,6 @@ const AuthForm: React.FC<Type> = function ({
 
   return (
     <div id={styles.authForm}>
-      <nav>
-        <i className="fas fa-arrow-left" />
-      </nav>
       <form className={styles.form}>
         <div className={styles.form_titleblock}>
           <h2 className={styles.form_title}>{title}</h2>
