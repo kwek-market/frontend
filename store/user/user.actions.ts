@@ -95,11 +95,7 @@ export function loginUser(user: UserLogin) {
       });
     } catch (error) {
       message.error(error.message);
-<<<<<<< HEAD
-      logout();
-=======
       logout()(dispatch);
->>>>>>> 0740132d36062e20c2e839f987f2648ee0f6687c
       dispatch({
         type: SET_ERROR,
         payload: error.message,
