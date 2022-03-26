@@ -179,7 +179,7 @@ function ValidID(props: StepComponentProps) {
                 onChange={IdChangeHandler}
                 className="tw-mr-2"
               />{" "}
-              National Passport
+              Voters Card
             </div>
           </label>
           {selectedId && (

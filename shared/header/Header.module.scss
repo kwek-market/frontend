@@ -3,9 +3,10 @@
 
 #mainHeader {
   padding: 2rem 5%;
-  @include respondMax("tablet") {
-    padding: 2rem 5% 0;
-  }
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 6;
   @include flex(space-between, center);
   flex-flow: nowrap;
 
