@@ -23,18 +23,19 @@
   }
 
   .headerNav {
-    @include flex(flex-end, center);
+    // @include flex(flex-end, center);
 
     @include respondMax("tablet") {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      background: #efefef;
-      z-index: 5;
-      padding: 2vh 8%;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease-in-out;
+      display: none;
+      // position: fixed;
+      // top: 0;
+      // left: 0;
+      // height: 100vh;
+      // background: #efefef;
+      // z-index: 5;
+      // padding: 2vh 8%;
+      // transform: translateX(-100%);
+      // transition: transform 0.3s ease-in-out;
     }
   }
 
