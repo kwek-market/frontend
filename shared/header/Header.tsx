@@ -101,7 +101,7 @@ const Header = function ({
           <a>
             <FiHeart
               className="tw-text-black-stock"
-              style={{ height: "28px", width: "30px" }}
+              style={{ height: "28px", width: "30px", marginRight: "2rem" }}
             />
           </a>
         </Link>
@@ -115,7 +115,7 @@ const Header = function ({
         </Link>
       </div>
 
-      <div
+      {/* <div
         className={styles.headerNav}
         style={{ transform: userNav && "translateX(0)" }}
       >
@@ -196,7 +196,7 @@ const Header = function ({
             </a>
           </Link>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };

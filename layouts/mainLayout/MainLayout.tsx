@@ -22,9 +22,9 @@ type MainLayoutType = {
 const MainLayout = function ({ children, title }: MainLayoutType) {
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state);
-  const [showNavBar, setShowNavBar] = useState<boolean>(false);
-  const [userNav, setUserNav] = useState<boolean>(false);
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showNavBar, setShowNavBar] = useState<boolean>(true);
+  const [userNav, setUserNav] = useState<boolean>(true);
+  const [showMenu, setShowMenu] = useState<boolean>(true);
   const [search, setSearch] = useState("");
   const [check, setCheck] = useState<boolean>(false);
 

@@ -15,7 +15,7 @@ import { GetProducts } from "@/store/product/product.queries";
 const GridContainer = function ({ cards, category }: any) {
   const queryClient = useQueryClient();
   const queryClient2 = new QueryClient();
-  const [filter, setFilter] = useState(true);
+  const [filter, setFilter] = useState(false);
   const [filtering, setFiltering] = useState<Filtering>({
     priceRange: [],
     sizes: [],

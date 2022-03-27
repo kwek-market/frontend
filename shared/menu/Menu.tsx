@@ -17,6 +17,7 @@ import { clearCategories } from "@/store/category/categories.actions";
 import { clearProduct } from "@/store/product/product.action";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
 import Link from "next/link";
+import { v4 } from "uuid";
 
 const Menu = function ({}) {
   const dispatch = useDispatch();
@@ -132,7 +133,7 @@ const Menu = function ({}) {
         <p>Categories</p>
         <div>
           {categories.slice(0, 7).map((category) => (
-            <Link href={`/category/${category.name}`}>
+            <Link key={v4()} href={`/category/${category.name}`}>
               <a>
                 <CategoryBox
                   key={category.id}
