@@ -6,15 +6,16 @@
   padding: 1rem 6%;
 
   @include respondMax("tablet") {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    z-index: 5;
-    flex-flow: column nowrap;
-    padding: 1rem 12%;
-    transform: translateX(105%);
-    transition: transform 0.3s ease-in-out;
+    display: none;
+    // position: fixed;
+    // top: 0;
+    // right: 0;
+    // height: 100vh;
+    // z-index: 5;
+    // flex-flow: column nowrap;
+    // padding: 1rem 12%;
+    // transform: translateX(105%);
+    // transition: transform 0.3s ease-in-out;
   }
 
   .nav {
@@ -23,14 +24,15 @@
     padding: 0;
     margin: 0;
 
-    @include respondMax("tablet") {
-      margin-top: 10vh;
-      height: 75vh;
-      flex-flow: column nowrap;
-      width: 100%;
-      justify-content: space-evenly;
-      font-size: 1.5rem;
-    }
+    // @include respondMax("tablet") {
+    //   display: none;
+    //   margin-top: 10vh;
+    //   height: 75vh;
+    //   flex-flow: column nowrap;
+    //   width: 100%;
+    //   justify-content: space-evenly;
+    //   font-size: 1.5rem;
+    // }
 
     &_item {
       margin-right: 2.5rem;
