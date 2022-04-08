@@ -248,7 +248,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         </div>
         <div className={styles.product_option_share}>
           <p>Share:</p>
-          <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-justify-center tw-items-center tw-gap-2 ">
+          <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-justify-center tw-items-center tw-gap-2 ">
             <a
               href={`https://www.facebook.com/sharer/sharer.php?u=https://kwekmarket.com/${router.pathname}`}
               target="_blank noreferer noopener"
