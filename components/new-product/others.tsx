@@ -31,9 +31,9 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const handleSubmit = async () => {
     const { message } = await import("antd");
     for (let i = 0; i < formValues.length; i++) {
-      if (formValues[i].size === "") {
-        return message.error("Please enter a size for all variants", 4);
-      }
+      // if (formValues[i].size === "") {
+      //   return message.error("Please enter a size for all variants", 4);
+      // }
       if (formValues[i].quantity === "") {
         return message.error("Please enter a quantity for all variants", 4);
       }
@@ -75,7 +75,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     const val = [];
     // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
-      const emptyString = `{'size': ${formValues[i].size} , 'quantity': ${formValues[i].quantity} , 'price': ${formValues[i].price} , 'discounted_price': ${formValues[i].discountPrice} , 'option_total_price': ${formValues[i].totalPrice}}`;
+      const emptyString = `{'size': ${formValues[i].size}, 'quantity': ${formValues[i].quantity}, 'price': ${formValues[i].price}, 'discounted_price': ${formValues[i].discountPrice}, 'option_total_price': ${formValues[i].totalPrice}}`;
       val.push(emptyString);
     }
     setSubmitDetails({
@@ -117,7 +117,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   type="text"
                   placeholder="0"
                   name="size"
-                  required
                   value={element.size || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -233,6 +232,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               }
             >
               <option value="no">no return policy</option>
+              <option value="yes">Can be returned</option>
             </select>
           </label>
 
@@ -251,6 +251,11 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               }
             >
               <option value="no">No warranty</option>
+              <option value="1 year">1yr warranty</option>
+              <option value="2 years">2yrs warranty</option>
+              <option value="3 years">3yrs warranty</option>
+              <option value="4 years">4yrs warranty</option>
+              <option value="5 years">5yrs warranty</option>
             </select>
           </label>
 
@@ -260,7 +265,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             <input
               type="text"
               placeholder="what is the color of this item?"
-              required
               className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
               value={submitDetails.color}
               onChange={(e) =>
@@ -276,7 +280,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             {" "}
             gender <br />
             <select
-              required
               value={submitDetails.gender}
               onChange={(e) =>
                 setSubmitDetails({

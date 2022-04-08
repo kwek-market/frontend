@@ -101,7 +101,7 @@ const Header = function ({
           <a>
             <FiHeart
               className="tw-text-black-stock"
-              style={{ height: "28px", width: "30px" }}
+              style={{ height: "28px", width: "30px", marginRight: "1.5rem" }}
             />
           </a>
         </Link>
@@ -115,13 +115,10 @@ const Header = function ({
         </Link>
       </div>
 
-      <div
-        className={styles.headerNav}
-        style={{ transform: userNav && "translateX(0)" }}
-      >
-        <div className={styles.close} onClick={() => setUserNav(false)}>
+      <div className={styles.headerNav}>
+        {/* <div className={styles.close} onClick={() => setUserNav(false)}>
           <i className={`fas fa-times ${styles.close_icon}`} />
-        </div>
+        </div> */}
 
         <SearchBar
           search={search}

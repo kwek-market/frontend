@@ -106,7 +106,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   return (
     <div className={styles.product_container}>
       <div className={styles.product_carousel}>
-        <Carousel arrows {...settings} autoplay dots={false}>
+        <Carousel arrows {...settings} autoplay dots={true}>
           {product?.image?.map((image) => (
             <div key={uuid()}>
               <Image
@@ -190,6 +190,15 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             ))}
           </div>
         </div>
+        <div className="">
+          <p className="tw-capitalize tw-textbase">
+            <span className="tw-font-medium">Warranty</span>: {product.warranty}
+          </p>
+          <p className="tw-capitalize tw-textbase">
+            <span className="tw-font-medium">Return policy</span>:{" "}
+            {product.returnPolicy}
+          </p>
+        </div>
         <div className={styles.product_option_order}>
           <div className={styles.product_qty}>
             <p>QTY:</p>
@@ -239,7 +248,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         </div>
         <div className={styles.product_option_share}>
           <p>Share:</p>
-          <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-1 tw-justify-center tw-items-center tw-gap-2 ">
+          <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-justify-center tw-items-center tw-gap-2 ">
             <a
               href={`https://www.facebook.com/sharer/sharer.php?u=https://kwekmarket.com/${router.pathname}`}
               target="_blank noreferer noopener"

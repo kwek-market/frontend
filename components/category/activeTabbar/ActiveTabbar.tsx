@@ -37,7 +37,7 @@ const ActiveTabbar = function ({
         )}
 
         <div className={styles.sortPart}>
-          <p>Sort By:</p>
+          <p className="tw-hidden md:tw-flex">Sort By:</p>
           <div className={styles.select}>
             <select value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="-clicks">Popularity</option>

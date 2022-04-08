@@ -4,6 +4,7 @@ import styles from "../checkGrid/checkGrid.module.scss";
 import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
 import { v4 } from "uuid";
+import { ProductType } from "@/interfaces/commonTypes";
 
 function CartInfo() {
   const { cart } = useSelector((state: RootState) => state);
@@ -37,6 +38,16 @@ function CartInfo() {
               <div className={styles.item_info}>
                 <p className={styles.qty}>Qty: {item.quantity}</p>
                 <p className={styles.price}>₦{item.price}</p>
+              </div>
+              <div className={styles.item_info}>
+                <p className={styles.qty}>Color:</p>
+                <p className={styles.price}>{item.product.color}</p>
+              </div>
+              <div className={styles.item_info}>
+                <p className={styles.qty}>Size:</p>
+                <p className={styles.price}>
+                  {item.product.options[0].size}
+                </p>
               </div>
             </div>
           </div>

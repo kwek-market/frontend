@@ -22,6 +22,7 @@ export const GetCart = /* GraphQL */ `
       product {
         id
         productTitle
+        color
         user {
           sellerprofileSet {
             shopName
@@ -32,6 +33,7 @@ export const GetCart = /* GraphQL */ `
         }
         options {
           id
+          size
           price
           discountedPrice
           optionTotalPrice
