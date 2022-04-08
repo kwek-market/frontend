@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import styles from "./TitleBlock.module.scss";
 import { countdown } from "@/helpers/index";
 
@@ -11,9 +11,27 @@ type TitleBlockType = {
 
 const TitleBlock = function ({ title, timer, cards }: TitleBlockType) {
   const router = useRouter();
+  const [time, setTime] = React.useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   const { days, hours, minutes, seconds } = useMemo(() => {
-    return countdown(new Date(2022, 3, 15), new Date(2022, 3, 27));
+    return countdown(new Date(), new Date(2022, 2, 27));
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const { days, hours, minutes, seconds } = countdown(
+        new Date(),
+        new Date(2022, 2, 27)
+      );
+      console.log(days, hours, minutes, seconds);
+      setTime({ days, hours, minutes, seconds });
+    }, 1000 * 60 * 60);
+    return () => clearInterval(interval);
   }, []);
 
   return (

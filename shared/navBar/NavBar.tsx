@@ -21,16 +21,20 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
       title: "Contact Us",
       url: "/contact-us",
     },
+    {
+      title: "All Categories",
+      url: "/all",
+    },
   ];
   return (
     <nav
       id={styles.mainNav}
       className="bg-primary"
-      style={{ transform: showNavBar && "translateX(0)" }}
+      style={{ transform: true && "translateX(0)" }}
     >
-      <div className={styles.close} onClick={() => setShowNavBar(false)}>
+      {/* <div className={styles.close} onClick={() => setShowNavBar(false)}>
         <i className={`fas fa-times ${styles.close_icon}`} />
-      </div>
+      </div> */}
 
       <ul className={styles.nav}>
         {menu.map((item, index) => (

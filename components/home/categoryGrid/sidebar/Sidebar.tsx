@@ -42,7 +42,7 @@ const Sidebar = function ({ title }) {
           categoryData?.products.objects.map((product: ProductType) => (
             <Link
               key={v4()}
-              href={`/product/${product.productTitle}?id=${product.id}`}
+              href={`/product/${product.id}?id=${product.productTitle}`}
             >
               <a className="hover:tw-text-opacity-25">
                 <div className={styles.product}>

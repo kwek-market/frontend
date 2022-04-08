@@ -1,28 +1,28 @@
-import React, { Fragment } from 'react';
-import { NavigationComponentProps } from 'react-step-builder';
-import Style from './tracker.module.scss';
+import React, { Fragment } from "react";
+import { NavigationComponentProps } from "react-step-builder";
+import Style from "./tracker.module.scss";
 
 interface progressTrackerProps extends NavigationComponentProps {}
 
-const ProgressTracker: React.FC<progressTrackerProps> = props => {
+const ProgressTracker: React.FC<progressTrackerProps> = (props) => {
   const { allSteps, current: currentStep, size: stepLength } = props;
 
   return (
-    <section className="tw-bg-white-100 tw-py-10 tw-px-10 md:tw-px-[10rem] tw-flex tw-justify-around tw-items-center tw-rounded-md">
+    <section className="tw-bg-white-100 tw-py-10 tw-px-0 md:tw-px-[10rem] tw-flex tw-justify-around tw-items-center tw-rounded-md tw-overflow-auto">
       {allSteps.map(({ title }, index) => {
         const currentProgress = currentStep - 1 > index;
 
         const iconTheme = currentProgress
-          ? 'tw-border-green-success tw-text-green-success'
-          : 'tw-border-brown-kwek400 tw-border-2';
+          ? "tw-border-green-success tw-text-green-success"
+          : "tw-border-brown-kwek400 tw-border-2";
         const textTheme = currentProgress
-          ? 'tw-text-green-success'
+          ? "tw-text-green-success"
           : currentStep === index + 1
-          ? 'tw-text-black'
-          : 'tw-text-gray-kwek400';
+          ? "tw-text-black"
+          : "tw-text-gray-kwek400";
         const barTheme = currentProgress
-          ? 'tw-border-green-success'
-          : 'tw-border-gray-kwek400';
+          ? "tw-border-green-success"
+          : "tw-border-gray-kwek400";
 
         return (
           <Fragment key={title}>
@@ -46,7 +46,9 @@ const ProgressTracker: React.FC<progressTrackerProps> = props => {
                 )}
               </div>
               <p
-                className={`tw-text-xs tw-font-medium ${textTheme} tw-absolute tw-top-7 tw-w-[500%]`}
+                className={`tw-text-xs tw-font-medium ${textTheme} ${
+                  index === 0 ? "tw-mr-2" : "tw-mr-0"
+                } tw-absolute tw-top-7 tw-truncate`}
               >
                 {title}
               </p>

@@ -22,7 +22,6 @@ export default function Invoice({ element }) {
   const { invoice } = router.query;
 
   const { status, data, error } = useSellerInvoice(invoice as string, token);
-  console.log(data);
 
   return (
     <main
