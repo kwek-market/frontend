@@ -4,7 +4,7 @@ import { MainLayout } from '@/layouts'
 
 const Admin = () => {
   return (
-    <MainLayout>Admin</MainLayout>
+    <MainLayout title="Admin">Admin</MainLayout>
   )
 }
 
