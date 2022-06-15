@@ -1,8 +1,10 @@
 import React from 'react'
 
+import { MainLayout } from '@/layouts'
+
 const Admin = () => {
   return (
-    <div>Admin</div>
+    <MainLayout>Admin</MainLayout>
   )
 }
 
