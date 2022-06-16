@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const AdminLayout = () => {
-  return (
-    <div>AdminLayout</div>
-  )
-}
+type AdminLayoutType = {
+  children: React.ReactNode;
+};
 
-export default AdminLayout
+const AdminLayout = ({ children }) => {
+  return <div>Admin</div>;
+};
+
+export default AdminLayout;
