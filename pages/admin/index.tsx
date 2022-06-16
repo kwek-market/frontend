@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { MainLayout } from '@/layouts'
+import { AdminLayout} from '@/layouts'
 
 const Admin = () => {
   return (
-    <MainLayout title="Admin">Admin</MainLayout>
+    <AdminLayout>Admin</AdminLayout>
   )
 }
 

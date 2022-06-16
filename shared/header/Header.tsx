@@ -75,7 +75,7 @@ const Header = function ({
   );
 
   return (
-    <header id={styles.mainHeader}>
+    <header id={styles.mainHeader} className="tw-flex tw-flex-col tw-justify-between">
       <div onClick={() => openMenu()}>
         {!showMenu ? (
           <i className={`fas fa-bars fa-2x ${styles.navBar_icon}`} />
