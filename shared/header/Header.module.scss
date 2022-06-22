@@ -4,6 +4,8 @@
 #mainHeader {
   padding: 2rem 5%;
   position: sticky;
+  display: flex;
+  flex-direction: row;
   top: 0;
   background-color: white;
   z-index: 30;
@@ -24,6 +26,8 @@
 
   .headerNav {
     // @include flex(flex-end, center);
+    display: flex;
+    justify-content: space-between;
 
     @include respondMax("tablet") {
       display: none;
@@ -41,6 +45,7 @@
 
   .navBar_icon {
     display: none;
+    visibility: hidden;
 
     // font-size: 2.5rem;
 

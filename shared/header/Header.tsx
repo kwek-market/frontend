@@ -78,7 +78,7 @@ const Header = function ({
     <header id={styles.mainHeader} className="tw-flex tw-flex-col tw-justify-between">
       <div onClick={() => openMenu()}>
         {!showMenu ? (
-          <i className={`fas fa-bars fa-2x ${styles.navBar_icon}`} />
+          <i className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`} />
         ) : (
           <i className={`fas fa-times fa-2x ${styles.navBar_icon}`} />
         )}
@@ -101,7 +101,7 @@ const Header = function ({
           <a>
             <FiHeart
               className="tw-text-black-stock"
-              style={{ height: "28px", width: "30px", marginRight: "1.5rem" }}
+              style={{ height: "28px", width: "28px", marginRight: "1.5rem" }}
             />
           </a>
         </Link>
