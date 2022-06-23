@@ -517,7 +517,7 @@ const Page = function ({ data }) {
 };
 
 export async function getStaticProps() {
-  const data = await (await fetch(`https://restcountries.com/v2/all`)).json();
+  const data = await (await fetch(`https://restcountries.com/v3.1/all`)).json();
 
   return {
     props: { data }, // will be passed to the page component as props
