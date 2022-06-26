@@ -36,7 +36,7 @@ const SearchBar = function ({
         />
         <input
           type="search"
-          className={styles.searchForm_input}
+          className={`tw-outline-none focus:tw-outline-none tw-rounded-md ${styles.searchForm_input}`}
           placeholder="I'm searching for..."
           value={search}
           onChange={(e) => handleSearch(e)}
