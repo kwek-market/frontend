@@ -11,10 +11,13 @@ const ExtraGrid = function ({ product }: { product: ProductType }) {
     <div className={styles.extra_container}>
       <div className={styles.extra_info}>
         <Image
+          // src={
+          //   product.user.sellerprofileSet[0].storeBannerUrl
+          //     ? product.user.sellerprofileSet[0].storeBannerUrl
+          //     : "/images/store.png"
+          // }
           src={
-            product.user.sellerprofileSet[0].storeBannerUrl
-              ? product.user.sellerprofileSet[0].storeBannerUrl
-              : "/images/store.png"
+            product.user.sellerprofileSet[0].storeBannerUrl ?? "/images/store.png"
           }
           width="100"
           height="100"
