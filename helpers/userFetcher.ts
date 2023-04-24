@@ -5,7 +5,7 @@ import { GraphQLClient, request } from "graphql-request";
 const graphqlEndpoint = process.env.BACKEND_ENDPOINT;
 
 export const userFetcher = async (query: string, variables?: any) => {
-  return await request(apiEndpoint, query, variables);
+  return await request(graphqlEndpoint, query, variables);
 };
 
 export const userFetcherWithAuth = async (
