@@ -51,6 +51,7 @@ const Sidebar = function ({ title }) {
                       src={product?.image[0].imageUrl}
                       width="96"
                       height="110"
+                      className="tw-object-cover"
                     />
                   </div>
 

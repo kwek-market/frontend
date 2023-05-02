@@ -22,7 +22,12 @@ const Banner = function ({ product }: { product: ProductType }) {
       </div>
 
       <div className={styles.imageContainer}>
-        <Image src={product?.image[0].imageUrl} width="300" height="160" />
+        <Image
+          src={product?.image[0].imageUrl}
+          width="300"
+          height="160"
+          className=" tw-object-cover"
+        />
       </div>
     </div>
   );
