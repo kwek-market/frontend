@@ -72,6 +72,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           height="284"
           alt="product"
           quality={"auto"}
+          className=" tw-object-cover"
         />
         {/* <span
           id="cart-wishlist"
