@@ -32,7 +32,7 @@ function CartInfo() {
             />
             <div className={styles.info}>
               <p className={styles.seller}>
-                Seller: {item.product.user.sellerprofileSet[0].shopName}
+                Seller: {item.product.user.sellerprofileSet[0]?.shopName}
               </p>
               <p className={styles.name}>{item.product.productTitle}</p>
               <div className={styles.item_info}>
@@ -45,9 +45,7 @@ function CartInfo() {
               </div>
               <div className={styles.item_info}>
                 <p className={styles.qty}>Size:</p>
-                <p className={styles.price}>
-                  {item.product.options[0].size}
-                </p>
+                <p className={styles.price}>{item.product.options[0].size}</p>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ module.exports = {
       "res.cloudinary.com",
       "via.placeholder.com",
       "randomuser.me",
+      "images.pexels.com",
     ],
   },
 };

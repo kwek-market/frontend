@@ -141,11 +141,6 @@ export default function Home() {
             )}
           </Fragment> */}
         </div>
-        <Revenue
-          revenue={revenueData}
-          status={revenueStatus}
-          err={revenueError}
-        />
       </section>
       <aside>
         <div className="tw-mb-4">
@@ -160,66 +155,69 @@ export default function Home() {
             val={rateData !== undefined && rateData.getSellerDeliveryRate}
           />
         </div>
-        <div className="tw-grid tw-grid-cols-1 tw-gap-3 tw-mt-4">
-          <Fragment>
-            {salesStatus === "loading" && <Load />}
-            {salesStatus === "error" && (
-              <ErrorInfo error={(salesError as { message: string }).message} />
-            )}
-            {salesStatus === "success" && salesData !== undefined && (
-              <Card
-                name="successful sales"
-                content={saleData.getSellerSuccessfulSales ?? 0}
-                num={salesData.getSellerSuccessfulSales ?? 0}
-                imgSrc={"/svg/sale.svg"}
-                imgAlt={"sales"}
-              />
-            )}
-          </Fragment>
-          <Fragment>
-            {daysStatus === "loading" && <Load />}
-            {daysStatus === "error" && (
-              <ErrorInfo error={(daysError as { message: string }).message} />
-            )}
-            {daysStatus === "success" && daysData !== undefined && (
-              <Card
-                name="Days selling on Kwek"
-                num={daysData.getSellerDaysSelling}
-                content={`NGN ${daysData.getSellerDaysSelling}`}
-                imgSrc={"/svg/calendar.svg"}
-                imgAlt={"days-selling"}
-              />
-            )}
-          </Fragment>
-          <Fragment>
-            {productStatus === "loading" && <Load />}
-            {productStatus === "error" && (
-              <ErrorInfo
-                error={(productError as { message: string }).message}
-              />
-            )}
-            {productStatus === "success" &&
-            productData !== undefined &&
-            productData.getSellerProducts.objects.length > 0 ? (
-              <Card
-                name="products"
-                content={prodData?.getSellerProducts.objects.length}
-                num={productData.getSellerProducts.objects.length}
-                imgSrc={"/svg/received.svg"}
-                imgAlt={"products"}
-              />
-            ) : (
-              <Card
-                name="products"
-                content={0}
-                num={0}
-                imgSrc={"/svg/received.svg"}
-                imgAlt={"products"}
-              />
-            )}
-          </Fragment>
-        </div>
       </aside>
+      <Revenue
+        revenue={revenueData}
+        status={revenueStatus}
+        err={revenueError}
+      />
+      <div className="tw-grid tw-grid-cols-1 tw-gap-3 tw-mt-3">
+        <Fragment>
+          {salesStatus === "loading" && <Load />}
+          {salesStatus === "error" && (
+            <ErrorInfo error={(salesError as { message: string }).message} />
+          )}
+          {salesStatus === "success" && salesData !== undefined && (
+            <Card
+              name="successful sales"
+              content={saleData.getSellerSuccessfulSales ?? 0}
+              num={salesData.getSellerSuccessfulSales ?? 0}
+              imgSrc={"/svg/sale.svg"}
+              imgAlt={"sales"}
+            />
+          )}
+        </Fragment>
+        <Fragment>
+          {daysStatus === "loading" && <Load />}
+          {daysStatus === "error" && (
+            <ErrorInfo error={(daysError as { message: string }).message} />
+          )}
+          {daysStatus === "success" && daysData !== undefined && (
+            <Card
+              name="Days selling on Kwek"
+              num={daysData.getSellerDaysSelling}
+              content={`NGN ${daysData.getSellerDaysSelling}`}
+              imgSrc={"/svg/calendar.svg"}
+              imgAlt={"days-selling"}
+            />
+          )}
+        </Fragment>
+        <Fragment>
+          {productStatus === "loading" && <Load />}
+          {productStatus === "error" && (
+            <ErrorInfo error={(productError as { message: string }).message} />
+          )}
+          {productStatus === "success" &&
+          productData !== undefined &&
+          productData.getSellerProducts.objects.length > 0 ? (
+            <Card
+              name="products"
+              content={prodData?.getSellerProducts.objects.length}
+              num={productData.getSellerProducts.objects.length}
+              imgSrc={"/svg/received.svg"}
+              imgAlt={"products"}
+            />
+          ) : (
+            <Card
+              name="products"
+              content={0}
+              num={0}
+              imgSrc={"/svg/received.svg"}
+              imgAlt={"products"}
+            />
+          )}
+        </Fragment>
+      </div>
     </section>
   );
 }
