@@ -22,6 +22,8 @@ const CartGridComponent = function () {
   const dispatch = useDispatch();
   const { user, cart } = useSelector((state: RootState) => state);
 
+  console.log(cart, "carter");
+
   function deleteItemFromCart(itemId: string, cartId: string) {
     const payload = {
       itemId,
@@ -77,7 +79,7 @@ const CartGridComponent = function () {
               </div>
               <div className={styles.item_desc}>
                 <p className={styles.seller}>
-                  Seller: {item.product.user.sellerprofileSet[0].shopName}
+                  Seller: {item.product.user.sellerprofileSet[0]?.shopName}
                 </p>
                 <p className={styles.name}>{item.product.productTitle}</p>
               </div>
@@ -130,7 +132,7 @@ const CartGridComponent = function () {
           <div className="tw-ml-7 tw-flex-[2]">
             <div>
               <span className="tw-text-xs tw-text-gray-kwek100">
-                Seller: {item.product.user.sellerprofileSet[0].shopName}
+                Seller: {item.product.user.sellerprofileSet[0]?.shopName}
               </span>
             </div>
             <div className="tw-mb-4">

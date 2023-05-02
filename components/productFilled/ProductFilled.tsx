@@ -49,10 +49,10 @@ const ProductFilled = function ({
           <div className="tw-text-lg tw-font-semibold">
             All Products - {product.length}
           </div>
-          <div className={styles.sort}>
-            <p className="">Sort by: </p>
+          <div className="tw-flex tw-gap-x-4 tw-items-center">
+            <p className="tw-p-0 tw-m-0">Sort by: </p>
             <select
-              className="tw-ml-2"
+              className=""
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             >
@@ -77,6 +77,7 @@ const ProductFilled = function ({
                 layout="responsive"
                 width={200}
                 height={200}
+                className=" tw-object-cover"
               />
               {!!isPromoted(prod.id) && (
                 <span className="tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[35%] md:tw-left-[60%] tw-top-[5%]">
@@ -91,10 +92,12 @@ const ProductFilled = function ({
                   <Rate allowHalf value={useAvgRating(prod)} />
                 </div>
                 <div>
-                  <p className="tw-text-lg tw-font-semibold tw-mb-0">
+                  <p className="tw-text-lg tw-font-semibold tw-mb-0 tw-text-right">
                     {prod.options[0].price}
                   </p>
-                  <p>{prod?.productRating.length} reviews</p>
+                  <p className=" tw-text-[#BFA5A3] tw-text-xs">
+                    ({prod?.productRating.length} reviews)
+                  </p>
                 </div>
               </div>
             </div>

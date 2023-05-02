@@ -25,6 +25,7 @@ function Content() {
         defaultActiveKey="1"
         animated
         tabBarStyle={{ margin: "0 3rem", borderColor: "red" }}
+        className="sellprof"
       >
         <TabPane tab="Home" key="1">
           <Container>

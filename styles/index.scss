@@ -98,3 +98,9 @@ progress[value]::-webkit-progress-bar {
     }
   }
 }
+.sellprof {
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: $col-primary;
+    text-shadow: 0 0 0.25px currentColor;
+  }
+}
