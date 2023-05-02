@@ -61,7 +61,7 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
         <meta property="og:description" content="Online Market Site" />
         <meta property="og:image" content="" />
         <meta property="og:image:alt" content="kwekmarket" />
-        <meta httpEquiv="Content-Security-Policy" content="img-src 'self' https://images.pexels.com" />
+        <meta httpEquiv="Content-Security-Policy" content="img-src 'self' https://images.pexels.com;" />u
         <script
           defer
           src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
