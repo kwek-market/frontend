@@ -374,6 +374,7 @@ export type OrderList = {
   };
   order: {
     id: string;
+    orderId: string;
     deliveryStatus: string;
   };
   total: number;

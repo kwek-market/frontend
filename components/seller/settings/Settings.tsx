@@ -24,9 +24,9 @@ export default function Settings() {
           <TabPane tab="Store" key="2">
             <Store />
           </TabPane>
-          <TabPane tab="Delivery" key="3">
+          {/* <TabPane tab="Delivery" key="3">
             Content of Tab Pane 1
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </section>
     </section>

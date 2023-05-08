@@ -30,6 +30,9 @@ const OrderHeader = function () {
         <th>
           <span className={styles.title}>Status</span>
         </th>
+        <th>
+          <span className={styles.title}></span>
+        </th>
       </tr>
     </thead>
   );

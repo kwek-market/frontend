@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import Settings from "../settings/Settings";
 import Wallet from "../wallet/Wallet";
@@ -7,6 +7,7 @@ import Product from "../product/Product";
 import Promotions from "../promotions/Promotions";
 import Home from "../home/Home";
 import Reviews from "../reviews/Reviews";
+import { useRouter } from "next/router";
 
 const { TabPane } = Tabs;
 
@@ -18,14 +19,27 @@ function Container({ children }: { children: React.ReactNode }) {
   );
 }
 
+const tabKeys = {
+  products: "2",
+  settings: "6",
+};
+
 function Content() {
+  const router = useRouter();
+  useEffect(() => {
+    if (router.query.tab) {
+      setActiveKey(tabKeys[router.query.tab as keyof typeof tabKeys]);
+    }
+  }, [router.query]);
+  const [activeKey, setActiveKey] = useState("1");
   return (
     <div className="tw-py-3">
       <Tabs
-        defaultActiveKey="1"
         animated
         tabBarStyle={{ margin: "0 3rem", borderColor: "red" }}
         className="sellprof"
+        activeKey={activeKey}
+        onTabClick={(key) => setActiveKey(key)}
       >
         <TabPane tab="Home" key="1">
           <Container>

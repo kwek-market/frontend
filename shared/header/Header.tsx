@@ -75,10 +75,15 @@ const Header = function ({
   );
 
   return (
-    <header id={styles.mainHeader} className="tw-flex tw-flex-col tw-justify-between">
-      <div onClick={() => openMenu()}>
+    <header
+      id={styles.mainHeader}
+      className="tw-flex tw-flex-col tw-justify-between"
+    >
+      <div onClick={() => openMenu()} className="md:tw-hidden">
         {!showMenu ? (
-          <i className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`} />
+          <i
+            className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`}
+          />
         ) : (
           <i className={`fas fa-times fa-2x ${styles.navBar_icon}`} />
         )}
