@@ -59,6 +59,7 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
           width="329"
           height="284"
           alt="product"
+          className=" tw-object-cover"
         />
         {/* <span className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden">
           <i

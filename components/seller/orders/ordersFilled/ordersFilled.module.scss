@@ -128,41 +128,56 @@
         padding: 10px 26px;
         color: #ff2d1a;
         border: 1px solid #ff2d1a;
-        border-radius: 5px;
+        border-radius: 20px;
         height: 40px;
         min-width: 103px;
         text-align: center;
         width: fit-content;
+        font-weight: 500;
       }
 
       .orderPaymentPaid {
-        border-radius: 5px;
+        border-radius: 20px;
         background: #009d19;
         color: #ffffff;
         min-width: 103px;
         text-align: center;
         padding: 10px 26px;
         width: fit-content;
+        font-weight: 500;
       }
 
       .orderStatusConfirmed {
         border: 1px solid #574240;
-        border-radius: 5px;
+        border-radius: 20px;
         padding: 10px 26px;
         color: #574240;
         width: fit-content;
         min-width: 128px;
         text-align: center;
+        font-weight: 500;
       }
 
       .orderStatusPending {
         padding: 10px 26px;
         background: #ffc107;
+        border-radius: 20px;
+        color: #ffffff;
+        width: fit-content;
+        text-align: center;
+        min-width: 128px;
+        font-weight: 500;
+      }
+
+      .trackOrder {
+        padding: 10px 26px;
+        background: #009d19;
         border-radius: 5px;
         color: #ffffff;
         width: fit-content;
         text-align: center;
         min-width: 128px;
+        font-weight: 500;
       }
     }
   }

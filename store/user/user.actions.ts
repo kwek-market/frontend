@@ -88,11 +88,19 @@ export function loginUser(user: UserLogin) {
       setLoading()(dispatch);
       const myIp = await getIp();
       const response = await userFetcher(LOGIN_USER, { ...user, ip: myIp });
-      message.success(response.loginUser.message);
-      dispatch({
-        type: USERLOGIN,
-        payload: response.loginUser,
-      });
+      console.log(response, "response");
+
+      if (response.loginUser.status === true) {
+        message.success(response.loginUser.message);
+
+        dispatch({
+          type: USERLOGIN,
+          payload: response.loginUser,
+        });
+      } else {
+        message.error(response.loginUser.message);
+        logout()(dispatch);
+      }
     } catch (error) {
       message.error(error.message);
       logout()(dispatch);
