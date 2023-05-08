@@ -164,6 +164,7 @@ export const GET_SELLER_ORDERS = `
      objects {
       order {
         id
+        orderId
         deliveryStatus
       }
       created
@@ -582,7 +583,7 @@ export const UPDATE_PRODUCT = `
   }
 `;
 
-export const UPDATE_ORDER_PROGRESS = `
+export const UPDATE_ORDER_PROGRESS = /* GraphQL */ `
   mutation updateOrderProgress($orderId: String!, $progress: String!) {
     updateOrderProgress(orderId: $orderId, progress: $progress) {
       status
@@ -591,7 +592,7 @@ export const UPDATE_ORDER_PROGRESS = `
   }
 `;
 
-export const CANCEL_PROMOTION = `
+export const CANCEL_PROMOTION = /* GraphQL */ `
   mutation cancelProductPromotion($productId: String!, $token: String!) {
     cancelProductPromotion(productId: $productId, token: $token) {
       status

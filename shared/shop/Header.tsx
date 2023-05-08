@@ -45,7 +45,14 @@ function Header() {
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link href="/seller/profile/#settings">
+        <Link
+          href={{
+            pathname: "/seller/profile",
+            query: {
+              tab: "settings",
+            },
+          }}
+        >
           <a>account</a>
         </Link>
       </Menu.Item>

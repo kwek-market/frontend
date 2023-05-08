@@ -22,13 +22,17 @@ export type UserPasswordType = {
 };
 
 export default function PersonalDetails({}) {
-  const { user } = useSelector((state: RootState) => state);
+  const {
+    user,
+    seller: { seller },
+  } = useSelector((state: RootState) => state);
+
   const dispatch = useDispatch();
   const { mutate, isLoading } = usePasswordUpdate(user.token);
   const [personalDetails, setPersonalDetails] = useState<UserDataType>({
-    firstname: user.user.firstName ?? "",
-    lastname: user.user.lastName ?? "",
-    phoneNumber: user.user.phoneNumber ?? "",
+    firstname: seller.firstname ?? "",
+    lastname: seller.lastname ?? "",
+    phoneNumber: seller.phoneNumber ?? "",
     email: user.user.email ?? "",
   });
   const [password, setPassword] = useState<UserPasswordType>({
@@ -182,6 +186,7 @@ export default function PersonalDetails({}) {
               className="tw-rounded-sm tw-w-full tw-mt-2"
               size="large"
               value={personalDetails.email}
+              disabled
               onChange={(e) =>
                 setPersonalDetails({
                   ...personalDetails,

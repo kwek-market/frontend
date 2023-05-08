@@ -57,6 +57,7 @@ const userReducer = (
         error: null,
       };
     case LOGIN_USER:
+      console.log(action.payload, "login");
       return {
         ...state,
         id: action.payload.user.id,

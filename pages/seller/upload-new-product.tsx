@@ -29,6 +29,7 @@ function page() {
     warranty: "no warranty",
   });
 
+  console.log(submitDetails, "details");
   return (
     <section>
       <Header submitDetails={submitDetails} />

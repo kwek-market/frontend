@@ -77,6 +77,9 @@ module.exports = {
         "seller-header":
           "linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('/images/user-photo.svg')",
       },
+      fontFamily: {
+        poppins: ["Poppins"],
+      },
     },
   },
   variants: {
