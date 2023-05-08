@@ -98,7 +98,11 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
           {
             onUploadProgress: (progressEvent) => {
               const { loaded, total } = progressEvent;
-              const loading = Math.round((loaded / total) * 100);
+              const fraction = 100 / files.length;
+
+              const loading =
+                Math.round((loaded / total) * 100) / files.length +
+                fraction * x;
               // console.log(`${loading}%`);
               setUploadPercent(loading);
             },
@@ -115,7 +119,10 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
     }
     loading = "done uploading images";
     message.success(loading, 4);
-    setSubmitDetails({ ...submitDetails, productImageUrl: uploadedUrls });
+    setSubmitDetails((prevSubmitDetails) => ({
+      ...prevSubmitDetails,
+      productImageUrl: uploadedUrls,
+    }));
   }
 
   return (

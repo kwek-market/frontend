@@ -24,7 +24,7 @@ export function createProduct(Data: UploadProductType, token: string) {
       message.success("Product uploaded successfully");
       dispatch({
         type: productType.CREATE_PRODUCT,
-        payload: res.data.createProduct,
+        payload: res.createProduct,
       });
     } catch (err) {
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);
