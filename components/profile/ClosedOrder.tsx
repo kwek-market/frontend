@@ -29,7 +29,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
       );
       setLoading(false);
       dispatch(setOrderDetails(data.order));
-      console.log(data);
+      // console.log(data);
       setActiveBtn("Closed Order Details");
     } catch (err) {
       message.error(err.message);

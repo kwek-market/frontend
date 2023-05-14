@@ -56,3 +56,70 @@ const TextInput = function ({
 };
 
 export default TextInput;
+
+interface InputFieldProps
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  label: string;
+}
+
+export const InputField = ({ label, ...props }: InputFieldProps) => {
+  return (
+    <div>
+      <label htmlFor={props.id} className=" tw-font-medium">
+        {label}
+      </label>
+      <input
+        {...props}
+        className={
+          "tw-mt-1 tw-w-full tw-border tw-border-[#D7DCE0] tw-rounded tw-p-4 tw-outline-none " +
+          props.className
+        }
+      />
+    </div>
+  );
+};
+
+export const RadioField = ({ label, ...props }: InputFieldProps) => {
+  return (
+    <div className=" tw-flex tw-gap-x-2 tw-items-center">
+      <input
+        {...props}
+        className={
+          " tw-border tw-border-[#D7DCE0] tw-rounded tw-p-4 tw-outline-none " +
+          props.className
+        }
+        type="radio"
+      />
+      <label htmlFor={props.id} className=" tw-font-medium ">
+        {label}
+      </label>
+    </div>
+  );
+};
+interface TextFieldProps
+  extends React.DetailedHTMLProps<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+  > {
+  label: string;
+}
+
+export const TextField = ({ label, ...props }: TextFieldProps) => {
+  return (
+    <div>
+      <label htmlFor={props.id} className=" tw-font-medium">
+        {label}
+      </label>
+      <textarea
+        {...props}
+        className={
+          "tw-mt-1 tw-w-full tw-border tw-border-[#D7DCE0] tw-rounded tw-p-4 tw-outline-none tw-resize-none tw-h-28" +
+          props.className
+        }
+      />
+    </div>
+  );
+};
