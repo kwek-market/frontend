@@ -16,6 +16,7 @@ module.exports = {
           kwek100: "#BFA5A3",
           review: "#C7C0BF",
           kwek200: "#1D1616",
+          kwek100a: "rgba(29, 22, 22, 0.1)",
           kwek300: "#18191f",
           kwek400: "#8B8B8B",
           kwek500: "#796866",
@@ -24,7 +25,10 @@ module.exports = {
           kwek800: "#c4c4c4",
           kwek200a: "rgba(29, 22, 22, 0.7)",
           kwek900: "#574240",
+
           input: "#745858",
+
+          kwek300a: "rgba(0, 0, 0, 0.6)",
         },
         white: {
           100: "#FFF",
@@ -62,6 +66,8 @@ module.exports = {
           kwek200: "rgba(175, 19, 40, 0.6)",
         },
         error: "#FF2D1A",
+        breadcrumb: "rgba(51, 51, 51, 0.6)",
+        review: "rgba(191, 165, 163, 0.1)",
       },
       gridTemplateColumns: {
         "kwek-1": "repeat(auto-fit, minmax(350px, 1fr))",

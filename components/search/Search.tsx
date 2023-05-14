@@ -43,7 +43,7 @@ export default function Search({ search, check }: SearchProps) {
 
   useEffect(() => {
     if (data?.products.hasNext) {
-      console.log("has more");
+      // console.log("has more");
       queryClient.prefetchQuery(["category-items", payload], () =>
         userFetcher(GetProducts, payload)
       );

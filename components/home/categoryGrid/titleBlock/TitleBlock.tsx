@@ -28,7 +28,7 @@ const TitleBlock = function ({ title, timer, cards }: TitleBlockType) {
         new Date(),
         new Date(2022, 2, 27)
       );
-      console.log(days, hours, minutes, seconds);
+      // console.log(days, hours, minutes, seconds);
       setTime({ days, hours, minutes, seconds });
     }, 1000 * 60 * 60);
     return () => clearInterval(interval);
