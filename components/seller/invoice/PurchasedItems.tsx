@@ -67,7 +67,7 @@ export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
         return message.error("total cannot be negative", 4);
       }
     }
-    console.log(formValues);
+    // console.log(formValues);
     const val: string[] = [];
     // "{'item': 12, 'description':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
