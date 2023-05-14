@@ -43,7 +43,7 @@ export default Page;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { product: process.env.NEXT_PUBLIC_FALLBACK_PRODUCTID } }],
+    paths: [{ params: { product: "006c3368-5aee-4939-90a7-aa95989c3619" } }],
     fallback: true,
   };
 };
