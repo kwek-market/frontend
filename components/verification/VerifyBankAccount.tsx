@@ -105,7 +105,7 @@ function VerifyBankAccount(props: T) {
     const controller = new AbortController();
     const signal = controller.signal;
     const accountNumber = props.state.bankAccountNumber;
-    console.log(bankCBNCode);
+    // console.log(bankCBNCode);
     const bankCode = bankCBNCode;
     const options = {
       method: "GET",

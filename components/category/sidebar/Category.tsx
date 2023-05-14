@@ -20,7 +20,6 @@ export function Category({
   setFiltering,
   filtering,
 }: CategoryProps) {
-  console.log(data);
   return (
     <div className={styles.sidebar_content}>
       <p className={styles.header}>BROWSE CATEGORIES</p>

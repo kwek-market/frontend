@@ -46,7 +46,7 @@ export function verifyUserToken(token: string) {
   return async function (dispatch: Dispatch) {
     try {
       const res = await userFetcher(VERIFY_TOKEN, { token });
-      console.log(res);
+      // console.log(res);
       res.verifyToken.status === false &&
         dispatch({
           type: CLEAR_USER,
@@ -88,7 +88,7 @@ export function loginUser(user: UserLogin) {
       setLoading()(dispatch);
       const myIp = await getIp();
       const response = await userFetcher(LOGIN_USER, { ...user, ip: myIp });
-      console.log(response, "response");
+      // console.log(response, "response");
 
       if (response.loginUser.status === true) {
         message.success(response.loginUser.message);
@@ -153,7 +153,7 @@ export function sendPasswordResetEmail(email: string, token: string) {
         { email },
         token
       );
-      console.log({ result });
+      // console.log({ result });
       import("antd").then((antd) => {
         result.sendPasswordResetEmail.status
           ? antd.message.success(result.sendPasswordResetEmail.message)
