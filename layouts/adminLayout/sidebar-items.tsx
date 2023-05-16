@@ -61,7 +61,15 @@ const SidebarItems = () => {
     {
       name: "Marketing",
       icon: MarketingIcon,
-      options: [],
+      options: [
+        {
+          name: "Subscription List",
+          path: "/admin/marketing/subscription-list",
+        },
+        { name: "New Subscription", path: "/admin/marketing/new-subscription" },
+        { name: "Coupon List", path: "/admin/marketing/coupon-list" },
+        { name: "New Coupon", path: "/admin/marketing/new-coupon" },
+      ],
       path: "/admin/marketing",
     },
     {
@@ -94,7 +102,6 @@ const SidebarItems = () => {
             key={index}
             className={`  tw-text-sm tw-cursor-pointer `}
             onClick={() => {
-              console.log("yay");
               setItems((prev) => {
                 let tempPrev = prev.slice();
                 tempPrev[index].open = !tempPrev[index].open;
@@ -117,12 +124,12 @@ const SidebarItems = () => {
             </div>
             <div
               className={` tw-pl-7  tw-overflow-hidden tw-transition-[max-height] tw-duration-300 tw-ease-out ${
-                item.open ? "tw-max-h-20" : "tw-max-h-0"
+                item.open ? "tw-max-h-40" : "tw-max-h-0"
               }`}
             >
               <div className=" tw-pt-4 tw-flex tw-flex-col tw-gap-y-4 tw-pl-8">
                 {item.options.map((option, idx) => (
-                  <Link href={option.path}>
+                  <Link href={option.path} key={idx}>
                     <a className="tw-text-white-100 tw-text-opacity-70">
                       {option.name}
                     </a>
