@@ -82,6 +82,33 @@ export const InputField = ({ label, ...props }: InputFieldProps) => {
   );
 };
 
+interface SelectFieldProps
+  extends React.DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  > {
+  label: string;
+}
+
+export const SelectField = ({ label, ...props }: SelectFieldProps) => {
+  return (
+    <div>
+      <label htmlFor={props.id} className=" tw-font-medium">
+        {label}
+      </label>
+      <select
+        {...props}
+        className={
+          "tw-mt-1 tw-w-full tw-border tw-border-[#D7DCE0] tw-rounded tw-p-4 tw-outline-none " +
+          props.className
+        }
+      >
+        {props.children}
+      </select>
+    </div>
+  );
+};
+
 export const RadioField = ({ label, ...props }: InputFieldProps) => {
   return (
     <div className=" tw-flex tw-gap-x-2 tw-items-center">

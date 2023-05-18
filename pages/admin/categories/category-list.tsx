@@ -110,20 +110,10 @@ const CategoryList = () => {
           },
           { name: "Category List", path: "/admin/categories/category-list" },
         ]}
+        header="Category List"
+        buttonPath="/admin/categories/add-category"
+        buttonText="New Category"
       />
-      <div className=" tw-flex tw-justify-between tw-pt-6 tw-items-center">
-        <h1 className=" tw-text-[2rem] tw-font-bold tw-mb-0 ">Category List</h1>
-        <Link href={"/admin/categories/add-category"}>
-          <a>
-            <button
-              className="  tw-font-semibold tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
-              type="button"
-            >
-              New Category
-            </button>
-          </a>
-        </Link>
-      </div>
 
       <div className=" tw-pr-4 tw-overflow-hidden tw-border tw-border-[#D7DCE0] tw-rounded tw-flex tw-items-center tw-w-max tw-mt-16">
         <input

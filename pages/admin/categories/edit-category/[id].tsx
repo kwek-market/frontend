@@ -29,9 +29,8 @@ const EditCategory = () => {
             name: "Category List",
             path: "/admin/categories/category-list",
           },
-          { name: "Edit category", path: "/admin/categories/edit-category" },
           {
-            name: router.query?.id as string,
+            name: ("Edit category - " + router.query?.id) as string,
             path: ("/admin/categories/edit-category/" +
               router.query?.id) as string,
           },

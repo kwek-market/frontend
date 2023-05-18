@@ -8,9 +8,16 @@ interface BreadCrumbsProps {
     path: string;
   }[];
   header?: string;
+  buttonText?: string;
+  buttonPath?: string;
 }
 
-const BreadCrumbs = ({ items, header }: BreadCrumbsProps) => {
+const BreadCrumbs = ({
+  items,
+  header,
+  buttonPath,
+  buttonText,
+}: BreadCrumbsProps) => {
   return (
     <div>
       <div className=" tw-flex tw-text-breadcrumb tw-font-poppins tw-tracking-[0.2px] tw-gap-x-4">
@@ -26,9 +33,21 @@ const BreadCrumbs = ({ items, header }: BreadCrumbsProps) => {
         ))}
       </div>
       {header ? (
-        <h1 className=" tw-text-[2rem] tw-font-bold tw-mb-0 tw-pt-6">
-          {header}
-        </h1>
+        <div className=" tw-flex tw-justify-between tw-pt-6 tw-items-center">
+          <h1 className=" tw-text-[2rem] tw-font-bold tw-mb-0 ">{header}</h1>
+          {buttonText ? (
+            <Link href={buttonPath}>
+              <a>
+                <button
+                  className="  tw-font-semibold tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
+                  type="button"
+                >
+                  {buttonText}
+                </button>
+              </a>
+            </Link>
+          ) : null}
+        </div>
       ) : null}
     </div>
   );
