@@ -13,8 +13,8 @@ export type DetailsProps = {
   show: boolean;
   order: Order;
   idx: number;
-  setActiveBtn: any
-}
+  setActiveBtn: any;
+};
 
 const Details = function ({ show, order, idx, setActiveBtn }) {
   const {
@@ -57,7 +57,7 @@ const Details = function ({ show, order, idx, setActiveBtn }) {
               Delivered between 04 June and 06 June
             </span>
           )}
-          {/* {!order.closed ? (
+          {!order.closed ? (
             !show ? (
               <>
                 <div className="tw-flex tw-flex-row tw-justify-between">
@@ -82,7 +82,7 @@ const Details = function ({ show, order, idx, setActiveBtn }) {
                 cmd={statusHistory}
               />
             )
-          ) : null} */}
+          ) : null}
         </div>
       </div>
       <div className="tw-flex tw-flex-col md:tw-justify-between tw-items-end tw-p-0 md:tw-p-3 tw-flex-[1]">

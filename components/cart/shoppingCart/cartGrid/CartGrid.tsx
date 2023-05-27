@@ -34,9 +34,10 @@ const CartGrid = function () {
     if (coupon === "" || coupon === null)
       return message.error("enter a coupon");
     const payload = {
-      token,
       couponId: coupon,
+      token,
     };
+    console.log(payload, "pelode");
     mutate(payload, {
       onSuccess: (data) => {
         message.success(data.applyCoupon.message);

@@ -47,6 +47,8 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
               src={items[0]?.product.image[0].imageUrl}
               alt="order"
               className="tw-rounded-md"
+              width={60}
+              height={60}
             />
           )}
         </div>

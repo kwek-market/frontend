@@ -119,6 +119,7 @@ const CategoryList = () => {
         <input
           type="text"
           className=" tw-py-3 tw-pl-4 tw-border-none tw-outline-none tw-mr-4 tw-w-64 active:tw-border-none"
+          placeholder="Search"
         />
         <SearchIcon />
       </div>

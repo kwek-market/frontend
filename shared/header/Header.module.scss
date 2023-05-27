@@ -52,6 +52,7 @@
     @include respondMax("tablet") {
       display: block;
       cursor: pointer;
+      visibility: visible;
     }
   }
 
