@@ -98,39 +98,42 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
               onClick={() => addToWishlist(id)}
             />
           )}
-        </span> */}
-        <div className="tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300">
-          <span className="tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2">
-            <i
-              className={`fas fa-shopping-cart ${
-                !checkIfItemInCart(prod?.options[0]?.id)
-                  ? "tw-bg-white-100"
-                  : "tw-bg-red-kwek100"
-              } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
-              style={{ padding: "5px" }}
-              onClick={() => addToCart(prod?.options[0]?.id)}
-            />
-            {user.token && (
+        </span> */}{" "}
+        <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
+          <a
+            className="tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block"
+            onClick={(e) => {
+              updateClicks(prod.id, user.token);
+              e.stopPropagation();
+            }}
+          >
+            <span className="tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10">
               <i
-                className={`fas fa-heart tw-p-1 ${
-                  !checkIfItemInWishlist(id)
+                className={`fas fa-shopping-cart ${
+                  !checkIfItemInCart(prod?.options[0]?.id)
                     ? "tw-bg-white-100"
-                    : "tw-bg-gray-kwek700"
-                } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
+                    : "tw-bg-red-kwek100"
+                } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
                 style={{ padding: "5px" }}
-                onClick={() => addToWishlist(id)}
+                onClick={() => addToCart(prod?.options[0]?.id)}
               />
-            )}
-          </span>
-          <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
-            <a
-              onClick={() => updateClicks(prod.id, user.token)}
-              className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"
-            >
+              {user.token && (
+                <i
+                  className={`fas fa-heart tw-p-1 ${
+                    !checkIfItemInWishlist(id)
+                      ? "tw-bg-white-100"
+                      : "tw-bg-gray-kwek700"
+                  } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
+                  style={{ padding: "5px" }}
+                  onClick={() => addToWishlist(id)}
+                />
+              )}
+            </span>
+            <span className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
               details
-            </a>
-          </Link>
-        </div>
+            </span>
+          </a>
+        </Link>
       </div>
 
       <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>

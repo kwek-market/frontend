@@ -85,6 +85,7 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins"],
+        "dm-sans": ["DM Sans"],
       },
     },
   },

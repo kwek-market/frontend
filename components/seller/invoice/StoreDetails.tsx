@@ -38,7 +38,7 @@ export default function StoreDetails() {
               placeholder="cocostore@example.com"
               size="large"
               className="tw-w-full"
-              value={seller.shopAddress}
+              value={user.email}
             />
           </label>
         </div>
@@ -49,7 +49,7 @@ export default function StoreDetails() {
               type="text"
               placeholder="150 Elgin Street, Ottawa, Iyana Ipaja, Lagos, Nigeria."
               size="large"
-              value={user.email}
+              value={seller.shopAddress}
             />
           </label>
         </div>

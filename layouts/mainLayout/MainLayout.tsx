@@ -79,12 +79,7 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
         setSearch={setSearch}
         check={check}
         setCheck={setCheck}
-      />
-      <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
-      {showMenu && <Menu />}
-
-      {title && <PageTitle title={title as string} />}
-
+      />{" "}
       <div className="tw-px-4 tw-mt-4">
         <MobileSearchBar
           search={search}
@@ -93,7 +88,9 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
           setCheck={setCheck}
         />
       </div>
-
+      <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
+      {showMenu && <Menu />}
+      {title && <PageTitle title={title as string} />}
       {check ? (
         <Search search={search} check={check} />
       ) : (

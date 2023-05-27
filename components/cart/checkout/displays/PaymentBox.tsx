@@ -8,10 +8,24 @@ import usePlaceOrder from "@/hooks/usePlaceOrder";
 import { PaymentLinkType, PlaceOrder } from "@/interfaces/commonTypes";
 import usePayment from "@/hooks/usePayment";
 import Load from "@/components/Loader/Loader";
+import SimpleModal from "@/components/modal";
 
 function PaymentBox({ step, addressId }) {
   const { user, cart } = useSelector((state: RootState) => state);
   const [paymentMethod, setPaymentMethod] = useState("");
+
+  const [confirmModal, setConfirmModal] = useState(false);
+
+  const showModal = () => {
+    if (paymentMethod === "") {
+      return message.warn("Please select a payment method");
+    }
+    setConfirmModal(true);
+  };
+
+  const handleCancel = () => {
+    setConfirmModal(false);
+  };
 
   const result = useMemo(() => {
     let initial = 0;
@@ -25,7 +39,10 @@ function PaymentBox({ step, addressId }) {
   const { mutate: placeOrderMutate, isLoading } = usePlaceOrder(user.token);
   const { mutate: paymentMutate, status } = usePayment(user.token);
 
-  useEffect(() => {
+  const handleOrder = () => {
+    if (paymentMethod === "") {
+      return message.warn("Please select a payment method");
+    }
     if (paymentMethod === "pay on delivery") {
       const payload: PlaceOrder = {
         addressId,
@@ -55,7 +72,7 @@ function PaymentBox({ step, addressId }) {
       window.sessionStorage.setItem("order", JSON.stringify(placeOrder));
       paymentMutate(payload);
     }
-  }, [paymentMethod]);
+  };
 
   return (
     <div className={styles.payment_container}>
@@ -84,7 +101,7 @@ function PaymentBox({ step, addressId }) {
                   Pay cash when order gets delivered to you
                 </p>
               </div>
-              {isLoading && <Load />}
+              {/* {isLoading && <Load />} */}
             </div>
             <div className={styles.option_box}>
               <input
@@ -100,11 +117,25 @@ function PaymentBox({ step, addressId }) {
                   Make Payments using your Credit or Debit Card
                 </p>
               </div>
-              {status === "loading" && <Load />}
+              {/* {status === "loading" && <Load />} */}
             </div>
           </div>
+          <button type="submit" onClick={() => showModal()}>
+            Place Order
+          </button>
         </div>
       )}
+      <SimpleModal open={confirmModal} handleClose={handleCancel}>
+        <div className=" tw-bg-white-100 tw-rounded tw-w-[80vw] lg:tw-w-[30vw] tw-mt-[30vh] tw-p-10">
+          <h2 className="tw-mb-0 tw-font-bold tw-text-center tw-text-3xl tw-pb-10">
+            Place Order?
+          </h2>
+
+          <button type="submit" onClick={() => handleOrder()}>
+            {status === "loading" || isLoading ? <Load /> : "Confirm"}
+          </button>
+        </div>
+      </SimpleModal>
     </div>
   );
 }
