@@ -21,7 +21,7 @@ const Component = function () {
 
         <div className={styles.cta_section}>
           <div className={styles.cta}>
-            <h4 className={styles.cta_heading}>NEW TO KWEKMARTKET?</h4>
+            <h4 className={styles.cta_heading}>NEW TO KWEKMARKET?</h4>
             <p className={styles.cta_text}>
               Subscribe to our newsletter to get updates on our latest offers!
             </p>

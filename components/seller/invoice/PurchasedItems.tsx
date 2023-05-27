@@ -5,7 +5,7 @@ const DELIVERYFEE = 200;
 
 export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
   const [formValues, setFormValues] = useState([
-    { item: "", description: "", quantity: "", unitCost: "", total: "" },
+    { item: "", description: "", quantity: 0, unitCost: 0, total: 0 },
   ]);
 
   const SUBTOTAL = useMemo(() => {
@@ -15,15 +15,20 @@ export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
   const TOTAL = SUBTOTAL + DELIVERYFEE;
 
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFormValues = [...formValues];
+    let newFormValues = [...formValues];
     newFormValues[i][e.target.name] = e.target.value;
+
+    newFormValues[i] = {
+      ...newFormValues[i],
+      total: newFormValues[i].quantity * newFormValues[i].unitCost,
+    };
     setFormValues(newFormValues);
   };
 
   const addNewVariant = () => {
     setFormValues([
       ...formValues,
-      { item: "", description: "", quantity: "", unitCost: "", total: "" },
+      { item: "", description: "", quantity: 0, unitCost: 0, total: 0 },
     ]);
   };
 
@@ -42,13 +47,13 @@ export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
       if (formValues[i].description === "") {
         return message.error("Please enter a description for all variants", 4);
       }
-      if (formValues[i].quantity === "") {
+      if (formValues[i].quantity === 0) {
         return message.error("Please enter a quantity for all variants", 4);
       }
-      if (formValues[i].unitCost === "") {
+      if (formValues[i].unitCost === 0) {
         return message.error("Please enter a unit cost for all variants", 4);
       }
-      if (formValues[i].total === "") {
+      if (formValues[i].total === 0) {
         return message.error("Please enter a total for all variants", 4);
       }
       if (!Number(formValues[i].quantity)) {
@@ -165,9 +170,7 @@ export default function PurchasedItems({ invoice, setInvoice }: InvoiceProps) {
                 type="text"
                 placeholder="0"
                 name="total"
-                required
-                value={element.total || ""}
-                onChange={(e) => handleChange(index, e)}
+                value={element.total}
                 className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
               />
             </label>
