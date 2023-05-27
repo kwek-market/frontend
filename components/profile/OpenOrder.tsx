@@ -55,14 +55,14 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
             <Load />
           ) : (
             <Fragment>
-              {items.slice(0, 4).map((item) => (
+              {items.slice(0, 4).map((item, idx) => (
                 <Image
-                  key={v4()}
+                  key={idx}
                   src={item.product.image[0].imageUrl}
                   alt="order-img"
                   width="60"
                   height="60"
-                  className="tw-rounded-md"
+                  className="tw-rounded-md tw-overflow-hidden"
                 />
               ))}
             </Fragment>

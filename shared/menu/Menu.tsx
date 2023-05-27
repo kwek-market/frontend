@@ -29,6 +29,8 @@ const Menu = function ({}) {
   } = useSelector((state: RootState) => state);
   const router = useRouter();
 
+  console.log(categories);
+
   function handleLogout() {
     dispatch(logout());
     dispatch(clearSubs());
@@ -132,8 +134,8 @@ const Menu = function ({}) {
       <div className={menuStyle.categories}>
         <p>Categories</p>
         <div>
-          {categories.slice(0, 7).map((category) => (
-            <Link key={v4()} href={`/category/${category.name}`}>
+          {categories.slice(0, 7).map((category, index) => (
+            <Link key={index} href={`/category/${category.name}`}>
               <a>
                 <CategoryBox
                   key={category.id}

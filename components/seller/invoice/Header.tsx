@@ -17,9 +17,14 @@ export default function Header({ title, btn, element }: HeaderProps) {
     const filename = `invoice-${invoice}.pdf`;
 
     const image = await toPng(element.current, { quality: 0.95 });
-    const doc = new jsPDF();
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      compress: true,
+    });
 
-    doc.addImage(image, "JPEG", 5, 22, 200, 160);
+    doc.addImage(image, "JPEG", 5, 22, 200, 110);
+    // doc.html(item).save(filename);
     doc.save(filename);
   }
 

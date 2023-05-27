@@ -17,6 +17,7 @@ import StarRatingComponent from "react-star-rating-component";
 import useItemInWishlist from "@/hooks/useItemInWishlist";
 import useAvgRating from "@/hooks/useAvgRating";
 import { useRouter } from "next/router";
+import { CarouselRef } from "antd/lib/carousel";
 
 const SampleNextArrow = function (props) {
   const { className, style, onClick } = props;
@@ -103,12 +104,18 @@ const ProductHead = function ({ product }: ProductHeadProps) {
 
   const checkIfItemInWishlist = useItemInWishlist(product, wishlists);
 
+  const carouselRef = React.useRef<CarouselRef>();
+
+  const handleCarouselChange = (number: number) => {
+    carouselRef?.current?.goTo(number);
+  };
+
   return (
     <div className={styles.product_container}>
       <div className={styles.product_carousel}>
-        <Carousel arrows {...settings} autoplay dots={true}>
-          {product?.image?.map((image) => (
-            <div key={uuid()}>
+        <Carousel arrows {...settings} autoplay dots={true} ref={carouselRef}>
+          {product?.image?.map((image, idx) => (
+            <div key={idx}>
               <Image
                 className={styles.carousel_img}
                 src={image.imageUrl}
@@ -120,8 +127,8 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           ))}
         </Carousel>
         <div className={styles.carousel_sub}>
-          {product?.image?.map((image) => (
-            <div key={uuid()}>
+          {product?.image?.map((image, idx) => (
+            <div key={idx} onClick={() => handleCarouselChange(idx)}>
               <button className={styles.img_sub}>
                 <Image
                   className={styles.carousel_img}

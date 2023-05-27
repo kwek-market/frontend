@@ -8,7 +8,7 @@ type Coupon = {
   code: string;
   days: number;
   value: number;
-}
+};
 
 export function useCreateCoupon(token: string) {
   return useMutation(
@@ -33,6 +33,7 @@ export function useApplyCoupon() {
         message.success(data.applyCoupon.message);
       },
       onError: (error: any) => {
+        console.log(error.message);
         message.error(error.message);
       },
     }
