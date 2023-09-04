@@ -43,7 +43,7 @@ export default Page;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { product: "006c3368-5aee-4939-90a7-aa95989c3619" } }],
+    paths: [{ params: { product: "ceee4112-4f70-4db2-bb64-69bb17ed4bd7" } }],
     fallback: true,
   };
 };
