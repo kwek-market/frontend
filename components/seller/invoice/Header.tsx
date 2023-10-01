@@ -28,6 +28,21 @@ export default function Header({ title, btn, element }: HeaderProps) {
     doc.save(filename);
   }
 
+  async function downloadMobile() {
+    const filename = `invoice-${invoice}.pdf`;
+
+    const image = await toPng(element.current, { quality: 0.95 });
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      compress: true,
+    });
+
+    doc.addImage(image, "JPEG", 5, 22, 90, 110);
+    // doc.html(item).save(filename);
+    doc.save(filename);
+  }
+
   return (
     <header className="tw-flex tw-justify-between tw-bg-red-kwek100 tw-p-3 md:tw-px-12">
       <div onClick={() => router.back()}>
@@ -42,12 +57,20 @@ export default function Header({ title, btn, element }: HeaderProps) {
 
       <div>
         {btn && (
-          <button
-            className="tw-rounded-md tw-py-2 tw-px-3 tw-text-white-100 tw-bg-green-success tw-uppercase"
-            onClick={() => download()}
-          >
-            download
-          </button>
+          <>
+            <button
+              className="tw-hidden md:tw-block tw-rounded-md tw-py-2 tw-px-3 tw-text-white-100 tw-bg-green-success tw-uppercase"
+              onClick={() => download()}
+            >
+              download
+            </button>
+            <button
+              className="md:tw-hidden tw-rounded-md tw-py-2 tw-px-3 tw-text-white-100 tw-bg-green-success tw-uppercase"
+              onClick={() => downloadMobile()}
+            >
+              download
+            </button>
+          </>
         )}
       </div>
     </header>

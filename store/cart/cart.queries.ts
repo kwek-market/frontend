@@ -2,11 +2,13 @@ export const AddToCart = /* GraphQL */ `
   mutation addToCart(
     $ipAddress: String
     $productOptionId: String!
+    $quantity: Int
     $token: String
   ) {
     addToCart(
       ipAddress: $ipAddress
       productOptionId: $productOptionId
+      quantity: $quantity
       token: $token
     ) {
       status
