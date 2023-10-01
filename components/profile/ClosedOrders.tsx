@@ -9,7 +9,7 @@ import { ClosedOrder } from "./index";
 
 const ClosedOrders = function ({ setActiveBtn }) {
   const { user } = useSelector((state: RootState) => state);
-  const { status, data, error } = useOrders(user.token);
+  const { status, data, error, refetch } = useOrders(user.token);
 
   const loading = status === "loading" && <Load />;
   const hasError = status === "error" && <ErrorInfo error={error} />;
@@ -30,6 +30,7 @@ const ClosedOrders = function ({ setActiveBtn }) {
                 key={order.id}
                 order={order}
                 setActiveBtn={setActiveBtn}
+                refetch={refetch}
               />
             )
         )}

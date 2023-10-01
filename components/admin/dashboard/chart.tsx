@@ -23,7 +23,7 @@ const options = {
   responsive: true,
 };
 
-const DashboardChart = () => {
+const DashboardChart = ({ data }: { data: number[] }) => {
   const labels = [
     "Jan",
     "Feb",
@@ -45,7 +45,7 @@ const DashboardChart = () => {
 
         datasets: [
           {
-            data: [65, 59, 80, 81, 56, 55, 40, 30, 50, 60, 50, 45],
+            data: data,
             backgroundColor: [
               "rgba(65, 216, 125, 0.2)",
               "rgba(65, 216, 125, 0.2)",

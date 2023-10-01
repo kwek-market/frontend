@@ -1,4 +1,5 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
+import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
@@ -6,7 +7,7 @@ import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import React, { useState } from "react";
 
-const Customers = () => {
+const Vendors = () => {
   const [activeKey, setActiveKey] = useState("1");
   const { TabPane } = Tabs;
 
@@ -16,7 +17,7 @@ const Customers = () => {
       dataIndex: "name",
       key: "name",
       render: (name) => (
-        <Link href={"/admin/customers/" + name}>
+        <Link href={"/admin/vendors/vendor-info/" + name}>
           <a className=" tw-text-black-kwek100">{name}</a>
         </Link>
       ),
@@ -42,14 +43,14 @@ const Customers = () => {
       key: "state",
     },
     {
-      title: "Amount Spent",
-      dataIndex: "amount_spent",
-      key: "amount_spent",
+      title: "Amount Sold",
+      dataIndex: "amount_sold",
+      key: "amount_sold",
     },
     {
       title: "",
       key: "action",
-      render: (text, record) => (
+      render: () => (
         <span>
           <DotsVerticalIcon className="tw-h-5 tw-w-5 tw-text-[#27BE63]" />
         </span>
@@ -65,7 +66,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
     {
       key: "2",
@@ -74,7 +75,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
     {
       key: "3",
@@ -83,7 +84,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
     {
       key: "4",
@@ -92,7 +93,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
     {
       key: "5",
@@ -101,7 +102,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
     {
       key: "6",
@@ -110,7 +111,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
     {
       key: "7",
@@ -119,7 +120,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
     {
       key: "8",
@@ -128,7 +129,7 @@ const Customers = () => {
       date_joined: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
+      amount_sold: "N13,873.74",
     },
   ];
 
@@ -137,12 +138,30 @@ const Customers = () => {
       <BreadCrumbs
         items={[
           { name: "Dashboard", path: "/admin/dashboard" },
-          { name: "Customers", path: "/admin/customers" },
+          {
+            name: "Vendor List",
+            path: "/admin/vendors/vendor-list",
+          },
         ]}
-        header="Customers"
+        header="Vendors List"
         buttonPath="#"
         buttonText="Send Bulk Email"
       />
+
+      <div className=" tw-flex tw-gap-x-2 tw-mt-6 tw-items-center ">
+        <span className=" tw-opacity-70">Sort By:</span>
+        <select
+          value="all"
+          className=" tw-rounded tw-border tw-border-[#D7DCE0] tw-py-3 tw-outline-none tw-cursor-pointer"
+        >
+          <option value="all">All Categories</option>
+          <option value="fashion">Fashion</option>
+          <option value="auto">Automobiles</option>
+        </select>
+      </div>
+      <div className="tw-mt-6">
+        <Search placeholder="Search by Store name" />
+      </div>
 
       <div className=" tw-pt-4">
         <Tabs
@@ -152,14 +171,14 @@ const Customers = () => {
           activeKey={activeKey}
           onTabClick={(key) => setActiveKey(key)}
         >
-          <TabPane tab="Active" key="1">
+          <TabPane tab="Active Vendors" key="1">
             <AdminTable data={data} columns={columns} />
           </TabPane>
-          <TabPane tab="Inactive" key="2"></TabPane>
+          <TabPane tab="Red-flagged Vendors" key="2"></TabPane>
         </Tabs>
       </div>
     </AdminLayout>
   );
 };
 
-export default Customers;
+export default Vendors;

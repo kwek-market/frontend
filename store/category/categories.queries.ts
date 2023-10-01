@@ -3,6 +3,7 @@ export const CATEGORIES = /* GraphQL */ `
     categories {
       id
       name
+      icon
       parent {
         id
         name

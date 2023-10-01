@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { FormHead } from "@/components/admin/form";
 import CustomerDetail from "@/components/admin/customers/customer-detail";
+import Image from "next/image";
+import StarRatingComponent from "react-star-rating-component";
 
 const Customer = () => {
   const router = useRouter();
@@ -117,13 +119,14 @@ const Customer = () => {
       <BreadCrumbs
         items={[
           { name: "Dashboard", path: "/admin/dashboard" },
-          { name: "Customers", path: "/admin/customers" },
+          { name: "Vendors", path: "/admin/vendors/vendor-list" },
+
           {
             name: router.query?.id as string,
-            path: "/admin/customers/" + router.query?.id,
+            path: "/admin/vendors/vendor-info/" + router.query?.id,
           },
         ]}
-        header="Customer Info"
+        header="Vendor Info"
         buttonPath=""
         buttonText="Send Email"
       />
@@ -150,6 +153,75 @@ const Customer = () => {
             </div>
           ))}
         </div>
+        <div className=" tw-mt-10">
+          <div className=" tw-flex tw-justify-between tw-items-center ">
+            <h1 className="tw-mb-0 tw-text-2xl tw-font-medium">
+              All Products - 32
+            </h1>
+            <div className=" tw-flex tw-gap-x-2  tw-items-center ">
+              <span className=" tw-opacity-70">Sort By:</span>
+              <select
+                value="all"
+                className=" tw-rounded tw-border tw-border-[#D7DCE0] tw-py-3 tw-outline-none tw-cursor-pointer"
+              >
+                <option value="all">All Categories</option>
+                <option value="fashion">Fashion</option>
+                <option value="auto">Automobiles</option>
+              </select>
+            </div>
+          </div>
+
+          <div className=" tw-grid tw-grid-cols-3 tw-gap-x-4 tw-pt-6">
+            {Array(3)
+              .fill(null)
+              .map((item, index) => (
+                <div key={index} className="tw-p-6 tw-shadow-cardShadow">
+                  <div className=" tw-relative tw-h-56">
+                    <Image
+                      layout="fill"
+                      src="https://images.pexels.com/photos/4386158/pexels-photo-4386158.jpeg"
+                      className=" tw-object-cover"
+                    />
+                  </div>
+
+                  <div className=" tw-pt-6 tw-flex tw-justify-between tw-gap-x-10 tw-items-center">
+                    <span className=" tw-font-light tw-text-sm">
+                      Women's fashion Shiny High Heels
+                    </span>
+                    <div className=" tw-text-right">
+                      <p className=" tw-mb-0 tw-text-xl tw-font-semibold">
+                        $25.00
+                      </p>
+                      <p className=" tw-mb-0 tw-text-[#C7C0BF] tw-text-xs tw-font-medium tw-line-through">
+                        $35.00
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className=" tw-flex tw-justify-between tw-pt-5 tw-items-center">
+                    <StarRatingComponent
+                      name="rate1"
+                      starCount={5}
+                      value={5}
+                      editing={false}
+                      emptyStarColor="#c4c4c4"
+                      starColor="#FFC107"
+                    />
+                    <span className="tw-text-[#BFA5A3] tw-text-xs">
+                      (6 Reviews)
+                    </span>
+                  </div>
+                </div>
+              ))}
+          </div>
+          <div className="tw-pt-4">
+            <Link href={"#"}>
+              <a className=" tw-underline tw-text-[#009D19] ">
+                View All Products
+              </a>
+            </Link>
+          </div>
+        </div>
         <div className=" tw-py-4">
           <Tabs
             animated
@@ -168,7 +240,7 @@ const Customer = () => {
           </Tabs>
         </div>
 
-        <Link href={"/admin/customers/" + router.query?.id + "/order-list"}>
+        <Link href={"#"}>
           <a className=" tw-underline tw-text-[#009D19] ">View All 17 Orders</a>
         </Link>
 
@@ -191,3 +263,7 @@ const Customer = () => {
 };
 
 export default Customer;
+
+const Card = () => {
+  return <div></div>;
+};

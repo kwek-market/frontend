@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-import { AdminLayout} from '@/layouts'
+import { AdminLayout } from "@/layouts";
+import { useRouter } from "next/router";
 
 const Admin = () => {
-  return (
-    <AdminLayout>Admin</AdminLayout>
-  )
-}
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/admin/dashboard");
+  }, []);
 
-export default Admin
+  return <AdminLayout>Admin</AdminLayout>;
+};
+
+export default Admin;
