@@ -87,6 +87,9 @@ module.exports = {
         poppins: ["Poppins"],
         "dm-sans": ["DM Sans"],
       },
+      boxShadow: {
+        cardShadow: "0px 0px 32.1963px rgba(138, 149, 158, 0.15)",
+      },
     },
   },
   variants: {

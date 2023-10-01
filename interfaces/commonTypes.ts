@@ -232,6 +232,7 @@ export type ProductType = {
 export type AddToCartPayload = {
   productOptionId: string;
   token?: string;
+  quantity: number;
   ipAddress?: string;
 };
 

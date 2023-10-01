@@ -68,6 +68,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
     const payload: AddToCartPayload = {
       ipAddress: await getIp(),
       productOptionId: id,
+      quantity: numItem,
       token: user.token,
     };
     dispatch(addToCartFunc(payload, user.token));

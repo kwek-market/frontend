@@ -37,14 +37,14 @@ const CartGrid = function () {
       couponId: coupon,
       token,
     };
-    console.log(payload, "pelode");
+
     mutate(payload, {
       onSuccess: (data) => {
-        message.success(data.applyCoupon.message);
+        // message.success(data.applyCoupon.message);
       },
-      onError: (err) => {
-        message.error(err.message);
-      },
+      // onError: (err) => {
+      //   message.error(err.message);
+      // },
     });
   }
 

@@ -1,15 +1,18 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
-import CustomerDetail from "@/components/admin/customers/customer-detail";
 import Search from "@/components/admin/search";
+
 import SearchIcon from "@/components/icons/admin/search";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
+import { Tabs } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
-const OrderList = () => {
+const Orders = () => {
   const router = useRouter();
+  const [activeKey, setActiveKey] = useState("1");
+  const { TabPane } = Tabs;
 
   const columns = [
     {
@@ -20,7 +23,7 @@ const OrderList = () => {
         <Link
           href={
             "/admin/customers/" +
-            router.query?.id +
+            "Maryjane Egbu" +
             "/order-detail/" +
             "order-" +
             order_number
@@ -94,6 +97,42 @@ const OrderList = () => {
       amount: "N13,849",
       payment: "Paid",
     },
+    {
+      key: "5",
+      order_number: "#37812",
+      order_date: "13/03/2023",
+      no_of_items: "14",
+      status: "Shipped",
+      amount: "N13,849",
+      payment: "Paid",
+    },
+    {
+      key: "6",
+      order_number: "#37812",
+      order_date: "13/03/2023",
+      no_of_items: "14",
+      status: "Shipped",
+      amount: "N13,849",
+      payment: "Paid",
+    },
+    {
+      key: "7",
+      order_number: "#37812",
+      order_date: "13/03/2023",
+      no_of_items: "14",
+      status: "Shipped",
+      amount: "N13,849",
+      payment: "Paid",
+    },
+    {
+      key: "8",
+      order_number: "#37812",
+      order_date: "13/03/2023",
+      no_of_items: "14",
+      status: "Shipped",
+      amount: "N13,849",
+      payment: "Paid",
+    },
   ];
 
   return (
@@ -101,36 +140,34 @@ const OrderList = () => {
       <BreadCrumbs
         items={[
           { name: "Dashboard", path: "/admin/dashboard" },
-          { name: "Customers", path: "/admin/customers" },
-          {
-            name: router.query?.id as string,
-            path: "/admin/customers/" + router.query?.id,
-          },
           {
             name: "Order List",
-            path: "/admin/customers/" + router.query?.id + "/order-list",
+            path: "/admin/orders",
           },
         ]}
         header="Order List"
       />
 
       <div className=" tw-mt-12 tw-font-poppins">
-        <CustomerDetail
-          image="/images/pp.png"
-          name="Akomolafe Akadri"
-          email="theakomolafeakadri@email.com"
-          phone="0812 345 6789"
-        />
         <div className="tw-mt-6">
           <Search placeholder="Search by order code" />
         </div>
-
         <div className=" tw-py-4">
-          <AdminTable data={data} columns={columns} />
+          <Tabs
+            animated
+            tabBarStyle={{ borderColor: "red" }}
+            className="adminTab"
+            activeKey={activeKey}
+            onTabClick={(key) => setActiveKey(key)}
+          >
+            <TabPane tab="Order History" key="1">
+              <AdminTable data={data} columns={columns} />
+            </TabPane>
+          </Tabs>
         </div>
       </div>
     </AdminLayout>
   );
 };
 
-export default OrderList;
+export default Orders;

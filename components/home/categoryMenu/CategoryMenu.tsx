@@ -11,6 +11,7 @@ import { v4 as uuid } from "uuid";
 const CategoryMenu = function () {
   const [showCat, setShowCat] = useState<boolean>(false);
   const { categories } = useSelector((state: RootState) => state);
+  console.log(categories, "categories");
 
   return (
     <>
@@ -37,9 +38,9 @@ const CategoryMenu = function () {
               <Link href={`/category/${item.name}`}>
                 <a className={styles.menu_link}>
                   <Image
-                    src="/svg/cat-icon-electronics.svg"
-                    width="20"
-                    height="20"
+                    src={item.icon || "/svg/cat-icon-electronics.svg"}
+                    width="24"
+                    height="24"
                     className="tw-flex-[0.2]"
                   />
                   <span className={styles.menu_text}> {item.name} </span>

@@ -11,6 +11,7 @@ import VendorsIcon from "@/components/icons/admin/sidebar/vendors";
 import { useRouter } from "next/router";
 import Link from "next/dist/client/link";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import OrderIcon from "@/components/icons/admin/sidebar/orders";
 
 const SidebarItems = () => {
   const router = useRouter();
@@ -45,7 +46,12 @@ const SidebarItems = () => {
       path: "/admin/categories",
       open: false,
     },
-
+    {
+      name: "Orders",
+      icon: OrderIcon,
+      options: [],
+      path: "/admin/orders",
+    },
     {
       name: "Customers",
       icon: CustomersIcon,
@@ -55,7 +61,13 @@ const SidebarItems = () => {
     {
       name: "Vendors",
       icon: VendorsIcon,
-      options: [],
+      options: [
+        {
+          name: "Vendor Application",
+          path: "/admin/vendors/vendor-application",
+        },
+        { name: "Vendor List", path: "/admin/vendors/vendor-list" },
+      ],
       path: "/admin/vendors",
     },
     {
@@ -71,6 +83,7 @@ const SidebarItems = () => {
         { name: "New Coupon", path: "/admin/marketing/new-coupon" },
       ],
       path: "/admin/marketing",
+      open: false,
     },
     {
       name: "Transactions",

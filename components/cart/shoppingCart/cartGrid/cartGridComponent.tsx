@@ -36,6 +36,7 @@ const CartGridComponent = function () {
     const payload: AddToCartPayload = {
       productOptionId: productId,
       token: user.token,
+      quantity: 1,
       ipAddress: await getIp(),
     };
     dispatch(addToCartFunc(payload, user.token));
