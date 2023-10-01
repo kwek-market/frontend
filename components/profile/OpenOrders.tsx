@@ -11,7 +11,7 @@ const OpenOrders = function ({ setActiveBtn }) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  const { status, data, error } = useOrders(token);
+  const { status, data, error, refetch } = useOrders(token);
 
   const loading = status === "loading" && <Load />;
   const hasError = status === "error" && <ErrorInfo error={error} />;
@@ -32,6 +32,7 @@ const OpenOrders = function ({ setActiveBtn }) {
                 key={order.id}
                 order={order}
                 setActiveBtn={setActiveBtn}
+                refetch={refetch}
               />
             )
         )}

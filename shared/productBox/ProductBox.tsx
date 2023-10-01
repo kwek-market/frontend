@@ -33,6 +33,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
       ipAddress: await getIp(),
       productOptionId: id,
       token: user.token,
+      quantity: 1,
     };
     dispatch(addToCartFunc(payload, user.token));
     dispatch(getCartFunc(user.token));

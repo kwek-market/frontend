@@ -1,4 +1,3 @@
-import useCancelOrder from "@/hooks/useCancelOrder";
 import useCartItems from "@/hooks/useCartItems";
 import { Order } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
@@ -20,13 +19,8 @@ const Details = function ({ show, order, idx, setActiveBtn }) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  const { mutate } = useCancelOrder();
 
   const { items, loading } = useCartItems(order);
-
-  function cancelItem(id: string) {
-    mutate({ orderId: id, token });
-  }
 
   function trackItem() {
     setActiveBtn("Track My Order");
@@ -61,11 +55,6 @@ const Details = function ({ show, order, idx, setActiveBtn }) {
             !show ? (
               <>
                 <div className="tw-flex tw-flex-row tw-justify-between">
-                  <Button
-                    buttonStyle="tw-p-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-sm tw-border tw-border-red-kwek100 hover:tw-opacity-50"
-                    text="Cancel Item"
-                    cmd={() => cancelItem(order.id)}
-                  />
                   <Button
                     buttonStyle="tw-p-2 tw-text-red-kwek100 tw-border tw-border-red-kwek100 tw-rounded-sm"
                     text="Track Item"

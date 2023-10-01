@@ -12,13 +12,15 @@ import useCartItems from "@/hooks/useCartItems";
 import Load from "../Loader/Loader";
 import { v4 } from "uuid";
 import Image from "next/image";
+import useCancelOrder from "@/hooks/useCancelOrder";
 
 export type OrderProps = {
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
   order: OrderType;
+  refetch: () => void;
 };
 
-const Order = function ({ setActiveBtn, order }: OrderProps) {
+const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
   const dispatch = useDispatch();
   const {
     user: { token },
@@ -45,6 +47,18 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
     } catch (err) {
       message.error(err.message);
     }
+  }
+
+  const { mutate, isLoading } = useCancelOrder();
+  function cancelItem(id: string) {
+    mutate(
+      { orderId: id, token },
+      {
+        onSuccess: () => {
+          refetch();
+        },
+      }
+    );
   }
 
   return (
@@ -84,7 +98,7 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
           </span>
         </div>
       </div>
-      <div className="tw-flex tw-flex-col">
+      <div className="tw-flex tw-flex-col tw-justify-between">
         <Badge
           badgeStyle={`${deliveryStatus} tw-uppercase tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-mb-2`}
           text={order.deliveryStatus}
@@ -93,6 +107,11 @@ const Order = function ({ setActiveBtn, order }: OrderProps) {
           buttonStyle="tw-underline tw-text-yellow-primary tw-uppercase"
           text={load ? "loading..." : "See Details"}
           cmd={() => checkDetails(order.id)}
+        />
+        <Button
+          buttonStyle="tw-p-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-sm tw-border tw-border-red-kwek100 hover:tw-opacity-50"
+          text={isLoading ? "loading..." : "Cancel Order"}
+          cmd={() => cancelItem(order.id)}
         />
       </div>
     </div>

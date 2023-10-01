@@ -1,3 +1,4 @@
+import Load from "@/components/Loader/Loader";
 import Card from "@/components/admin/dashboard/card";
 import DashboardChart from "@/components/admin/dashboard/chart";
 
@@ -6,23 +7,133 @@ import CartIcon from "@/components/icons/admin/dashboard/cart";
 import ProfitIcon from "@/components/icons/admin/dashboard/profit";
 import DownloadIcon from "@/components/icons/admin/download";
 import ArrowDownIcon from "@/components/icons/admin/nav/arrow-down";
+import {
+  useGetAverageOrderValues,
+  useGetTotalActiveCustomers,
+  useGetTotalOrders,
+  useGetTotalRevenue,
+  useGetTotalSales,
+  useGetRecentTransactions,
+} from "@/hooks/admin/dashboard";
+
 import { AdminLayout } from "@/layouts";
+import { RootState } from "@/store/rootReducer";
 import { ChevronRightIcon } from "@heroicons/react/solid";
+import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const {
+    user: { token, user },
+  } = useSelector((state: RootState) => state);
+
+  const [currentMonth, setCurrentMonth] = useState("thisMonth");
+
+  const [currentRange, setCurrentRange] = useState({
+    start: getMonthDateRange(dayjs()).start,
+    end: getMonthDateRange(dayjs()).end,
+    last_date: dayjs(),
+  });
+
+  function getMonthDateRange(dayJsDate: dayjs.Dayjs) {
+    // Current month
+    const currentMonthStart = dayJsDate.startOf("month");
+    const currentMonthEnd = dayJsDate.endOf("month");
+
+    // Last month
+    // const lastMonthStart = dayjs().subtract(1, "month").startOf("month");
+    // const lastMonthEnd = dayjs().subtract(1, "month").endOf("month");
+
+    return {
+      start: currentMonthStart.format("YYYY-MM-DD"),
+      end: currentMonthEnd.format("YYYY-MM-DD"),
+    };
+  }
+
+  useEffect(() => {
+    if (currentMonth === "lastMonth") {
+      setCurrentRange({
+        start: getMonthDateRange(dayjs().subtract(1, "month")).start,
+        end: getMonthDateRange(dayjs().subtract(1, "month")).end,
+        last_date: dayjs().subtract(2, "month"),
+      });
+    } else {
+      setCurrentRange({
+        start: getMonthDateRange(dayjs()).start,
+        end: getMonthDateRange(dayjs()).end,
+        last_date: dayjs().subtract(1, "month"),
+      });
+    }
+  }, [currentMonth]);
+
+  const { data: totalOrders, isFetching: isFetchingTotalOrders } =
+    useGetTotalOrders({
+      startDate: currentRange.start,
+      endDate: currentRange.end,
+      token,
+    });
+
+  const { data: totalSales, isFetching: isFetchingTotalSales } =
+    useGetTotalSales({
+      startDate: currentRange.start,
+      endDate: currentRange.end,
+      token,
+    });
+
+  const { data: averageOrderValue, isFetching: isFetchingAverageOrderValue } =
+    useGetAverageOrderValues({
+      startDate: currentRange.start,
+      endDate: currentRange.end,
+      token,
+    });
+
+  const {
+    data: totalActiveCustomers,
+    isFetching: isFetchingTotalActiveCustomers,
+  } = useGetTotalActiveCustomers({
+    startDate: currentRange.start,
+    endDate: currentRange.end,
+    token,
+  });
+
+  const { data: totalRevenue, isFetching: isFetchingTotalRevenue } =
+    useGetTotalRevenue({
+      token,
+    });
+
+  const { data: recentTransactions, isFetching: isFetchingRecentTransactions } =
+    useGetRecentTransactions({
+      page: 1,
+      pageSize: 5,
+      token,
+    });
+
+  console.log(
+    totalSales,
+    averageOrderValue,
+    totalActiveCustomers,
+    totalRevenue,
+    recentTransactions
+  );
+
   return (
     <AdminLayout>
       <div className=" tw-font-poppins tw-flex tw-justify-between">
         <h1 className=" tw-text-[2rem] tw-font-bold tw-mb-0">Dashboard</h1>
         <div className=" tw-flex tw-gap-x-4">
           <div>
-            <button className=" tw-rounded tw-border tw-border-[#D7DCE0] tw-flex tw-gap-x-2 tw-p-3 tw-items-center  ">
-              This Month <ArrowDownIcon />
-            </button>
+            <select
+              value={currentMonth}
+              onChange={(e) => setCurrentMonth(e.target.value)}
+              className=" tw-rounded tw-border tw-border-[#D7DCE0] tw-flex tw-gap-x-2 tw-p-3 tw-items-center tw-cursor-pointer tw-w-[8rem] tw-outline-none"
+            >
+              <option value="thisMonth">This Month</option>
+              <option value="lastMonth">Last Month</option>
+            </select>
           </div>
           <div>
             <button className=" tw-border tw-border-[#D4D4D8] tw-rounded-[5px] tw-bg-[#FFC107] tw-flex tw-gap-x-2 tw-p-3 tw-items-center">
@@ -35,25 +146,39 @@ const Dashboard = () => {
       <div className=" tw-grid tw-grid-cols-3 tw-gap-x-8 tw-mt-10">
         <Card
           text={"TOTAL ORDERS"}
-          subText={"2,210"}
-          down
-          fig={19}
-          lastText={"Compared to February"}
+          subText={totalOrders?.getTotalOrders?.totalOrders}
+          down={
+            totalOrders?.getTotalOrders?.prevOrders >
+            totalOrders?.getTotalOrders?.totalOrders
+          }
+          fig={totalOrders?.getTotalOrders?.percentage}
+          lastText={`Compared to ${currentRange.last_date.format("MMMM")}`}
           Icon={CartIcon}
+          loading={isFetchingTotalOrders}
         />
         <Card
           text={"TOTAL SALES"}
-          subText={"₦128,700"}
-          fig={16}
-          lastText={"Compared to February"}
+          subText={totalSales?.getTotalSales.totalSales}
+          fig={totalSales?.getTotalSales?.percentage}
+          lastText={`Compared to ${currentRange.last_date.format("MMMM")}`}
           Icon={ProfitIcon}
+          down={
+            totalSales?.getTotalSales?.prevSales >
+            totalSales?.getTotalSales?.totalSales
+          }
+          loading={isFetchingTotalSales}
         />
         <Card
-          text={"TOTAL ORDERS"}
-          subText={"2,210"}
-          fig={36}
-          lastText={"Compared to February"}
+          text={"AVERAGE ORDER VALUE"}
+          subText={averageOrderValue?.getAverageSales?.averageOrderValue}
+          fig={averageOrderValue?.getAverageSales?.percentage}
+          lastText={`Compared to ${currentRange.last_date.format("MMMM")}`}
           Icon={ShoppingBagIcon}
+          loading={isFetchingAverageOrderValue}
+          down={
+            averageOrderValue?.getAverageSales?.prevAverageOrderValue >
+            averageOrderValue?.getAverageSales?.averageOrderValue
+          }
         />
       </div>
       <div className=" tw-flex  tw-pt-8 tw-gap-x-8 tw-font-poppins">
@@ -62,10 +187,31 @@ const Dashboard = () => {
             Total Revenue
           </h2>
           <p className="tw-mb-0 tw-font-medium tw-pt-3 tw-text-2xl">
-            NGN 2,043,435.98
+            {isFetchingTotalRevenue ? (
+              <Load />
+            ) : (
+              "NGN" +
+              " " +
+              Number(
+                Object.keys(totalRevenue?.getTotalRevenue || {}).reduce(
+                  (prev, curr) => {
+                    return totalRevenue?.getTotalRevenue[curr] + prev;
+                  },
+                  0
+                )
+              ).toLocaleString()
+            )}
           </p>
           <div className=" tw-pt-2">
-            <DashboardChart />
+            {isFetchingTotalRevenue ? (
+              <Load />
+            ) : (
+              <DashboardChart
+                data={Object.keys(totalRevenue?.getTotalRevenue).map(
+                  (item) => totalRevenue?.getTotalRevenue[item]
+                )}
+              />
+            )}
           </div>
         </div>
         <div className=" tw-border tw-border-[#E4E4E7] tw-rounded-[10px] tw-flex-[5] tw-p-6">
@@ -74,7 +220,11 @@ const Dashboard = () => {
           </h2>
 
           <div className=" tw-text-center tw-bg-[#FFF8E4] tw-py-4 tw-mt-4 tw-font-medium tw-text-[2rem]">
-            2,210
+            {isFetchingTotalActiveCustomers ? (
+              <Load />
+            ) : (
+              totalActiveCustomers?.getTotalActiveCustomers?.activeCustomers
+            )}
           </div>
           <p className=" tw-mb-0 tw-pt-3 tw-text-[#71717A] tw-text-sm">
             Recent Transactions

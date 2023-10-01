@@ -6,7 +6,7 @@ import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import React, { useState } from "react";
 
-const Customers = () => {
+const VendorApplications = () => {
   const [activeKey, setActiveKey] = useState("1");
   const { TabPane } = Tabs;
 
@@ -16,7 +16,7 @@ const Customers = () => {
       dataIndex: "name",
       key: "name",
       render: (name) => (
-        <Link href={"/admin/customers/" + name}>
+        <Link href={"/admin/vendors/vendor-info/" + name}>
           <a className=" tw-text-black-kwek100">{name}</a>
         </Link>
       ),
@@ -27,9 +27,9 @@ const Customers = () => {
       key: "email_address",
     },
     {
-      title: "Date Joined",
-      dataIndex: "date_joined",
-      key: "date_joined",
+      title: "Date Applied",
+      dataIndex: "date_applied",
+      key: "date_applied",
     },
     {
       title: "Country",
@@ -42,14 +42,24 @@ const Customers = () => {
       key: "state",
     },
     {
-      title: "Amount Spent",
-      dataIndex: "amount_spent",
-      key: "amount_spent",
+      title: "Decision",
+      dataIndex: "decision",
+      key: "decision",
+      render: () => (
+        <div className=" tw-flex tw-gap-x-2">
+          <button className=" tw-py-[5px] tw-px-[10px] tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-bg-[#009D19]">
+            Accept
+          </button>
+          <button className=" tw-py-[5px] tw-px-[10px] tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-bg-[#AF1328]">
+            Reject
+          </button>
+        </div>
+      ),
     },
     {
       title: "",
       key: "action",
-      render: (text, record) => (
+      render: () => (
         <span>
           <DotsVerticalIcon className="tw-h-5 tw-w-5 tw-text-[#27BE63]" />
         </span>
@@ -62,73 +72,65 @@ const Customers = () => {
       key: "1",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
     {
       key: "2",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
     {
       key: "3",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
     {
       key: "4",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
     {
       key: "5",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
     {
       key: "6",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
     {
       key: "7",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
     {
       key: "8",
       name: "Maryjane Egbu",
       email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
+      date_applied: "13/03/2023",
       country: "Nigeria",
       state: "Lagos",
-      amount_spent: "N13,873.74",
     },
   ];
 
@@ -137,14 +139,15 @@ const Customers = () => {
       <BreadCrumbs
         items={[
           { name: "Dashboard", path: "/admin/dashboard" },
-          { name: "Customers", path: "/admin/customers" },
+          {
+            name: "Vendor Application",
+            path: "/admin/vendors/vendor-application",
+          },
         ]}
-        header="Customers"
-        buttonPath="#"
-        buttonText="Send Bulk Email"
+        header="Vendors Application"
       />
 
-      <div className=" tw-pt-4">
+      <div className=" tw-pt-4 tw-font-poppins">
         <Tabs
           animated
           tabBarStyle={{ borderColor: "red" }}
@@ -152,14 +155,14 @@ const Customers = () => {
           activeKey={activeKey}
           onTabClick={(key) => setActiveKey(key)}
         >
-          <TabPane tab="Active" key="1">
+          <TabPane tab="New Applications" key="1">
             <AdminTable data={data} columns={columns} />
           </TabPane>
-          <TabPane tab="Inactive" key="2"></TabPane>
+          <TabPane tab="Declined Applications" key="2"></TabPane>
         </Tabs>
       </div>
     </AdminLayout>
   );
 };
 
-export default Customers;
+export default VendorApplications;

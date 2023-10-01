@@ -1,4 +1,4 @@
-import { userFetcherWithAuth } from "@/helpers";
+import { userFetcherWithAuth, userFetcher } from "@/helpers";
 import { CouponType } from "@/interfaces/commonTypes";
 import { APPLY_COUPON, CREATE_COUPON } from "@/store/seller/seller.queries";
 import { message } from "antd";
@@ -33,8 +33,9 @@ export function useApplyCoupon() {
         message.success(data.applyCoupon.message);
       },
       onError: (error: any) => {
-        console.log(error.message);
-        message.error(error.message);
+        // console.log(error.response.errors[0].message);
+        // message.error(error.response.errors[0].message);
+        message.error("Invalid Coupon");
       },
     }
   );

@@ -1,4 +1,5 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
+import Search from "@/components/admin/search";
 import SearchIcon from "@/components/icons/admin/search";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
@@ -115,13 +116,8 @@ const CategoryList = () => {
         buttonText="New Category"
       />
 
-      <div className=" tw-pr-4 tw-overflow-hidden tw-border tw-border-[#D7DCE0] tw-rounded tw-flex tw-items-center tw-w-max tw-mt-16">
-        <input
-          type="text"
-          className=" tw-py-3 tw-pl-4 tw-border-none tw-outline-none tw-mr-4 tw-w-64 active:tw-border-none"
-          placeholder="Search"
-        />
-        <SearchIcon />
+      <div className="tw-mt-16">
+        <Search placeholder="Search" />
       </div>
       <div className=" tw-pt-4">
         <AdminTable data={data} columns={columns} />

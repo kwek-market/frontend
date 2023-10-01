@@ -1,0 +1,17 @@
+import SearchIcon from "@/components/icons/admin/search";
+import React from "react";
+
+const Search = ({ placeholder }: { placeholder: string }) => {
+  return (
+    <div className=" tw-pr-4 tw-overflow-hidden tw-border tw-border-[#D7DCE0] tw-rounded tw-flex tw-items-center tw-w-max ">
+      <input
+        type="text"
+        className=" tw-py-3 tw-pl-4 tw-border-none tw-outline-none tw-mr-4 tw-w-64 active:tw-border-none"
+        placeholder={placeholder}
+      />
+      <SearchIcon />
+    </div>
+  );
+};
+
+export default Search;
