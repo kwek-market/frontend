@@ -23,6 +23,7 @@
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "html-to-image": "^1.9.0",
+    "html2pdf.js": "^0.10.1",
     "jspdf": "^2.5.1",
     "luxon": "^2.3.1",
     "next": "10.0.9",
