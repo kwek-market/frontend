@@ -77,3 +77,62 @@ export const GET_RECENT_TRANSACTIONS = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_PRODUCTS = /* GraphQL */ `
+  query products($page: Int, $pageSize: Int) {
+    products(page: $page, pageSize: $pageSize) {
+      objects {
+        id
+        productTitle
+        dateCreated
+        options {
+          price
+          discountedPrice
+          size
+        }
+        sales {
+          amount
+        }
+        user {
+          fullName
+          storedetail {
+            storeName
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_PRODUCT = /* GraphQL */ `
+  query product($id: String!) {
+    product(id: $id) {
+      id
+      productTitle
+
+      options {
+        price
+        discountedPrice
+        size
+      }
+      image {
+        imageUrl
+      }
+
+      sales {
+        amount
+        date
+      }
+      user {
+        id
+        fullName
+        sellerprofileSet {
+          shopName
+        }
+        storedetail {
+          storeName
+        }
+      }
+    }
+  }
+`;

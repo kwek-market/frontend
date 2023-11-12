@@ -4,38 +4,52 @@ import React from "react";
 import AdminTable from "@/components/table";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import Link from "next/link";
+import { useGetProducts } from "@/hooks/admin/products";
+import Load from "@/components/Loader/Loader";
+import moment from "moment";
 
 const Products = () => {
+  const { data, isFetching } = useGetProducts({
+    page: 1,
+    pageSize: 10,
+  });
+
   const columns = [
     {
       title: "Product",
-      dataIndex: "product",
-      key: "product",
-      render: (product) => (
-        <Link href={"/admin/products/38ug4hhvv"}>
-          <a className=" tw-text-[#1D1616]">{product}</a>
-        </Link>
-      ),
+      dataIndex: "productTitle",
+      key: "productTitle",
+      render: (productTitle, x) => {
+        return (
+          <Link href={`/admin/products/${x?.id}`}>
+            <a className=" tw-text-[#1D1616]">{productTitle}</a>
+          </Link>
+        );
+      },
     },
     {
       title: "Vendor",
-      dataIndex: "vendor",
-      key: "vendor",
+      dataIndex: "user",
+      key: "user",
+      render: (user) => user?.fullName,
     },
     {
       title: "Unit Price",
-      dataIndex: "unit_price",
-      key: "unit_price",
+      dataIndex: "options",
+      key: "options",
+      render: (options) => `N${options[0]?.price}`,
     },
     {
       title: "Sold",
-      key: "sold",
-      dataIndex: "sold",
+      key: "sales",
+      dataIndex: "sales",
+      render: (sales) => sales?.length,
     },
     {
       title: "Date Uploaded",
-      key: "date_uploaded",
-      dataIndex: "date_uploaded",
+      key: "dateCreated",
+      dataIndex: "dateCreated",
+      render: (date) => moment(new Date(date)).format("MMM D, YYYY | h:MM A"),
     },
     {
       title: "",
@@ -48,7 +62,7 @@ const Products = () => {
     },
   ];
 
-  const data = [
+  const dataj = [
     {
       key: "1",
       product: "Nestle Milo CRUNCHY CEREALS 320g",
@@ -91,10 +105,20 @@ const Products = () => {
         ]}
         header="Product"
       />
-
-      <div className=" tw-pt-7">
-        <AdminTable select data={data} columns={columns} />
-      </div>
+      {isFetching ? (
+        <Load />
+      ) : (
+        <div className=" tw-pt-7">
+          <AdminTable
+            select
+            data={data?.products?.objects?.map((item, indx) => ({
+              ...item,
+              key: indx,
+            }))}
+            columns={columns}
+          />
+        </div>
+      )}
     </AdminLayout>
   );
 };
