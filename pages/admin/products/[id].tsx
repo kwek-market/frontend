@@ -8,11 +8,17 @@ import { Divider } from "antd";
 import { Tabs } from "antd";
 import OrderHistory from "@/components/admin/products/order-history";
 import Reviews from "@/components/admin/products/reviews";
+import { useGetProduct } from "@/hooks/admin/products";
 
 const ProductDetail = () => {
   const { TabPane } = Tabs;
   const router = useRouter();
   const [activeKey, setActiveKey] = useState("1");
+
+  const { data, isFetching } = useGetProduct({
+    id: router.query?.id as string,
+  });
+
   return (
     <AdminLayout>
       <BreadCrumbs
@@ -30,25 +36,29 @@ const ProductDetail = () => {
           <Image
             width={72}
             height={72}
-            src="/images/hh.png"
+            src={data?.product?.image[0]?.imageUrl}
             alt="hh"
-            className="  tw-rounded-[10px] tw-overflow-hidden"
+            className="  tw-rounded-[10px] tw-overflow-hidden tw-object-cover"
           />
         </div>
         <div>
           <h2 className="tw-mb-0 tw-font-bold tw-text-lg">
-            Women's Fashion Shiny High Heels
+            {data?.product?.productTitle}
           </h2>
           <h3 className="tw-mb-0 tw-font-semibold tw-text-[#009D19]">
-            N 14,000
+            N {Number(data?.product?.options[0]?.price).toLocaleString()}
           </h3>
           <div className=" tw-text-xs tw-text-gray-kwek300a ">
             Seller:{" "}
-            <Link href="">
-              <a className=" tw-text-[#AF1328] tw-underline">Moda Stores</a>
+            <Link
+              href={`/admin/vendors/vendor-info/${data?.product?.user?.id}`}
+            >
+              <a className=" tw-text-[#AF1328] tw-underline">
+                {data?.product?.user?.fullName}
+              </a>
             </Link>
             <Divider type="vertical" />
-            Product Code: MODA124323
+            Product Code: {router.query?.id}
           </div>
         </div>
       </div>
