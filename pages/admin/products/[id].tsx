@@ -8,7 +8,7 @@ import { Divider } from "antd";
 import { Tabs } from "antd";
 import OrderHistory from "@/components/admin/products/order-history";
 import Reviews from "@/components/admin/products/reviews";
-import { useGetProduct } from "@/hooks/admin/products";
+import { useGetProduct, useGetProductReviews } from "@/hooks/admin/products";
 
 const ProductDetail = () => {
   const { TabPane } = Tabs;
@@ -17,6 +17,13 @@ const ProductDetail = () => {
 
   const { data, isFetching } = useGetProduct({
     id: router.query?.id as string,
+  });
+
+  const getProductReviews = useGetProductReviews({
+    page: 1,
+    pageSize: 10,
+    productId: router.query?.id as string,
+    sortBy: "id",
   });
 
   return (
@@ -36,7 +43,10 @@ const ProductDetail = () => {
           <Image
             width={72}
             height={72}
-            src={data?.product?.image[0]?.imageUrl}
+            src={
+              data?.product?.image[0]?.imageUrl ||
+              "https://res.cloudinary.com/psami-wondah/image/upload/v1701686786/tadukzulu3bmj4wzrszr.webp"
+            }
             alt="hh"
             className="  tw-rounded-[10px] tw-overflow-hidden tw-object-cover"
           />
@@ -78,13 +88,13 @@ const ProductDetail = () => {
               <div className=" tw-flex tw-gap-x-3">
                 Reviews
                 <span className=" tw-rounded-full tw-bg-[#009D19] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-text-white-100">
-                  2
+                  {getProductReviews?.data?.reviews?.objects?.length}
                 </span>
               </div>
             }
             key="2"
           >
-            <Reviews />
+            <Reviews getProductReviews={getProductReviews} />
           </TabPane>
         </Tabs>
       </div>
