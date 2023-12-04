@@ -136,3 +136,47 @@ export const GET_PRODUCT = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_PRODUCT_REVIEWS = /* GraphQL */ `
+  query reviews(
+    $page: Int
+    $pageSize: Int
+    $productId: String
+    $sortBy: String
+  ) {
+    reviews(
+      page: $page
+      pageSize: $pageSize
+      productId: $productId
+      sortBy: $sortBy
+    ) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        rating
+        review
+        user {
+          fullName
+        }
+        likes
+        dislikes
+        ratedAt
+      }
+    }
+  }
+`;
+
+export const GET_CATEGORIES = /* GraphQL */ `
+  query categories($search: String) {
+    categories(search: $search) {
+      id
+      name
+      icon
+      visibility
+      publishDate
+    }
+  }
+`;
