@@ -105,6 +105,8 @@ const Dashboard = () => {
       token,
     });
 
+  console.log("totalRevenue", totalRevenue)
+
   const { data: recentTransactions, isFetching: isFetchingRecentTransactions } =
     useGetRecentTransactions({
       page: 1,
@@ -115,9 +117,9 @@ const Dashboard = () => {
   console.log(
     totalSales,
     averageOrderValue,
-    totalActiveCustomers,
+    "active customers: ", totalActiveCustomers,
     totalRevenue,
-    recentTransactions
+    "recent Transactions: ", recentTransactions
   );
 
   return (
@@ -207,7 +209,7 @@ const Dashboard = () => {
               <Load />
             ) : (
               <DashboardChart
-                data={Object.keys(totalRevenue?.getTotalRevenue).map(
+                data={Object?.keys(totalRevenue?.getTotalRevenue ?? []).map(
                   (item) => totalRevenue?.getTotalRevenue[item]
                 )}
               />

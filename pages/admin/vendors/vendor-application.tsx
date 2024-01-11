@@ -1,14 +1,32 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
+import Load from "@/components/Loader/Loader";
 import AdminTable from "@/components/table";
+import { useGetSellers } from "@/hooks/admin/vendors";
 import { AdminLayout } from "@/layouts";
+import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 const VendorApplications = () => {
   const [activeKey, setActiveKey] = useState("1");
   const { TabPane } = Tabs;
+  const [page, setPage] = useState(1);
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+
+  const { data: getVendorsData, isFetching } = useGetSellers({
+    token,
+    seller: true,
+    active: true,
+    redFlagged: false,
+    page,
+    pageSize: 10,
+  });
+  console.log(getVendorsData);
 
   const columns = [
     {
@@ -67,72 +85,50 @@ const VendorApplications = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-    {
-      key: "2",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-    {
-      key: "3",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-    {
-      key: "4",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-    {
-      key: "5",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-    {
-      key: "6",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-    {
-      key: "7",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-    {
-      key: "8",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_applied: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-    },
-  ];
+  const data = useMemo(
+    () =>
+      getVendorsData?.getUserType?.objects?.map(({ id, fullName, email }) => {
+        return {
+          key: id,
+          name: fullName,
+          email_address: email,
+          date_applied: "13/02/2023",
+          country: null,
+          state: null,
+        };
+      }),
+    [getVendorsData],
+  );
+  console.log("Table data: ", data);
+
+  if (data === null) {
+    return (
+      <AdminLayout>
+        <BreadCrumbs
+          items={[
+            { name: "Dashboard", path: "/admin/dashboard" },
+            {
+              name: "Vendor Application",
+              path: "/admin/vendors/vendor-application",
+            },
+          ]}
+          header="Vendors Application"
+        />
+
+        <div className=" tw-pt-4 tw-font-poppins">
+          <Tabs
+            animated
+            tabBarStyle={{ borderColor: "red" }}
+            className="adminTab"
+            activeKey={activeKey}
+            onTabClick={(key) => setActiveKey(key)}
+          >
+            <Load />
+          </Tabs>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -156,7 +152,11 @@ const VendorApplications = () => {
           onTabClick={(key) => setActiveKey(key)}
         >
           <TabPane tab="New Applications" key="1">
-            <AdminTable data={data} columns={columns} />
+            <AdminTable
+              data={data}
+              columns={columns}
+              pages={getVendorsData?.getUserType?.pages}
+            />
           </TabPane>
           <TabPane tab="Declined Applications" key="2"></TabPane>
         </Tabs>

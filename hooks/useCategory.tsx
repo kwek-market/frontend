@@ -1,6 +1,5 @@
 import { userFetcher } from "@/helpers";
-import { CATEGORY } from "@/store/category/categories.queries";
-import React from "react";
+import { CATEGORY, LEASTCATEGORIES } from "@/store/category/categories.queries";
 import { useQuery } from "react-query";
 
 function useCategory(payload: { id: string }) {
@@ -8,6 +7,13 @@ function useCategory(payload: { id: string }) {
     staleTime: Infinity,
     cacheTime: 1000 * 60 * 20,
     enabled: payload.id !== undefined,
+  });
+}
+
+export function useGetLeastCategories() {
+  return useQuery(["least-categories"], () => userFetcher(LEASTCATEGORIES), {
+    staleTime: Infinity,
+    cacheTime: 1000 * 60 * 20,
   });
 }
 
