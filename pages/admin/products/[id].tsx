@@ -46,7 +46,7 @@ const ProductDetail = () => {
             {data?.product?.productTitle}
           </h2>
           <h3 className="tw-mb-0 tw-font-semibold tw-text-[#009D19]">
-            N {Number(data?.product?.options[0]?.price).toLocaleString()}
+            {Number(data?.product?.options[0]?.price).toLocaleString()}
           </h3>
           <div className=" tw-text-xs tw-text-gray-kwek300a ">
             Seller:{" "}
@@ -78,13 +78,13 @@ const ProductDetail = () => {
               <div className=" tw-flex tw-gap-x-3">
                 Reviews
                 <span className=" tw-rounded-full tw-bg-[#009D19] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-text-white-100">
-                  2
+                 {data?.product?.productRating?.length} 
                 </span>
               </div>
             }
             key="2"
           >
-            <Reviews />
+            <Reviews reviews={data?.product?.productRating} />
           </TabPane>
         </Tabs>
       </div>

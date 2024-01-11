@@ -1,21 +1,96 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import { FormHead, FormItems } from "@/components/admin/form";
-import UploadToCloud from "@/components/icons/admin/upload-to-cloud";
-import {
-  InputField,
-  RadioField,
-  TextField,
-} from "@/components/input/textInput";
+import { InputField, RadioField } from "@/components/input/textInput";
 import { AdminLayout } from "@/layouts";
 import { useRouter } from "next/router";
+import useCategory from "@/hooks/useCategory";
+import { UpdateCategorySchema } from "@/validations/createCategory";
+import { message, MessageArgsProps } from "antd";
+import { useUpdateCategory } from "@/hooks/admin/category";
+import { RootState } from "@/store/rootReducer";
+import { useSelector } from "react-redux";
+import Load from "@/components/Loader/Loader";
 
 const EditCategory = () => {
-  const [visibility, setVisibility] = useState("");
-  const handleRadio = (value) => {
-    setVisibility(value);
-  };
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
   const router = useRouter();
+  const { id } = router.query;
+  const { data, isFetching } = useCategory({
+    id: id as string,
+  });
+  console.log("data: ", data);
+  const [name, setName] = useState(data?.category?.name);
+  const [visibility, setVisibility] = useState(data?.category?.visibility);
+  const [publishedDate, setPublishedDate] = useState(
+    data?.category?.publishedDate,
+  );
+  const [parent, setParent] = useState(data?.category?.parent?.name);
+
+  const { mutate: updateMut } = useUpdateCategory(token);
+
+  async function publish(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string,
+  ) {
+    e.preventDefault();
+
+    console.log("form values: ", name, visibility, publishedDate, parent);
+    // validate with zod
+    const parsed = await UpdateCategorySchema.safeParseAsync({
+      name,
+      visibility,
+      publishedDate,
+      parent,
+    });
+
+    if (parsed.success !== true) {
+      message.error(parsed.error.errors[0].message);
+      return;
+    }
+
+    try {
+      updateMut(
+        { id, ...parsed.data },
+        {
+          onError: (err: { message: string }) => {
+            message.error(err.message);
+          },
+        },
+      );
+    } catch (err) {
+      message.error(err.message);
+    }
+  }
+
+  if (isFetching)
+    return (
+      <AdminLayout>
+        <BreadCrumbs
+          items={[
+            { name: "Dashboard", path: "/admin/dashboard" },
+            {
+              name: "Manage Categories",
+              path: "/admin/categories/category-list",
+            },
+            {
+              name: "Category List",
+              path: "/admin/categories/category-list",
+            },
+            {
+              name: ("Edit category - " + router.query?.id) as string,
+              path: ("/admin/categories/edit-category/" +
+                router.query?.id) as string,
+            },
+          ]}
+          header="Edit Category"
+        />
+        <Load />
+      </AdminLayout>
+    );
+
   return (
     <AdminLayout>
       <BreadCrumbs
@@ -38,39 +113,20 @@ const EditCategory = () => {
         header="Edit Category"
       />
 
-      <form
-        className=" tw-pt-2 tw-font-poppins"
-        onSubmit={(e) => e.preventDefault()}
-      >
+      <form className=" tw-pt-2 tw-font-poppins">
         <FormHead>Basic Information</FormHead>
         <FormItems>
-          <InputField label="Name" placeholder="e.g Fashion" />
-          <div>
-            <label className=" tw-font-medium ">Slug</label>
-            <div className="tw-flex tw-mt-1">
-              <div className=" tw-bg-[#F2F5F9] tw-p-4 tw-text-[#81909D]">
-                https://kwekmarket.com/catalog/
-              </div>
-              <input className=" tw-w-full tw-border tw-border-l-0 tw-border-[#D7DCE0] tw-rounded-r tw-p-4 tw-outline-none" />
-            </div>
-          </div>
-          <TextField
-            label="Description"
-            placeholder="Type description here..."
+          <InputField
+            label="Name"
+            placeholder="e.g Fashion"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-        </FormItems>
-
-        <FormHead>SubCategory</FormHead>
-        <button className=" tw-py-[10px] tw-px-[14px] tw-rounded-[20px] tw-border tw-border-gray-kwek300a tw-w-max tw-mt-6">
-          + Add Sub-Category
-        </button>
-
-        <FormHead>Search Engine Optimization</FormHead>
-        <FormItems>
-          <InputField label="Page Title" />
-          <TextField
-            label="Meta Descripiton"
-            placeholder="Type description here..."
+          <InputField
+            label="Parent"
+            placeholder="Fashion"
+            value={parent}
+            onChange={(e) => setParent(e.target.value)}
           />
         </FormItems>
 
@@ -79,36 +135,40 @@ const EditCategory = () => {
           <RadioField
             label="Published"
             checked={visibility == "published"}
-            onChange={() => handleRadio("published")}
+            onChange={() => setVisibility(() => "published")}
           />
           <RadioField
             label="Scheduled"
             checked={visibility == "scheduled"}
-            onChange={() => handleRadio("scheduled")}
+            onChange={() => setVisibility(() => "scheduled")}
           />
           <RadioField
             label="Hidden"
             checked={visibility == "hidden"}
-            onChange={() => handleRadio("hidden")}
+            onChange={() => setVisibility(() => "hidden")}
           />
-          <InputField label="Publish Date" type="date" />
+          <InputField
+            label="Publish Date"
+            type="date"
+            value={publishedDate}
+            onChange={(e) => setPublishedDate(e.target.value)}
+          />
         </FormItems>
 
-        <FormHead>Image</FormHead>
-        <div className="tw-bg-[#FFFBEF] tw-py-4 tw-mt-10 tw-w-[60vw]  lg:tw-w-[35vw]">
-          <div className=" tw-mx-auto tw-w-max tw-text-center">
-            <div className=" tw-flex tw-justify-center">
-              <UploadToCloud />
-            </div>
-            <p className="tw-mb-0">Click here to upload image</p>
-          </div>
-        </div>
+        <button
+          className="tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-[#1E944D] tw-border-[#1E944D] tw-mt-16"
+          type="button"
+          onClick={() => router.push("/admin/categories")}
+        >
+          Cancel
+        </button>
 
         <button
           className="  tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-16"
           type="submit"
+          onClick={(e) => publish(e, id as string)}
         >
-          Publish Category
+          save changes
         </button>
       </form>
     </AdminLayout>

@@ -31,6 +31,8 @@ export const CATEGORY = /* GraphQL */ `
     category(id: $id) {
       id
       name
+      visibility
+      publishDate
       parent {
         id
         name
@@ -75,6 +77,26 @@ query subcategories {
     }
     subcategory {
       id
+    }
+  }
+}
+`;
+
+export const LEASTCATEGORIES = /* GRAPHQL */ `
+query leastSubcategories {
+  leastSubcategories {
+    id
+    name
+    icon
+    visibility
+    publishDate
+    parent {
+      id
+      name
+    }
+    child {
+      id
+      name
     }
   }
 }

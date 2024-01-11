@@ -6,14 +6,58 @@ import {
   RadioField,
   TextField,
 } from "@/components/input/textInput";
+import { useCreateCategory } from "@/hooks/admin/category";
 import { AdminLayout } from "@/layouts";
+import { RootState } from "@/store/rootReducer";
+import { CreateCategorySchema } from "@/validations/createCategory";
+import { message } from "antd";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const AddCategory = () => {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
   const [visibility, setVisibility] = useState("");
-  const handleRadio = (value) => {
+  const handleRadio = (value: React.SetStateAction<string>) => {
     setVisibility(value);
   };
+
+  const [name, setName] = useState("");
+  const [visibilityCat, setVisibilityCat] = useState("");
+  const [publishedDate, setPublishedDate] = useState("");
+  const [parent, setParent] = useState("");
+
+  const { mutate: createMut } = useCreateCategory(token);
+
+  async function publish(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+
+    console.log("form values: ", name, visibilityCat, publishedDate, parent);
+
+    const parsed = await CreateCategorySchema.safeParseAsync({
+      name,
+      visibility: visibilityCat,
+      publishedDate,
+      parent,
+    });
+
+    if (parsed.success !== true) {
+      message.error(parsed.error.errors[0].message);
+      return;
+    }
+
+    try {
+      createMut(parsed.data, {
+        onError: (err: Error) => {
+          message.error(err.message);
+        },
+      });
+    } catch (error) {
+      message.error(error.message);
+    }
+  }
+
   return (
     <AdminLayout>
       <BreadCrumbs
@@ -28,10 +72,7 @@ const AddCategory = () => {
         header="New Category"
       />
 
-      <form
-        className=" tw-pt-2 tw-font-poppins"
-        onSubmit={(e) => e.preventDefault()}
-      >
+      <form className=" tw-pt-2 tw-font-poppins">
         <FormHead>Basic Information</FormHead>
         <FormItems>
           <InputField label="Name" placeholder="e.g Fashion" />
@@ -97,6 +138,7 @@ const AddCategory = () => {
         <button
           className="  tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-16"
           type="submit"
+          onClick={(e) => publish(e)}
         >
           Publish Category
         </button>

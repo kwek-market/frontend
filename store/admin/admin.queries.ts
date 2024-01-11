@@ -109,19 +109,26 @@ export const GET_PRODUCT = /* GraphQL */ `
     product(id: $id) {
       id
       productTitle
-
       options {
         price
         discountedPrice
         size
       }
       image {
+        id
         imageUrl
       }
-
       sales {
+        id
         amount
         date
+      }
+      productRating {
+        review
+        comment {
+          id
+          review
+        }
       }
       user {
         id
@@ -135,4 +142,92 @@ export const GET_PRODUCT = /* GraphQL */ `
       }
     }
   }
+`;
+
+export const GET_REVIEWS = /* GraphQL */ `
+  query getSellerReview($page: Int, $pageSize: Int, $token: String!, $sortBy: String) {
+    getSellerReview(page: $page, pageSize: $pageSize, token: $token, sortBy: $sortBy) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {    
+        id
+        rating
+        review
+        likes
+        user {
+          id
+          firstName
+          lastName
+        }
+      }
+    }
+  }
+`;
+
+export const CATEGORIES = /* GraphQL */ `
+  query categories($search: String) {
+    categories(search: $search) {
+      id
+      name
+      icon
+      visibility
+      category {
+        id 
+      }
+    }
+  }
+`;
+
+export const DELETE_CATEGORY = /* GraphQL */ `
+  mutation deleteCategory($id: String!) {
+    deleteCategory(id: $id) {
+      message
+      status
+    }
+  }
+`;
+
+export const UPDATE_CATEGORY = /* GraphQL */ `
+  mutation updateCategory($id: String!, $name: String!, $parent: String, $publishDate: Date, $visibility: String) {
+    updateCategory(id: $id, name: $name, parent: $parent, publishDate: $publishDate, visibility: $visibility) {
+      message
+      status
+    }
+  }
+`;
+
+export const CREATE_CATEGORY = /* GraphQL */ `
+  mutation addCategory($name: String!, $parent: String, $publishDate: Date, $visibility: String) {
+    addCategory(name: $name, parent: $parent, publishDate: $publishDate, visibility: $visibility) {
+      message
+      status
+    }
+  }
+`;
+
+
+export const GET_SELLERS = /* GraphQL */ `
+  query getSellers($token: String!, $seller: Boolean, $active: Boolean, $redFlagged: Boolean, $page: Int, $pageSize: Int) {
+    getUserType(token: $token, seller: $seller, active: $active, redFlagged: $redFlagged, page: $page, pageSize: $pageSize) {
+    page
+    pages
+    hasNext
+    hasPrev
+    objects {
+      id
+      firstName
+      lastName
+      fullName
+      email
+      sellerprofileSet {
+        id
+        state
+        city
+        lga
+      }
+    }
+  }
+}
 `;

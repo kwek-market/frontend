@@ -1,12 +1,23 @@
+import { useGetReviews } from "@/hooks/admin/review";
+import { RootState } from "@/store/rootReducer";
 import Image from "next/image";
 import React from "react";
+import { useSelector } from "react-redux";
 
-const Reviews = () => {
+const Reviews = ({ reviews }) => {
+  const { user: { token }} = useSelector((state: RootState) => state);
+  const { data, isFetching } = useGetReviews({
+    page: 1,
+    pageSize: 10,
+    token: token,
+    sortBy: "",
+  });
+
+  console.log("data reviews: ", reviews);
+
   return (
     <div className=" tw-font-poppins">
-      {Array(3)
-        .fill(null)
-        .map(() => (
+      {reviews.map(() => (
           <div className=" tw-flex tw-gap-x-[10px] tw-pb-4 tw-border-b tw-border-b-review last:tw-border-none tw-pt-4 first:tw-pt-0">
             <div className=" tw-flex-shrink-0">
               <Image

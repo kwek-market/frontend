@@ -7,7 +7,6 @@ import {
   GET_TOTAL_REVENUE,
   GET_RECENT_TRANSACTIONS,
 } from "@/store/admin/admin.queries";
-import React from "react";
 import { useQuery } from "react-query";
 
 export type PayloadType = {

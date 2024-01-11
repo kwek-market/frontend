@@ -1,30 +1,60 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
-import SearchIcon from "@/components/icons/admin/search";
+import Load from "@/components/Loader/Loader";
 import AdminTable from "@/components/table";
+import {
+  useDeleteCategory,
+  useGetAdminCategories,
+  useUpdateCategory,
+} from "@/hooks/admin/category";
 import { AdminLayout } from "@/layouts";
+import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Dropdown, Menu } from "antd";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CategoryList = () => {
-  const menu = (
+  const [search, setSearch] = useState("");
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+
+  const { data: categoryData, isFetching } = useGetAdminCategories({
+    search: search,
+    token: token,
+  });
+  const { mutate: deleteMut } = useDeleteCategory();
+
+  function deleteCategory(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string,
+  ) {
+    e.preventDefault();
+    console.log("delete category: ", id);
+    deleteMut({ id: id, token: token });
+  }
+
+  const menu = (id: string) => (
     <Menu>
       <Menu.Item>
         <Link
           href={{
-            pathname: "/admin/categories/edit-category/chicken",
+            pathname: `/admin/categories/edit-category/${id}`,
           }}
         >
           <a>Edit</a>
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <button>Delete</button>
+        <button type="button" onClick={(e) => deleteCategory(e, id)}>
+          Delete
+        </button>
       </Menu.Item>
     </Menu>
   );
+
   const columns = [
     {
       title: "Category Name",
@@ -55,11 +85,11 @@ const CategoryList = () => {
       ),
     },
     {
-      title: "",
+      title: "Actions",
       key: "action",
-      render: () => (
+      render: ({ key }) => (
         <span className=" tw-cursor-pointer">
-          <Dropdown overlay={menu} placement="bottomCenter" arrow>
+          <Dropdown overlay={menu(key)} placement="bottomCenter" arrow>
             <DotsVerticalIcon className="tw-h-5 tw-w-5" />
           </Dropdown>
         </span>
@@ -67,38 +97,50 @@ const CategoryList = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      category_name: "Fashion",
-      items: 237,
-      visibility: { visibility: "Visible" },
+  const data = categoryData?.categories?.map(
+    (category: {
+      id: string;
+      name: string;
+      category: any[];
+      visibility: string;
+    }) => {
+      return {
+        key: category.id,
+        category_name: category.name,
+        items: category.category.length,
+        visibility: { visibility: category.visibility },
+      };
     },
-    {
-      key: "2",
-      category_name: "Fashion",
-      items: 237,
-      visibility: { visibility: "Hidden" },
-    },
-    {
-      key: "3",
-      category_name: "Fashion",
-      items: 237,
-      visibility: { visibility: "scheduled", date: "13/03/2021" },
-    },
-    {
-      key: "4",
-      category_name: "Fashion",
-      items: 237,
-      visibility: { visibility: "Hidden" },
-    },
-    {
-      key: "5",
-      category_name: "Fashion",
-      items: 237,
-      visibility: { visibility: "scheduled", date: "13/03/2021" },
-    },
-  ];
+  );
+
+  if (isFetching) {
+    return (
+      <AdminLayout>
+        <BreadCrumbs
+          items={[
+            { name: "Dashboard", path: "/admin/dashboard" },
+            {
+              name: "Manage Categories",
+              path: "/admin/categories/category-list",
+            },
+            { name: "Category List", path: "/admin/categories/category-list" },
+          ]}
+          header="Category List"
+          buttonPath="/admin/categories/add-category"
+          buttonText="New Category"
+        />
+
+        <div className="tw-mt-16">
+          <Search
+            placeholder="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <Load />
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -117,7 +159,11 @@ const CategoryList = () => {
       />
 
       <div className="tw-mt-16">
-        <Search placeholder="Search" />
+        <Search
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
       <div className=" tw-pt-4">
         <AdminTable data={data} columns={columns} />
