@@ -124,9 +124,9 @@ const Dashboard = () => {
 
   return (
     <AdminLayout>
-      <div className=" tw-font-poppins tw-flex tw-justify-between">
+      <div className=" tw-font-poppins tw-flex tw-justify-between md:tw-flex-row tw-flex-col">
         <h1 className=" tw-text-[2rem] tw-font-bold tw-mb-0">Dashboard</h1>
-        <div className=" tw-flex tw-gap-x-4">
+        <div className=" tw-flex tw-gap-3 md:tw-gap-x-4 sm:tw-flex-row tw-flex-col">
           <div>
             <select
               value={currentMonth}
@@ -145,7 +145,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className=" tw-grid tw-grid-cols-3 tw-gap-x-8 tw-mt-10">
+      <div className=" tw-grid tw-grid-cols-1 md:tw-grid-cols-3 md:tw-gap-x-8 tw-gap-3 tw-mt-10">
         <Card
           text={"TOTAL ORDERS"}
           subText={totalOrders?.getTotalOrders?.totalOrders}
@@ -183,7 +183,7 @@ const Dashboard = () => {
           }
         />
       </div>
-      <div className=" tw-flex  tw-pt-8 tw-gap-x-8 tw-font-poppins">
+      <div className=" tw-flex tw-flex-col md:tw-flex-row  tw-pt-8 md:tw-gap-x-8 tw-gap-3 tw-font-poppins">
         <div className=" tw-flex-[10] tw-rounded-[3px] tw-border tw-border-black-kwek100 tw-border-opacity-10 tw-p-10 tw-font-poppins">
           <h2 className="tw-mb-0 tw-tracking-[1px] tw-text-lg tw-text-black-kwek100">
             Total Revenue

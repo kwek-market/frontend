@@ -1,24 +1,19 @@
-import { useGetReviews } from "@/hooks/admin/review";
-import { RootState } from "@/store/rootReducer";
+import Load from "@/components/Loader/Loader";
+import moment from "moment";
 import Image from "next/image";
 import React from "react";
-import { useSelector } from "react-redux";
 
-const Reviews = ({ reviews }) => {
-  const { user: { token }} = useSelector((state: RootState) => state);
-  const { data, isFetching } = useGetReviews({
-    page: 1,
-    pageSize: 10,
-    token: token,
-    sortBy: "",
-  });
-
-  console.log("data reviews: ", reviews);
-
+const Reviews = ({ getProductReviews }: { getProductReviews: any }) => {
   return (
     <div className=" tw-font-poppins">
-      {reviews.map(() => (
-          <div className=" tw-flex tw-gap-x-[10px] tw-pb-4 tw-border-b tw-border-b-review last:tw-border-none tw-pt-4 first:tw-pt-0">
+      {getProductReviews?.isFetching ? (
+        <Load />
+      ) : (
+        getProductReviews?.data?.reviews?.objects?.map((review: any) => (
+          <div
+            key={review.id}
+            className=" tw-flex tw-gap-x-[10px] tw-pb-4 tw-border-b tw-border-b-review last:tw-border-none tw-pt-4 first:tw-pt-0"
+          >
             <div className=" tw-flex-shrink-0">
               <Image
                 src={"/images/pp.png"}
@@ -29,22 +24,21 @@ const Reviews = ({ reviews }) => {
               />
             </div>
             <div>
-              <p className="tw-mb-0 tw-font-semibold ">James Afuye</p>
+              <p className="tw-mb-0 tw-font-semibold ">
+                {review?.user?.fullName}
+              </p>
               <p className="tw-mb-0 tw-pt-[6px] tw-text-[#BFA5A3] tw-text-xs">
-                November 9, 2020 at 3:20 pm
+                {moment(new Date(review?.ratedAt)).format(
+                  "MMMM D, YYYY [at] h:mm a",
+                )}
               </p>
               <p className=" tw-pt-3 tw-text-[#574240] tw-font-light">
-                Sed pretium, ligula sollicitudin laoreet viverra, tortor libero
-                sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut
-                justo. Suspendisse potenti. Sed egestas, ante et vulputate
-                volutpat, eros pede semper est, vitae luctus metus libero eu
-                augue. Morbi purus libero, faucibus adipiscing, commodo quis,
-                avida id, est. Sed lectus. Praesent elementum hendrerit tortor.
-                Sed semper lorem at felis. Vestibulum volutpat.
+                {review.review}
               </p>
             </div>
           </div>
-        ))}
+        ))
+      )}
     </div>
   );
 };

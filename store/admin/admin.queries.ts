@@ -144,9 +144,19 @@ export const GET_PRODUCT = /* GraphQL */ `
   }
 `;
 
-export const GET_REVIEWS = /* GraphQL */ `
-  query getSellerReview($page: Int, $pageSize: Int, $token: String!, $sortBy: String) {
-    getSellerReview(page: $page, pageSize: $pageSize, token: $token, sortBy: $sortBy) {
+export const GET_PRODUCT_REVIEWS = /* GraphQL */ `
+  query reviews(
+    $page: Int
+    $pageSize: Int
+    $productId: String
+    $sortBy: String
+  ) {
+    reviews(
+      page: $page
+      pageSize: $pageSize
+      productId: $productId
+      sortBy: $sortBy
+    ) {
       page
       pages
       hasNext
@@ -161,12 +171,22 @@ export const GET_REVIEWS = /* GraphQL */ `
           firstName
           lastName
         }
+      objects {
+        id
+        rating
+        review
+        user {
+          fullName
+        }
+        likes
+        dislikes
+        ratedAt
       }
     }
   }
 `;
 
-export const CATEGORIES = /* GraphQL */ `
+export const GET_CATEGORIES = /* GraphQL */ `
   query categories($search: String) {
     categories(search: $search) {
       id
