@@ -108,7 +108,7 @@ const SidebarItems = () => {
   const [items, setItems] = useState(paths);
 
   return (
-    <div className=" tw-space-y-1">
+    <div className="tw-space-y-1">
       {items.map((item, index) =>
         item.options.length > 0 ? (
           <div
