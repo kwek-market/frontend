@@ -1,5 +1,5 @@
 import { userFetcherWithAuth } from "@/helpers";
-import { GET_REVIEWS } from "@/store/admin/admin.queries";
+import { GET_PRODUCT_REVIEWS } from "@/store/admin/admin.queries";
 import { useQuery } from "react-query";
 
 export type PayloadType = {
@@ -11,6 +11,6 @@ export type PayloadType = {
 
 export const useGetReviews = (payload: PayloadType) => {
   return useQuery(["review-admin", payload], () =>
-    userFetcherWithAuth(GET_REVIEWS, payload, payload.token),
+    userFetcherWithAuth(GET_PRODUCT_REVIEWS, payload, payload.token),
   );
 };

@@ -6,10 +6,12 @@ import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 const OrderList = () => {
   const router = useRouter();
+  const [search, useSearch] = useState("");
+  function onChange() {}
 
   const columns = [
     {
@@ -122,11 +124,15 @@ const OrderList = () => {
           phone="0812 345 6789"
         />
         <div className="tw-mt-6">
-          <Search placeholder="Search by order code" />
+          <Search
+            placeholder="Search by order code"
+            value={search}
+            onChange={onChange}
+          />
         </div>
 
         <div className=" tw-py-4">
-          <AdminTable data={data} columns={columns} />
+          <AdminTable data={data} columns={columns} pages={1} />
         </div>
       </div>
     </AdminLayout>

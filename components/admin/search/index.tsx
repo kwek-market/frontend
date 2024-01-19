@@ -3,8 +3,8 @@ import React from "react";
 
 type SearchProps = {
   placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Search = ({ placeholder, value, onChange }: SearchProps) => {
