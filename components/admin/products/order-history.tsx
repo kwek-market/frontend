@@ -123,7 +123,7 @@ const OrderHistory = () => {
   ];
   return (
     <div>
-      <AdminTable data={data} columns={columns} />
+      <AdminTable pages={3} data={data} columns={columns} />
     </div>
   );
 };

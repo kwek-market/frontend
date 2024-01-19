@@ -6,7 +6,7 @@ interface AdminTableProps {
   data: any[];
   select?: boolean;
   noPagination?: boolean;
-  pages: number;
+  pages?: number;
 }
 const AdminTable = ({
   columns,
