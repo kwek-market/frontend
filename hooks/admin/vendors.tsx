@@ -1,6 +1,7 @@
 import { userFetcherWithAuth } from "@/helpers";
 import { GET_SELLERS } from "@/store/admin/admin.queries";
-import { useQuery } from "react-query";
+import { COMPLETE_SELLER_VERIFICATION } from "@/store/seller/seller.queries";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 type SELLERSTYPE = {
   token: string;
@@ -17,6 +18,19 @@ export function useGetSellers(payload: SELLERSTYPE) {
     () => userFetcherWithAuth(GET_SELLERS, payload, payload.token),
     {
       keepPreviousData: true,
+    },
+  );
+}
+
+export function useCompleteSeller() {
+  return useMutation(
+    (payload: { id: string; token: string }) =>
+      userFetcherWithAuth(COMPLETE_SELLER_VERIFICATION, payload, payload.token),
+    {
+      onSuccess: () => {
+        const queryClient = useQueryClient();
+        queryClient.invalidateQueries("seller");
+      },
     },
   );
 }

@@ -1,11 +1,14 @@
 import { userFetcherWithAuth } from "@/helpers";
 import {
-  CATEGORIES,
   CREATE_CATEGORY,
   DELETE_CATEGORY,
+  GET_CATEGORIES,
   UPDATE_CATEGORY,
 } from "@/store/admin/admin.queries";
-import { CreateCategoryType, UpdateCategoryType } from "@/validations/createCategory";
+import {
+  CreateCategoryType,
+  UpdateCategoryType,
+} from "@/validations/createCategory";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 type SearchProps = {
@@ -23,7 +26,7 @@ type UpdatePayload = {
 
 export const useGetAdminCategories = (payload: SearchProps) => {
   return useQuery(["admin-categories", payload], () =>
-    userFetcherWithAuth(CATEGORIES, payload, payload.token),
+    userFetcherWithAuth(GET_CATEGORIES, payload, payload.token),
   );
 };
 
