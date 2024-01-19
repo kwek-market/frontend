@@ -88,21 +88,13 @@ const ProductDetail = () => {
               <div className=" tw-flex tw-gap-x-3">
                 Reviews
                 <span className=" tw-rounded-full tw-bg-[#009D19] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-text-white-100">
-<<<<<<< HEAD
-                 {data?.product?.productRating?.length} 
-=======
                   {getProductReviews?.data?.reviews?.objects?.length}
->>>>>>> 8d6bc11cadd1c7c6b3ddaa294db514016d2bbec9
                 </span>
               </div>
             }
             key="2"
           >
-<<<<<<< HEAD
-            <Reviews reviews={data?.product?.productRating} />
-=======
             <Reviews getProductReviews={getProductReviews} />
->>>>>>> 8d6bc11cadd1c7c6b3ddaa294db514016d2bbec9
           </TabPane>
         </Tabs>
       </div>

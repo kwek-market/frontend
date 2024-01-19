@@ -1,17 +1,13 @@
 import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
-import Load from "@/components/Loader/Loader";
 import AdminTable from "@/components/table";
-<<<<<<< HEAD
 import {
   useDeleteCategory,
   useGetAdminCategories,
   useUpdateCategory,
 } from "@/hooks/admin/category";
-=======
 import { useGetCategories } from "@/hooks/admin/categories";
->>>>>>> 8d6bc11cadd1c7c6b3ddaa294db514016d2bbec9
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
@@ -21,7 +17,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const CategoryList = () => {
-<<<<<<< HEAD
   const [search, setSearch] = useState("");
   const {
     user: { token },
@@ -42,21 +37,15 @@ const CategoryList = () => {
     deleteMut({ id: id, token: token });
   }
 
-=======
   const getCategories = useGetCategories({ search: "" });
 
   console.log(getCategories?.data);
->>>>>>> 8d6bc11cadd1c7c6b3ddaa294db514016d2bbec9
   const menu = (id: string) => (
     <Menu>
       <Menu.Item>
         <Link
           href={{
-<<<<<<< HEAD
             pathname: `/admin/categories/edit-category/${id}`,
-=======
-            pathname: "/admin/categories/edit-category/" + id,
->>>>>>> 8d6bc11cadd1c7c6b3ddaa294db514016d2bbec9
           }}
         >
           <a>Edit</a>
@@ -100,20 +89,11 @@ const CategoryList = () => {
       // ),
     },
     {
-<<<<<<< HEAD
       title: "Actions",
       key: "action",
       render: ({ key }) => (
         <span className=" tw-cursor-pointer">
           <Dropdown overlay={menu(key)} placement="bottomCenter" arrow>
-=======
-      title: "",
-      dataIndex: "id",
-      key: "action",
-      render: (id: string) => (
-        <span className=" tw-cursor-pointer">
-          <Dropdown overlay={menu(id)} placement="bottomCenter" arrow>
->>>>>>> 8d6bc11cadd1c7c6b3ddaa294db514016d2bbec9
             <DotsVerticalIcon className="tw-h-5 tw-w-5" />
           </Dropdown>
         </span>
@@ -197,6 +177,7 @@ const CategoryList = () => {
           <AdminTable
             data={getCategories?.data?.categories || []}
             columns={columns}
+            pages={1}
           />
         </div>
       )}
