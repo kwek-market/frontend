@@ -162,8 +162,7 @@ const Customer = () => {
               <AdminTable
                 data={data.slice(0, 4)}
                 columns={columns}
-                noPagination
-                pages={1}
+                pages={[1]}
               />
             </TabPane>
           </Tabs>

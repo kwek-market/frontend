@@ -81,6 +81,10 @@ export const GET_RECENT_TRANSACTIONS = /* GraphQL */ `
 export const GET_PRODUCTS = /* GraphQL */ `
   query products($page: Int, $pageSize: Int) {
     products(page: $page, pageSize: $pageSize) {
+      page
+      pages
+      hasNext
+      hasPrev
       objects {
         id
         productTitle
@@ -194,7 +198,7 @@ export const GET_CATEGORIES = /* GraphQL */ `
       icon
       visibility
       category {
-        id 
+        id
       }
     }
   }
@@ -210,8 +214,20 @@ export const DELETE_CATEGORY = /* GraphQL */ `
 `;
 
 export const UPDATE_CATEGORY = /* GraphQL */ `
-  mutation updateCategory($id: String!, $name: String!, $parent: String, $publishDate: Date, $visibility: String) {
-    updateCategory(id: $id, name: $name, parent: $parent, publishDate: $publishDate, visibility: $visibility) {
+  mutation updateCategory(
+    $id: String!
+    $name: String!
+    $parent: String
+    $publishDate: Date
+    $visibility: String
+  ) {
+    updateCategory(
+      id: $id
+      name: $name
+      parent: $parent
+      publishDate: $publishDate
+      visibility: $visibility
+    ) {
       message
       status
     }
@@ -219,36 +235,58 @@ export const UPDATE_CATEGORY = /* GraphQL */ `
 `;
 
 export const CREATE_CATEGORY = /* GraphQL */ `
-  mutation addCategory($name: String!, $parent: String, $publishDate: Date, $visibility: String) {
-    addCategory(name: $name, parent: $parent, publishDate: $publishDate, visibility: $visibility) {
+  mutation addCategory(
+    $name: String!
+    $parent: String
+    $publishDate: Date
+    $visibility: String
+  ) {
+    addCategory(
+      name: $name
+      parent: $parent
+      publishDate: $publishDate
+      visibility: $visibility
+    ) {
       message
       status
     }
   }
 `;
 
-
 export const GET_SELLERS = /* GraphQL */ `
-  query getSellers($token: String!, $seller: Boolean, $active: Boolean, $redFlagged: Boolean, $page: Int, $pageSize: Int) {
-    getUserType(token: $token, seller: $seller, active: $active, redFlagged: $redFlagged, page: $page, pageSize: $pageSize) {
-    page
-    pages
-    hasNext
-    hasPrev
-    objects {
-      id
-      firstName
-      lastName
-      fullName
-      email
-      sellerprofileSet {
+  query getSellers(
+    $token: String!
+    $seller: Boolean
+    $active: Boolean
+    $redFlagged: Boolean
+    $page: Int
+    $pageSize: Int
+  ) {
+    getUserType(
+      token: $token
+      seller: $seller
+      active: $active
+      redFlagged: $redFlagged
+      page: $page
+      pageSize: $pageSize
+    ) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
         id
-        state
-        city
-        lga
+        firstName
+        lastName
+        fullName
+        email
+        sellerprofileSet {
+          id
+          state
+          city
+          lga
+        }
       }
     }
   }
-}
 `;
-
