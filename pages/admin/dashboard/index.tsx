@@ -105,7 +105,7 @@ const Dashboard = () => {
       token,
     });
 
-  console.log("totalRevenue", totalRevenue)
+  console.log("totalRevenue", totalRevenue);
 
   const { data: recentTransactions, isFetching: isFetchingRecentTransactions } =
     useGetRecentTransactions({
@@ -117,9 +117,11 @@ const Dashboard = () => {
   console.log(
     totalSales,
     averageOrderValue,
-    "active customers: ", totalActiveCustomers,
+    "active customers: ",
+    totalActiveCustomers,
     totalRevenue,
-    "recent Transactions: ", recentTransactions
+    "recent Transactions: ",
+    recentTransactions,
   );
 
   return (
@@ -199,8 +201,8 @@ const Dashboard = () => {
                   (prev, curr) => {
                     return totalRevenue?.getTotalRevenue[curr] + prev;
                   },
-                  0
-                )
+                  0,
+                ),
               ).toLocaleString()
             )}
           </p>
@@ -210,7 +212,7 @@ const Dashboard = () => {
             ) : (
               <DashboardChart
                 data={Object?.keys(totalRevenue?.getTotalRevenue ?? []).map(
-                  (item) => totalRevenue?.getTotalRevenue[item]
+                  (item) => totalRevenue?.getTotalRevenue[item],
                 )}
               />
             )}
@@ -232,9 +234,12 @@ const Dashboard = () => {
             Recent Transactions
           </p>
           <div className=" tw-space-y-4 tw-pt-4">
-            {Array(5)
-              .fill(null)
-              .map(() => (
+            {isFetchingRecentTransactions ? (
+              <Load />
+            ) : recentTransactions?.objects?.length === 0 ? (
+              <p>No recent transactions</p>
+            ) : (
+              recentTransactions?.objects?.map((data) => (
                 <div className=" tw-flex tw-gap-x-3 tw-items-center">
                   <div className=" flex-[1]">
                     <Image
@@ -248,17 +253,18 @@ const Dashboard = () => {
                   <div className=" tw-flex-[9]">
                     <div className=" tw-flex tw-justify-between">
                       <span className=" tw-font-semibold tw-text-sm">
-                        Henry Eze
+                        {data.user.fullName}
                       </span>
-                      <span className=" tw-text-sm">N 18,119</span>
+                      <span className=" tw-text-sm">N {data.orderPrice}</span>
                     </div>
                     <div className=" tw-text-sm tw-text-[#1D1616] tw-text-opacity-40 tw-flex tw-justify-between tw-pt-1">
-                      <span>eze3271@gmail.com</span>
-                      <span>Lagos</span>
+                      <span>{data.user.email}</span>
+                      <span>{data.pickup.state}</span>
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+            )}
           </div>
 
           <Link href="/admin/customers">
