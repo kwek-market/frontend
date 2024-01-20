@@ -1,5 +1,5 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
-import { AdminLayout } from "@/layouts";
+import AdminLayout from "@/layouts/adminLayout/adminLayout";
 import React from "react";
 import AdminTable from "@/components/table";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
@@ -116,6 +116,7 @@ const Products = () => {
               key: indx,
             }))}
             columns={columns}
+            pages={1}
           />
         </div>
       )}

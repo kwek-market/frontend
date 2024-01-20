@@ -12,10 +12,10 @@ const ArrowDownIcon = () => {
       <path
         d="M13.5 1.5L7.5 7.5L1.5 1.5"
         stroke="black"
-        stroke-width="2"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
