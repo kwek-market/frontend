@@ -1,7 +1,9 @@
 import { userFetcherWithAuth } from "@/helpers";
 import { GET_SELLERS } from "@/store/admin/admin.queries";
+import { RootState } from "@/store/rootReducer";
 import { COMPLETE_SELLER_VERIFICATION } from "@/store/seller/seller.queries";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
 
 type SELLERSTYPE = {
   token: string;
@@ -23,9 +25,12 @@ export function useGetSellers(payload: SELLERSTYPE) {
 }
 
 export function useCompleteSeller() {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
   return useMutation(
-    (payload: { id: string; token: string }) =>
-      userFetcherWithAuth(COMPLETE_SELLER_VERIFICATION, payload, payload.token),
+    (payload: { email: string; isVerified: boolean }) =>
+      userFetcherWithAuth(COMPLETE_SELLER_VERIFICATION, payload, token),
     {
       onSuccess: () => {
         const queryClient = useQueryClient();

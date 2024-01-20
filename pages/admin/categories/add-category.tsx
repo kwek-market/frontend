@@ -4,6 +4,7 @@ import UploadToCloud from "@/components/icons/admin/upload-to-cloud";
 import {
   InputField,
   RadioField,
+  SelectField,
   TextField,
 } from "@/components/input/textInput";
 import { useCreateCategory } from "@/hooks/admin/category";
@@ -18,26 +19,26 @@ const AddCategory = () => {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
+
+  const [name, setName] = useState("");
+  const [publishedDate, setPublishedDate] = useState("");
+  const [parent, setParent] = useState("");
   const [visibility, setVisibility] = useState("");
+
   const handleRadio = (value: React.SetStateAction<string>) => {
     setVisibility(value);
   };
-
-  const [name, setName] = useState("");
-  const [visibilityCat, setVisibilityCat] = useState("");
-  const [publishedDate, setPublishedDate] = useState("");
-  const [parent, setParent] = useState("");
 
   const { mutate: createMut } = useCreateCategory(token);
 
   async function publish(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
-    console.log("form values: ", name, visibilityCat, publishedDate, parent);
+    console.log("form values: ", name, visibility, publishedDate, parent);
 
     const parsed = await CreateCategorySchema.safeParseAsync({
       name,
-      visibility: visibilityCat,
+      visibility,
       publishedDate,
       parent,
     });
@@ -75,35 +76,26 @@ const AddCategory = () => {
       <form className=" tw-pt-2 tw-font-poppins">
         <FormHead>Basic Information</FormHead>
         <FormItems>
-          <InputField label="Name" placeholder="e.g Fashion" />
-          <div>
-            <label className=" tw-font-medium ">Slug</label>
-            <div className="tw-flex tw-mt-1">
-              <div className=" tw-bg-[#F2F5F9] tw-p-4 tw-text-[#81909D]">
-                https://kwekmarket.com/catalog/
-              </div>
-              <input className=" tw-w-full tw-border tw-border-l-0 tw-border-[#D7DCE0] tw-rounded-r tw-p-4 tw-outline-none" />
-            </div>
-          </div>
-          <TextField
-            label="Description"
-            placeholder="Type description here..."
+          <InputField
+            label="Name"
+            placeholder="e.g Fashion"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
+          <SelectField
+            id="parent"
+            label="Parent"
+            value={parent}
+            onChange={(e) => setParent(e.target.value)}
+          >
+            <option></option>
+          </SelectField>
         </FormItems>
 
         <FormHead>SubCategory</FormHead>
         <button className=" tw-py-[10px] tw-px-[14px] tw-rounded-[20px] tw-border tw-border-gray-kwek300a tw-w-max tw-mt-6">
           + Add Sub-Category
         </button>
-
-        <FormHead>Search Engine Optimization</FormHead>
-        <FormItems>
-          <InputField label="Page Title" />
-          <TextField
-            label="Meta Descripiton"
-            placeholder="Type description here..."
-          />
-        </FormItems>
 
         <FormHead>Visibility</FormHead>
         <FormItems>
@@ -122,18 +114,13 @@ const AddCategory = () => {
             checked={visibility == "hidden"}
             onChange={() => handleRadio("hidden")}
           />
-          <InputField label="Publish Date" type="date" />
+          <InputField
+            label="Publish Date"
+            type="date"
+            value={publishedDate}
+            onChange={(e) => setPublishedDate(e.target.value)}
+          />
         </FormItems>
-
-        <FormHead>Image</FormHead>
-        <div className="tw-bg-[#FFFBEF] tw-py-4 tw-mt-10 tw-w-[60vw]  lg:tw-w-[35vw]">
-          <div className=" tw-mx-auto tw-w-max tw-text-center">
-            <div className=" tw-flex tw-justify-center">
-              <UploadToCloud />
-            </div>
-            <p className="tw-mb-0">Click here to upload image</p>
-          </div>
-        </div>
 
         <button
           className="  tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-16"
