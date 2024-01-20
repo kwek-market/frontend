@@ -30,7 +30,7 @@ const CategoryList = () => {
 
   function deleteCategory(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: string,
+    id: string
   ) {
     e.preventDefault();
     console.log("delete category: ", id);
@@ -114,7 +114,7 @@ const CategoryList = () => {
         items: category.category.length,
         visibility: { visibility: category.visibility },
       };
-    },
+    }
   );
 
   if (isFetching) {
@@ -177,7 +177,7 @@ const CategoryList = () => {
           <AdminTable
             data={getCategories?.data?.categories || []}
             columns={columns}
-            pages={1}
+            pages={[1]}
           />
         </div>
       )}

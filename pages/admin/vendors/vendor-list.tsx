@@ -6,18 +6,13 @@ import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import React, { useState } from "react";
+import { reduceCharacterLength } from "@/helpers/helper";
 
 const Vendors = () => {
   const [activeKey, setActiveKey] = useState("1");
   const [searchValue, setSearchValue] = useState("");
   const { TabPane } = Tabs;
   const maxNameLength = 14;
-
-  const reduceCharacterLength = (text: string, lenght: number): string => {
-    return text.length > maxNameLength
-      ? `${text.slice(0, maxNameLength)}...`
-      : text;
-  };
 
   const columns = [
     {
@@ -190,7 +185,7 @@ const Vendors = () => {
           onTabClick={(key) => setActiveKey(key)}
         >
           <TabPane tab="Active Vendors" key="1">
-            <AdminTable pages={1} data={data} columns={columns} />
+            <AdminTable pages={[1]} data={data} columns={columns} />
           </TabPane>
           <TabPane tab="Red-flagged Vendors" key="2"></TabPane>
         </Tabs>

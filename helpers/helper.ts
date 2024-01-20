@@ -37,7 +37,8 @@ export async function getIp() {
   return myIp;
 }
 
-export const even = (index: number) => (index % 2 !== 0 ? "tw-bg-gray-kwek700" : "");
+export const even = (index: number) =>
+  index % 2 !== 0 ? "tw-bg-gray-kwek700" : "";
 
 export function updateClicks(productId: string, token: string, mutate: any) {
   mutate({ productId, token });
@@ -51,4 +52,29 @@ export function countdown(start: Date, end: Date) {
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
   return { days, hours, minutes, seconds };
+}
+
+export const reduceCharacterLength = (text: string, lenght: number): string => {
+  return text.length > lenght ? `${text.slice(0, lenght)}...` : text;
+};
+
+export function generatePagesArray(
+  length: number,
+  currentPage: number,
+  totalPages: number
+): number[] | null {
+  // Check if i is within the valid range
+  if (currentPage < 1 || currentPage > totalPages) {
+    console.error("Invalid value for i. It should be between 1 and m.");
+    return null;
+  }
+
+  // Calculate the minimum and maximum values for the array elements
+  const min = Math.max(1, currentPage - Math.floor(length / 2));
+  const max = Math.min(totalPages, min + length - 1);
+
+  // Generate the array
+  const result = Array.from({ length: length }, (_, index) => min + index);
+
+  return result;
 }
