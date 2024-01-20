@@ -31,30 +31,32 @@ const Products = () => {
       title: "Vendor",
       dataIndex: "user",
       key: "user",
-      render: (user) => user?.fullName,
+      render: (user: Record<string, unknown>) => user?.fullName,
     },
     {
       title: "Unit Price",
       dataIndex: "options",
       key: "options",
-      render: (options) => `N${options[0]?.price}`,
+      render: (options: Array<Record<string, unknown>>) =>
+        `N${options[0]?.price}`,
     },
     {
       title: "Sold",
       key: "sales",
       dataIndex: "sales",
-      render: (sales) => sales?.length,
+      render: (sales: Record<string, unknown>) => sales?.length,
     },
     {
       title: "Date Uploaded",
       key: "dateCreated",
       dataIndex: "dateCreated",
-      render: (date) => moment(new Date(date)).format("MMM D, YYYY | h:MM A"),
+      render: (date: string) =>
+        moment(new Date(date)).format("MMM D, YYYY | h:MM A"),
     },
     {
       title: "",
       key: "action",
-      render: (text, record) => (
+      render: () => (
         <span>
           <DotsVerticalIcon className="tw-h-5 tw-w-5" />
         </span>
@@ -62,40 +64,6 @@ const Products = () => {
     },
   ];
 
-  const dataj = [
-    {
-      key: "1",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      vendor: "Coco's Body Beauty",
-      unit_price: "N13,000",
-      sold: 230,
-      date_uploaded: "Nov 12, 2021 | 9:53 AM",
-    },
-    {
-      key: "2",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      vendor: "Coco's Body Beauty",
-      unit_price: "N13,000",
-      sold: 230,
-      date_uploaded: "Nov 12, 2021 | 9:53 AM",
-    },
-    {
-      key: "3",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      vendor: "Coco's Body Beauty",
-      unit_price: "N13,000",
-      sold: 230,
-      date_uploaded: "Nov 12, 2021 | 9:53 AM",
-    },
-    {
-      key: "4",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      vendor: "Coco's Body Beauty",
-      unit_price: "N13,000",
-      sold: 230,
-      date_uploaded: "Nov 12, 2021 | 9:53 AM",
-    },
-  ];
   return (
     <AdminLayout>
       <BreadCrumbs
