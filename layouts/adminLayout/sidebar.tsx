@@ -28,7 +28,8 @@ const SideBarAdmin = ({ sidebarOpen, setSidebarOpen }) => {
           />
         </div>
 
-        <div className=" tw-pt-20 tw-overflow-y-scroll tw-h-[80vh] ">
+        <div className=" tw-pt-20 tw-h-[80vh] ">
+          {/* tw-overflow-y-scroll causing a white line on the sidebar removed for now. */}
           <SidebarItems />
         </div>
         {/* {sidebarOpen ? (
