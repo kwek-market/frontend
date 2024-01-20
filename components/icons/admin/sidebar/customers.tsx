@@ -9,7 +9,7 @@ const CustomersIcon = ({ fill }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_7374_12832)">
+      <g clipPath="url(#clip0_7374_12832)">
         <path
           d="M11.5 12C13.433 12 15 10.433 15 8.5C15 6.567 13.433 5 11.5 5C9.567 5 8 6.567 8 8.5C8 10.433 9.567 12 11.5 12Z"
           fill={fill}

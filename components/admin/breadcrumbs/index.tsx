@@ -34,12 +34,15 @@ const BreadCrumbs = ({
       </div>
       {header ? (
         <div className=" tw-flex tw-justify-between tw-pt-6 tw-items-center">
-          <h1 className=" tw-text-[2rem] tw-font-bold tw-mb-0 ">{header}</h1>
+          <h1 className="tw-text-[1.5rem] md:tw-text-[2rem] tw-font-bold tw-mb-0 ">
+            {header}
+          </h1>
           {buttonText ? (
             <Link href={buttonPath}>
               <a>
                 <button
-                  className="  tw-font-semibold tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
+                  // className="md:tw-font-semibold tw-font-extralight  tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
+                  className="tw-font-semibold tw-py-1 tw-px-3  md:tw-py-2 md:tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
                   type="button"
                 >
                   {buttonText}
