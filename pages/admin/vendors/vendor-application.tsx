@@ -109,7 +109,7 @@ const VendorApplications = () => {
           state: null,
         };
       }),
-    [getVendorsData],
+    [getVendorsData]
   );
 
   if (data === null) {
@@ -166,7 +166,7 @@ const VendorApplications = () => {
             <AdminTable
               data={data}
               columns={columns}
-              pages={getVendorsData?.getUserType?.pages}
+              numberOfPages={getVendorsData?.getUserType?.pages}
             />
           </TabPane>
           <TabPane tab="Declined Applications" key="2"></TabPane>
