@@ -153,7 +153,7 @@ const Customers = () => {
           onTabClick={(key) => setActiveKey(key)}
         >
           <TabPane tab="Active" key="1">
-            <AdminTable data={data} columns={columns} pages={[1]} />
+            <AdminTable data={data} columns={columns} />
           </TabPane>
           <TabPane tab="Inactive" key="2"></TabPane>
         </Tabs>

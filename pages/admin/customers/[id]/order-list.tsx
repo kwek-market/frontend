@@ -132,7 +132,7 @@ const OrderList = () => {
         </div>
 
         <div className=" tw-py-4">
-          <AdminTable data={data} columns={columns} pages={[1]} />
+          <AdminTable data={data} columns={columns} />
         </div>
       </div>
     </AdminLayout>
