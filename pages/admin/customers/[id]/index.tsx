@@ -159,11 +159,7 @@ const Customer = () => {
             onTabClick={(key) => setActiveKey(key)}
           >
             <TabPane tab="Order History" key="1">
-              <AdminTable
-                data={data.slice(0, 4)}
-                columns={columns}
-                pages={[1]}
-              />
+              <AdminTable data={data.slice(0, 4)} columns={columns} />
             </TabPane>
           </Tabs>
         </div>
