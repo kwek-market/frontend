@@ -177,7 +177,6 @@ const CategoryList = () => {
           <AdminTable
             data={getCategories?.data?.categories || []}
             columns={columns}
-            pages={[1]}
           />
         </div>
       )}

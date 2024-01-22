@@ -10,17 +10,17 @@ import moment from "moment";
 import { generatePagesArray, reduceCharacterLength } from "@/helpers/helper";
 import { ProductType } from "@/interfaces/commonTypes";
 import { QueryClient } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
+import { search as searchData } from "@/store/search/search.action";
+import { GetProducts } from "@/store/product/product.queries";
 
 const Products = () => {
   const queryClient = new QueryClient();
+  const { search } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(1);
-
-  const requestData = {
-    page: page,
-    pageSize: 10,
-  };
 
   const { data, isFetching } = useGetProducts({
     page: page,
@@ -39,14 +39,28 @@ const Products = () => {
   };
 
   useEffect(() => {
-    queryClient.invalidateQueries([
-      "products-admin",
-      {
-        page: page,
-        pageSize: 10,
-      },
-    ]);
-  }, [page]);
+    if (!search.searched) {
+      queryClient.invalidateQueries([
+        "products-admin",
+        {
+          page: page,
+          pageSize: 10,
+        },
+      ]);
+    } else {
+      if (search.data == null) {
+        setPage(1);
+      }
+
+      dispatch(
+        searchData(GetProducts, {
+          search: search.search,
+          page: page,
+          pageSize: 10,
+        })
+      );
+    }
+  }, [page, search.searched as boolean, search.search as string]);
 
   const maxTextLength = 25;
 
@@ -110,15 +124,21 @@ const Products = () => {
         ]}
         header="Product"
       />
-      {isFetching ? (
+      {isFetching || search.loading ? (
         <Load />
       ) : (
         <div className=" tw-pt-7">
           <AdminTable
             select
-            pages={generatePagesArray(5, page, data?.products?.pages)}
-            numberOfPages={data?.products?.pages as number}
-            data={data?.products?.objects?.map((item, indx) => ({
+            numberOfPages={
+              search.searched
+                ? search?.data?.products?.pages
+                : (data?.products?.pages as number)
+            }
+            data={(search.searched
+              ? search?.data?.products?.objects
+              : data?.products?.objects
+            )?.map((item, indx) => ({
               ...item,
               key: indx,
             }))}

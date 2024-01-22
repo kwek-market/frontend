@@ -74,7 +74,15 @@ export function generatePagesArray(
   const max = Math.min(totalPages, min + length - 1);
 
   // Generate the array
-  const result = Array.from({ length: length }, (_, index) => min + index);
+  const result = Array.from({ length: length }, (_, index) => {
+    const v = min + index;
+    if (v <= max) {
+      return v;
+    }
+    return;
+  });
 
-  return result;
+  console.log("pages Array", result);
+
+  return result.filter((value, i) => value != undefined);
 }

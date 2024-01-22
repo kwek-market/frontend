@@ -185,7 +185,7 @@ const Vendors = () => {
           onTabClick={(key) => setActiveKey(key)}
         >
           <TabPane tab="Active Vendors" key="1">
-            <AdminTable pages={[1]} data={data} columns={columns} />
+            <AdminTable data={data} columns={columns} />
           </TabPane>
           <TabPane tab="Red-flagged Vendors" key="2"></TabPane>
         </Tabs>
