@@ -82,7 +82,5 @@ export function generatePagesArray(
     return;
   });
 
-  console.log("pages Array", result);
-
   return result.filter((value, i) => value != undefined);
 }

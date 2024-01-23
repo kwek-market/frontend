@@ -7,8 +7,7 @@ import Link from "next/link";
 import { useGetProducts } from "@/hooks/admin/products";
 import Load from "@/components/Loader/Loader";
 import moment from "moment";
-import { generatePagesArray, reduceCharacterLength } from "@/helpers/helper";
-import { ProductType } from "@/interfaces/commonTypes";
+import { reduceCharacterLength } from "@/helpers/helper";
 import { QueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
@@ -122,7 +121,7 @@ const Products = () => {
           { name: "Dashboard", path: "/admin/dashboard" },
           { name: "Products", path: "/admin/products" },
         ]}
-        header="Product"
+        header="Products"
       />
       {isFetching || search.loading ? (
         <Load />

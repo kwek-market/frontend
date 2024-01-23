@@ -165,21 +165,14 @@ export const GET_PRODUCT_REVIEWS = /* GraphQL */ `
       pages
       hasNext
       hasPrev
-      objects {    
-        id
-        rating
-        review
-        likes
-        user {
-          id
-          firstName
-          lastName
-        }
       objects {
         id
         rating
         review
         user {
+          id
+          firstName
+          lastName
           fullName
         }
         likes
