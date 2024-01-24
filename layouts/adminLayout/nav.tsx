@@ -24,15 +24,6 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
       cancelable: true,
     });
     elementRef.current?.dispatchEvent(event);
-    if (!elementRef.current?.classList.contains("tw-border-[1px]")) {
-      elementRef.current?.classList.add("tw-border-[1px]");
-    }
-    if (!elementRef.current?.classList.contains("tw-rounded-lg")) {
-      elementRef.current?.classList.add("tw-rounded-lg");
-    }
-    if (!elementRef.current?.classList.contains("tw-border-[#1D1616]")) {
-      elementRef.current?.classList.add("tw-border-[#1D1616]");
-    }
   }, []);
 
   const [search, setSearch] = useState(searchState.search);
@@ -41,11 +32,26 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
     const searchInput = document.querySelector(".searchInput");
     if (searchInput) {
       setTimeout(() => {
-        if (searchInput.classList.contains("tw-hidden")) {
-          searchInput.classList.remove("tw-hidden");
-        }
-        if (!searchInput.classList.contains("tw-flex")) {
-          searchInput.classList.add("tw-flex");
+        const classes = [
+          ["add", searchInput, "tw-flex"],
+          ["remove", searchInput, "tw-hidden"],
+          ["add", elementRef.current, "tw-border-[1px]"],
+          ["add", elementRef.current, "tw-rounded-lg"],
+          ["add", elementRef.current, "tw-border-[#1D1616]"],
+        ];
+
+        for (let i = 0; i < classes.length; i++) {
+          let element = classes[i][1] as Element | HTMLDivElement;
+          const cls = classes[i][2] as string;
+          if (classes[i][0] === "add") {
+            if (!element.classList.contains(cls)) {
+              element.classList.add(cls);
+            }
+          } else {
+            if (element.classList.contains(cls)) {
+              element.classList.remove(cls);
+            }
+          }
         }
       }, 200);
     }
@@ -55,27 +61,30 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
     const searchInput = document.querySelector(".searchInput");
     if (searchInput && search == "") {
       setTimeout(() => {
-        if (searchInput.classList.contains("tw-flex")) {
-          searchInput.classList.remove("tw-flex");
-        }
-        if (!searchInput.classList.contains("tw-hidden")) {
-          searchInput.classList.add("tw-hidden");
-        }
+        const classes = [
+          ["remove", searchInput, "tw-flex"],
+          ["add", searchInput, "tw-hidden"],
+          ["remove", elementRef.current, "tw-border-[1px]"],
+          ["remove", elementRef.current, "tw-rounded-lg"],
+          ["remove", elementRef.current, "tw-border-[#1D1616]"],
+        ];
 
-        if (elementRef.current?.classList.contains("tw-border-[1px]")) {
-          elementRef.current?.classList.remove("tw-border-[1px]");
-        }
-        if (elementRef.current?.classList.contains("tw-rounded-lg")) {
-          elementRef.current?.classList.remove("tw-rounded-lg");
-        }
-        if (elementRef.current?.classList.contains("tw-border-[#1D1616]")) {
-          elementRef.current?.classList.remove("tw-border-[#1D1616]");
+        for (let i = 0; i < classes.length; i++) {
+          let element = classes[i][1] as Element | HTMLDivElement;
+          const cls = classes[i][2] as string;
+          if (classes[i][0] === "add") {
+            if (!element.classList.contains(cls)) {
+              element.classList.add(cls);
+            }
+          } else {
+            if (element.classList.contains(cls)) {
+              element.classList.remove(cls);
+            }
+          }
         }
       }, 200);
     }
   };
-
-  // dispatch(createProduct(submitDetails, user.token));
 
   useEffect(() => {
     if (search !== "") {
@@ -84,7 +93,6 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
       dispatch(setSearched(search, false));
     }
 
-    /////////////////////////////////////////////////////
     const delay = 1500; // Set your desired delay time
     let timeoutId;
 
@@ -116,7 +124,7 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="tw-flex tw-gap-x-6 lg:tw-gap-x-8 tw-items-center tw-w-max tw-justify-between lg:tw-justify-start">
           <div
             ref={elementRef}
-            className={`tw-flex hover:tw-border-[1px] hover:tw-rounded-lg hover:tw-border-[#1D1616] tw-items-center tw-gap-x-2 md:tw-gap-x-2 tw-py-1 tw-px-2 tw-transition-all tw-duration-300`}
+            className={`tw-flex tw-items-center tw-gap-x-2 md:tw-gap-x-2 tw-py-1 tw-px-2 tw-transition-all tw-duration-300`}
             onMouseEnter={handleSearchHover}
             onMouseLeave={handleSearchLeave}
           >

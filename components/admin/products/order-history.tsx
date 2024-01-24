@@ -1,8 +1,15 @@
 import AdminTable from "@/components/table";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { boolean } from "zod";
 
-const OrderHistory = () => {
+interface Prop {
+  isFetching?: boolean;
+  data?: any;
+}
+
+const OrderHistory = ({ isFetching }: Prop) => {
+  const [page, setPage] = useState(1);
   const columns = [
     {
       title: "Customer",
@@ -123,7 +130,7 @@ const OrderHistory = () => {
   ];
   return (
     <div>
-      <AdminTable data={data} columns={columns} />
+      <AdminTable data={data} page={page} columns={columns} numberOfPages={1} />
     </div>
   );
 };
