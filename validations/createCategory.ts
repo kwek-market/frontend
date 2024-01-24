@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const CreateCategorySchema = z.object({
+  icon: z.string().url(),
   name: z.string().min(3),
   parent: z.string().optional(),
   publishDate: z.date().optional(),

@@ -20,3 +20,4 @@ export const saveState = (state: RootState) => {
     throw new Error(`errors from localstorage.js -: ${err}`);
   }
 };
+

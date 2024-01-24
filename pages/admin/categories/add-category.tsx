@@ -1,6 +1,5 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import { FormHead, FormItems } from "@/components/admin/form";
-import UploadToCloud from "@/components/icons/admin/upload-to-cloud";
 import {
   InputField,
   RadioField,
@@ -20,6 +19,7 @@ const AddCategory = () => {
     user: { token },
   } = useSelector((state: RootState) => state);
 
+  const [icon, setIcon] = useState("");
   const [name, setName] = useState("");
   const [publishedDate, setPublishedDate] = useState("");
   const [parent, setParent] = useState("");
@@ -37,6 +37,7 @@ const AddCategory = () => {
     console.log("form values: ", name, visibility, publishedDate, parent);
 
     const parsed = await CreateCategorySchema.safeParseAsync({
+      icon,
       name,
       visibility,
       publishedDate,
