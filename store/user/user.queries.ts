@@ -36,10 +36,10 @@ export const LOGIN_USER = /* GraphQL */ `
         isVerified
         isSeller
         isSuperuser
-        sellerprofileSet {
+        sellerProfile {
           id
         }
-        orderSet {
+        order {
           orderId
         }
         productSet {
@@ -98,10 +98,10 @@ export const GET_USER = /* GraphQL */ `
       isVerified
       isSeller
       isSuperuser
-      sellerprofileSet {
+      sellerProfile {
         id
       }
-      orderSet {
+      order {
         orderId
       }
       productSet {

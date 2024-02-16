@@ -26,7 +26,7 @@ export const GetCart = /* GraphQL */ `
         productTitle
         color
         user {
-          sellerprofileSet {
+          sellerProfile {
             shopName
           }
         }

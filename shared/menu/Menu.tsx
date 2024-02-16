@@ -62,8 +62,8 @@ const Menu = function ({}) {
     myOrders: {
       icon: "fa-shopping-bag",
       title: "My Orders",
-      description: user.user?.orderSet?.length
-        ? `${user.user.orderSet.length} items ordered`
+      description: user.user?.order?.length
+        ? `${user.user.order.length} items ordered`
         : "No item ordered",
       link: "/profile/account",
     },

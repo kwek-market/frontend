@@ -40,7 +40,7 @@ export const CreateProduct = /* GraphQL */ `
           id
           username
           isSeller
-          sellerprofileSet {
+          sellerProfile {
             shopName
           }
         }
@@ -159,7 +159,7 @@ export const GetProducts = /* GraphQL */ `
           id
           username
           isSeller
-          sellerprofileSet {
+          sellerProfile {
             shopName
           }
         }
@@ -225,7 +225,7 @@ export const GetProduct = /* GraphQL */ `
         id
         username
         isSeller
-        sellerprofileSet {
+        sellerProfile {
           shopName
           storeBannerUrl
         }
