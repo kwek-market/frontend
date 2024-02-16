@@ -1,7 +1,6 @@
 import AdminTable from "@/components/table";
 import Image from "next/image";
 import React, { useState } from "react";
-import { boolean } from "zod";
 
 interface Prop {
   isFetching?: boolean;
@@ -20,11 +19,12 @@ const OrderHistory = ({ isFetching }: Prop) => {
           <Image
             src={image}
             alt="pp"
-            className="  tw-rounded-full tw-overflow-hidden"
+            className="tw-rounded-full tw-overflow-hidden tw-min-w-[24px]"
             height={24}
             width={24}
+            layout="fixed"
           />
-          {name}
+          <span className="tw-line-clamp-1">{name}</span>
         </div>
       ),
     },

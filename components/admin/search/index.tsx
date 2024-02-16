@@ -5,9 +5,10 @@ type SearchProps = {
   placeholder: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchFunc: (e: React.KeyboardEvent<HTMLInputElement>) => void
 };
 
-const Search = ({ placeholder, value, onChange }: SearchProps) => {
+const Search = ({ placeholder, value, onChange, searchFunc }: SearchProps) => {
   return (
     <div className=" tw-pr-4 tw-overflow-hidden tw-border tw-border-[#D7DCE0] tw-rounded tw-flex tw-items-center tw-w-max ">
       <input
@@ -16,8 +17,9 @@ const Search = ({ placeholder, value, onChange }: SearchProps) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onKeyPress={e => searchFunc(e)}
       />
-      <SearchIcon />
+      <SearchIcon/>
     </div>
   );
 };

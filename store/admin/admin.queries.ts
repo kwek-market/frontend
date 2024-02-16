@@ -137,7 +137,7 @@ export const GET_PRODUCT = /* GraphQL */ `
       user {
         id
         fullName
-        sellerprofileSet {
+        sellerProfile {
           shopName
         }
         storedetail {
@@ -273,7 +273,7 @@ export const GET_SELLERS = /* GraphQL */ `
         lastName
         fullName
         email
-        sellerprofileSet {
+        sellerProfile {
           id
           state
           city

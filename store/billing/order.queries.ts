@@ -12,6 +12,8 @@ query orders($token: String!) {
       ordered
     }
     deliveryStatus
+    dateCreated
+    paid
   }
 }
 `;

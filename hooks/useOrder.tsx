@@ -6,7 +6,7 @@ function useOrder(token: string, id: string) {
   return useQuery(
     "order",
     () => userFetcherWithAuth(GETORDER, { token, id }, token),
-    { staleTime: Infinity, cacheTime: 1000 * 60 * 20 }
+    { staleTime: Infinity, cacheTime: 1000 * 60 * 20, enabled: !!id }
   );
 }
 

@@ -186,7 +186,7 @@ export type ProductType = {
     id: string;
     username: string;
     isSeller: boolean;
-    sellerprofileSet: {
+    sellerProfile: {
       shopName: string;
       storeBannerUrl: string;
     }[];
