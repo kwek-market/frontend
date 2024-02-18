@@ -156,7 +156,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <p className={styles.productTitle}>{product.productTitle}</p>
         <div className={styles.product_subDesc}>
           <p className={styles.product_seller}>
-            Seller: <span>{product?.user?.sellerprofileSet[0]?.shopName}</span>
+            Seller: <span>{product?.user?.sellerProfile[0]?.shopName}</span>
           </p>
           <p className={styles.product_Code}>Product Code: {product?.id}</p>
         </div>
