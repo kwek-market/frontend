@@ -5,7 +5,7 @@ type SearchProps = {
   placeholder: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchFunc: (e: React.KeyboardEvent<HTMLInputElement>) => void
+  searchFunc?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 };
 
 const Search = ({ placeholder, value, onChange, searchFunc }: SearchProps) => {

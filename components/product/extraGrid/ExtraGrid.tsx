@@ -12,8 +12,8 @@ const ExtraGrid = function ({ product }: { product: ProductType }) {
       <div className={styles.extra_info}>
         <Image
           src={
-            product?.user?.sellerprofileSet[0]?.storeBannerUrl
-              ? product?.user?.sellerprofileSet[0]?.storeBannerUrl
+            product?.user?.sellerProfile[0]?.storeBannerUrl
+              ? product?.user?.sellerProfile[0]?.storeBannerUrl
               : "/images/store.png"
           }
           
@@ -22,7 +22,7 @@ const ExtraGrid = function ({ product }: { product: ProductType }) {
           className={styles.img}
         />
         <p>
-          Sold by <span>{product?.user?.sellerprofileSet[0]?.shopName}</span>
+          Sold by <span>{product?.user?.sellerProfile[0]?.shopName}</span>
         </p>
         <div className={styles.box_productRating}>
           <StarRatingComponent
