@@ -1,23 +1,54 @@
+import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import AdminTable from "@/components/table";
+import { useGetCustomers } from "@/hooks/useGetCustomers";
 import { AdminLayout } from "@/layouts";
+import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Customers = () => {
   const [activeKey, setActiveKey] = useState("1");
   const { TabPane } = Tabs;
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+
+  const { data: activeCustomerData, error: acError, isLoading: acLoading } = useGetCustomers({
+    token,
+    seller: false,
+    customer: true,
+    sellerIsRejected: false,
+    active: true,
+    redFlagged: false,
+    page: 1,
+    pageSize: 10,
+  })
+
+  const { data: inactiveCustomerData, error: icError, isLoading: icLoading } = useGetCustomers({
+    token,
+    seller: false,
+    customer: true,
+    sellerIsRejected: false,
+    active: false,
+    redFlagged: false,
+    page: 1,
+    pageSize: 10,
+  })
+
+  console.log("ac data: ", activeCustomerData)
 
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (name) => (
-        <Link href={"/admin/customers/" + name}>
-          <a className=" tw-text-black-kwek100">{name}</a>
+      render: (name: string, { key }) => (
+        <Link href={"/admin/customers/" + key}>
+          <a className=" tw-text-black-kwek100">{key}</a>
         </Link>
       ),
     },
@@ -57,80 +88,29 @@ const Customers = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
+  const data = useMemo(() => activeCustomerData?.getUserType?.objects?.map((d) => {
+    return {
+      key: d.id,
+      name: d.fullName,
+      email_address: d.email,
+      date_joined: new Intl.DateTimeFormat('en-US').format(new Date(d.dateJoined)),
+      country: d.billingSet.city,
+      state: d.billingSet.state,
       amount_spent: "N13,873.74",
-    },
-    {
-      key: "2",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
+    }
+  }), [activeCustomerData])
+
+  const inactiveData = useMemo(() => inactiveCustomerData?.getUserType?.objects?.map((d) => {
+    return {
+      key: d.id,
+      name: d.fullName,
+      email_address: d.email,
+      date_joined: new Intl.DateTimeFormat('en-US').format(new Date(d.dateJoined)),
+      country: d.billingSet.city,
+      state: d.billingSet.state,
       amount_spent: "N13,873.74",
-    },
-    {
-      key: "3",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_spent: "N13,873.74",
-    },
-    {
-      key: "4",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_spent: "N13,873.74",
-    },
-    {
-      key: "5",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_spent: "N13,873.74",
-    },
-    {
-      key: "6",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_spent: "N13,873.74",
-    },
-    {
-      key: "7",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_spent: "N13,873.74",
-    },
-    {
-      key: "8",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_spent: "N13,873.74",
-    },
-  ];
+    }
+  }), [inactiveCustomerData])
 
   return (
     <AdminLayout>
@@ -153,9 +133,15 @@ const Customers = () => {
           onTabClick={(key) => setActiveKey(key)}
         >
           <TabPane tab="Active" key="1">
-            <AdminTable data={data} columns={columns} />
+            {acLoading ? <Load /> :
+              <AdminTable data={data} columns={columns} />
+            }
           </TabPane>
-          <TabPane tab="Inactive" key="2"></TabPane>
+          <TabPane tab="Inactive" key="2">
+            {icLoading ? <Load /> :
+              <AdminTable data={inactiveData} columns={columns} />
+            }
+          </TabPane>
         </Tabs>
       </div>
     </AdminLayout>

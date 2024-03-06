@@ -6,7 +6,7 @@ import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -21,12 +21,23 @@ const VendorApplications = () => {
   const { data: getVendorsData, isFetching } = useGetSellers({
     token,
     seller: true,
-    active: true,
+    customer: false,
+    sellerIsRejected: false,
+    active: false,
     redFlagged: false,
     page,
     pageSize: 10,
   });
-  console.log(getVendorsData);
+  const { data: rejectedVendors, isLoading } = useGetSellers({
+    token,
+    seller: true,
+    sellerIsRejected: true,
+    active: false,
+    redFlagged: false,
+    page,
+    pageSize: 10
+  })
+  console.log("rejected vendors: ", rejectedVendors);
 
   const { mutate: acceptVendor } = useCompleteSeller();
 
@@ -99,47 +110,33 @@ const VendorApplications = () => {
 
   const data = useMemo(
     () =>
-      getVendorsData?.getUserType?.objects?.map(({ id, fullName, email }) => {
+      getVendorsData?.getUserType?.objects?.map(({ id, fullName, email, sellerProfile }) => {
         return {
           key: id,
           name: fullName,
           email_address: email,
           date_applied: "13/02/2023",
-          country: null,
-          state: null,
+          country: sellerProfile.lga ,
+          state: sellerProfile.state,
         };
       }),
     [getVendorsData]
   );
 
-  if (data === null) {
-    return (
-      <AdminLayout>
-        <BreadCrumbs
-          items={[
-            { name: "Dashboard", path: "/admin/dashboard" },
-            {
-              name: "Vendor Application",
-              path: "/admin/vendors/vendor-application",
-            },
-          ]}
-          header="Vendors Application"
-        />
-
-        <div className=" tw-pt-4 tw-font-poppins">
-          <Tabs
-            animated
-            tabBarStyle={{ borderColor: "red" }}
-            className="adminTab"
-            activeKey={activeKey}
-            onTabClick={(key) => setActiveKey(key)}
-          >
-            <Load />
-          </Tabs>
-        </div>
-      </AdminLayout>
-    );
-  }
+  const rejected = useMemo(
+    () => 
+      rejectedVendors?.getUserType?.objects?.map(({ id, fullName, email, sellerProfile }) => {
+        return {
+          key: id,
+          name: fullName,
+          email_address: email,
+          date_applied: "13/02/2023",
+          country: sellerProfile.lga ,
+          state: sellerProfile.state,
+        };
+      }),
+    [rejectedVendors]
+  )
 
   return (
     <AdminLayout>
@@ -163,13 +160,19 @@ const VendorApplications = () => {
           onTabClick={(key) => setActiveKey(key)}
         >
           <TabPane tab="New Applications" key="1">
-            <AdminTable
+            {data === null ? <Load /> : <AdminTable
               data={data}
               columns={columns}
               numberOfPages={getVendorsData?.getUserType?.pages}
+            />}
+          </TabPane>
+          <TabPane tab="Declined Applications" key="2">
+            <AdminTable
+              data={rejected}
+              columns={columns}
+              numberOfPages={rejectedVendors?.getUserType?.pages}
             />
           </TabPane>
-          <TabPane tab="Declined Applications" key="2"></TabPane>
         </Tabs>
       </div>
     </AdminLayout>

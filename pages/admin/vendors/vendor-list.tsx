@@ -5,14 +5,44 @@ import { AdminLayout } from "@/layouts";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { reduceCharacterLength } from "@/helpers/helper";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
+import { useGetSellers } from "@/hooks/admin/vendors";
 
 const Vendors = () => {
   const [activeKey, setActiveKey] = useState("1");
   const [searchValue, setSearchValue] = useState("");
   const { TabPane } = Tabs;
   const maxNameLength = 14;
+
+  const [page, setPage] = useState(1);
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+
+  const { data: activeData, isLoading } = useGetSellers({
+    token,
+    seller: true,
+    customer: false,
+    sellerIsRejected: false,
+    active: true,
+    redFlagged: false,
+    page,
+    pageSize: 10,
+  });
+  
+  const { data: redFlaggedData, isFetching } = useGetSellers({
+    token,
+    seller: true,
+    customer: false,
+    sellerIsRejected: false,
+    active: false,
+    redFlagged: true,
+    page,
+    pageSize: 10,
+  });
 
   const columns = [
     {
@@ -65,80 +95,38 @@ const Vendors = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "Maryjane Egbu Maryjane Egbu Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-    {
-      key: "2",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-    {
-      key: "3",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-    {
-      key: "4",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-    {
-      key: "5",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-    {
-      key: "6",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-    {
-      key: "7",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-    {
-      key: "8",
-      name: "Maryjane Egbu",
-      email_address: "maryeu@gmail.com",
-      date_joined: "13/03/2023",
-      country: "Nigeria",
-      state: "Lagos",
-      amount_sold: "N13,873.74",
-    },
-  ];
+  const data = useMemo(
+    () =>
+      activeData?.getUserType?.objects?.map(({ id, fullName, email, dateJoined, sellerProfile }) => {
+        return {
+          key: id,
+          name: fullName,
+          email_address: email,
+          date_joined: dateJoined,
+          country: sellerProfile.lga ,
+          state: sellerProfile.state,
+          amount_sold: 0
+        };
+      }),
+    [activeData]
+  );
+
+  const redFlagged = useMemo(
+    () =>
+      redFlaggedData?.getUserType?.objects?.map(({ id, fullName, email, dateJoined, sellerProfile }) => {
+        return {
+          key: id,
+          name: fullName,
+          email_address: email,
+          date_joined: dateJoined,
+          country: sellerProfile.lga ,
+          state: sellerProfile.state,
+          amount_sold: 0
+        };
+      }),
+    [activeData]
+  );
+  
 
   return (
     <AdminLayout>
@@ -187,7 +175,9 @@ const Vendors = () => {
           <TabPane tab="Active Vendors" key="1">
             <AdminTable data={data} columns={columns} />
           </TabPane>
-          <TabPane tab="Red-flagged Vendors" key="2"></TabPane>
+          <TabPane tab="Red-flagged Vendors" key="2">
+            <AdminTable data={redFlagged} columns={columns} />
+          </TabPane>
         </Tabs>
       </div>
     </AdminLayout>

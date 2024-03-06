@@ -5,21 +5,24 @@ import { COMPLETE_SELLER_VERIFICATION } from "@/store/seller/seller.queries";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 
-type SELLERSTYPE = {
+export type USERTYPE = {
   token: string;
-  seller: boolean;
+  seller?: boolean;
+  sellerIsRejected?: boolean;
+  customer?: boolean;
   active: boolean;
   redFlagged: boolean;
   page: number;
   pageSize: number;
+  search?: string;
 };
 
-export function useGetSellers(payload: SELLERSTYPE) {
+export function useGetSellers(payload: USERTYPE) {
   return useQuery(
     ["seller", payload.page],
     () => userFetcherWithAuth(GET_SELLERS, payload, payload.token),
     {
-      keepPreviousData: true,
+      keepPreviousData: false,
     },
   );
 }

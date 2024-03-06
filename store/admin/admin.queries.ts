@@ -250,18 +250,24 @@ export const GET_SELLERS = /* GraphQL */ `
   query getSellers(
     $token: String!
     $seller: Boolean
+    $sellerIsRejected: Boolean
+    $customer: Boolean
     $active: Boolean
     $redFlagged: Boolean
     $page: Int
     $pageSize: Int
+    $search: String
   ) {
     getUserType(
       token: $token
       seller: $seller
+      sellerIsRejected: $sellerIsRejected
+      customer: $customer
       active: $active
       redFlagged: $redFlagged
       page: $page
       pageSize: $pageSize
+      search: $search
     ) {
       page
       pages
@@ -272,12 +278,57 @@ export const GET_SELLERS = /* GraphQL */ `
         firstName
         lastName
         fullName
+        dateJoined
         email
         sellerProfile {
           id
           state
           city
           lga
+        }
+      }
+    }
+  }
+`;
+
+
+export const GET_CUSTOMERS = /* GraphQL */ `
+  query getCustomers(
+    $token: String!
+    $seller: Boolean
+    $sellerIsRejected: Boolean
+    $customer: Boolean
+    $active: Boolean
+    $redFlagged: Boolean
+    $page: Int
+    $pageSize: Int
+    $search: String
+  ) {
+    getUserType(
+      token: $token
+      seller: $seller
+      sellerIsRejected: $sellerIsRejected
+      customer: $customer
+      active: $active
+      redFlagged: $redFlagged
+      page: $page
+      pageSize: $pageSize
+      search: $search
+    ) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        firstName
+        lastName
+        fullName
+        dateJoined
+        email
+        billingSet {
+          city
+          state
         }
       }
     }

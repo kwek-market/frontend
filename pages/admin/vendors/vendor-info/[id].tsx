@@ -9,11 +9,39 @@ import { FormHead } from "@/components/admin/form";
 import CustomerDetail from "@/components/admin/customers/customer-detail";
 import Image from "next/image";
 import StarRatingComponent from "react-star-rating-component";
+import { useGetCustomers } from "@/hooks/useGetCustomers";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/rootReducer";
 
 const Customer = () => {
   const router = useRouter();
   const { TabPane } = Tabs;
   const [activeKey, setActiveKey] = useState("1");
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+  const { data: activeCustomerData, error: acError, isLoading: acLoading } = useGetCustomers({
+    token,
+    seller: false,
+    customer: true,
+    sellerIsRejected: false,
+    active: true,
+    redFlagged: false,
+    page: 1,
+    pageSize: 10,
+  }) 
+
+  const { data: inactiveCustomerData, error: icError, isLoading: icLoading } = useGetCustomers({
+    token,
+    seller: false,
+    customer: true,
+    sellerIsRejected: false,
+    active: false,
+    redFlagged: false,
+    page: 1,
+    pageSize: 10,
+  }) 
+  
   const cardData = [
     {
       title: "Total No of Orders",
@@ -75,6 +103,7 @@ const Customer = () => {
     },
   ];
 
+  console.log("ac data: ", activeCustomerData)
   const data = [
     {
       key: "1",
