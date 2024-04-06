@@ -111,10 +111,7 @@ const CartGridComponent = function () {
           <div className='tw-ml-7 tw-flex-[2]'>
             <div>
               <span className='tw-text-xs tw-text-gray-kwek100'>
-                Seller:{" "}
-                {item?.product?.user?.sellerprofile
-                  ? item?.product?.user?.sellerprofile[0]?.shopName
-                  : ''}
+                Seller: {item.product.user.sellerprofileSet[0]?.shopName}
               </span>
             </div>
             <div className='tw-mb-4'>
