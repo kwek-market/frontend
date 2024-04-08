@@ -16,6 +16,6 @@ export const UpdateCategorySchema = z.object({
   parent: z.string().optional(),
   publishDate: z.date().optional(),
   visibility: z.string(),
-})
+});
 
 export type UpdateCategoryType = z.infer<typeof UpdateCategorySchema>;

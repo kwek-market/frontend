@@ -214,8 +214,20 @@ export const UPDATE_CATEGORY = /* GraphQL */ `
 `;
 
 export const CREATE_CATEGORY = /* GraphQL */ `
-  mutation addCategory($name: String!, $parent: String, $publishDate: Date, $visibility: String) {
-    addCategory(name: $name, parent: $parent, publishDate: $publishDate, visibility: $visibility) {
+  mutation addCategory(
+    $icon: String
+    $name: String!
+    $parent: String
+    $publishDate: Date
+    $visibility: String!
+  ) {
+    addCategory(
+      icon: $icon
+      name: $name
+      parent: $parent
+      publishDate: $publishDate
+      visibility: $visibility
+    ) {
       message
       status
     }

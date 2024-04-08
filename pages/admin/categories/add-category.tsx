@@ -1,22 +1,19 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import { FormHead, FormItems } from "@/components/admin/form";
-import {
-  InputField,
-  RadioField,
-  SelectField,
-  TextField,
-} from "@/components/input/textInput";
-import { useCreateCategory } from "@/hooks/admin/category";
+import { InputField, RadioField, SelectField } from "@/components/input/textInput";
+import { CreateCategoryPayload, useCreateCategory } from "@/hooks/admin/category";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { CreateCategorySchema } from "@/validations/createCategory";
 import { message } from "antd";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { FileInputLarge } from "../../../components/input/FileInputLarge";
 
 const AddCategory = () => {
   const {
     user: { token },
+    categories,
   } = useSelector((state: RootState) => state);
 
   const [icon, setIcon] = useState("");
@@ -25,8 +22,10 @@ const AddCategory = () => {
   const [parent, setParent] = useState("");
   const [visibility, setVisibility] = useState("");
 
-  const handleRadio = (value: React.SetStateAction<string>) => {
-    setVisibility(value);
+  const [formData, setFormDta] = useState<CreateCategoryPayload>({ name: "", visibility: "" });
+
+  const handleRadio = (value: string) => {
+    setFormDta({ ...formData, visibility: value });
   };
 
   const { mutate: createMut } = useCreateCategory(token);
@@ -34,15 +33,16 @@ const AddCategory = () => {
   async function publish(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
-    console.log("form values: ", name, visibility, publishedDate, parent);
+    console.log("form values: ", formData);
 
-    const parsed = await CreateCategorySchema.safeParseAsync({
-      icon,
-      name,
-      visibility,
-      publishedDate,
-      parent,
-    });
+    const formalPublishDate = formData.publishDate;
+    if (formalPublishDate) {
+      formData.publishDate = new Date(formalPublishDate) as any;
+    }
+
+    console.log("🚀 ~~ publish ~~ formData:", formData);
+
+    const parsed = await CreateCategorySchema.safeParseAsync(formData);
 
     if (parsed.success !== true) {
       message.error(parsed.error.errors[0].message);
@@ -50,11 +50,16 @@ const AddCategory = () => {
     }
 
     try {
+      if (parsed.data.publishDate) {
+        parsed.data.publishDate = formalPublishDate as any;
+      }
+
       createMut(parsed.data, {
         onError: (err: Error) => {
           message.error(err.message);
         },
       });
+      console.log("🚀 ~~ publish ~~ parsed.data:", parsed.data);
     } catch (error) {
       message.error(error.message);
     }
@@ -71,62 +76,88 @@ const AddCategory = () => {
           },
           { name: "Add new Category", path: "/admin/categories/add-category" },
         ]}
-        header="New Category"
+        header='New Category'
       />
 
-      <form className=" tw-pt-2 tw-font-poppins">
+      <form className=' tw-pt-2 tw-font-poppins'>
         <FormHead>Basic Information</FormHead>
         <FormItems>
           <InputField
-            label="Name"
-            placeholder="e.g Fashion"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            label='Name'
+            placeholder='e.g Fashion'
+            value={formData.name}
+            onChange={e => setFormDta({ ...formData, name: e.target.value })}
           />
           <SelectField
-            id="parent"
-            label="Parent"
-            value={parent}
-            onChange={(e) => setParent(e.target.value)}
+            id='parent'
+            label='Parent Category'
+            value={formData.parent}
+            onChange={e => {
+              if (e.target.value !== "select") {
+                setFormDta({ ...formData, parent: e.target.value });
+              } else {
+                delete formData.parent;
+                setFormDta(formData);
+              }
+            }}
           >
-            <option></option>
+            <option defaultChecked value={"select"}>
+              Select..
+            </option>
+            {categories.categories.map(category => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
           </SelectField>
         </FormItems>
-
-        <FormHead>SubCategory</FormHead>
-        <button className=" tw-py-[10px] tw-px-[14px] tw-rounded-[20px] tw-border tw-border-gray-kwek300a tw-w-max tw-mt-6">
-          + Add Sub-Category
-        </button>
 
         <FormHead>Visibility</FormHead>
         <FormItems>
           <RadioField
-            label="Published"
-            checked={visibility == "published"}
+            label='Published'
+            checked={formData.visibility == "published"}
             onChange={() => handleRadio("published")}
           />
           <RadioField
-            label="Scheduled"
-            checked={visibility == "scheduled"}
+            label='Scheduled'
+            checked={formData.visibility == "scheduled"}
             onChange={() => handleRadio("scheduled")}
           />
           <RadioField
-            label="Hidden"
-            checked={visibility == "hidden"}
+            label='Hidden'
+            checked={formData.visibility == "hidden"}
             onChange={() => handleRadio("hidden")}
           />
+
           <InputField
-            label="Publish Date"
-            type="date"
-            value={publishedDate}
-            onChange={(e) => setPublishedDate(e.target.value)}
+            label='Publish Date'
+            type='date'
+            value={formData?.publishDate}
+            onChange={e => {
+              setFormDta({ ...formData, publishDate: e.target.value });
+            }}
           />
         </FormItems>
 
+        <FormHead>Image</FormHead>
+        <div className='tw-border mt-1'>
+          <FileInputLarge
+            className='tw-border mt-1'
+            onChange={info => {
+              const { status } = info.file;
+
+              if (status === "done") {
+                setFormDta({ ...formData, icon: JSON.parse(info.file.xhr.response).secure_url });
+              }
+            }}
+          />
+        </div>
+
         <button
-          className="  tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-16"
-          type="submit"
-          onClick={(e) => publish(e)}
+          className='  tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-16'
+          type='submit'
+          onClick={e => publish(e)}
         >
           Publish Category
         </button>
