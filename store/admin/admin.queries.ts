@@ -1,9 +1,5 @@
 export const GET_TOTAL_ORDERS = /* GraphQL */ `
-  query getTotalOrders(
-    $startDate: String!
-    $endDate: String!
-    $token: String!
-  ) {
+  query getTotalOrders($startDate: String!, $endDate: String!, $token: String!) {
     getTotalOrders(startDate: $startDate, endDate: $endDate, token: $token) {
       totalOrders
       prevOrders
@@ -25,11 +21,7 @@ export const GET_TOTAL_SALES = /* GraphQL */ `
 `;
 
 export const GET_AVERAGE_ORDER_VALUE = /* GraphQL */ `
-  query getAverageSales(
-    $startDate: String!
-    $endDate: String!
-    $token: String!
-  ) {
+  query getAverageSales($startDate: String!, $endDate: String!, $token: String!) {
     getAverageSales(startDate: $startDate, endDate: $endDate, token: $token) {
       averageOrderValue
       prevAverageOrderValue
@@ -40,16 +32,8 @@ export const GET_AVERAGE_ORDER_VALUE = /* GraphQL */ `
 `;
 
 export const GET_TOTAL_ACTIVE_CUSTOMERS = /* GraphQL */ `
-  query getTotalActiveCustomers(
-    $startDate: String!
-    $endDate: String!
-    $token: String!
-  ) {
-    getTotalActiveCustomers(
-      startDate: $startDate
-      endDate: $endDate
-      token: $token
-    ) {
+  query getTotalActiveCustomers($startDate: String!, $endDate: String!, $token: String!) {
+    getTotalActiveCustomers(startDate: $startDate, endDate: $endDate, token: $token) {
       activeCustomers
     }
   }
@@ -62,8 +46,20 @@ export const GET_TOTAL_REVENUE = /* GraphQL */ `
 `;
 
 export const GET_RECENT_TRANSACTIONS = /* GraphQL */ `
-  query getRecentTransactions($page: Int, $pageSize: Int, $token: String!) {
-    getRecentTransactions(page: $page, pageSize: $pageSize, token: $token) {
+  query getRecentTransactions(
+    $page: Int
+    $pageSize: Int
+    $token: String!
+    $startDate: String!
+    $endDate: String!
+  ) {
+    getRecentTransactions(
+      page: $page
+      pageSize: $pageSize
+      startDate: $startDate
+      endDate: $endDate
+      token: $token
+    ) {
       objects {
         user {
           fullName
@@ -149,18 +145,8 @@ export const GET_PRODUCT = /* GraphQL */ `
 `;
 
 export const GET_PRODUCT_REVIEWS = /* GraphQL */ `
-  query reviews(
-    $page: Int
-    $pageSize: Int
-    $productId: String
-    $sortBy: String
-  ) {
-    reviews(
-      page: $page
-      pageSize: $pageSize
-      productId: $productId
-      sortBy: $sortBy
-    ) {
+  query reviews($page: Int, $pageSize: Int, $productId: String, $sortBy: String) {
+    reviews(page: $page, pageSize: $pageSize, productId: $productId, sortBy: $sortBy) {
       page
       pages
       hasNext
@@ -228,18 +214,8 @@ export const UPDATE_CATEGORY = /* GraphQL */ `
 `;
 
 export const CREATE_CATEGORY = /* GraphQL */ `
-  mutation addCategory(
-    $name: String!
-    $parent: String
-    $publishDate: Date
-    $visibility: String
-  ) {
-    addCategory(
-      name: $name
-      parent: $parent
-      publishDate: $publishDate
-      visibility: $visibility
-    ) {
+  mutation addCategory($name: String!, $parent: String, $publishDate: Date, $visibility: String) {
+    addCategory(name: $name, parent: $parent, publishDate: $publishDate, visibility: $visibility) {
       message
       status
     }
@@ -290,7 +266,6 @@ export const GET_SELLERS = /* GraphQL */ `
     }
   }
 `;
-
 
 export const GET_CUSTOMERS = /* GraphQL */ `
   query getCustomers(
