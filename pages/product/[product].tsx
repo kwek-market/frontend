@@ -1,17 +1,12 @@
-import React, { Fragment } from "react";
-import { useRouter } from "next/router";
-import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
-import {
-  ProductHead,
-  ExtraGrid,
-  ProductDesc,
-  MoreCard,
-} from "@/components/product";
-import { MainLayout } from "@/layouts";
 import Load from "@/components/Loader/Loader";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { GetProduct } from "@/store/product/product.queries";
+import { ExtraGrid, MoreCard, ProductDesc, ProductHead } from "@/components/product";
 import { userFetcher } from "@/helpers";
+import { MainLayout } from "@/layouts";
+import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
+import { GetProduct } from "@/store/product/product.queries";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import { Fragment } from "react";
 
 const Page = function ({ product }) {
   const router = useRouter();
@@ -27,10 +22,7 @@ const Page = function ({ product }) {
             <ProductHead product={product} />
             <ExtraGrid product={product} />
             <ProductDesc product={product} />
-            <MoreCard
-              similar={product.category.name}
-              title="Similar Items you might Like"
-            />
+            <MoreCard similar={product.category.name} title='Similar Items you might Like' />
           </Fragment>
         )
       )}
@@ -41,14 +33,14 @@ const Page = function ({ product }) {
 
 export default Page;
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async context => {
   return {
-    paths: [{ params: { product: "12a8de4e-65ce-4e4e-9362-95fac5eccc19" } }],
+    paths: [],
     fallback: true,
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async context => {
   const payload = { id: context.params.product };
   const { product } = await userFetcher(GetProduct, payload);
 
