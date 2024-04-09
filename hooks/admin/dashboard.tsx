@@ -51,7 +51,7 @@ export const useGetTotalRevenue = (payload: { token: string }) => {
   );
 };
 
-export const useGetRecentTransactions = (payload: PayloadType2) => {
+export const useGetRecentTransactions = (payload: PayloadType2 & PayloadType) => {
   return useQuery(["recent-transactions", payload], () =>
     userFetcherWithAuth(GET_RECENT_TRANSACTIONS, payload, payload.token)
   );

@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  UserDataType,
-  UserPasswordType,
-} from "../seller/settings/components/PersonalDetails";
+import { UserDataType, UserPasswordType } from "../seller/settings/components/PersonalDetails";
 
 type TextInputProps = {
   text: string;
   type: string;
   value: string | number;
-  setValue: React.Dispatch<
-    React.SetStateAction<string | number | UserDataType | UserPasswordType>
-  >;
+  setValue: React.Dispatch<React.SetStateAction<string | number | UserDataType | UserPasswordType>>;
   hide?: string;
   min?: number;
   max?: number;
@@ -46,7 +41,7 @@ const TextInput = function ({
         placeholder={text}
         className={`tw-rounded-sm tw-w-full ${style}`}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={e => setValue(e.target.value)}
         min={min}
         max={max}
       />
@@ -58,17 +53,14 @@ const TextInput = function ({
 export default TextInput;
 
 interface InputFieldProps
-  extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+  extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   label: string;
 }
 
 export const InputField = ({ label, ...props }: InputFieldProps) => {
   return (
     <div>
-      <label htmlFor={props.id} className=" tw-font-medium">
+      <label htmlFor={props.id} className=' tw-font-medium'>
         {label}
       </label>
       <input
@@ -93,7 +85,7 @@ interface SelectFieldProps
 export const SelectField = ({ label, ...props }: SelectFieldProps) => {
   return (
     <div>
-      <label htmlFor={props.id} className=" tw-font-medium">
+      <label htmlFor={props.id} className=' tw-font-medium'>
         {label}
       </label>
       <select
@@ -111,16 +103,17 @@ export const SelectField = ({ label, ...props }: SelectFieldProps) => {
 
 export const RadioField = ({ label, ...props }: InputFieldProps) => {
   return (
-    <div className=" tw-flex tw-gap-x-2 tw-items-center">
+    <div className=' tw-flex tw-gap-x-2 tw-items-center'>
       <input
         {...props}
         className={
-          " tw-border tw-border-[#D7DCE0] tw-rounded tw-p-4 tw-outline-none " +
+          " tw-border tw-cursor-pointer tw-border-[#D7DCE0] tw-rounded tw-p-4 tw-outline-none " +
           props.className
         }
-        type="radio"
+        id={props.id ?? label}
+        type='radio'
       />
-      <label htmlFor={props.id} className=" tw-font-medium ">
+      <label htmlFor={props.id ?? label} className=' tw-font-medium tw-cursor-pointer'>
         {label}
       </label>
     </div>
@@ -137,7 +130,7 @@ interface TextFieldProps
 export const TextField = ({ label, ...props }: TextFieldProps) => {
   return (
     <div>
-      <label htmlFor={props.id} className=" tw-font-medium">
+      <label htmlFor={props.id} className=' tw-font-medium'>
         {label}
       </label>
       <textarea

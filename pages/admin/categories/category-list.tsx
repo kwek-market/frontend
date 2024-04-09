@@ -2,12 +2,7 @@ import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
-import {
-  useDeleteCategory,
-  useGetAdminCategories,
-  useUpdateCategory,
-} from "@/hooks/admin/category";
-import { useGetCategories } from "@/hooks/admin/categories";
+import { useDeleteCategory, useGetAdminCategories } from "@/hooks/admin/category";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
@@ -15,46 +10,39 @@ import { Dropdown, Menu } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useDebounce } from "use-debounce";
 
 const CategoryList = () => {
   const [search, setSearch] = useState("");
+  const [searchDebouncedValue] = useDebounce(search, 600);
+
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
 
   const { data: categoryData, isFetching } = useGetAdminCategories({
-    search: search,
+    search: searchDebouncedValue,
     token: token,
   });
   const { mutate: deleteMut } = useDeleteCategory();
 
-  function deleteCategory(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: string
-  ) {
-    e.preventDefault();
-    console.log("delete category: ", id);
+  function deleteCategory(id: string) {
     deleteMut({ id: id, token: token });
   }
 
-  const getCategories = useGetCategories({ search: "" });
-
-  console.log(getCategories?.data);
   const menu = (id: string) => (
-    <Menu>
-      <Menu.Item>
+    <Menu className='tw-w-32 '>
+      <Menu.Item className=''>
         <Link
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
         >
-          <a>Edit</a>
+          <a className='tw-py-2 tw-px-4'>Edit</a>
         </Link>
       </Menu.Item>
-      <Menu.Item>
-        <button type="button" onClick={(e) => deleteCategory(e, id)}>
-          Delete
-        </button>
+      <Menu.Item className='tw-py-2 tw-px-4' onClick={(e:any) => deleteCategory(id)}>
+        Delete
       </Menu.Item>
     </Menu>
   );
@@ -91,31 +79,16 @@ const CategoryList = () => {
     {
       title: "Actions",
       key: "action",
-      render: ({ key }) => (
-        <span className=" tw-cursor-pointer">
-          <Dropdown overlay={menu(key)} placement="bottomCenter" arrow>
-            <DotsVerticalIcon className="tw-h-5 tw-w-5" />
+      render: ({ key, id }) => (
+        <span className=' tw-cursor-pointer'>
+          {console.log(key, id)}
+          <Dropdown overlay={menu(id)} placement='bottomCenter' arrow>
+            <DotsVerticalIcon className='tw-h-5 tw-w-5' />
           </Dropdown>
         </span>
       ),
     },
   ];
-
-  const data = categoryData?.categories?.map(
-    (category: {
-      id: string;
-      name: string;
-      category: any[];
-      visibility: string;
-    }) => {
-      return {
-        key: category.id,
-        category_name: category.name,
-        items: category.category.length,
-        visibility: { visibility: category.visibility },
-      };
-    }
-  );
 
   if (isFetching) {
     return (
@@ -129,17 +102,13 @@ const CategoryList = () => {
             },
             { name: "Category List", path: "/admin/categories/category-list" },
           ]}
-          header="Category List"
-          buttonPath="/admin/categories/add-category"
-          buttonText="New Category"
+          header='Category List'
+          buttonPath='/admin/categories/add-category'
+          buttonText='New Category'
         />
 
-        <div className="tw-mt-16">
-          <Search
-            placeholder="Search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+        <div className='tw-mt-16'>
+          <Search placeholder='Search' value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         <Load />
       </AdminLayout>
@@ -157,27 +126,20 @@ const CategoryList = () => {
           },
           { name: "Category List", path: "/admin/categories/category-list" },
         ]}
-        header="Category List"
-        buttonPath="/admin/categories/add-category"
-        buttonText="New Category"
+        header='Category List'
+        buttonPath='/admin/categories/add-category'
+        buttonText='New Category'
       />
 
-      <div className="tw-mt-16">
-        <Search
-          placeholder="Search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className='tw-mt-16'>
+        <Search placeholder='Search' value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
-      {getCategories.isFetching ? (
+      {isFetching ? (
         <Load />
       ) : (
-        <div className=" tw-pt-4">
-          <AdminTable
-            data={getCategories?.data?.categories || []}
-            columns={columns}
-          />
+        <div className=' tw-pt-4'>
+          <AdminTable data={categoryData?.categories || []} columns={columns} />
         </div>
       )}
     </AdminLayout>

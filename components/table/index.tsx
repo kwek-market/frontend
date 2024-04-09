@@ -1,7 +1,5 @@
-import React from "react";
 import { Table } from "antd";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/solid";
-import { generatePagesArray } from "@/helpers/helper";
+import { useRouter } from "next/router";
 import TableNav from "./table-nav";
 
 interface AdminTableProps {
@@ -24,25 +22,18 @@ const AdminTable = ({
   goToPrev,
   goToNext,
 }: AdminTableProps) => {
+  const router = useRouter();
+
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {},
   };
 
-  const getPage = (event) => {
-    goToPage(event.target.textContent as number);
-  };
-
-  const getPrev = (event) => {
-    // console.log("selected prev");
-    goToPrev();
-  };
-  const getNext = (event) => {
-    // console.log(`selected Next; ${page} ${numberOfPages}`);
-    goToNext();
+  const getPage = event => {
+    if (goToPage) goToPage(Number(event.target.textContent));
   };
 
   return (
-    <div className="tw-full tw-overflow-x-scroll admin-table">
+    <div className='tw-full tw-overflow-x-scroll admin-table'>
       <Table
         rowSelection={select ? rowSelection : null}
         columns={columns}
@@ -54,8 +45,8 @@ const AdminTable = ({
           page={page}
           numberOfPages={numberOfPages}
           dataLength={data?.length}
-          getNext={getNext}
-          getPrev={getPrev}
+          getNext={() => goToNext()}
+          getPrev={() => goToPrev()}
           getPage={getPage}
         />
       )}
