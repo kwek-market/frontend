@@ -22,18 +22,18 @@ import { AdminAuthenticatedLayout } from "../layouts/AdminAuthenticatedLayout/Ad
 
 // setPusherClient(pusherClient);
 
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      cacheTime: 1000 * 60 * 20,
+      staleTime: Infinity,
+    },
+  },
+});
+
 const MyApp = function ({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        cacheTime: 1000 * 60 * 20,
-        staleTime: Infinity,
-      },
-    },
-  });
 
   if (router.route.includes("/admin")) {
     return (

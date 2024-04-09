@@ -5,16 +5,23 @@ import {
   GET_CATEGORIES,
   UPDATE_CATEGORY,
 } from "@/store/admin/admin.queries";
-import {
-  CreateCategoryType,
-  UpdateCategoryType,
-} from "@/validations/createCategory";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { CreateCategoryType, UpdateCategoryType } from "@/validations/createCategory";
+import { message } from "antd";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "react-query";
+import { queryClient } from "../../pages/_app";
 
 type SearchProps = {
   search: string;
   token: string;
 };
+
+export interface CreateCategoryPayload {
+  name: string;
+  parent?: string;
+  publishDate?: string;
+  visibility: string;
+  icon?: string;
+}
 
 type UpdatePayload = {
   id: string;
@@ -25,21 +32,26 @@ type UpdatePayload = {
 };
 
 export const useGetAdminCategories = (payload: SearchProps) => {
-  return useQuery(["admin-categories", payload], () =>
-    userFetcherWithAuth(GET_CATEGORIES, payload, payload.token),
+  return useQuery([`admin-categories`, payload.search], () =>
+    userFetcherWithAuth(GET_CATEGORIES, payload, payload.token)
   );
 };
 
 export const useCreateCategory = (token: string) => {
   return useMutation(
-    (payload: CreateCategoryType) =>
-      userFetcherWithAuth(CREATE_CATEGORY, payload, token),
+    (payload: CreateCategoryType) => userFetcherWithAuth(CREATE_CATEGORY, payload, token),
     {
-      onSuccess: () => {
-        const queryClient = useQueryClient();
+      onSuccess: data => {
+        if (!data.addCategory.status) {
+          throw Error(data.addCategory.message);
+        } else {
+          message.success(data.addCategory.message);
+        }
+
+        const queryClient = new QueryClient();
         queryClient.invalidateQueries("admin-categories");
       },
-    },
+    }
   );
 };
 
@@ -48,23 +60,38 @@ export const useDeleteCategory = () => {
     (payload: { id: string; token: string }) =>
       userFetcherWithAuth(DELETE_CATEGORY, payload, payload.token),
     {
-      onSuccess: () => {
-        const queryClient = useQueryClient();
+      onSuccess: data => {
+        if (!data.deleteCategory.status) {
+          message.error({
+            key: "delete-category",
+            content: data.deleteCategory.message,
+            duration: 3,
+          });
+        } else {
+          message.success({
+            key: "delete-category",
+            content: data.deleteCategory.message,
+            duration: 3,
+          });
+        }
+
         queryClient.invalidateQueries("admin-categories");
       },
-    },
+      onMutate(variables) {
+        message.loading({ key: "delete-category", content: "Loading..", duration: 3 });
+      },
+    }
   );
 };
 
 export const useUpdateCategory = (token: string) => {
   return useMutation(
-    (payload: UpdateCategoryType) =>
-      userFetcherWithAuth(UPDATE_CATEGORY, payload, token),
+    (payload: UpdateCategoryType) => userFetcherWithAuth(UPDATE_CATEGORY, payload, token),
     {
       onSuccess: () => {
         const queryClient = useQueryClient();
         queryClient.invalidateQueries("admin-categories");
       },
-    },
+    }
   );
 };
