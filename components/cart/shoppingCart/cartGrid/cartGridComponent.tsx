@@ -72,7 +72,7 @@ const CartGridComponent = function () {
                   Seller:{" "}
                   {item.product?.user?.sellerprofile
                     ? item.product?.user?.sellerprofile[0]?.shopName
-                    : null}
+                    : ''}
                 </p>
                 <p className={styles.name}>{item.product.productTitle}</p>
               </div>
@@ -114,7 +114,7 @@ const CartGridComponent = function () {
                 Seller:{" "}
                 {item?.product?.user?.sellerprofile
                   ? item?.product?.user?.sellerprofile[0]?.shopName
-                  : null}
+                  : ''}
               </span>
             </div>
             <div className='tw-mb-4'>

@@ -32,7 +32,7 @@ function CartInfo() {
             />
             <div className={styles.info}>
               <p className={styles.seller}>
-                Seller: {item.product?.user?.sellerprofile ? item.product?.user?.sellerprofile[0]?.shopName: null}
+                Seller: {item.product?.user?.sellerprofile ? item.product?.user?.sellerprofile[0]?.shopName: ""}
               </p>
               <p className={styles.name}>{item.product.productTitle}</p>
               <div className={styles.item_info}>
