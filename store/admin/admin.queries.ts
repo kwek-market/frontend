@@ -321,3 +321,36 @@ export const GET_CUSTOMERS = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_ALL_ORDERS = /* GraphQL */ `
+  query allOrders(
+    $token: String!
+    $page: Int
+    $pageSize: Int
+    $search: String # $productId: String # $orderBy: String
+  ) {
+    allOrders(token: $token, page: $page, pageSize: $pageSize, search: $search) {
+      objects {
+        id
+        closed
+        orderId
+        cartItems {
+          id
+          productOptionId
+          quantity
+          price
+          ordered
+        }
+        deliveryStatus
+        orderPriceTotal
+        orderPrice
+        dateCreated
+        paid
+      }
+      page
+      pages
+      hasNext
+      hasPrev
+    }
+  }
+`;

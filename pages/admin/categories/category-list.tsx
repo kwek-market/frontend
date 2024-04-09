@@ -26,27 +26,23 @@ const CategoryList = () => {
   });
   const { mutate: deleteMut } = useDeleteCategory();
 
-  function deleteCategory(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) {
-    e.preventDefault();
-    console.log("delete category: ", id);
+  function deleteCategory(id: string) {
     deleteMut({ id: id, token: token });
   }
 
   const menu = (id: string) => (
-    <Menu className="tw-w-32 ">
-      <Menu.Item className="tw-py-2 tw-px-4">
+    <Menu className='tw-w-32 '>
+      <Menu.Item className=''>
         <Link
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
         >
-          <a>Edit</a>
+          <a className='tw-py-2 tw-px-4'>Edit</a>
         </Link>
       </Menu.Item>
-      <Menu.Item className="tw-py-2 tw-px-4">
-        <button type='button' onClick={e => deleteCategory(e, id)}>
-          Delete
-        </button>
+      <Menu.Item className='tw-py-2 tw-px-4' onClick={(e:any) => deleteCategory(id)}>
+        Delete
       </Menu.Item>
     </Menu>
   );
@@ -85,7 +81,7 @@ const CategoryList = () => {
       key: "action",
       render: ({ key, id }) => (
         <span className=' tw-cursor-pointer'>
-          {console.log(key, id )}
+          {console.log(key, id)}
           <Dropdown overlay={menu(id)} placement='bottomCenter' arrow>
             <DotsVerticalIcon className='tw-h-5 tw-w-5' />
           </Dropdown>
