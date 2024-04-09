@@ -33,8 +33,8 @@ const CategoryList = () => {
   }
 
   const menu = (id: string) => (
-    <Menu>
-      <Menu.Item>
+    <Menu className="tw-w-32 ">
+      <Menu.Item className="tw-py-2 tw-px-4">
         <Link
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
@@ -43,7 +43,7 @@ const CategoryList = () => {
           <a>Edit</a>
         </Link>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item className="tw-py-2 tw-px-4">
         <button type='button' onClick={e => deleteCategory(e, id)}>
           Delete
         </button>

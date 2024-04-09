@@ -16,11 +16,7 @@ const AddCategory = () => {
     categories,
   } = useSelector((state: RootState) => state);
 
-  const [icon, setIcon] = useState("");
-  const [name, setName] = useState("");
-  const [publishedDate, setPublishedDate] = useState("");
-  const [parent, setParent] = useState("");
-  const [visibility, setVisibility] = useState("");
+
 
   const [formData, setFormDta] = useState<CreateCategoryPayload>({ name: "", visibility: "" });
 

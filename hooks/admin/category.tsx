@@ -7,7 +7,8 @@ import {
 } from "@/store/admin/admin.queries";
 import { CreateCategoryType, UpdateCategoryType } from "@/validations/createCategory";
 import { message } from "antd";
-import { QueryClient, useMutation, useQuery, useQueryClient } from "react-query";
+import { useRouter } from "next/router";
+import { useMutation, useQuery } from "react-query";
 import { queryClient } from "../../pages/_app";
 
 type SearchProps = {
@@ -38,6 +39,8 @@ export const useGetAdminCategories = (payload: SearchProps) => {
 };
 
 export const useCreateCategory = (token: string) => {
+  const router = useRouter();
+
   return useMutation(
     (payload: CreateCategoryType) => userFetcherWithAuth(CREATE_CATEGORY, payload, token),
     {
@@ -46,9 +49,9 @@ export const useCreateCategory = (token: string) => {
           throw Error(data.addCategory.message);
         } else {
           message.success(data.addCategory.message);
+          router.push("/admin/categories/category-list");
         }
 
-        const queryClient = new QueryClient();
         queryClient.invalidateQueries("admin-categories");
       },
     }
@@ -85,11 +88,19 @@ export const useDeleteCategory = () => {
 };
 
 export const useUpdateCategory = (token: string) => {
+  const router = useRouter();
+
   return useMutation(
     (payload: UpdateCategoryType) => userFetcherWithAuth(UPDATE_CATEGORY, payload, token),
     {
-      onSuccess: () => {
-        const queryClient = useQueryClient();
+      onSuccess: data => {
+        if (!data.updateCategory.status) {
+          throw Error(data.updateCategory.message);
+        } else {
+          message.success(data.updateCategory.message);
+          router.push("/admin/categories/category-list");
+        }
+
         queryClient.invalidateQueries("admin-categories");
       },
     }

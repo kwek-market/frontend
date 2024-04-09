@@ -96,3 +96,13 @@ export function debounce(func: any, timeout: number = 300) {
     }, timeout);
   };
 }
+
+
+export function deletePropertyNullUndefined(obj: { [key: string]: any }) {
+  for (let key in obj) {
+    if (obj[key] === null || obj[key] === undefined) {
+      delete obj[key];
+    }
+  }
+}
+
