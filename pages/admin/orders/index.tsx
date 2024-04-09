@@ -2,63 +2,36 @@ import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
-import useOrder from "@/hooks/useOrder";
-import useOrders from "@/hooks/useOrders";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { Tabs } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useDebounce } from "use-debounce";
+import { useGetAllOrders } from "../../../hooks/admin/orders";
 
 const Orders = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [activeKey, setActiveKey] = useState("1");
+  const [page, setPage] = useState(1);
+
   const { TabPane } = Tabs;
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  console.log("token: ", token)
-  const search = router.query.search as string
-  console.log("search: ", search)
-  const { data: ordersData, error, isLoading } = useOrders(token)
-  console.log(ordersData)
-  const { data: orderData, error: orderError, isLoading: orderLoading, refetch } = useOrder(token, search)
-  console.log(orderData)
-  const [searchOrder, setSearchOrder] = useState(search)
 
-  useEffect(() => {
-    setSearchOrder(() => search)
-  }, [search])
+  const search = router.query.search as string;
 
-  function dataOrder() {
-    if (orderData !== null && !orderLoading) {
-      return [{
-        key: orderData?.order.id,
-        order_number: orderData?.order.orderId,
-        order_date: orderData?.order.dateCreated,
-        no_of_items: orderData?.order.cartItems.length,
-        status: orderData?.order.deliveryStatus,
-        amount: orderData?.order.orderPriceTotal,
-        payment: orderData?.order.paid ? "paid" : "not paid",
-      }]
-    } else {
-      return ordersData?.orders.map(order => {
-        return {
-          key: order.id,
-          order_number: order.orderId,
-          order_date: order.dateCreated,
-          no_of_items: order.cartItems.reduce((acc, item) => acc + item.quantity, 0),
-          status: order.deliveryStatus,
-          amount: order.cartItems.reduce((acc, item) => acc + item.price, 0),
-          payment: order.paid ? "paid" : "not paid",
-        }
-      })
-    }
-  }
+  const [searchOrder, setSearchOrder] = useState(search);
+  const [searchDebounce] = useDebounce(searchOrder, 600);
 
-  const data = useMemo(() => dataOrder(), [ordersData, error, isLoading])
+  const {
+    data: ordersData,
+    error,
+    isLoading,
+  } = useGetAllOrders({ token, search: searchDebounce, page });
 
   if (isLoading) {
     return (
@@ -71,54 +44,49 @@ const Orders = () => {
               path: "/admin/orders",
             },
           ]}
-          header="Order List"
+          header='Order List'
         />
 
-        <div className=" tw-mt-12 tw-font-poppins">
-          <div className="tw-mt-6">
-            <Search placeholder="Search by order code" />
+        <div className=' tw-mt-12 tw-font-poppins'>
+          <div className='tw-mt-6'>
+            <Search placeholder='Search by order code' />
           </div>
-          <div className=" tw-py-4">
+          <div className=' tw-py-4'>
             <Tabs
               animated
               tabBarStyle={{ borderColor: "red" }}
-              className="adminTab"
+              className='adminTab'
               activeKey={activeKey}
-              onTabClick={(key) => setActiveKey(key)}
+              onTabClick={key => setActiveKey(key)}
             >
-              <TabPane tab="Order History" key="1">
+              <TabPane tab='Order History' key='1'>
                 <Load />
               </TabPane>
             </Tabs>
           </div>
         </div>
       </AdminLayout>
-    )
+    );
   }
 
   const columns = [
     {
       title: "Order Number",
-      dataIndex: "order_number",
+      dataIndex: "orderId",
       key: "order_number",
       render: (order_number: {}) => (
         <Link
-          href={
-            "/admin/customers/" +
-            "Maryjane Egbu" +
-            "/order-detail/" +
-            "order-" +
-            order_number
-          }
+          href={"/admin/customers/" + "Maryjane Egbu" + "/order-detail/" + "order-" + order_number}
         >
-          <a className=" tw-text-black-kwek100">{order_number}</a>
+          <a className=' tw-text-black-kwek100'>{order_number}</a>
         </Link>
       ),
     },
     {
       title: "Order Date",
-      dataIndex: "order_date",
+      dataIndex: "dateCreated",
       key: "order_date",
+      render: (order_date: string) => <p>{new Date(order_date).toLocaleDateString()}</p>,
     },
     {
       title: "No of Items",
@@ -127,34 +95,25 @@ const Orders = () => {
     },
     {
       title: "Status",
-      dataIndex: "status",
+      dataIndex: "deliveryStatus",
       key: "status",
     },
     {
       title: "Amount",
-      dataIndex: "amount",
+      dataIndex: "orderPriceTotal",
       key: "amount",
     },
     {
       title: "Payment",
-      dataIndex: "payment",
+      dataIndex: "paid",
       key: "payment",
+      render: (payment: string) => (
+        <p className={`${!payment ? "tw-text-red-kwek100" : "tw-text-green-success"}`}>
+          {payment ? "Paid" : "Not Paid"}
+        </p>
+      ),
     },
   ];
-
-  function handleChangeSearch(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchOrder(() => e.target.value)
-    router.push(`${router.route}?search=${e.target.value}`, `${router.route}?search=${e.target.value}`, {
-      shallow: true
-    })
-  }
-
-  function searchFunc(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" || e.keyCode === 13) {
-      refetch()
-    }
-  }
-
 
   return (
     <AdminLayout>
@@ -166,27 +125,41 @@ const Orders = () => {
             path: "/admin/orders",
           },
         ]}
-        header="Order List"
+        header='Order List'
       />
 
-      <div className=" tw-mt-12 tw-font-poppins">
-        <div className="tw-mt-6">
+      <div className=' tw-mt-12 tw-font-poppins'>
+        <div className='tw-mt-6'>
           <Search
-            placeholder="Search by order code"
+            placeholder='Search by order id'
             value={searchOrder}
-            searchFunc={searchFunc}
-            onChange={e => handleChangeSearch(e)} />
+            onChange={e => setSearchOrder(e.target.value)}
+          />
         </div>
-        <div className=" tw-py-4">
+        <div className=' tw-py-4'>
           <Tabs
             animated
             tabBarStyle={{ borderColor: "red" }}
-            className="adminTab"
+            className='adminTab'
             activeKey={activeKey}
-            onTabClick={(key) => setActiveKey(key)}
+            onTabClick={key => setActiveKey(key)}
           >
-            <TabPane tab="Order History" key="1">
-              <AdminTable data={data} columns={columns} />
+            <TabPane tab='Order History' key='1'>
+              <AdminTable
+                numberOfPages={ordersData.allOrders.pages}
+                data={ordersData?.allOrders?.objects}
+                page={ordersData.allOrders.page}
+                columns={columns}
+                goToNext={() => {
+                  if (ordersData?.allOrders?.hasNext) setPage(page + 1);
+                }}
+                goToPrev={() => {
+                  if (ordersData?.allOrders?.hasPrev) setPage(page - 1);
+                }}
+                goToPage={page => {
+                  setPage(page);
+                }}
+              />
             </TabPane>
           </Tabs>
         </div>

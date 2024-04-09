@@ -27,7 +27,7 @@
     "jspdf": "^2.5.1",
     "luxon": "^2.3.1",
     "next": "10.0.9",
-    "next-redux-wrapper": "^6.0.2",
+    "next-redux-wrapper": "^6.0.2", 
     "nookies": "^2.5.2",
     "pusher-js": "^7.0.6",
     "react": "17.0.1",

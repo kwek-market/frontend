@@ -5,12 +5,7 @@ export const CREATE_USER = /* GraphQL */ `
     $password1: String!
     $password2: String!
   ) {
-    createUser(
-      email: $email
-      fullName: $fullName
-      password1: $password1
-      password2: $password2
-    ) {
+    createUser(email: $email, fullName: $fullName, password1: $password1, password2: $password2) {
       status
       message
       emailText
@@ -36,6 +31,7 @@ export const LOGIN_USER = /* GraphQL */ `
         isVerified
         isSeller
         isSuperuser
+        isAdmin
         sellerProfile {
           id
         }
@@ -98,6 +94,7 @@ export const GET_USER = /* GraphQL */ `
       isVerified
       isSeller
       isSuperuser
+      isAdmin
       sellerProfile {
         id
       }
@@ -195,16 +192,8 @@ export const RESEND_VERIFICATION_EMAIL = /* GraphQL */ `
 `;
 
 export const RESET_PASSWORD = /* GraphQL */ `
-  mutation changePassword(
-    $password1: String!
-    $password2: String!
-    $token: String!
-  ) {
-    changePassword(
-      password1: $password1
-      password2: $password2
-      token: $token
-    ) {
+  mutation changePassword($password1: String!, $password2: String!, $token: String!) {
+    changePassword(password1: $password1, password2: $password2, token: $token) {
       message
       status
     }
