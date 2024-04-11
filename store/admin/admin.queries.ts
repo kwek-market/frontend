@@ -109,6 +109,11 @@ export const GET_PRODUCT = /* GraphQL */ `
     product(id: $id) {
       id
       productTitle
+      brand
+      productWeight
+      warranty
+      color
+      gender
       options {
         price
         discountedPrice
