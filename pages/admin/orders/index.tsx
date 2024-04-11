@@ -72,13 +72,11 @@ const Orders = () => {
   const columns = [
     {
       title: "Order Number",
-      dataIndex: "orderId",
+      dataIndex: "id",
       key: "order_number",
-      render: (order_number: {}) => (
-        <Link
-          href={"/admin/customers/" + "Maryjane Egbu" + "/order-detail/" + "order-" + order_number}
-        >
-          <a className=' tw-text-black-kwek100'>{order_number}</a>
+      render: (id: {}) => (
+        <Link href={"/admin/customers/" + "Maryjane Egbu" + "/order-detail/" + id}>
+          <a className=' tw-text-black-kwek100'>{id}</a>
         </Link>
       ),
     },

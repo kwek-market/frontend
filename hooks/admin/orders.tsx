@@ -1,7 +1,8 @@
 import { userFetcherWithAuth } from "@/helpers";
 import { useQuery } from "react-query";
-import { GET_ALL_ORDERS } from "../../store/admin/admin.queries";
 import { PAGE_SIZE } from "../../constants/constants";
+import { IdAndTokenPayload } from "../../interfaces/commonTypes";
+import { GET_ALL_ORDERS, GET_ORDERS_ADMIN } from "../../store/admin/admin.queries";
 
 interface PayloadType {
   token: string;
@@ -22,5 +23,16 @@ export function useGetAllOrders(variables: PayloadType) {
 
   return useQuery(["admin-orders", variables.search, variables.page], () =>
     userFetcherWithAuth(GET_ALL_ORDERS, variables, variables.token)
+  );
+}
+
+export function useGetOrdersAdmin(payload: IdAndTokenPayload) {
+  return useQuery(
+    ["orders", "admin", payload.id],
+    () => userFetcherWithAuth(GET_ORDERS_ADMIN, payload, payload.token),
+    {
+      keepPreviousData: false,
+      enabled: !!payload.id,
+    }
   );
 }
