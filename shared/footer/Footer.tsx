@@ -4,17 +4,21 @@ import Link from "next/link";
 import styles from "./Footer.module.scss";
 
 import Form from "./SubscribeForm";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/rootReducer";
 
 const Component = function () {
+  const { seller, user } = useSelector((state: RootState) => state);
+
   return (
     <footer className={styles.footer}>
       <div className={`${styles.footer_section} ${styles.footer_sectionOne}`}>
         <div className={styles.logo}>
           <Image
-            width="180"
-            height="30"
-            src="/svg/kwek-logo-white.svg"
-            alt="Kwek logo"
+            width='180'
+            height='30'
+            src='/svg/kwek-logo-white.svg'
+            alt='Kwek logo'
             className={styles.logo_image}
           />
         </div>
@@ -36,22 +40,30 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/aboutUs">
+              <Link href='/aboutUs'>
                 <a className={styles.nav_link}>About Us</a>
               </Link>
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/contact-us">
+              <Link href='/contact-us'>
                 <a className={styles.nav_link}>Contact Us</a>
               </Link>
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/terms-of-service">
+              <Link href='/terms-of-service'>
                 <a className={styles.nav_link}>Terms of Service</a>
               </Link>
             </li>
+
+            {user?.user?.isAdmin ? (
+              <li className={styles.nav_item}>
+                <Link href='/admin/dashboard'>
+                  <a className={styles.nav_link}>Switch to Admin</a>
+                </Link>
+              </li>
+            ) : null}
           </ul>
         </nav>
 
@@ -60,7 +72,7 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="https://flutterwave.com/us/">
+              <Link href='https://flutterwave.com/us/'>
                 <a className={styles.nav_link}>Flutterwave</a>
               </Link>
             </li>
@@ -72,7 +84,7 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/buyerPolicy">
+              <Link href='/buyerPolicy'>
                 <a className={styles.nav_link}>Buyer Policy</a>
               </Link>
             </li>
@@ -90,7 +102,7 @@ const Component = function () {
             </li> */}
 
             <li className={styles.nav_item}>
-              <Link href="/returnpolicy">
+              <Link href='/returnpolicy'>
                 <a className={styles.nav_link}>Kwek Return Policy</a>
               </Link>
             </li>
@@ -102,12 +114,12 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/sell">
+              <Link href='/sell'>
                 <a className={styles.nav_link}>Sell On Kwek</a>
               </Link>
             </li>
             <li className={styles.nav_item}>
-              <Link href="/sellerPolicy">
+              <Link href='/sellerPolicy'>
                 <a className={styles.nav_link}>Seller Policy</a>
               </Link>
             </li>
@@ -119,19 +131,19 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href="/sitemap.xml">
+              <Link href='/sitemap.xml'>
                 <a className={styles.nav_link}>Site Map</a>
               </Link>
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/privacyPolicy">
+              <Link href='/privacyPolicy'>
                 <a className={styles.nav_link}>Privacy Policy</a>
               </Link>
             </li>
 
             <li className={styles.nav_item}>
-              <Link href="/billingPolicy">
+              <Link href='/billingPolicy'>
                 <a className={styles.nav_link}>Billing Policy</a>
               </Link>
             </li>
@@ -143,30 +155,30 @@ const Component = function () {
         <div className={styles.gateways}>
           <div className={styles.gateway}>
             <Image
-              width="44"
-              height="24"
-              src="/images/visa.png"
-              alt="visacard"
+              width='44'
+              height='24'
+              src='/images/visa.png'
+              alt='visacard'
               className={styles.gateways_image}
             />
           </div>
 
           <div className={styles.gateway}>
             <Image
-              width="44"
-              height="24"
-              src="/images/visa.png"
-              alt="visacard"
+              width='44'
+              height='24'
+              src='/images/visa.png'
+              alt='visacard'
               className={styles.gateways_image}
             />
           </div>
 
           <div className={styles.gateway}>
             <Image
-              width="44"
-              height="24"
-              src="/images/visa.png"
-              alt="visacard"
+              width='44'
+              height='24'
+              src='/images/visa.png'
+              alt='visacard'
               className={styles.gateways_image}
             />
           </div>
@@ -174,53 +186,43 @@ const Component = function () {
 
         <div className={styles.copyright}>
           <p className={styles.copyright_text}>
-            Kwekmarket eCommerce{" "}
-            <span className={styles.copyright_symbol}>&copy;</span> 2022 . All
+            Kwekmarket eCommerce <span className={styles.copyright_symbol}>&copy;</span> 2022 . All
             Rights Reserved
           </p>
         </div>
 
         <div className={styles.social}>
-          <Link href="https://www.facebook.com/Kwekmarket/">
-            <a
-              className={styles.social_link}
-              target="_blank noreferer noopener"
-            >
+          <Link href='https://www.facebook.com/Kwekmarket/'>
+            <a className={styles.social_link} target='_blank noreferer noopener'>
               <Image
-                width="28"
-                height="28"
-                src="/svg/facebook.svg"
-                alt="visacard"
+                width='28'
+                height='28'
+                src='/svg/facebook.svg'
+                alt='visacard'
                 className={styles.social_icon}
               />
             </a>
           </Link>
 
-          <Link href="https://www.instagram.com/invites/contact/?i=lthbstut4tp&utm_content=6szcidd">
-            <a
-              className={styles.social_link}
-              target="_blank noreferer noopener"
-            >
+          <Link href='https://www.instagram.com/invites/contact/?i=lthbstut4tp&utm_content=6szcidd'>
+            <a className={styles.social_link} target='_blank noreferer noopener'>
               <Image
-                width="28"
-                height="28"
-                src="/svg/instagram.svg"
-                alt="visacard"
+                width='28'
+                height='28'
+                src='/svg/instagram.svg'
+                alt='visacard'
                 className={styles.social_icon}
               />
             </a>
           </Link>
 
-          <Link href="https://twitter.com/kwekmarket?t=gFj8_Lp-EA2gJEZ0QZkEFQ&s=09">
-            <a
-              className={styles.social_link}
-              target="_blank noreferer noopener"
-            >
+          <Link href='https://twitter.com/kwekmarket?t=gFj8_Lp-EA2gJEZ0QZkEFQ&s=09'>
+            <a className={styles.social_link} target='_blank noreferer noopener'>
               <Image
-                width="28"
-                height="28"
-                src="/svg/twitter.svg"
-                alt="visacard"
+                width='28'
+                height='28'
+                src='/svg/twitter.svg'
+                alt='visacard'
                 className={styles.social_icon}
               />
             </a>

@@ -146,10 +146,10 @@ const Orders = () => {
           >
             <TabPane tab='Order History' key='1'>
               <AdminTable
-                numberOfPages={ordersData.allOrders.pages}
                 data={ordersData?.allOrders?.objects}
-                page={ordersData.allOrders.page}
                 columns={columns}
+                numberOfPages={ordersData.allOrders.pages}
+                page={ordersData.allOrders.page}
                 goToNext={() => {
                   if (ordersData?.allOrders?.hasNext) setPage(page + 1);
                 }}

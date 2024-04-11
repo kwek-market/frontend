@@ -354,3 +354,67 @@ export const GET_ALL_ORDERS = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_TOTAL_CUSTOMER_EXPENSES = /* GraphQL */ `
+  query getCustomerTotalExpense($token: String!, $id: String!) {
+    getCustomerTotalExpense(token: $token, id: $id) {
+      totalSpent
+    }
+  }
+`;
+
+export const GET_CUSTOMER_TOTAL_ORDERS = /* GraphQL */ `
+  query getCustomerOrders($token: String!, $id: String!) {
+    getCustomerOrders(token: $token, id: $id) {
+      totalOrders
+    }
+  }
+`;
+
+export const GET_CUSTOMER_ORDERS = /* GraphQL */ `
+  query getCustomerOrdersPaginated($token: String!, $id: String!) {
+    getCustomerOrdersPaginated(token: $token, id: $id) {
+      objects {
+        id
+        orderId
+        cartItems {
+          product {
+            productTitle
+          }
+          price
+          quantity
+        }
+        dateCreated
+        deliveryStatus
+        paid
+        orderPriceTotal
+        orderPrice
+      }
+      page
+      pages
+      hasNext
+      hasPrev
+    }
+  }
+`;
+
+export const GET_USER_BY_ID = /* GraphQL */ `
+  query getAdminUser($token: String!, $id: String!) {
+    getUserById(token: $token, id: $id) {
+      id
+      firstName
+      lastName
+      fullName
+      dateJoined
+      isActive
+      email
+      phoneNumber
+      billingSet {
+        city
+        state
+        address
+        fullName
+      }
+    }
+  }
+`;
