@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-interface Pagination {
+export interface IPagination {
   page?: number;
   pageSize?: number;
   search?: string;
   orderBy?: string;
 }
 
-export const usePagination = (data: Pagination) => {
+export const usePagination = (data: IPagination) => {
   const router = useRouter();
   const params = new URLSearchParams();
 
