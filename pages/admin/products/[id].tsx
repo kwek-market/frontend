@@ -2,7 +2,7 @@ import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import OrderHistory from "@/components/admin/products/order-history";
 import Reviews from "@/components/admin/products/reviews";
-import { useGetProduct, useGetProductReviews } from "@/hooks/admin/products";
+import { useGetProduct } from "@/hooks/admin/products";
 import { AdminLayout } from "@/layouts";
 import { Tabs } from "antd";
 import Image from "next/image";
@@ -20,13 +20,6 @@ const ProductDetail = () => {
 
   const { data, isFetching } = useGetProduct({
     id: id as string,
-  });
-
-  const getProductReviews = useGetProductReviews({
-    page: 1,
-    pageSize: 10,
-    productId: id as string,
-    sortBy: "id",
   });
 
   return (

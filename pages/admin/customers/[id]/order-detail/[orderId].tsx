@@ -1,12 +1,12 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import CustomerDetail from "@/components/admin/customers/customer-detail";
 import { AdminLayout } from "@/layouts";
+import { Empty } from "antd";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Load from "../../../../../components/Loader/Loader";
 import { useGetOrdersAdmin } from "../../../../../hooks/admin/orders";
 import { RootState } from "../../../../../store/rootReducer";
-import { Empty } from "antd";
 
 const OrderDetail = () => {
   const router = useRouter();
@@ -17,8 +17,6 @@ const OrderDetail = () => {
   });
 
   const order = data?.order;
-
-
 
   return (
     <AdminLayout>
@@ -53,8 +51,7 @@ const OrderDetail = () => {
           />
         ) : null}
 
-
-        {error ? <Empty description={(error as any).message} />: null}
+        {error ? <Empty description={(error as any).message} /> : null}
         {isLoading ? <Load className='tw-w-96' /> : null}
         {order ? (
           <div className=' tw-mt-9 tw-text-[#574240]'>
@@ -70,7 +67,7 @@ const OrderDetail = () => {
               </div>
               <div className=' tw-flex tw-justify-between tw-pt-4 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium'>Placed on: </p>
-                <p className='tw-mb-0'>{new Date(order?.dateCreated).toString()}</p>
+                <p className='tw-mb-0'>{new Date(order?.dateCreated).toLocaleDateString()}</p>
               </div>
               <div className=' tw-flex tw-justify-between tw-pt-2 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium'>Total:</p>
@@ -83,9 +80,11 @@ const OrderDetail = () => {
                 </p>
                 <div className=' tw-flex tw-gap-x-4 tw-items-center '>
                   <div className=' tw-text-white-100 tw-rounded-sm tw-px-3 tw-py-1 tw-bg-[#1D1616] tw-bg-opacity-40'>
-                    CANCELLED - PAYMENT UNSUCCESSFUL
+                    {order?.paid
+                      ? "SUCCESS - PAYMENT SUCCESSFUL"
+                      : "CANCELLED - PAYMENT UNSUCCESSFUL"}
                   </div>
-                  <p className='tw-mb-0'>{order?.dateCreated}</p>
+                  <p className='tw-mb-0'>{new Date(order?.dateCreated).toDateString()}</p>
                 </div>
               </div>
               <div className=' tw-border-b tw-border-gray-kwek700 tw-mt-4 tw-w-full' />
@@ -94,7 +93,7 @@ const OrderDetail = () => {
                 {order?.cartItems.map((item, index) => (
                   <Item
                     key={item?.id}
-                    image={item?.product?.image?.imageUrl}
+                    image={item?.product?.image[0]?.imageUrl}
                     name={item?.product?.productTitle}
                     qty={item?.quantity}
                     amount={item?.price * item?.quantity}
