@@ -459,3 +459,42 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_PRODUCT_ORDERS = /* GraphQL */ `
+  query allOrders(
+    $token: String!
+    $page: Int
+    $pageSize: Int
+    $search: String
+    $productId: String
+    $orderBy: String
+  ) {
+    allOrders(
+      token: $token
+      page: $page
+      pageSize: $pageSize
+      search: $search
+      productId: $productId
+      orderBy: $orderBy
+    ) {
+      page
+      objects {
+        id
+        orderId
+        user {
+          fullName
+          id
+        }
+        cartItems {
+          quantity
+        }
+        orderPriceTotal
+        doorStep {
+          address
+        }
+        dateCreated
+        deliveryStatus
+      }
+    }
+  }
+`;
