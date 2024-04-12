@@ -512,3 +512,8 @@ export type SidebarProps = {
   filtering: Filtering;
   setFiltering: React.Dispatch<React.SetStateAction<Filtering>>;
 };
+
+export interface IdAndTokenPayload {
+  id: string;
+  token: string;
+}

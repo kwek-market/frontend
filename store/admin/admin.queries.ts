@@ -418,3 +418,39 @@ export const GET_USER_BY_ID = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_ORDERS_ADMIN = /* GraphQL */ `
+  query order($token: String!, $id: String!) {
+    order(token: $token, id: $id) {
+      orderId
+      dateCreated
+      user {
+        fullName
+        email
+        phoneNumber
+      }
+      orderPrice
+      orderPriceTotal
+      cartItems {
+        id
+        product {
+          productTitle
+          image {
+            imageUrl
+          }
+        }
+        price
+        quantity
+      }
+      paymentMethod
+      orderPrice
+      deliveryMethod
+      doorStep {
+        city
+        state
+        address
+        fullName
+      }
+    }
+  }
+`;
