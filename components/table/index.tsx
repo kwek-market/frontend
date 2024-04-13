@@ -8,6 +8,7 @@ interface AdminTableProps {
   select?: boolean;
   numberOfPages?: number;
   page?: number;
+  isLoading?: boolean
   goToPage?: (page: number) => void;
   goToPrev?: () => void;
   goToNext?: () => void;
@@ -21,6 +22,7 @@ const AdminTable = ({
   goToPage,
   goToPrev,
   goToNext,
+  isLoading
 }: AdminTableProps) => {
   const router = useRouter();
 
@@ -39,6 +41,7 @@ const AdminTable = ({
         columns={columns}
         dataSource={data}
         pagination={false}
+        loading={isLoading}
       />
       {data?.length > 0 && (
         <TableNav

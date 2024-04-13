@@ -109,6 +109,11 @@ export const GET_PRODUCT = /* GraphQL */ `
     product(id: $id) {
       id
       productTitle
+      brand
+      productWeight
+      warranty
+      color
+      gender
       options {
         price
         discountedPrice
@@ -450,6 +455,45 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
         state
         address
         fullName
+      }
+    }
+  }
+`;
+
+export const GET_PRODUCT_ORDERS = /* GraphQL */ `
+  query allOrders(
+    $token: String!
+    $page: Int
+    $pageSize: Int
+    $search: String
+    $productId: String
+    $orderBy: String
+  ) {
+    allOrders(
+      token: $token
+      page: $page
+      pageSize: $pageSize
+      search: $search
+      productId: $productId
+      orderBy: $orderBy
+    ) {
+      page
+      objects {
+        id
+        orderId
+        user {
+          fullName
+          id
+        }
+        cartItems {
+          quantity
+        }
+        orderPriceTotal
+        doorStep {
+          address
+        }
+        dateCreated
+        deliveryStatus
       }
     }
   }
