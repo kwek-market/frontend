@@ -50,8 +50,8 @@ const VendorApplications = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (name: string) => (
-        <Link href={"/admin/vendors/vendor-info/" + name}>
+      render: (name: string, object) => (
+        <Link href={"/admin/vendors/vendor-info/" + object.id}>
           <a className=' tw-text-black-kwek100'>{name}</a>
         </Link>
       ),
@@ -105,6 +105,7 @@ const VendorApplications = () => {
     () =>
       getVendorsData?.getUserType?.objects?.map(({ id, fullName, email, sellerProfile }) => {
         return {
+          id,
           key: id,
           name: fullName,
           email_address: email,
@@ -120,6 +121,7 @@ const VendorApplications = () => {
     () =>
       rejectedVendors?.getUserType?.objects?.map(({ id, fullName, email, sellerProfile }) => {
         return {
+          id,
           key: id,
           name: fullName,
           email_address: email,

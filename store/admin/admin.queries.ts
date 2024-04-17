@@ -420,6 +420,10 @@ export const GET_USER_BY_ID = /* GraphQL */ `
         address
         fullName
       }
+      sellerProfile {
+        id
+        phoneNumber
+      }
     }
   }
 `;
