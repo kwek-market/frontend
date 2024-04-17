@@ -1,4 +1,3 @@
-import "antd/dist/antd.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import "../styles/index.scss";
@@ -6,11 +5,13 @@ import "../styles/index.scss";
 import { Provider } from "react-redux";
 
 import store from "@/store";
+import { ConfigProvider } from "antd";
 import { createWrapper } from "next-redux-wrapper";
 import { useRouter } from "next/router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { AdminAuthenticatedLayout } from "../layouts/AdminAuthenticatedLayout/AdminAuthenticatedLayout";
+import theme from "../theme/themeConfig";
 // import { setPusherClient } from "react-pusher";
 // import Pusher from "pusher-js";
 
@@ -76,9 +77,11 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
         </Head>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            <AdminAuthenticatedLayout>
-              <Component {...pageProps} />
-            </AdminAuthenticatedLayout>
+            <ConfigProvider theme={theme}>
+              <AdminAuthenticatedLayout>
+                <Component {...pageProps} />
+              </AdminAuthenticatedLayout>
+            </ConfigProvider>
             <ReactQueryDevtools initialIsOpen />
           </QueryClientProvider>
         </Provider>
@@ -132,7 +135,9 @@ const MyApp = function ({ Component, pageProps }: AppProps) {
       </Head>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <ConfigProvider theme={theme}>
+            <Component {...pageProps} />
+          </ConfigProvider>
           <ReactQueryDevtools initialIsOpen />
         </QueryClientProvider>
       </Provider>

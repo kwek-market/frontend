@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "antd/dist/antd.css";
 import { message, Modal, Steps } from "antd";
 import Button from "@/components/buttons/Button";
 import TextInput from "@/components/input/textInput";

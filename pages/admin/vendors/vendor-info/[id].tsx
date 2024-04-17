@@ -215,6 +215,7 @@ const Customer = () => {
                       layout='fill'
                       src='https://images.pexels.com/photos/4386158/pexels-photo-4386158.jpeg'
                       className=' tw-object-cover'
+                      alt='product image'
                     />
                   </div>
 
