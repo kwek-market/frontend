@@ -76,8 +76,8 @@ const Customer = () => {
       render: order_number => (
         <Link
           href={"/admin/customers/" + router.query?.id + "/order-detail/" + "order-" + order_number}
-        >
-          <a className=' tw-text-black-kwek100'>{order_number}</a>
+          className=' tw-text-black-kwek100'>
+          {order_number}
         </Link>
       ),
     },
@@ -246,8 +246,8 @@ const Customer = () => {
               ))}
           </div>
           <div className='tw-pt-4'>
-            <Link href={"#"}>
-              <a className=' tw-underline tw-text-[#009D19] '>View All Products</a>
+            <Link href={"#"} className=' tw-underline tw-text-[#009D19] '>
+              View All Products
             </Link>
           </div>
         </div>
@@ -265,8 +265,8 @@ const Customer = () => {
           </Tabs>
         </div>
 
-        <Link href={"#"}>
-          <a className=' tw-underline tw-text-[#009D19] '>View All 17 Orders</a>
+        <Link href={"#"} className=' tw-underline tw-text-[#009D19] '>
+          View All 17 Orders
         </Link>
 
         <FormHead>Address</FormHead>

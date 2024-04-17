@@ -19,25 +19,25 @@ const heroSection = () => {
     <div className={Styles.hero}>
       <div className="tw-flex tw-justify-between tw-px-5 md:tw-px-20">
         <Link href="/">
-          <a>
-            <img src="/svg/kweklogo.svg" />
-          </a>
+
+          <img src="/svg/kweklogo.svg" />
+
         </Link>
         <div className="md:tw-flex tw-justify-center tw-items-center tw-hidden">
-          <Link href="/sell">
-            <a className={Styles.sell}>
-              <span className="tw-mr-3 lg:tw-mr-5">Marketplace</span>
-            </a>
+          <Link href="/sell" className={Styles.sell}>
+
+            <span className="tw-mr-3 lg:tw-mr-5">Marketplace</span>
+
           </Link>
           {/* <Link href="/">
 						<a className={Styles.sell}>
 							<span className="tw-mr-3 lg:tw-mr-5">Pricing</span>
 						</a>
 					</Link> */}
-          <Link href="/">
-            <a className={Styles.sell}>
-              <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
-            </a>
+          <Link href="/" className={Styles.sell}>
+
+            <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
+
           </Link>
           {!user.user.isSeller ? (
             <Button
@@ -46,11 +46,11 @@ const heroSection = () => {
               cmd={() => router.push("/sell/create-account")}
             />
           ) : (
-            <Link href="/seller/profile">
-              <a className={Styles.sell}>
-                <span className="tw-mr-3 lg:tw-mr-5">Account</span>
-              </a>
-            </Link>
+            (<Link href="/seller/profile" className={Styles.sell}>
+
+              <span className="tw-mr-3 lg:tw-mr-5">Account</span>
+
+            </Link>)
           )}
         </div>
         <i
@@ -67,12 +67,12 @@ const heroSection = () => {
                 />
               </div>
               <div className="tw-mb-5">
-                <Link href="/sell">
-                  <a className={Styles.sell}>
-                    <span className="tw-mr-3 lg:tw-mr-5 active:tw-text-red-kwek-100 active:tw-border active:tw-border-bottom">
-                      Marketplace
-                    </span>
-                  </a>
+                <Link href="/sell" className={Styles.sell}>
+
+                  <span className="tw-mr-3 lg:tw-mr-5 active:tw-text-red-kwek-100 active:tw-border active:tw-border-bottom">
+                    Marketplace
+                  </span>
+
                 </Link>
               </div>
               {/* <Link href="/">
@@ -81,10 +81,10 @@ const heroSection = () => {
 								</a>
 							</Link> */}
               <div className="tw-mb-5">
-                <Link href="/">
-                  <a className={Styles.sell}>
-                    <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
-                  </a>
+                <Link href="/" className={Styles.sell}>
+
+                  <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
+
                 </Link>
               </div>
               {!user.user.isSeller ? (
@@ -97,10 +97,10 @@ const heroSection = () => {
                 </div>
               ) : (
                 <div className="tw-mb-5">
-                  <Link href="/seller/profile">
-                    <a className={Styles.sell}>
-                      <span className="tw-mr-3 lg:tw-mr-5">Account</span>
-                    </a>
+                  <Link href="/seller/profile" className={Styles.sell}>
+
+                    <span className="tw-mr-3 lg:tw-mr-5">Account</span>
+
                   </Link>
                 </div>
               )}

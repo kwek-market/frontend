@@ -75,8 +75,10 @@ const Orders = () => {
       dataIndex: "id",
       key: "order_number",
       render: (id: {}) => (
-        <Link href={"/admin/customers/" + "Maryjane Egbu" + "/order-detail/" + id}>
-          <a className=' tw-text-black-kwek100'>{id}</a>
+        <Link
+          href={"/admin/customers/" + "Maryjane Egbu" + "/order-detail/" + id}
+          className=' tw-text-black-kwek100'>
+          {id}
         </Link>
       ),
     },

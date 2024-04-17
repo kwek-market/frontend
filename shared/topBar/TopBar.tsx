@@ -12,11 +12,11 @@ const Topbar = function ({ withLogo }: { withLogo: boolean }) {
   return (
     <div id={styles.topbar}>
       {withLogo && (
-        <Link href="/">
-          <a className={styles.logo}>
-            <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
-          </a>
-        </Link>
+        (<Link href="/" className={styles.logo}>
+
+          <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
+
+        </Link>)
       )}
 
       <div className={styles.ad}>
@@ -49,11 +49,11 @@ const Topbar = function ({ withLogo }: { withLogo: boolean }) {
         </div>
 
         <Link href="/">
-          <a>
-            <button className={`btn btn--outline-white ${styles.ad_cta}`}>
-              Learn More
-            </button>
-          </a>
+
+          <button className={`btn btn--outline-white ${styles.ad_cta}`}>
+            Learn More
+          </button>
+
         </Link>
       </div>
 

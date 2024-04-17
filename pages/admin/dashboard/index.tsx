@@ -209,10 +209,11 @@ const Dashboard = () => {
         <div className=' tw-border tw-border-[#E4E4E7] tw-rounded-[10px] tw-flex-[5] tw-p-6'>
           <div className='tw-flex tw-w-full tw-justify-between tw-items-center tw-gap-2'>
             <h2 className='tw-mb-0 tw-tracking-[1px] tw-text-[#18181B]'>Active Customers</h2>
-            <Link href='/admin/customers'>
-              <a className=' tw-uppercase tw-text-xs tw-font-semibold tw-text-[#151518] tw-text-opacity-50 tw-tracking-[1px] tw-flex tw-items-center tw-gap-x-2'>
-                See All customers <ChevronRightIcon width={20} height={20} />
-              </a>
+            <Link
+              href='/admin/customers'
+              className=' tw-uppercase tw-text-xs tw-font-semibold tw-text-[#151518] tw-text-opacity-50 tw-tracking-[1px] tw-flex tw-items-center tw-gap-x-2'>
+              See All customers<ChevronRightIcon width={20} height={20} />
+
             </Link>
           </div>
 

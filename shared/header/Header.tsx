@@ -60,13 +60,13 @@ const Header = function ({
     <Menu>
       <Menu.Item>
         <Link href='/profile/account'>
-          <a>Account</a>
+          Account
         </Link>
       </Menu.Item>
 
       <Menu.Item>
-        <Link href='/'>
-          <a onClick={() => handleLogout()}>Logout</a>
+        <Link href='/' onClick={() => handleLogout()}>
+          Logout
         </Link>
       </Menu.Item>
     </Menu>
@@ -82,34 +82,34 @@ const Header = function ({
         )}
       </div>
 
-      <Link href='/'>
-        <a className={`${styles.logo} tw-px-2`}>
-          <Image
-            width='180'
-            height='30'
-            src='/svg/kweklogo.svg'
-            alt='Kwek logo'
-            className={styles.logo_image}
-          />
-        </a>
+      <Link href='/' className={`${styles.logo} tw-px-2`}>
+
+        <Image
+          width='180'
+          height='30'
+          src='/svg/kweklogo.svg'
+          alt='Kwek logo'
+          className={styles.logo_image}
+        />
+
       </Link>
 
       <div className={`${styles.headerControls} tw-flex`}>
         <Link href='/wishlist'>
-          <a>
-            <FiHeart
-              className='tw-text-black-stock'
-              style={{ height: "28px", width: "28px", marginRight: "1.5rem" }}
-            />
-          </a>
+
+          <FiHeart
+            className='tw-text-black-stock'
+            style={{ height: "28px", width: "28px", marginRight: "1.5rem" }}
+          />
+
         </Link>
         <Link href='/cart'>
-          <a>
-            <AiOutlineShoppingCart
-              className='tw-text-black-stock'
-              style={{ height: "28px", width: "30px" }}
-            />
-          </a>
+
+          <AiOutlineShoppingCart
+            className='tw-text-black-stock'
+            style={{ height: "28px", width: "30px" }}
+          />
+
         </Link>
       </div>
 
@@ -131,46 +131,46 @@ const Header = function ({
               </Dropdown>
             </div>
           ) : (
-            <Link href='/login'>
-              <a className={styles.shortcuts_item}>
-                <Image
-                  width='16'
-                  height='18'
-                  src='/svg/user.svg'
-                  className={styles.shortcuts_icon}
-                />
-                <p className={styles.shortcuts_label}>Sign In</p>
-              </a>
-            </Link>
+            (<Link href='/login' className={styles.shortcuts_item}>
+
+              <Image
+                width='16'
+                height='18'
+                src='/svg/user.svg'
+                className={styles.shortcuts_icon}
+              />
+              <p className={styles.shortcuts_label}>Sign In</p>
+
+            </Link>)
           )}
 
-          <Link href='/wishlist'>
-            <a className={styles.shortcuts_item}>
-              <div className={styles.shortcuts_iconWrap}>
-                <Image
-                  width='16'
-                  height='18'
-                  src='/svg/heart-filled.svg'
-                  className={styles.shortcuts_icon}
-                />
-                <span className={styles.shortcuts_iconSuper}>{wishlist.wishlists?.length}</span>
-              </div>
-              <p className={styles.shortcuts_label}>Saved</p>
-            </a>
+          <Link href='/wishlist' className={styles.shortcuts_item}>
+
+            <div className={styles.shortcuts_iconWrap}>
+              <Image
+                width='16'
+                height='18'
+                src='/svg/heart-filled.svg'
+                className={styles.shortcuts_icon}
+              />
+              <span className={styles.shortcuts_iconSuper}>{wishlist.wishlists?.length}</span>
+            </div>
+            <p className={styles.shortcuts_label}>Saved</p>
+
           </Link>
-          <Link href='/cart'>
-            <a className={styles.shortcuts_item}>
-              <div className={styles.shortcuts_iconWrap}>
-                <Image
-                  width='16'
-                  height='18'
-                  src='/svg/cart.svg'
-                  className={styles.shortcuts_icon}
-                />
-                <span className={styles.shortcuts_iconSuper}>{cart.cart?.length}</span>
-              </div>
-              <p className={styles.shortcuts_label}>Cart</p>
-            </a>
+          <Link href='/cart' className={styles.shortcuts_item}>
+
+            <div className={styles.shortcuts_iconWrap}>
+              <Image
+                width='16'
+                height='18'
+                src='/svg/cart.svg'
+                className={styles.shortcuts_icon}
+              />
+              <span className={styles.shortcuts_iconSuper}>{cart.cart?.length}</span>
+            </div>
+            <p className={styles.shortcuts_label}>Cart</p>
+
           </Link>
         </div>
       </div>

@@ -53,7 +53,7 @@ function Header() {
             },
           }}
         >
-          <a>account</a>
+          account
         </Link>
       </Menu.Item>
       <Menu.Item>
@@ -128,25 +128,25 @@ function Header() {
       <header className="tw-bg-red-kwek100 tw-py-4 tw-px-8 tw-flex tw-justify-between">
         <nav className="md:tw-flex-[3] lg:tw-flex-[5]">
           <Link href="/">
-            <a>
-              <img src="/svg/kwek-logo-white.svg" alt="logo" />
-            </a>
+
+            <img src="/svg/kwek-logo-white.svg" alt="logo" />
+
           </Link>
         </nav>
         <nav className="md:tw-flex tw-justify-between tw-flex-[4] tw-hidden">
           <nav>
-            <Link href="/seller/profile">
-              <a className={`tw-mr-5 ${border} tw-capitalize `}>your store</a>
+            <Link href="/seller/profile" className={`tw-mr-5 ${border} tw-capitalize `}>
+              your store
             </Link>
             {/* <Link href="/sell/pricing">
               <a className="tw-mr-5 tw-text-white-100 tw-capitalize tw-pb-2">
                 pricing
               </a>
             </Link> */}
-            <Link href="/all">
-              <a className="tw-mr-5  tw-text-white-100 tw-capitalize  tw-pb-2">
+            <Link href="/all" className="tw-mr-5  tw-text-white-100 tw-capitalize  tw-pb-2">
+              
                 buy on kwek
-              </a>
+              
             </Link>
           </nav>
           <nav className="tw-flex ">
@@ -188,10 +188,10 @@ function Header() {
                   />
                 </div>
                 <div className="tw-mb-5">
-                  <Link href="/">
-                    <a className="tw-text-black-kwek100 hover:tw-text-blue-400">
-                      <span className="tw-mr-3 lg:tw-mr-5">buy on kwek</span>
-                    </a>
+                  <Link href="/" className="tw-text-black-kwek100 hover:tw-text-blue-400">
+
+                    <span className="tw-mr-3 lg:tw-mr-5">buy on kwek</span>
+
                   </Link>
                 </div>
                 <div
@@ -208,10 +208,12 @@ function Header() {
                   </span>
                 </div>
                 <div className="tw-mb-5">
-                  <Link href="/seller/profile/#settings">
-                    <a className="tw-text-black-kwek100 hover:tw-text-blue-400">
+                  <Link
+                    href="/seller/profile/#settings"
+                    className="tw-text-black-kwek100 hover:tw-text-blue-400">
+                    
                       account
-                    </a>
+                    
                   </Link>
                 </div>
                 <div className="tw-mb-5">

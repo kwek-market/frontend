@@ -60,8 +60,8 @@ const Customer = () => {
       render: order_number => (
         <Link
           href={"/admin/customers/" + router.query?.id + "/order-detail/" + "order-" + order_number}
-        >
-          <a className=' tw-text-black-kwek100'>{order_number}</a>
+          className=' tw-text-black-kwek100'>
+          {order_number}
         </Link>
       ),
     },
@@ -175,8 +175,10 @@ const Customer = () => {
         </div>
 
         {orders?.getCustomerOrdersPaginated?.objects?.length > 0 ? (
-          <Link href={"/admin/customers/" + router.query?.id + "/order-list"}>
-            <a className=' tw-underline tw-text-[#009D19] '>View All Orders</a>
+          <Link
+            href={"/admin/customers/" + router.query?.id + "/order-list"}
+            className=' tw-underline tw-text-[#009D19] '>
+            View All Orders
           </Link>
         ) : null}
 

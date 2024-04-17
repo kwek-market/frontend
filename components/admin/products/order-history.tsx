@@ -44,8 +44,10 @@ const OrderHistory = ({ isFetching }: Prop) => {
       dataIndex: "orderId",
       key: "orderId",
       render: (orderId, order) => (
-        <Link href={"/admin/customers/" + order?.user?.id + "/order-detail/" + order?.id}>
-          <a className=' tw-text-black-kwek100'>{orderId}</a>
+        <Link
+          href={"/admin/customers/" + order?.user?.id + "/order-detail/" + order?.id}
+          className=' tw-text-black-kwek100'>
+          {orderId}
         </Link>
       ),
     },

@@ -22,7 +22,11 @@ const BreadCrumbs = ({
     <div>
       <div className=" tw-flex tw-text-breadcrumb tw-font-poppins tw-tracking-[0.2px] tw-gap-x-[0.1rem] md:tw-gap-x-4">
         {items.map((item, index) => (
-          <Link className="tw-flex tw-gap-x-[0.1rem] md:tw-gap-x-4 tw-text-breadcrumb" href={item.path} key={index}>
+          <Link
+            className="tw-flex tw-gap-x-[0.1rem] md:tw-gap-x-4 tw-text-breadcrumb"
+            href={item.path}
+            key={index}
+            legacyBehavior>
             
               <span className="tw-max-w-[6rem] md:tw-max-w-max tw-truncate">
                 {item.name}
@@ -40,17 +44,17 @@ const BreadCrumbs = ({
             {header}
           </h1>
           {buttonText ? (
-            <Link href={buttonPath}>
-              <a>
-                <button
-                  // className="md:tw-font-semibold tw-font-extralight  tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
-                  className="tw-font-semibold tw-py-1 tw-px-3  md:tw-py-2 md:tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
-                  type="button"
-                >
-                  {buttonText}
-                </button>
-              </a>
-            </Link>
+            (<Link href={buttonPath}>
+
+              <button
+                // className="md:tw-font-semibold tw-font-extralight  tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
+                className="tw-font-semibold tw-py-1 tw-px-3  md:tw-py-2 md:tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
+                type="button"
+              >
+                {buttonText}
+              </button>
+
+            </Link>)
           ) : null}
         </div>
       ) : null}

@@ -37,8 +37,8 @@ const CategoryList = () => {
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
-        >
-          <a className='tw-py-2 tw-px-4'>Edit</a>
+          className='tw-py-2 tw-px-4'>
+          Edit
         </Link>
       </Menu.Item>
       <Menu.Item className='tw-py-2 tw-px-4' onClick={(e:any) => deleteCategory(id)}>

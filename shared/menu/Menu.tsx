@@ -135,15 +135,15 @@ const Menu = function ({}) {
         <p>Categories</p>
         <div>
           {categories.slice(0, 7).map((category, index) => (
-            <Link key={index} href={`/category/${category.name}`}>
-              <a>
-                <CategoryBox
-                  key={category.id}
-                  name={category.name}
-                  icon="/svg/cat-icon-electronics.svg"
-                />
-              </a>
-            </Link>
+            (<Link key={index} href={`/category/${category.name}`}>
+
+              <CategoryBox
+                key={category.id}
+                name={category.name}
+                icon="/svg/cat-icon-electronics.svg"
+              />
+
+            </Link>)
           ))}
         </div>
       </div>

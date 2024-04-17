@@ -95,73 +95,74 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             />
           )}
         </span> */}{" "}
-        <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
-          <a
-            className='tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block'
-            onClick={e => {
-              updateClicks(prod.id, user.token);
-              e.stopPropagation();
-            }}
-          >
-            <span className='tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10'>
+        <Link
+          href={`/product/${prod.id}?id=${prod.productTitle}`}
+          replace
+          className='tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block'
+          onClick={e => {
+            updateClicks(prod.id, user.token);
+            e.stopPropagation();
+          }}>
+
+          <span className='tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10'>
+            <i
+              className={`fas fa-shopping-cart ${
+                !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
+              } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
+              style={{ padding: "5px" }}
+              onClick={() => addToCart(prod?.options[0]?.id)}
+            />
+            {user.token && (
               <i
-                className={`fas fa-shopping-cart ${
-                  !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
-                } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
+                className={`fas fa-heart tw-p-1 ${
+                  !checkIfItemInWishlist(id) ? "tw-bg-white-100" : "tw-bg-gray-kwek700"
+                } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
                 style={{ padding: "5px" }}
-                onClick={() => addToCart(prod?.options[0]?.id)}
+                onClick={() => addToWishlist(id)}
               />
-              {user.token && (
-                <i
-                  className={`fas fa-heart tw-p-1 ${
-                    !checkIfItemInWishlist(id) ? "tw-bg-white-100" : "tw-bg-gray-kwek700"
-                  } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
-                  style={{ padding: "5px" }}
-                  onClick={() => addToWishlist(id)}
-                />
-              )}
-            </span>
-            <span className='tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100'>
-              details
-            </span>
-          </a>
+            )}
+          </span>
+          <span className='tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100'>
+            details
+          </span>
+
         </Link>
       </div>
 
       <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
-        <a>
-          <div className={styles.box_details}>
-            <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
-            <p className={styles.box_productPrice}>
-              {!!prod.options[0]?.discountedPrice && (
-                <span>
-                  ₦{""} {prod.options[0].discountedPrice}
-                </span>
-              )}
-              <span>₦{prod.options[0]?.price}</span>
-            </p>
+        <div className={styles.box_details}>
+          <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
-            {prod.productRating.length > 0 ? (
-              <div className='tw-flex tw-flex-wrap tw-justify-center'>
-                <Rate
-                  style={{ fontSize: "0.75rem" }}
-                  allowHalf
-                  disabled
-                  value={prod.productRating[0]?.rating}
-                />
-                <small className='tw-text-gray-kwek400'>
-                  ({prod.productRating[0].likes} reviews)
-                </small>
-              </div>
-            ) : (
-              <div className='tw-flex tw-flex-wrap tw-justify-center'>
-                <Rate style={{ fontSize: "0.75rem" }} allowHalf disabled value={0} />
-                <small className='tw-text-gray-kwek400'>(0 Reviews)</small>
-              </div>
+          <p className={styles.box_productPrice}>
+            {!!prod.options[0]?.discountedPrice && (
+              <span>
+                ₦{""} {prod.options[0].discountedPrice}
+              </span>
             )}
-          </div>
-        </a>
+            <span>₦{prod.options[0]?.price}</span>
+          </p>
+
+          {prod.productRating.length > 0 ? (
+            <div className='tw-flex tw-flex-wrap tw-justify-center'>
+              <Rate
+                style={{ fontSize: "0.75rem" }}
+                allowHalf
+                disabled
+                value={prod.productRating[0]?.rating}
+              />
+              <small className='tw-text-gray-kwek400'>
+                ({prod.productRating[0].likes} reviews)
+              </small>
+            </div>
+          ) : (
+            <div className='tw-flex tw-flex-wrap tw-justify-center'>
+              <Rate style={{ fontSize: "0.75rem" }} allowHalf disabled value={0} />
+              <small className='tw-text-gray-kwek400'>(0 Reviews)</small>
+            </div>
+          )}
+        </div>
+
       </Link>
     </div>
   );
