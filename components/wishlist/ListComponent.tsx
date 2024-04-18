@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "./list.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getIp } from "@/helpers";

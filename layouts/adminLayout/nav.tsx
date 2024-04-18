@@ -6,7 +6,7 @@ import { getInitials } from "@/helpers";
 import { RootState } from "@/store/rootReducer";
 import { setSearched } from "@/store/search/search.action";
 import { MenuIcon } from "@heroicons/react/solid";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

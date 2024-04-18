@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import styles from "../checkGrid/checkGrid.module.scss";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { BillingAddressType } from "@/interfaces/commonTypes";

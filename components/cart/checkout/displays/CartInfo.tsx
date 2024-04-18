@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "../checkGrid/checkGrid.module.scss";
 import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";

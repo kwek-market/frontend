@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { message, Tabs } from "antd";
 import { FaStar } from "react-icons/fa";
 import styles from "./productDesc.module.scss";

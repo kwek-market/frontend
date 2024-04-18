@@ -1,5 +1,5 @@
 import AdminTable from "@/components/table";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";

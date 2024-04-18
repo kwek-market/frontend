@@ -5,7 +5,7 @@ import styles from "./Header.module.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 

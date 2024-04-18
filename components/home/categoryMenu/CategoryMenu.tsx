@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "./CategoryMenu.module.scss";
 import CategoryMobile from "./CategoryMobile";
 import { useSelector } from "react-redux";

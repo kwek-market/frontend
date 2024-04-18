@@ -7,7 +7,7 @@ import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { Carousel, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import React, { Fragment, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

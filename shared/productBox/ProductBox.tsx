@@ -7,7 +7,7 @@ import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { Rate } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import Loader from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";

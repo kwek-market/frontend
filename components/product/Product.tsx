@@ -1,6 +1,6 @@
 import { ProductType } from "@/interfaces/commonTypes";
 import React, { Fragment } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import StarRatingComponent from "react-star-rating-component";
 import { updateClicks } from "@/helpers";

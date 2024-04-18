@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../checkGrid/checkGrid.module.scss";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
 import { message } from "antd";

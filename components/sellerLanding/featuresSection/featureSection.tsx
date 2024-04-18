@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Styles from "./featureSection.module.scss";
 import Testimonials from "../Testimonials/testimonials";
 

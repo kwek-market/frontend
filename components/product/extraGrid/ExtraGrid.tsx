@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import styles from "./extraGrid.module.scss";
 import { ProductType } from "@/interfaces/commonTypes";

@@ -1,7 +1,7 @@
 import CancelIcon from "@/components/icons/cancel";
 import SimpleModal from "@/components/modal";
 import React, { useMemo } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Load from "@/components/Loader/Loader";
 
 interface SellerTrackModalProps {

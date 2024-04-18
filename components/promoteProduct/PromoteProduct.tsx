@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "./PromoteProduct.module.scss";
 import useProduct from "@/hooks/useProduct";
 import Load from "../Loader/Loader";
