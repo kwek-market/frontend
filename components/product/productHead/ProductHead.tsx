@@ -144,11 +144,11 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <div className={styles.navigation}>
           <Image src='/svg/house.svg' width='20' height='20' />
           <i className='fas fa-angle-right' />
-          <a>{product?.category?.name}</a>
+          <span>{product?.category?.name}</span>
           <i className='fas fa-angle-right' />
-          <a>{product?.subcategory?.name}</a>
+          <span>{product?.subcategory?.name}</span>
           <i className='fas fa-angle-right' />
-          <a>{product.productTitle}</a>
+          <span>{product.productTitle}</span>
         </div>
         <p className={styles.productTitle}>{product.productTitle}</p>
         <div className={styles.product_subDesc}>

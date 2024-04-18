@@ -47,7 +47,7 @@ const nextConfig = {
     "rc-upload",
     "rc-util",
     "@rc-component/tour",
-    "classnames",
+    "@ant-design/cssinjs",
   ],
 };
 

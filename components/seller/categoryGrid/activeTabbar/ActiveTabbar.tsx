@@ -1,17 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
-import styles from './activeTabbar.module.scss';
+import Link from "next/link";
+import styles from "./activeTabbar.module.scss";
 
 const ActiveTabbar = function () {
   return (
     <div className={styles.bar_container}>
       <div className={styles.bar_content}>
-        <Link href="/seller/filter" legacyBehavior>
+        <Link href='/seller/filter' legacyBehavior>
           <div className={styles.filter}>
-            <a>
-              Filters
-              <i className="fas fa-angle-right" />
-            </a>
+            Filters
+            <i className='fas fa-angle-right' />
           </div>
         </Link>
         <div className={styles.sortPart}>
@@ -25,7 +22,7 @@ const ActiveTabbar = function () {
               <option>Product Rating</option>
             </select>
             <div className={styles.arrow_down}>
-              <i className="fas fa-angle-down" />
+              <i className='fas fa-angle-down' />
             </div>
           </div>
         </div>

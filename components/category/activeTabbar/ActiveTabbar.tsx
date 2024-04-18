@@ -19,20 +19,20 @@ const ActiveTabbar = function ({
       <div className={styles.bar_content}>
         {filter ? (
           <div className={styles.filter} onClick={() => setFilter(!filter)}>
-            <a>
+            <span>
               <i className="fas fa-angle-left" />
               Hide Filters
-            </a>
+            </span>
           </div>
         ) : (
           <div
             className={styles.filter__red}
             onClick={() => setFilter(!filter)}
           >
-            <a>
+            <span>
               Filters
               <i className="fas fa-angle-right" />
-            </a>
+            </span>
           </div>
         )}
 

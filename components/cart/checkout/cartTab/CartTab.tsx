@@ -15,7 +15,7 @@ const CartTab = function () {
           2. Checkout<i className="fas fa-angle-right" />
 
         </Link>
-        <a>3. Order Complete</a>
+        3. Order Complete
       </div>
     </div>
   );

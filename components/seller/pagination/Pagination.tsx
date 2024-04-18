@@ -1,28 +1,26 @@
-import React from 'react';
-import Link from 'next/link';
-import styles from './pagination.module.scss';
+import styles from "./pagination.module.scss";
 
 const Pagination = function () {
   return (
     <div className={styles.pag_container}>
       <div className={styles.pag_button}>
-        <a>
-          <i className="fas fa-angle-left" />
+        <span>
+          <i className='fas fa-angle-left' />
           <p>Prev</p>
-        </a>
+        </span>
       </div>
       <div className={styles.pag_sub}>
-        <a>1</a>
+        <span>1</span>
         <a className={styles.pag_active}>2</a>
-        <a>3</a>
+        <span>3</span>
         <p>...</p>
-        <a>23</a>
+        <span>23</span>
       </div>
       <div className={styles.pag_button}>
-        <a>
+        <span>
           <p>Next</p>
-          <i className="fas fa-angle-right" />
-        </a>
+          <i className='fas fa-angle-right' />
+        </span>
       </div>
     </div>
   );

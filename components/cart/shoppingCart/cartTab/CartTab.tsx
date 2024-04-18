@@ -8,11 +8,11 @@ const CartTab = function () {
   return (
     <div className={styles.tab_container}>
       <div className={styles.tab_content}>
-        <a className={styles.active}>1. Shopping Cart</a>
+        <div className={styles.active}>1. Shopping Cart</div>
         <i className="fas fa-angle-right" />
-        <a>2. Checkout</a>
+        <div>2. Checkout</div>
         <i className="fas fa-angle-right" />
-        <a>3. Order Complete</a>
+        <div>3. Order Complete</div>
       </div>
     </div>
   );
