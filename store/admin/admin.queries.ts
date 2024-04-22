@@ -273,6 +273,10 @@ export const GET_SELLERS = /* GraphQL */ `
         fullName
         dateJoined
         email
+        wallet {
+          id
+          balance
+        }
         sellerProfile {
           id
           state
@@ -420,6 +424,18 @@ export const GET_USER_BY_ID = /* GraphQL */ `
         address
         fullName
       }
+      sellerProfile {
+        id
+        phoneNumber
+        shopAddress
+        shopName
+      }
+      storedetail {
+        id
+        storeName
+        email
+        address
+      }
     }
   }
 `;
@@ -495,6 +511,14 @@ export const GET_PRODUCT_ORDERS = /* GraphQL */ `
         dateCreated
         deliveryStatus
       }
+    }
+  }
+`;
+
+export const GET_CUSTOMER_AVERAGE_ORDERS = /* GraphQL */ `
+  query getCustomerAverageOrder($token: String!, $id: String!) {
+    getCustomerAverageOrder(token: $token, id: $id) {
+      averageOrderValue
     }
   }
 `;

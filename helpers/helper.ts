@@ -1,4 +1,5 @@
 import { VERIFY_TOKEN } from "@/store/user/user.queries";
+import dayjs from "dayjs";
 import { userFetcher } from "./userFetcher";
 
 export function getInitials(name: string) {
@@ -97,7 +98,6 @@ export function debounce(func: any, timeout: number = 300) {
   };
 }
 
-
 export function deletePropertyNullUndefined(obj: { [key: string]: any }) {
   for (let key in obj) {
     if (obj[key] === null || obj[key] === undefined) {
@@ -106,5 +106,17 @@ export function deletePropertyNullUndefined(obj: { [key: string]: any }) {
   }
 }
 
+export function getMonthDateRange(dayJsDate: dayjs.Dayjs) {
+  // Current month
+  const currentMonthStart = dayJsDate.startOf("month");
+  const currentMonthEnd = dayJsDate.endOf("month");
 
+  // Last month
+  // const lastMonthStart = dayjs().subtract(1, "month").startOf("month");
+  // const lastMonthEnd = dayjs().subtract(1, "month").endOf("month");
 
+  return {
+    start: currentMonthStart.format("YYYY-MM-DD"),
+    end: currentMonthEnd.format("YYYY-MM-DD"),
+  };
+}
