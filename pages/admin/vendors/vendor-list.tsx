@@ -180,10 +180,40 @@ const Vendors = () => {
           onTabClick={key => setActiveKey(key)}
         >
           <TabPane tab='Active Vendors' key='1'>
-            <AdminTable data={data} columns={columns} isLoading={isActiveLoading} />
+            <AdminTable
+              data={data}
+              columns={columns}
+              isLoading={isActiveLoading}
+              numberOfPages={activeData?.getUserType?.pages}
+              page={activeData?.getUserType?.page}
+              goToNext={() => {
+                if (activeData?.getUserType?.hasNext) setPage(page + 1);
+              }}
+              goToPrev={() => {
+                if (activeData?.getUserType?.hasPrev) setPage(page - 1);
+              }}
+              goToPage={page => {
+                setPage(page);
+              }}
+            />
           </TabPane>
           <TabPane tab='Red-flagged Vendors' key='2'>
-            <AdminTable data={redFlagged} columns={columns} isLoading={isRedFlagLoading} />
+            <AdminTable
+              data={redFlagged}
+              columns={columns}
+              isLoading={isRedFlagLoading}
+              numberOfPages={redFlaggedData?.getUserType?.pages}
+              page={redFlaggedData?.getUserType?.page}
+              goToNext={() => {
+                if (redFlaggedData?.getUserType?.hasNext) setPage(page + 1);
+              }}
+              goToPrev={() => {
+                if (redFlaggedData?.getUserType?.hasPrev) setPage(page - 1);
+              }}
+              goToPage={page => {
+                setPage(page);
+              }}
+            />
           </TabPane>
         </Tabs>
       </div>
