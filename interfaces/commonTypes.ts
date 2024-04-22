@@ -446,7 +446,7 @@ export type PagePayload = {
   pageSize?: number;
   token: string;
   search?: string;
-  sortBy: string;
+  sortBy?: string;
   priceRange?: number[];
   sizes?: string[];
   keyword?: string[];
