@@ -273,6 +273,10 @@ export const GET_SELLERS = /* GraphQL */ `
         fullName
         dateJoined
         email
+        wallet {
+          id
+          balance
+        }
         sellerProfile {
           id
           state

@@ -1,15 +1,16 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
+import { reduceCharacterLength } from "@/helpers/helper";
+import { useGetSellers } from "@/hooks/admin/vendors";
 import { AdminLayout } from "@/layouts";
+import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import React, { useMemo, useState } from "react";
-import { reduceCharacterLength } from "@/helpers/helper";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import { useGetSellers } from "@/hooks/admin/vendors";
+import { PAGE_SIZE } from "../../../constants/constants";
 
 const Vendors = () => {
   const [activeKey, setActiveKey] = useState("1");
@@ -22,7 +23,7 @@ const Vendors = () => {
     user: { token },
   } = useSelector((state: RootState) => state);
 
-  const { data: activeData, isLoading } = useGetSellers({
+  const { data: activeData, isLoading: isActiveLoading } = useGetSellers({
     token,
     seller: true,
     customer: false,
@@ -30,10 +31,10 @@ const Vendors = () => {
     active: true,
     redFlagged: false,
     page,
-    pageSize: 10,
+    pageSize: PAGE_SIZE,
   });
-  
-  const { data: redFlaggedData, isFetching } = useGetSellers({
+
+  const { data: redFlaggedData, isFetching: isRedFlagLoading } = useGetSellers({
     token,
     seller: true,
     customer: false,
@@ -41,7 +42,7 @@ const Vendors = () => {
     active: false,
     redFlagged: true,
     page,
-    pageSize: 10,
+    pageSize: PAGE_SIZE,
   });
 
   const columns = [
@@ -49,11 +50,11 @@ const Vendors = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (name) => {
+      render: name => {
         name = reduceCharacterLength(name, maxNameLength);
         return (
           <Link href={"/admin/vendors/vendor-info/" + name}>
-            <a className=" tw-text-black-kwek100">{name}</a>
+            <a className=' tw-text-black-kwek100'>{name}</a>
           </Link>
         );
       },
@@ -62,17 +63,19 @@ const Vendors = () => {
       title: "Email Address",
       dataIndex: "email_address",
       key: "email_address",
-      render: (email) => reduceCharacterLength(email, maxNameLength),
+      render: email => reduceCharacterLength(email, maxNameLength),
     },
     {
       title: "Date Joined",
       dataIndex: "date_joined",
       key: "date_joined",
+      render: date => <p>{new Date(date).toDateString()}</p>,
     },
     {
       title: "Country",
       dataIndex: "country",
       key: "country",
+      render: () => <p>Nigeria</p>,
     },
     {
       title: "State",
@@ -80,7 +83,7 @@ const Vendors = () => {
       key: "state",
     },
     {
-      title: "Amount Sold",
+      title: "Wallet Balance",
       dataIndex: "amount_sold",
       key: "amount_sold",
     },
@@ -89,7 +92,7 @@ const Vendors = () => {
       key: "action",
       render: () => (
         <span>
-          <DotsVerticalIcon className="tw-h-5 tw-w-5 tw-text-[#27BE63]" />
+          <DotsVerticalIcon className='tw-h-5 tw-w-5 tw-text-[#27BE63]' />
         </span>
       ),
     },
@@ -97,36 +100,39 @@ const Vendors = () => {
 
   const data = useMemo(
     () =>
-      activeData?.getUserType?.objects?.map(({ id, fullName, email, dateJoined, sellerProfile }) => {
-        return {
-          key: id,
-          name: fullName,
-          email_address: email,
-          date_joined: dateJoined,
-          country: sellerProfile.lga ,
-          state: sellerProfile.state,
-          amount_sold: 0
-        };
-      }),
+      activeData?.getUserType?.objects?.map(
+        ({ id, fullName, email, dateJoined, sellerProfile, wallet }) => {
+          return {
+            key: id,
+            name: fullName,
+            email_address: email,
+            date_joined: dateJoined,
+            country: sellerProfile[0]?.lga,
+            state: sellerProfile[0]?.state,
+            amount_sold: wallet?.balance,
+          };
+        }
+      ),
     [activeData]
   );
 
   const redFlagged = useMemo(
     () =>
-      redFlaggedData?.getUserType?.objects?.map(({ id, fullName, email, dateJoined, sellerProfile }) => {
-        return {
-          key: id,
-          name: fullName,
-          email_address: email,
-          date_joined: dateJoined,
-          country: sellerProfile.lga ,
-          state: sellerProfile.state,
-          amount_sold: 0
-        };
-      }),
+      redFlaggedData?.getUserType?.objects?.map(
+        ({ id, fullName, email, dateJoined, sellerProfile, wallet }) => {
+          return {
+            key: id,
+            name: fullName,
+            email_address: email,
+            date_joined: dateJoined,
+            country: sellerProfile[0]?.lga,
+            state: sellerProfile[0]?.state,
+            amount_sold: wallet?.balance,
+          };
+        }
+      ),
     [activeData]
   );
-  
 
   return (
     <AdminLayout>
@@ -138,12 +144,12 @@ const Vendors = () => {
             path: "/admin/vendors/vendor-list",
           },
         ]}
-        header="Vendors List"
-        buttonPath="#"
-        buttonText="Send Bulk Email"
+        header='Vendors List'
+        buttonPath='#'
+        buttonText='Send Bulk Email'
       />
 
-      <div className=" tw-flex tw-gap-x-2 tw-mt-6 tw-items-center ">
+      {/* <div className=" tw-flex tw-gap-x-2 tw-mt-6 tw-items-center ">
         <span className=" tw-opacity-70">Sort By:</span>
         <select
           value="all"
@@ -153,30 +159,31 @@ const Vendors = () => {
           <option value="fashion">Fashion</option>
           <option value="auto">Automobiles</option>
         </select>
-      </div>
-      <div className="tw-mt-6">
+      </div> */}
+
+      <div className='tw-mt-6'>
         <Search
           value={searchValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setSearchValue(e.target.value);
           }}
-          placeholder="Search by Store name"
+          placeholder='Search by Store name'
         />
       </div>
 
-      <div className=" tw-pt-4">
+      <div className=' tw-pt-4'>
         <Tabs
           animated
           tabBarStyle={{ borderColor: "red" }}
-          className="adminTab"
+          className='adminTab'
           activeKey={activeKey}
-          onTabClick={(key) => setActiveKey(key)}
+          onTabClick={key => setActiveKey(key)}
         >
-          <TabPane tab="Active Vendors" key="1">
-            <AdminTable data={data} columns={columns} />
+          <TabPane tab='Active Vendors' key='1'>
+            <AdminTable data={data} columns={columns} isLoading={isActiveLoading} />
           </TabPane>
-          <TabPane tab="Red-flagged Vendors" key="2">
-            <AdminTable data={redFlagged} columns={columns} />
+          <TabPane tab='Red-flagged Vendors' key='2'>
+            <AdminTable data={redFlagged} columns={columns} isLoading={isRedFlagLoading} />
           </TabPane>
         </Tabs>
       </div>
