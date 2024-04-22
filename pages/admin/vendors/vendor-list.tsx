@@ -10,11 +10,14 @@ import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { useDebounce } from "use-debounce";
 import { PAGE_SIZE } from "../../../constants/constants";
 
 const Vendors = () => {
   const [activeKey, setActiveKey] = useState("1");
   const [searchValue, setSearchValue] = useState("");
+  const [searchDebouncedValue] = useDebounce(searchValue, 600);
+
   const { TabPane } = Tabs;
   const maxNameLength = 14;
 
@@ -32,6 +35,7 @@ const Vendors = () => {
     redFlagged: false,
     page,
     pageSize: PAGE_SIZE,
+    search: searchDebouncedValue,
   });
 
   const { data: redFlaggedData, isFetching: isRedFlagLoading } = useGetSellers({
@@ -43,6 +47,7 @@ const Vendors = () => {
     redFlagged: true,
     page,
     pageSize: PAGE_SIZE,
+    search: searchDebouncedValue,
   });
 
   const columns = [
