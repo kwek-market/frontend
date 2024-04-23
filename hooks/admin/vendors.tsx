@@ -11,10 +11,10 @@ export type USERTYPE = {
   seller?: boolean;
   sellerIsRejected?: boolean;
   customer?: boolean;
-  active: boolean;
+  active?: boolean;
   redFlagged?: boolean;
-  page: number;
-  pageSize: number;
+  page?: number;
+  pageSize?: number;
   search?: string;
 };
 

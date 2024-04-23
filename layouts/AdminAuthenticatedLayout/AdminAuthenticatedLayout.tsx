@@ -7,8 +7,6 @@ export const AdminAuthenticatedLayout = ({ children }: { children: ReactNode }) 
   const reduxState = useSelector((state: RootState) => state);
   const user = reduxState.user;
 
-  console.log(user);
-
   const router = useRouter();
 
   useEffect(() => {
