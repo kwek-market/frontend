@@ -39,8 +39,8 @@ const GridContainer = function ({
   } = useProducts(payload);
 
   const newBanner =
-    !!categoryData?.products.objects !== undefined &&
-    categoryData?.products.objects
+    !!(categoryData as Record<string, any>)?.products.objects !== undefined &&
+    (categoryData as Record<string, any>)?.products.objects
       .slice(0, 2)
       .map((banner: ProductType) => (
         <Banner key={banner.id} product={banner} />
@@ -66,8 +66,10 @@ const GridContainer = function ({
               <Spin size="large" />
             </div>
           )}
-          {categoryData?.products.objects !== undefined &&
-          categoryData?.products.objects.length === 0 ? (
+          {(categoryData as Record<string, any>)?.products.objects !==
+            undefined &&
+          (categoryData as Record<string, any>)?.products.objects.length ===
+            0 ? (
             cards ? (
               cards.slice(0, 4).map((card) => (
                 <div key={uuid()} className={styles.product}>
@@ -80,12 +82,15 @@ const GridContainer = function ({
               </div>
             )
           ) : (
-            categoryData?.products.objects !== undefined &&
-            categoryData.products.objects.map((product: ProductType) => (
-              <div key={uuid()} className={styles.product}>
-                <ProductBox product={product} id={product.id} />
-              </div>
-            ))
+            (categoryData as Record<string, any>)?.products.objects !==
+              undefined &&
+            (categoryData as Record<string, any>).products.objects.map(
+              (product: ProductType) => (
+                <div key={uuid()} className={styles.product}>
+                  <ProductBox product={product} id={product.id} />
+                </div>
+              )
+            )
           )}
 
           <div className="tw-mx-auto tw-w-24 tw-flex md:tw-hidden">
@@ -118,8 +123,9 @@ const GridContainer = function ({
 
         <>
           <div className={styles.banners}>
-            {categoryData?.products.objects !== undefined &&
-              categoryData?.products.objects
+            {(categoryData as Record<string, any>)?.products.objects !==
+              undefined &&
+              (categoryData as Record<string, any>)?.products.objects
                 .slice(0, 2)
                 .map((banner: ProductType) => (
                   <div key={banner.id} className={styles.banner}>

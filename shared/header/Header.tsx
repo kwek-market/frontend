@@ -20,6 +20,7 @@ import { logout } from "@/store/user/user.actions";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
 import { Dropdown, Menu } from "antd";
 import SearchBar from "./SearchBar";
+import { useAppDispatch } from "../../store";
 
 interface HeaderProps {
   userNav: boolean;
@@ -42,7 +43,7 @@ const Header = function ({
   check,
   setCheck,
 }: HeaderProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, cart, wishlist } = useSelector((state: RootState) => state);
   const router = useRouter();
   function handleLogout() {
@@ -59,13 +60,11 @@ const Header = function ({
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link href='/profile/account'>
-          Account
-        </Link>
+        <Link href="/profile/account">Account</Link>
       </Menu.Item>
 
       <Menu.Item>
-        <Link href='/' onClick={() => handleLogout()}>
+        <Link href="/" onClick={() => handleLogout()}>
           Logout
         </Link>
       </Menu.Item>
@@ -73,43 +72,42 @@ const Header = function ({
   );
 
   return (
-    <header id={styles.mainHeader} className='tw-flex tw-flex-col tw-justify-between'>
-      <div onClick={() => openMenu()} className='md:tw-hidden'>
+    <header
+      id={styles.mainHeader}
+      className="tw-flex tw-flex-col tw-justify-between"
+    >
+      <div onClick={() => openMenu()} className="md:tw-hidden">
         {!showMenu ? (
-          <i className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`} />
+          <i
+            className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`}
+          />
         ) : (
           <i className={`fas fa-times fa-2x ${styles.navBar_icon}`} />
         )}
       </div>
 
-      <Link href='/' className={`${styles.logo} tw-px-2`}>
-
+      <Link href="/" className={`${styles.logo} tw-px-2`}>
         <Image
-          width='180'
-          height='30'
-          src='/svg/kweklogo.svg'
-          alt='Kwek logo'
+          width="180"
+          height="30"
+          src="/svg/kweklogo.svg"
+          alt="Kwek logo"
           className={styles.logo_image}
         />
-
       </Link>
 
       <div className={`${styles.headerControls} tw-flex`}>
-        <Link href='/wishlist'>
-
+        <Link href="/wishlist">
           <FiHeart
-            className='tw-text-black-stock'
+            className="tw-text-black-stock"
             style={{ height: "28px", width: "28px", marginRight: "1.5rem" }}
           />
-
         </Link>
-        <Link href='/cart'>
-
+        <Link href="/cart">
           <AiOutlineShoppingCart
-            className='tw-text-black-stock'
+            className="tw-text-black-stock"
             style={{ height: "28px", width: "30px" }}
           />
-
         </Link>
       </div>
 
@@ -118,59 +116,71 @@ const Header = function ({
           <i className={`fas fa-times ${styles.close_icon}`} />
         </div> */}
 
-        <SearchBar search={search} setSearch={setSearch} check={check} setCheck={setCheck} />
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          check={check}
+          setCheck={setCheck}
+        />
 
         <div className={styles.shortcuts}>
           {user.id ? (
             <div className={styles.shortcuts_item}>
-              <Image width='16' height='18' src='/svg/user.svg' className={styles.shortcuts_icon} />
+              <Image
+                width="16"
+                height="18"
+                src="/svg/user.svg"
+                className={styles.shortcuts_icon}
+              />
               <Dropdown overlay={menu} className={styles.shortcuts_label}>
-                <a className='ant-dropdown-link' onClick={e => e.preventDefault()}>
-                  Hi {user.user.fullName.split(" ")[0]} <i className='fas fa-chevron-down' />
+                <a
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Hi {user.user.fullName.split(" ")[0]}{" "}
+                  <i className="fas fa-chevron-down" />
                 </a>
               </Dropdown>
             </div>
           ) : (
-            (<Link href='/login' className={styles.shortcuts_item}>
-
+            <Link href="/login" className={styles.shortcuts_item}>
               <Image
-                width='16'
-                height='18'
-                src='/svg/user.svg'
+                width="16"
+                height="18"
+                src="/svg/user.svg"
                 className={styles.shortcuts_icon}
               />
               <p className={styles.shortcuts_label}>Sign In</p>
-
-            </Link>)
+            </Link>
           )}
 
-          <Link href='/wishlist' className={styles.shortcuts_item}>
-
+          <Link href="/wishlist" className={styles.shortcuts_item}>
             <div className={styles.shortcuts_iconWrap}>
               <Image
-                width='16'
-                height='18'
-                src='/svg/heart-filled.svg'
+                width="16"
+                height="18"
+                src="/svg/heart-filled.svg"
                 className={styles.shortcuts_icon}
               />
-              <span className={styles.shortcuts_iconSuper}>{wishlist.wishlists?.length}</span>
+              <span className={styles.shortcuts_iconSuper}>
+                {wishlist.wishlists?.length}
+              </span>
             </div>
             <p className={styles.shortcuts_label}>Saved</p>
-
           </Link>
-          <Link href='/cart' className={styles.shortcuts_item}>
-
+          <Link href="/cart" className={styles.shortcuts_item}>
             <div className={styles.shortcuts_iconWrap}>
               <Image
-                width='16'
-                height='18'
-                src='/svg/cart.svg'
+                width="16"
+                height="18"
+                src="/svg/cart.svg"
                 className={styles.shortcuts_icon}
               />
-              <span className={styles.shortcuts_iconSuper}>{cart.cart?.length}</span>
+              <span className={styles.shortcuts_iconSuper}>
+                {cart.cart?.length}
+              </span>
             </div>
             <p className={styles.shortcuts_label}>Cart</p>
-
           </Link>
         </div>
       </div>

@@ -22,37 +22,69 @@ export type PayloadType2 = {
 };
 
 export const useGetTotalOrders = (payload: PayloadType) => {
-  return useQuery(["total-orders-admin", payload], () =>
-    userFetcherWithAuth(GET_TOTAL_ORDERS, payload, payload.token)
+  return useQuery(
+    ["total-orders-admin", payload],
+    () =>
+      userFetcherWithAuth(GET_TOTAL_ORDERS, payload, payload.token) as Promise<
+        Record<string, any>
+      >
   );
 };
 
 export const useGetTotalSales = (payload: PayloadType) => {
-  return useQuery(["total-sales-admin", payload], () =>
-    userFetcherWithAuth(GET_TOTAL_SALES, payload, payload.token)
+  return useQuery(
+    ["total-sales-admin", payload],
+    () =>
+      userFetcherWithAuth(GET_TOTAL_SALES, payload, payload.token) as Promise<
+        Record<string, any>
+      >
   );
 };
 
 export const useGetAverageOrderValues = (payload: PayloadType) => {
-  return useQuery(["average-order-value-admin", payload], () =>
-    userFetcherWithAuth(GET_AVERAGE_ORDER_VALUE, payload, payload.token)
+  return useQuery(
+    ["average-order-value-admin", payload],
+    () =>
+      userFetcherWithAuth(
+        GET_AVERAGE_ORDER_VALUE,
+        payload,
+        payload.token
+      ) as Promise<Record<string, any>>
   );
 };
 
 export const useGetTotalActiveCustomers = (payload: PayloadType) => {
-  return useQuery(["total-active-customers-admin", payload], () =>
-    userFetcherWithAuth(GET_TOTAL_ACTIVE_CUSTOMERS, payload, payload.token)
+  return useQuery(
+    ["total-active-customers-admin", payload],
+    () =>
+      userFetcherWithAuth(
+        GET_TOTAL_ACTIVE_CUSTOMERS,
+        payload,
+        payload.token
+      ) as Promise<Record<string, any>>
   );
 };
 
 export const useGetTotalRevenue = (payload: { token: string }) => {
-  return useQuery(["total-revenue", payload], () =>
-    userFetcherWithAuth(GET_TOTAL_REVENUE, payload, payload.token)
+  return useQuery(
+    ["total-revenue", payload],
+    () =>
+      userFetcherWithAuth(GET_TOTAL_REVENUE, payload, payload.token) as Promise<
+        Record<string, any>
+      >
   );
 };
 
-export const useGetRecentTransactions = (payload: PayloadType2 & PayloadType) => {
-  return useQuery(["recent-transactions", payload], () =>
-    userFetcherWithAuth(GET_RECENT_TRANSACTIONS, payload, payload.token)
+export const useGetRecentTransactions = (
+  payload: PayloadType2 & PayloadType
+) => {
+  return useQuery(
+    ["recent-transactions", payload],
+    () =>
+      userFetcherWithAuth(
+        GET_RECENT_TRANSACTIONS,
+        payload,
+        payload.token
+      ) as Promise<Record<string, any>>
   );
 };

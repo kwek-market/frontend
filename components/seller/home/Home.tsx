@@ -65,14 +65,17 @@ export default function Home() {
   } = useHomeCard(token, true);
 
   const total = useMemo(() => {
-    return ordersData?.getSellerOrders.objects.reduce(
+    return (ordersData as Record<string, any>)?.getSellerOrders.objects.reduce(
       (a, b) => a + b.profit,
       0
     );
   }, [ordersData]);
 
   const thisMonthTotal = useMemo(() => {
-    return ordData?.getSellerOrders.objects.reduce((a, b) => a + b.profit, 0);
+    return (ordData as Record<string, any>)?.getSellerOrders.objects.reduce(
+      (a, b) => a + b.profit,
+      0
+    );
   }, [ordData]);
 
   return (
@@ -86,7 +89,8 @@ export default function Home() {
             )}
             {ordersStatus === "success" &&
             ordersData !== undefined &&
-            ordersData.getSellerOrders.objects.length > 0 ? (
+            (ordersData as Record<string, any>).getSellerOrders.objects.length >
+              0 ? (
               <Card
                 name="order sales"
                 content={`NGN ${thisMonthTotal}`}
@@ -115,8 +119,12 @@ export default function Home() {
             {earningsStatus === "success" && earningsData !== undefined && (
               <Card
                 name="sales earnings"
-                content={`NGN ${earningData.getSellerSalesEarnings}`}
-                num={`NGN ${earningsData.getSellerSalesEarnings}`}
+                content={`NGN ${
+                  (earningData as Record<string, any>)?.getSellerSalesEarnings
+                }`}
+                num={`NGN ${
+                  (earningsData as Record<string, any>)?.getSellerSalesEarnings
+                }`}
                 imgSrc={"/svg/profits.svg"}
                 imgAlt={"earnings"}
               />
@@ -147,12 +155,16 @@ export default function Home() {
           <ProgressText
             text={"product quality"}
             val={
-              qualityData !== undefined && qualityData.getSellerProductQuality
+              qualityData !== undefined &&
+              (qualityData as Record<string, any>)?.getSellerProductQuality
             }
           />
           <ProgressText
             text={"delivery rate"}
-            val={rateData !== undefined && rateData.getSellerDeliveryRate}
+            val={
+              rateData !== undefined &&
+              (rateData as Record<string, any>)?.getSellerDeliveryRate
+            }
           />
         </div>
       </aside>
@@ -170,8 +182,13 @@ export default function Home() {
           {salesStatus === "success" && salesData !== undefined && (
             <Card
               name="successful sales"
-              content={saleData.getSellerSuccessfulSales ?? 0}
-              num={salesData.getSellerSuccessfulSales ?? 0}
+              content={
+                (saleData as Record<string, any>)?.getSellerSuccessfulSales ?? 0
+              }
+              num={
+                (salesData as Record<string, any>)?.getSellerSuccessfulSales ??
+                0
+              }
               imgSrc={"/svg/sale.svg"}
               imgAlt={"sales"}
             />
@@ -185,8 +202,10 @@ export default function Home() {
           {daysStatus === "success" && daysData !== undefined && (
             <Card
               name="Days selling on Kwek"
-              num={daysData.getSellerDaysSelling}
-              content={`NGN ${daysData.getSellerDaysSelling}`}
+              num={(daysData as Record<string, any>)?.getSellerDaysSelling}
+              content={`NGN ${
+                (daysData as Record<string, any>)?.getSellerDaysSelling
+              }`}
               imgSrc={"/svg/calendar.svg"}
               imgAlt={"days-selling"}
             />
@@ -199,11 +218,18 @@ export default function Home() {
           )}
           {productStatus === "success" &&
           productData !== undefined &&
-          productData.getSellerProducts.objects.length > 0 ? (
+          (productData as Record<string, any>)?.getSellerProducts.objects
+            .length > 0 ? (
             <Card
               name="products"
-              content={prodData?.getSellerProducts.objects.length}
-              num={productData.getSellerProducts.objects.length}
+              content={
+                (prodData as Record<string, any>)?.getSellerProducts.objects
+                  .length
+              }
+              num={
+                (productData as Record<string, any>)?.getSellerProducts.objects
+                  .length
+              }
               imgSrc={"/svg/received.svg"}
               imgAlt={"products"}
             />

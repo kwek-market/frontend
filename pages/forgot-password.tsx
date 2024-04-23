@@ -7,11 +7,12 @@ import { Alert } from "antd";
 import { sendPasswordResetEmail } from "@/store/user/user.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import { useRouter } from "next/router";
+import { useAppDispatch } from "../store";
 
 const Page = function () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const user = useSelector((state: RootState) => state.user);
   const [email, setEmail] = useState<string>("");
@@ -68,7 +69,13 @@ const Page = function () {
             />
           ) : (
             <div className="tw-bg-red-kwek100 tw-truncate tw-rounded-sm tw-p-2.5 tw-w-full tw-text-white-100 tw-mt-4  md:tw-w-[500px] tw-text-center tw-flex tw-justify-center tw-items-center">
-              <Loader type="Puff" color="#fff" height={30} width={30} />
+              <Puff
+                visible={true}
+                height="30"
+                width="30"
+                color="#fff"
+                ariaLabel="puff-loading"
+              />
             </div>
           )}
         </div>
@@ -79,10 +86,9 @@ const Page = function () {
           </span>{" "}
           <Link
             href="/login"
-            className="tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base">
-            
-              Try Loggin In
-            
+            className="tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base"
+          >
+            Try Loggin In
           </Link>
         </div>
       </div>

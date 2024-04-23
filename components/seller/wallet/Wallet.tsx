@@ -31,8 +31,8 @@ export default function Wallet() {
   const invoiceNum =
     invoiceStatus === "success" &&
     invoiceData !== undefined &&
-    invoiceData.getSellerInvoices.objects.length > 0
-      ? invoiceData.getSellerInvoices.objects.length
+    (invoiceData as Record<string, any>)?.getSellerInvoices.objects.length > 0
+      ? (invoiceData as Record<string, any>)?.getSellerInvoices.objects.length
       : 0;
 
   return (
@@ -57,7 +57,9 @@ export default function Wallet() {
           <Fragment>
             <WalletCard
               name="Balance"
-              num={walletData.getSellerWallet[0].balance}
+              num={
+                (walletData as Record<string, any>)?.getSellerWallet[0].balance
+              }
               imgSrc="/svg/wallet.svg"
               imgAlt="wallet"
             />
@@ -70,8 +72,12 @@ export default function Wallet() {
             />
             <WalletCard
               name="Total Income"
-              content={walletData.getSellerWallet[0].balance}
-              num={walletData.getSellerWallet[0].balance}
+              content={
+                (walletData as Record<string, any>)?.getSellerWallet[0].balance
+              }
+              num={
+                (walletData as Record<string, any>)?.getSellerWallet[0].balance
+              }
               imgSrc="/svg/income.svg"
               imgAlt="income"
             />

@@ -12,19 +12,31 @@ export default function useHomeCard(token: string, thisMonth?: boolean) {
   return useQueries([
     {
       queryKey: "sales-earnings",
-      queryFn: () => userFetcher(GET_SELLER_SALES_EARNINGS, payload),
+      queryFn: () =>
+        userFetcher(GET_SELLER_SALES_EARNINGS, payload) as Promise<
+          Record<string, any>
+        >,
     },
     {
       queryKey: "days-selling",
-      queryFn: () => userFetcher(GET_SELLER_DAYS_SELLING, {token: payload.token }),
+      queryFn: () =>
+        userFetcher(GET_SELLER_DAYS_SELLING, {
+          token: payload.token,
+        }) as Promise<Record<string, any>>,
     },
     {
       queryKey: "customers",
-      queryFn: () => userFetcher(GET_SELLER_CUSTOMERS, payload),
+      queryFn: () =>
+        userFetcher(GET_SELLER_CUSTOMERS, payload) as Promise<
+          Record<string, any>
+        >,
     },
     {
       queryKey: "revenu-data",
-      queryFn: () => userFetcher(GET_SELLER_REVENUE_CHART_DATA, {token: payload.token }),
+      queryFn: () =>
+        userFetcher(GET_SELLER_REVENUE_CHART_DATA, {
+          token: payload.token,
+        }) as Promise<Record<string, any>>,
     },
   ]);
 }

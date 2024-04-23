@@ -8,7 +8,7 @@ function useBillingDelete(token: string) {
     (data: { addressId: string }) =>
       userFetcherWithAuth(BILLINGADDRESSDELETE, data, token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.billingAddressDelete.message);
       },
       onError: (error) => {

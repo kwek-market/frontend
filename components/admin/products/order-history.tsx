@@ -1,4 +1,4 @@
-import AdminTable from "@/components/table";
+import AdminTable from "../../../components/table";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,6 +6,8 @@ import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetProductOrders } from "../../../hooks/admin/products";
 import { RootState } from "../../../store/rootReducer";
+import { Order } from "../../../interfaces/commonTypes";
+import React from "react";
 
 interface Prop {
   isFetching?: boolean;
@@ -24,19 +26,20 @@ const OrderHistory = ({ isFetching }: Prop) => {
     token: user?.token,
   });
 
-  const orders = data?.allOrders?.objects;
+  const orders = ((data as Record<string, any>)?.allOrders as any)
+    ?.objects as Order[];
 
   const transformedOrder = useMemo(() => {
-    return orders?.map(order => ({
+    return orders?.map((order) => ({
       ...order,
       customerName: order?.user?.fullName,
-      quantity: order?.cartItems?.quantity,
+      // quantity: order?.cartItems?.quantity, // this is an array work on it
       doorStepAddress: order?.doorStep?.address,
     }));
   }, [orders]);
 
   console.log("🚀 ~~ transformedOrder ~~ transformedOrder:", transformedOrder);
-  const pagination = data?.allOrders;
+  const pagination = (data as Record<string, any>)?.allOrders;
 
   const columns = [
     {
@@ -45,8 +48,11 @@ const OrderHistory = ({ isFetching }: Prop) => {
       key: "orderId",
       render: (orderId, order) => (
         <Link
-          href={"/admin/customers/" + order?.user?.id + "/order-detail/" + order?.id}
-          className=' tw-text-black-kwek100'>
+          href={
+            "/admin/customers/" + order?.user?.id + "/order-detail/" + order?.id
+          }
+          className=" tw-text-black-kwek100"
+        >
           {orderId}
         </Link>
       ),
@@ -55,18 +61,17 @@ const OrderHistory = ({ isFetching }: Prop) => {
       title: "Customer",
       dataIndex: "customerName",
       key: "customerName",
-      render: data => (
-        <div className='tw-flex tw-gap-x-2'>
-          {console.log(data)}
+      render: (data) => (
+        <div className="tw-flex tw-gap-x-2">
           <Image
             src={"/images/pp.png"}
-            alt='pp'
-            className='tw-rounded-full tw-overflow-hidden tw-min-w-[24px]'
+            alt="pp"
+            className="tw-rounded-full tw-overflow-hidden tw-min-w-[24px]"
             height={24}
             width={24}
-            layout='fixed'
+            layout="fixed"
           />
-          <span className='tw-line-clamp-1'>{data}</span>
+          <span className="tw-line-clamp-1">{data}</span>
         </div>
       ),
     },
@@ -100,7 +105,9 @@ const OrderHistory = ({ isFetching }: Prop) => {
       render: (status: string) => (
         <span
           className={`${
-            status?.toLowerCase() === "delivered" ? "tw-bg-[#009D19]" : "tw-bg-[#FFC107]"
+            status?.toLowerCase() === "delivered"
+              ? "tw-bg-[#009D19]"
+              : "tw-bg-[#FFC107]"
           } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-px-3 tw-py-2`}
         >
           {status}
@@ -123,7 +130,7 @@ const OrderHistory = ({ isFetching }: Prop) => {
         goToPrev={() => {
           if (pagination?.hasPrev) setPage(page - 1);
         }}
-        goToPage={page => {
+        goToPage={(page) => {
           setPage(page);
         }}
       />

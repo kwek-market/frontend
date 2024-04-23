@@ -9,8 +9,15 @@ interface IdAndTokenPayload {
 
 export function userGetUserById(payload: IdAndTokenPayload) {
   return useQuery(
-    ["user",  payload.id],
-    () => userFetcherWithAuth(GET_USER_BY_ID, payload, payload.token),
+    ["user", payload.id],
+    async () => {
+      const data: Record<string, any> = await userFetcherWithAuth(
+        GET_USER_BY_ID,
+        payload,
+        payload.token
+      );
+      return data;
+    },
     {
       keepPreviousData: false,
       enabled: !!payload.id,

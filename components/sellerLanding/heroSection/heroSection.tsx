@@ -8,26 +8,23 @@ import Styles from "./heroSection.module.scss";
 import Button from "@/components/buttons/Button";
 import { RootState } from "@/store/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "../../../store";
 
 const heroSection = () => {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, seller } = useSelector((state: RootState) => state);
 
   return (
     <div className={Styles.hero}>
       <div className="tw-flex tw-justify-between tw-px-5 md:tw-px-20">
         <Link href="/">
-
           <img src="/svg/kweklogo.svg" />
-
         </Link>
         <div className="md:tw-flex tw-justify-center tw-items-center tw-hidden">
           <Link href="/sell" className={Styles.sell}>
-
             <span className="tw-mr-3 lg:tw-mr-5">Marketplace</span>
-
           </Link>
           {/* <Link href="/">
 						<a className={Styles.sell}>
@@ -35,9 +32,7 @@ const heroSection = () => {
 						</a>
 					</Link> */}
           <Link href="/" className={Styles.sell}>
-
             <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
-
           </Link>
           {!user.user.isSeller ? (
             <Button
@@ -46,11 +41,9 @@ const heroSection = () => {
               cmd={() => router.push("/sell/create-account")}
             />
           ) : (
-            (<Link href="/seller/profile" className={Styles.sell}>
-
+            <Link href="/seller/profile" className={Styles.sell}>
               <span className="tw-mr-3 lg:tw-mr-5">Account</span>
-
-            </Link>)
+            </Link>
           )}
         </div>
         <i
@@ -68,11 +61,9 @@ const heroSection = () => {
               </div>
               <div className="tw-mb-5">
                 <Link href="/sell" className={Styles.sell}>
-
                   <span className="tw-mr-3 lg:tw-mr-5 active:tw-text-red-kwek-100 active:tw-border active:tw-border-bottom">
                     Marketplace
                   </span>
-
                 </Link>
               </div>
               {/* <Link href="/">
@@ -82,9 +73,7 @@ const heroSection = () => {
 							</Link> */}
               <div className="tw-mb-5">
                 <Link href="/" className={Styles.sell}>
-
                   <span className="tw-mr-3 lg:tw-mr-5">Buy on kwek</span>
-
                 </Link>
               </div>
               {!user.user.isSeller ? (
@@ -98,9 +87,7 @@ const heroSection = () => {
               ) : (
                 <div className="tw-mb-5">
                   <Link href="/seller/profile" className={Styles.sell}>
-
                     <span className="tw-mr-3 lg:tw-mr-5">Account</span>
-
                   </Link>
                 </div>
               )}

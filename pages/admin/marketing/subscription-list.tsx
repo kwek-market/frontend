@@ -1,7 +1,7 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { Dropdown, Menu, Tabs } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -59,7 +59,7 @@ const SubscriptionList = () => {
       render: () => (
         <span className=" tw-cursor-pointer">
           <Dropdown overlay={menu} placement="bottomCenter" arrow>
-            <DotsVerticalIcon className="tw-h-5 tw-w-5" />
+            <EllipsisVerticalIcon className="tw-h-5 tw-w-5" />
           </Dropdown>
         </span>
       ),

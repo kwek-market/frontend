@@ -5,10 +5,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { message, Modal } from "antd";
 import useBillingUpdate from "@/hooks/useBillingUpdate";
+import { useAppDispatch } from "../../store";
 
 const AddressCard = function ({ address }) {
   const { user } = useSelector((state: RootState) => state);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { mutate: deleteMutate, isSuccess } = useBillingDelete(user.token);
   const { mutate: updateMutate, isSuccess: success } = useBillingUpdate(
     user.token

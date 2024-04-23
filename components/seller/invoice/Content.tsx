@@ -62,9 +62,13 @@ export default function Content() {
     };
     mutate(payload, {
       onSuccess: (data) => {
-        message.success(data.createInvoice.message);
+        message.success((data as Record<string, any>)?.createInvoice.message);
         queryClient.invalidateQueries(["invoice"]);
-        router.push(`/seller/invoice/${data.createInvoice.invoice.id}`);
+        router.push(
+          `/seller/invoice/${
+            (data as Record<string, any>)?.createInvoice.invoice.id
+          }`
+        );
       },
       onError: (err: { message: string }) => {
         message.error(err.message);

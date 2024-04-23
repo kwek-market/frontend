@@ -65,7 +65,11 @@ export function getUserData(token: string) {
   return async function (dispatch: Dispatch) {
     try {
       setLoading()(dispatch);
-      const response = await userFetcherWithAuth(GET_USER, { token }, token);
+      const response: Record<string, any> = await userFetcherWithAuth(
+        GET_USER,
+        { token },
+        token
+      );
       // console.log(response);
       dispatch({
         type: GET_USER_DATA,
@@ -117,9 +121,13 @@ export function updateUser(user: UserUpdate, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       setLoading()(dispatch);
-      const result = await userFetcherWithAuth(USER_ACCOUNT_UPDATE, user, token);
+      const result: Record<string, any> = await userFetcherWithAuth(
+        USER_ACCOUNT_UPDATE,
+        user,
+        token
+      );
       // console.log({ result });
-      import("antd").then(antd => {
+      import("antd").then((antd) => {
         result.userAccountUpdate
           ? antd.message.success(result.userAccountUpdate.message)
           : antd.message.error(result.userAccountUpdate.message);
@@ -144,9 +152,13 @@ export function sendPasswordResetEmail(email: string, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       setLoading()(dispatch);
-      const result = await userFetcherWithAuth(RESEND_VERIFICATION_EMAIL, { email }, token);
+      const result: Record<string, any> = await userFetcherWithAuth(
+        RESEND_VERIFICATION_EMAIL,
+        { email },
+        token
+      );
       // console.log({ result });
-      import("antd").then(antd => {
+      import("antd").then((antd) => {
         result.sendPasswordResetEmail.status
           ? antd.message.success(result.sendPasswordResetEmail.message)
           : antd.message.error(result.sendPasswordResetEmail.message);
@@ -170,8 +182,12 @@ export function changePassword(
   return async function (dispatch: Dispatch) {
     try {
       setLoading()(dispatch);
-      const result = await userFetcherWithAuth(RESET_PASSWORD, changeData, token);
-      import("antd").then(antd => {
+      const result: Record<string, any> = await userFetcherWithAuth(
+        RESET_PASSWORD,
+        changeData,
+        token
+      );
+      import("antd").then((antd) => {
         result.changePassword.status
           ? antd.message.success(result.changePassword.message)
           : antd.message.error(result.changePassword.message);

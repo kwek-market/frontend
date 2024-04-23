@@ -12,6 +12,7 @@ import { LocationInfo, LocationMarker } from "@/components/map";
 import useLocation from "@/hooks/useLocation";
 import { v4 } from "uuid";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
+import { useAppDispatch } from "../../../../store";
 
 export default function Store() {
   const defaultProps = {
@@ -25,7 +26,7 @@ export default function Store() {
     user,
     seller: { seller },
   } = useSelector((state: RootState) => state);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { mutate, isLoading } = useStoreBanner();
   const { mutate: post, isLoading: loading } = useStoreLocationUpdate();
   const address = `${seller.shopAddress} ${seller.city}  ${seller.state}`;
@@ -134,7 +135,7 @@ export default function Store() {
     mutate(payload, {
       onSuccess: (data) => {
         dispatch(getSellerData(user.token));
-        message.success(data.storeBanner.message);
+        message.success((data as Record<string, any>)?.storeBanner.message);
       },
       onError: (err: any) => {
         message.error(err.message);
@@ -160,7 +161,9 @@ export default function Store() {
     post(payload, {
       onSuccess: (data) => {
         dispatch(getSellerData(user.token));
-        message.success(data.storeLocationUpdate.message);
+        message.success(
+          (data as Record<string, any>)?.storeLocationUpdate.message
+        );
       },
       onError: (err: any) => {
         message.error(err.message);
@@ -169,10 +172,13 @@ export default function Store() {
   }
 
   useEffect(() => {
-    if (data !== undefined && data.results.length > 0) {
+    if (
+      data !== undefined &&
+      (data as Record<string, any>)?.results.length > 0
+    ) {
       setLocations({
-        lat: data.results[0].geometry.location.lat,
-        lng: data.results[0].geometry.location.lng,
+        lat: (data as Record<string, any>)?.results[0].geometry.location.lat,
+        lng: (data as Record<string, any>)?.results[0].geometry.location.lng,
       });
     }
   }, [data, status, error]);

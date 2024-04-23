@@ -1,14 +1,24 @@
-import BreadCrumbs from "@/components/admin/breadcrumbs";
-import { FormHead, FormItems } from "@/components/admin/form";
-import { InputField, RadioField, SelectField } from "@/components/input/textInput";
-import { CreateCategoryPayload, useCreateCategory } from "@/hooks/admin/category";
-import { AdminLayout } from "@/layouts";
-import { RootState } from "@/store/rootReducer";
-import { CreateCategorySchema } from "@/validations/createCategory";
+import { FormHead, FormItems } from "../../../components/admin/form";
+import {
+  InputField,
+  RadioField,
+  SelectField,
+} from "../../../components/input/textInput";
+import {
+  CreateCategoryPayload,
+  useCreateCategory,
+} from "../../../hooks/admin/category";
+import { AdminLayout } from "../../../layouts";
+import { RootState } from "../../../store/rootReducer";
+import {
+  CreateCategorySchema,
+  CreateCategoryType,
+} from "../../../validations/createCategory";
 import { message } from "antd";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FileInputLarge } from "../../../components/input/FileInputLarge";
+import BreadCrumbs from "../../../components/admin/breadcrumbs";
 
 const AddCategory = () => {
   const {
@@ -16,9 +26,10 @@ const AddCategory = () => {
     categories,
   } = useSelector((state: RootState) => state);
 
-
-
-  const [formData, setFormDta] = useState<CreateCategoryPayload>({ name: "", visibility: "" });
+  const [formData, setFormDta] = useState<CreateCategoryPayload>({
+    name: "",
+    visibility: "",
+  });
 
   const handleRadio = (value: string) => {
     setFormDta({ ...formData, visibility: value });
@@ -51,8 +62,12 @@ const AddCategory = () => {
       }
 
       createMut(parsed.data, {
-        onError: (err: Error) => {
-          message.error(err.message);
+        onError: (
+          error: unknown,
+          variables: CreateCategoryType,
+          context: unknown
+        ) => {
+          message.error(error as string);
         },
       });
       console.log("🚀 ~~ publish ~~ parsed.data:", parsed.data);
@@ -72,23 +87,23 @@ const AddCategory = () => {
           },
           { name: "Add new Category", path: "/admin/categories/add-category" },
         ]}
-        header='New Category'
+        header="New Category"
       />
 
-      <form className=' tw-pt-2 tw-font-poppins'>
+      <form className=" tw-pt-2 tw-font-poppins">
         <FormHead>Basic Information</FormHead>
         <FormItems>
           <InputField
-            label='Name'
-            placeholder='e.g Fashion'
+            label="Name"
+            placeholder="e.g Fashion"
             value={formData.name}
-            onChange={e => setFormDta({ ...formData, name: e.target.value })}
+            onChange={(e) => setFormDta({ ...formData, name: e.target.value })}
           />
           <SelectField
-            id='parent'
-            label='Parent Category'
+            id="parent"
+            label="Parent Category"
             value={formData.parent}
-            onChange={e => {
+            onChange={(e) => {
               if (e.target.value !== "select") {
                 setFormDta({ ...formData, parent: e.target.value });
               } else {
@@ -100,7 +115,7 @@ const AddCategory = () => {
             <option defaultChecked value={"select"}>
               Select..
             </option>
-            {categories.categories.map(category => (
+            {categories.categories.map((category) => (
               <option key={category.id} value={category.name}>
                 {category.name}
               </option>
@@ -111,49 +126,52 @@ const AddCategory = () => {
         <FormHead>Visibility</FormHead>
         <FormItems>
           <RadioField
-            label='Published'
+            label="Published"
             checked={formData.visibility == "published"}
             onChange={() => handleRadio("published")}
           />
           <RadioField
-            label='Scheduled'
+            label="Scheduled"
             checked={formData.visibility == "scheduled"}
             onChange={() => handleRadio("scheduled")}
           />
           <RadioField
-            label='Hidden'
+            label="Hidden"
             checked={formData.visibility == "hidden"}
             onChange={() => handleRadio("hidden")}
           />
 
           <InputField
-            label='Publish Date'
-            type='date'
+            label="Publish Date"
+            type="date"
             value={formData?.publishDate}
-            onChange={e => {
+            onChange={(e) => {
               setFormDta({ ...formData, publishDate: e.target.value });
             }}
           />
         </FormItems>
 
         <FormHead>Image</FormHead>
-        <div className='tw-border mt-1'>
+        <div className="tw-border mt-1">
           <FileInputLarge
-            className='tw-border mt-1'
-            onChange={info => {
+            className="tw-border mt-1"
+            onChange={(info) => {
               const { status } = info.file;
 
               if (status === "done") {
-                setFormDta({ ...formData, icon: JSON.parse(info.file.xhr.response).secure_url });
+                setFormDta({
+                  ...formData,
+                  icon: JSON.parse(info.file.xhr.response).secure_url,
+                });
               }
             }}
           />
         </div>
 
         <button
-          className='  tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-16'
-          type='submit'
-          onClick={e => publish(e)}
+          className="  tw-font-semibold tw-py-2 tw-px-6 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-16"
+          type="submit"
+          onClick={(e) => publish(e)}
         >
           Publish Category
         </button>

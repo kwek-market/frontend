@@ -20,7 +20,7 @@ export function reviewProduct(reviewProduct: ReviewType, token: string) {
     const { message } = await import("antd");
     try {
       setLoading()(dispatch);
-      const response = await userFetcherWithAuth(
+      const response: Record<string, any> = await userFetcherWithAuth(
         PRODUCT_REVIEW,
         reviewProduct,
         token

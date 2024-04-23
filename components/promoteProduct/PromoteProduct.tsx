@@ -192,7 +192,9 @@ const PromoteProduct = function ({
               <div className={styles.balance}>
                 <p>Available Balance</p>
                 <h6>
-                  NGN {data !== undefined && data.getSellerWallet[0].balance}
+                  NGN{" "}
+                  {data !== undefined &&
+                    (data as Record<string, any>).getSellerWallet[0].balance}
                 </h6>
               </div>
               <button

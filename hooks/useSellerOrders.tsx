@@ -12,7 +12,10 @@ export type SellerOrdersType = {
 export default function useSellerOrders(payload: SellerOrdersType) {
   return useQuery(
     ["sellerOrders", payload],
-    () => userFetcherWithAuth(GET_SELLER_ORDERS, payload, payload.token),
+    () =>
+      userFetcherWithAuth(GET_SELLER_ORDERS, payload, payload.token) as Promise<
+        Record<string, any>
+      >,
     {
       staleTime: Infinity,
       cacheTime: 1000 * 60 * 20,

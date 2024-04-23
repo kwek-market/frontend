@@ -163,6 +163,26 @@ export type UploadProductProps = {
   setSubmitDetails: React.Dispatch<React.SetStateAction<UploadProductType>>;
 };
 
+export interface Rating {
+  id: string;
+  product: ProductType;
+  rating: number;
+  review: string;
+  parent: Rating;
+  user: {
+    id: string;
+    username: string;
+    isSeller: boolean;
+    sellerProfile: {
+      shopName: string;
+      storeBannerUrl: string;
+    }[];
+  };
+  likes: number;
+  dislikes: number;
+  rated_at: string;
+}
+
 export type ProductType = {
   id: string;
   productTitle: string;
@@ -314,12 +334,14 @@ export type Order = {
   orderPriceTotal: number;
   user: {
     username: string;
+    fullName: string;
   };
   cartItems: {
     id: string;
     ordered: boolean;
     price: number;
     productOptionId: string;
+    quantity: number;
   }[];
   doorStep: {
     fullName: string;

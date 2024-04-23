@@ -7,9 +7,10 @@ import Button from "@/components/buttons/Button";
 import TextInput from "@/components/input/textInput";
 import { Alert } from "antd";
 import Link from "next/link";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import { passwordValidator } from "@/helpers";
 import { changePassword } from "@/store/user/user.actions";
+import { useAppDispatch } from "../store";
 
 export type passwordProps = {
   password1: "";
@@ -18,7 +19,7 @@ export type passwordProps = {
 
 const Page = function () {
   const user = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -121,7 +122,13 @@ const Page = function () {
             />
           ) : (
             <div className="tw-bg-red-kwek100 tw-truncate tw-rounded-sm tw-p-2.5 tw-w-full tw-text-white-100 tw-mt-4  md:tw-w-[500px] tw-text-center tw-flex tw-justify-center tw-items-center">
-              <Loader type="Puff" color="#fff" height={30} width={30} />
+              <Puff
+                visible={true}
+                height="30"
+                width="30"
+                color="#fff"
+                ariaLabel="puff-loading"
+              />
             </div>
           )}
         </div>
@@ -132,10 +139,9 @@ const Page = function () {
           </span>{" "}
           <Link
             href="/login"
-            className="tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base">
-            
-              Try Loggin In
-            
+            className="tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base"
+          >
+            Try Loggin In
           </Link>
         </div>
       </div>

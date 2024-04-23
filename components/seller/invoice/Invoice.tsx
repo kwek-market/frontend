@@ -36,9 +36,9 @@ export default function Invoice({ element }) {
         {status === "error" && <ErrorInfo error={(error as any).message} />}
         {status === "success" && data !== undefined && (
           <Fragment>
-            <BillFrom data={data.getSellerInvoice} />
-            <BillTo data={data.getSellerInvoice} />
-            <Total data={data.getSellerInvoice} />
+            <BillFrom data={(data as Record<string, any>)?.getSellerInvoice} />
+            <BillTo data={(data as Record<string, any>)?.getSellerInvoice} />
+            <Total data={(data as Record<string, any>)?.getSellerInvoice} />
           </Fragment>
         )}
       </section>

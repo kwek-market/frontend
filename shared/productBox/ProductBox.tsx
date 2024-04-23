@@ -2,16 +2,22 @@ import { getIp } from "@/helpers";
 import useClicksUpdate from "@/hooks/useClicksUpdate";
 import useItemInCart from "@/hooks/useItemInCart";
 import useItemInWishlist from "@/hooks/useItemInWishlist";
-import { AddToCartPayload, AddToWishlistPayload, ProductType } from "@/interfaces/commonTypes";
+import {
+  AddToCartPayload,
+  AddToWishlistPayload,
+  ProductType,
+} from "@/interfaces/commonTypes";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { Rate } from "antd";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
-import Loader from "react-loader-spinner";
+import { Rings } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ProductBox.module.scss";
+import { useAppDispatch } from "../../store";
+import React from "react";
 
 export type ProductBoxProps = {
   id?: string;
@@ -19,7 +25,7 @@ export type ProductBoxProps = {
 };
 
 const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, cart, wishlist } = useSelector((state: RootState) => state);
   const { mutate } = useClicksUpdate();
 
@@ -53,22 +59,28 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
 
   if (prod === undefined)
     return (
-      <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
-        <Loader type='Rings' width={60} height={60} color='#FC476E' />
+      <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
+        <Rings
+          visible={true}
+          height="60"
+          width="60"
+          color="#FC476E"
+          ariaLabel="rings-loading"
+        />
       </div>
     );
 
   return (
-    <div className='tw-w-full'>
-      <div className='tw-relative tw-w-full'>
+    <div className="tw-w-full">
+      <div className="tw-relative tw-w-full">
         <Image
           src={prod?.image[0].imageUrl}
-          placeholder='blur'
-          width='329'
-          height='284'
-          alt='product'
-          quality={"auto"}
-          className=' tw-object-cover'
+          placeholder="blur"
+          width="329"
+          height="284"
+          alt="product"
+          quality={75}
+          className=" tw-object-cover"
         />
         {/* <span
           id="cart-wishlist"
@@ -98,16 +110,18 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
         <Link
           href={`/product/${prod.id}?id=${prod.productTitle}`}
           replace
-          className='tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block'
-          onClick={e => {
+          className="tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block"
+          onClick={(e) => {
             updateClicks(prod.id, user.token);
             e.stopPropagation();
-          }}>
-
-          <span className='tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10'>
+          }}
+        >
+          <span className="tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10">
             <i
               className={`fas fa-shopping-cart ${
-                !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
+                !checkIfItemInCart(prod?.options[0]?.id)
+                  ? "tw-bg-white-100"
+                  : "tw-bg-red-kwek100"
               } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
               style={{ padding: "5px" }}
               onClick={() => addToCart(prod?.options[0]?.id)}
@@ -115,22 +129,22 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             {user.token && (
               <i
                 className={`fas fa-heart tw-p-1 ${
-                  !checkIfItemInWishlist(id) ? "tw-bg-white-100" : "tw-bg-gray-kwek700"
+                  !checkIfItemInWishlist(id)
+                    ? "tw-bg-white-100"
+                    : "tw-bg-gray-kwek700"
                 } tw-rounded-full fa-0.5x tw-text-red-kwek100 fa-xs`}
                 style={{ padding: "5px" }}
                 onClick={() => addToWishlist(id)}
               />
             )}
           </span>
-          <span className='tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100'>
+          <span className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
             details
           </span>
-
         </Link>
       </div>
 
       <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
-
         <div className={styles.box_details}>
           <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
@@ -144,25 +158,29 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           </p>
 
           {prod.productRating.length > 0 ? (
-            <div className='tw-flex tw-flex-wrap tw-justify-center'>
+            <div className="tw-flex tw-flex-wrap tw-justify-center">
               <Rate
                 style={{ fontSize: "0.75rem" }}
                 allowHalf
                 disabled
                 value={prod.productRating[0]?.rating}
               />
-              <small className='tw-text-gray-kwek400'>
+              <small className="tw-text-gray-kwek400">
                 ({prod.productRating[0].likes} reviews)
               </small>
             </div>
           ) : (
-            <div className='tw-flex tw-flex-wrap tw-justify-center'>
-              <Rate style={{ fontSize: "0.75rem" }} allowHalf disabled value={0} />
-              <small className='tw-text-gray-kwek400'>(0 Reviews)</small>
+            <div className="tw-flex tw-flex-wrap tw-justify-center">
+              <Rate
+                style={{ fontSize: "0.75rem" }}
+                allowHalf
+                disabled
+                value={0}
+              />
+              <small className="tw-text-gray-kwek400">(0 Reviews)</small>
             </div>
           )}
         </div>
-
       </Link>
     </div>
   );

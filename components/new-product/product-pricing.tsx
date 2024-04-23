@@ -35,12 +35,14 @@ function ProductPricing({
           {" "}
           charge 5%<span className="tw-uppercase">VAT</span> on this item <br />
           <select
-            placeholder="charge 5% VAT?"
             required
             className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
             value={tax}
             onChange={(e) => handleChange(e)}
           >
+            <option value="" disabled selected>
+              charge 5% VAT?
+            </option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>

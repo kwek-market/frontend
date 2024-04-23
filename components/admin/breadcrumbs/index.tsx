@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React from "react";
 
@@ -26,15 +26,14 @@ const BreadCrumbs = ({
             className="tw-flex tw-gap-x-[0.1rem] md:tw-gap-x-4 tw-text-breadcrumb"
             href={item.path}
             key={index}
-            legacyBehavior>
-            
-              <span className="tw-max-w-[6rem] md:tw-max-w-max tw-truncate">
-                {item.name}
-              </span>
-              {index === items.length - 1 ? null : (
-                <ChevronRightIcon width={20} height={20} />
-              )}
-            
+            legacyBehavior
+          >
+            <span className="tw-max-w-[6rem] md:tw-max-w-max tw-truncate">
+              {item.name}
+            </span>
+            {index === items.length - 1 ? null : (
+              <ChevronRightIcon width={20} height={20} />
+            )}
           </Link>
         ))}
       </div>
@@ -44,8 +43,7 @@ const BreadCrumbs = ({
             {header}
           </h1>
           {buttonText ? (
-            (<Link href={buttonPath}>
-
+            <Link href={buttonPath as string}>
               <button
                 // className="md:tw-font-semibold tw-font-extralight  tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
                 className="tw-font-semibold tw-py-1 tw-px-3  md:tw-py-2 md:tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
@@ -53,8 +51,7 @@ const BreadCrumbs = ({
               >
                 {buttonText}
               </button>
-
-            </Link>)
+            </Link>
           ) : null}
         </div>
       ) : null}

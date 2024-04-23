@@ -19,7 +19,7 @@ export default function Promotions() {
       )}
       {status === "success" &&
       data !== undefined &&
-      data.getSellerPromotedProducts.length === 0 ? (
+      (data as Record<string, any>)?.getSellerPromotedProducts.length === 0 ? (
         <EmptyInfo
           title={"promotions"}
           desc={"you currently have no promotions"}

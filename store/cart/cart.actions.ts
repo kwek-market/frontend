@@ -29,7 +29,11 @@ export function addToCartFunc(payload: AddToCartPayload, token: string) {
     const { message } = await import("antd");
     setLoading();
     try {
-      const res = await userFetcherWithAuth(AddToCart, payload, token);
+      const res: Record<string, any> = await userFetcherWithAuth(
+        AddToCart,
+        payload,
+        token
+      );
       message.success(res.addToCart.message, 5);
     } catch (err) {
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);

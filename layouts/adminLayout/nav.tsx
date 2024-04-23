@@ -5,16 +5,17 @@ import CancelIcon from "@/components/icons/cancel";
 import { getInitials } from "@/helpers";
 import { RootState } from "@/store/rootReducer";
 import { setSearched } from "@/store/search/search.action";
-import { MenuIcon } from "@heroicons/react/solid";
+import { Bars3Icon } from "@heroicons/react/24/solid";
 import Image from "next/legacy/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "../../store";
 
 const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
   const reduxState = useSelector((state: RootState) => state);
   const searchState = reduxState.search;
   const user = reduxState.user;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const elementRef = useRef<HTMLDivElement>(null);
 
   const triggerMouseOver = useCallback(() => {
@@ -114,7 +115,7 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
     <div className="tw-sticky tw-top-0 tw-z-[1] tw-bg-white-100 tw-border-b tw-border-b-[#D7DCE0] tw-flex tw-justify-end tw-items-center tw-py-3 lg:tw-py-4 tw-px-4 lg:tw-px-8">
       <div className="tw-flex  lg:tw-gap-x-8 tw-items-center tw-w-full lg:tw-w-max tw-justify-between lg:tw-justify-start transition-all duration-300">
         <div className="lg:tw-hidden">
-          <MenuIcon
+          <Bars3Icon
             color="black"
             onClick={() => setSidebarOpen(true)}
             width={40}

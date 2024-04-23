@@ -1,9 +1,10 @@
-import Load from "@/components/Loader/Loader";
-import TableNav from "@/components/table/table-nav";
-import { useGetProductReviews } from "@/hooks/admin/products";
+import Load from "../../../components/Loader/Loader";
+import TableNav from "../../../components/table/table-nav";
+import { useGetProductReviews } from "../../../hooks/admin/products";
 import moment from "moment";
 import Image from "next/legacy/image";
 import React, { useEffect, useState } from "react";
+import { Rating } from "../../../interfaces/commonTypes";
 
 interface Prop {
   productId: string;
@@ -21,7 +22,10 @@ const Reviews = ({ productId, setReviewsCount }: Prop) => {
   });
 
   useEffect(() => {
-    setReviewsCount(getProductReviews?.data?.reviews?.objects?.length);
+    setReviewsCount(
+      (((getProductReviews?.data as any)?.reviews as any)?.objects as Rating[])
+        ?.length
+    );
   }, [getProductReviews.isFetching]);
 
   const getPage = (event) => {
@@ -40,7 +44,10 @@ const Reviews = ({ productId, setReviewsCount }: Prop) => {
         {getProductReviews?.isFetching ? (
           <Load />
         ) : (
-          getProductReviews?.data?.reviews?.objects?.map((review: any) => (
+          (
+            ((getProductReviews?.data as any)?.reviews as any)
+              ?.objects as Rating[]
+          )?.map((review: any) => (
             <div
               key={review.id}
               className=" tw-flex tw-gap-x-[10px] tw-pb-4 tw-border-b tw-border-b-review last:tw-border-none tw-pt-4 first:tw-pt-0"
@@ -71,11 +78,17 @@ const Reviews = ({ productId, setReviewsCount }: Prop) => {
           ))
         )}
       </div>
-      {(getProductReviews?.data?.reviews?.hasNext as boolean) && (
+      {((getProductReviews as Record<string, any>)?.data?.reviews
+        ?.hasNext as boolean) && (
         <TableNav
-          page={getProductReviews?.data?.reviews?.page}
-          numberOfPages={getProductReviews?.data?.reviews?.pages}
-          dataLength={getProductReviews?.data?.reviews?.objects?.length}
+          page={(getProductReviews as Record<string, any>)?.data?.reviews?.page}
+          numberOfPages={
+            (getProductReviews as Record<string, any>)?.data?.reviews?.pages
+          }
+          dataLength={
+            (getProductReviews as Record<string, any>)?.data?.reviews?.objects
+              ?.length
+          }
           getNext={getNext}
           getPrev={getPrev}
           getPage={getPage}

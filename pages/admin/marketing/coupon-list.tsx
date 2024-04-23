@@ -2,7 +2,7 @@ import BreadCrumbs from "@/components/admin/breadcrumbs";
 import TickIcon from "@/components/icons/tick";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { Dropdown, Menu, Tabs } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";

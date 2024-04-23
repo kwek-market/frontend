@@ -2,7 +2,7 @@ import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import React, { useState } from "react";

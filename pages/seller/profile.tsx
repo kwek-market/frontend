@@ -7,9 +7,10 @@ import ShopLayout from "@/layouts/seller/ShopLayout";
 import { Modal } from "@/components/verification";
 import sellerAuth from "@/hooks/sellerAuth";
 import { Content } from "@/components/seller";
+import { useAppDispatch } from "../../store";
 
 const Page = function () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, seller } = useSelector((state: RootState) => state);
 
   useEffect(() => {

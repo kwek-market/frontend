@@ -38,7 +38,7 @@ export default function fundWallet() {
               token,
             },
             {
-              onSuccess: (data) => {
+              onSuccess: (data: Record<string, any>) => {
                 message.success(data.fundWallet.message);
                 router.push("/seller/profile");
               },

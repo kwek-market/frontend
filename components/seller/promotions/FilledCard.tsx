@@ -18,12 +18,7 @@ export default function FilledCard() {
         <label>
           {" "}
           showing{" "}
-          <select
-            placeholder="All time"
-            className=""
-            value=""
-            onChange={() => null}
-          >
+          <select className="" value="" onChange={() => null}>
             <option>all time</option>
           </select>
         </label>
@@ -37,22 +32,40 @@ export default function FilledCard() {
           <Fragment>
             <Card
               name={"reach"}
-              num={data.getSellerPromotedProducts[0].promo[0].reach}
-              content={data.getSellerPromotedProducts[0].promo[0].reach}
+              num={
+                (data as Record<string, any>)?.getSellerPromotedProducts[0]
+                  .promo[0].reach
+              }
+              content={
+                (data as Record<string, any>)?.getSellerPromotedProducts[0]
+                  .promo[0].reach
+              }
               imgSrc="/svg/team.svg"
               imgAlt="team"
             />
             <Card
               name={"link clicks"}
-              num={data.getSellerPromotedProducts[0].promo[0].linkClicks}
-              content={data.getSellerPromotedProducts[0].promo[0].linkClicks}
+              num={
+                (data as Record<string, any>)?.getSellerPromotedProducts[0]
+                  .promo[0].linkClicks
+              }
+              content={
+                (data as Record<string, any>)?.getSellerPromotedProducts[0]
+                  .promo[0].linkClicks
+              }
               imgSrc="/svg/click.svg"
               imgAlt="clicks"
             />
             <Card
               name={"amount"}
-              num={data.getSellerPromotedProducts[0].promo[0].amount}
-              content={data.getSellerPromotedProducts[0].promo[0].amount}
+              num={
+                (data as Record<string, any>)?.getSellerPromotedProducts[0]
+                  .promo[0].amount
+              }
+              content={
+                (data as Record<string, any>)?.getSellerPromotedProducts[0]
+                  .promo[0].amount
+              }
               imgSrc="/svg/money-bag.svg"
               imgAlt="money-bag"
             />

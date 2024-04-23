@@ -13,6 +13,7 @@ import Load from "../Loader/Loader";
 import { v4 } from "uuid";
 import Image from "next/legacy/image";
 import useCancelOrder from "@/hooks/useCancelOrder";
+import { useAppDispatch } from "../../store";
 
 export type OrderProps = {
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
@@ -21,7 +22,7 @@ export type OrderProps = {
 };
 
 const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
@@ -42,7 +43,7 @@ const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
         userFetcherWithAuth(GETORDER, { token, id }, token)
       );
       setLoading(false);
-      dispatch(setOrderDetails(data.order));
+      dispatch(setOrderDetails((data as Record<string, any>).order));
       setActiveBtn("Open Order Details");
     } catch (err) {
       message.error(err.message);

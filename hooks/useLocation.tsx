@@ -8,5 +8,8 @@ async function fetcher(address: string) {
 }
 
 export default function useLocation(address: string) {
-  return useQuery(["location"], () => fetcher(address));
+  return useQuery(
+    ["location"],
+    () => fetcher(address) as Promise<Record<string, any>>
+  );
 }

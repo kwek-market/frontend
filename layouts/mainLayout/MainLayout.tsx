@@ -13,6 +13,7 @@ import Search from "@/components/search/Search";
 import MobileSearchBar from "@/shared/header/MobileSearchBar";
 // import Pusher from "react-pusher";
 import Pusher from "pusher-js";
+import { useAppDispatch } from "../../store";
 
 type MainLayoutType = {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ type MainLayoutType = {
 };
 
 const MainLayout = function ({ children, title }: MainLayoutType) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user } = useSelector((state: RootState) => state);
   const [showNavBar, setShowNavBar] = useState<boolean>(false);
   const [userNav, setUserNav] = useState<boolean>(false);
@@ -40,7 +41,7 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
   });
   useEffect(() => {
     const channel = pusherClient.subscribe(userId);
-    channel.bind(userId, (data) => {
+    channel.bind(userId, (data: Record<string, any>) => {
       console.log(data.message);
     });
     dispatch(getCategories());
@@ -50,7 +51,9 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
     dispatch(getCartFunc(user.token));
     (async () => {
       try {
-        const data = await verifyTokenFunc(user.token ? user.token : "");
+        const data: Record<string, any> = await verifyTokenFunc(
+          user.token ? user.token : ""
+        );
         if (data.verifyToken.status) {
           user.token && dispatch(getUserData(user.token));
           user.token &&

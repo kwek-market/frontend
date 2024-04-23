@@ -5,7 +5,10 @@ import { useQuery } from "react-query";
 function useOrders(token: string) {
   return useQuery(
     ["orders", token],
-    () => userFetcherWithAuth(GETORDERS, { token }, token),
+    () =>
+      userFetcherWithAuth(GETORDERS, { token }, token) as Promise<
+        Record<string, any>
+      >,
     { staleTime: Infinity, cacheTime: 1000 * 60 * 20 }
   );
 }

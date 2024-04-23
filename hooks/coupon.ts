@@ -14,7 +14,7 @@ export function useCreateCoupon(token: string) {
   return useMutation(
     (payload: Coupon) => userFetcherWithAuth(CREATE_COUPON, payload, token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.createCoupon.message);
       },
       onError: (error: any) => {
@@ -29,7 +29,7 @@ export function useApplyCoupon() {
     (payload: { couponId: string; token: string }) =>
       userFetcherWithAuth(APPLY_COUPON, payload, payload.token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.applyCoupon.message);
       },
       onError: (error: any) => {
@@ -46,7 +46,7 @@ export function useUnapplyCoupon() {
     (payload: { couponId: string; token: string }) =>
       userFetcherWithAuth(APPLY_COUPON, payload, payload.token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.applyCoupon.message);
       },
       onError: (error: any) => {

@@ -3,7 +3,7 @@ import { userFetcher } from "./userFetcher";
 
 export function getInitials(name: string) {
   const names = name.split(" ");
-  return names.map(n => n[0]).join("");
+  return names.map((n) => n[0]).join("");
 }
 
 export function getInitials2(str: string) {
@@ -37,7 +37,8 @@ export async function getIp() {
   return myIp;
 }
 
-export const even = (index: number) => (index % 2 !== 0 ? "tw-bg-gray-kwek700" : "");
+export const even = (index: number) =>
+  index % 2 !== 0 ? "tw-bg-gray-kwek700" : "";
 
 export function updateClicks(productId: string, token: string, mutate: any) {
   mutate({ productId, token });
@@ -85,7 +86,7 @@ export function generatePagesArray(
 }
 
 export function debounce(func: any, timeout: number = 300) {
-  let timer: NodeJS.Timer;
+  let timer: NodeJS.Timeout;
   return (...args) => {
     console.log("🚀 ~~ return ~~ args:", args);
 
@@ -97,7 +98,6 @@ export function debounce(func: any, timeout: number = 300) {
   };
 }
 
-
 export function deletePropertyNullUndefined(obj: { [key: string]: any }) {
   for (let key in obj) {
     if (obj[key] === null || obj[key] === undefined) {
@@ -105,6 +105,3 @@ export function deletePropertyNullUndefined(obj: { [key: string]: any }) {
     }
   }
 }
-
-
-

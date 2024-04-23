@@ -17,6 +17,7 @@ import useItemInCart from "@/hooks/useItemInCart";
 import useItemInWishlist from "@/hooks/useItemInWishlist";
 import useClicksUpdate from "@/hooks/useClicksUpdate";
 import { Rate } from "antd";
+import { useAppDispatch } from "../../store";
 
 export type ProductBoxProps = {
   id: string;
@@ -24,7 +25,7 @@ export type ProductBoxProps = {
 };
 
 const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, cart, wishlist } = useSelector((state: RootState) => state);
   const { mutate } = useClicksUpdate();
 
@@ -110,18 +111,17 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
           <Link
             href={`/product/${prod.id}?id=${prod.productTitle}`}
             onClick={() => updateClicks(prod.id, user.token, mutate)}
-            className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
-            
-              details
-            
+            className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"
+          >
+            details
           </Link>
         </div>
       </div>
 
       <Link
         href={`/product/${prod.productTitle}?id=${prod.id}`}
-        onClick={() => updateClicks(prod.id, user.token, mutate)}>
-
+        onClick={() => updateClicks(prod.id, user.token, mutate)}
+      >
         <div className={styles.box_details}>
           <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
@@ -162,7 +162,6 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
             </div>
           )}
         </div>
-
       </Link>
     </div>
   );

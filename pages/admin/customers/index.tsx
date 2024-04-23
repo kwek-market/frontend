@@ -4,7 +4,7 @@ import AdminTable from "@/components/table";
 import { useGetCustomers } from "@/hooks/useGetCustomers";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import { useMemo, useState } from "react";
@@ -59,7 +59,7 @@ const Customers = () => {
       key: "name",
       render: (name: string, { key }) => (
         <Link href={"/admin/customers/" + key}>
-          <a className=' tw-text-black-kwek100'>{key}</a>
+          <a className=" tw-text-black-kwek100">{key}</a>
         </Link>
       ),
     },
@@ -93,7 +93,7 @@ const Customers = () => {
       key: "action",
       render: (text, record) => (
         <span>
-          <DotsVerticalIcon className='tw-h-5 tw-w-5 tw-text-[#27BE63]' />
+          <EllipsisVerticalIcon className="tw-h-5 tw-w-5 tw-text-[#27BE63]" />
         </span>
       ),
     },
@@ -101,12 +101,14 @@ const Customers = () => {
 
   const data = useMemo(
     () =>
-      activeCustomerData?.getUserType?.objects?.map(d => {
+      activeCustomerData?.getUserType?.objects?.map((d) => {
         return {
           key: d.id,
           name: d.fullName,
           email_address: d.email,
-          date_joined: new Intl.DateTimeFormat("en-US").format(new Date(d.dateJoined)),
+          date_joined: new Intl.DateTimeFormat("en-US").format(
+            new Date(d.dateJoined)
+          ),
           country: d.billingSet.city,
           state: d.billingSet.state,
           amount_spent: "N13,873.74",
@@ -117,12 +119,14 @@ const Customers = () => {
 
   const inactiveData = useMemo(
     () =>
-      inactiveCustomerData?.getUserType?.objects?.map(d => {
+      inactiveCustomerData?.getUserType?.objects?.map((d) => {
         return {
           key: d.id,
           name: d.fullName,
           email_address: d.email,
-          date_joined: new Intl.DateTimeFormat("en-US").format(new Date(d.dateJoined)),
+          date_joined: new Intl.DateTimeFormat("en-US").format(
+            new Date(d.dateJoined)
+          ),
           country: d.billingSet.city,
           state: d.billingSet.state,
           amount_spent: "N13,873.74",
@@ -138,20 +142,20 @@ const Customers = () => {
           { name: "Dashboard", path: "/admin/dashboard" },
           { name: "Customers", path: "/admin/customers" },
         ]}
-        header='Customers'
-        buttonPath='#'
-        buttonText='Send Bulk Email'
+        header="Customers"
+        buttonPath="#"
+        buttonText="Send Bulk Email"
       />
 
-      <div className=' tw-pt-4'>
+      <div className=" tw-pt-4">
         <Tabs
           animated
           tabBarStyle={{ borderColor: "red" }}
-          className='adminTab'
+          className="adminTab"
           activeKey={activeKey}
-          onTabClick={key => setActiveKey(key)}
+          onTabClick={(key) => setActiveKey(key)}
         >
-          <TabPane tab='Active' key='1'>
+          <TabPane tab="Active" key="1">
             {acLoading ? (
               <Load />
             ) : (
@@ -161,18 +165,20 @@ const Customers = () => {
                 numberOfPages={activeCustomerData?.getUserType.pages}
                 page={activeCustomerData?.getUserType.page}
                 goToNext={() => {
-                  if (activeCustomerData?.getUserType?.hasNext) setPage(page + 1);
+                  if (activeCustomerData?.getUserType?.hasNext)
+                    setPage(page + 1);
                 }}
                 goToPrev={() => {
-                  if (activeCustomerData?.getUserType?.hasPrev) setPage(page - 1);
+                  if (activeCustomerData?.getUserType?.hasPrev)
+                    setPage(page - 1);
                 }}
-                goToPage={page => {
+                goToPage={(page) => {
                   setPage(page);
                 }}
               />
             )}
           </TabPane>
-          <TabPane tab='Inactive' key='2'>
+          <TabPane tab="Inactive" key="2">
             {icLoading ? (
               <Load />
             ) : (
@@ -182,12 +188,14 @@ const Customers = () => {
                 numberOfPages={activeCustomerData?.getUserType.pages}
                 page={activeCustomerData?.getUserType.page}
                 goToNext={() => {
-                  if (activeCustomerData?.getUserType?.hasNext) setPage(page + 1);
+                  if (activeCustomerData?.getUserType?.hasNext)
+                    setPage(page + 1);
                 }}
                 goToPrev={() => {
-                  if (activeCustomerData?.getUserType?.hasPrev) setPage(page - 1);
+                  if (activeCustomerData?.getUserType?.hasPrev)
+                    setPage(page - 1);
                 }}
-                goToPage={page => {
+                goToPage={(page) => {
                   setPage(page);
                 }}
               />

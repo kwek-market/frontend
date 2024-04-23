@@ -7,10 +7,11 @@ import { message, Modal } from "antd";
 import useBilling from "@/hooks/useBilling";
 import { getUserData } from "@/store/user/user.actions";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
+import { useAppDispatch } from "../../../store";
 
 const Addresses = function ({ activeBtn }) {
   const { user } = useSelector((state: RootState) => state);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { mutate: createMutate, isSuccess } = useBilling(user.token);
   const {
     user: { billingSet },

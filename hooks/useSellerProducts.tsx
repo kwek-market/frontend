@@ -6,7 +6,12 @@ import { useQuery } from "react-query";
 export default function useSellerProducts(payload: PagePayload) {
   return useQuery(
     ["sellerProducts", payload],
-    () => userFetcherWithAuth(GET_SELLER_PRODUCTS, payload, payload.token),
+    () =>
+      userFetcherWithAuth(
+        GET_SELLER_PRODUCTS,
+        payload,
+        payload.token
+      ) as Promise<Record<string, any>>,
     {
       staleTime: Infinity,
       cacheTime: 1000 * 60 * 20,

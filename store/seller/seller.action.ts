@@ -25,7 +25,7 @@ export function startSelling(startSelling: StartSelling, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(
+      const response: Record<string, any> = await userFetcherWithAuth(
         START_SELLING,
         startSelling,
         token
@@ -63,7 +63,7 @@ export function sellerVerification(
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(
+      const response: Record<string, any> = await userFetcherWithAuth(
         SELLER_VERIFICATION,
         sellerVerification,
         token
@@ -89,7 +89,7 @@ export function completeSellerVerification(email: string, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(
+      const response: Record<string, any> = await userFetcherWithAuth(
         COMPLETE_SELLER_VERIFICATION,
         { email },
         token
@@ -115,7 +115,11 @@ export function getSellerData(token: string) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(SELLER_DATA, { token }, token);
+      const response: Record<string, any> = await userFetcherWithAuth(
+        SELLER_DATA,
+        { token },
+        token
+      );
       dispatch({
         type: SellerTypes.GET_SELLER,
         payload: response.sellerData,

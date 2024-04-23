@@ -22,11 +22,15 @@ const Orders = function ({ activeBtn, setActiveBtn }) {
       : "tw-text-brown-kwek200";
 
   const numOfOpenOrders = data
-    ? data.orders.filter((order) => order.closed !== true).length
+    ? (data as Record<string, any>).orders.filter(
+        (order) => (order as Record<string, any>).closed !== true
+      ).length
     : 0;
 
   const numOfClosedOrders = data
-    ? data.orders.filter((order) => order.closed === true).length
+    ? (data as Record<string, any>).orders.filter(
+        (order) => order.closed === true
+      ).length
     : 0;
 
   return (

@@ -35,22 +35,24 @@ export default function Search({ search, check }: SearchProps) {
 
   const num =
     status === "success" &&
-    Number(data.products.objects.length).toLocaleString();
+    Number(
+      (data as Record<string, any>).products.objects.length
+    ).toLocaleString();
 
   const handlePageClick = (event: { selected: number }) => {
     setCurrentPage(event.selected + 1);
   };
 
   useEffect(() => {
-    if (data?.products.hasNext) {
+    if ((data as Record<string, any>)?.products.hasNext) {
       // console.log("has more");
       queryClient.prefetchQuery(["category-items", payload], () =>
         userFetcher(GetProducts, payload)
       );
     }
     if (data === undefined) return;
-    setPageCount(data.products.pages);
-    setCurrentItems(data.products.objects);
+    setPageCount((data as Record<string, any>).products.pages);
+    setCurrentItems((data as Record<string, any>).products.objects);
   }, [data, currentPage, queryClient]);
 
   useEffect(() => {

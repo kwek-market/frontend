@@ -6,7 +6,7 @@ import { TitleBlock, Card } from "../index";
 import { ProductBox } from "@/shared";
 import { userFetcher } from "@/helpers";
 import { GetProducts } from "@/store/product/product.queries";
-import Loader from "react-loader-spinner";
+import { Rings } from "react-loader-spinner";
 import { ProductType } from "@/interfaces/commonTypes";
 import { QueryClient } from "react-query";
 
@@ -37,7 +37,7 @@ const GridContainer = function ({ title, cards, similar }: GridContainerProps) {
           userFetcher(GetProducts, payload)
         );
         setLoading(false);
-        setProducts(data.products.objects);
+        setProducts((data as Record<string, any>).products.objects);
       } catch (err) {
         message.error(err.message);
         setError(err.message);
@@ -47,7 +47,13 @@ const GridContainer = function ({ title, cards, similar }: GridContainerProps) {
 
   const isLoading = !!loading && (
     <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
-      <Loader type="Rings" width={60} height={60} color="#FC476E" />
+      <Rings
+        visible={true}
+        height="60"
+        width="60"
+        color="#FC476E"
+        ariaLabel="rings-loading"
+      />
     </div>
   );
 

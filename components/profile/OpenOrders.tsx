@@ -21,11 +21,11 @@ const OpenOrders = function ({ setActiveBtn }) {
       {loading}
       {hasError}
       {data !== undefined &&
-        data.orders.filter((order) => order.closed !== true).length < 1 && (
-          <ErrorInfo error={"No open orders"} />
-        )}
+        (data as Record<string, any>).orders.filter(
+          (order) => order.closed !== true
+        ).length < 1 && <ErrorInfo error={"No open orders"} />}
       {data !== undefined &&
-        data.orders.map(
+        (data as Record<string, any>).orders.map(
           (order: Order) =>
             order.closed !== true && (
               <OpenOrder

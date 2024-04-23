@@ -1,7 +1,7 @@
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import { SidebarProps } from "@/interfaces/commonTypes";
 import React from "react";
-import Loader from "react-loader-spinner";
+import { Bars } from "react-loader-spinner";
 import { v4 } from "uuid";
 import styles from "./Sidebar.module.scss";
 
@@ -24,7 +24,13 @@ export function Category({
     <div className={styles.sidebar_content}>
       <p className={styles.header}>BROWSE CATEGORIES</p>
       {status === "loading" && data === undefined && (
-        <Loader type="Bars" width="20" height="20" color="red" />
+        <Bars
+          visible={true}
+          height="20"
+          width="20"
+          color="red"
+          ariaLabel="bars-loading"
+        />
       )}
       {status === "error" && (
         <div className="tw-py-3">

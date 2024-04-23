@@ -20,7 +20,11 @@ export function createProduct(Data: UploadProductType, token: string) {
     const { message } = await import("antd");
     try {
       setLoading();
-      const res = await userFetcherWithAuth(CreateProduct, Data, token);
+      const res: Record<string, any> = await userFetcherWithAuth(
+        CreateProduct,
+        Data,
+        token
+      );
       message.success("Product uploaded successfully");
       dispatch({
         type: productType.CREATE_PRODUCT,

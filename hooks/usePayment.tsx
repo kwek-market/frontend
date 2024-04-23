@@ -8,7 +8,7 @@ function usePayment(token: string) {
   return useMutation(
     (data: PaymentLinkType) => userFetcherWithAuth(PAYMENTLINK, data, token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         data.paymentLink.status &&
           window.location.assign(data.paymentLink.paymentLink);
       },

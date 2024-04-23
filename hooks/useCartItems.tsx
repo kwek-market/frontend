@@ -15,8 +15,9 @@ export default function useCartItems(order: Order) {
       try {
         setLoading(true);
         for (let i = 0; i < order.cartItems.length; i++) {
-          const data = await queryClient.fetchQuery("cart-item", () =>
-            userFetcher(GETCARTITEM, { id: order.cartItems[i].id })
+          const data: Record<string, any> = await queryClient.fetchQuery(
+            "cart-item",
+            () => userFetcher(GETCARTITEM, { id: order.cartItems[i].id })
           );
           itemsArray.push(data.cartitem);
         }

@@ -8,9 +8,10 @@ import { AuthForm } from "@/shared";
 import { loginUser } from "@/store/user/user.actions";
 import { RootState } from "@/store/rootReducer";
 import { UserLogin } from "@/interfaces/commonTypes";
+import { useAppDispatch } from "../store";
 
 const Page = function () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();

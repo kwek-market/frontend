@@ -8,7 +8,7 @@ function useTrackOrder() {
     (data: { orderId: string; token: string }) =>
       userFetcherWithAuth(TRACK_ORDER, { orderId: data.orderId }, data.token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.trackOrder.message);
       },
       onError: (err) => {

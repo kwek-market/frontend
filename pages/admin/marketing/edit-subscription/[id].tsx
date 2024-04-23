@@ -39,10 +39,7 @@ const EditSubscription = () => {
           />
 
           <div className="tw-grid lg:tw-grid-cols-2 tw-gap-6">
-            <SelectField
-              label="Category"
-              placeholder="Select a Category from the Dropdown"
-            >
+            <SelectField label="Category">
               <option value="">Select a Category from the Dropdown</option>
             </SelectField>
             <InputField label="Vendor" placeholder="Enter the Vendor Name" />

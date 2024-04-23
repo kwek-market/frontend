@@ -14,6 +14,7 @@ import { reviewProduct } from "@/store/review/review.action";
 import { RootState } from "@/store/rootReducer";
 import { v4 as uuid } from "uuid";
 import useAvgRating from "@/hooks/useAvgRating";
+import { useAppDispatch } from "../../../store";
 
 dayjs.extend(LocalizedFormat);
 
@@ -26,7 +27,7 @@ type ProductDescProps = {
 const ProductDesc = function ({ product }: ProductDescProps) {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [reviewType, setReviewType] = useState<ReviewType>({
     comment: "",
@@ -134,9 +135,7 @@ const ProductDesc = function ({ product }: ProductDescProps) {
                   <p className={styles.head}>7 Days Return Guarantee</p>
                   <p className={styles.sub}>
                     For more information on the return shipping options, go to{" "}
-                    <Link href="/returnPolicy">
-                      Kwek return Policy
-                    </Link>
+                    <Link href="/returnPolicy">Kwek return Policy</Link>
                   </p>
                 </div>
               </div>

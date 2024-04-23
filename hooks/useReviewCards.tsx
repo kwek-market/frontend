@@ -6,20 +6,29 @@ import {
 } from "@/store/seller/seller.queries";
 import { useQueries } from "react-query";
 
-export default function useReviewCard(token: string, thisMonth?: boolean ) {
+export default function useReviewCard(token: string, thisMonth?: boolean) {
   const payload = { token, thisMonth };
   return useQueries([
     {
       queryKey: "successful-sales",
-      queryFn: () => userFetcher(GET_SELLER_SUCCESSFUL_SALES, payload),
+      queryFn: () =>
+        userFetcher(GET_SELLER_SUCCESSFUL_SALES, payload) as Promise<
+          Record<string, any>
+        >,
     },
     {
       queryKey: "product-quality",
-      queryFn: () => userFetcher(GET_SELLER_PRODUCT_QUALITY, { token: payload.token }),
+      queryFn: () =>
+        userFetcher(GET_SELLER_PRODUCT_QUALITY, {
+          token: payload.token,
+        }) as Promise<Record<string, any>>,
     },
     {
       queryKey: "delivery-rate",
-      queryFn: () => userFetcher(GET_SELLER_DELIVERY_RATE, { token: payload.token }),
+      queryFn: () =>
+        userFetcher(GET_SELLER_DELIVERY_RATE, {
+          token: payload.token,
+        }) as Promise<Record<string, any>>,
     },
   ]);
 }

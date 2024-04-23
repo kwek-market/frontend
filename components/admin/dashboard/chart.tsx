@@ -72,7 +72,7 @@ const DashboardChart = ({ data }: { data: number[] }) => {
           xAxis: {
             grid: {
               display: false,
-              borderColor: "rgba(0, 0, 0, 0.2)",
+              // borderColor: "rgba(0, 0, 0, 0.2)",
             },
           },
           yAxis: {
@@ -80,7 +80,7 @@ const DashboardChart = ({ data }: { data: number[] }) => {
               stepSize: 20,
             },
             grid: {
-              drawBorder: false,
+              // drawBorder: false,
             },
           },
         },

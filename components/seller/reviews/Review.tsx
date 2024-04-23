@@ -53,14 +53,16 @@ export default function Review() {
   }, [sort]);
 
   useEffect(() => {
-    if (reviewData?.getSellerReview.hasNext) {
+    if ((reviewData as Record<string, any>)?.getSellerReview.hasNext) {
       queryClient.prefetchQuery(["reviews", payload], () =>
         userFetcher(GET_SELLER_REVIEW, payload)
       );
     }
     if (reviewData === undefined) return;
-    setPageCount(reviewData.getSellerReview.pages);
-    setCurrentItems(reviewData.getSellerReview.objects);
+    setPageCount((reviewData as Record<string, any>)?.getSellerReview.pages);
+    setCurrentItems(
+      (reviewData as Record<string, any>)?.getSellerReview.objects
+    );
     // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries(["reviews", payload]);
@@ -90,8 +92,10 @@ export default function Review() {
           {salesStatus === "success" && salesData !== undefined && (
             <Card
               name={"successful sales"}
-              num={salesData.getSellerSuccessfulSales}
-              content={`NGN ${saleData.getSellerSuccessfulSales}`}
+              num={(salesData as Record<string, any>)?.getSellerSuccessfulSales}
+              content={`NGN ${
+                (saleData as Record<string, any>)?.getSellerSuccessfulSales
+              }`}
             />
           )}
         </Fragment>
@@ -103,8 +107,12 @@ export default function Review() {
           {qualityStatus === "success" && qualityData !== undefined && (
             <Card
               name={"product quality"}
-              num={`${qualityData.getSellerProductQuality}%`}
-              content={`${qualityData.getSellerProductQuality}%`}
+              num={`${
+                (qualityData as Record<string, any>)?.getSellerProductQuality
+              }%`}
+              content={`${
+                (qualityData as Record<string, any>)?.getSellerProductQuality
+              }%`}
             />
           )}
         </Fragment>
@@ -116,8 +124,12 @@ export default function Review() {
           {rateStatus === "success" && rateData !== undefined && (
             <Card
               name={"delivery rate"}
-              num={`${rateData.getSellerDeliveryRate}%`}
-              content={`NGN ${rateData.getSellerDeliveryRate}%`}
+              num={`${
+                (rateData as Record<string, any>)?.getSellerDeliveryRate
+              }%`}
+              content={`NGN ${
+                (rateData as Record<string, any>)?.getSellerDeliveryRate
+              }%`}
             />
           )}
         </Fragment>
@@ -132,7 +144,6 @@ export default function Review() {
             {" "}
             sort by{" "}
             <select
-              placeholder="All time"
               className=""
               value={sort}
               onChange={(e) => {
@@ -144,6 +155,9 @@ export default function Review() {
                 setSort(e.target.value);
               }}
             >
+              <option value="" selected disabled>
+                All time
+              </option>
               <option value="-date_created">recent</option>
               <option value="date_created">oldest</option>
               <option value="rating">raing:low to high</option>

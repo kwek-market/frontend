@@ -2,7 +2,7 @@ import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import React, { useMemo, useState } from "react";
@@ -32,7 +32,7 @@ const Vendors = () => {
     page,
     pageSize: 10,
   });
-  
+
   const { data: redFlaggedData, isFetching } = useGetSellers({
     token,
     seller: true,
@@ -89,7 +89,7 @@ const Vendors = () => {
       key: "action",
       render: () => (
         <span>
-          <DotsVerticalIcon className="tw-h-5 tw-w-5 tw-text-[#27BE63]" />
+          <EllipsisVerticalIcon className="tw-h-5 tw-w-5 tw-text-[#27BE63]" />
         </span>
       ),
     },
@@ -97,36 +97,39 @@ const Vendors = () => {
 
   const data = useMemo(
     () =>
-      activeData?.getUserType?.objects?.map(({ id, fullName, email, dateJoined, sellerProfile }) => {
-        return {
-          key: id,
-          name: fullName,
-          email_address: email,
-          date_joined: dateJoined,
-          country: sellerProfile.lga ,
-          state: sellerProfile.state,
-          amount_sold: 0
-        };
-      }),
+      activeData?.getUserType?.objects?.map(
+        ({ id, fullName, email, dateJoined, sellerProfile }) => {
+          return {
+            key: id,
+            name: fullName,
+            email_address: email,
+            date_joined: dateJoined,
+            country: sellerProfile.lga,
+            state: sellerProfile.state,
+            amount_sold: 0,
+          };
+        }
+      ),
     [activeData]
   );
 
   const redFlagged = useMemo(
     () =>
-      redFlaggedData?.getUserType?.objects?.map(({ id, fullName, email, dateJoined, sellerProfile }) => {
-        return {
-          key: id,
-          name: fullName,
-          email_address: email,
-          date_joined: dateJoined,
-          country: sellerProfile.lga ,
-          state: sellerProfile.state,
-          amount_sold: 0
-        };
-      }),
+      redFlaggedData?.getUserType?.objects?.map(
+        ({ id, fullName, email, dateJoined, sellerProfile }) => {
+          return {
+            key: id,
+            name: fullName,
+            email_address: email,
+            date_joined: dateJoined,
+            country: sellerProfile.lga,
+            state: sellerProfile.state,
+            amount_sold: 0,
+          };
+        }
+      ),
     [activeData]
   );
-  
 
   return (
     <AdminLayout>

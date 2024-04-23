@@ -34,7 +34,9 @@ const ProductFilled = function ({
   const { status, data, error } = usePromotions(token);
 
   function isPromoted(id: string) {
-    return data?.getSellerPromotedProducts.find((item) => item.id === id);
+    return (data as Record<string, any>)?.getSellerPromotedProducts.find(
+      (item) => item.id === id
+    );
   }
 
   function displayProductDetails(prod: any) {

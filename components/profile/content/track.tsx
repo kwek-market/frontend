@@ -43,10 +43,13 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
       { orderId: track, token },
       {
         onSuccess: (data) => {
-          if (data.trackOrder.message.toLowerCase() === "invalid order id") {
+          if (
+            (data as Record<string, any>).trackOrder.message.toLowerCase() ===
+            "invalid order id"
+          ) {
             setError("Invalid order id");
           } else {
-            setInfo(data.trackOrder.message);
+            setInfo((data as Record<string, any>).trackOrder.message);
             showModal();
             setError("");
           }

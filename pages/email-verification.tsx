@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthLayout } from '@/layouts';
-import Button from '@/components/buttons/Button';
-import { RootState } from '@/store/rootReducer';
-import { clearAccount } from '@/store/account/account.actions';
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthLayout } from "@/layouts";
+import Button from "@/components/buttons/Button";
+import { RootState } from "@/store/rootReducer";
+import { clearAccount } from "@/store/account/account.actions";
+import { useAppDispatch } from "../store";
 
 const Emailverification = function () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const account = useSelector((state: RootState) => state.account);
   const router = useRouter();
 
   useEffect(() => {
-    if (account.email === '') {
-      import('antd').then(({ message }) => {
-        message.error('Email is not set');
+    if (account.email === "") {
+      import("antd").then(({ message }) => {
+        message.error("Email is not set");
       });
-      router.push('/create-account');
+      router.push("/create-account");
     }
   }, []);
 
@@ -26,17 +27,19 @@ const Emailverification = function () {
         <h3 className="tw-text-red-kwek100 tw-font-bold tw-text-base md:tw-text-xl lg:tw-text-3xl tw-text-center">
           Verify your email to finish signing up to Kwek
         </h3>
-        <p className="tw-text-black-stock tw-text-sm md:tw-text-base">Thank you for choosing Kwek</p>
         <p className="tw-text-black-stock tw-text-sm md:tw-text-base">
-          Please confirm that <strong>{account.email} </strong>is your email address by clicking on the link sent to
-          your email within the next 24 hours.
-          Also check your spam.
+          Thank you for choosing Kwek
+        </p>
+        <p className="tw-text-black-stock tw-text-sm md:tw-text-base">
+          Please confirm that <strong>{account.email} </strong>is your email
+          address by clicking on the link sent to your email within the next 24
+          hours. Also check your spam.
         </p>
         <Button
           buttonStyle="tw-py-2 tw-px-4 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-capitalize"
           text="sign in"
           cmd={() => {
-            router.push('/login');
+            router.push("/login");
             dispatch(clearAccount());
           }}
         />

@@ -15,7 +15,7 @@ export default function useCancelOrder() {
     (data: CancelOrderType) =>
       userFetcherWithAuth(CANCELORDER, { orderId: data.orderId }, data.token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.cancelOrder.message);
         queryClient.invalidateQueries(["orders"]);
       },

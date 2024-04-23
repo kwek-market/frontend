@@ -9,7 +9,7 @@ function usePaymentVerify(token: string) {
     (data: VerifyPaymentType) =>
       userFetcherWithAuth(VERIFYPAYMENT, data, token),
     {
-      onSuccess: (res) => {
+      onSuccess: (res: Record<string, any>) => {
         message.success(res.verifyPayment.message);
       },
       onError: (error) => {

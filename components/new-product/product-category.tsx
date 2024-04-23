@@ -36,26 +36,26 @@ function ProductCategory({
           userFetcher(CATEGORY, { id })
         ));
       setLoading(false);
-      data.category.child.length > 0
+      (data as Record<string, any>).category.child.length > 0
         ? setSubCategories((prev) => {
-            // find the one that was clicked, then replace the values, 
+            // find the one that was clicked, then replace the values,
             // and clear the values in the array after it
             if (index === undefined) {
-              return [data.category];
+              return [(data as Record<string, any>)?.category];
             }
             if (prev[index + 1]) {
               subCategories.splice(
                 index + 1,
                 subCategories.length - 1,
-                data.category
+                (data as Record<string, any>).category
               );
               return subCategories;
             }
-            return [...prev, data.category];
+            return [...prev, (data as Record<string, any>).category];
           })
         : setSubmitDetails({
             ...submitDetails,
-            subcategory: data.category.id,
+            subcategory: (data as Record<string, any>).category.id,
           });
     } catch (error) {
       setLoading(false);
@@ -77,7 +77,7 @@ function ProductCategory({
     index: number
   ) {
     setSubCategoryValue((prev) => {
-      // replace the value in the array if there's an existing value and 
+      // replace the value in the array if there's an existing value and
       // remove the values after it
       if (subCategoryValue[index]) {
         subCategoryValue.splice(
@@ -104,7 +104,6 @@ function ProductCategory({
           {" "}
           Main Category <br />
           <select
-            placeholder="Select Main Category"
             className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
             value={category}
             onChange={(e) => handleCategoryChange(e)}
@@ -129,7 +128,6 @@ function ProductCategory({
               Sub Category <br />
               <select
                 className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
-                placeholder="Select subcategory"
                 required
                 value={subCategoryValue[index]}
                 onChange={(e) => handleSubCategoryChange(e, index)}

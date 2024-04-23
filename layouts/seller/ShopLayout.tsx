@@ -6,9 +6,10 @@ import { RootState } from "@/store/rootReducer";
 import { getCartFunc } from "@/store/cart/cart.actions";
 import { getSellerData } from "@/store/seller/seller.action";
 import { getUserData } from "@/store/user/user.actions";
+import { useAppDispatch } from "../../store";
 
 function ShopLayout({ children }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user } = useSelector((state: RootState) => state);
 
   useEffect(() => {

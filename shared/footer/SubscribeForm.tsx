@@ -4,9 +4,10 @@ import styles from "./Footer.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { subscribeToNewsletter } from "@/store/newsletter/newsletter.actions";
 import { RootState } from "@/store/rootReducer";
+import { useAppDispatch } from "../../store";
 
-const Component = function () {    
-  const dispatch = useDispatch();
+const Component = function () {
+  const dispatch = useAppDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [email, setEmail] = useState<string>("");
 

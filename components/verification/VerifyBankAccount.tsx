@@ -12,13 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { SellerVerification } from "@/interfaces/commonTypes";
 import VerifiedModal from "./VerifiedModal";
-import Loader from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
+import { useAppDispatch } from "../../store";
 
 interface T extends StepComponentProps {
   submit: (data: any) => void;
 }
 function VerifyBankAccount(props: T) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, seller } = useSelector((state: RootState) => state);
   const [loading, setLoading] = useState(false);
   const fetchFromState = (value: string, defaultValue: string = "") => {
@@ -248,11 +249,12 @@ function VerifyBankAccount(props: T) {
             onChange={props.handleChange}
           />
           {loading && (
-            <Loader
-              type="CradleLoader"
-              width={20}
-              height={20}
+            <ThreeDots
+              visible={true}
+              height="20"
+              width="20"
               color="#FC476E"
+              ariaLabel="cradle-loading"
             />
           )}
           {props.state.bankName && props.state.bankAccountNumber && (

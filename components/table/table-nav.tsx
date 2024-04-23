@@ -1,5 +1,5 @@
 import { generatePagesArray } from "@/helpers/helper";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/solid";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 
 interface Prop {
   page: number;
@@ -9,23 +9,31 @@ interface Prop {
   getPrev: (event) => void;
   getNext: (event) => void;
 }
-const TableNav = ({ page, numberOfPages, dataLength, getPage, getPrev, getNext }: Prop) => {
+const TableNav = ({
+  page,
+  numberOfPages,
+  dataLength,
+  getPage,
+  getPrev,
+  getNext,
+}: Prop) => {
   const pagesArr = generatePagesArray(5, page, numberOfPages);
 
   return (
-    <div className='tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-between tw-m-2'>
-      <p className='tw-order-2 md:tw-order-1 tw-m-3'>
-        Showing results: {page != null ? page : 1} - {dataLength} of {numberOfPages}
+    <div className="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-between tw-m-2">
+      <p className="tw-order-2 md:tw-order-1 tw-m-3">
+        Showing results: {page != null ? page : 1} - {dataLength} of{" "}
+        {numberOfPages}
       </p>
 
-      <div className='tw-order-1 md:tw-order-2 tw-flex tw-justify-between tw-items-center tw-gap-1'>
+      <div className="tw-order-1 md:tw-order-2 tw-flex tw-justify-between tw-items-center tw-gap-1">
         <ArrowLeftIcon
           onClick={page > 1 ? getPrev : null}
           width={45}
           height={25}
-          className='tw-p-0.5 hover:tw-opacity-50 focus:tw-opacity-50 tw-cursor-pointer'
+          className="tw-p-0.5 hover:tw-opacity-50 focus:tw-opacity-50 tw-cursor-pointer"
         />
-        <div className='tw-flex tw-justify-between tw-align-center tw-gap-1'>
+        <div className="tw-flex tw-justify-between tw-align-center tw-gap-1">
           {(pagesArr?.length > 0 ? pagesArr : [1]).map((aPage, index) => (
             <button
               key={index}
@@ -45,7 +53,7 @@ const TableNav = ({ page, numberOfPages, dataLength, getPage, getPrev, getNext }
           onClick={page < numberOfPages ? getNext : null}
           width={45}
           height={25}
-          className='tw-p-0.5 hover:tw-opacity-50 focus:tw-opacity-50 tw-cursor-pointer'
+          className="tw-p-0.5 hover:tw-opacity-50 focus:tw-opacity-50 tw-cursor-pointer"
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { GraphQLClient, request } from "graphql-request";
+import { GraphQLClient, request, Variables } from "graphql-request";
 
 // const oldUrl = "https://kwekapi.com/v1/kwekql";
 // const newUrl = "https://kwekapi.herokuapp.com/v1/kwekql";
@@ -6,9 +6,13 @@ import { GraphQLClient, request } from "graphql-request";
 const graphqlEndpoint = "https://kwekapi.vercel.app/v1/kwekql";
 // const graphqlEndpoint = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
 
-export const userFetcher = async (query: string, variables?: any) => {
-  return await request(graphqlEndpoint, query, variables);
+export const userFetcher = async <T = any>(query: string, variables?: any) => {
+  return (await request(graphqlEndpoint, query, variables)) as T;
 };
+
+interface signature {
+  [key: string]: any;
+}
 
 export const userFetcherWithAuth = async <T>(
   query: string,
@@ -27,5 +31,5 @@ export const userFetcherWithAuth = async <T>(
     },
   });
 
-  return await graphQLClient.request(query, variables);
+  return await graphQLClient.request(query, variables as Variables);
 };

@@ -7,6 +7,7 @@ import { AddToCartPayload } from "@/interfaces/commonTypes";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import StarRatingComponent from "react-star-rating-component";
+import { useAppDispatch } from "../../store";
 
 const ListComponent = function ({
   listStyle,
@@ -19,7 +20,7 @@ const ListComponent = function ({
   itemId,
   options,
 }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user } = useSelector((state: RootState) => state);
 
   async function addToCart(id: string) {
@@ -76,8 +77,8 @@ const ListComponent = function ({
           <Image
             src={imgSrc}
             alt={altText}
-            width="100%"
-            height="100%"
+            width="100"
+            height="100"
             layout="responsive"
             className={styles.img}
           />

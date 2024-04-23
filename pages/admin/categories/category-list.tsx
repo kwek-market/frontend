@@ -2,10 +2,13 @@ import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
-import { useDeleteCategory, useGetAdminCategories } from "@/hooks/admin/category";
+import {
+  useDeleteCategory,
+  useGetAdminCategories,
+} from "@/hooks/admin/category";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { Dropdown, Menu } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -31,17 +34,21 @@ const CategoryList = () => {
   }
 
   const menu = (id: string) => (
-    <Menu className='tw-w-32 '>
-      <Menu.Item className=''>
+    <Menu className="tw-w-32 ">
+      <Menu.Item className="">
         <Link
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
-          className='tw-py-2 tw-px-4'>
+          className="tw-py-2 tw-px-4"
+        >
           Edit
         </Link>
       </Menu.Item>
-      <Menu.Item className='tw-py-2 tw-px-4' onClick={(e:any) => deleteCategory(id)}>
+      <Menu.Item
+        className="tw-py-2 tw-px-4"
+        onClick={(e: any) => deleteCategory(id)}
+      >
         Delete
       </Menu.Item>
     </Menu>
@@ -80,10 +87,9 @@ const CategoryList = () => {
       title: "Actions",
       key: "action",
       render: ({ key, id }) => (
-        <span className=' tw-cursor-pointer'>
-          {console.log(key, id)}
-          <Dropdown overlay={menu(id)} placement='bottomCenter' arrow>
-            <DotsVerticalIcon className='tw-h-5 tw-w-5' />
+        <span className=" tw-cursor-pointer">
+          <Dropdown overlay={menu(id)} placement="bottomCenter" arrow>
+            <EllipsisVerticalIcon className="tw-h-5 tw-w-5" />
           </Dropdown>
         </span>
       ),
@@ -102,13 +108,17 @@ const CategoryList = () => {
             },
             { name: "Category List", path: "/admin/categories/category-list" },
           ]}
-          header='Category List'
-          buttonPath='/admin/categories/add-category'
-          buttonText='New Category'
+          header="Category List"
+          buttonPath="/admin/categories/add-category"
+          buttonText="New Category"
         />
 
-        <div className='tw-mt-16'>
-          <Search placeholder='Search' value={search} onChange={e => setSearch(e.target.value)} />
+        <div className="tw-mt-16">
+          <Search
+            placeholder="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
         <Load />
       </AdminLayout>
@@ -126,20 +136,27 @@ const CategoryList = () => {
           },
           { name: "Category List", path: "/admin/categories/category-list" },
         ]}
-        header='Category List'
-        buttonPath='/admin/categories/add-category'
-        buttonText='New Category'
+        header="Category List"
+        buttonPath="/admin/categories/add-category"
+        buttonText="New Category"
       />
 
-      <div className='tw-mt-16'>
-        <Search placeholder='Search' value={search} onChange={e => setSearch(e.target.value)} />
+      <div className="tw-mt-16">
+        <Search
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
 
       {isFetching ? (
         <Load />
       ) : (
-        <div className=' tw-pt-4'>
-          <AdminTable data={categoryData?.categories || []} columns={columns} />
+        <div className=" tw-pt-4">
+          <AdminTable
+            data={(categoryData as any)?.categories || []}
+            columns={columns}
+          />
         </div>
       )}
     </AdminLayout>

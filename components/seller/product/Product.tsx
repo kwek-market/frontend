@@ -28,7 +28,7 @@ export default function Product() {
     page: currentPage,
     pageSize: 20,
     sortBy: filter,
-    rating: -5
+    rating: -5,
   };
   const {
     status,
@@ -49,15 +49,19 @@ export default function Product() {
   }, [filter]);
 
   useEffect(() => {
-    if (productsData?.getSellerProducts.hasNext) {
+    if ((productsData as Record<string, any>)?.getSellerProducts.hasNext) {
       // console.log("has more");
       queryClient.prefetchQuery(["sellerProducts", payload], () =>
         userFetcher(GET_SELLER_PRODUCTS, payload)
       );
     }
     if (productsData === undefined) return;
-    setPageCount(productsData.getSellerProducts.pages);
-    setCurrentItems(productsData.getSellerProducts.objects);
+    setPageCount(
+      (productsData as Record<string, any>)?.getSellerProducts.pages
+    );
+    setCurrentItems(
+      (productsData as Record<string, any>)?.getSellerProducts.objects
+    );
     // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries(["sellerProducts", payload]);

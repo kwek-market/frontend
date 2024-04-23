@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../buttons/Button";
+import { useAppDispatch } from "../../store";
 
 type Props = {
   submitDetails: UploadProductType;
@@ -12,7 +13,7 @@ type Props = {
 
 function Header({ submitDetails }: Props) {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user } = useSelector((state: RootState) => state);
 
   function goBack() {

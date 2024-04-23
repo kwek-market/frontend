@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { Menu } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { message } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import styles from "./styles/sellers.module.css";
 import { AuthLayout } from "@/layouts";
 import { StartSelling } from "@/interfaces/commonTypes";
@@ -16,13 +16,14 @@ import { RootState } from "@/store/rootReducer";
 import { getSellerData, startSelling } from "@/store/seller/seller.action";
 import withAuth from "@/hooks/withAuth";
 import { getUserData } from "@/store/user/user.actions";
+import { useAppDispatch } from "../../store";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
 };
 
 const Page = function ({ data }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, seller } = useSelector((state: RootState) => state);
   const router = useRouter();
   const [callCode, setCallCode] = useState<number>(93);
@@ -493,7 +494,6 @@ const Page = function ({ data }) {
                     and{" "}
                     <Link href="/" className="tw-text-red-kwek100">
                       Terms and Conditions{" "}
-
                     </Link>
                   </label>
                 </div>
@@ -501,7 +501,13 @@ const Page = function ({ data }) {
               <div className="tw-mt-2 tw-flex ">
                 <button className="btn bg-primary tw-flex-1 tw-w-6 tw-p-4">
                   {seller.loading ? (
-                    <Loader type="Puff" color="#fff" height={30} width={30} />
+                    <Puff
+                      visible={true}
+                      height="30"
+                      width="30"
+                      color="#fff"
+                      ariaLabel="puff-loading"
+                    />
                   ) : (
                     "Start Selling"
                   )}

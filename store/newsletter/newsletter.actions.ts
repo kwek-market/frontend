@@ -13,7 +13,11 @@ export function subscribeToNewsletter(email: string, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       setLoading();
-      const response = await userFetcherWithAuth(SUBCRIBE, { email }, token);
+      const response: Record<string, any> = await userFetcherWithAuth(
+        SUBCRIBE,
+        { email },
+        token
+      );
       // console.log({ response });
       import("antd").then(({ message }) => {
         response.createSubscriber.status

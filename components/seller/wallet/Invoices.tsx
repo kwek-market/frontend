@@ -31,14 +31,16 @@ export default function Invoices() {
   } = useInvoice(payload);
 
   useEffect(() => {
-    if (invoiceData?.getSellerInvoices.hasNext) {
+    if ((invoiceData as Record<string, any>)?.getSellerInvoices.hasNext) {
       queryClient.prefetchQuery("invoice", () =>
         userFetcher(GET_SELLER_INVOICE, payload)
       );
     }
     if (invoiceData === undefined) return;
-    setPageCount(invoiceData.getSellerInvoices.pages);
-    setCurrentItems(invoiceData.getSellerInvoices.objects);
+    setPageCount((invoiceData as Record<string, any>).getSellerInvoices.pages);
+    setCurrentItems(
+      (invoiceData as Record<string, any>).getSellerInvoices.objects
+    );
     // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries("invoice");
@@ -85,10 +87,9 @@ export default function Invoices() {
                     <td>
                       <Link
                         href={`invoice/${item.id}`}
-                        className="tw-underline tw-font-semibold tw-text-gray-kwek900">
-
+                        className="tw-underline tw-font-semibold tw-text-gray-kwek900"
+                      >
                         {item.invoiceNumber}
-
                       </Link>
                     </td>
                     <td>{dayjs(item.issueDate).format("DD/MM/YYYY")}</td>

@@ -33,7 +33,9 @@ export default function WithdrawFunds() {
     };
     mutate(payload, {
       onSuccess: (data) => {
-        message.success(data.withdrawFromWallet.message);
+        message.success(
+          (data as Record<string, any>)?.withdrawFromWallet.message
+        );
       },
       onError: (err: any) => {
         message.error(err.message);

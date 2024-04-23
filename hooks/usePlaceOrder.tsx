@@ -12,9 +12,12 @@ function usePlaceOrder(token: string) {
   return useMutation(
     (data: PlaceOrder) => userFetcherWithAuth(PLACEORDER, data, token),
     {
-      onSuccess: (data) => {
-        console.log(data)
-        data.placeOrder.status && router.push(`/cart/order-complete?orderId=${data.placeOrder.orderId}`);
+      onSuccess: (data: Record<string, any>) => {
+        console.log(data);
+        data.placeOrder.status &&
+          router.push(
+            `/cart/order-complete?orderId=${data.placeOrder.orderId}`
+          );
         queryClient.invalidateQueries("orders");
       },
       onError: (error) => {

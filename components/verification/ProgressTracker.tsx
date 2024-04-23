@@ -4,7 +4,7 @@ import Style from "./tracker.module.scss";
 
 interface progressTrackerProps extends NavigationComponentProps {}
 
-const ProgressTracker: React.FC<progressTrackerProps> = (props) => {
+const ProgressTracker = (props: progressTrackerProps) => {
   const { allSteps, current: currentStep, size: stepLength } = props;
 
   return (

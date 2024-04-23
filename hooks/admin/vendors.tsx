@@ -21,7 +21,10 @@ export type USERTYPE = {
 export function useGetSellers(payload: USERTYPE) {
   return useQuery(
     ["seller", JSON.stringify(payload)],
-    () => userFetcherWithAuth(GET_SELLERS, payload, payload.token),
+    () =>
+      userFetcherWithAuth(GET_SELLERS, payload, payload.token) as Promise<
+        Record<string, any>
+      >,
     {
       keepPreviousData: false,
     }
@@ -36,7 +39,7 @@ export function useCompleteSeller() {
     (payload: { email: string; isVerified: boolean }) =>
       userFetcherWithAuth(COMPLETE_SELLER_VERIFICATION, payload, token),
     {
-      onSuccess: data => {
+      onSuccess: (data: Record<string, any>) => {
         if (!data?.completeSellerVerification?.status) {
           throw Error(data?.completeSellerVerification?.message);
         } else {
@@ -51,10 +54,18 @@ export function useCompleteSeller() {
         queryClient.invalidateQueries("seller");
       },
       onError(error) {
-        message.error({ content: (error as any).message, key: "vendor", duration: 3000 });
+        message.error({
+          content: (error as any).message,
+          key: "vendor",
+          duration: 3000,
+        });
       },
       onMutate() {
-        message.loading({ content: "loading..", key: "vendor", duration: 3000 });
+        message.loading({
+          content: "loading..",
+          key: "vendor",
+          duration: 3000,
+        });
       },
     }
   );

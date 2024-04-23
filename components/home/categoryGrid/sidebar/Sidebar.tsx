@@ -38,58 +38,59 @@ const Sidebar = function ({ title }) {
             <Spin size="large" />
           </div>
         )}
-        {categoryData?.products.objects.length &&
-          categoryData?.products.objects.map((product: ProductType) => (
-            (<Link
-              key={v4()}
-              href={`/product/${product.id}?id=${product.productTitle}`}
-              className="hover:tw-text-opacity-25">
+        {(categoryData as Record<string, any>)?.products.objects.length &&
+          (categoryData as Record<string, any>)?.products.objects.map(
+            (product: ProductType) => (
+              <Link
+                key={v4()}
+                href={`/product/${product.id}?id=${product.productTitle}`}
+                className="hover:tw-text-opacity-25"
+              >
+                <div className={styles.product}>
+                  <div className={styles.product_imageContainer}>
+                    <Image
+                      src={product?.image[0].imageUrl}
+                      width="96"
+                      height="110"
+                      className="tw-object-cover"
+                    />
+                  </div>
 
-              <div className={styles.product}>
-                <div className={styles.product_imageContainer}>
-                  <Image
-                    src={product?.image[0].imageUrl}
-                    width="96"
-                    height="110"
-                    className="tw-object-cover"
-                  />
-                </div>
-
-                <div className={styles.product_details}>
-                  <p className={styles.textSm}>{product?.productTitle}</p>
-                  <p className={styles.textMd}>
-                    {product.options[0]?.discountedPrice ? (
-                      <span>₦{product.options[0].discountedPrice}</span>
+                  <div className={styles.product_details}>
+                    <p className={styles.textSm}>{product?.productTitle}</p>
+                    <p className={styles.textMd}>
+                      {product.options[0]?.discountedPrice ? (
+                        <span>₦{product.options[0].discountedPrice}</span>
+                      ) : (
+                        <span>₦{product.options[0]?.price}</span>
+                      )}
+                    </p>
+                    {product.productRating.length > 0 ? (
+                      <div>
+                        <StarRatingComponent
+                          name="rate1"
+                          starCount={5}
+                          value={product.productRating[0].rating}
+                          editing={false}
+                          emptyStarColor="#c4c4c4"
+                          starColor="#ffc107"
+                        />
+                      </div>
                     ) : (
-                      <span>₦{product.options[0]?.price}</span>
+                      <div className={styles.box_productRating}>
+                        <StarRatingComponent
+                          name="rate2"
+                          starCount={5}
+                          value={0}
+                          editing={false}
+                        />
+                      </div>
                     )}
-                  </p>
-                  {product.productRating.length > 0 ? (
-                    <div>
-                      <StarRatingComponent
-                        name="rate1"
-                        starCount={5}
-                        value={product.productRating[0].rating}
-                        editing={false}
-                        emptyStarColor="#c4c4c4"
-                        starColor="#ffc107"
-                      />
-                    </div>
-                  ) : (
-                    <div className={styles.box_productRating}>
-                      <StarRatingComponent
-                        name="rate2"
-                        starCount={5}
-                        value={0}
-                        editing={false}
-                      />
-                    </div>
-                  )}
+                  </div>
                 </div>
-              </div>
-
-            </Link>)
-          ))}
+              </Link>
+            )
+          )}
       </div>
     </div>
   );

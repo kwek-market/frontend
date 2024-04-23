@@ -9,7 +9,7 @@ function useBilling(token: string, setAddressId?: any) {
     (data: BillingAddressType) =>
       userFetcherWithAuth(BILLINGADDRESS, data, token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success("Billing address added successfully");
         setAddressId && setAddressId(data.billingAddress.billingAddress.id);
       },

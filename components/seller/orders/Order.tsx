@@ -42,15 +42,17 @@ export default function Order() {
   }, [filter]);
 
   useEffect(() => {
-    if (ordersData?.getSellerOrders.hasNext) {
+    if ((ordersData as Record<string, any>)?.getSellerOrders.hasNext) {
       // console.log("has more");
       queryClient.prefetchQuery(["sellerOrders", payload], () =>
         userFetcher(GET_SELLER_ORDERS, payload)
       );
     }
     if (ordersData === undefined) return;
-    setPageCount(ordersData.getSellerOrders.pages);
-    setCurrentItems(ordersData.getSellerOrders.objects);
+    setPageCount((ordersData as Record<string, any>)?.getSellerOrders.pages);
+    setCurrentItems(
+      (ordersData as Record<string, any>)?.getSellerOrders.objects
+    );
     // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries(["sellerOrders", payload]);

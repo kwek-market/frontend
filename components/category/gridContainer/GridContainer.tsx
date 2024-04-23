@@ -5,7 +5,7 @@ import { ActiveTabbar, Card, SideBar } from "../index";
 import { v4 as uuid } from "uuid";
 import CategoryProducts from "../CategoryProducts";
 import { Filtering, ProductType } from "@/interfaces/commonTypes";
-import Loader from "react-loader-spinner";
+import { Rings } from "react-loader-spinner";
 import ReactPaginate from "react-paginate";
 import useProducts, { PayloadType } from "@/hooks/useProducts";
 import { QueryClient, useQueryClient } from "react-query";
@@ -55,13 +55,13 @@ const GridContainer = function ({ cards, category }: any) {
           ["category-items", payload],
           () => userFetcher(GetProducts, payload)
         );
-        if (data?.products?.hasNext) {
+        if ((data as Record<string, any>)?.products?.hasNext) {
           queryClient.prefetchQuery(["category-items", payload], () =>
             userFetcher(GetProducts, payload)
           );
         }
-        setPageCount(data?.products.pages);
-        setCurrentItems(data?.products.objects);
+        setPageCount((data as Record<string, any>)?.products.pages);
+        setCurrentItems((data as Record<string, any>)?.products.objects);
       } catch (err) {
         console.error(err.message);
       }
@@ -79,14 +79,14 @@ const GridContainer = function ({ cards, category }: any) {
   ]);
 
   useEffect(() => {
-    if (categoryData?.products?.hasNext) {
+    if ((categoryData as Record<string, any>)?.products?.hasNext) {
       queryClient.prefetchQuery(["category-items", payload], () =>
         userFetcher(GetProducts, payload)
       );
     }
     if (categoryData === undefined) return;
-    setPageCount(categoryData?.products?.pages);
-    setCurrentItems(categoryData?.products?.objects);
+    setPageCount((categoryData as Record<string, any>)?.products?.pages);
+    setCurrentItems((categoryData as Record<string, any>)?.products?.objects);
     // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries(["category-items", payload]);
@@ -100,7 +100,13 @@ const GridContainer = function ({ cards, category }: any) {
 
   const isLoading = categoryStatus === "loading" && (
     <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
-      <Loader type="Rings" width={60} height={60} color="#FC476E" />
+      <Rings
+        visible={true}
+        height="60"
+        width="60"
+        color="#FC476E"
+        ariaLabel="rings-loading"
+      />
     </div>
   );
 
@@ -184,7 +190,13 @@ const GridContainer = function ({ cards, category }: any) {
           />
           {isFetching ? (
             <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
-              <Loader type="Rings" width={60} height={60} color="#FC476E" />
+              <Rings
+                visible={true}
+                height="60"
+                width="60"
+                color="#FC476E"
+                ariaLabel="rings-loading"
+              />
             </div>
           ) : null}{" "}
         </div>

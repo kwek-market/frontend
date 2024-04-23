@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Link from "next/link";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import styles from "./AuthForm.module.scss";
 import { emailValidator } from "@/helpers";
 import { Type, UserLogin, UserError } from "@/interfaces/commonTypes";
@@ -118,12 +118,12 @@ const AuthForm: React.FC<Type> = function ({
             onClick={(e) => handleSubmit(e)}
           >
             {user.loading ? (
-              <Loader
-                type="Puff"
+              <Puff
+                visible={true}
+                height="30"
+                width="30"
                 color="#fff"
-                height={30}
-                width={30}
-                // timeout={3000} //3 secs
+                ariaLabel="puff-loading"
               />
             ) : (
               submit.text

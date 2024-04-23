@@ -16,7 +16,7 @@ export default function useBillingUpdate(token: string) {
   return useMutation(
     (data: DataType) => userFetcherWithAuth(BILLINGADDRESSUPDATE, data, token),
     {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.billingAddressUpdate.message);
       },
       onError: (error) => {

@@ -8,11 +8,12 @@ import { logout } from "@/store/user/user.actions";
 import { clearAccount } from "@/store/account/account.actions";
 import { clearSubs } from "@/store/newsletter/newsletter.actions";
 import { clearSeller } from "@/store/seller/seller.action";
+import { useAppDispatch } from "../store";
 
 const sellerAuth = (WrappedComponent: any) => {
   return function (props: any) {
     const router = useRouter();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const { user } = useSelector((state: RootState) => state);
@@ -42,7 +43,7 @@ const sellerAuth = (WrappedComponent: any) => {
           router.push("/login");
         } else {
           // we call the api that verifies the token.
-          const data = await verifyTokenFunc(user.token);
+          const data: Record<string, any> = await verifyTokenFunc(user.token);
           // console.log({ data });
           // verify token first
           if (data.verifyToken.status) {

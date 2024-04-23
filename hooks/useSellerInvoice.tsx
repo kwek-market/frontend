@@ -6,7 +6,8 @@ export default function useSellerInvoice(invoiceId: string, token: string) {
   const payload = { invoiceId, token };
   return useQuery(
     "invoice-details",
-    () => userFetcher(GET_SELLERS_INVOICE, payload),
+    () =>
+      userFetcher(GET_SELLERS_INVOICE, payload) as Promise<Record<string, any>>,
     {
       enabled: invoiceId !== undefined,
     }

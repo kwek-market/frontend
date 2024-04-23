@@ -10,9 +10,10 @@ import { QueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import useCartItems from "@/hooks/useCartItems";
 import Load from "../Loader/Loader";
+import { useAppDispatch } from "../../store";
 
 const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
@@ -28,7 +29,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
         userFetcherWithAuth(GETORDER, { token, id }, token)
       );
       setLoading(false);
-      dispatch(setOrderDetails(data.order));
+      dispatch(setOrderDetails((data as Record<string, any>).order));
       // console.log(data);
       setActiveBtn("Closed Order Details");
     } catch (err) {

@@ -7,10 +7,11 @@ import Link from "next/link";
 import { clearCart } from "@/store/cart/cart.actions";
 import { logout } from "@/store/user/user.actions";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
+import { useAppDispatch } from "../../store";
 
 function Header() {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { seller } = useSelector((state: RootState) => state);
 
   function goBack() {
@@ -26,9 +27,7 @@ function Header() {
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link href="/seller/profile/#settings">
-          account
-        </Link>
+        <Link href="/seller/profile/#settings">account</Link>
       </Menu.Item>
       <Menu.Item>
         <button onClick={handleLogout}>logout</button>

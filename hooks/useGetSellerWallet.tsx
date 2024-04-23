@@ -10,7 +10,10 @@ type WalletType = {
 export default function useGetSellerWallet(token: string) {
   return useQuery<WalletType>(
     "wallet",
-    () => userFetcher(GET_SELLER_WALLET, { token: token }),
+    async () => {
+      const data = await userFetcher(GET_SELLER_WALLET, { token: token });
+      return data as WalletType;
+    },
     {
       staleTime: Infinity,
       cacheTime: 1000 * 60 * 20,

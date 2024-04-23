@@ -60,12 +60,15 @@ const OrdersFilled = function ({
       { orderId: orderIdText, token },
       {
         onSuccess: (data) => {
-          if (data.trackOrder.message.toLowerCase() === "invalid order id") {
+          if (
+            (data as Record<string, any>)?.trackOrder.message.toLowerCase() ===
+            "invalid order id"
+          ) {
             message.error("Invalid order id");
             setInfo("");
           } else {
-            message.success(data.trackOrder.message);
-            setInfo(data.trackOrder.message);
+            message.success((data as Record<string, any>)?.trackOrder.message);
+            setInfo((data as Record<string, any>)?.trackOrder.message);
           }
         },
         onError: () => {

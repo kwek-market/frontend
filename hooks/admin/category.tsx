@@ -5,7 +5,10 @@ import {
   GET_CATEGORIES,
   UPDATE_CATEGORY,
 } from "@/store/admin/admin.queries";
-import { CreateCategoryType, UpdateCategoryType } from "@/validations/createCategory";
+import {
+  CreateCategoryType,
+  UpdateCategoryType,
+} from "@/validations/createCategory";
 import { message } from "antd";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "react-query";
@@ -33,8 +36,12 @@ type UpdatePayload = {
 };
 
 export const useGetAdminCategories = (payload: SearchProps) => {
-  return useQuery([`admin-categories`, payload.search], () =>
-    userFetcherWithAuth(GET_CATEGORIES, payload, payload.token)
+  return useQuery(
+    [`admin-categories`, payload.search],
+    () =>
+      userFetcherWithAuth(GET_CATEGORIES, payload, payload.token) as Promise<
+        Record<string, any>
+      >
   );
 };
 
@@ -42,9 +49,10 @@ export const useCreateCategory = (token: string) => {
   const router = useRouter();
 
   return useMutation(
-    (payload: CreateCategoryType) => userFetcherWithAuth(CREATE_CATEGORY, payload, token),
+    (payload: CreateCategoryType) =>
+      userFetcherWithAuth(CREATE_CATEGORY, payload, token),
     {
-      onSuccess: data => {
+      onSuccess: (data: Record<string, any>) => {
         if (!data.addCategory.status) {
           throw Error(data.addCategory.message);
         } else {
@@ -63,7 +71,7 @@ export const useDeleteCategory = () => {
     (payload: { id: string; token: string }) =>
       userFetcherWithAuth(DELETE_CATEGORY, payload, payload.token),
     {
-      onSuccess: data => {
+      onSuccess: (data: Record<string, any>) => {
         if (!data.deleteCategory.status) {
           message.error({
             key: "delete-category",
@@ -81,7 +89,11 @@ export const useDeleteCategory = () => {
         queryClient.invalidateQueries("admin-categories");
       },
       onMutate(variables) {
-        message.loading({ key: "delete-category", content: "Loading..", duration: 3 });
+        message.loading({
+          key: "delete-category",
+          content: "Loading..",
+          duration: 3,
+        });
       },
     }
   );
@@ -91,9 +103,10 @@ export const useUpdateCategory = (token: string) => {
   const router = useRouter();
 
   return useMutation(
-    (payload: UpdateCategoryType) => userFetcherWithAuth(UPDATE_CATEGORY, payload, token),
+    (payload: UpdateCategoryType) =>
+      userFetcherWithAuth(UPDATE_CATEGORY, payload, token),
     {
-      onSuccess: data => {
+      onSuccess: (data: Record<string, any>) => {
         if (!data.updateCategory.status) {
           throw Error(data.updateCategory.message);
         } else {

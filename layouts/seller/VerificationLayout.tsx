@@ -6,9 +6,10 @@ import { RootState } from "@/store/rootReducer";
 import { getSellerData } from "@/store/seller/seller.action";
 import { getUserData } from "@/store/user/user.actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "../../store";
 
 function VerificationLayout({ children }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user } = useSelector((state: RootState) => state);
 
   useEffect(() => {

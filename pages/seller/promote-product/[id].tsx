@@ -38,7 +38,7 @@ const Promote = function () {
       token,
     };
     mutate(payload, {
-      onSuccess: (data) => {
+      onSuccess: (data: Record<string, any>) => {
         message.success(data.promoteProduct.message);
         router.push("/seller/profile");
       },

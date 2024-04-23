@@ -33,14 +33,18 @@ export default function History() {
   });
 
   useEffect(() => {
-    if (data?.getSellerWalletTransactions.hasNext) {
+    if ((data as Record<string, any>)?.getSellerWalletTransactions.hasNext) {
       queryClient.prefetchQuery("wallet-transaction", () =>
         userFetcher(GET_SELLER_TRANSACTIONS, payload)
       );
     }
     if (data === undefined) return;
-    setPageCount(data.getSellerWalletTransactions.pages);
-    setCurrentItems(data.getSellerWalletTransactions.objects);
+    setPageCount(
+      (data as Record<string, any>).getSellerWalletTransactions.pages
+    );
+    setCurrentItems(
+      (data as Record<string, any>).getSellerWalletTransactions.objects
+    );
     // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries("wallet-transaction");

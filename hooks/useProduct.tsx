@@ -25,7 +25,7 @@ function useProduct(payload: { id: string }) {
           ...productData,
           error: null,
           loading: false,
-          product: data.product,
+          product: (data as any).product,
         });
       } catch (err) {
         setProductData({ ...productData, loading: false, error: err });

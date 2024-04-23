@@ -2,7 +2,7 @@ import BreadCrumbs from "@/components/admin/breadcrumbs";
 import AdminLayout from "@/layouts/adminLayout/adminLayout";
 import React, { useEffect, useState } from "react";
 import AdminTable from "@/components/table";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useGetProducts } from "@/hooks/admin/products";
 import Load from "@/components/Loader/Loader";
@@ -13,11 +13,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { search as searchData } from "@/store/search/search.action";
 import { GetProducts } from "@/store/product/product.queries";
+import { useAppDispatch } from "../../../store";
 
 const Products = () => {
   const queryClient = new QueryClient();
   const { search } = useSelector((state: RootState) => state);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(1);
 
@@ -71,7 +72,10 @@ const Products = () => {
       render: (productTitle, x) => {
         productTitle = reduceCharacterLength(productTitle, maxTextLength);
         return (
-          <Link href={`/admin/products/${x?.id}`} className=" tw-text-[#1D1616]">
+          <Link
+            href={`/admin/products/${x?.id}`}
+            className=" tw-text-[#1D1616]"
+          >
             {productTitle}
           </Link>
         );
@@ -108,7 +112,7 @@ const Products = () => {
       key: "action",
       render: () => (
         <span>
-          <DotsVerticalIcon className="tw-h-5 tw-w-5" />
+          <EllipsisVerticalIcon className="tw-h-5 tw-w-5" />
         </span>
       ),
     },

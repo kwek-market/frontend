@@ -1,10 +1,10 @@
-import { userFetcher, userFetcherWithAuth } from "@/helpers";
+import { userFetcher, userFetcherWithAuth } from "../../helpers";
 import {
   GET_PRODUCT,
   GET_PRODUCTS,
   GET_PRODUCT_ORDERS,
   GET_PRODUCT_REVIEWS,
-} from "@/store/admin/admin.queries";
+} from "../../store/admin/admin.queries";
 import { useQuery } from "react-query";
 
 export type PayloadType = {
@@ -20,23 +20,38 @@ export type ReviewPayloadType = {
 };
 
 export const useGetProducts = (payload: PayloadType) => {
-  return useQuery(["products-admin", payload], () => userFetcher(GET_PRODUCTS, payload));
-};
-
-export const useGetProduct = (payload: { id: string }) => {
-  return useQuery(["product-admin", payload], () => userFetcher(GET_PRODUCT, payload));
-};
-
-export const useGetProductReviews = (payload: ReviewPayloadType) => {
-  return useQuery(["product-reviews-admin", payload], () =>
-    userFetcher(GET_PRODUCT_REVIEWS, payload)
+  return useQuery(
+    ["products-admin", payload],
+    () => userFetcher(GET_PRODUCTS, payload) as Promise<Record<string, any>>
   );
 };
 
-export const useGetProductOrders = (payload: ReviewPayloadType & PayloadType) => {
+export const useGetProduct = (payload: { id: string }) => {
+  return useQuery(
+    ["product-admin", payload],
+    () => userFetcher(GET_PRODUCT, payload) as Promise<Record<string, any>>
+  );
+};
+
+export const useGetProductReviews = (payload: ReviewPayloadType) => {
+  return useQuery(
+    ["product-reviews-admin", payload],
+    () =>
+      userFetcher(GET_PRODUCT_REVIEWS, payload) as Promise<Record<string, any>>
+  );
+};
+
+export const useGetProductOrders = (
+  payload: ReviewPayloadType & PayloadType
+) => {
   return useQuery(
     ["product-orders", payload.productId, payload.page, payload.pageSize],
-    () => userFetcherWithAuth(GET_PRODUCT_ORDERS, payload, payload.token),
+    () =>
+      userFetcherWithAuth(
+        GET_PRODUCT_ORDERS,
+        payload,
+        payload.token as string
+      ) as Promise<Record<string, any>>,
     { enabled: !!payload.productId }
   );
 };

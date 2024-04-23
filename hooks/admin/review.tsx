@@ -10,7 +10,13 @@ export type PayloadType = {
 };
 
 export const useGetReviews = (payload: PayloadType) => {
-  return useQuery(["review-admin", payload], () =>
-    userFetcherWithAuth(GET_PRODUCT_REVIEWS, payload, payload.token),
+  return useQuery(
+    ["review-admin", payload],
+    () =>
+      userFetcherWithAuth(
+        GET_PRODUCT_REVIEWS,
+        payload,
+        payload.token
+      ) as Promise<Record<string, any>>
   );
 };

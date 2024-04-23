@@ -3,7 +3,8 @@ import { GET_CATEGORIES } from "@/store/admin/admin.queries";
 import { useQuery } from "react-query";
 
 export const useGetCategories = (payload: { search: string }) => {
-  return useQuery(["categories-admin", payload], () =>
-    userFetcher(GET_CATEGORIES, payload)
+  return useQuery(
+    ["categories-admin", payload],
+    () => userFetcher(GET_CATEGORIES, payload) as Promise<Record<string, any>>
   );
 };

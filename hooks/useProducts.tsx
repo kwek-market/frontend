@@ -16,7 +16,7 @@ export type PayloadType = {
 function useProducts(payload: PayloadType) {
   return useQuery(
     ["category-items", payload],
-    () => userFetcher(GetProducts, payload),
+    () => userFetcher(GetProducts, payload) as Promise<Record<string, any>>,
     {
       staleTime: Infinity,
       cacheTime: 1000 * 60 * 20,

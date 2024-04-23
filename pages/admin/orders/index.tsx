@@ -44,22 +44,22 @@ const Orders = () => {
               path: "/admin/orders",
             },
           ]}
-          header='Order List'
+          header="Order List"
         />
 
-        <div className=' tw-mt-12 tw-font-poppins'>
-          <div className='tw-mt-6'>
-            <Search placeholder='Search by order code' />
+        <div className=" tw-mt-12 tw-font-poppins">
+          <div className="tw-mt-6">
+            <Search placeholder="Search by order code" />
           </div>
-          <div className=' tw-py-4'>
+          <div className=" tw-py-4">
             <Tabs
               animated
               tabBarStyle={{ borderColor: "red" }}
-              className='adminTab'
+              className="adminTab"
               activeKey={activeKey}
-              onTabClick={key => setActiveKey(key)}
+              onTabClick={(key) => setActiveKey(key)}
             >
-              <TabPane tab='Order History' key='1'>
+              <TabPane tab="Order History" key="1">
                 <Load />
               </TabPane>
             </Tabs>
@@ -77,16 +77,17 @@ const Orders = () => {
       render: (id: {}) => (
         <Link
           href={"/admin/customers/" + "Maryjane Egbu" + "/order-detail/" + id}
-          className=' tw-text-black-kwek100'>
-          {id}
-        </Link>
+          className=" tw-text-black-kwek100"
+        ></Link>
       ),
     },
     {
       title: "Order Date",
       dataIndex: "dateCreated",
       key: "order_date",
-      render: (order_date: string) => <p>{new Date(order_date).toLocaleDateString()}</p>,
+      render: (order_date: string) => (
+        <p>{new Date(order_date).toLocaleDateString()}</p>
+      ),
     },
     {
       title: "No of Items",
@@ -108,7 +109,11 @@ const Orders = () => {
       dataIndex: "paid",
       key: "payment",
       render: (payment: string) => (
-        <p className={`${!payment ? "tw-text-red-kwek100" : "tw-text-green-success"}`}>
+        <p
+          className={`${
+            !payment ? "tw-text-red-kwek100" : "tw-text-green-success"
+          }`}
+        >
           {payment ? "Paid" : "Not Paid"}
         </p>
       ),
@@ -125,26 +130,26 @@ const Orders = () => {
             path: "/admin/orders",
           },
         ]}
-        header='Order List'
+        header="Order List"
       />
 
-      <div className=' tw-mt-12 tw-font-poppins'>
-        <div className='tw-mt-6'>
+      <div className=" tw-mt-12 tw-font-poppins">
+        <div className="tw-mt-6">
           <Search
-            placeholder='Search by order id'
+            placeholder="Search by order id"
             value={searchOrder}
-            onChange={e => setSearchOrder(e.target.value)}
+            onChange={(e) => setSearchOrder(e.target.value)}
           />
         </div>
-        <div className=' tw-py-4'>
+        <div className=" tw-py-4">
           <Tabs
             animated
             tabBarStyle={{ borderColor: "red" }}
-            className='adminTab'
+            className="adminTab"
             activeKey={activeKey}
-            onTabClick={key => setActiveKey(key)}
+            onTabClick={(key) => setActiveKey(key)}
           >
-            <TabPane tab='Order History' key='1'>
+            <TabPane tab="Order History" key="1">
               <AdminTable
                 data={ordersData?.allOrders?.objects}
                 columns={columns}
@@ -156,7 +161,7 @@ const Orders = () => {
                 goToPrev={() => {
                   if (ordersData?.allOrders?.hasPrev) setPage(page - 1);
                 }}
-                goToPage={page => {
+                goToPage={(page) => {
                   setPage(page);
                 }}
               />

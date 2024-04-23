@@ -20,7 +20,11 @@ export function createWishlist(payload: AddToWishlistPayload, token: string) {
     const { message } = await import("antd");
     try {
       setLoading();
-      const res = await userFetcherWithAuth(AddToWishlist, payload, token);
+      const res: Record<string, any> = await userFetcherWithAuth(
+        AddToWishlist,
+        payload,
+        token
+      );
       // console.log(res);
       message.success("added to wishlist", 5);
       dispatch({

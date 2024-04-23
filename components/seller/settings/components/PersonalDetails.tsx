@@ -8,6 +8,7 @@ import { changePassword, updateUser } from "@/store/user/user.actions";
 import { Input, message } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "../../../../store";
 
 export type UserDataType = {
   firstname: string;
@@ -27,7 +28,7 @@ export default function PersonalDetails({}) {
     seller: { seller },
   } = useSelector((state: RootState) => state);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { mutate, isLoading } = usePasswordUpdate(user.token);
   const [personalDetails, setPersonalDetails] = useState<UserDataType>({
     firstname: seller.firstname ?? "",

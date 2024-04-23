@@ -18,9 +18,10 @@ import { clearProduct } from "@/store/product/product.action";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
 import Link from "next/link";
 import { v4 } from "uuid";
+import { useAppDispatch } from "../../store";
 
 const Menu = function ({}) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     user,
     cart: { cart },
@@ -135,15 +136,13 @@ const Menu = function ({}) {
         <p>Categories</p>
         <div>
           {categories.slice(0, 7).map((category, index) => (
-            (<Link key={index} href={`/category/${category.name}`}>
-
+            <Link key={index} href={`/category/${category.name}`}>
               <CategoryBox
                 key={category.id}
                 name={category.name}
                 icon="/svg/cat-icon-electronics.svg"
               />
-
-            </Link>)
+            </Link>
           ))}
         </div>
       </div>
