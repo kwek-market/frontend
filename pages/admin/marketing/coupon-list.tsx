@@ -1,90 +1,47 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
-import TickIcon from "@/components/icons/tick";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
-import { Dropdown, Menu, Tabs } from "antd";
-import Link from "next/link";
-import React, { useState } from "react";
+import { Tabs } from "antd";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useGetAdminCoupons } from "../../../hooks/admin/coupon";
+import { RootState } from "../../../store/rootReducer";
 
 const CouponList = () => {
   const { TabPane } = Tabs;
   const [activeKey, setActiveKey] = useState("1");
 
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+
+  const { data, isLoading, error } = useGetAdminCoupons({ token });
+
+  const coupons = data?.coupons;
+  console.log("🚀 ~~ CouponList ~~ coupons:", coupons);
+
   const columns = [
     {
       title: "Coupon Code",
-      dataIndex: "coupon_code",
+      dataIndex: "code",
       key: "coupon_code",
     },
     {
-      title: "Coupon Type",
-      dataIndex: "coupon_type",
-      key: "coupon_type",
+      title: "Discount Value",
+      dataIndex: "value",
+      key: "discount_value",
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status) => (
-        <span className="tw-flex tw-gap-x-2 tw-items-center">
-          {status}
-          <TickIcon />
-        </span>
-      ),
+      title: "Date Created",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: date => <p>{new Date(date).toDateString()}</p>,
     },
     {
-      title: "Start Date",
-      dataIndex: "start_date",
-      key: "start_date",
-    },
-    {
-      title: "End Date",
-      dataIndex: "end_date",
-      key: "end_date",
-    },
-  ];
-
-  const data = [
-    {
-      key: "1",
-      coupon_code: "Anniversary70",
-      coupon_type: "Discount (25%)",
-      status: "ACTIVE",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "2",
-      coupon_code: "Anniversary70",
-      coupon_type: "Discount (25%)",
-      status: "ACTIVE",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "3",
-      coupon_code: "Anniversary70",
-      coupon_type: "Discount (25%)",
-      status: "ACTIVE",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "4",
-      coupon_code: "Anniversary70",
-      coupon_type: "Discount (25%)",
-      status: "ACTIVE",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "5",
-      coupon_code: "Anniversary70",
-      coupon_type: "Discount (25%)",
-      status: "ACTIVE",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
+      title: "Valid Until",
+      dataIndex: "validUntil",
+      key: "validUntil",
+      render: date => <p>{new Date(date).toDateString()}</p>,
     },
   ];
 
@@ -99,24 +56,13 @@ const CouponList = () => {
           },
           { name: "Coupons", path: "/admin/marketing/coupon-list" },
         ]}
-        header="Coupons"
-        buttonPath="/admin/marketing/new-coupon"
-        buttonText="New Coupon"
+        header='Coupons'
+        buttonPath='/admin/marketing/new-coupon'
+        buttonText='New Coupon'
       />
 
-      <div className=" tw-pt-4">
-        <Tabs
-          animated
-          tabBarStyle={{ borderColor: "red" }}
-          className="adminTab"
-          activeKey={activeKey}
-          onTabClick={(key) => setActiveKey(key)}
-        >
-          <TabPane tab="Active" key="1">
-            <AdminTable data={data} columns={columns} />
-          </TabPane>
-          <TabPane tab="Inactive" key="2"></TabPane>
-        </Tabs>
+      <div className=' tw-pt-4'>
+        <AdminTable data={coupons} columns={columns} isLoading={isLoading} />
       </div>
     </AdminLayout>
   );

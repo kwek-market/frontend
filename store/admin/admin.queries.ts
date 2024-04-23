@@ -522,3 +522,36 @@ export const GET_CUSTOMER_AVERAGE_ORDERS = /* GraphQL */ `
     }
   }
 `;
+
+export const CREATE_ADMIN_COUPON = /* GraphQL */ `
+  mutation createCoupon(
+    $code: String
+    $days: Int
+    $userList: [String]
+    $validUntil: DateTime
+    $value: Int!
+  ) {
+    createCoupon(
+      code: $code
+      days: $days
+      userList: $userList
+      validUntil: $validUntil
+      value: $value
+    ) {
+      message
+      status
+    }
+  }
+`;
+
+export const GET_ADMIN_COUPONS = /* GraphQL */ `
+  query coupons {
+    coupons {
+      id
+      code
+      value
+      createdAt
+      validUntil
+    }
+  }
+`;

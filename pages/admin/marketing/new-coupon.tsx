@@ -1,14 +1,54 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import { FormHead, FormItems } from "@/components/admin/form";
-import { InputField, RadioField } from "@/components/input/textInput";
+import { InputField } from "@/components/input/textInput";
 import { AdminLayout } from "@/layouts";
-import React, { useState } from "react";
+import { message } from "antd";
+import moment from "moment";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import DateInput from "../../../components/input/DateInput";
+import { SearchSelectInput } from "../../../components/input/SelectSearchInput";
+import { userFetcherWithAuth } from "../../../helpers";
+import { useAdminCreateCoupon } from "../../../hooks/admin/coupon";
+import { GET_SELLERS } from "../../../store/admin/admin.queries";
+import { RootState } from "../../../store/rootReducer";
+import { CreateCouponSchema } from "../../../validations/createCoupon";
+
+interface IFormData {
+  userList?: string[];
+  value?: number;
+  validUntil?: string;
+}
 
 const NewCoupon = () => {
-  const [couponType, setCouponType] = useState("");
-  const handleRadio = (value) => {
-    setCouponType(value);
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+
+  const [formData, setFormData] = useState<IFormData>({ userList: [] });
+  const { mutate: createMut } = useAdminCreateCoupon(token);
+
+  const createCoupon = async e => {
+    e.preventDefault();
+
+    const parsed = await CreateCouponSchema.safeParseAsync(formData);
+
+    if (parsed.success !== true) {
+      message.error(parsed.error.errors[0].message);
+      return;
+    }
+
+    try {
+      createMut(parsed.data, {
+        onError: (err: Error) => {
+          message.error(err.message);
+        },
+      });
+    } catch (error) {
+      message.error(error.message);
+    }
   };
+
   return (
     <AdminLayout>
       <BreadCrumbs
@@ -23,47 +63,48 @@ const NewCoupon = () => {
             path: "/admin/marketing/new-coupon",
           },
         ]}
-        header="New Coupon"
+        header='New Coupon'
       />
-      <form
-        className=" tw-mt-16 tw-font-poppins"
-        onSubmit={(e) => e.preventDefault()}
-      >
+      <form className=' tw-mt-16 tw-font-poppins' onSubmit={e => e.preventDefault()}>
         <FormHead>Basic Information</FormHead>
+
         <FormItems>
-          <InputField label="Coupon Code" placeholder="e.g XXYYY376" />
-          <div className=" tw-space-y-4">
-            <label className=" tw-font-medium">Coupon Type</label>
-            <RadioField
-              label="Percentage"
-              checked={couponType == "percentage"}
-              onChange={() => handleRadio("percentage")}
-            />
-            <RadioField
-              label="Free Shipping"
-              checked={couponType == "free_shipping"}
-              onChange={() => handleRadio("free_shipping")}
-            />
-            <RadioField
-              label="Multibuys"
-              checked={couponType == "multibuys"}
-              onChange={() => handleRadio("multibuys")}
+          <div className='tw-space-y-2'>
+            <InputField
+              label='Discount Value'
+              placeholder='input the value of the discount given'
+              type='number'
+              onChange={e => setFormData({ ...formData, value: Number(e.target.value) })}
             />
           </div>
-          <InputField
-            label="Discount Value"
-            placeholder="input the value of the discount given "
-          />
-          <InputField label="Usage Limit" placeholder="e.g 200" />
-          <div className="tw-grid lg:tw-grid-cols-2 tw-gap-6">
-            <InputField type="date" label="Start Date" />
-            <InputField type="date" label="End Date" />
+
+          <div className='tw-space-y-2'>
+            <label className=' tw-font-medium'>Valid until</label>
+            <DateInput
+              style={{ width: "100%" }}
+              disabledDate={date => date && date < moment().endOf("day")}
+              onChange={(date, dateString) =>
+                setFormData({ ...formData, validUntil: date.toISOString() })
+              }
+            />
+          </div>
+
+          <div className='tw-space-y-2'>
+            <label className=' tw-font-medium'>Select Users (Optional)</label>
+            <SearchSelectInput
+              fetchOptions={search => fetchUserList(search, token)}
+              placeholder='Search the user and select'
+              onChange={values => {
+                setFormData({ ...formData, userList: values.map(value => value.value) });
+              }}
+            />
           </div>
         </FormItems>
 
         <button
-          className="  tw-font-semibold tw-py-2 tw-px-12 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-14"
-          type="submit"
+          className='  tw-font-semibold tw-py-2 tw-px-12 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-14'
+          type='submit'
+          onClick={createCoupon}
         >
           Create Coupon
         </button>
@@ -71,5 +112,18 @@ const NewCoupon = () => {
     </AdminLayout>
   );
 };
+
+async function fetchUserList(username: string, token?: string): Promise<any[]> {
+  try {
+    const result = await userFetcherWithAuth(GET_SELLERS, { search: username, token }, token);
+
+    return result?.getUserType?.objects?.map(user => ({
+      label: `${user.fullName}`,
+      value: user.id,
+    }));
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export default NewCoupon;
