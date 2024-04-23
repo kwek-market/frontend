@@ -543,3 +543,15 @@ export const CREATE_ADMIN_COUPON = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_ADMIN_COUPONS = /* GraphQL */ `
+  query coupons {
+    coupons {
+      id
+      code
+      value
+      createdAt
+      validUntil
+    }
+  }
+`;

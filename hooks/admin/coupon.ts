@@ -1,9 +1,9 @@
 import { message } from "antd";
 import { useRouter } from "next/router";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { userFetcherWithAuth } from "../../helpers";
 import { queryClient } from "../../pages/_app";
-import { CREATE_ADMIN_COUPON } from "../../store/admin/admin.queries";
+import { CREATE_ADMIN_COUPON, GET_ADMIN_COUPONS } from "../../store/admin/admin.queries";
 import { CreateCouponType } from "../../validations/createCoupon";
 
 export const useAdminCreateCoupon = (token: string) => {
@@ -23,5 +23,11 @@ export const useAdminCreateCoupon = (token: string) => {
         queryClient.invalidateQueries("admin-coupon");
       },
     }
+  );
+};
+
+export const useGetAdminCoupons = (payload: { token?: string }) => {
+  return useQuery([`admin-coupons`], () =>
+    userFetcherWithAuth(GET_ADMIN_COUPONS, payload, payload.token)
   );
 };
