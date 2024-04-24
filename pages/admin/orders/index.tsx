@@ -146,8 +146,8 @@ const Orders = () => {
               <AdminTable
                 data={ordersData?.allOrders?.objects}
                 columns={columns}
-                numberOfPages={ordersData.allOrders.pages}
-                page={ordersData.allOrders.page}
+                numberOfPages={ordersData?.allOrders.pages}
+                page={ordersData?.allOrders.page}
                 goToNext={() => {
                   if (ordersData?.allOrders?.hasNext) setPage(page + 1);
                 }}

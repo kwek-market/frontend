@@ -545,13 +545,19 @@ export const CREATE_ADMIN_COUPON = /* GraphQL */ `
 `;
 
 export const GET_ADMIN_COUPONS = /* GraphQL */ `
-  query coupons {
-    coupons {
-      id
-      code
-      value
-      createdAt
-      validUntil
+  query coupons($page: Int, $pageSize: Int) {
+    coupons(page: $page, pageSize: $pageSize) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        code
+        value
+        createdAt
+        validUntil
+      }
     }
   }
 `;
