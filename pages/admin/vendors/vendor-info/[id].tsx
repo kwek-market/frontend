@@ -190,7 +190,9 @@ const Customer = () => {
         ]}
         header='Vendor Info'
         buttonPath=''
-        buttonText='Send Email'
+        buttonText='Red-flag vendor'
+        buttonClassName='tw-bg-red-700'
+        onClickButton={() => {}}
       />
 
       <div className=' tw-mt-12 tw-font-poppins'>
