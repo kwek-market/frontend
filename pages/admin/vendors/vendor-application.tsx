@@ -62,6 +62,11 @@ const VendorApplications = () => {
       key: "email_address",
     },
     {
+      title: "Phone Number",
+      dataIndex: "phone_number",
+      key: "phone_number",
+    },
+    {
       title: "Date Applied",
       dataIndex: "date_applied",
       key: "date_applied",
@@ -80,7 +85,7 @@ const VendorApplications = () => {
     },
     {
       title: "Decision",
-      dataIndex: "email_address",
+      dataIndex: "decision",
       key: "decision",
       render: (email_address: string) => (
         <div className=' tw-flex tw-gap-x-2'>
@@ -112,6 +117,7 @@ const VendorApplications = () => {
           date_applied: "13/02/2023",
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
+          phone_number: sellerProfile[0]?.phoneNumber
         };
       }),
     [getVendorsData]
@@ -128,6 +134,7 @@ const VendorApplications = () => {
           date_applied: "13/02/2023",
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
+          phone_number: sellerProfile[0]?.phoneNumber
         };
       }),
     [rejectedVendors]

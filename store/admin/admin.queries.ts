@@ -282,6 +282,7 @@ export const GET_SELLERS = /* GraphQL */ `
           state
           city
           lga
+          phoneNumber
         }
       }
     }
