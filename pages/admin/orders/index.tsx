@@ -74,11 +74,14 @@ const Orders = () => {
       title: "Order Number",
       dataIndex: "id",
       key: "order_number",
-      render: (id: {}) => (
-        <Link href={"/admin/customers/" + "Maryjane Egbu" + "/order-detail/" + id}>
-          <a className=' tw-text-black-kwek100'>{id}</a>
-        </Link>
-      ),
+      render: (id: string, objects) => {
+        console.log(objects);
+        return (
+          <Link href={"/admin/customers/" + objects?.user?.fullName + "/order-detail/" + id}>
+            <a className=' tw-text-black-kwek100'>{id}</a>
+          </Link>
+        );
+      },
     },
     {
       title: "Order Date",

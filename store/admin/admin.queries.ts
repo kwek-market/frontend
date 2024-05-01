@@ -355,6 +355,11 @@ export const GET_ALL_ORDERS = /* GraphQL */ `
         orderPrice
         dateCreated
         paid
+        user {
+          fullName
+          firstName
+          lastName
+        }
       }
       page
       pages
@@ -459,6 +464,9 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
           image {
             imageUrl
           }
+          brand
+          color
+          gender
         }
         price
         quantity

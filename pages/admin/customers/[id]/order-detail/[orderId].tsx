@@ -97,6 +97,9 @@ const OrderDetail = () => {
                     name={item?.product?.productTitle}
                     qty={item?.quantity}
                     amount={item?.price * item?.quantity}
+                    size={item?.product?.size}
+                    color={item?.product?.color}
+                    brand={item?.product?.brand}
                   />
                 ))}
               </div>
@@ -157,7 +160,7 @@ const OrderDetail = () => {
 
 export default OrderDetail;
 
-const Item = ({ image, name, qty, amount }) => {
+const Item = ({ image, name, qty, amount, size, color, brand }) => {
   return (
     <div className='tw-border-gray-kwek700 tw-border tw-rounded-2xl tw-pl-2 tw-py-2 tw-flex tw-gap-x-6 tw-pr-8'>
       {/* <Image
@@ -172,14 +175,20 @@ const Item = ({ image, name, qty, amount }) => {
         alt='item'
         className='tw-w-[121px] tw-h-[101px] tw-rounded-xl tw-object-cover tw-overflow-hidden'
       />
-      <div className=' tw-w-full tw-pt-5'>
-        <div className=' tw-flex tw-justify-between tw-w-full tw-items-center'>
+      <div className='tw-flex tw-justify-between tw-w-full tw-pt-5'>
+        <div className='tw-space-y-1'>
           <p className='tw-mb-0 tw-font-medium tw-text-xl tw-text-black-kwek100'>{name}</p>
-          <span className=' tw-text-opacity-60'>QTY: {qty}</span>
+
+          {size ? <p className='tw-font-medium'>Size: <span className="tw-font-light">{size}</span></p> : null}
+          {color ? <p className='tw-font-medium'>Color: <span className="tw-font-light">{color}</span></p> : null}
+          {brand ? <p className='tw-font-medium'>Brand: <span className="tw-font-light">{brand}</span></p> : null}
         </div>
-        <p className='tw-mb-0 tw-font-medium tw-text-xl tw-text-right tw-pt-2'>
-          NGN {Number(amount).toLocaleString()}
-        </p>
+        <div className='tw-space-y-1'>
+          <span className=' tw-text-opacity-60 tw-text-right'>QTY: {qty}</span>
+          <p className='tw-mb-0 tw-font-medium tw-text-xl tw-text-right tw-pt-2'>
+            NGN {Number(amount).toLocaleString()}
+          </p>
+        </div>
       </div>
     </div>
   );
