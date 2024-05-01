@@ -92,7 +92,7 @@ const VendorApplications = () => {
     },
     {
       title: "Decision",
-      dataIndex: "decision",
+      dataIndex: "email_address",
       key: "decision",
       render: (email_address: string, object) => {
         return (
