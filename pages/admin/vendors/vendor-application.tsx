@@ -117,7 +117,7 @@ const VendorApplications = () => {
           date_applied: "13/02/2023",
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
-          phone_number: sellerProfile[0]?.phoneNumber
+          phone_number: sellerProfile[0]?.phoneNumber,
         };
       }),
     [getVendorsData]
@@ -134,7 +134,7 @@ const VendorApplications = () => {
           date_applied: "13/02/2023",
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
-          phone_number: sellerProfile[0]?.phoneNumber
+          phone_number: sellerProfile[0]?.phoneNumber,
         };
       }),
     [rejectedVendors]
