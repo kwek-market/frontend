@@ -4,21 +4,21 @@ import { AdminLayout } from "@/layouts";
 import { Tabs } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { PAGE_SIZE } from "../../../constants/constants";
 import { useGetAdminCoupons } from "../../../hooks/admin/coupon";
 import { RootState } from "../../../store/rootReducer";
 
 const CouponList = () => {
   const { TabPane } = Tabs;
-  const [activeKey, setActiveKey] = useState("1");
+  const [page, setPage] = useState(1);
 
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
 
-  const { data, isLoading, error } = useGetAdminCoupons({ token });
+  const { data, isLoading, error } = useGetAdminCoupons({ token, page, pageSize: PAGE_SIZE });
 
-  const coupons = data?.coupons;
-  console.log("🚀 ~~ CouponList ~~ coupons:", coupons);
+  const coupons = data?.coupons?.objects;
 
   const columns = [
     {
@@ -62,7 +62,22 @@ const CouponList = () => {
       />
 
       <div className=' tw-pt-4'>
-        <AdminTable data={coupons} columns={columns} isLoading={isLoading} />
+        <AdminTable
+          data={coupons}
+          columns={columns}
+          isLoading={isLoading}
+          numberOfPages={data?.coupons.pages}
+          page={data?.coupons.page}
+          goToNext={() => {
+            if (data?.coupons?.hasNext) setPage(page + 1);
+          }}
+          goToPrev={() => {
+            if (data?.coupons?.hasPrev) setPage(page - 1);
+          }}
+          goToPage={page => {
+            setPage(page);
+          }}
+        />
       </div>
     </AdminLayout>
   );

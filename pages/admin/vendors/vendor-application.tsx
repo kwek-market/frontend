@@ -1,7 +1,7 @@
 import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import AdminTable from "@/components/table";
-import { useCompleteSeller, useGetSellers } from "@/hooks/admin/vendors";
+import { useCompleteSeller, useGetSellers, useRejectSeller } from "@/hooks/admin/vendors";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { Tabs } from "antd";
@@ -40,9 +40,16 @@ const VendorApplications = () => {
   });
 
   const { mutate: acceptVendor } = useCompleteSeller();
+  const { mutate: rejectVendor } = useRejectSeller();
 
   function decision(email: string, isVerified: boolean) {
     acceptVendor({ email, isVerified });
+  }
+
+  function rejectSeller(email: string) {
+    console.log("🚀 ~~ rejectSeller ~~ email:", email);
+
+    rejectVendor({ email });
   }
 
   const columns = [
@@ -60,6 +67,11 @@ const VendorApplications = () => {
       title: "Email Address",
       dataIndex: "email_address",
       key: "email_address",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "phone_number",
+      key: "phone_number",
     },
     {
       title: "Date Applied",
@@ -82,22 +94,24 @@ const VendorApplications = () => {
       title: "Decision",
       dataIndex: "email_address",
       key: "decision",
-      render: (email_address: string) => (
-        <div className=' tw-flex tw-gap-x-2'>
-          <button
-            onClick={() => decision(email_address, true)}
-            className=' tw-py-[5px] tw-px-[10px] tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-bg-[#009D19]'
-          >
-            Accept
-          </button>
-          <button
-            onClick={() => decision(email_address, false)}
-            className=' tw-py-[5px] tw-px-[10px] tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-bg-[#AF1328]'
-          >
-            Reject
-          </button>
-        </div>
-      ),
+      render: (email_address: string, object) => {
+        return (
+          <div className=' tw-flex tw-gap-x-2'>
+            <button
+              onClick={() => decision(email_address, true)}
+              className=' tw-py-[5px] tw-px-[10px] tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-bg-[#009D19]'
+            >
+              Accept
+            </button>
+            <button
+              onClick={() => rejectSeller(email_address)}
+              className=' tw-py-[5px] tw-px-[10px] tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-bg-[#AF1328]'
+            >
+              Reject
+            </button>
+          </div>
+        );
+      },
     },
   ];
 
@@ -112,6 +126,7 @@ const VendorApplications = () => {
           date_applied: "13/02/2023",
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
+          phone_number: sellerProfile[0]?.phoneNumber,
         };
       }),
     [getVendorsData]
@@ -128,6 +143,7 @@ const VendorApplications = () => {
           date_applied: "13/02/2023",
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
+          phone_number: sellerProfile[0]?.phoneNumber,
         };
       }),
     [rejectedVendors]

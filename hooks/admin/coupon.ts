@@ -26,7 +26,14 @@ export const useAdminCreateCoupon = (token: string) => {
   );
 };
 
-export const useGetAdminCoupons = (payload: { token?: string }) => {
+
+interface IPayload {
+  token?: string
+  page: number
+  pageSize?: number
+}
+
+export const useGetAdminCoupons = (payload: IPayload) => {
   return useQuery([`admin-coupons`], () =>
     userFetcherWithAuth(GET_ADMIN_COUPONS, payload, payload.token)
   );
