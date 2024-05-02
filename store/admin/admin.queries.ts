@@ -601,7 +601,7 @@ export const GET_ADMIN_PROMOTED_PRODUCTS = /* GraphQL */ `
 `;
 
 export const PROMOTE_ADMIN_PRODUCT = /* GraphQL */ `
-  mutation promoteProduct($amount: Int!, $days: Int!, $productId: String!, $token: String!) {
+  mutation promoteProduct($amount: Float!, $days: Int!, $productId: String!, $token: String!) {
     promoteProduct(amount: $amount, days: $days, productId: $productId, token: $token) {
       message
       status

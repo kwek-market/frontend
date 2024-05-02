@@ -3,35 +3,35 @@ import { FormHead, FormItems } from "@/components/admin/form";
 import { InputField } from "@/components/input/textInput";
 import { AdminLayout } from "@/layouts";
 import { message } from "antd";
-import moment from "moment";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import DateInput from "../../../components/input/DateInput";
 import { SearchSelectInput } from "../../../components/input/SelectSearchInput";
 import { userFetcherWithAuth } from "../../../helpers";
-import { useAdminCreateCoupon } from "../../../hooks/admin/coupon";
-import { GET_SELLERS } from "../../../store/admin/admin.queries";
+
+import { GET_PRODUCTS } from "../../../store/admin/admin.queries";
 import { RootState } from "../../../store/rootReducer";
-import { CreateCouponSchema } from "../../../validations/createCoupon";
+
+import { useAdminPromoteProduct } from "../../../hooks/admin/promotedProducts";
+import { PromoteProductSchema } from "../../../validations/promoteProduct";
 
 interface IFormData {
-  userList?: string[];
-  value?: number;
-  validUntil?: string;
+  amount?: number;
+  days?: number;
+  productId?: string;
 }
 
-const NewCoupon = () => {
+const NewProductPromotion = () => {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
 
-  const [formData, setFormData] = useState<IFormData>({ userList: [] });
-  const { mutate: createMut } = useAdminCreateCoupon(token);
+  const [formData, setFormData] = useState<IFormData>({});
+  const { mutate: createMut } = useAdminPromoteProduct(token);
 
-  const createCoupon = async e => {
+  const promoteProduct = async e => {
     e.preventDefault();
 
-    const parsed = await CreateCouponSchema.safeParseAsync(formData);
+    const parsed = await PromoteProductSchema.safeParseAsync(formData);
 
     if (parsed.success !== true) {
       message.error(parsed.error.errors[0].message);
@@ -59,11 +59,11 @@ const NewCoupon = () => {
             path: "/admin/marketing/subscription-list",
           },
           {
-            name: "New Coupon",
-            path: "/admin/marketing/new-coupon",
+            name: "New Product Promotion",
+            path: "/admin/marketing/new-product-promotion",
           },
         ]}
-        header='New Coupon'
+        header='New Product Promotion'
       />
       <form className=' tw-mt-16 tw-font-poppins' onSubmit={e => e.preventDefault()}>
         <FormHead>Basic Information</FormHead>
@@ -71,33 +71,32 @@ const NewCoupon = () => {
         <FormItems>
           <div className='tw-space-y-2'>
             <InputField
-              label='Discount Value'
-              placeholder='input the value of the discount given'
+              label='Amount for the promotion'
+              placeholder='Write your Amount'
               type='number'
-              onChange={e => setFormData({ ...formData, value: Number(e.target.value) })}
+              onChange={e => setFormData({ ...formData, amount: Number(e.target.value) })}
+              step={"0.01"}
             />
           </div>
 
           <div className='tw-space-y-2'>
-            <label className=' tw-font-medium'>Valid until</label>
-            <DateInput
-              style={{ width: "100%" }}
-              disabledDate={date => date && date < moment().endOf("day")}
-              onChange={(date, dateString) =>
-                setFormData({ ...formData, validUntil: date.toISOString() })
-              }
+            <InputField
+              label='No of Days active'
+              placeholder='Number of days the promotion will be valid'
+              type='number'
+              onChange={e => setFormData({ ...formData, days: Number(e.target.value) })}
             />
           </div>
 
           <div className='tw-space-y-2'>
-            <label className=' tw-font-medium'>Select Users (Optional)</label>
+            <label className=' tw-font-medium'>Select Product</label>
             <SearchSelectInput
-              fetchOptions={search => fetchUserList(search, token)}
+              fetchOptions={search => fetchProductsList(search, token)}
               placeholder='Search the user and select'
-              onChange={values => {
-                setFormData({ ...formData, userList: values.map(value => value.value) });
+              onChange={value => {
+                setFormData({ ...formData, productId: value?.value });
               }}
-              mode='multiple'
+              maxTagCount={"responsive"}
             />
           </div>
         </FormItems>
@@ -105,26 +104,27 @@ const NewCoupon = () => {
         <button
           className='  tw-font-semibold tw-py-2 tw-px-12 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-14'
           type='submit'
-          onClick={createCoupon}
+          onClick={promoteProduct}
         >
-          Create Coupon
+          Promote Product
         </button>
       </form>
     </AdminLayout>
   );
 };
 
-async function fetchUserList(username: string, token?: string): Promise<any[]> {
+async function fetchProductsList(search: string, token?: string): Promise<any[]> {
   try {
-    const result = await userFetcherWithAuth(GET_SELLERS, { search: username, token }, token);
+    const result = await userFetcherWithAuth(GET_PRODUCTS, { search, token, page: 1 }, token);
+    console.log("🚀 ~~ fetchProductsList ~~ result:", result);
 
-    return result?.getUserType?.objects?.map(user => ({
-      label: `${user.fullName}`,
-      value: user.id,
+    return result?.products?.objects?.map(product => ({
+      label: `${product.productTitle}`,
+      value: product.id,
     }));
   } catch (error) {
     console.error(error);
   }
 }
 
-export default NewCoupon;
+export default NewProductPromotion;

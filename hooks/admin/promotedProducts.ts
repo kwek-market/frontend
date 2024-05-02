@@ -3,24 +3,28 @@ import { useRouter } from "next/router";
 import { useMutation, useQuery } from "react-query";
 import { userFetcherWithAuth } from "../../helpers";
 import { queryClient } from "../../pages/_app";
-import { CREATE_ADMIN_COUPON, GET_ADMIN_PROMOTED_PRODUCTS, PROMOTE_ADMIN_PRODUCT } from "../../store/admin/admin.queries";
-import { CreateCouponType } from "../../validations/createCoupon";
+import {
+  GET_ADMIN_PROMOTED_PRODUCTS,
+  PROMOTE_ADMIN_PRODUCT,
+} from "../../store/admin/admin.queries";
+import { PromoteProductType } from "../../validations/promoteProduct";
 
 export const useAdminPromoteProduct = (token: string) => {
   const router = useRouter();
 
   return useMutation(
-    (payload: CreateCouponType) => userFetcherWithAuth(PROMOTE_ADMIN_PRODUCT, payload, token),
+    (payload: PromoteProductType) =>
+      userFetcherWithAuth(PROMOTE_ADMIN_PRODUCT, { ...payload, token }, token),
     {
       onSuccess: data => {
-        if (!data.createCoupon.status) {
-          throw Error(data.createCoupon.message);
+        if (!data.promoteProduct.status) {
+          throw Error(data.promoteProduct.message);
         } else {
-          message.success(data.createCoupon.message);
-          router.push("/admin/marketing/coupon-list");
+          message.success(data.promoteProduct.message);
+          router.push("/admin/marketing/promoted-products");
         }
 
-        queryClient.invalidateQueries("admin-coupon");
+        queryClient.invalidateQueries("admin-promoted-products");
       },
     }
   );

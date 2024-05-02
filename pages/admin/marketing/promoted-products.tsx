@@ -1,87 +1,68 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
-import { Tabs } from "antd";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { PAGE_SIZE } from "../../../constants/constants";
+import { useGetAdminPromotedProducts } from "../../../hooks/admin/promotedProducts";
+import { RootState } from "../../../store/rootReducer";
 
-const SubscriptionList = () => {
-  const { TabPane } = Tabs;
-  const [activeKey, setActiveKey] = useState("1");
+const PromotedProducts = () => {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
 
-  const [page, setPage]  = useState(1)
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading } = useGetAdminPromotedProducts({ page, pageSize: PAGE_SIZE, token });
 
   //TODO: If they request that you should do a button for edit and delete for the tables you will carry the menu property from the promoted-products file
 
+  const promotedProducts = data?.getPromotedProductsPaginated?.objects;
+
   const columns = [
     {
-      title: "Product",
-      dataIndex: "product",
+      title: "Name",
+      dataIndex: "productTitle",
       key: "product",
     },
     {
-      title: "Category",
-      dataIndex: "category",
-      key: "category",
-    },
-    {
       title: "Vendor",
-      dataIndex: "vendor",
+      dataIndex: "user",
       key: "vendor",
     },
     {
-      title: "Start Date",
-      dataIndex: "start_date",
-      key: "start_date",
+      title: "Days Active",
+      dataIndex: "promo",
+      key: "days_active",
     },
     {
       title: "End Date",
-      dataIndex: "end_date",
+      dataIndex: "promo",
       key: "end_date",
+    },
+    {
+      title: "Amount",
+      dataIndex: "promo",
+      key: "amount",
+    },
+    {
+      title: "Balance",
+      dataIndex: "promo",
+      key: "balance",
+    },
+    {
+      title: "Reach",
+      dataIndex: "promo",
+      key: "reach",
+    },
+    {
+      title: "No of Clicks",
+      dataIndex: "promo",
+      key: "linkClicks",
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      category: "Groceries",
-      vendor: "Martha Store",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "2",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      category: "Groceries",
-      vendor: "Martha Store",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "3",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      category: "Groceries",
-      vendor: "Martha Store",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "4",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      category: "Groceries",
-      vendor: "Martha Store",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-    {
-      key: "5",
-      product: "Nestle Milo CRUNCHY CEREALS 320g",
-      category: "Groceries",
-      vendor: "Martha Store",
-      start_date: "13/03/2023",
-      end_date: "13/03/2023",
-    },
-  ];
   return (
     <AdminLayout>
       <BreadCrumbs
@@ -91,18 +72,32 @@ const SubscriptionList = () => {
             name: "Marketing",
             path: "/admin/marketing/promoted-products",
           },
-          { name: "Promoted Products", path: "/admin/marketing/promoted-products" },
+          { name: "Promoted Products", path: "/admin/marketing/new-product-promotion" },
         ]}
         header='Promoted Products'
-        buttonPath='/admin/marketing/new-promotion'
-        buttonText='New Promotion'
+        buttonPath='/admin/marketing/new-product-promotion'
+        buttonText='Promote Product'
       />
 
       <div className=' tw-pt-4'>
-        <AdminTable data={data} columns={columns} />
+        <AdminTable
+          data={promotedProducts}
+          columns={columns}
+          numberOfPages={data?.getPromotedProductsPaginated.pages}
+          page={data?.getPromotedProductsPaginated.page}
+          goToNext={() => {
+            if (data?.getPromotedProductsPaginated?.hasNext) setPage(page + 1);
+          }}
+          goToPrev={() => {
+            if (data?.getPromotedProductsPaginated?.hasPrev) setPage(page - 1);
+          }}
+          goToPage={page => {
+            setPage(page);
+          }}
+        />
       </div>
     </AdminLayout>
   );
 };
 
-export default SubscriptionList;
+export default PromotedProducts;

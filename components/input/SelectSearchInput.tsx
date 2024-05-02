@@ -20,6 +20,7 @@ function DebounceSelect<
     const loadOptions = (value: string) => {
       fetchRef.current += 1;
       const fetchId = fetchRef.current;
+
       setOptions([]);
       setFetching(true);
 
@@ -40,11 +41,12 @@ function DebounceSelect<
   return (
     <Select
       labelInValue
+      showSearch
       filterOption={false}
       onSearch={debounceFetcher}
       notFoundContent={fetching ? <Spin size='small' /> : null}
-      {...props}
       options={options}
+      {...props}
     />
   );
 }
@@ -55,16 +57,21 @@ interface UserValue {
   value: string;
 }
 
-export const SearchSelectInput = ({ onChange, ...props }: DebounceSelectProps) => {
+export const SearchSelectInput = ({ onChange, mode, ...props }: DebounceSelectProps) => {
   const [value, setValue] = useState<UserValue[]>([]);
 
   return (
     <DebounceSelect
-      mode='multiple'
+      mode={mode}
       value={value}
       placeholder='Select users'
       onChange={(newValue, option) => {
-        setValue(newValue as UserValue[]);
+        if (mode === "multiple" || mode === "tags") {
+          setValue(newValue as UserValue[]);
+        } else {
+          setValue(newValue);
+        }
+
         if (onChange) onChange(newValue, option);
       }}
       style={{ width: "100%" }}
