@@ -75,6 +75,10 @@ const SidebarItems = () => {
       icon: MarketingIcon,
       options: [
         {
+          name: "Promoted Products",
+          path: "/admin/marketing/promoted-products",
+        },
+        {
           name: "Subscription List",
           path: "/admin/marketing/subscription-list",
         },
@@ -136,7 +140,7 @@ const SidebarItems = () => {
               </div>
               <div
                 className={` tw-pl-7  tw-overflow-hidden tw-transition-[max-height] tw-duration-300 tw-ease-out ${
-                  item.open ? "tw-max-h-40" : "tw-max-h-0"
+                  item.open ? "tw-max-h-48" : "tw-max-h-0"
                 }`}
               >
                 <div className=' tw-pt-4 tw-flex tw-flex-col tw-gap-y-4 tw-pl-8'>

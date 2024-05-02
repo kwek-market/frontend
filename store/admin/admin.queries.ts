@@ -75,8 +75,8 @@ export const GET_RECENT_TRANSACTIONS = /* GraphQL */ `
 `;
 
 export const GET_PRODUCTS = /* GraphQL */ `
-  query products($page: Int, $pageSize: Int) {
-    products(page: $page, pageSize: $pageSize) {
+  query products($page: Int, $pageSize: Int, $search: String) {
+    products(page: $page, pageSize: $pageSize, search: $search) {
       page
       pages
       hasNext
@@ -567,6 +567,44 @@ export const GET_ADMIN_COUPONS = /* GraphQL */ `
         createdAt
         validUntil
       }
+    }
+  }
+`;
+
+export const GET_ADMIN_PROMOTED_PRODUCTS = /* GraphQL */ `
+  query getPromotedProductsPaginated($token: String!, $page: Int, $pageSize: Int, $search: String) {
+    getPromotedProductsPaginated(page: $page, pageSize: $pageSize, token: $token, search: $search) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        productTitle
+        user {
+          fullName
+          email
+        }
+        promo {
+          startDate
+          endDate
+          days
+          active
+          amount
+          balance
+          reach
+          linkClicks
+        }
+      }
+    }
+  }
+`;
+
+export const PROMOTE_ADMIN_PRODUCT = /* GraphQL */ `
+  mutation promoteProduct($amount: Int!, $days: Int!, $productId: String!, $token: String!) {
+    promoteProduct(amount: $amount, days: $days, productId: $productId, token: $token) {
+      message
+      status
     }
   }
 `;
