@@ -1,7 +1,10 @@
 import { userFetcherWithAuth } from "@/helpers";
 import { GET_SELLERS } from "@/store/admin/admin.queries";
 import { RootState } from "@/store/rootReducer";
-import { COMPLETE_SELLER_VERIFICATION } from "@/store/seller/seller.queries";
+import {
+  COMPLETE_SELLER_VERIFICATION,
+  REJECT_SELLER_VERIFICATION,
+} from "@/store/seller/seller.queries";
 import { message } from "antd";
 import { QueryClient, useMutation, useQuery } from "react-query";
 import { useSelector } from "react-redux";
@@ -42,6 +45,37 @@ export function useCompleteSeller() {
         } else {
           message.success({
             content: data?.completeSellerVerification?.message,
+            key: "vendor",
+            duration: 3000,
+          });
+        }
+
+        const queryClient = new QueryClient();
+        queryClient.invalidateQueries("seller");
+      },
+      onError(error) {
+        message.error({ content: (error as any).message, key: "vendor", duration: 3000 });
+      },
+      onMutate() {
+        message.loading({ content: "loading..", key: "vendor", duration: 3000 });
+      },
+    }
+  );
+}
+
+export function useRejectSeller() {
+  const {
+    user: { token },
+  } = useSelector((state: RootState) => state);
+  return useMutation(
+    (payload: { email: string }) => userFetcherWithAuth(REJECT_SELLER_VERIFICATION, payload, token),
+    {
+      onSuccess: data => {
+        if (!data?.rejectSellerVerification?.status) {
+          throw Error(data?.rejectSellerVerification?.message);
+        } else {
+          message.success({
+            content: data?.rejectSellerVerification?.message,
             key: "vendor",
             duration: 3000,
           });

@@ -101,6 +101,15 @@ export const COMPLETE_SELLER_VERIFICATION = /* GraphQL */ `
   }
 `;
 
+export const REJECT_SELLER_VERIFICATION = /* GraphQL */ `
+  mutation ($email: String!) {
+    rejectSellerVerification(email: $email) {
+      status
+      message
+    }
+  }
+`;
+
 export const GET_SELLER_PRODUCTS = `
   query getSellerProducts(
     $page: Int

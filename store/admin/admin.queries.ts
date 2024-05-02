@@ -282,6 +282,7 @@ export const GET_SELLERS = /* GraphQL */ `
           state
           city
           lga
+          phoneNumber
         }
       }
     }
@@ -355,6 +356,11 @@ export const GET_ALL_ORDERS = /* GraphQL */ `
         orderPrice
         dateCreated
         paid
+        user {
+          fullName
+          firstName
+          lastName
+        }
       }
       page
       pages
@@ -459,6 +465,9 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
           image {
             imageUrl
           }
+          brand
+          color
+          gender
         }
         price
         quantity
@@ -545,13 +554,19 @@ export const CREATE_ADMIN_COUPON = /* GraphQL */ `
 `;
 
 export const GET_ADMIN_COUPONS = /* GraphQL */ `
-  query coupons {
-    coupons {
-      id
-      code
-      value
-      createdAt
-      validUntil
+  query coupons($page: Int, $pageSize: Int) {
+    coupons(page: $page, pageSize: $pageSize) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        code
+        value
+        createdAt
+        validUntil
+      }
     }
   }
 `;
