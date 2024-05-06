@@ -75,8 +75,8 @@ export const GET_RECENT_TRANSACTIONS = /* GraphQL */ `
 `;
 
 export const GET_PRODUCTS = /* GraphQL */ `
-  query products($page: Int, $pageSize: Int) {
-    products(page: $page, pageSize: $pageSize) {
+  query products($page: Int, $pageSize: Int, $search: String) {
+    products(page: $page, pageSize: $pageSize, search: $search) {
       page
       pages
       hasNext
@@ -283,6 +283,7 @@ export const GET_SELLERS = /* GraphQL */ `
           city
           lga
           phoneNumber
+          date
         }
       }
     }
@@ -566,6 +567,69 @@ export const GET_ADMIN_COUPONS = /* GraphQL */ `
         value
         createdAt
         validUntil
+      }
+    }
+  }
+`;
+
+export const GET_ADMIN_PROMOTED_PRODUCTS = /* GraphQL */ `
+  query getPromotedProductsPaginated($token: String!, $page: Int, $pageSize: Int, $search: String) {
+    getPromotedProductsPaginated(page: $page, pageSize: $pageSize, token: $token, search: $search) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        productTitle
+        user {
+          fullName
+          email
+        }
+        promo {
+          startDate
+          endDate
+          days
+          active
+          amount
+          balance
+          reach
+          linkClicks
+        }
+      }
+    }
+  }
+`;
+
+export const PROMOTE_ADMIN_PRODUCT = /* GraphQL */ `
+  mutation promoteProduct($amount: Float!, $days: Int!, $productId: String!, $token: String!) {
+    promoteProduct(amount: $amount, days: $days, productId: $productId, token: $token) {
+      message
+      status
+    }
+  }
+`;
+
+export const GET_WALLET_TRANSACTIONS = /* GraphQL */ `
+  query walletTransactions($token: String!, $page: Int, $search: String, $sortBy: String) {
+    getWalletTransactions(token: $token, page: $page, search: $search, sortBy: $sortBy) {
+      pages
+      page
+      hasNext
+      hasPrev
+      objects {
+        id
+        wallet {
+          balance
+          owner {
+            fullName
+          }
+        }
+        remark
+        amount
+        date
+        transactionType
+        status
       }
     }
   }

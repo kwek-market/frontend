@@ -43,7 +43,7 @@ const Vendors = () => {
     seller: true,
     customer: false,
     sellerIsRejected: false,
-    active: false,
+    active: true,
     redFlagged: true,
     page,
     pageSize: PAGE_SIZE,

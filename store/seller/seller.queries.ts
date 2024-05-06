@@ -93,8 +93,8 @@ export const SELLER_DATA = /* GRAPHQL */ `
 `;
 
 export const COMPLETE_SELLER_VERIFICATION = /* GraphQL */ `
-  mutation ($email: String!, $isVerified: Boolean!) {
-    completeSellerVerification(email: $email, isVerified: $isVerified) {
+  mutation ($email: String!) {
+    completeSellerVerification(email: $email) {
       status
       message
     }
@@ -606,6 +606,15 @@ export const CANCEL_PROMOTION = /* GraphQL */ `
     cancelProductPromotion(productId: $productId, token: $token) {
       status
       message
+    }
+  }
+`;
+
+export const ADMIN_FLAG_VENDOR = /* GraphQL */ `
+  mutation flagVendor($id: String!, $redFlaggedVendor: Boolean!, $token: String!) {
+    flagVendor(id: $id, redFlaggedVendor: $redFlaggedVendor, token: $token) {
+      message
+      status
     }
   }
 `;
