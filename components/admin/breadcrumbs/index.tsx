@@ -11,6 +11,7 @@ interface BreadCrumbsProps {
   buttonText?: string;
   buttonPath?: string;
   buttonClassName?: string;
+  buttonType?: "button" | "link";
   onClickButton?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -21,6 +22,7 @@ const BreadCrumbs = ({
   buttonText,
   buttonClassName,
   onClickButton,
+  buttonType = "link",
 }: BreadCrumbsProps) => {
   return (
     <div>
@@ -37,7 +39,7 @@ const BreadCrumbs = ({
       {header ? (
         <div className=' tw-flex tw-justify-between tw-pt-6 tw-items-center'>
           <h1 className='tw-text-[1.5rem] md:tw-text-[2rem] tw-font-bold tw-mb-0 '>{header}</h1>
-          {buttonText ? (
+          {buttonText && buttonType === "link" ? (
             <Link href={buttonPath}>
               <a>
                 <button
@@ -50,6 +52,17 @@ const BreadCrumbs = ({
                 </button>
               </a>
             </Link>
+          ) : null}
+
+          {buttonText && buttonType === "button" ? (
+            <button
+              // className="md:tw-font-semibold tw-font-extralight  tw-py-2 tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D]"
+              className={`tw-font-semibold tw-py-1 tw-px-3  md:tw-py-2 md:tw-px-11 tw-rounded tw-text-white-100 tw-bg-[#1E944D] ${buttonClassName}`}
+              type='button'
+              onClick={onClickButton}
+            >
+              {buttonText}
+            </button>
           ) : null}
         </div>
       ) : null}

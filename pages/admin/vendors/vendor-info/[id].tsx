@@ -2,7 +2,6 @@ import BreadCrumbs from "@/components/admin/breadcrumbs";
 import CustomerDetail from "@/components/admin/customers/customer-detail";
 import { FormHead } from "@/components/admin/form";
 import AdminTable from "@/components/table";
-import { useGetCustomers } from "@/hooks/useGetCustomers";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { Tabs } from "antd";
@@ -20,6 +19,7 @@ import {
   useGetCustomerTotalExpense,
 } from "../../../../hooks/admin/dashboard";
 import { userGetUserById } from "../../../../hooks/admin/user";
+import { useFlagVendor } from "../../../../hooks/admin/vendors";
 import useSellerProducts from "../../../../hooks/useSellerProducts";
 
 const Customer = () => {
@@ -34,20 +34,6 @@ const Customer = () => {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  const {
-    data: activeCustomerData,
-    error: acError,
-    isLoading: acLoading,
-  } = useGetCustomers({
-    token,
-    seller: false,
-    customer: true,
-    sellerIsRejected: false,
-    active: true,
-    redFlagged: false,
-    page: 1,
-    pageSize: 10,
-  });
 
   const {
     data: userData,
@@ -83,6 +69,8 @@ const Customer = () => {
 
   const { data: customerTotalExpense, isLoading: isTotalExpenseLoading } =
     useGetCustomerTotalExpense({ id: customerId, token });
+
+  const { mutate: flagVendor } = useFlagVendor();
 
   const columns = [
     {
@@ -128,45 +116,6 @@ const Customer = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      order_number: "#37812",
-      order_date: "13/03/2023",
-      no_of_items: "14",
-      status: "Shipped",
-      amount: "N13,849",
-      payment: "Paid",
-    },
-    {
-      key: "2",
-      order_number: "#37812",
-      order_date: "13/03/2023",
-      no_of_items: "14",
-      status: "Shipped",
-      amount: "N13,849",
-      payment: "Paid",
-    },
-    {
-      key: "3",
-      order_number: "#37812",
-      order_date: "13/03/2023",
-      no_of_items: "14",
-      status: "Shipped",
-      amount: "N13,849",
-      payment: "Paid",
-    },
-    {
-      key: "4",
-      order_number: "#37812",
-      order_date: "13/03/2023",
-      no_of_items: "14",
-      status: "Shipped",
-      amount: "N13,849",
-      payment: "Paid",
-    },
-  ];
-
   const vendor = userData?.getUserById;
   const totalOrders = customerTotalOrder?.getCustomerOrders;
   const avgOrderValue = averageOrderValue?.getCustomerAverageOrder;
@@ -192,7 +141,8 @@ const Customer = () => {
         buttonPath=''
         buttonText='Red-flag vendor'
         buttonClassName='tw-bg-red-700'
-        onClickButton={() => {}}
+        onClickButton={() => flagVendor({ id: router.query.id as string, redFlaggedVendor: true })}
+        buttonType='button'
       />
 
       <div className=' tw-mt-12 tw-font-poppins'>

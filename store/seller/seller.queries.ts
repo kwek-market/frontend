@@ -609,3 +609,12 @@ export const CANCEL_PROMOTION = /* GraphQL */ `
     }
   }
 `;
+
+export const ADMIN_FLAG_VENDOR = /* GraphQL */ `
+  mutation flagVendor($id: String!, $redFlaggedVendor: Boolean!, $token: String!) {
+    flagVendor(id: $id, redFlaggedVendor: $redFlaggedVendor, token: $token) {
+      message
+      status
+    }
+  }
+`;
