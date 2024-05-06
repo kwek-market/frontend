@@ -608,3 +608,28 @@ export const PROMOTE_ADMIN_PRODUCT = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_WALLET_TRANSACTIONS = /* GraphQL */ `
+  query walletTransactions($token: String!, $page: Int, $search: String, $sortBy: String) {
+    getWalletTransactions(token: $token, page: $page, search: $search, sortBy: $sortBy) {
+      pages
+      page
+      hasNext
+      hasPrev
+      objects {
+        id
+        wallet {
+          balance
+          owner {
+            fullName
+          }
+        }
+        remark
+        amount
+        date
+        transactionType
+        status
+      }
+    }
+  }
+`;
