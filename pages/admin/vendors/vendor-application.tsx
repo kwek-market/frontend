@@ -42,8 +42,8 @@ const VendorApplications = () => {
   const { mutate: acceptVendor } = useCompleteSeller();
   const { mutate: rejectVendor } = useRejectSeller();
 
-  function decision(email: string, isVerified: boolean) {
-    acceptVendor({ email, isVerified });
+  function decision(email: string) {
+    acceptVendor({ email });
   }
 
   function rejectSeller(email: string) {
@@ -98,7 +98,7 @@ const VendorApplications = () => {
         return (
           <div className=' tw-flex tw-gap-x-2'>
             <button
-              onClick={() => decision(email_address, true)}
+              onClick={() => decision(email_address)}
               className=' tw-py-[5px] tw-px-[10px] tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-bg-[#009D19]'
             >
               Accept
@@ -123,7 +123,7 @@ const VendorApplications = () => {
           key: id,
           name: fullName,
           email_address: email,
-          date_applied: "13/02/2023",
+          date_applied: new Date(sellerProfile[0]?.date).toDateString(),
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
           phone_number: sellerProfile[0]?.phoneNumber,
@@ -140,7 +140,7 @@ const VendorApplications = () => {
           key: id,
           name: fullName,
           email_address: email,
-          date_applied: "13/02/2023",
+          date_applied: new Date(sellerProfile[0]?.date).toDateString(),
           country: sellerProfile[0]?.lga,
           state: sellerProfile[0]?.state,
           phone_number: sellerProfile[0]?.phoneNumber,

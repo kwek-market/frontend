@@ -2,25 +2,43 @@ import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
-import Link from "next/dist/client/link";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDebounce } from "use-debounce";
+import { PAGE_SIZE } from "../../../constants/constants";
+import { useGetWalletTransactions } from "../../../hooks/admin/transactions";
+import { RootState } from "../../../store/rootReducer";
 
 const Transactions = () => {
   const [activeKey, setActiveKey] = useState("1");
   const { TabPane } = Tabs;
 
+  const { token } = useSelector((state: RootState) => state.user);
+
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [searchDebouncedValue] = useDebounce(search, 600);
+
+  const { data, isLoading, error } = useGetWalletTransactions({
+    page,
+    pageSize: PAGE_SIZE,
+    search: searchDebouncedValue,
+    token,
+  });
+
+  const transactions = data?.getWalletTransactions?.objects;
+
   const columns = [
     {
       title: "Transaction ID ",
-      dataIndex: "transaction_id",
-      key: "transaction_id",
+      dataIndex: "id",
+      key: "id",
     },
     {
       title: "Transaction Type",
-      dataIndex: "transaction_type",
-      key: "transaction_type",
+      dataIndex: "transactionType",
+      key: "transactionType",
     },
     {
       title: "Amount",
@@ -28,14 +46,14 @@ const Transactions = () => {
       key: "amount",
     },
     {
-      title: "Channel",
-      dataIndex: "channel",
-      key: "channel",
+      title: "Remark",
+      dataIndex: "remark",
+      key: "remark",
     },
     {
       title: "Date & Time",
-      dataIndex: "date_and_time",
-      key: "date_and_time",
+      dataIndex: "date",
+      key: "date",
     },
     {
       title: "Status",
@@ -57,81 +75,6 @@ const Transactions = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "success",
-    },
-    {
-      key: "2",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "success",
-    },
-    {
-      key: "3",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "success",
-    },
-    {
-      key: "4",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "pending",
-    },
-    {
-      key: "5",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "success",
-    },
-    {
-      key: "6",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "success",
-    },
-    {
-      key: "7",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "success",
-    },
-    {
-      key: "8",
-      transaction_id: "vrbheug573ui589393h",
-      transaction_type: "Deposit",
-      amount: "N 12,600.22",
-      channel: "USSD",
-      date_and_time: "Nov 12, 2021 | 9:53 AM",
-      status: "failed",
-    },
-  ];
-
   return (
     <AdminLayout>
       <BreadCrumbs
@@ -142,35 +85,50 @@ const Transactions = () => {
             path: "/admin/transactions",
           },
         ]}
-        header="Vendors List"
+        header='Wallet Transaction List'
       />
 
-      <div className=" tw-flex tw-gap-x-2 tw-mt-6 tw-items-center ">
-        <span className=" tw-opacity-70">Filter By:</span>
+      <div className=' tw-flex tw-gap-x-2 tw-mt-6 tw-items-center '>
+        <span className=' tw-opacity-70'>Filter By:</span>
         <select
-          value="all"
-          className=" tw-rounded tw-border tw-border-[#D7DCE0] tw-py-3 tw-outline-none tw-cursor-pointer"
+          value='all'
+          className=' tw-rounded tw-border tw-border-[#D7DCE0] tw-py-3 tw-outline-none tw-cursor-pointer'
         >
-          <option value="all">All Transactions</option>
+          <option value='all'>All Wallet Transactions</option>
         </select>
       </div>
-      <div className="tw-mt-6">
-        <Search placeholder="Search by Transaction ID" />
+      <div className='tw-mt-6'>
+        <Search placeholder='Search by Transaction ID' />
       </div>
 
-      <div className=" tw-pt-4">
+      <div className=' tw-pt-4'>
         <Tabs
           animated
           tabBarStyle={{ borderColor: "red" }}
-          className="adminTab"
+          className='adminTab'
           activeKey={activeKey}
-          onTabClick={(key) => setActiveKey(key)}
+          onTabClick={key => setActiveKey(key)}
         >
-          <TabPane tab="Transaction Log" key="1">
-            <AdminTable data={data} columns={columns} />
+          <TabPane tab='Transaction Log' key='1'>
+            <AdminTable
+              data={transactions}
+              columns={columns}
+              isLoading={isLoading}
+              numberOfPages={data?.getWalletTransactions.pages}
+              page={data?.getWalletTransactions.page}
+              goToNext={() => {
+                if (data?.getWalletTransactions?.hasNext) setPage(page + 1);
+              }}
+              goToPrev={() => {
+                if (data?.getWalletTransactions?.hasPrev) setPage(page - 1);
+              }}
+              goToPage={page => {
+                setPage(page);
+              }}
+            />
           </TabPane>
-          <TabPane tab="Refund Requests" key="2"></TabPane>
-          <TabPane tab="Refund History" key="3"></TabPane>
+          <TabPane tab='Refund Requests' key='2'></TabPane>
+          <TabPane tab='Refund History' key='3'></TabPane>
         </Tabs>
       </div>
     </AdminLayout>
