@@ -93,8 +93,8 @@ export const SELLER_DATA = /* GRAPHQL */ `
 `;
 
 export const COMPLETE_SELLER_VERIFICATION = /* GraphQL */ `
-  mutation ($email: String!, $isVerified: Boolean!) {
-    completeSellerVerification(email: $email, isVerified: $isVerified) {
+  mutation ($email: String!) {
+    completeSellerVerification(email: $email) {
       status
       message
     }

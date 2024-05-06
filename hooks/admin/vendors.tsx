@@ -36,7 +36,7 @@ export function useCompleteSeller() {
     user: { token },
   } = useSelector((state: RootState) => state);
   return useMutation(
-    (payload: { email: string; isVerified: boolean }) =>
+    (payload: { email: string }) =>
       userFetcherWithAuth(COMPLETE_SELLER_VERIFICATION, payload, token),
     {
       onSuccess: data => {

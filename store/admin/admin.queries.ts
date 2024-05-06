@@ -283,6 +283,7 @@ export const GET_SELLERS = /* GraphQL */ `
           city
           lga
           phoneNumber
+          date
         }
       }
     }
