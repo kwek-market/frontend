@@ -139,9 +139,16 @@ const Customer = () => {
         ]}
         header='Vendor Info'
         buttonPath=''
-        buttonText='Red-flag vendor'
-        buttonClassName='tw-bg-red-700'
-        onClickButton={() => flagVendor({ id: router.query.id as string, redFlaggedVendor: true })}
+        buttonText={vendor?.isFlagged ? "Activate Vendor" : "Red-flag vendor"}
+        buttonClassName={vendor?.isFlagged ? "tw-bg-green-700" : "tw-bg-red-700"}
+        onClickButton={() => {
+          if (vendor.isFlagged) {
+            flagVendor({ id: router.query.id as string, redFlaggedVendor: false });
+            return;
+          }
+
+          flagVendor({ id: router.query.id as string, redFlaggedVendor: true });
+        }}
         buttonType='button'
       />
 

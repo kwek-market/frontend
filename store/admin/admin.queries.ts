@@ -425,6 +425,7 @@ export const GET_USER_BY_ID = /* GraphQL */ `
       isActive
       email
       phoneNumber
+      isFlagged
       billingSet {
         city
         state
