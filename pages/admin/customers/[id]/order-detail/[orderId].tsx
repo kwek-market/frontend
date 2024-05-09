@@ -120,7 +120,7 @@ const OrderDetail = () => {
                       Items subtotal: NGN {order.orderPrice}
                     </p>
                     <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-1'>
-                      Shipping Fees: NGN {order.orderPriceTotal - order.orderPrice}
+                      Delivery Cost: NGN {order.orderPriceTotal - order.orderPrice}
                     </p>
                     <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-1'>
                       Total: NGN {order.orderPriceTotal}
@@ -137,7 +137,7 @@ const OrderDetail = () => {
                     <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>{order?.deliveryMethod}</p>
                   </div>
                   <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
-                    <p className=' tw-font-semibold tw-mb-0'>Delivery Method</p>
+                    <p className=' tw-font-semibold tw-mb-0'>Delivery Address</p>
                     <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-2'>
                       {order?.doorStep?.fullName}
                     </p>
@@ -179,9 +179,21 @@ const Item = ({ image, name, qty, amount, size, color, brand }) => {
         <div className='tw-space-y-1'>
           <p className='tw-mb-0 tw-font-medium tw-text-xl tw-text-black-kwek100'>{name}</p>
 
-          {size ? <p className='tw-font-medium'>Size: <span className="tw-font-light">{size}</span></p> : null}
-          {color ? <p className='tw-font-medium'>Color: <span className="tw-font-light">{color}</span></p> : null}
-          {brand ? <p className='tw-font-medium'>Brand: <span className="tw-font-light">{brand}</span></p> : null}
+          {size ? (
+            <p className='tw-font-medium'>
+              Size: <span className='tw-font-light'>{size}</span>
+            </p>
+          ) : null}
+          {color ? (
+            <p className='tw-font-medium'>
+              Color: <span className='tw-font-light'>{color}</span>
+            </p>
+          ) : null}
+          {brand ? (
+            <p className='tw-font-medium'>
+              Brand: <span className='tw-font-light'>{brand}</span>
+            </p>
+          ) : null}
         </div>
         <div className='tw-space-y-1'>
           <span className=' tw-text-opacity-60 tw-text-right'>QTY: {qty}</span>

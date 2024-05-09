@@ -116,7 +116,7 @@ export function useFlagVendor() {
         }
 
         const queryClient = new QueryClient();
-        queryClient.invalidateQueries("seller");
+        queryClient.invalidateQueries(["seller"]);
       },
       onError(error) {
         message.error({ content: (error as any).message, key: "vendor", duration: 300 });

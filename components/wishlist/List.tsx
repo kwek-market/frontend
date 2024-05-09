@@ -26,6 +26,7 @@ const Component = function ({ wishlists }: WishlistProps) {
       inStock={wishlists.product.options.length}
       itemId={wishlists.product.options[0]?.id}
       options={wishlists.product.options}
+      productId={wishlists?.product?.id}
     />
   );
 };
