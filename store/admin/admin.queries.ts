@@ -437,6 +437,11 @@ export const GET_USER_BY_ID = /* GraphQL */ `
         phoneNumber
         shopAddress
         shopName
+        shopUrl
+        state
+        city
+        lga
+        date
       }
       storedetail {
         id

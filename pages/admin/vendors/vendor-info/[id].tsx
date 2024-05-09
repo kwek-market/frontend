@@ -5,12 +5,10 @@ import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { Tabs } from "antd";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import StarRatingComponent from "react-star-rating-component";
 import Load from "../../../../components/Loader/Loader";
 import { PAGE_SIZE } from "../../../../constants/constants";
 import { useGetCustomerOrders, useGetCustomerTotalOrders } from "../../../../hooks/admin/customers";
@@ -125,6 +123,8 @@ const Customer = () => {
 
   const orders = customerOrders?.getCustomerOrdersPaginated?.objects;
 
+  const order = {};
+
   return (
     <AdminLayout>
       <BreadCrumbs
@@ -195,7 +195,7 @@ const Customer = () => {
 
         <div className=' tw-mt-10'>
           <div className=' tw-flex tw-justify-between tw-items-center '>
-            <h1 className='tw-mb-0 tw-text-2xl tw-font-medium'>All Products</h1>
+            <h1 className='tw-mb-0 tw-text-2xl tw-font-medium'>Seller Profile</h1>
             {/* <div className=' tw-flex tw-gap-x-2  tw-items-center '>
               <span className=' tw-opacity-70'>Sort By:</span>
               <select
@@ -209,51 +209,73 @@ const Customer = () => {
             </div> */}
           </div>
 
-          <div className=' tw-grid tw-grid-cols-3 tw-gap-x-4 tw-pt-6'>
-            {products?.map((product, index) => (
-              <div key={product.id} className='tw-p-6 tw-shadow-cardShadow'>
-                <div className=' tw-relative tw-h-56'>
-                  <Image
-                    layout='fill'
-                    src={product?.image[0]?.imageUrl}
-                    className='tw-object-cover'
-                  />
-                </div>
-
-                <div className=' tw-pt-6 tw-flex tw-justify-between tw-gap-x-10 tw-items-center'>
-                  <Link href={`/admin/products/${product.id}`}>
-                    <a className=' tw-font-light tw-text-sm'>{product?.productTitle}</a>
-                  </Link>
-                  <div className=' tw-text-right'>
-                    <p className=' tw-mb-0 tw-text-xl tw-font-semibold'>
-                      ${product?.options[0]?.price ?? 0}
+          <div className=' tw-gap-x-8 tw-text-[#574240] tw-mt-8'>
+            <div className='tw-grid-cols-2 tw-grid tw-bg-review tw-rounded-2xl tw-p-8 tw-gap-6'>
+              <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
+                <p className=' tw-font-semibold tw-mb-0'>Registration details</p>
+                <div className='tw-mt-2 tw-space-y-2'>
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>
+                      State of Origin:
                     </p>
-                    <p className=' tw-mb-0 tw-text-[#C7C0BF] tw-text-xs tw-font-medium tw-line-through'>
-                      ${product?.options[0]?.discountedPrice ?? 0}
+                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      {vendor?.sellerProfile[0]?.state}
+                    </p>
+                  </div>
+
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>City:</p>
+                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      {vendor?.sellerProfile[0]?.city}
+                    </p>
+                  </div>
+
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>LGA:</p>
+                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      {vendor?.sellerProfile[0]?.lga}
+                    </p>
+                  </div>
+
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>
+                      Date applied / Joined:
+                    </p>
+                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      {new Date(vendor?.sellerProfile[0]?.date).toDateString()}
                     </p>
                   </div>
                 </div>
+              </div>
 
-                <div className=' tw-flex tw-justify-between tw-pt-5 tw-items-center'>
-                  <StarRatingComponent
-                    name='rate1'
-                    starCount={5}
-                    value={product?.productRating[0]?.rating}
-                    editing={false}
-                    emptyStarColor='#c4c4c4'
-                    starColor='#FFC107'
-                  />
-                  <span className='tw-text-[#BFA5A3] tw-text-xs'>
-                    ({product?.productRating[0]?.review ?? 0} reviews)
-                  </span>
+              <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
+                <p className=' tw-font-semibold tw-mb-0'>Shop Details</p>
+                <div className='tw-mt-2 tw-space-y-2'>
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>Shop Name:</p>
+                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      {vendor?.sellerProfile[0]?.shopName}
+                    </p>
+                  </div>
+
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>
+                      Shop Address:
+                    </p>
+                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      {vendor?.sellerProfile[0]?.shopAddress}
+                    </p>
+                  </div>
+
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>Shop Url:</p>
+                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      {vendor?.sellerProfile[0]?.shopUrl}
+                    </p>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-          <div className='tw-pt-4'>
-            <Link href={"#"}>
-              <a className=' tw-underline tw-text-[#009D19] '>View All Products</a>
-            </Link>
+            </div>
           </div>
         </div>
 
