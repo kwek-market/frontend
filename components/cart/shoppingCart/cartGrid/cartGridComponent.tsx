@@ -74,6 +74,20 @@ const CartGridComponent = function () {
                     : ""}
                 </p>
                 <p className={styles.name}>{item.product.productTitle}</p>
+
+                {item.product?.options[0]?.size ? (
+                  <div className={""}>
+                    <span className={"tw-font-medium tw-text-gray-kwek700"}>Size: </span>
+                    <span className={""}>{item.product?.options[0]?.size}</span>
+                  </div>
+                ) : null}
+
+                {item.product?.brand ? (
+                  <div className={""}>
+                    <span className={"tw-font-medium tw-text-gray-kwek700"}>Brand: </span>
+                    <span className={""}>{item.product?.brand}</span>
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className={styles.secondBox}>

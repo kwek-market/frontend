@@ -3,11 +3,16 @@ import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
 import { Tabs } from "antd";
+import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDebounce } from "use-debounce";
 import { PAGE_SIZE } from "../../../constants/constants";
-import { useGetWalletTransactions } from "../../../hooks/admin/transactions";
+import {
+  useGetRefundRequests,
+  useGetRefunds,
+  useGetWalletTransactions,
+} from "../../../hooks/admin/transactions";
 import { RootState } from "../../../store/rootReducer";
 
 const Transactions = () => {
@@ -27,7 +32,21 @@ const Transactions = () => {
     token,
   });
 
+  const { data: refundRequestsData, isLoading: isLoadingRefundRequests } = useGetRefundRequests({
+    page,
+    pageSize: PAGE_SIZE,
+    token,
+  });
+
+  const { data: refundsData, isLoading: isLoadingRefunds } = useGetRefunds({
+    page,
+    pageSize: PAGE_SIZE,
+    token,
+  });
+
   const transactions = data?.getWalletTransactions?.objects;
+  const refundRequests = refundRequestsData?.getRefundRequests?.objects;
+  const refunds = refundsData?.getRefunds?.objects;
 
   const columns = [
     {
@@ -54,6 +73,69 @@ const Transactions = () => {
       title: "Date & Time",
       dataIndex: "date",
       key: "date",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status: string) => (
+        <button
+          className={`${
+            status.toLowerCase() === "success"
+              ? "tw-bg-[#009D19]"
+              : status.toLowerCase() === "failed"
+              ? "tw-bg-[#AF1328]"
+              : "tw-bg-[#FFC107]"
+          } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}
+        >
+          {status}
+        </button>
+      ),
+    },
+  ];
+
+  const refundColumns = [
+    {
+      title: "Order ID ",
+      dataIndex: "order",
+      key: "orderId",
+      render: (order: any) => (
+        <Link
+          href={"/admin/customers/" + order?.user?.fullName + "/order-detail/" + order?.orderId}
+        >
+          <a
+            className={`${
+              status.toLowerCase() === "success"
+                ? "tw-bg-[#009D19]"
+                : status.toLowerCase() === "failed"
+                ? "tw-bg-[#AF1328]"
+                : "tw-bg-[#FFC107]"
+            } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}
+          >
+            {status}
+          </a>
+        </Link>
+      ),
+    },
+    {
+      title: "Account Number",
+      dataIndex: "accountNumber",
+      key: "accountNumber",
+    },
+    {
+      title: "Bank Name",
+      dataIndex: "bankName",
+      key: "bankName",
+    },
+    {
+      title: "No Of Products",
+      dataIndex: "numberOfProducts",
+      key: "numberOfProducts",
+    },
+    {
+      title: "Date Created",
+      dataIndex: "dateCreated",
+      key: "dateCreated",
     },
     {
       title: "Status",
@@ -127,8 +209,42 @@ const Transactions = () => {
               }}
             />
           </TabPane>
-          <TabPane tab='Refund Requests' key='2'></TabPane>
-          <TabPane tab='Refund History' key='3'></TabPane>
+          <TabPane tab='Refund Requests' key='2'>
+            <AdminTable
+              data={refundRequests}
+              columns={refundColumns}
+              isLoading={isLoadingRefundRequests}
+              numberOfPages={refundRequestsData?.getRefundRequests?.pages}
+              page={refundRequestsData?.getRefundRequests?.page}
+              goToNext={() => {
+                if (refundRequestsData?.getRefundRequests?.hasNext) setPage(page + 1);
+              }}
+              goToPrev={() => {
+                if (refundRequestsData?.getRefundRequests?.hasPrev) setPage(page - 1);
+              }}
+              goToPage={page => {
+                setPage(page);
+              }}
+            />
+          </TabPane>
+          <TabPane tab='Refund History' key='3'>
+            <AdminTable
+              data={refundsData}
+              columns={refundColumns}
+              isLoading={isLoadingRefunds}
+              numberOfPages={refundsData?.getRefunds?.pages}
+              page={refundsData?.getRefunds?.page}
+              goToNext={() => {
+                if (refundsData?.getRefunds?.hasNext) setPage(page + 1);
+              }}
+              goToPrev={() => {
+                if (refundsData?.getRefunds?.hasPrev) setPage(page - 1);
+              }}
+              goToPage={page => {
+                setPage(page);
+              }}
+            />
+          </TabPane>
         </Tabs>
       </div>
     </AdminLayout>

@@ -425,6 +425,7 @@ export const GET_USER_BY_ID = /* GraphQL */ `
       isActive
       email
       phoneNumber
+      isFlagged
       billingSet {
         city
         state
@@ -436,6 +437,11 @@ export const GET_USER_BY_ID = /* GraphQL */ `
         phoneNumber
         shopAddress
         shopName
+        shopUrl
+        state
+        city
+        lga
+        date
       }
       storedetail {
         id
@@ -630,6 +636,58 @@ export const GET_WALLET_TRANSACTIONS = /* GraphQL */ `
         date
         transactionType
         status
+      }
+    }
+  }
+`;
+
+export const GET_REFUND_REQUESTS = /* GraphQL */ `
+  query getRefundRequests($token: String!, $page: Int, $pageSize: Int) {
+    getRefundRequests(token: $token, page: $page, pageSize: $pageSize) {
+      pages
+      page
+      hasNext
+      hasPrev
+      objects {
+        id
+        order {
+          id
+          orderId
+          user {
+            fullName
+          }
+        }
+        accountNumber
+        bankName
+        numberOfProduct
+        status
+        dateCreated
+      }
+    }
+  }
+`;
+
+export const GET_REFUNDS = /* GraphQL */ `
+  query getRefunds($token: String!, $page: Int, $pageSize: Int) {
+    getRefunds(token: $token, page: $page, pageSize: $pageSize) {
+      pages
+      page
+      hasNext
+      hasPrev
+      objects {
+        id
+        order {
+          id
+          orderId
+          user {
+            fullName
+          }
+        }
+        accountNumber
+        bankName
+        numberOfProduct
+        status
+        dateCreated
       }
     }
   }

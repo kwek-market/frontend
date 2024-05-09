@@ -14,18 +14,19 @@ const Page = function ({ product }) {
 
   return (
     <MainLayout title={id}>
-      {router.isFallback ? (
-        <Load />
-      ) : (
-        Object.keys(product).length && (
-          <Fragment>
-            <ProductHead product={product} />
-            <ExtraGrid product={product} />
-            <ProductDesc product={product} />
-            <MoreCard similar={product.category.name} title='Similar Items you might Like' />
-          </Fragment>
-        )
-      )}
+      {router.isFallback ? <Load /> : null}
+
+      {product
+        ? Object.keys(product).length && (
+            <Fragment>
+              <ProductHead product={product} />
+              <ExtraGrid product={product} />
+              <ProductDesc product={product} />
+              <MoreCard similar={product.category.name} title='Similar Items you might Like' />
+            </Fragment>
+          )
+        : null}
+
       <ExtraInfo />
     </MainLayout>
   );
@@ -42,7 +43,13 @@ export const getStaticPaths: GetStaticPaths = async context => {
 
 export const getStaticProps: GetStaticProps = async context => {
   const payload = { id: context.params.product };
-  const { product } = await userFetcher(GetProduct, payload);
+  let product = null;
+  try {
+    const data = await userFetcher(GetProduct, payload);
+    product = data?.product;
+  } catch (error) {
+    console.log(error);
+  }
 
   return {
     props: {
