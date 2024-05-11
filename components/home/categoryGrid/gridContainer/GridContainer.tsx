@@ -1,15 +1,14 @@
-import React from "react";
 import { useRouter } from "next/router";
 import styles from "./GridContainer.module.scss";
 
-import { TitleBlock, Banner, Card, SideBar } from "../index";
-import { ProductBox } from "@/shared";
 import Button from "@/components/buttons/Button";
 import Slider from "@/components/slider/slider";
-import { v4 as uuid } from "uuid";
-import { Spin } from "antd";
 import useProducts from "@/hooks/useProducts";
 import { ProductType } from "@/interfaces/commonTypes";
+import { ProductBox } from "@/shared";
+import { Spin } from "antd";
+import { v4 as uuid } from "uuid";
+import { Banner, Card, SideBar, TitleBlock } from "../index";
 
 type GridContainerProps = {
   title: string;
@@ -18,12 +17,7 @@ type GridContainerProps = {
   cards?: any[];
 };
 
-const GridContainer = function ({
-  title,
-  timer,
-  sidebar,
-  cards,
-}: GridContainerProps) {
+const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerProps) {
   const router = useRouter();
 
   const payload = {
@@ -32,50 +26,42 @@ const GridContainer = function ({
     search: title,
     sortBy: "-sales",
   };
-  const {
-    status: categoryStatus,
-    data: categoryData,
-    error: categoryError,
-  } = useProducts(payload);
+  const { status: categoryStatus, data: categoryData, error: categoryError } = useProducts(payload);
 
   const newBanner =
     !!categoryData?.products.objects !== undefined &&
     categoryData?.products.objects
       .slice(0, 2)
-      .map((banner: ProductType) => (
-        <Banner key={banner.id} product={banner} />
-      ));
+      .map((banner: ProductType) => <Banner key={banner.id} product={banner} />);
   const banner = [{ element: newBanner }];
 
   return (
     <div id={styles.categoryGrid}>
       <TitleBlock title={title} timer={timer} cards={cards} />
-      <div
-        className={sidebar ? styles.mainContainer : styles.mainContainer__full}
-      >
+      <div className={sidebar ? styles.mainContainer : styles.mainContainer__full}>
         <div className={styles.products}>
           {categoryStatus === "error" && (
-            <div className="tw-py-5 tw-w-full tw-text-center">
-              <h1 className="tw-text-error tw-font-bold tw-text-2xl">
+            <div className='tw-py-5 tw-w-full tw-text-center'>
+              <h1 className='tw-text-error tw-font-bold tw-text-2xl'>
                 {(categoryError as { message: string }).message}
               </h1>
             </div>
           )}
           {categoryStatus === "loading" && (
-            <div className="tw-py-5 tw-w-full tw-text-center">
-              <Spin size="large" />
+            <div className='tw-py-5 tw-w-full tw-text-center'>
+              <Spin size='large' />
             </div>
           )}
           {categoryData?.products.objects !== undefined &&
           categoryData?.products.objects.length === 0 ? (
             cards ? (
-              cards.slice(0, 4).map((card) => (
+              cards.slice(0, 4).map(card => (
                 <div key={uuid()} className={styles.product}>
                   <ProductBox product={card} id={card.id} />
                 </div>
               ))
             ) : (
-              <div className="tw-py-5 tw-w-full tw-text-center">
+              <div className='tw-py-5 tw-w-full tw-text-center'>
                 <h1>No Products Found</h1>
               </div>
             )
@@ -88,10 +74,10 @@ const GridContainer = function ({
             ))
           )}
 
-          <div className="tw-mx-auto tw-w-24 tw-flex md:tw-hidden">
+          <div className='tw-mx-auto tw-mt-8 tw-w-24 tw-flex md:tw-hidden'>
             <Button
-              buttonStyle="tw-bg-red-kwek100 tw-text-white-100 tw-p-2"
-              text="view more"
+              buttonStyle='tw-bg-red-kwek100 tw-text-white-100 tw-p-2'
+              text='view more'
               cmd={
                 cards?.length > 0
                   ? () => router.push("/deals-of-the-day/1")
@@ -110,22 +96,18 @@ const GridContainer = function ({
                 </div>
               ))}
             </div>
-            <Slider
-              element={cards.map((card) => ({ element: <Card card={card} /> }))}
-            />
+            <Slider element={cards.map(card => ({ element: <Card card={card} /> }))} />
           </>
         )}
 
         <>
           <div className={styles.banners}>
             {categoryData?.products.objects !== undefined &&
-              categoryData?.products.objects
-                .slice(0, 2)
-                .map((banner: ProductType) => (
-                  <div key={banner.id} className={styles.banner}>
-                    <Banner product={banner} />
-                  </div>
-                ))}
+              categoryData?.products.objects.slice(0, 2).map((banner: ProductType) => (
+                <div key={banner.id} className={styles.banner}>
+                  <Banner product={banner} />
+                </div>
+              ))}
           </div>
           <Slider element={banner} />
         </>
