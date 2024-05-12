@@ -475,6 +475,11 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
           brand
           color
           gender
+          user {
+            fullName
+            email
+            phoneNumber
+          }
         }
         price
         quantity

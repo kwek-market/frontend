@@ -100,6 +100,9 @@ const OrderDetail = () => {
                     size={item?.product?.size}
                     color={item?.product?.color}
                     brand={item?.product?.brand}
+                    fullName={item?.product?.user?.fullName}
+                    email={item?.product?.user?.email}
+                    phone={item?.product?.user?.phone}
                   />
                 ))}
               </div>
@@ -160,7 +163,7 @@ const OrderDetail = () => {
 
 export default OrderDetail;
 
-const Item = ({ image, name, qty, amount, size, color, brand }) => {
+const Item = ({ image, name, qty, amount, size, color, brand, fullName, email, phone }) => {
   return (
     <div className='tw-border-gray-kwek700 tw-border tw-rounded-2xl tw-pl-2 tw-py-2 tw-flex tw-gap-x-6 tw-pr-8'>
       {/* <Image
@@ -192,6 +195,24 @@ const Item = ({ image, name, qty, amount, size, color, brand }) => {
           {brand ? (
             <p className='tw-font-medium'>
               Brand: <span className='tw-font-light'>{brand}</span>
+            </p>
+          ) : null}
+
+          {fullName ? (
+            <p className='tw-font-medium'>
+              Vendor Name: <span className='tw-font-light'>{fullName}</span>
+            </p>
+          ) : null}
+
+          {email ? (
+            <p className='tw-font-medium'>
+              Vendor email: <span className='tw-font-light'>{email}</span>
+            </p>
+          ) : null}
+
+          {phone ? (
+            <p className='tw-font-medium'>
+              Vendor no: <span className='tw-font-light'>{phone}</span>
             </p>
           ) : null}
         </div>

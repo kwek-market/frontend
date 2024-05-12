@@ -5,7 +5,7 @@ import { AddToCartPayload, AddToWishlistPayload, ProductType } from "@/interface
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
-import { Carousel, message } from "antd";
+import { Carousel, Radio, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -182,10 +182,13 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <p className={styles.product_subtitle}>{product.shortDescription}</p>
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
-          <div
-            style={{ backgroundColor: `${product.color.toLowerCase()}` }}
-            className='tw-p-3'
-          ></div>
+          <Radio.Group defaultValue='a' buttonStyle='solid'>
+            <Radio.Button
+              style={{ backgroundColor: `${product.color.toLowerCase()}` }}
+              className='tw-p-3'
+              value='a'
+            ></Radio.Button>
+          </Radio.Group>
         </div>
         <div className={styles.product_option_size}>
           <p>SIZE:</p>
