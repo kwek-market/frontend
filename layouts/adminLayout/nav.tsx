@@ -1,13 +1,8 @@
-import ArrowDownIcon from "@/components/icons/admin/nav/arrow-down";
-import NotificationIcon from "@/components/icons/admin/nav/notification";
-import SearchIcon from "@/components/icons/admin/nav/search";
-import CancelIcon from "@/components/icons/cancel";
 import { getInitials } from "@/helpers";
 import { RootState } from "@/store/rootReducer";
 import { setSearched } from "@/store/search/search.action";
 import { MenuIcon } from "@heroicons/react/solid";
-import Image from "next/image";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
@@ -111,18 +106,13 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
   }, [search]);
 
   return (
-    <div className="tw-sticky tw-top-0 tw-z-[1] tw-bg-white-100 tw-border-b tw-border-b-[#D7DCE0] tw-flex tw-justify-end tw-items-center tw-py-3 lg:tw-py-4 tw-px-4 lg:tw-px-8">
-      <div className="tw-flex  lg:tw-gap-x-8 tw-items-center tw-w-full lg:tw-w-max tw-justify-between lg:tw-justify-start transition-all duration-300">
-        <div className="lg:tw-hidden">
-          <MenuIcon
-            color="black"
-            onClick={() => setSidebarOpen(true)}
-            width={40}
-            height={40}
-          />
+    <div className='tw-sticky tw-top-0 tw-z-[1] tw-bg-white-100 tw-border-b tw-border-b-[#D7DCE0] tw-flex tw-justify-end tw-items-center tw-py-3 lg:tw-py-4 tw-px-4 lg:tw-px-8'>
+      <div className='tw-flex  lg:tw-gap-x-8 tw-items-center tw-w-full lg:tw-w-max tw-justify-between lg:tw-justify-start transition-all duration-300'>
+        <div className='lg:tw-hidden'>
+          <MenuIcon color='black' onClick={() => setSidebarOpen(true)} width={40} height={40} />
         </div>
-        <div className="tw-flex tw-gap-x-6 lg:tw-gap-x-8 tw-items-center tw-w-max tw-justify-between lg:tw-justify-start">
-          <div
+        <div className='tw-flex tw-gap-x-6 lg:tw-gap-x-8 tw-items-center tw-w-max tw-justify-between lg:tw-justify-start'>
+          {/* <div
             ref={elementRef}
             className={`tw-flex tw-items-center tw-gap-x-2 md:tw-gap-x-2 tw-py-1 tw-px-2 tw-transition-all tw-duration-300`}
             onMouseEnter={handleSearchHover}
@@ -148,25 +138,21 @@ const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
                 </div>
               ) : null}
             </div>
-          </div>
-          <NotificationIcon />
+          </div> */}
+          {/* <NotificationIcon /> */}
 
-          <div className=" tw-flex tw-gap-x-[10px] tw-items-center tw-justify-self-end">
-            <div className=" tw-w-10 tw-h-10 tw-rounded-full tw-overflow-hidden tw-bg-black-kwek100 tw-flex tw-content-center tw-items-center tw-place-content-center">
-              <p className="tw-text-white-400 tw-mb-0">
-                {getInitials(user?.user?.fullName ?? "")}
-              </p>
+          <div className=' tw-flex tw-gap-x-[10px] tw-items-center tw-justify-self-end'>
+            <div className=' tw-w-10 tw-h-10 tw-rounded-full tw-overflow-hidden tw-bg-black-kwek100 tw-flex tw-content-center tw-items-center tw-place-content-center'>
+              <p className='tw-text-white-400 tw-mb-0'>{getInitials(user?.user?.fullName ?? "")}</p>
             </div>
-            <div className=" tw-font-poppins">
-              <p className=" tw-mb-0 tw-font-semibold tw-text-sm">
-                {user?.user?.fullName}
-              </p>
-              <p className=" tw-mb-0 tw-text-black-kwek100 tw-text-opacity-60 tw-text-[10px]">
+            <div className=' tw-font-poppins'>
+              <p className=' tw-mb-0 tw-font-semibold tw-text-sm'>{user?.user?.fullName}</p>
+              <p className=' tw-mb-0 tw-text-black-kwek100 tw-text-opacity-60 tw-text-[10px]'>
                 {user?.user?.email}
               </p>
             </div>
           </div>
-          <ArrowDownIcon />
+          {/* <ArrowDownIcon /> */}
         </div>
       </div>
     </div>

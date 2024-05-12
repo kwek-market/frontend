@@ -229,7 +229,7 @@ const Transactions = () => {
           </TabPane>
           <TabPane tab='Refund History' key='3'>
             <AdminTable
-              data={refundsData}
+              data={refunds}
               columns={refundColumns}
               isLoading={isLoadingRefunds}
               numberOfPages={refundsData?.getRefunds?.pages}
