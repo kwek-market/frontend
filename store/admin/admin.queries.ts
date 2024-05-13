@@ -86,6 +86,7 @@ export const GET_PRODUCTS = /* GraphQL */ `
         productTitle
         dateCreated
         options {
+          id
           price
           discountedPrice
           size
@@ -725,6 +726,25 @@ export const GET_ADMIN_FLASH_SALES = /* GraphQL */ `
         discountPercent
         status
       }
+    }
+  }
+`;
+
+export const CREATE_FLASH_SALE = /* GraphQL */ `
+  mutation newFlashSales(
+    $discountPercent: Int!
+    $days: Int!
+    $productOptionId: String!
+    $token: String!
+  ) {
+    newFlashSales(
+      discountPercent: $discountPercent
+      days: $days
+      productOptionId: $productOptionId
+      token: $token
+    ) {
+      message
+      status
     }
   }
 `;
