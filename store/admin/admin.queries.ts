@@ -697,3 +697,34 @@ export const GET_REFUNDS = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_ADMIN_FLASH_SALES = /* GraphQL */ `
+  query getFlashSales($page: Int, $pageSize: Int, $token: String!) {
+    getFlashSales(page: $page, pageSize: $pageSize, token: $token) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        product {
+          product {
+            productTitle
+            image {
+              imageUrl
+            }
+          }
+          size
+          quantity
+          price
+          discountedPrice
+          optionTotalPrice
+        }
+        startDate
+        numberOfDays
+        discountPercent
+        status
+      }
+    }
+  }
+`;
