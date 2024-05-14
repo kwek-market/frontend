@@ -96,10 +96,10 @@ const SidebarItems = () => {
       path: "/admin/transactions",
     },
     {
-      name: "Ads Management",
+      name: "Flash sales",
       icon: AdsIcon,
       options: [],
-      path: "/admin/ads-management",
+      path: "/admin/flash-sales",
     },
     {
       name: "Settings",

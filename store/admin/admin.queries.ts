@@ -86,6 +86,7 @@ export const GET_PRODUCTS = /* GraphQL */ `
         productTitle
         dateCreated
         options {
+          id
           price
           discountedPrice
           size
@@ -694,6 +695,56 @@ export const GET_REFUNDS = /* GraphQL */ `
         status
         dateCreated
       }
+    }
+  }
+`;
+
+export const GET_ADMIN_FLASH_SALES = /* GraphQL */ `
+  query getFlashSales($page: Int, $pageSize: Int, $token: String!) {
+    getFlashSales(page: $page, pageSize: $pageSize, token: $token) {
+      page
+      pages
+      hasNext
+      hasPrev
+      objects {
+        id
+        product {
+          product {
+            productTitle
+            image {
+              imageUrl
+            }
+          }
+          size
+          quantity
+          price
+          discountedPrice
+          optionTotalPrice
+        }
+        startDate
+        numberOfDays
+        discountPercent
+        status
+      }
+    }
+  }
+`;
+
+export const CREATE_FLASH_SALE = /* GraphQL */ `
+  mutation newFlashSales(
+    $discountPercent: Int!
+    $days: Int!
+    $productOptionId: String!
+    $token: String!
+  ) {
+    newFlashSales(
+      discountPercent: $discountPercent
+      days: $days
+      productOptionId: $productOptionId
+      token: $token
+    ) {
+      message
+      status
     }
   }
 `;
