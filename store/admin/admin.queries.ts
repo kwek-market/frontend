@@ -735,7 +735,7 @@ export const GET_ADMIN_FLASH_SALES = /* GraphQL */ `
 
 export const CREATE_FLASH_SALE = /* GraphQL */ `
   mutation newFlashSales(
-    $discountPercent: Int!
+    $discountPercent: Float!
     $days: Int!
     $productOptionId: String!
     $token: String!
