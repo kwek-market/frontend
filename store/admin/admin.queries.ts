@@ -326,11 +326,13 @@ export const GET_CUSTOMERS = /* GraphQL */ `
         firstName
         lastName
         fullName
+        phoneNumber
         dateJoined
         email
         billingSet {
           city
           state
+          contact
         }
       }
     }
