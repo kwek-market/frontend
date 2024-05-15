@@ -58,18 +58,18 @@ const FlashSales = () => {
     },
     {
       title: "Discount Price",
-      dataIndex: "discountPrice",
-      key: "discountPrice",
+      dataIndex: "product",
+      key: "product",
       render: product => {
-        return <div>{product?.discountPrice}</div>;
+        return <div>{product?.discountedPrice}</div>;
       },
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: product => {
-        return <div>{product?.status}</div>;
+      render: status => {
+        return <div>{status ? "Active" : "Inactive"}</div>;
       },
     },
   ];

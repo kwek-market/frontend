@@ -21,7 +21,7 @@ export function useGetAllOrders(variables: PayloadType) {
     variables.pageSize = PAGE_SIZE;
   }
 
-  return useQuery(["admin-orders", variables.search, variables.page], () =>
+  return useQuery(["admin-orders", variables], () =>
     userFetcherWithAuth(GET_ALL_ORDERS, variables, variables.token)
   );
 }
