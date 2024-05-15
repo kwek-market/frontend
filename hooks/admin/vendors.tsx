@@ -17,6 +17,7 @@ export type USERTYPE = {
   customer?: boolean;
   active?: boolean;
   redFlagged?: boolean;
+  sellerIsVerified?: boolean;
   page?: number;
   pageSize?: number;
   search?: string;
