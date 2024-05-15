@@ -11,6 +11,8 @@ export type PayloadType = {
   pageSize: number;
   page: number;
   token?: string;
+  search?: string;
+  sortBy?: string;
 };
 export type ReviewPayloadType = {
   pageSize: number;
