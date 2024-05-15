@@ -61,6 +61,8 @@ const ProductHead = function ({ product }: ProductHeadProps) {
 
   const [numItem, incNumItem] = useState(1);
 
+  const [isProductColorSelected, setIsProductColorSelected] = useState(false);
+
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
       ipAddress: await getIp(),
@@ -184,7 +186,16 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           <p>COLOR:</p>
           <Radio.Group defaultValue='a' buttonStyle='solid'>
             <Radio.Button
-              style={{ backgroundColor: `${product.color.toLowerCase()}` }}
+              style={{
+                backgroundColor: `${product.color.toLowerCase()}`,
+                opacity: isProductColorSelected ? 0.8 : 1,
+                border: isProductColorSelected ? `2px solid magenta` : "0px",
+              }}
+              onClick={e => {
+                isProductColorSelected
+                  ? setIsProductColorSelected(false)
+                  : setIsProductColorSelected(true);
+              }}
               className='tw-p-3'
               value='a'
             ></Radio.Button>
