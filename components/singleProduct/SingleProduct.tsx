@@ -108,7 +108,7 @@ const SingleProduct = function ({
               </div>
             </div>
           </div>
-          <h2>₦{product.options[0].price}</h2>
+          <h2>₦{product?.options[0]?.price}</h2>
           <p className={styles.name}>{product.shortDescription}</p>
 
           <div className={styles.colors}>
