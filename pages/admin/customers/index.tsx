@@ -59,7 +59,7 @@ const Customers = () => {
       key: "name",
       render: (name: string, { key }) => (
         <Link href={"/admin/customers/" + key}>
-          <a className=' tw-text-black-kwek100'>{key}</a>
+          <a className=' tw-text-black-kwek100'>{name}</a>
         </Link>
       ),
     },
@@ -67,6 +67,11 @@ const Customers = () => {
       title: "Email Address",
       dataIndex: "email_address",
       key: "email_address",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
       title: "Date Joined",
@@ -107,9 +112,10 @@ const Customers = () => {
           name: d.fullName,
           email_address: d.email,
           date_joined: new Intl.DateTimeFormat("en-US").format(new Date(d.dateJoined)),
-          country: d.billingSet.city,
-          state: d.billingSet.state,
-          amount_spent: "N13,873.74",
+          country: d.billingSet.city || "N/A",
+          state: d.billingSet.state || "N/A",
+          amount_spent: d?.amount_set  || "N/A",
+          phone: d.phoneNumber || d.billingSet?.contact || "N/A",
         };
       }),
     [activeCustomerData]
@@ -123,9 +129,10 @@ const Customers = () => {
           name: d.fullName,
           email_address: d.email,
           date_joined: new Intl.DateTimeFormat("en-US").format(new Date(d.dateJoined)),
-          country: d.billingSet.city,
-          state: d.billingSet.state,
-          amount_spent: "N13,873.74",
+          country: d.billingSet.city || "N/A",
+          state: d.billingSet.state || "N/A",
+          amount_spent: d?.amount_set  || "N/A",
+          phone: d.phoneNumber || d.billingSet?.contact || "N/A",
         };
       }),
     [inactiveCustomerData]
