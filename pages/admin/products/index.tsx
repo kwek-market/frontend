@@ -1,29 +1,34 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
-import AdminLayout from "@/layouts/adminLayout/adminLayout";
-import React, { useEffect, useState } from "react";
 import AdminTable from "@/components/table";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
-import Link from "next/link";
-import { useGetProducts } from "@/hooks/admin/products";
-import Load from "@/components/Loader/Loader";
-import moment from "moment";
 import { reduceCharacterLength } from "@/helpers/helper";
+import { useGetProducts } from "@/hooks/admin/products";
+import AdminLayout from "@/layouts/adminLayout/adminLayout";
+import moment from "moment";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { QueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import { search as searchData } from "@/store/search/search.action";
-import { GetProducts } from "@/store/product/product.queries";
+import { useDispatch } from "react-redux";
+import { useDebounce } from "use-debounce";
+import Search from "../../../components/admin/search";
 
 const Products = () => {
   const queryClient = new QueryClient();
-  const { search } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  const search = router.query.search as string;
+
+  const [searchedProduct, setSearchedProducts] = useState(search);
+  const [searchDebounce] = useDebounce(searchedProduct, 600);
 
   const [page, setPage] = useState(1);
 
-  const { data, isFetching } = useGetProducts({
+  const { data, isLoading } = useGetProducts({
     page: page,
     pageSize: 10,
+    search: searchDebounce,
   });
 
   const goToPage = (page: number) => {
@@ -37,30 +42,6 @@ const Products = () => {
     setPage(page + 1);
   };
 
-  useEffect(() => {
-    if (!search.searched) {
-      queryClient.invalidateQueries([
-        "products-admin",
-        {
-          page: page,
-          pageSize: 10,
-        },
-      ]);
-    } else {
-      if (search.data == null) {
-        setPage(1);
-      }
-
-      dispatch(
-        searchData(GetProducts, {
-          search: search.search,
-          page: page,
-          pageSize: 10,
-        })
-      );
-    }
-  }, [page, search.searched as boolean, search.search as string]);
-
   const maxTextLength = 25;
 
   const columns = [
@@ -72,7 +53,7 @@ const Products = () => {
         productTitle = reduceCharacterLength(productTitle, maxTextLength);
         return (
           <Link href={`/admin/products/${x?.id}`}>
-            <a className=" tw-text-[#1D1616]">{productTitle}</a>
+            <a className=' tw-text-[#1D1616]'>{productTitle}</a>
           </Link>
         );
       },
@@ -87,8 +68,7 @@ const Products = () => {
       title: "Unit Price",
       dataIndex: "options",
       key: "options",
-      render: (options: Array<Record<string, unknown>>) =>
-        `N${options[0]?.price}`,
+      render: (options: Array<Record<string, unknown>>) => `N${options[0]?.price}`,
     },
     {
       title: "Sold",
@@ -100,18 +80,17 @@ const Products = () => {
       title: "Date Uploaded",
       key: "dateCreated",
       dataIndex: "dateCreated",
-      render: (date: string) =>
-        moment(new Date(date)).format("MMM D, YYYY | h:MM A"),
+      render: (date: string) => moment(new Date(date)).format("MMM D, YYYY | h:MM A"),
     },
-    {
-      title: "",
-      key: "action",
-      render: () => (
-        <span>
-          <DotsVerticalIcon className="tw-h-5 tw-w-5" />
-        </span>
-      ),
-    },
+    // {
+    //   title: "",
+    //   key: "action",
+    //   render: () => (
+    //     <span>
+    //       <DotsVerticalIcon className='tw-h-5 tw-w-5' />
+    //     </span>
+    //   ),
+    // },
   ];
 
   return (
@@ -121,34 +100,33 @@ const Products = () => {
           { name: "Dashboard", path: "/admin/dashboard" },
           { name: "Products", path: "/admin/products" },
         ]}
-        header="Products"
+        header='Products'
       />
-      {isFetching || search.loading ? (
-        <Load />
-      ) : (
-        <div className=" tw-pt-7">
-          <AdminTable
-            select
-            numberOfPages={
-              search.searched
-                ? search?.data?.products?.pages
-                : (data?.products?.pages as number)
-            }
-            data={(search.searched
-              ? search?.data?.products?.objects
-              : data?.products?.objects
-            )?.map((item, indx) => ({
-              ...item,
-              key: indx,
-            }))}
-            columns={columns}
-            page={page}
-            goToPage={goToPage}
-            goToPrev={goToPrev}
-            goToNext={goToNext}
+
+      <div className=' tw-pt-7'>
+        <div className='tw-mt-6 tw-mb-8'>
+          <Search
+            placeholder='Search by products name'
+            value={searchedProduct}
+            onChange={e => setSearchedProducts(e.target.value)}
           />
         </div>
-      )}
+
+        <AdminTable
+          select
+          isLoading={isLoading}
+          numberOfPages={data?.products?.pages as number}
+          data={data?.products?.objects?.map((item, indx) => ({
+            ...item,
+            key: indx,
+          }))}
+          columns={columns}
+          page={page}
+          goToPage={goToPage}
+          goToPrev={goToPrev}
+          goToNext={goToNext}
+        />
+      </div>
     </AdminLayout>
   );
 };

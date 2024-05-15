@@ -245,6 +245,7 @@ export const GET_SELLERS = /* GraphQL */ `
     $token: String!
     $seller: Boolean
     $sellerIsRejected: Boolean
+    $sellerIsVerified: Boolean
     $customer: Boolean
     $active: Boolean
     $redFlagged: Boolean
@@ -256,6 +257,7 @@ export const GET_SELLERS = /* GraphQL */ `
       token: $token
       seller: $seller
       sellerIsRejected: $sellerIsRejected
+      sellerIsVerified: $sellerIsVerified
       customer: $customer
       active: $active
       redFlagged: $redFlagged
@@ -285,6 +287,7 @@ export const GET_SELLERS = /* GraphQL */ `
           lga
           phoneNumber
           date
+          sellerIsVerified
         }
       }
     }
@@ -323,11 +326,13 @@ export const GET_CUSTOMERS = /* GraphQL */ `
         firstName
         lastName
         fullName
+        phoneNumber
         dateJoined
         email
         billingSet {
           city
           state
+          contact
         }
       }
     }
@@ -732,7 +737,7 @@ export const GET_ADMIN_FLASH_SALES = /* GraphQL */ `
 
 export const CREATE_FLASH_SALE = /* GraphQL */ `
   mutation newFlashSales(
-    $discountPercent: Int!
+    $discountPercent: Float!
     $days: Int!
     $productOptionId: String!
     $token: String!
