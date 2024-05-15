@@ -1,23 +1,21 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
 import Button from "@/components/buttons/Button";
-import buttonStyle from "@/styles/buttons.module.scss";
-import menuStyle from "./menu.module.scss";
-import MenuBox from "@/components/menu/MenuBox";
 import CategoryBox from "@/components/menu/CategoryBox";
-import { RootState } from "@/store/rootReducer";
+import MenuBox from "@/components/menu/MenuBox";
 import { getInitials2 } from "@/helpers";
-import { logout } from "@/store/user/user.actions";
 import { clearAccount } from "@/store/account/account.actions";
-import { clearSubs } from "@/store/newsletter/newsletter.actions";
-import { clearSeller } from "@/store/seller/seller.action";
 import { clearCart } from "@/store/cart/cart.actions";
 import { clearCategories } from "@/store/category/categories.actions";
+import { clearSubs } from "@/store/newsletter/newsletter.actions";
 import { clearProduct } from "@/store/product/product.action";
+import { RootState } from "@/store/rootReducer";
+import { clearSeller } from "@/store/seller/seller.action";
+import { logout } from "@/store/user/user.actions";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
+import buttonStyle from "@/styles/buttons.module.scss";
 import Link from "next/link";
-import { v4 } from "uuid";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import menuStyle from "./menu.module.scss";
 
 const Menu = function ({}) {
   const dispatch = useDispatch();
@@ -29,7 +27,7 @@ const Menu = function ({}) {
   } = useSelector((state: RootState) => state);
   const router = useRouter();
 
-  console.log(categories);
+  console.log(categories[0], "fucking categories");
 
   function handleLogout() {
     dispatch(logout());
@@ -47,10 +45,7 @@ const Menu = function ({}) {
     myCart: {
       icon: "fa-shopping-cart",
       title: "My Cart",
-      description:
-        cart?.length < 0
-          ? "No items in the cart"
-          : `${cart.length} items in the cart`,
+      description: cart?.length < 0 ? "No items in the cart" : `${cart.length} items in the cart`,
       link: "/cart",
     },
     trackOrder: {
@@ -93,14 +88,14 @@ const Menu = function ({}) {
         <div className={menuStyle.authDiv}>
           <Button
             buttonStyle={buttonStyle.red_border_button}
-            text="Sign up"
+            text='Sign up'
             cmd={() => {
               router.push("/create-account");
             }}
           />
           <Button
             buttonStyle={buttonStyle.red_filled_button}
-            text="Sign in"
+            text='Sign in'
             cmd={() => {
               router.push("/login");
             }}
@@ -116,7 +111,7 @@ const Menu = function ({}) {
             <span>{user.user.username}</span>
           </div>
           <button onClick={() => router.push("/profile/account")}>
-            <i className="fas fa-cog fa-2x" />
+            <i className='fas fa-cog fa-2x' />
           </button>
         </div>
       )}
@@ -137,11 +132,7 @@ const Menu = function ({}) {
           {categories.slice(0, 7).map((category, index) => (
             <Link key={index} href={`/category/${category.name}`}>
               <a>
-                <CategoryBox
-                  key={category.id}
-                  name={category.name}
-                  icon="/svg/cat-icon-electronics.svg"
-                />
+                <CategoryBox key={category.id} name={category.name} icon={category?.icon} />
               </a>
             </Link>
           ))}
@@ -153,16 +144,16 @@ const Menu = function ({}) {
       <div>
         <Button
           buttonStyle={buttonStyle.btn_block}
-          text="Contact Us"
+          text='Contact Us'
           cmd={() => router.push("/contact-us")}
-          icon="fa-phone"
+          icon='fa-phone'
         />
         {user.id && (
           <Button
             buttonStyle={buttonStyle.btn_block_red}
-            text="Log out"
+            text='Log out'
             cmd={() => handleLogout()}
-            icon="fa-sign-out-alt"
+            icon='fa-sign-out-alt'
           />
         )}
       </div>
