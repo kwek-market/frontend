@@ -33,52 +33,16 @@ const Orders = () => {
     isLoading,
   } = useGetAllOrders({ token, search: searchDebounce, page });
 
-  if (isLoading) {
-    return (
-      <AdminLayout>
-        <BreadCrumbs
-          items={[
-            { name: "Dashboard", path: "/admin/dashboard" },
-            {
-              name: "Order List",
-              path: "/admin/orders",
-            },
-          ]}
-          header='Order List'
-        />
-
-        <div className=' tw-mt-12 tw-font-poppins'>
-          <div className='tw-mt-6'>
-            <Search placeholder='Search by order code' />
-          </div>
-          <div className=' tw-py-4'>
-            <Tabs
-              animated
-              tabBarStyle={{ borderColor: "red" }}
-              className='adminTab'
-              activeKey={activeKey}
-              onTabClick={key => setActiveKey(key)}
-            >
-              <TabPane tab='Order History' key='1'>
-                <Load />
-              </TabPane>
-            </Tabs>
-          </div>
-        </div>
-      </AdminLayout>
-    );
-  }
-
   const columns = [
     {
       title: "Order Number",
-      dataIndex: "id",
-      key: "order_number",
-      render: (id: string, objects) => {
+      dataIndex: "orderId",
+      key: "orderId",
+      render: (orderId: string, objects) => {
         console.log(objects);
         return (
-          <Link href={"/admin/customers/" + objects?.user?.fullName + "/order-detail/" + id}>
-            <a className=' tw-text-black-kwek100'>{id}</a>
+          <Link href={"/admin/customers/" + objects?.user?.fullName + "/order-detail/" + objects?.id}>
+            <a className=' tw-text-black-kwek100'>{orderId}</a>
           </Link>
         );
       },
@@ -147,6 +111,7 @@ const Orders = () => {
           >
             <TabPane tab='Order History' key='1'>
               <AdminTable
+                isLoading={isLoading}
                 data={ordersData?.allOrders?.objects}
                 columns={columns}
                 numberOfPages={ordersData?.allOrders.pages}
