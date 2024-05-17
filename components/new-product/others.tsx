@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const [seoKeywords, setSeoKeywords] = useState([]);
   const [formValues, setFormValues] = useState([
-    { size: "", quantity: "", price: "", discountPrice: "", totalPrice: "" },
+    { size: null, quantity: null, price: null, discountPrice: null, totalPrice: null },
   ]);
 
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const addNewVariant = () => {
     setFormValues([
       ...formValues,
-      { size: "", quantity: "", price: "", discountPrice: "", totalPrice: "" },
+      { size: null, quantity: null, price: null, discountPrice: null, totalPrice: null },
     ]);
   };
 
@@ -111,7 +111,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
             >
               <label className="tw-text-base tw-font-medium tw-capitalize">
                 {" "}
-                size
+                size (Optional)
                 <br />
                 <input
                   type="text"
@@ -169,7 +169,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
 
               <label className="tw-text-base tw-font-medium tw-capitalize">
                 {" "}
-                Total price (inc VAT)
+                Total price (inc VAT) (Optional)
                 <br />
                 <input
                   type="text"
@@ -219,7 +219,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-3 tw-mt-3">
           <label className="tw-text-base tw-font-medium tw-capitalize">
             {" "}
-            return policy <br />
+            return policy (Optional) <br />
             <select
               required
               className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -238,7 +238,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
 
           <label className="tw-text-base tw-font-medium tw-capitalize">
             {" "}
-            warranty <br />
+            warranty (Optional) <br />
             <select
               required
               className="tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2"
@@ -261,7 +261,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
 
           <label className="tw-text-base tw-font-medium tw-capitalize">
             {" "}
-            color <br />
+            color - separated by comma (,) (Optional) <br />
             <input
               type="text"
               placeholder="what is the color of this item?"
@@ -278,7 +278,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
 
           <label className="tw-text-base tw-font-medium tw-capitalize">
             {" "}
-            gender <br />
+            gender (Optional) <br />
             <select
               value={submitDetails.gender}
               onChange={(e) =>
@@ -308,7 +308,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
           <label className="tw-text-base tw-font-medium tw-capitalize">
             {" "}
             Keywords (SEO meta tags describes your store to search engine.
-            Separate each tag with comma (,)) <br />
+            Separate each tag with comma (,)) (Optional) <br />
             <Select
               mode="tags"
               placeholder="Please enter your keywords"
