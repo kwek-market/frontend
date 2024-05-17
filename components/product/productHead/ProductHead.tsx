@@ -13,6 +13,7 @@ import React, { Fragment, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
 import { v4 } from "uuid";
+import { separateWords } from "../../../helpers/helper";
 import styles from "./productHead.module.scss";
 
 const SampleNextArrow = function (props) {
@@ -61,7 +62,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
 
   const [numItem, incNumItem] = useState(1);
 
-  const [isProductColorSelected, setIsProductColorSelected] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<string>("");
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
@@ -184,21 +185,24 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <p className={styles.product_subtitle}>{product.shortDescription}</p>
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
-          <Radio.Group defaultValue='a' buttonStyle='solid'>
-            <Radio.Button
-              style={{
-                backgroundColor: `${product.color.toLowerCase()}`,
-                opacity: isProductColorSelected ? 0.8 : 1,
-                border: isProductColorSelected ? `2px solid magenta` : "0px",
-              }}
-              onClick={e => {
-                isProductColorSelected
-                  ? setIsProductColorSelected(false)
-                  : setIsProductColorSelected(true);
-              }}
-              className='tw-p-3'
-              value='a'
-            ></Radio.Button>
+          <Radio.Group
+            className={`${styles.product_options_color} tw-flex tw-space-x-4 tw-items-center`}
+            defaultValue='a'
+            buttonStyle='solid'
+          >
+            {separateWords(product.color).map((color, index) => (
+              <Radio.Button
+                key={v4()}
+                style={{
+                  backgroundColor: `${color.toLowerCase()}`,
+                  opacity: selectedColor === color ? 0.8 : 1,
+                  border: selectedColor === color ? `2px solid magenta` : "0px",
+                }}
+                onClick={e => setSelectedColor(color)}
+                className='tw-p-3 tw-w-5 tw-h-5'
+                value='a'
+              ></Radio.Button>
+            ))}
           </Radio.Group>
         </div>
         <div className={styles.product_option_size}>
