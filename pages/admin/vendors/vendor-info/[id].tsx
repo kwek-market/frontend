@@ -160,7 +160,7 @@ const Customer = () => {
             image='/images/pp.png'
             name={userData?.getUserById?.fullName}
             email={userData?.getUserById?.email}
-            phone={userData?.getUserById?.phoneNumber}
+            phone={userData?.getUserById?.sellerProfile[0]?.phoneNumber}
           />
         ) : null}
 
