@@ -23,8 +23,8 @@ const CustomerDetail = ({ image, name, email, phone }: CustomerDetailProps) => {
         <h2 className="tw-mb-0 tw-font-medium tw-text-2xl">{name}</h2>
         <div className=" tw-flex tw-gap-x-[10px] tw-items-center">
           {email}
-          <Divider type="vertical" />
-          {phone}
+          <Divider className="tw-bg-black" type="vertical" />
+          +{phone}
         </div>
       </div>
     </div>
