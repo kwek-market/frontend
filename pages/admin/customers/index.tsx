@@ -50,8 +50,6 @@ const Customers = () => {
     pageSize: PAGE_SIZE,
   });
 
-  console.log("ac data: ", activeCustomerData);
-
   const columns = [
     {
       title: "Name",
@@ -114,7 +112,7 @@ const Customers = () => {
           date_joined: new Intl.DateTimeFormat("en-US").format(new Date(d.dateJoined)),
           country: d.billingSet.city || "N/A",
           state: d.billingSet.state || "N/A",
-          amount_spent: d?.amount_set  || "N/A",
+          amount_spent: d?.totalSpent,
           phone: d.phoneNumber || d.billingSet?.contact || "N/A",
         };
       }),
@@ -131,7 +129,7 @@ const Customers = () => {
           date_joined: new Intl.DateTimeFormat("en-US").format(new Date(d.dateJoined)),
           country: d.billingSet.city || "N/A",
           state: d.billingSet.state || "N/A",
-          amount_spent: d?.amount_set  || "N/A",
+          amount_spent: d?.totalSpent,
           phone: d.phoneNumber || d.billingSet?.contact || "N/A",
         };
       }),

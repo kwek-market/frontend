@@ -329,6 +329,7 @@ export const GET_CUSTOMERS = /* GraphQL */ `
         phoneNumber
         dateJoined
         email
+        totalSpent
         billingSet {
           city
           state
