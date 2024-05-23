@@ -131,9 +131,7 @@ const OrderList = () => {
           />
         </div>
 
-        <div className=" tw-py-4">
-          <AdminTable data={data} columns={columns} />
-        </div>
+      z
       </div>
     </AdminLayout>
   );

@@ -466,6 +466,7 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
       orderId
       dateCreated
       user {
+        id
         fullName
         email
         phoneNumber

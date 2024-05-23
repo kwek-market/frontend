@@ -5,6 +5,7 @@ import { Empty } from "antd";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Load from "../../../../../components/Loader/Loader";
+import { OrderTable } from "../../../../../components/admin/orderTable/orderTable";
 import { useGetOrdersAdmin } from "../../../../../hooks/admin/orders";
 import { RootState } from "../../../../../store/rootReducer";
 
@@ -156,6 +157,12 @@ const OrderDetail = () => {
             </div>
           </div>
         ) : null}
+
+        <div className='tw-mt-10'>
+          <h2 className='tw-text-2xl tw-font-bold'>More Customer Orders </h2>
+
+          {order ? <OrderTable id={order?.user?.id as string} token={user?.token} /> : null}
+        </div>
       </div>
     </AdminLayout>
   );
