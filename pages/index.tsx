@@ -12,8 +12,8 @@ const Home = function ({ categories, dealsOfTheDay }) {
     <MainLayout>
       <Hero />
       <Features />
-      {dealsOfTheDay.objects.length > 0 ? (
-        <CategoryGrid title='Deals Of The day' timer cards={dealsOfTheDay.objects.slice(0, 4)} />
+      {dealsOfTheDay?.objects?.length > 0 ? (
+        <CategoryGrid title='Deals Of The day' timer cards={dealsOfTheDay?.objects?.slice(0, 4)} />
       ) : null}
       <div>
         {categories !== undefined &&
