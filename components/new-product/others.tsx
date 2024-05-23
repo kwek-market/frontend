@@ -74,7 +74,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         size: formValues[i].size,
         quantity: formValues[i].quantity,
         price: formValues[i].price,
-        discounted_price: formValues[i].discountPrice,
+        discounted_price: formValues[i].discountPrice || formValues[i].price,
         option_total_price: formValues[i].totalPrice,
       };
       val.push(JSON.stringify(newFormValues));
