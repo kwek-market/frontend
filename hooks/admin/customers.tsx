@@ -21,12 +21,12 @@ export function useGetCustomerTotalOrders(payload: IdAndTokenPayload) {
 
 export function useGetCustomerOrders(payload: IPagination & { token: string; id: string }) {
   return useQuery(
-    ["customer", "orders", payload.page, payload.pageSize, payload.id],
-    () => userFetcherWithAuth(GET_CUSTOMER_ORDERS, payload, payload.token),
+    ["customer", "orders", payload],
+    () =>
+      userFetcherWithAuth(GET_CUSTOMER_ORDERS, { ...payload, token: payload.token }, payload.token),
     {
       keepPreviousData: false,
       enabled: !!payload.id,
     }
   );
 }
-
