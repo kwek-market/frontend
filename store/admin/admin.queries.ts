@@ -329,6 +329,7 @@ export const GET_CUSTOMERS = /* GraphQL */ `
         phoneNumber
         dateJoined
         email
+        totalSpent
         billingSet {
           city
           state
@@ -465,9 +466,16 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
       orderId
       dateCreated
       user {
+        id
         fullName
         email
         phoneNumber
+        sellerProfile {
+          phoneNumber
+        }
+        billingSet {
+          contact
+        }
       }
       orderPrice
       orderPriceTotal
@@ -485,6 +493,7 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
             fullName
             email
             phoneNumber
+           
           }
         }
         price

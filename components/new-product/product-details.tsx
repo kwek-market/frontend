@@ -15,7 +15,7 @@ function ProductDetails({
       <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-3 tw-mt-3">
         <label className="tw-text-base tw-font-medium tw-capitalize tw-self-end">
           {" "}
-          Brand{" "}
+          Brand (Optional)
           <span className="tw-text-red-kwek100 tw-text-sm tw-italic tw-font-normal">
             (For unbranded items, use the hyphen - sign)
           </span>{" "}
@@ -37,7 +37,7 @@ function ProductDetails({
 
         <label className="tw-text-base tw-font-medium tw-capitalize tw-self-end">
           {" "}
-          Product weight (kg) <br />
+          Product weight (kg) (Optional) <br />
           <input
             type="text"
             placeholder="e.g 70"
@@ -76,7 +76,7 @@ function ProductDetails({
 
         <label className="tw-text-base tw-font-medium tw-capitalize tw-pt-3">
           {" "}
-          short description <br />
+          short description (Optional) <br />
           <textarea
             rows={4}
             required
