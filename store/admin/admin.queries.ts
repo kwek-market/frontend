@@ -470,6 +470,12 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
         fullName
         email
         phoneNumber
+        sellerProfile {
+          phoneNumber
+        }
+        billingSet {
+          contact
+        }
       }
       orderPrice
       orderPriceTotal
@@ -487,6 +493,7 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
             fullName
             email
             phoneNumber
+           
           }
         }
         price

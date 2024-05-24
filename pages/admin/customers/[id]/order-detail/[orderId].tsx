@@ -48,7 +48,9 @@ const OrderDetail = () => {
             image='/images/pp.png'
             name={order?.user?.fullName}
             email={order?.user?.email}
-            phone={order?.user?.phoneNumber}
+            phone={
+              order?.user?.sellerProfile?.[0]?.phoneNumber || order?.user?.billingSet?.[-1]?.contact
+            }
           />
         ) : null}
 
