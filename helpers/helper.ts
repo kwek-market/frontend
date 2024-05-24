@@ -120,3 +120,9 @@ export function getMonthDateRange(dayJsDate: dayjs.Dayjs) {
     end: currentMonthEnd.format("YYYY-MM-DD"),
   };
 }
+
+
+// make a function to separate a string into an array of words
+export function separateWords(text: string) {
+  return text.split(",");
+}

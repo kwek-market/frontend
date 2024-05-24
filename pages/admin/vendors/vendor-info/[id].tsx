@@ -1,17 +1,16 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import CustomerDetail from "@/components/admin/customers/customer-detail";
 import { FormHead } from "@/components/admin/form";
-import AdminTable from "@/components/table";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { Tabs } from "antd";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Load from "../../../../components/Loader/Loader";
+import { OrderTable } from "../../../../components/admin/orderTable/orderTable";
 import { PAGE_SIZE } from "../../../../constants/constants";
-import { useGetCustomerOrders, useGetCustomerTotalOrders } from "../../../../hooks/admin/customers";
+import { useGetCustomerTotalOrders } from "../../../../hooks/admin/customers";
 import {
   useGetCustomerAverageOrder,
   useGetCustomerTotalExpense,
@@ -45,17 +44,6 @@ const Customer = () => {
     error: sellerProductsError,
   } = useSellerProducts({ page, pageSize: PAGE_SIZE, token });
 
-  const {
-    data: customerOrders,
-    isLoading: isLoadingCustomerOrders,
-    error: customerError,
-  } = useGetCustomerOrders({
-    page,
-    pageSize: 5,
-    id: router.query.id as string,
-    token,
-  });
-
   const { data: customerTotalOrder, isLoading: isLoadingCustomerTotalOrders } =
     useGetCustomerTotalOrders({ id: customerId, token });
 
@@ -70,60 +58,10 @@ const Customer = () => {
 
   const { mutate: flagVendor } = useFlagVendor();
 
-  const columns = [
-    {
-      title: "Order Number",
-      dataIndex: "orderId",
-      key: "order_number",
-      render: (order_number, object) => (
-        <Link
-          href={"/admin/customers/" + router.query?.id + "/order-detail/" + "order-" + object?.id}
-        >
-          <a className=' tw-text-black-kwek100'>{order_number}</a>
-        </Link>
-      ),
-    },
-    {
-      title: "Order Date",
-      dataIndex: "dateCreated",
-      key: "order_date",
-      render: (date, object) => <div className=''>{new Date(date).toDateString()}</div>,
-    },
-    {
-      title: "No of Items",
-      dataIndex: "cartItems",
-      key: "no_of_items",
-      render: (cartItems, object) => <div className=''>{cartItems?.length}</div>,
-    },
-    {
-      title: "Status",
-      dataIndex: "deliveryStatus",
-      key: "status",
-    },
-    {
-      title: "Amount",
-      dataIndex: "orderPriceTotal",
-      key: "amount",
-      render: (amount, object) => <div className=''>${amount}</div>,
-    },
-    {
-      title: "Payment",
-      dataIndex: "payment",
-      key: "payment",
-      render: (paid, object) => <div className=''>{paid ? "Paid" : "Not Paid"}</div>,
-    },
-  ];
-
   const vendor = userData?.getUserById;
   const totalOrders = customerTotalOrder?.getCustomerOrders;
   const avgOrderValue = averageOrderValue?.getCustomerAverageOrder;
   const totalExpense = customerTotalExpense?.getCustomerTotalExpense;
-
-  const products = sellerProducts?.getSellerProducts?.objects;
-
-  const orders = customerOrders?.getCustomerOrdersPaginated?.objects;
-
-  const order = {};
 
   return (
     <AdminLayout>
@@ -160,7 +98,7 @@ const Customer = () => {
             image='/images/pp.png'
             name={userData?.getUserById?.fullName}
             email={userData?.getUserById?.email}
-            phone={userData?.getUserById?.phoneNumber}
+            phone={userData?.getUserById?.sellerProfile[0]?.phoneNumber}
           />
         ) : null}
 
@@ -288,24 +226,7 @@ const Customer = () => {
             onTabClick={key => setActiveKey(key)}
           >
             <TabPane tab='Order History' key='1'>
-              <AdminTable
-                data={orders}
-                columns={columns}
-                isLoading={isLoadingCustomerOrders}
-                numberOfPages={customerOrders?.getCustomerOrdersPaginated.pages}
-                page={customerOrders?.getCustomerOrdersPaginated.page}
-                goToNext={() => {
-                  if (customerOrders?.getCustomerOrdersPaginated?.hasNext)
-                    setOrderPage(orderPage + 1);
-                }}
-                goToPrev={() => {
-                  if (customerOrders?.getCustomerOrdersPaginated?.hasPrev)
-                    setOrderPage(orderPage - 1);
-                }}
-                goToPage={page => {
-                  setOrderPage(page);
-                }}
-              />
+              <OrderTable id={customerId as string} token={token} />
             </TabPane>
           </Tabs>
         </div>
