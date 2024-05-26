@@ -1,24 +1,43 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import { FormHead, FormItems } from "@/components/admin/form";
-import { InputField, RadioField, SelectField } from "@/components/input/textInput";
-import { CreateCategoryPayload, useCreateCategory } from "@/hooks/admin/category";
+import { InputField, RadioField } from "@/components/input/textInput";
+import {
+  CreateCategoryPayload,
+  useCreateCategory,
+  useGetAdminCategories,
+} from "@/hooks/admin/category";
 import { AdminLayout } from "@/layouts";
-import { RootState } from "@/store/rootReducer";
 import { CreateCategorySchema } from "@/validations/createCategory";
 import { message } from "antd";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FileInputLarge } from "../../../components/input/FileInputLarge";
+import { ProductCategory } from "../../../components/new-product";
+import { RootState } from "../../../store/rootReducer";
+
+// once a category is selected,
+// fetch the subcategories
+//  update the category array according to the number
 
 const AddCategory = () => {
   const {
     user: { token },
-    categories,
   } = useSelector((state: RootState) => state);
 
+  const [formData, setFormDta] = useState<CreateCategoryPayload>({
+    name: "",
+    visibility: "",
+    children: [],
+    category: "",
+    subcategory: "",
+  });
 
+  const { data: categories, isLoading: isLoadingCategories } = useGetAdminCategories({
+    token,
+    search: "",
+  });
 
-  const [formData, setFormDta] = useState<CreateCategoryPayload>({ name: "", visibility: "" });
+  console.log(categories);
 
   const handleRadio = (value: string) => {
     setFormDta({ ...formData, visibility: value });
@@ -29,14 +48,10 @@ const AddCategory = () => {
   async function publish(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
-    console.log("form values: ", formData);
-
     const formalPublishDate = formData.publishDate;
     if (formalPublishDate) {
       formData.publishDate = new Date(formalPublishDate) as any;
     }
-
-    console.log("🚀 ~~ publish ~~ formData:", formData);
 
     const parsed = await CreateCategorySchema.safeParseAsync(formData);
 
@@ -50,12 +65,11 @@ const AddCategory = () => {
         parsed.data.publishDate = formalPublishDate as any;
       }
 
-      createMut(parsed.data, {
+      createMut(parsed?.data, {
         onError: (err: Error) => {
           message.error(err.message);
         },
       });
-      console.log("🚀 ~~ publish ~~ parsed.data:", parsed.data);
     } catch (error) {
       message.error(error.message);
     }
@@ -84,28 +98,48 @@ const AddCategory = () => {
             value={formData.name}
             onChange={e => setFormDta({ ...formData, name: e.target.value })}
           />
-          <SelectField
-            id='parent'
-            label='Parent Category'
-            value={formData.parent}
-            onChange={e => {
-              if (e.target.value !== "select") {
-                setFormDta({ ...formData, parent: e.target.value });
-              } else {
-                delete formData.parent;
-                setFormDta(formData);
-              }
-            }}
-          >
-            <option defaultChecked value={"select"}>
-              Select..
-            </option>
-            {categories.categories.map(category => (
-              <option key={category.id} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </SelectField>
+
+          {categories?.categories ? (
+            <ProductCategory
+              submitDetails={formData as any}
+              setSubmitDetails={(data: any) => {
+                console.log("🚀 ~~ AddCategory ~~ data:", data);
+
+                if (data.subcategory) {
+                  setFormDta({ ...formData, parent: data.subcategory });
+                  return;
+                }
+
+                if (data.category) setFormDta({ ...formData, parent: data.category });
+              }}
+              doNotUseLocal={true}
+              categoriesFromParent={categories}
+              useNameAsValue
+              useAsSubCategory
+            />
+          ) : null}
+
+          {/* {selectedCategories?.child ? (
+            <SelectField
+              id='parent'
+              label='select a sub category'
+              value={formData.parent}
+              onChange={e => {
+                if (e.target.value !== "select") {
+                  setFormDta({ ...formData, parent: e.target.value });
+                } else {
+                  delete formData.parent;
+                  setFormDta(formData);
+                }
+              }}
+            >
+              {selectedCategories?.child?.map(category => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </SelectField>
+          ) : null} */}
         </FormItems>
 
         <FormHead>Visibility</FormHead>
