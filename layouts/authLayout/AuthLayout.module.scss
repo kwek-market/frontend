@@ -66,7 +66,7 @@
   .formContainer {
     @include flex(center, flex-start);
     flex-grow: 1;
-    height: 100%;
+    height: 100vh;
     padding: 10% 5% 0;
 
     @include respondMax("tablet") {
