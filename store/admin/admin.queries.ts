@@ -185,6 +185,10 @@ export const GET_CATEGORIES = /* GraphQL */ `
       category {
         id
       }
+      child {
+        id
+        name
+      }
     }
   }
 `;
@@ -493,7 +497,6 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
             fullName
             email
             phoneNumber
-           
           }
         }
         price
@@ -576,6 +579,12 @@ export const CREATE_ADMIN_COUPON = /* GraphQL */ `
     ) {
       message
       status
+      coupon {
+        code
+        value
+        validUntil
+        userList
+      }
     }
   }
 `;
@@ -757,6 +766,15 @@ export const CREATE_FLASH_SALE = /* GraphQL */ `
       productOptionId: $productOptionId
       token: $token
     ) {
+      message
+      status
+    }
+  }
+`;
+
+export const SEND_EMAILS = /* GraphQL */ `
+  mutation sendEmail($subject: String!, $template: String!, $token: String!, $userList: [String]!) {
+    sendEmailToUsers(subject: $subject, template: $template, token: $token, userList: $userList) {
       message
       status
     }

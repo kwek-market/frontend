@@ -159,7 +159,7 @@ export type UploadProductType = {
 };
 
 export type UploadProductProps = {
-  submitDetails: UploadProductType;
+  submitDetails: UploadProductType & Record<any, any>;
   setSubmitDetails: React.Dispatch<React.SetStateAction<UploadProductType>>;
 };
 
