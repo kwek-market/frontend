@@ -185,6 +185,10 @@ export const GET_CATEGORIES = /* GraphQL */ `
       category {
         id
       }
+      child {
+        id
+        name
+      }
     }
   }
 `;
@@ -493,7 +497,6 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
             fullName
             email
             phoneNumber
-           
           }
         }
         price

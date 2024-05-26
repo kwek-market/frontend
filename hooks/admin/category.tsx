@@ -22,6 +22,9 @@ export interface CreateCategoryPayload {
   publishDate?: string;
   visibility: string;
   icon?: string;
+  category?: "";
+  subcategory?: "";
+  children?: Record<any, any>[];
 }
 
 type UpdatePayload = {
