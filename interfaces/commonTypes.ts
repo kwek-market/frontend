@@ -289,7 +289,6 @@ export type PlaceOrder = {
   deliveryMethod: string;
   paymentMethod: string;
   paymentRef?: string;
-  productOptionsId: string[];
   token: string;
 };
 

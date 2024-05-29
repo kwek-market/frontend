@@ -6,7 +6,6 @@ export const PLACEORDER = /* GRAPHQL */ `
     $deliveryMethod: String!
     $paymentMethod: String!
     $paymentRef: String
-    $productOptionsId: [String]!
     $token: String!
   ) {
     placeOrder(
@@ -16,7 +15,6 @@ export const PLACEORDER = /* GRAPHQL */ `
       deliveryMethod: $deliveryMethod
       paymentMethod: $paymentMethod
       paymentRef: $paymentRef
-      productOptionsId: $productOptionsId
       token: $token
     ) {
         status
