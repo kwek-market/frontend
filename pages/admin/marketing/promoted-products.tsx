@@ -30,36 +30,43 @@ const PromotedProducts = () => {
       title: "Vendor",
       dataIndex: "user",
       key: "vendor",
+      render: user => <div>{user.fullName}</div>,
     },
     {
       title: "Days Active",
       dataIndex: "promo",
       key: "days_active",
+      render: promo => <div>{promo?.[0].days}</div>,
     },
     {
       title: "End Date",
       dataIndex: "promo",
       key: "end_date",
+      render: promo => <div>{new Date(promo?.[0]?.endDate).toDateString()}</div>,
     },
     {
       title: "Amount",
       dataIndex: "promo",
       key: "amount",
+      render: promo => <div>{promo?.[0]?.amount}</div>,
     },
     {
       title: "Balance",
       dataIndex: "promo",
       key: "balance",
+      render: promo => <div>{promo?.[0]?.balance}</div>,
     },
     {
       title: "Reach",
       dataIndex: "promo",
       key: "reach",
+      render: promo => <div>{promo?.[0]?.reach}</div>,
     },
     {
       title: "No of Clicks",
       dataIndex: "promo",
       key: "linkClicks",
+      render: promo => <div>{promo?.[0]?.linkClicks}</div>,
     },
   ];
 
