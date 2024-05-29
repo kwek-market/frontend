@@ -368,10 +368,16 @@ export const GET_ALL_ORDERS = /* GraphQL */ `
         orderPrice
         dateCreated
         paid
+        paymentMethod
         user {
           fullName
           firstName
           lastName
+        }
+        doorStep {
+          city
+          address
+          state
         }
       }
       page
