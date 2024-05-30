@@ -8,7 +8,7 @@ export const getCouponEmailTemplate = (options: {
     <html>
       <head>
         <meta charset="UTF-8" />
-        <title>Kwek Market Coupon</title>
+        <title>Kwekmarket Coupon</title>
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -26,13 +26,13 @@ export const getCouponEmailTemplate = (options: {
           .header {
             text-align: center;
             padding: 10px 0;
-            color: #ff4500;
+            color: #AF1328;
           }
           .coupon-code {
             text-align: center;
             font-size: 24px;
             font-weight: bold;
-            color: #ff4500;
+            color: #AF1328;
             margin: 20px 0;
           }
           .button {
@@ -41,7 +41,7 @@ export const getCouponEmailTemplate = (options: {
           }
           .button a {
             text-decoration: none;
-            background-color: #ff4500;
+            background-color: #AF1328;
             color: #fff;
             padding: 10px 20px;
             border-radius: 5px;
@@ -57,11 +57,11 @@ export const getCouponEmailTemplate = (options: {
       <body>
         <div class="container">
           <div class="header">
-            <h1>Exclusive Offer Just for You! Save Big at Kwek Market</h1>
+            <h1>Exclusive Offer Just for You! Save Big at Kwekmarket</h1>
           </div>
           <p>Hi {{user.full_name}},</p>
           <p>
-            We hope you are having a wonderful day! At Kwek Market, we appreciate your loyalty and
+            We hope you are having a wonderful day! At Kwekmarket, we appreciate your loyalty and
             support. To show our gratitude, we have a special offer just for you.
           </p>
           <p><strong>🎉 Enjoy ${options.discount}% Off Your Next Purchase! 🎉</strong></p>
@@ -69,7 +69,7 @@ export const getCouponEmailTemplate = (options: {
           <p><strong>How to Redeem:</strong></p>
           <ol>
             <li>
-              Visit <a href="http://www.kwekmarket.com">Kwek Market</a> and add your favorite items
+              Visit <a href="http://www.kwekmarket.com">Kwekmarket</a> and add your favorite items
               to your cart.
             </li>
             <li>At checkout, enter the coupon code <strong>${options.code}</strong>.</li>
@@ -84,7 +84,7 @@ export const getCouponEmailTemplate = (options: {
             number].
           </p>
           <p>Happy Shopping!</p>
-          <p>Best regards,<br />The Kwek Market Team</p>
+          <p>Best regards,<br />The Kwekmarket Team</p>
           <div class="footer">
             <p>
               <em
