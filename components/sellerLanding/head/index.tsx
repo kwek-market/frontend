@@ -10,7 +10,8 @@ const SellerLandingHead = () => {
   const router = useRouter();
 
   useLayoutEffect(() => {
-    if (user.token) {
+    if (user.token && user?.user?.sellerProfile?.length > 0) {
+
       router.push("/seller/profile");
     }
   }, []);
