@@ -87,7 +87,7 @@ const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerP
           </div>
         </div>
 
-        {cards && (
+        {/* {cards && (
           <>
             <div className={styles.cards}>
               {cards.slice(0, 3).map((card: any) => (
@@ -98,7 +98,7 @@ const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerP
             </div>
             <Slider element={cards.map(card => ({ element: <Card card={card} /> }))} />
           </>
-        )}
+        )} */}
 
         <>
           <div className={styles.banners}>
