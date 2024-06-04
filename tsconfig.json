@@ -25,6 +25,6 @@
       "@store/*": ["store/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "seeds/countries.js"],
   "exclude": ["node_modules"]
 }

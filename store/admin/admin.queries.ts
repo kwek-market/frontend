@@ -193,6 +193,31 @@ export const GET_CATEGORIES = /* GraphQL */ `
   }
 `;
 
+export const GET_CATEGORY = /* GraphQL */ `
+  query category($id: String!) {
+    category(id: $id) {
+      id
+      name
+      icon
+      visibility
+      publishDate
+      category {
+        id
+      }
+      child {
+        id
+        name
+        icon
+        visibility
+        publishDate
+        child {
+          id
+        }
+      }
+    }
+  }
+`;
+
 export const DELETE_CATEGORY = /* GraphQL */ `
   mutation deleteCategory($id: String!) {
     deleteCategory(id: $id) {

@@ -5,13 +5,14 @@ import {
   VerifyBankAccount,
   VerifyBVN,
 } from "@/components/verification";
+import withAuth from "@/hooks/withAuth";
 import VerificationLayout from "@/layouts/seller/VerificationLayout";
 import { RootState } from "@/store/rootReducer";
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Steps, Step, StepComponentProps } from "react-step-builder";
 import { useRouter } from "next/router";
-import withAuth from "@/hooks/withAuth";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Step, StepComponentProps, Steps } from "react-step-builder";
+import VerifiedModal from "../../../components/verification/VerifiedModal";
 
 function index(props: StepComponentProps) {
   const { seller } = useSelector((state: RootState) => state);
@@ -25,7 +26,7 @@ function index(props: StepComponentProps) {
   useEffect(() => {
     // a verified seller shouldn't be able to access this page
     if (seller.seller.sellerIsVerified) {
-      router.push("/seller/profile");
+      // router.push("/seller/profile");
     }
   }, [seller.seller.sellerIsVerified]);
 
@@ -45,14 +46,15 @@ function index(props: StepComponentProps) {
   return (
     <VerificationLayout>
       <Steps config={config}>
-        <Step title="Vendor's Policy" component={VendorsPolicy} />
-        <Step title="Upload a Valid ID" component={ValidID} />
-        <Step title="Verify BVN" component={VerifyBVN} />
         <Step
-          title="Verify Bank Account"
-          component={VerifyBankAccount}
-          submit={submitDetails}
+          title='Complete Verification'
+          component={VerifiedModal}
+          // submit={submitDetails}
         />
+        <Step title="Vendor's Policy" component={VendorsPolicy} />
+        <Step title='Upload a Valid ID' component={ValidID} />
+        <Step title='Verify BVN' component={VerifyBVN} />
+        <Step title='Verify Bank Account' component={VerifyBankAccount} submit={submitDetails} />
       </Steps>
     </VerificationLayout>
   );

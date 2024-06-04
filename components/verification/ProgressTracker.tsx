@@ -1,14 +1,13 @@
 import React, { Fragment } from "react";
 import { NavigationComponentProps } from "react-step-builder";
-import Style from "./tracker.module.scss";
 
 interface progressTrackerProps extends NavigationComponentProps {}
 
-const ProgressTracker: React.FC<progressTrackerProps> = (props) => {
+const ProgressTracker: React.FC<progressTrackerProps> = props => {
   const { allSteps, current: currentStep, size: stepLength } = props;
 
   return (
-    <section className="tw-bg-white-100 tw-py-10 tw-px-0 md:tw-px-[10rem] tw-flex tw-justify-around tw-items-center tw-rounded-md tw-overflow-auto">
+    <section className='tw-bg-white-100 tw-py-10 tw-px-0 md:tw-px-[10rem] tw-flex tw-justify-around tw-items-center tw-rounded-md tw-overflow-auto'>
       {allSteps.map(({ title }, index) => {
         const currentProgress = currentStep - 1 > index;
 
@@ -20,27 +19,23 @@ const ProgressTracker: React.FC<progressTrackerProps> = (props) => {
           : currentStep === index + 1
           ? "tw-text-black"
           : "tw-text-gray-kwek400";
-        const barTheme = currentProgress
-          ? "tw-border-green-success"
-          : "tw-border-gray-kwek400";
+        const barTheme = currentProgress ? "tw-border-green-success" : "tw-border-gray-kwek400";
 
         return (
           <Fragment key={title}>
-            <div className="tw-flex tw-flex-col tw-items-center tw-text-center tw-relative tw-mb-5">
-              <div
-                className={`tw-border-solid tw-rounded-full tw-h-7 tw-w-7 ${iconTheme} `}
-              >
+            <div className='tw-flex tw-flex-col tw-items-center tw-text-center tw-relative tw-mb-5'>
+              <div className={`tw-border-solid tw-rounded-full tw-h-7 tw-w-7 ${iconTheme} `}>
                 {currentProgress && (
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="tw-w-7 tw-h-7"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='tw-w-7 tw-h-7'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
                   >
                     <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
+                      fillRule='evenodd'
+                      d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
+                      clipRule='evenodd'
                     />
                   </svg>
                 )}

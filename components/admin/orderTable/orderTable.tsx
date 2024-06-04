@@ -31,7 +31,7 @@ export const OrderTable = ({ token, id }: { token?: string; id?: string }) => {
       key: "order_number",
       render: (order_number, object) => (
         <Link
-          href={"/admin/customers/" + router.query?.id + "/order-detail/" + "order-" + object?.id}
+          href={"/admin/customers/" + router.query?.id + "/order-detail/" +  object?.id}
         >
           <a className=' tw-text-black-kwek100'>{order_number}</a>
         </Link>

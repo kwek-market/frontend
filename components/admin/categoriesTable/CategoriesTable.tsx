@@ -1,29 +1,16 @@
-import Load from "@/components/Loader/Loader";
-import BreadCrumbs from "@/components/admin/breadcrumbs";
-import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
-import { useDeleteCategory, useGetAdminCategories } from "@/hooks/admin/category";
-import { AdminLayout } from "@/layouts";
+import { useDeleteCategory } from "@/hooks/admin/category";
 import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Dropdown, Menu } from "antd";
 import Link from "next/link";
-import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useDebounce } from "use-debounce";
 
-const CategoryList = () => {
-  const [search, setSearch] = useState("");
-  const [searchDebouncedValue] = useDebounce(search, 600);
-
+const CategoryTable = ({ data }: { data: Record<any, any>[] }) => {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
 
-  const { data: categoryData, isFetching } = useGetAdminCategories({
-    search: searchDebouncedValue,
-    token: token,
-  });
   const { mutate: deleteMut } = useDeleteCategory();
 
   function deleteCategory(id: string) {
@@ -92,60 +79,11 @@ const CategoryList = () => {
     },
   ];
 
-  if (isFetching) {
-    return (
-      <AdminLayout>
-        <BreadCrumbs
-          items={[
-            { name: "Dashboard", path: "/admin/dashboard" },
-            {
-              name: "Manage Categories",
-              path: "/admin/categories/category-list",
-            },
-            { name: "Category List", path: "/admin/categories/category-list" },
-          ]}
-          header='Category List'
-          buttonPath='/admin/categories/add-category'
-          buttonText='New Category'
-        />
-
-        <div className='tw-mt-16'>
-          <Search placeholder='Search' value={search} onChange={e => setSearch(e.target.value)} />
-        </div>
-        <Load />
-      </AdminLayout>
-    );
-  }
-
   return (
-    <AdminLayout>
-      <BreadCrumbs
-        items={[
-          { name: "Dashboard", path: "/admin/dashboard" },
-          {
-            name: "Manage Categories",
-            path: "/admin/categories/category-list",
-          },
-          { name: "Category List", path: "/admin/categories/category-list" },
-        ]}
-        header='Category List'
-        buttonPath='/admin/categories/add-category'
-        buttonText='New Category'
-      />
-
-      <div className='tw-mt-16'>
-        <Search placeholder='Search' value={search} onChange={e => setSearch(e.target.value)} />
-      </div>
-
-      {isFetching ? (
-        <Load />
-      ) : (
-        <div className=' tw-pt-4'>
-          <AdminTable data={categoryData?.categories || []} columns={columns} />
-        </div>
-      )}
-    </AdminLayout>
+    <div className=' tw-pt-4'>
+      <AdminTable data={data || []} columns={columns} />
+    </div>
   );
 };
 
-export default CategoryList;
+export default CategoryTable;

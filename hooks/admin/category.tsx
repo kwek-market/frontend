@@ -3,6 +3,7 @@ import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   GET_CATEGORIES,
+  GET_CATEGORY,
   UPDATE_CATEGORY,
 } from "@/store/admin/admin.queries";
 import { CreateCategoryType, UpdateCategoryType } from "@/validations/createCategory";
@@ -38,6 +39,14 @@ type UpdatePayload = {
 export const useGetAdminCategories = (payload: SearchProps) => {
   return useQuery([`admin-categories`, payload.search], () =>
     userFetcherWithAuth(GET_CATEGORIES, payload, payload.token)
+  );
+};
+
+export const useGetAdminCategory = (payload: { id: string; token: string }) => {
+  return useQuery(
+    [`admin-category`, payload.id],
+    () => userFetcherWithAuth(GET_CATEGORY, payload, payload.token),
+    { enabled: !!payload.id }
   );
 };
 

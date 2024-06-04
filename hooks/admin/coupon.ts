@@ -38,6 +38,7 @@ export const useAdminCreateCoupon = (token: string, onSuccess?: (data: any) => v
             userList,
           });
 
+          queryClient.invalidateQueries("admin-coupon");
           router.push("/admin/marketing/coupon-list");
         }
 
