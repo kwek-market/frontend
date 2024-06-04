@@ -26,13 +26,13 @@ export const getCouponEmailTemplate = (options: {
           .header {
             text-align: center;
             padding: 10px 0;
-            color: #AF1328;
+            color: #af1328;
           }
           .coupon-code {
             text-align: center;
             font-size: 24px;
             font-weight: bold;
-            color: #AF1328;
+            color: #af1328;
             margin: 20px 0;
           }
           .button {
@@ -41,7 +41,7 @@ export const getCouponEmailTemplate = (options: {
           }
           .button a {
             text-decoration: none;
-            background-color: #AF1328;
+            background-color: #af1328;
             color: #fff;
             padding: 10px 20px;
             border-radius: 5px;
@@ -98,3 +98,78 @@ export const getCouponEmailTemplate = (options: {
     </html>
   `;
 };
+
+export const getVendorApplicationEmail = () => /* HTML */ `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Vendor Application Under Review</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        .header {
+          background-color: #af1328;
+          color: #ffffff;
+          padding: 20px;
+          text-align: center;
+        }
+        .header h1 {
+          margin: 0;
+        }
+        .content {
+          padding: 20px;
+          color: #333333;
+        }
+        .content p {
+          line-height: 1.6;
+        }
+        .footer {
+          background-color: #f4f4f4;
+          color: #666666;
+          padding: 10px;
+          text-align: center;
+          font-size: 12px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>Kwekmarket</h1>
+        </div>
+        <div class="content">
+          <p>Dear {{user.fullName}},</p>
+          <p>
+            Thank you for submitting your application to become a vendor with us. We are pleased to
+            inform you that your application is currently being reviewed by our team.
+          </p>
+          <p>
+            We appreciate your interest in partnering with Kwekmarket and will get back to you
+            shortly with the next steps. If we need any additional information, we will reach out to
+            you.
+          </p>
+          <p>Thank you for your patience and understanding.</p>
+          <p>Best regards,</p>
+          <p>
+            Kwekmarket<br />
+            [Contact Information]
+          </p>
+        </div>
+        <div class="footer">&copy; ${new Date().getFullYear()} Kwekmarket. All rights reserved.</div>
+      </div>
+    </body>
+  </html> `;
