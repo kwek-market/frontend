@@ -1,11 +1,10 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Footer.module.scss";
 
-import Form from "./SubscribeForm";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
+import Form from "./SubscribeForm";
 
 const Component = function () {
   const { seller, user } = useSelector((state: RootState) => state);
@@ -114,8 +113,10 @@ const Component = function () {
 
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
-              <Link href='/sell'>
-                <a className={styles.nav_link}>Sell On Kwek</a>
+              <Link href='/seller/profile'>
+                <a className={styles.nav_link}>
+                  {user?.user?.isSeller ? "Enter Vendor profile" : "Sell on Kwek"}
+                </a>
               </Link>
             </li>
             <li className={styles.nav_item}>
