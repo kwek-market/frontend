@@ -99,7 +99,7 @@ const OrderDetail = () => {
                     image={item?.product?.image[0]?.imageUrl}
                     name={item?.product?.productTitle}
                     qty={item?.quantity}
-                    amount={item?.price * item?.quantity}
+                    amount={item?.price}
                     size={item?.product?.size}
                     color={item?.product?.color}
                     brand={item?.product?.brand}
@@ -110,7 +110,7 @@ const OrderDetail = () => {
                 ))}
               </div>
 
-              <div className=' tw-grid tw-grid-cols-2 tw-gap-x-8 tw-text-[#574240] tw-mt-8'>
+              <div className=' tw-grid tw-gap-y-8 md:tw-grid-cols-2 tw-gap-x-8 tw-text-[#574240] tw-mt-8'>
                 <div className=' tw-bg-review tw-rounded-2xl tw-p-8'>
                   <h2 className='tw-mb-0 tw-text-2xl tw-font-semibold tw-text-[#574240]'>
                     Payment Information
