@@ -90,6 +90,7 @@ const PromotedProducts = () => {
         <AdminTable
           data={promotedProducts}
           columns={columns}
+          isLoading={isLoading}
           numberOfPages={data?.getPromotedProductsPaginated.pages}
           page={data?.getPromotedProductsPaginated.page}
           goToNext={() => {
