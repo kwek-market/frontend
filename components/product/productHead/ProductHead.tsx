@@ -186,7 +186,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
           <Radio.Group
-            className={`${styles.product_options_color} tw-flex tw-space-x-4 tw-items-center`}
+            className={`${styles.product_options_color} tw-flex tw-space-x-4 tw-items-center tw-border-r-2`}
             defaultValue='a'
             buttonStyle='solid'
           >
@@ -199,7 +199,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                   border: selectedColor === color ? `2px solid magenta` : "0px",
                 }}
                 onClick={e => setSelectedColor(color)}
-                className='tw-p-3 tw-w-5 tw-h-5'
+                className='tw-p-3 tw-w-5 tw-h-5 tw-border-4'
                 value='a'
               ></Radio.Button>
             ))}
