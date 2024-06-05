@@ -15,7 +15,7 @@ const MenuBox = function ({ icon, title, description, link }: MenuBoxProps) {
       <a>
         <span className={style.menuBox}>
           <span>
-            <i className={`fas ${icon} icon tw-text-black-kwek100`} />
+            <i className={`fas ${icon} icon tw-text-gray-kwek900`} />
           </span>
           <span style={{ paddingLeft: '12px' }}>
             <span className={style.title}>{title}</span>
