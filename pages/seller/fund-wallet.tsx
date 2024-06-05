@@ -6,7 +6,7 @@ import { MainLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function fundWallet() {
@@ -29,6 +29,8 @@ export default function fundWallet() {
         transactionId: transaction_id as string,
         paymentRef: tx_ref as string,
       };
+      console.log("🚀 ~~ useEffect ~~ payload:", payload);
+
       post(payload, {
         onSuccess: () => {
           mutate(
@@ -38,7 +40,7 @@ export default function fundWallet() {
               token,
             },
             {
-              onSuccess: (data) => {
+              onSuccess: data => {
                 message.success(data.fundWallet.message);
                 router.push("/seller/profile");
               },
@@ -61,7 +63,7 @@ export default function fundWallet() {
     <MainLayout>
       <div>
         {isLoading && <Load />}
-        <p className="tw-uppercase tw-font-bold tw-text-center tw-text-2xl">
+        <p className='tw-uppercase tw-font-bold tw-text-center tw-text-2xl'>
           funding your wallet...
         </p>
       </div>

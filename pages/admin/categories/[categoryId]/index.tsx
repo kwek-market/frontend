@@ -31,13 +31,15 @@ const Category = () => {
       <BreadCrumbs
         items={[
           { name: "Dashboard", path: "/admin/dashboard" },
-          { name: "Categories", path: "/admin/categories" },
+          { name: "Categories", path: "/admin/categories/category-list" },
           {
             name: router.query?.id as string,
             path: "/admin/categories/" + router.query?.id,
           },
         ]}
         header='Category Details'
+        buttonPath='/admin/categories/category-list'
+        buttonText='Back'
       />
 
       <div className=' tw-mt-12 tw-font-poppins'>

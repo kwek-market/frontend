@@ -3,14 +3,38 @@ import { Select } from "antd";
 import { SelectValue } from "antd/lib/select";
 import React, { useState } from "react";
 
+const sizes = [
+  { id: 1, name: "S" },
+  { id: 2, name: "M" },
+  { id: 3, name: "L" },
+  { id: 4, name: "XL" },
+  { id: 5, name: "XXL" },
+];
+
 function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const [seoKeywords, setSeoKeywords] = useState([]);
+  const [size, setSize] = useState(sizes[0].name);
   const [formValues, setFormValues] = useState([
-    { size: "", quantity: "", price: 0, discountPrice: 0, totalPrice: 0 },
+    {
+      size: "",
+      quantity: "",
+      price: 0,
+      discountPrice: 0,
+      totalPrice: 0,
+      sizePostfix: sizes[0].name,
+    },
   ]);
 
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormValues = [...formValues];
+
+    // if(e.target.name === 'sizePostfix') {
+
+    //   newFormValues[i][e.target.name] = e.target.value;
+    //   setFormValues(newFormValues);
+    //   return
+    // }
+
     newFormValues[i][e.target.name] = e.target.value;
     setFormValues(newFormValues);
   };
@@ -18,7 +42,14 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const addNewVariant = () => {
     setFormValues([
       ...formValues,
-      { size: "", quantity: "", price: 0, discountPrice: 0, totalPrice: 0 },
+      {
+        size: "",
+        quantity: "",
+        price: 0,
+        discountPrice: 0,
+        totalPrice: 0,
+        sizePostfix: sizes[0].name,
+      },
     ]);
   };
 
@@ -76,13 +107,13 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
       const newFormValues = {
-        size: formValues[i].size,
+        size: formValues[i].size ? `${formValues[i].size} ${formValues[i].sizePostfix}` : "",
         quantity: formValues[i].quantity,
         price: formValues[i].price,
-        discounted_price: formValues[i].discountPrice || formValues[i].price,
+        discounted_price: formValues[i].discountPrice,
         option_total_price: submitDetails.chargeFivePercentVat
           ? 0.05 * Number(formValues[formValues.length - 1].price) +
-            Number(formValues[formValues.length - 1].price) 
+            Number(formValues[formValues.length - 1].price)
           : Number(formValues[formValues.length - 1].price),
       };
       val.push(JSON.stringify(newFormValues));
@@ -123,14 +154,30 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                 {" "}
                 size (Optional)
                 <br />
-                <input
-                  type='text'
-                  placeholder='0'
-                  name='size'
-                  value={element.size || ""}
-                  onChange={e => handleChange(index, e)}
-                  className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-                />
+                <div className=' tw-flex tw-space-x-2 tw-items-center  '>
+                  <input
+                    type='tel'
+                    placeholder='0'
+                    name='size'
+                    value={element.size || ""}
+                    onChange={e => handleChange(index, e)}
+                    className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
+                  />
+                  <select
+                    placeholder='Select Main Category'
+                    className='tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
+                    name='sizePostfix'
+                    onChange={e => {
+                      handleChange(index, e as any);
+                    }}
+                  >
+                    {sizes.map(size => (
+                      <option key={size.id} value={size.name}>
+                        {size.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </label>
 
               <label className='tw-text-base tw-font-medium tw-capitalize'>
