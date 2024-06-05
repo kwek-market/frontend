@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
-import Settings from "../settings/Settings";
-import Wallet from "../wallet/Wallet";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import Home from "../home/Home";
 import Order from "../orders/Order";
 import Product from "../product/Product";
 import Promotions from "../promotions/Promotions";
-import Home from "../home/Home";
 import Reviews from "../reviews/Reviews";
-import { useRouter } from "next/router";
+import Settings from "../settings/Settings";
+import Wallet from "../wallet/Wallet";
 
 const { TabPane } = Tabs;
 
 function Container({ children }: { children: React.ReactNode }) {
   return (
-    <section className="tw-p-3 md:tw-px-14 lg:tw-px-20 tw-bg-red-300 tw-bg-opacity-10 ">
+    <section className='tw-p-3 md:tw-px-14 lg:tw-px-20 tw-bg-red-300 tw-bg-opacity-10 '>
       {children}
     </section>
   );
@@ -33,45 +33,45 @@ function Content() {
   }, [router.query]);
   const [activeKey, setActiveKey] = useState("1");
   return (
-    <div className="tw-py-3">
+    <div className='tw-py-3'>
       <Tabs
         animated
-        tabBarStyle={{ margin: "0 3rem", borderColor: "red" }}
-        className="sellprof"
+        tabBarStyle={{ margin: "0px", borderColor: "red" }}
+        className='sellprof'
         activeKey={activeKey}
-        onTabClick={(key) => setActiveKey(key)}
+        onTabClick={key => setActiveKey(key)}
       >
-        <TabPane tab="Home" key="1">
+        <TabPane tab='Home' key='1'>
           <Container>
             <Home />
           </Container>
         </TabPane>
-        <TabPane tab="Products" key="2">
+        <TabPane tab='Products' key='2'>
           <Container>
             <Product />
           </Container>
         </TabPane>
-        <TabPane tab="Order" key="3">
+        <TabPane tab='Order' key='3'>
           <Container>
             <Order />
           </Container>
         </TabPane>
-        <TabPane tab="Reviews" key="4">
+        <TabPane tab='Reviews' key='4'>
           <Container>
             <Reviews />
           </Container>
         </TabPane>
-        <TabPane tab="Promotions" key="5">
+        <TabPane tab='Promotions' key='5'>
           <Container>
             <Promotions />
           </Container>
         </TabPane>
-        <TabPane tab="Settings" key="6">
+        <TabPane tab='Settings' key='6'>
           <Container>
             <Settings />
           </Container>
         </TabPane>
-        <TabPane tab="Wallet" key="7">
+        <TabPane tab='Wallet' key='7'>
           <Container>
             <Wallet />
           </Container>
