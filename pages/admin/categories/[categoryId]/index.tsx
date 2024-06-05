@@ -38,6 +38,8 @@ const Category = () => {
           },
         ]}
         header='Category Details'
+        buttonPath='/admin/category-list'
+        buttonText='Back'
       />
 
       <div className=' tw-mt-12 tw-font-poppins'>

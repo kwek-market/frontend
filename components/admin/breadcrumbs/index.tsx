@@ -26,7 +26,7 @@ const BreadCrumbs = ({
 }: BreadCrumbsProps) => {
   return (
     <div>
-      <div className='tw-overflow-scroll tw-flex tw-text-breadcrumb tw-font-poppins tw-tracking-[0.2px] tw-gap-x-[0.1rem] md:tw-gap-x-4'>
+      <div className='hide-scrollbar tw-overflow-x-scroll tw-flex tw-text-breadcrumb tw-font-poppins tw-tracking-[0.2px] tw-gap-x-[0.1rem] md:tw-gap-x-4'>
         {items.map((item, index) => (
           <Link href={item.path} key={index}>
             <a className='tw-flex tw-gap-x-[0.1rem] md:tw-gap-x-4 tw-text-breadcrumb'>
