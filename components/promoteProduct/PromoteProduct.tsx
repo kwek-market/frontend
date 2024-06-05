@@ -1,17 +1,17 @@
-import React, { Fragment, useState } from "react";
-import Image from "next/image";
-import styles from "./PromoteProduct.module.scss";
-import useProduct from "@/hooks/useProduct";
-import Load from "../Loader/Loader";
-import ErrorInfo from "../Loader/ErrorInfo";
-import StarRatingComponent from "react-star-rating-component";
 import useAvgRating from "@/hooks/useAvgRating";
-import Modal from "antd/lib/modal/Modal";
-import { message } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import usePayment from "@/hooks/usePayment";
 import useGetSellerWallet from "@/hooks/useGetSellerWallet";
+import usePayment from "@/hooks/usePayment";
+import useProduct from "@/hooks/useProduct";
+import { RootState } from "@/store/rootReducer";
+import { message } from "antd";
+import Modal from "antd/lib/modal/Modal";
+import Image from "next/image";
+import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
+import StarRatingComponent from "react-star-rating-component";
+import ErrorInfo from "../Loader/ErrorInfo";
+import Load from "../Loader/Loader";
+import styles from "./PromoteProduct.module.scss";
 
 type PromoteData = {
   range: number;
@@ -25,11 +25,7 @@ type PromoteProductProps = {
   setPromoteData: React.Dispatch<React.SetStateAction<PromoteData>>;
 };
 
-const PromoteProduct = function ({
-  id,
-  promoteData,
-  setPromoteData,
-}: PromoteProductProps) {
+const PromoteProduct = function ({ id, promoteData, setPromoteData }: PromoteProductProps) {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
@@ -54,7 +50,9 @@ const PromoteProduct = function ({
       token,
     };
     mutate(payload, {
-      onSuccess: (data) => {
+      onSuccess: data => {
+        console.log("🚀 ~~ addMoneyToWallet ~~ data:", data);
+
         //message.success(data.paymentLink.message);
       },
       onError: (err: any) => {
@@ -80,52 +78,47 @@ const PromoteProduct = function ({
   return (
     <Fragment>
       <Modal
-        title="Add Money"
+        title='Add Money'
         visible={isModalVisible}
         onOk={addMoneyToWallet}
         onCancel={handleCancel}
-        okText="Add Money"
+        okText='Add Money'
       >
-        <div className="">
-          <label htmlFor="amount" className="">
+        <div className=''>
+          <label htmlFor='amount' className=''>
             Amount
             <br />
             <input
-              id="amount"
-              type="number"
-              placeholder="200"
-              className=""
+              id='amount'
+              type='number'
+              placeholder='200'
+              className=''
               value={amount}
-              onChange={(e) => setAmount(e.target.valueAsNumber)}
+              onChange={e => setAmount(e.target.valueAsNumber)}
             />
           </label>
         </div>
       </Modal>
       <div className={styles.promote}>
-        <div className="tw-flex-[2]">
+        <div className='tw-flex-[2]'>
           <form className={styles.form}>
             <div className={styles.board}>
               <h4 className={styles.duration}>Duration</h4>
               <div className={styles.key}>
-                <Image
-                  src="/images/board.png"
-                  width="20"
-                  height="20"
-                  className={styles.img}
-                />
+                <Image src='/images/board.png' width='20' height='20' className={styles.img} />
               </div>
             </div>
             <div className={styles.parallel}>
-              <div className="">
-                <label htmlFor="day" className={styles.count}>
+              <div className=''>
+                <label htmlFor='day' className={styles.count}>
                   Days
                 </label>
                 <input
-                  id="day"
-                  placeholder="Day"
+                  id='day'
+                  placeholder='Day'
                   type={"number"}
                   value={promoteData.days}
-                  onChange={(e) =>
+                  onChange={e =>
                     setPromoteData({
                       ...promoteData,
                       days: e.target.valueAsNumber,
@@ -153,17 +146,10 @@ const PromoteProduct = function ({
             <div className={styles.boarder}>
               <h4>Total Budget</h4>
               <div className={styles.key}>
-                <Image
-                  src="/images/board.png"
-                  width="20"
-                  height="20"
-                  className={styles.img}
-                />
+                <Image src='/images/board.png' width='20' height='20' className={styles.img} />
               </div>
             </div>
-            <p className={styles.estimate}>
-              Estimated 3k - 9.2k people reached daily
-            </p>
+            <p className={styles.estimate}>Estimated 3k - 9.2k people reached daily</p>
             <div className={styles.span}>
               <p className={styles.spaner}>NGN</p>
               <h2>{Number(promoteData.range).toLocaleString()}.00</h2>
@@ -171,11 +157,11 @@ const PromoteProduct = function ({
 
             <div>
               <input
-                type="range"
+                type='range'
                 min={0}
                 max={100000}
                 value={promoteData.range}
-                onChange={(e) =>
+                onChange={e =>
                   setPromoteData({
                     ...promoteData,
                     range: e.target.valueAsNumber,
@@ -191,12 +177,10 @@ const PromoteProduct = function ({
             <div className={styles.money}>
               <div className={styles.balance}>
                 <p>Available Balance</p>
-                <h6>
-                  NGN {data !== undefined && data.getSellerWallet[0].balance}
-                </h6>
+                <h6>NGN {data !== undefined && data.getSellerWallet[0].balance}</h6>
               </div>
               <button
-                className="tw-rounded-md tw-px-5 tw-bg-red-kwek100 tw-text-white-100"
+                className='tw-rounded-md tw-px-5 tw-bg-red-kwek100 tw-text-white-100'
                 onClick={() => showModal()}
               >
                 Add Money
@@ -210,37 +194,29 @@ const PromoteProduct = function ({
           {loading && <Load />}
           {error && <ErrorInfo error={error.message} />}
           {Object.keys(product).length && (
-            <div className="">
+            <div className=''>
               <div className={styles.product}>
-                <Image
-                  src={product.image[0].imageUrl}
-                  width="500"
-                  height="284"
-                />
-                <span className="tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[60%] tw-top-[5%]">
+                <Image src={product.image[0].imageUrl} width='500' height='284' />
+                <span className='tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[60%] tw-top-[5%]'>
                   promoted
                 </span>
               </div>
-              <div className="tw-text-center">
+              <div className='tw-text-center'>
                 <p className={styles.fash}>{product.productTitle}</p>
                 <p className={styles.shiny}>
                   ₦{product.options[0]?.discountedPrice}
-                  <span className={styles.heel}>
-                    ₦{product.options[0]?.price}
-                  </span>
+                  <span className={styles.heel}>₦{product.options[0]?.price}</span>
                 </p>
                 <div className={styles.revs}>
                   <StarRatingComponent
-                    name="seller-product"
+                    name='seller-product'
                     starCount={5}
                     value={avgRating}
                     editing={false}
-                    emptyStarColor="#c4c4c4"
-                    starColor="#ffc107"
+                    emptyStarColor='#c4c4c4'
+                    starColor='#ffc107'
                   />
-                  <p className={styles.six}>
-                    ({product.productRating?.length} Reviews)
-                  </p>
+                  <p className={styles.six}>({product.productRating?.length} Reviews)</p>
                 </div>
               </div>
             </div>
@@ -248,14 +224,10 @@ const PromoteProduct = function ({
 
           <div className={styles.liner}></div>
           <h4 className={styles.summary}>Payment Summary</h4>
-          <p className={styles.run}>
-            Your ad will run for {promoteData.days} days
-          </p>
+          <p className={styles.run}>Your ad will run for {promoteData.days} days</p>
           <div className={styles.budget}>
             <p>Total budget</p>
-            <p className="">
-              NGN {Number(promoteData.range).toLocaleString()}.00
-            </p>
+            <p className=''>NGN {Number(promoteData.range).toLocaleString()}.00</p>
           </div>
         </div>
       </div>
