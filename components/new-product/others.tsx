@@ -110,7 +110,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         size: formValues[i].size ? `${formValues[i].size} ${formValues[i].sizePostfix}` : "",
         quantity: formValues[i].quantity,
         price: formValues[i].price,
-        discounted_price: formValues[i].discountPrice || formValues[i].price,
+        discounted_price: formValues[i].discountPrice,
         option_total_price: submitDetails.chargeFivePercentVat
           ? 0.05 * Number(formValues[formValues.length - 1].price) +
             Number(formValues[formValues.length - 1].price)
