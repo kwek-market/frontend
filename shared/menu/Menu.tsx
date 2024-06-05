@@ -103,7 +103,7 @@ const Menu = function ({}) {
         </div>
       ) : (
         <div className={menuStyle.userDiv}>
-          <div className={menuStyle.userInitials}>
+          <div className={`${menuStyle.userInitials} tw-bg-gray-300`}>
             {user.id !== null && getInitials2(user.user.fullName)}
           </div>
           <div className={menuStyle.user}>
@@ -111,7 +111,7 @@ const Menu = function ({}) {
             <span>{user.user.username}</span>
           </div>
           <button onClick={() => router.push("/profile/account")}>
-            <i className='fas fa-cog fa-2x' />
+            <i className='fas fa-cog fa-2x tw-text-gray-700/80' />
           </button>
         </div>
       )}
