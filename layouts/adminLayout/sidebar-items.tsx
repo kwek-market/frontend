@@ -12,6 +12,7 @@ import { ChevronDownIcon, UserIcon } from "@heroicons/react/solid";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import EmailIcon from "../../components/icons/admin/sidebar/emailIcon";
 
 const SidebarItems = () => {
   const router = useRouter();
@@ -100,6 +101,12 @@ const SidebarItems = () => {
       icon: AdsIcon,
       options: [],
       path: "/admin/flash-sales",
+    },
+    {
+      name: "Send Email",
+      icon: EmailIcon,
+      options: [],
+      path: "/admin/emails/create",
     },
     {
       name: "Settings",
