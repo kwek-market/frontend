@@ -49,6 +49,7 @@ function PaymentBox({ step, addressId }) {
         cartId: cart.cart[0].cart.id,
         deliveryMethod: "door step",
         paymentMethod,
+        deliveryFee: 1000,
         token: user.token,
       };
       placeOrderMutate(payload);
@@ -65,6 +66,7 @@ function PaymentBox({ step, addressId }) {
         cartId: cart.cart[0].cart.id,
         deliveryMethod: "door step",
         paymentMethod,
+        deliveryFee: 1000,
         token: user.token,
       };
       window.sessionStorage.setItem("order", JSON.stringify(placeOrder));

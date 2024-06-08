@@ -288,6 +288,7 @@ export type PlaceOrder = {
   couponIds?: string[];
   deliveryMethod: string;
   paymentMethod: string;
+  deliveryFee: number;
   paymentRef?: string;
   token: string;
 };

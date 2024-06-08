@@ -61,7 +61,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   return (
     <div className='tw-w-full'>
       <div className='tw-relative tw-w-full'>
-        <div className='tw-relative tw-w-full tw-h-[284px]'>
+        <div className='tw-relative tw-w-full tw-h-[150px] lg:tw-h-[284px]'>
           <Image
             src={prod?.image[0]?.imageUrl}
             placeholder='blur'
