@@ -811,3 +811,25 @@ export const SEND_EMAILS = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_STATE_DELIVERY_FEE = /* GraphQL */ `
+  query getStateDelivery {
+    getStateDeliveryFee {
+      state
+      fee
+    }
+  }
+`;
+
+export const UPDATE_STATE_DELIVERY_FEE = /* GraphQL */ `
+  mutation updateStateDelivery($fee: Float!, $state: String!, $token: String!) {
+    updateStateDeliveryFee(fee: $fee, state: $state, token: $token) {
+      deliveryCharge {
+        state
+        fee
+      }
+      message
+      status
+    }
+  }
+`;
