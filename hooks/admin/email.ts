@@ -4,7 +4,7 @@ import { useMutation } from "react-query";
 import { userFetcherWithAuth } from "../../helpers";
 import { SEND_EMAILS } from "../../store/admin/admin.queries";
 
-interface ISendEmail {
+export interface ISendEmail {
   subject: string;
   template: string;
   token: string;
