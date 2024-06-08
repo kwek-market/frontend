@@ -1,14 +1,16 @@
-import React, { Fragment, useState } from "react";
-import styles from "../checkGrid/checkGrid.module.scss";
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import { BillingAddressType } from "@/interfaces/commonTypes";
-import { message } from "antd";
 import useBilling from "@/hooks/useBilling";
+import { BillingAddressType } from "@/interfaces/commonTypes";
+import { RootState } from "@/store/rootReducer";
+import { message } from "antd";
+import Image from "next/image";
+import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
+import { statesInNigeria } from "../../../../data/nigeriaStateData";
+import styles from "../checkGrid/checkGrid.module.scss";
 
 function Billing({ setStep, addressId, setAddressId }) {
   const { user } = useSelector((state: RootState) => state);
+  const [selectedState, setSelectedState] = useState("");
   const {
     user: { billingSet },
   } = user;
@@ -28,8 +30,7 @@ function Billing({ setStep, addressId, setAddressId }) {
 
   function saveAddress(e: { preventDefault: () => void }) {
     e.preventDefault();
-    const { firstname, lastname, contact, email, address, city, state } =
-      billingInfo;
+    const { firstname, lastname, contact, email, address, city, state } = billingInfo;
     if (firstname.trim() === "") {
       return message.error("Enter a firstname");
     }
@@ -84,19 +85,19 @@ function Billing({ setStep, addressId, setAddressId }) {
       <div className={styles.title_box}>
         <Image
           src={!editStatus ? "/svg/activetick.svg" : "/svg/inactivetick.svg"}
-          width="32"
-          height="32"
+          width='32'
+          height='32'
         />
         <p>1. BILLING DETAILS</p>
       </div>
-      <div className="tw-ml-7 tw-mb-5">
+      <div className='tw-ml-7 tw-mb-5'>
         {billingSet?.length > 0 && (
           <div>
-            <label className="tw-font-medium tw-text-lg tw-capitalize">
+            <label className='tw-font-medium tw-text-lg tw-capitalize'>
               use old Address{" "}
               <input
-                type="checkbox"
-                name="billing-address"
+                type='checkbox'
+                name='billing-address'
                 checked={oldAddress}
                 onChange={() => handleCheckBox()}
               />
@@ -104,7 +105,7 @@ function Billing({ setStep, addressId, setAddressId }) {
           </div>
         )}
         {oldAddress && (
-          <select className="tw-w-full" onChange={(e) => handleSelect(e)}>
+          <select className='tw-w-full' onChange={e => handleSelect(e)}>
             <option>select address</option>
             {billingSet.map((item: any) => (
               <option key={item.id} value={item.id}>
@@ -119,26 +120,22 @@ function Billing({ setStep, addressId, setAddressId }) {
           <div className={styles.input_grid}>
             <div className={styles.input_box}>
               <input
-                type="text"
-                name="First Name"
-                placeholder="First Name"
+                type='text'
+                name='First Name'
+                placeholder='First Name'
                 required
                 value={billingInfo.firstname}
-                onChange={(e) =>
-                  setBillingInfo({ ...billingInfo, firstname: e.target.value })
-                }
+                onChange={e => setBillingInfo({ ...billingInfo, firstname: e.target.value })}
               />
             </div>
             <div className={styles.input_box}>
               <input
-                type="text"
-                name="Last Name"
-                placeholder="Last Name"
+                type='text'
+                name='Last Name'
+                placeholder='Last Name'
                 required
                 value={billingInfo.lastname}
-                onChange={(e) =>
-                  setBillingInfo({ ...billingInfo, lastname: e.target.value })
-                }
+                onChange={e => setBillingInfo({ ...billingInfo, lastname: e.target.value })}
               />
             </div>
           </div>
@@ -148,70 +145,71 @@ function Billing({ setStep, addressId, setAddressId }) {
                 <select>
                   <option defaultValue={"+234"}>+234</option>
                 </select>
-                <i className="fas fa-angle-down" />
+                <i className='fas fa-angle-down' />
               </div>
               <input
-                type="text"
-                name="Phone Number"
-                placeholder="Phone Number"
+                type='text'
+                name='Phone Number'
+                placeholder='Phone Number'
                 required
                 value={billingInfo.contact}
-                onChange={(e) =>
-                  setBillingInfo({ ...billingInfo, contact: e.target.value })
-                }
+                onChange={e => setBillingInfo({ ...billingInfo, contact: e.target.value })}
               />
             </div>
             <div className={styles.input_box}>
               <input
-                type="email"
-                name="Email Address"
-                placeholder="Email Address"
+                type='email'
+                name='Email Address'
+                placeholder='Email Address'
                 required
                 value={billingInfo.email}
-                onChange={(e) =>
-                  setBillingInfo({ ...billingInfo, email: e.target.value })
-                }
+                onChange={e => setBillingInfo({ ...billingInfo, email: e.target.value })}
               />
             </div>
           </div>
           <div className={styles.one_input}>
             <textarea
-              placeholder="Address"
+              placeholder='Address'
               value={billingInfo.address}
               required
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, address: e.target.value })
-              }
+              onChange={e => setBillingInfo({ ...billingInfo, address: e.target.value })}
             />
           </div>
-          <div className="tw-my-3">
-            <input
-              className="tw-py-4 tw-w-full tw-rounded-sm tw-border-gray-kwek700"
-              type="text"
-              name="state"
-              placeholder="state"
-              required
-              value={billingInfo.state}
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, state: e.target.value })
-              }
-            />
+          <div className='tw-my-3'>
+            <select
+              className='tw-block tw-py-4 tw-w-full tw-rounded-sm tw-border-gray-kwek700'
+              id='state'
+              value={selectedState}
+              onChange={e => {
+                if (e.target.value) {
+                  setSelectedState(e.target.value);
+                  setBillingInfo({ ...billingInfo, state: e.target.value });
+                }
+              }}
+              placeholder='State'
+            >
+              <option value=''>--Select State--</option>
+              {statesInNigeria.map(state => (
+                <option key={state.name} value={state.name}>
+                  {state.name}
+                </option>
+              ))}
+            </select>
+       
           </div>
-          <div className="tw-my-3">
+          <div className='tw-my-3'>
             <input
-              className="tw-py-4 tw-w-full tw-rounded-sm tw-border tw-border-solid tw-border-gray-kwek700"
-              type="text"
-              name="city"
-              placeholder="City"
+              className='tw-py-4 tw-w-full tw-rounded-sm tw-border tw-border-solid tw-border-gray-kwek700'
+              type='text'
+              name='city'
+              placeholder='City'
               required
               value={billingInfo.city}
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, city: e.target.value })
-              }
+              onChange={e => setBillingInfo({ ...billingInfo, city: e.target.value })}
             />
           </div>
           {!oldAddress ? (
-            <button type="submit" onClick={(e) => saveAddress(e)}>
+            <button type='submit' onClick={e => saveAddress(e)}>
               Save & Continue
             </button>
           ) : (
