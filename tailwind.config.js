@@ -68,6 +68,7 @@ module.exports = {
         error: "#FF2D1A",
         breadcrumb: "rgba(51, 51, 51, 0.6)",
         review: "rgba(191, 165, 163, 0.1)",
+        lightMagenta: "#FBF4F5",
       },
       gridTemplateColumns: {
         "kwek-1": "repeat(auto-fit, minmax(350px, 1fr))",
