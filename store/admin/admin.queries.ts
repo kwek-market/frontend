@@ -234,6 +234,7 @@ export const UPDATE_CATEGORY = /* GraphQL */ `
     $parent: String
     $publishDate: Date
     $visibility: String
+    $icon: String
   ) {
     updateCategory(
       id: $id
@@ -241,6 +242,7 @@ export const UPDATE_CATEGORY = /* GraphQL */ `
       parent: $parent
       publishDate: $publishDate
       visibility: $visibility
+      icon: $icon
     ) {
       message
       status
