@@ -110,7 +110,7 @@ export const useUpdateCategory = (token: string) => {
           throw Error(data.updateCategory.message);
         } else {
           message.success(data.updateCategory.message);
-          router.push("/admin/categories/category-list");
+          // router.push("/admin/categories/category-list");
         }
 
         queryClient.invalidateQueries("admin-categories");

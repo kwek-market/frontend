@@ -9,7 +9,8 @@ import {
 import { AdminLayout } from "@/layouts";
 import { CreateCategorySchema } from "@/validations/createCategory";
 import { message } from "antd";
-import React, { useState } from "react";
+import dayjs from "dayjs";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FileInputLarge } from "../../../components/input/FileInputLarge";
 import { ProductCategory } from "../../../components/new-product";
@@ -26,7 +27,7 @@ const AddCategory = () => {
 
   const [formData, setFormDta] = useState<CreateCategoryPayload>({
     name: "",
-    visibility: "",
+    visibility: "published",
     children: [],
     category: "",
     subcategory: "",
@@ -74,6 +75,8 @@ const AddCategory = () => {
       message.error(error.message);
     }
   }
+
+  const todayDate = dayjs().format("YYYY-MM-DD");
 
   return (
     <AdminLayout>
@@ -148,22 +151,25 @@ const AddCategory = () => {
             label='Published'
             checked={formData.visibility == "published"}
             onChange={() => handleRadio("published")}
+            name='visibility'
           />
           <RadioField
             label='Scheduled'
             checked={formData.visibility == "scheduled"}
             onChange={() => handleRadio("scheduled")}
+            name='visibility'
           />
           <RadioField
             label='Hidden'
             checked={formData.visibility == "hidden"}
             onChange={() => handleRadio("hidden")}
+            name='visibility'
           />
 
           <InputField
             label='Publish Date'
             type='date'
-            value={formData?.publishDate}
+            value={formData?.publishDate || todayDate}
             onChange={e => {
               setFormDta({ ...formData, publishDate: e.target.value });
             }}
