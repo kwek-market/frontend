@@ -5,11 +5,18 @@ import { message } from "antd";
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
-import { statesInNigeria } from "../../../../data/nigeriaStateData";
+import { useGetStateDeliveryFee } from "../../../../hooks/admin/stateDeliveryFee";
+import Load from "../../../Loader/Loader";
 import styles from "../checkGrid/checkGrid.module.scss";
 
 function Billing({ setStep, addressId, setAddressId }) {
   const { user } = useSelector((state: RootState) => state);
+
+  const { data, isLoading, error } = useGetStateDeliveryFee({ token: user?.token });
+
+  const states = data?.getStateDeliveryFee;
+  console.log("🚀 ~~ Billing ~~ states:", states);
+
   const [selectedState, setSelectedState] = useState("");
   const {
     user: { billingSet },
@@ -176,26 +183,35 @@ function Billing({ setStep, addressId, setAddressId }) {
             />
           </div>
           <div className='tw-my-3'>
-            <select
-              className='tw-block tw-py-4 tw-w-full tw-rounded-sm tw-border-gray-kwek700'
-              id='state'
-              value={selectedState}
-              onChange={e => {
-                if (e.target.value) {
-                  setSelectedState(e.target.value);
-                  setBillingInfo({ ...billingInfo, state: e.target.value });
-                }
-              }}
-              placeholder='State'
-            >
-              <option value=''>--Select State--</option>
-              {statesInNigeria.map(state => (
-                <option key={state.name} value={state.name}>
-                  {state.name}
-                </option>
-              ))}
-            </select>
-       
+            {isLoading ? <Load /> : null}
+
+            {states ? (
+              <select
+                className='tw-block tw-py-4 tw-w-full tw-rounded-sm tw-border-gray-kwek700'
+                id='state'
+                value={selectedState}
+                onChange={e => {
+                  if (e.target.value) {
+                    setSelectedState(e.target.value);
+                    setBillingInfo({ ...billingInfo, state: e.target.value });
+                  }
+                }}
+                placeholder='State'
+              >
+                <option value=''>--Select State--</option>
+                {states
+                  ?.filter(state => state.fee > 0)
+                  ?.map(state => (
+                    <option
+                      className='tw-flex tw-justify-between tw-items-center'
+                      key={state.state}
+                      value={state.state}
+                    >
+                      {state.state}, fee: {state.fee}
+                    </option>
+                  ))}
+              </select>
+            ) : null}
           </div>
           <div className='tw-my-3'>
             <input
