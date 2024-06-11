@@ -21,12 +21,14 @@
   @include flex(flex-start, center, nowrap);
   margin-top: 150px;
   padding: 0 5rem;
+
   @include respondMax("tablet") {
     margin-top: 90px;
     padding: 0 20px;
   }
 }
 .hero_textContent {
+  // max-width: 100px;
   width: 40%;
 
   @include respondMax("tablet") {

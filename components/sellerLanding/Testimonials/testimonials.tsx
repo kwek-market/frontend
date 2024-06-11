@@ -4,7 +4,7 @@ import Styles from "./testimonials.module.scss";
 
 import Switcher from "./Switcher";
 
-const testimonials = () => {
+const Testimonials = () => {
 	const slides = [
 		{
 			element: (
@@ -96,4 +96,4 @@ const testimonials = () => {
 	);
 };
 
-export default testimonials;
+export default Testimonials;
