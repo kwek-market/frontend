@@ -1,0 +1,4 @@
+export enum DeliveryFeeEnum {
+  GET_DELIVERY_FEE = "GET_DELIVERY_FEE",
+  SET_DELIVERY_FEE = "SET_DELIVERY_FEE"
+}

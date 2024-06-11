@@ -6,7 +6,8 @@ import { v4 } from "uuid";
 import styles from "../checkGrid/checkGrid.module.scss";
 
 function CartInfo() {
-  const { cart } = useSelector((state: RootState) => state);
+  const { cart, deliveryFee } = useSelector((state: RootState) => state);
+  console.log("🚀 ~~ CartInfo ~~ deliveryFee:", deliveryFee);
 
   const result = useMemo(() => {
     let initial = 0;
@@ -71,11 +72,11 @@ function CartInfo() {
         </div>
         <div className={styles.charge_box}>
           <p className={styles.head}>Delivery Charges</p>
-          <p className={styles.price}>₦100</p>
+          <p className={styles.price}>{deliveryFee?.fee}</p>
         </div>
         <div className={styles.total_box}>
           <p className={styles.head}>Total</p>
-          <p className={styles.price}>₦{result + 100}</p>
+          <p className={styles.price}>₦{result + deliveryFee?.fee}</p>
         </div>
       </div>
     </div>
