@@ -249,7 +249,7 @@ const Dashboard = () => {
                     </div>
                     <div className=' tw-text-sm tw-text-[#1D1616] tw-text-opacity-40 tw-flex tw-justify-between tw-pt-1'>
                       <span>{data.user.email}</span>
-                      <span>{data.pickup.state}</span>
+                      <span>{data.doorStep?.state}</span>
                     </div>
                   </div>
                 </div>
