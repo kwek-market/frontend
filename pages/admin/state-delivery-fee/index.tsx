@@ -12,17 +12,16 @@ const StateDeliveryFee = () => {
 
   const { data, isLoading, error } = useGetStateDeliveryFee({ token });
 
-  const stateDeliveryFee = data?.getStateDeliveryFee?.objects;
+  const stateDeliveryFee = data?.getStateDeliveryFee;
 
   const columns = [
     {
-      title: "Product",
-      dataIndex: "product",
+      title: "No.",
+      dataIndex: "no",
       key: "product",
       render: (product, data, index) => {
-        console.log("🚀 ~~ StateDeliveryFee ~~ data, index:", data, index);
 
-        return <div>{product?.product?.productTitle}</div>;
+        return <div>{index + 1}</div>;
       },
     },
 

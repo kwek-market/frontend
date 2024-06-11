@@ -1,11 +1,14 @@
 import { message } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Load from "../../../../components/Loader/Loader";
 import BreadCrumbs from "../../../../components/admin/breadcrumbs";
 import { FormHead, FormItems } from "../../../../components/admin/form";
 import { InputField } from "../../../../components/input/textInput";
-import { statesInNigeria } from "../../../../data/nigeriaStateData";
-import { useUpdateStateDeliveryFee } from "../../../../hooks/admin/stateDeliveryFee";
+import {
+  useGetStateDeliveryFee,
+  useUpdateStateDeliveryFee,
+} from "../../../../hooks/admin/stateDeliveryFee";
 import { AdminLayout } from "../../../../layouts";
 import { RootState } from "../../../../store/rootReducer";
 import { UpdateStateDeliveryFeeSchema } from "../../../../validations/updateStateDeliveryFee";
@@ -20,7 +23,10 @@ const NewFlashSales = () => {
     user: { token },
   } = useSelector((state: RootState) => state);
 
-  const [states, setStates] = useState([]);
+  const { data, isLoading, error } = useGetStateDeliveryFee({ token });
+
+  const states = data?.getStateDeliveryFee;
+
   const [selectedState, setSelectedState] = useState("");
 
   const [formData, setFormData] = useState<IFormData>({});
@@ -76,19 +82,23 @@ const NewFlashSales = () => {
             <label className='tw-block tw-font-medium' htmlFor='state'>
               Select a State:
             </label>
-            <select
-              className='tw-block'
-              id='state'
-              value={selectedState}
-              onChange={handleStateChange}
-            >
-              <option value=''>--Please choose an option--</option>
-              {statesInNigeria.map(state => (
-                <option key={state.name} value={state.name}>
-                  {state.name}
-                </option>
-              ))}
-            </select>
+
+            {isLoading ? <Load /> : null}
+            {states ? (
+              <select
+                className='tw-block'
+                id='state'
+                value={selectedState}
+                onChange={handleStateChange}
+              >
+                <option value=''>--Please choose an option--</option>
+                {states.map(state => (
+                  <option key={state.state} value={state.state}>
+                    {state?.state}: {state?.fee}
+                  </option>
+                ))}
+              </select>
+            ) : null}
           </div>
 
           <div className='tw-space-y-2'>
