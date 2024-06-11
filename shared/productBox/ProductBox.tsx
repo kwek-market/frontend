@@ -73,6 +73,11 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             className=' tw-object-cover'
           />
         </div>
+        {Number(prod?.options[0]?.quantity) === 0 ? (
+          <div className='absolute top-0 z-20 left-0 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-br-lg'>
+            Out of Stock
+          </div>
+        ) : null}
         {/* <span
           id="cart-wishlist"
           className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden"
