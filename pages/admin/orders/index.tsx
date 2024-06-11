@@ -1,4 +1,3 @@
-import Load from "@/components/Loader/Loader";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import Search from "@/components/admin/search";
 import AdminTable from "@/components/table";
@@ -41,7 +40,9 @@ const Orders = () => {
       render: (orderId: string, objects) => {
         console.log(objects);
         return (
-          <Link href={"/admin/customers/" + objects?.user?.fullName + "/order-detail/" + objects?.id}>
+          <Link
+            href={"/admin/customers/" + objects?.user?.fullName + "/order-detail/" + objects?.id}
+          >
             <a className=' tw-text-black-kwek100'>{orderId}</a>
           </Link>
         );
@@ -54,9 +55,9 @@ const Orders = () => {
       render: (order_date: string) => <p>{new Date(order_date).toLocaleDateString()}</p>,
     },
     {
-      title: "No of Items",
-      dataIndex: "no_of_items",
-      key: "no_of_items",
+      title: "Payment Method",
+      dataIndex: "paymentMethod",
+      key: "payment_method",
     },
     {
       title: "Status",

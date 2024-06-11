@@ -9,6 +9,27 @@ import { OrderTable } from "../../../../../components/admin/orderTable/orderTabl
 import { useGetOrdersAdmin } from "../../../../../hooks/admin/orders";
 import { RootState } from "../../../../../store/rootReducer";
 
+const getOrderText = (order: any) => {
+  let text = "";
+  let className = "";
+  if (order?.paid) {
+    text = "SUCCESS - PAYMENT SUCCESSFUL";
+    className = "tw-bg-green-500";
+  }
+
+  if (!order?.paid && order?.closed) {
+    text = "CANCELLED - PAYMENT UNSUCCESSFUL";
+    className = "tw-bg-red-500";
+  }
+
+  if (!order?.paid && !order?.closed) {
+    text = "PENDING - PAYMENT PENDING";
+    className = "tw-bg-yellow-500";
+  }
+
+  return { text, className };
+};
+
 const OrderDetail = () => {
   const router = useRouter();
   const { user } = useSelector((state: RootState) => state);
@@ -18,6 +39,7 @@ const OrderDetail = () => {
   });
 
   const order = data?.order;
+  console.log("🚀 ~~ OrderDetail ~~ order:", order);
 
   return (
     <AdminLayout>
@@ -82,10 +104,12 @@ const OrderDetail = () => {
                   ITEMS ({order?.cartItems.length})
                 </p>
                 <div className=' tw-flex tw-gap-x-4 tw-items-center '>
-                  <div className=' tw-text-white-100 tw-rounded-sm tw-px-3 tw-py-1 tw-bg-[#1D1616] tw-bg-opacity-40'>
-                    {order?.paid
-                      ? "SUCCESS - PAYMENT SUCCESSFUL"
-                      : "CANCELLED - PAYMENT UNSUCCESSFUL"}
+                  <div
+                    className={` tw-text-white-100 tw-rounded-sm tw-px-3 tw-py-1 ${
+                      getOrderText(order).className
+                    }`}
+                  >
+                    {getOrderText(order).text}
                   </div>
                   <p className='tw-mb-0'>{new Date(order?.dateCreated).toDateString()}</p>
                 </div>

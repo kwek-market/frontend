@@ -538,6 +538,8 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
       paymentMethod
       orderPrice
       deliveryMethod
+      paid
+      closed
       doorStep {
         city
         state
