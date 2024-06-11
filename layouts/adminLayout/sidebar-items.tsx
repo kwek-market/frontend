@@ -12,6 +12,7 @@ import { ChevronDownIcon, UserIcon } from "@heroicons/react/solid";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import BusIcon from "../../components/icons/admin/sidebar/busIcon";
 import EmailIcon from "../../components/icons/admin/sidebar/emailIcon";
 
 const SidebarItems = () => {
@@ -107,6 +108,12 @@ const SidebarItems = () => {
       icon: EmailIcon,
       options: [],
       path: "/admin/emails/create",
+    },
+    {
+      name: "State Delivery Fee",
+      icon: BusIcon,
+      options: [],
+      path: "/admin/state-delivery-fee",
     },
     {
       name: "Settings",

@@ -7,6 +7,7 @@ import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Dropdown, Menu } from "antd";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -52,7 +53,26 @@ const CategoryList = () => {
       title: "Category Name",
       dataIndex: "name",
       key: "category_name",
-      render: (name, object) => <Link href={`/admin/categories/${object?.id}`}>{name}</Link>,
+      render: (name, object) => (
+        <Link href={`/admin/categories/${object?.id}`}>
+          <a className='tw-flex tw-items-center tw-space-x-2'>
+            {object?.icon ? (
+              <Image
+                src={object?.icon}
+                alt='pp'
+                className='  tw-rounded-full tw-overflow-hidden'
+                height={20}
+                width={20}
+              />
+            ) : (
+              <div className='tw-bg-gray-300 tw-text-black-kwek100 tw-text-4xl tw-w-16 tw-h-16 tw-text-center tw-rounded-full tw-uppercase tw-flex tw-items-center tw-justify-center'>
+                {name?.substring(0, 2)}
+              </div>
+            )}
+            <span className=''>{name}</span>
+          </a>
+        </Link>
+      ),
     },
     {
       title: "Items",
