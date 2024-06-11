@@ -4,18 +4,19 @@ import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetStateDeliveryFee } from "../../../../hooks/admin/stateDeliveryFee";
+import { setDeliveryFee } from "../../../../store/deliveryFee/deliveryFee.action";
 import Load from "../../../Loader/Loader";
 import styles from "../checkGrid/checkGrid.module.scss";
 
 function Billing({ setStep, addressId, setAddressId }) {
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   const { data, isLoading, error } = useGetStateDeliveryFee({ token: user?.token });
 
   const states = data?.getStateDeliveryFee;
-  console.log("🚀 ~~ Billing ~~ states:", states);
 
   const [selectedState, setSelectedState] = useState("");
   const {
@@ -32,6 +33,8 @@ function Billing({ setStep, addressId, setAddressId }) {
     city: "",
     state: "",
   });
+
+  const filteredStates = states?.filter(state => state.fee > 0);
 
   const { mutate } = useBilling(user.token, setAddressId);
 
@@ -80,6 +83,19 @@ function Billing({ setStep, addressId, setAddressId }) {
 
   function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     setAddressId(e.target.value);
+
+    const state = billingSet?.find(set => set?.id === e.target.value)?.state;
+    if (state) {
+      setSelectedState(state);
+
+      console.log("🚀 ~~ handleSelect ~~ filteredStates:", filteredStates);
+      const stateAndFee = filteredStates?.find(
+        s => s?.state?.toLowerCase() === state?.toLowerCase()
+      );
+      console.log("🚀 ~~ handleSelect ~~ stateAndFee:", stateAndFee);
+      dispatch(setDeliveryFee(stateAndFee?.state, stateAndFee?.fee));
+    }
+
     setStep(2);
   }
 
@@ -194,22 +210,28 @@ function Billing({ setStep, addressId, setAddressId }) {
                   if (e.target.value) {
                     setSelectedState(e.target.value);
                     setBillingInfo({ ...billingInfo, state: e.target.value });
+
+                    const fee = filteredStates?.find(
+                      state => state.state.toLowerCase() === e.target.value?.toLowerCase()
+                    )?.fee;
+
+                    dispatch(setDeliveryFee(e.target.value, fee));
                   }
                 }}
                 placeholder='State'
               >
                 <option value=''>--Select State--</option>
-                {states
-                  ?.filter(state => state.fee > 0)
-                  ?.map(state => (
-                    <option
-                      className='tw-flex tw-justify-between tw-items-center'
-                      key={state.state}
-                      value={state.state}
-                    >
-                      {state.state}, fee: {state.fee}
-                    </option>
-                  ))}
+                {filteredStates?.map(state => (
+                  <option
+                    className='tw-flex tw-justify-between tw-items-center'
+                    key={state.state}
+                    value={state.state}
+                    datatype='nack'
+                    data-fee={state.fee}
+                  >
+                    {state.state}, fee: {state.fee}
+                  </option>
+                ))}
               </select>
             ) : null}
           </div>

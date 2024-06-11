@@ -1,7 +1,9 @@
-import React, { Fragment, useState } from "react";
-import styles from "../checkGrid/checkGrid.module.scss";
-import Image from "next/image";
 import { message } from "antd";
+import Image from "next/image";
+import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/rootReducer";
+import styles from "../checkGrid/checkGrid.module.scss";
 
 export type DeliveryType = {
   showModalone: () => void;
@@ -20,6 +22,8 @@ function Delivery({
 }: DeliveryType) {
   const [editStatus, setEditStatus] = useState(true);
 
+  const { deliveryFee } = useSelector((state: RootState) => state);
+
   function deliverFunc() {
     if (deliveryMethod === "" || deliveryMethod === null) {
       return message.error("Select an option for delivery", 5);
@@ -33,17 +37,15 @@ function Delivery({
       <div className={styles.title_box}>
         <Image
           src={editStatus ? "/svg/inactivetick.svg" : "/svg/activetick.svg"}
-          width="32"
-          height="32"
+          width='32'
+          height='32'
         />
         <p>2. DELIVERY METHOD</p>
       </div>
       {step >= 2 && (
         <Fragment>
-          <p className={styles.sub}>
-            How do you want your order to be delivered?
-          </p>
-          {editStatus ? (
+          <p className={styles.sub}>How do you want your order to be delivered?</p>
+          {editStatus && deliveryFee?.fee ? (
             <Fragment>
               <div className={styles.option_box}>
                 <div className={styles.option_grid}>
@@ -51,11 +53,11 @@ function Delivery({
                     className={styles.option_one}
                     onClick={() => setDeliveryMethod("door step")}
                   >
-                    <Image src="/svg/bike.svg" width="56" height="56" />
+                    <Image src='/svg/bike.svg' width='56' height='56' />
                     <div className={styles.info}>
                       <p className={styles.head}>Deliver To Me</p>
                       <p className={styles.sub_text}>
-                        Delivered within 24hrs for ₦100
+                        Delivered within 24hrs for ₦{deliveryFee?.fee}
                       </p>
                     </div>
                   </button>
@@ -79,7 +81,7 @@ function Delivery({
                   </button> */}
                 </div>
               </div>
-              <button type="submit" onClick={() => deliverFunc()}>
+              <button type='submit' onClick={() => deliverFunc()}>
                 Proceed to Continue
               </button>
             </Fragment>
@@ -91,7 +93,7 @@ function Delivery({
                   Edit Information
                 </a>
               </div>
-              <p className={styles.contact}>Deliver within 24hrs for ₦100</p>
+              <p className={styles.contact}>Deliver within 24hrs for ₦{deliveryFee?.fee}</p>
             </div>
           )}
         </Fragment>
