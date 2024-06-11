@@ -8,6 +8,7 @@ import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { UpdateCategorySchema } from "@/validations/createCategory";
 import { message } from "antd";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -47,7 +48,8 @@ const EditCategory = () => {
 
     deletePropertyNullUndefined(formData);
 
-    const parsed = await UpdateCategorySchema.safeParseAsync({...formData, id});
+    const parsed = await UpdateCategorySchema.safeParseAsync({ ...formData, id });
+    console.log("🚀 ~~ publish ~~ parsed:", parsed);
 
     if (parsed.success !== true) {
       message.error(parsed.error.errors[0].message);
@@ -73,13 +75,14 @@ const EditCategory = () => {
   }
 
   useEffect(() => {
+    const todayDate = dayjs().format("YYYY-MM-DD");
     if (data)
       setFormData({
         name: data.category.name,
         visibility: data.category.visibility,
         icon: data.category.icon,
         parent: data.category?.parent?.name,
-        publishDate: data.category.publishDate,
+        publishDate: data.category.publishDate || todayDate,
       });
   }, [data]);
 
@@ -231,13 +234,13 @@ const EditCategory = () => {
                   setFormData({ ...formData, icon: JSON.parse(info.file.xhr.response).secure_url });
                 }
               }}
-              fileList={[
+              defaultFileList={[
                 {
                   name: "category-image",
                   uid: data.category?.id,
                   status: "done",
                   url: data.category?.icon,
-                  type: "",
+                  type: "image",
                   size: 900,
                   originFileObj: null,
                 },

@@ -234,6 +234,7 @@ export const UPDATE_CATEGORY = /* GraphQL */ `
     $parent: String
     $publishDate: Date
     $visibility: String
+    $icon: String
   ) {
     updateCategory(
       id: $id
@@ -241,6 +242,7 @@ export const UPDATE_CATEGORY = /* GraphQL */ `
       parent: $parent
       publishDate: $publishDate
       visibility: $visibility
+      icon: $icon
     ) {
       message
       status
@@ -536,6 +538,8 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
       paymentMethod
       orderPrice
       deliveryMethod
+      paid
+      closed
       doorStep {
         city
         state
@@ -806,6 +810,28 @@ export const CREATE_FLASH_SALE = /* GraphQL */ `
 export const SEND_EMAILS = /* GraphQL */ `
   mutation sendEmail($subject: String!, $template: String!, $token: String!, $userList: [String]!) {
     sendEmailToUsers(subject: $subject, template: $template, token: $token, userList: $userList) {
+      message
+      status
+    }
+  }
+`;
+
+export const GET_STATE_DELIVERY_FEE = /* GraphQL */ `
+  query getStateDelivery {
+    getStateDeliveryFee {
+      state
+      fee
+    }
+  }
+`;
+
+export const UPDATE_STATE_DELIVERY_FEE = /* GraphQL */ `
+  mutation updateStateDelivery($fee: Float!, $state: String!, $token: String!) {
+    updateStateDeliveryFee(fee: $fee, state: $state, token: $token) {
+      deliveryCharge {
+        state
+        fee
+      }
       message
       status
     }
