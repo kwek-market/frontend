@@ -242,3 +242,71 @@ export const getWelcomeEmailTemplate = (name: string) => /* HTML */ `<!DOCTYPE h
       </div>
     </body>
   </html> `;
+
+export const getVerifyEmailTemplate = (name: string) => /* HTML */ `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Welcome to Kwekmarket.com</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          color: #333333;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .header img {
+          max-width: 100%;
+          height: auto;
+        }
+        .content {
+          line-height: 1.6;
+        }
+        .footer {
+          margin-top: 20px;
+          text-align: center;
+          font-size: 12px;
+          color: #777777;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <img
+            src="https://res.cloudinary.com/dlui93ca3/image/upload/v1718139660/logo_puuhdx.svg"
+            alt="Kwekmarket.com Logo"
+          />
+        </div>
+        <div class="content">
+          <h2>Hi ${name},</h2>
+          <p>Welcome to Kwekmarket.com!</p>
+          <p>
+            Thank you for signing up with <a href="https://www.kwekmarket.com">Kwekmarket.com</a>!
+            Please confirm your email address to complete your registration.
+          </p>
+          <p>[Confirm Your Email]</p>
+          <p>If you didn’t sign up, please ignore this email.</p>
+
+          <p>Thank you,</p>
+          <p>The <a href="https://www.kwekmarket.com">Kwekmarket.com</a> Team</p>
+        </div>
+        <div class="footer">&copy; 2024 Kwekmarket.com. All rights reserved.</div>
+      </div>
+    </body>
+  </html> `;
