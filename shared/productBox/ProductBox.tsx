@@ -107,7 +107,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           <a
             className='tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block'
             onClick={e => {
-              updateClicks(prod.id, user.token);
+              mutate({ productId: prod.id });
               e.stopPropagation();
             }}
           >

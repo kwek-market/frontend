@@ -479,7 +479,7 @@ export type ContactUs = {
 
 export type ClicksPayload = {
   productId: string;
-  token: string;
+  token?: string;
 };
 
 export type WalletHistory = {
