@@ -18,7 +18,7 @@ export function setLoading() {
   };
 }
 
-export function createUserAccount(account: AccountType) {
+export function createUserAccount(account: AccountType, onSuccess?: (data: any) => void) {
   return async function (dispatch: Dispatch) {
     try {
       dispatch({
@@ -34,6 +34,7 @@ export function createUserAccount(account: AccountType) {
         type: CREATE_ACCOUNT,
         payload: { ...result.createUser, email: account.email },
       });
+      onSuccess(result.createUser)
     } catch (err) {
       import("antd").then((antd) => {
         antd.message.error(err.message.slice(0, err.message.indexOf(".")));
