@@ -169,7 +169,76 @@ export const getVendorApplicationEmail = () => /* HTML */ `<!DOCTYPE html>
             [Contact Information]
           </p>
         </div>
-        <div class="footer">&copy; ${new Date().getFullYear()} Kwekmarket. All rights reserved.</div>
+        <div class="footer">
+          &copy; ${new Date().getFullYear()} Kwekmarket. All rights reserved.
+        </div>
+      </div>
+    </body>
+  </html> `;
+
+export const getWelcomeEmailTemplate = (name: string) => /* HTML */ `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Welcome to Kwekmarket.com</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          color: #333333;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .header img {
+          max-width: 100%;
+          height: auto;
+        }
+        .content {
+          line-height: 1.6;
+        }
+        .footer {
+          margin-top: 20px;
+          text-align: center;
+          font-size: 12px;
+          color: #777777;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <img
+            src="https://res.cloudinary.com/dlui93ca3/image/upload/v1718139660/logo_puuhdx.svg"
+            alt="Kwekmarket.com Logo"
+          />
+        </div>
+        <div class="content">
+          <h2>Hi ${name},</h2>
+          <p>Welcome to Kwekmarket.com!</p>
+          <p>
+            We guarantee delivery within 24 hours. Shop confidently with our extensive product range
+            and real-time tracking.
+          </p>
+          <p>Thank you for choosing us. We’re here for you 24/7.</p>
+          <p>Best,</p>
+          <p>James O.</p>
+          <p>Kwekmarket.com</p>
+        </div>
+        <div class="footer">&copy; 2024 Kwekmarket.com. All rights reserved.</div>
       </div>
     </body>
   </html> `;
