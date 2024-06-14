@@ -58,6 +58,10 @@ export const getCouponEmailTemplate = (options: {
         <div class="container">
           <div class="header">
             <h1>Exclusive Offer Just for You! Save Big at Kwekmarket</h1>
+            <img
+              src="https://res.cloudinary.com/dlui93ca3/image/upload/v1718139660/logo_puuhdx.svg"
+              alt="Kwekmarket.com Logo"
+            />
           </div>
           <p>Hi {{user.full_name}},</p>
           <p>
@@ -150,6 +154,10 @@ export const getVendorApplicationEmail = () => /* HTML */ `<!DOCTYPE html>
       <div class="container">
         <div class="header">
           <h1>Kwekmarket</h1>
+          <img
+            src="https://res.cloudinary.com/dlui93ca3/image/upload/v1718139660/logo_puuhdx.svg"
+            alt="Kwekmarket.com Logo"
+          />
         </div>
         <div class="content">
           <p>Dear {{user.fullName}},</p>
