@@ -11,12 +11,12 @@ const SimpleModal = ({ children, open, handleClose }: SimpleModalProps) => {
     <>
       {open ? (
         <div
-          className="tw-fixed tw-left-0 tw-top-0 tw-w-screen tw-h-screen tw-bg-[#1D1616] tw-bg-opacity-70 tw-z-[21]"
-          onClick={(e) => handleClose()}
+          className='tw-fixed tw-left-0 tw-top-0 tw-w-screen tw-h-screen tw-bg-[#1D1616] tw-bg-opacity-70 tw-z-[21]'
+          onClick={e => handleClose()}
         >
           <div
-            className=" tw-z-[2] tw-w-max tw-mx-auto"
-            onClick={(e) => {
+            className=' tw-z-[2]  tw-px-8 tw-mx-auto'
+            onClick={e => {
               e.stopPropagation();
             }}
           >

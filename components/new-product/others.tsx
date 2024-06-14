@@ -2,6 +2,10 @@ import { UploadProductProps } from "@/interfaces/commonTypes";
 import { Select } from "antd";
 import { SelectValue } from "antd/lib/select";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { ICreateProductCharge, useGetProductCharge } from "../../hooks/admin/productCharges";
+import { RootState } from "../../store/rootReducer";
+import Load from "../Loader/Loader";
 
 const sizes = [
   { id: 1, name: "S" },
@@ -13,6 +17,7 @@ const sizes = [
 
 function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const [seoKeywords, setSeoKeywords] = useState([]);
+  const { token } = useSelector((state: RootState) => state.user);
   const [size, setSize] = useState(sizes[0].name);
   const [formValues, setFormValues] = useState([
     {
@@ -24,6 +29,10 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
       sizePostfix: sizes[0].name,
     },
   ]);
+
+  const { data: productChargeData, isLoading: isLoadingCharge } = useGetProductCharge(token);
+
+  const productCharge = productChargeData?.getProductCharge[0] as ICreateProductCharge;
 
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormValues = [...formValues];
@@ -59,10 +68,13 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     setFormValues(newFormValues);
   };
 
-  const currentTotalPrice = submitDetails.chargeFivePercentVat
-    ? 0.05 * Number(formValues[formValues.length - 1].price) +
-      Number(formValues[formValues.length - 1].price)
-    : Number(formValues[formValues.length - 1].price);
+  const currentTotalPrice =
+    productCharge && productCharge?.hasFixedAmount
+      ? productCharge?.charge + Number(formValues[formValues.length - 1].price)
+      : !productCharge?.hasFixedAmount
+      ? (productCharge?.charge / 100) * Number(formValues[formValues.length - 1].price) +
+        Number(formValues[formValues.length - 1].price)
+      : Number(formValues[formValues.length - 1].price);
 
   const handleSubmit = async () => {
     const { message } = await import("antd");
@@ -111,10 +123,13 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         quantity: formValues[i].quantity,
         price: formValues[i].price,
         discounted_price: formValues[i].discountPrice,
-        option_total_price: submitDetails.chargeFivePercentVat
-          ? 0.05 * Number(formValues[formValues.length - 1].price) +
-            Number(formValues[formValues.length - 1].price)
-          : Number(formValues[formValues.length - 1].price),
+        option_total_price:
+          productCharge && productCharge?.hasFixedAmount
+            ? productCharge?.charge + Number(formValues[i].price)
+            : !productCharge?.hasFixedAmount
+            ? (productCharge?.charge / 100) * Number(formValues[i].price) +
+              Number(formValues[i].price)
+            : Number(formValues[i].price),
       };
       val.push(JSON.stringify(newFormValues));
     }
@@ -195,20 +210,22 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                 />
               </label>
 
-              <label className='tw-text-base tw-font-medium tw-capitalize'>
-                {" "}
-                price
-                <br />
-                <input
-                  type='number'
-                  placeholder='0'
-                  name='price'
-                  required
-                  value={element.price || ""}
-                  onChange={e => handleChange(index, e)}
-                  className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-                />
-              </label>
+              {productCharge ? (
+                <label className='tw-text-base tw-font-medium tw-capitalize'>
+                  {" "}
+                  price
+                  <br />
+                  <input
+                    type='number'
+                    placeholder='0'
+                    name='price'
+                    required
+                    value={element.price || ""}
+                    onChange={e => handleChange(index, e)}
+                    className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
+                  />
+                </label>
+              ) : null}
 
               <label className='tw-text-base tw-font-medium tw-capitalize'>
                 {" "}
@@ -224,20 +241,24 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                 />
               </label>
 
-              <label className='tw-text-base tw-font-medium tw-capitalize'>
-                {" "}
-                Total price (inc VAT)
-                <br />
-                <input
-                  type='number'
-                  placeholder='0'
-                  name='totalPrice'
-                  value={currentTotalPrice}
-                  disabled={true}
-                  // onChange={e => handleChange(index, e)}
-                  className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2 disabled:tw-text-gray-500 disabled:tw-bg-gray-200'
-                />
-              </label>
+              {productCharge ? (
+                <label className='tw-text-base tw-font-medium tw-capitalize'>
+                  Total price (inc our Charges)
+                  <br />
+                  <input
+                    type='number'
+                    placeholder='0'
+                    name='totalPrice'
+                    value={currentTotalPrice}
+                    disabled={true}
+                    // onChange={e => handleChange(index, e)}
+                    className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2 disabled:tw-text-gray-500 disabled:tw-bg-gray-200'
+                  />
+                </label>
+              ) : null}
+
+              {isLoadingCharge ? <Load /> : null}
+
               {index ? (
                 <button
                   type='button'

@@ -4,9 +4,7 @@ import { useSelector } from "react-redux";
 import usePayment from "../../../hooks/usePayment";
 import { RootState } from "../../../store/rootReducer";
 
-export const FundWallet = ({isOpen, onClose}:{isOpen: boolean, onClose: () => void}) => {
-  
-  
+export const FundWallet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [amount, setAmount] = useState(null);
   const {
     user: { token },
@@ -21,21 +19,18 @@ export const FundWallet = ({isOpen, onClose}:{isOpen: boolean, onClose: () => vo
       amount,
       currency: "NGN",
       description: "Fund Wallet",
-      redirectUrl: "https://kwekmarket.com/seller/fund-wallet",
+      redirectUrl: "http://localhost:3100/seller/fund-wallet",
       token,
     };
     mutate(payload, {
       onSuccess: data => {
         console.log("🚀 ~~ addMoneyToWallet ~~ data:", data);
-
-        //message.success(data.paymentLink.message);
       },
       onError: (err: any) => {
         message.error(err.message);
       },
     });
   }
-
 
   return (
     <Modal

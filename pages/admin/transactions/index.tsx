@@ -55,6 +55,14 @@ const Transactions = () => {
       key: "id",
     },
     {
+      title: "Owner",
+      dataIndex: "wallet",
+      key: "owner",
+      render: wallet => {
+        return <div>{wallet?.owner?.fullName}</div>;
+      },
+    },
+    {
       title: "Transaction Type",
       dataIndex: "transactionType",
       key: "transactionType",
@@ -73,6 +81,9 @@ const Transactions = () => {
       title: "Date & Time",
       dataIndex: "date",
       key: "date",
+      render(date) {
+        return <div>{new Date(date).toLocaleString()}</div>;
+      },
     },
     {
       title: "Status",
@@ -81,14 +92,10 @@ const Transactions = () => {
       render: (status: string) => (
         <button
           className={`${
-            status.toLowerCase() === "success"
-              ? "tw-bg-[#009D19]"
-              : status.toLowerCase() === "failed"
-              ? "tw-bg-[#AF1328]"
-              : "tw-bg-[#FFC107]"
+            status ? "tw-bg-[#009D19]" : "tw-bg-[#AF1328]"
           } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}
         >
-          {status}
+          {status ? "SUCCESS" : "FAILED"}
         </button>
       ),
     },
