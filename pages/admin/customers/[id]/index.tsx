@@ -11,6 +11,10 @@ import { useSelector } from "react-redux";
 import Load from "../../../../components/Loader/Loader";
 import { PAGE_SIZE } from "../../../../constants/constants";
 import { useGetCustomerOrders, useGetCustomerTotalOrders } from "../../../../hooks/admin/customers";
+import {
+  useGetCustomerAverageOrder,
+  useGetCustomerTotalExpense,
+} from "../../../../hooks/admin/dashboard";
 import { userGetUserById } from "../../../../hooks/admin/user";
 import { RootState } from "../../../../store/rootReducer";
 
@@ -28,6 +32,24 @@ const Customer = () => {
     isLoading: isLoadingTotalOrders,
     error,
   } = useGetCustomerTotalOrders({
+    id: router.query.id as string,
+    token: user.token,
+  });
+
+  const {
+    data: averageOrderValueData,
+    isLoading: isAverageOrderValueLoading,
+    error: averageOrderValueError,
+  } = useGetCustomerAverageOrder({
+    id: router.query.id as string,
+    token: user.token,
+  });
+
+  const {
+    data: totalSpentData,
+    isLoading: isTotalSpentLoading,
+    error: totalSpentError,
+  } = useGetCustomerTotalExpense({
     id: router.query.id as string,
     token: user.token,
   });
@@ -51,6 +73,9 @@ const Customer = () => {
     id: router.query.id as string,
     token: user.token,
   });
+
+  const averageOrderValue = averageOrderValueData?.getCustomerAverageOrder?.averageOrderValue;
+  const totalSpent = totalSpentData?.getCustomerTotalExpense?.totalSpent;
 
   const columns = [
     {
@@ -133,15 +158,26 @@ const Customer = () => {
             </div>
           ) : null}
 
-          <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
-            <p className=' tw-mb-0 tw-text-sm tw-text-[#3A434B]'>Average Order Value</p>
-            <p className='tw-mb-0 tw-pt-2 tw-text-[#0D0F11] tw-font-bold tw-text-2xl'>14</p>
-          </div>
+          {isAverageOrderValueLoading ? <Load /> : null}
+          {!isAverageOrderValueLoading ? (
+            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
+              <p className=' tw-mb-0 tw-text-sm tw-text-[#3A434B]'>Average Order Value</p>
+              <p className='tw-mb-0 tw-pt-2 tw-text-[#0D0F11] tw-font-bold tw-text-2xl'>
+                {averageOrderValue}
+              </p>
+            </div>
+          ) : null}
 
-          <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
-            <p className=' tw-mb-0 tw-text-sm tw-text-[#3A434B]'>Total Spent</p>
-            <p className='tw-mb-0 tw-pt-2 tw-text-[#0D0F11] tw-font-bold tw-text-2xl'>14</p>
-          </div>
+          {!isTotalSpentLoading ? (
+            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
+              <p className=' tw-mb-0 tw-text-sm tw-text-[#3A434B]'>Total Spent</p>
+              <p className='tw-mb-0 tw-pt-2 tw-text-[#0D0F11] tw-font-bold tw-text-2xl'>
+                {totalSpent}
+              </p>
+            </div>
+          ) : (
+            <Load />
+          )}
         </div>
         <div className=' tw-py-4'>
           <Tabs
