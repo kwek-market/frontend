@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useGetCustomerOrders } from "../../../hooks/admin/customers";
+import { Naira } from "../../UI/NairaSymbol";
 import AdminTable from "../../table";
 
 export const OrderTable = ({ token, id }: { token?: string; id?: string }) => {
@@ -30,9 +31,7 @@ export const OrderTable = ({ token, id }: { token?: string; id?: string }) => {
       dataIndex: "orderId",
       key: "order_number",
       render: (order_number, object) => (
-        <Link
-          href={"/admin/customers/" + router.query?.id + "/order-detail/" +  object?.id}
-        >
+        <Link href={"/admin/customers/" + router.query?.id + "/order-detail/" + object?.id}>
           <a className=' tw-text-black-kwek100'>{order_number}</a>
         </Link>
       ),
@@ -58,7 +57,12 @@ export const OrderTable = ({ token, id }: { token?: string; id?: string }) => {
       title: "Amount",
       dataIndex: "orderPriceTotal",
       key: "amount",
-      render: (amount, object) => <div className=''>${amount}</div>,
+      render: (amount, object) => (
+        <div className=''>
+          <Naira />
+          {amount}
+        </div>
+      ),
     },
     {
       title: "Payment",
