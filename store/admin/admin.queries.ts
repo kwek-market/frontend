@@ -837,3 +837,46 @@ export const UPDATE_STATE_DELIVERY_FEE = /* GraphQL */ `
     }
   }
 `;
+
+export const CREATE_PRODUCT_CHARGE = /* GraphQL */ `
+  mutation createProductCharge($charge: Float!, $hasFixedAmount: Boolean, $token: String!) {
+    createCharge(charge: $charge, hasFixedAmount: $hasFixedAmount, token: $token) {
+      productCharge {
+        id
+        hasFixedAmount
+        charge
+      }
+      status
+      message
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT_CHARGE = /* GraphQL */ `
+  mutation updateProductCharge(
+    $charge: Float!
+    $hasFixedAmount: Boolean
+    $token: String!
+    $id: String!
+  ) {
+    updateCharge(charge: $charge, hasFixedAmount: $hasFixedAmount, token: $token, id: $id) {
+      productCharge {
+        id
+        hasFixedAmount
+        charge
+      }
+      status
+      message
+    }
+  }
+`;
+
+export const GET_PRODUCT_CHARGE = /* GraphQL */ `
+  query {
+    getProductCharge {
+      id
+      hasFixedAmount
+      charge
+    }
+  }
+`;
