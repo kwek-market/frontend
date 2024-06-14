@@ -10,7 +10,7 @@ import { AdminLayout } from "@/layouts";
 import { CreateCategorySchema } from "@/validations/createCategory";
 import { message } from "antd";
 import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FileInputLarge } from "../../../components/input/FileInputLarge";
 import { ProductCategory } from "../../../components/new-product";
@@ -37,8 +37,6 @@ const AddCategory = () => {
     token,
     search: "",
   });
-
-  console.log(categories);
 
   const handleRadio = (value: string) => {
     setFormDta({ ...formData, visibility: value });
