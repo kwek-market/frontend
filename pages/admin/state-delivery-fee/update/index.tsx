@@ -18,7 +18,7 @@ interface IFormData {
   fee?: number;
 }
 
-const NewFlashSales = () => {
+const UpdateDeliveryFee = () => {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
@@ -123,4 +123,4 @@ const NewFlashSales = () => {
   );
 };
 
-export default NewFlashSales;
+export default UpdateDeliveryFee;

@@ -36,7 +36,7 @@ export default function fundWallet() {
           mutate(
             {
               paymentRef: tx_ref as string,
-              remark: `Fund ${user.firstName}'s wallet`,
+              remark: `Funded ${user.fullName}'s wallet`,
               token,
             },
             {
