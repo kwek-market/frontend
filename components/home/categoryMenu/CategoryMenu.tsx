@@ -1,16 +1,17 @@
 import { useState } from "react";
 
-import { RootState } from "@/store/rootReducer";
 import Image from "next/image";
 import Link from "next/link";
-import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
+import { useGetCategories } from "../../../hooks/admin/categories";
+import Load from "../../Loader/Loader";
 import styles from "./CategoryMenu.module.scss";
 import CategoryMobile from "./CategoryMobile";
 
 const CategoryMenu = function () {
   const [showCat, setShowCat] = useState<boolean>(false);
-  const { categories } = useSelector((state: RootState) => state);
+  const { data: categories, isLoading } = useGetCategories({ search: "" });
+
   console.log(categories, "categories");
 
   return (
@@ -27,32 +28,38 @@ const CategoryMenu = function () {
           </div>
         </div>
         <ul className={styles.category_list} style={{ maxHeight: showCat && "325px" }}>
-          {categories.categories.slice(0, 8).map(item => (
-            <li key={uuid()} className={styles.menu_item}>
-              <Link href={`/category/${item.name}`}>
-                <a className={styles.menu_link}>
-                  <Image
-                    src={item.icon || "/svg/cat-icon-electronics.svg"}
-                    width='24'
-                    height='24'
-                    className='tw-flex-[0.2]'
-                  />
-                  <span className={styles.menu_text}> {item.name} </span>
-                </a>
-              </Link>
-            </li>
-          ))}
+          {isLoading ? <Load /> : null}
+          {categories
+            ? categories?.categories.map(item => (
+                <li key={uuid()} className={styles.menu_item}>
+                  <Link href={`/category/${item.name}`}>
+                    <a className={styles.menu_link}>
+                      <Image
+                        src={item.icon || "/svg/cat-icon-electronics.svg"}
+                        width='24'
+                        height='24'
+                        className='tw-flex-[0.2]'
+                      />
+                      <span className={styles.menu_text}> {item.name} </span>
+                    </a>
+                  </Link>
+                </li>
+              ))
+            : null}
         </ul>
       </section>
       <section className='tw-flex md:tw-hidden tw-overflow-x-auto tw-overflow-y-hidden'>
         <CategoryMobile imgSrc='/svg/all.svg' text='All' style='tw-max-w-none' />
-        {categories.categories.slice(0, 8).map(item => (
-          <CategoryMobile
-            key={uuid()}
-            imgSrc={item.icon || "/svg/cat-icon-electronics.svg"}
-            text={item.name}
-          />
-        ))}
+        {isLoading ? <Load /> : null}
+        {categories
+          ? categories?.categories.map(item => (
+              <CategoryMobile
+                key={uuid()}
+                imgSrc={item.icon || "/svg/cat-icon-electronics.svg"}
+                text={item.name}
+              />
+            ))
+          : null}
       </section>
     </>
   );
