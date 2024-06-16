@@ -11,7 +11,7 @@ import Wallet from "../wallet/Wallet";
 
 const { TabPane } = Tabs;
 
-function Container({ children }: { children: React.ReactNode }) {
+export function Container({ children }: { children: React.ReactNode }) {
   return (
     <section className='tw-p-3 md:tw-px-14 lg:tw-px-20 tw-bg-red-300 tw-bg-opacity-10 '>
       {children}

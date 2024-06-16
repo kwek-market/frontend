@@ -15,6 +15,8 @@ import buttonStyle from "@/styles/buttons.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import Load from "../../components/Loader/Loader";
+import { useGetCategories } from "../../hooks/admin/categories";
 import menuStyle from "./menu.module.scss";
 
 const Menu = function ({}) {
@@ -22,12 +24,11 @@ const Menu = function ({}) {
   const {
     user,
     cart: { cart },
-    categories: { categories },
     wishlist: { wishlists },
   } = useSelector((state: RootState) => state);
   const router = useRouter();
 
-  console.log(categories[0], "fucking categories");
+  const { data: categories, isLoading } = useGetCategories({ search: "" });
 
   function handleLogout() {
     dispatch(logout());
@@ -111,7 +112,7 @@ const Menu = function ({}) {
             <span>{user.user.username}</span>
           </div>
           <button onClick={() => router.push("/profile/account")}>
-            <i className='fas fa-cog fa-2x tw-text-gray-700/80' />
+            <i className='fas fa-user fa-2x tw-text-gray-700/80' />
           </button>
         </div>
       )}
@@ -128,14 +129,17 @@ const Menu = function ({}) {
       </div>
       <div className={menuStyle.categories}>
         <p>Categories</p>
-        <div>
-          {categories.slice(0, 7).map((category, index) => (
-            <Link key={index} href={`/category/${category.name}`}>
-              <a>
-                <CategoryBox key={category.id} name={category.name} icon={category?.icon} />
-              </a>
-            </Link>
-          ))}
+        <div className='tw-max-h-96 tw-overflow-y-scroll'>
+          {isLoading ? <Load /> : null}
+          {categories
+            ? categories?.categories.map((category, index) => (
+                <Link key={index} href={`/category/${category.name}`}>
+                  <a>
+                    <CategoryBox key={category.id} name={category.name} icon={category?.icon} />
+                  </a>
+                </Link>
+              ))
+            : null}
         </div>
       </div>
       <div style={{ margin: "15px 0" }}>
