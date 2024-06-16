@@ -1,0 +1,183 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.header_container {
+  background-color: #1d1616;
+
+  .firstBox {
+    background-color: #1d1616;
+    padding: 2rem 6%;
+
+    .content {
+      @include flex(flex-start, center, row);
+
+      @include respondMax("tablet") {
+        display: block;
+      }
+
+      .profile {
+        @include flex(flex-start, flex-start, row);
+
+        @include respondMax("tablet") {
+          margin-bottom: 1.5rem;
+        }
+
+        .img {
+          border-radius: 5px;
+        }
+
+        .info {
+          margin-left: 40px;
+
+          @include respondMax("tablet") {
+            margin-left: 1.5rem;
+          }
+
+          .name {
+            font-size: 48px;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 2px;
+          }
+          .sub {
+            font-size: 24px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 16px;
+          }
+          .box_productRating {
+            @include flex(flex-start, center);
+
+            span {
+              font-size: 1.2rem;
+              color: #ffc107;
+            }
+          }
+        }
+      }
+
+      .contact {
+        @include flex(flex-start, center, row);
+        margin-left: auto;
+
+        .reviewsbtn {
+          border: 1px solid #ffc107;
+          padding: 18px 40px;
+          font-weight: 600;
+          font-size: 17px;
+          margin-bottom: 0;
+          margin-right: 16px;
+          color: #ffc107;
+
+          @include respondMax("tablet") {
+            padding: 1rem 1.5rem;
+          }
+        }
+
+        .contactbtn {
+          background-color: #ffc107;
+          padding: 18px 40px;
+          font-weight: 600;
+          font-size: 17px;
+          margin-bottom: 0;
+          margin-right: 16px;
+          color: #1d1616;
+
+          @include respondMax("tablet") {
+            padding: 1rem 1.5rem;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+  .secondBox {
+    background-color: #fff;
+    padding: 2rem 6%;
+
+    .content {
+      @include flex(flex-start, center, row);
+
+      @include respondMax("mobile") {
+        display: block;
+      }
+
+      .bars {
+        @include flex(flex-start, center, row);
+        width: 100%;
+
+        @include respondMax("mobile") {
+          justify-content: space-between;
+        }
+
+        .progressbox:nth-child(2) {
+          margin: 0 32px;
+        }
+
+        .progressbox {
+          width: 20%;
+
+          @include respondMax("mobile") {
+            width: auto;
+          }
+
+          p {
+            font-weight: 500;
+            font-size: 16px;
+            color: #574240;
+          }
+
+          .barbox {
+            background: #f5f0f0;
+            border: 1px solid rgba(191, 165, 163, 0.2);
+
+            .progress {
+              width: 60%;
+              background-color: #009d19;
+
+              .bar {
+                text-align: center;
+                font-weight: 600;
+                font-size: 11px;
+                color: #fff;
+                padding: 4px 0;
+              }
+            }
+          }
+        }
+      }
+
+      .orderbox {
+        margin-left: auto;
+        @include flex(flex-start, center, row);
+        padding: 18px 32px;
+        border-radius: 5px;
+        background-color: #f5f0f0;
+        width: 30%;
+
+        @include respondMax("mobile") {
+          margin: 1.5rem 0 0 0;
+          width: auto;
+        }
+
+        .info {
+          margin-left: 16px;
+
+          .numbers {
+            font-size: 22px;
+            margin-bottom: 2px;
+            font-weight: 600;
+            color: #574240;
+          }
+
+          .sub {
+            font-size: 12px;
+            margin-bottom: 0;
+            font-weight: 300;
+            color: #574240;
+          }
+        }
+      }
+    }
+  }
+}
