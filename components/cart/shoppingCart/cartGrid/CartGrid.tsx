@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from "react";
 
-import Link from "next/link";
-import styles from "./cartGrid.module.scss";
-import CartTab from "../cartTab/CartTab";
-import CartGridComponent from "./cartGridComponent";
 import Button from "@/components/buttons/Button";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import { useRouter } from "next/router";
 import { useApplyCoupon } from "@/hooks/coupon";
+import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import CartTab from "../cartTab/CartTab";
+import styles from "./cartGrid.module.scss";
+import CartGridComponent from "./cartGridComponent";
 
 const CartGrid = function () {
   const {
@@ -22,7 +22,7 @@ const CartGrid = function () {
 
   const result = useMemo(() => {
     let initial = 0;
-    cart.cart.forEach((item) => {
+    cart.cart.forEach(item => {
       const current = item.price;
       initial += current;
     });
@@ -31,15 +31,14 @@ const CartGrid = function () {
 
   function applyCoupon(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (coupon === "" || coupon === null)
-      return message.error("enter a coupon");
+    if (coupon === "" || coupon === null) return message.error("enter a coupon");
     const payload = {
       couponId: coupon,
       token,
     };
 
     mutate(payload, {
-      onSuccess: (data) => {
+      onSuccess: data => {
         // message.success(data.applyCoupon.message);
       },
       // onError: (err) => {
@@ -50,7 +49,7 @@ const CartGrid = function () {
 
   return (
     <section>
-      <div className="tw-flex tw-flex-col">
+      <div className='tw-flex tw-flex-col'>
         <nav>
           <CartTab />
         </nav>
@@ -75,7 +74,7 @@ const CartGrid = function () {
             <CartGridComponent />
             <div className={styles.bottom_part}>
               <div className={styles.content}>
-                <form
+                {/* <form
                   onSubmit={(e) => applyCoupon(e)}
                   className={styles.coupon_box}
                 >
@@ -87,38 +86,32 @@ const CartGrid = function () {
                     onChange={(e) => setCoupon(e.target.value)}
                   />
                   <button type="submit">Apply Coupon</button>
-                </form>
+                </form> */}
                 <p>
                   Total: <span>₦{result}</span>
                 </p>
               </div>
               <p>Delivery Fee is not included yet</p>
-              <Link href="/cart/checkout">
+              <Link href='/cart/checkout'>
                 <a>
-                  <button className={styles.checkout_btn}>
-                    Proceed to Checkout
-                  </button>
+                  <button className={styles.checkout_btn}>Proceed to Checkout</button>
                 </a>
               </Link>
             </div>
           </div>
         </section>
-        <div className="tw-flex tw-flex-row tw-shadow-md tw-bg-white-100 tw-fixed tw-w-full tw-z-10 tw-bottom-0 tw-left-0 tw-right-0 tw-justify-between tw-items-center tw-p-3 md:tw-hidden">
+        <div className='tw-flex tw-flex-row tw-shadow-md tw-bg-white-100 tw-fixed tw-w-full tw-z-10 tw-bottom-0 tw-left-0 tw-right-0 tw-justify-between tw-items-center tw-p-3 md:tw-hidden'>
           <div>
-            <i className="fas fa-angle-up tw-text-green-success tw-text-base" />
+            <i className='fas fa-angle-up tw-text-green-success tw-text-base' />
           </div>
-          <div className="tw-flex tw-flex-col">
-            <span className="tw-text-sm tw-text-black-stock">Total</span>
-            <span className="tw-text-gray-kwek200 tw-text-lg tw-font-medium">
-              ₦{result}
-            </span>
-            <span className="tw-text-error tw-text-xs">
-              * Delivery fee is not included
-            </span>
+          <div className='tw-flex tw-flex-col'>
+            <span className='tw-text-sm tw-text-black-stock'>Total</span>
+            <span className='tw-text-gray-kwek200 tw-text-lg tw-font-medium'>₦{result}</span>
+            <span className='tw-text-error tw-text-xs'>* Delivery fee is not included</span>
           </div>
           <Button
-            buttonStyle="tw-bg-green-success tw-text-white-100 tw-py-5 tw-px-10 tw-rounded"
-            text="checkout"
+            buttonStyle='tw-bg-green-success tw-text-white-100 tw-py-5 tw-px-10 tw-rounded'
+            text='checkout'
             cmd={() => router.push("/cart/checkout")}
           />
         </div>
