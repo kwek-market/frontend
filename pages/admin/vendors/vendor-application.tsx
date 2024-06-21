@@ -119,18 +119,6 @@ const VendorApplications = () => {
   const data = useMemo(
     () =>
       getVendorsData?.getUserType?.objects?.map(({ id, fullName, email, sellerProfile }) => {
-        if (!sellerProfile[0]?.sellerIsVerified)
-          return {
-            id: null,
-            key: null,
-            name: null,
-            email_address: null,
-            date_applied: null,
-            country: null,
-            state: null,
-            phone_number: null,
-          };
-
         return {
           id,
           key: id,
