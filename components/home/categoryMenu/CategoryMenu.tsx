@@ -10,7 +10,7 @@ import CategoryMobile from "./CategoryMobile";
 
 const CategoryMenu = function () {
   const [showCat, setShowCat] = useState<boolean>(false);
-  const { data: categories, isLoading } = useGetCategories({ search: "" });
+  const { data: categories, isLoading } = useGetCategories({ search: "", visibility: "published" });
 
   console.log(categories, "categories");
 
