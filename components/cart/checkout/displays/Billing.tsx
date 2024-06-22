@@ -3,9 +3,11 @@ import { BillingAddressType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
 import Image from "next/image";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { convertCitiesToJSON } from "../../../../helpers/helper";
 import { useGetStateDeliveryFee } from "../../../../hooks/admin/stateDeliveryFee";
+import useBillingUpdate from "../../../../hooks/useBillingUpdate";
 import { setDeliveryFee } from "../../../../store/deliveryFee/deliveryFee.action";
 import Load from "../../../Loader/Loader";
 import styles from "../checkGrid/checkGrid.module.scss";
@@ -22,11 +24,15 @@ function Billing({ setStep, addressId, setAddressId }) {
   const {
     user: { billingSet },
   } = user;
+  const { mutate } = useBilling(user.token, setAddressId);
+  const { mutate: updateBilling } = useBillingUpdate(user.token);
+
   const [editStatus, setEditStatus] = useState(true);
+  const [selectedBillingSetInfo, setSelectedBillingSetInfo] = useState(null);
+
   const [oldAddress, setOldAddress] = useState(false);
   const [billingInfo, setBillingInfo] = useState({
-    firstname: "",
-    lastname: "",
+    fullName: "",
     contact: "",
     email: "",
     address: "",
@@ -34,19 +40,28 @@ function Billing({ setStep, addressId, setAddressId }) {
     state: "",
   });
 
-  const filteredStates = states?.filter(state => state.fee > 0);
+  useEffect(() => {
+    dispatch(setDeliveryFee(null, null, null));
+  }, []);
 
-  const { mutate } = useBilling(user.token, setAddressId);
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const filteredStates = states?.filter(
+    state => state.fee > 0 && convertCitiesToJSON(state.city).length > 0
+  );
+
+  const selectedStateCity = filteredStates?.find(
+    state => state.state.toLowerCase() === selectedState?.toLowerCase()
+  )?.city;
+  console.log("🚀 ~~ Billing ~~ selectedStateCity:", selectedStateCity);
 
   function saveAddress(e: { preventDefault: () => void }) {
     e.preventDefault();
-    const { firstname, lastname, contact, email, address, city, state } = billingInfo;
-    if (firstname.trim() === "") {
+    const { fullName, contact, email, address, city, state } = billingInfo;
+    if (fullName.trim() === "") {
       return message.error("Enter a firstname");
     }
-    if (lastname.trim() === "") {
-      return message.error("Enter a lastname");
-    }
+
     if (contact.trim() === "") {
       return message.error("Enter a contact number");
     }
@@ -64,14 +79,19 @@ function Billing({ setStep, addressId, setAddressId }) {
     }
     setEditStatus(false);
     const payload: BillingAddressType = {
-      fullName: `${firstname} ${lastname}`,
+      fullName,
       contact,
       address,
       state,
       city,
       token: user.token,
     };
-    mutate(payload);
+    mutate(payload, {
+      onSuccess(data, variables, context) {
+        message.success("Address added successfully");
+      },
+    });
+
     setStep(2);
   }
 
@@ -81,19 +101,30 @@ function Billing({ setStep, addressId, setAddressId }) {
     setStep(1);
   }
 
+  console.log("fucking billing info", billingInfo);
+
   function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     setAddressId(e.target.value);
 
-    const state = billingSet?.find(set => set?.id === e.target.value)?.state;
-    if (state) {
-      setSelectedState(state);
+    const billing = billingSet?.find(set => set?.id === e.target.value);
+    console.log("🚀 ~~ handleSelect ~~ billing:", billing);
 
-      console.log("🚀 ~~ handleSelect ~~ filteredStates:", filteredStates);
+    setBillingInfo({ ...billing });
+
+    if (billing?.city) {
+      setSelectedState(billing?.state);
+
       const stateAndFee = filteredStates?.find(
-        s => s?.state?.toLowerCase() === state?.toLowerCase()
+        s => s?.state?.toLowerCase() === billing.state?.toLowerCase()
       );
-      console.log("🚀 ~~ handleSelect ~~ stateAndFee:", stateAndFee);
-      dispatch(setDeliveryFee(stateAndFee?.state, stateAndFee?.fee));
+
+      const city = convertCitiesToJSON(stateAndFee?.city)?.find(c => billing.city === c.name);
+
+      if (city) {
+        dispatch(setDeliveryFee(stateAndFee.name, city?.fee, city?.name));
+      } else {
+        message.error("Delivery is not available for this city, Please edit the city", 2);
+      }
     }
 
     setStep(2);
@@ -141,24 +172,14 @@ function Billing({ setStep, addressId, setAddressId }) {
       {editStatus ? (
         <form>
           <div className={styles.input_grid}>
-            <div className={styles.input_box}>
+            <div className={`${styles.input_box} !tw-col-span-2`}>
               <input
                 type='text'
-                name='First Name'
-                placeholder='First Name'
+                name='fullName'
+                placeholder='FullName'
                 required
-                value={billingInfo.firstname}
-                onChange={e => setBillingInfo({ ...billingInfo, firstname: e.target.value })}
-              />
-            </div>
-            <div className={styles.input_box}>
-              <input
-                type='text'
-                name='Last Name'
-                placeholder='Last Name'
-                required
-                value={billingInfo.lastname}
-                onChange={e => setBillingInfo({ ...billingInfo, lastname: e.target.value })}
+                value={billingInfo.fullName}
+                onChange={e => setBillingInfo({ ...billingInfo, fullName: e.target.value })}
               />
             </div>
           </div>
@@ -205,17 +226,11 @@ function Billing({ setStep, addressId, setAddressId }) {
               <select
                 className='tw-block tw-py-4 tw-w-full tw-rounded-sm tw-border-gray-kwek700'
                 id='state'
-                value={selectedState}
+                value={billingInfo.state}
                 onChange={e => {
                   if (e.target.value) {
                     setSelectedState(e.target.value);
                     setBillingInfo({ ...billingInfo, state: e.target.value });
-
-                    const fee = filteredStates?.find(
-                      state => state.state.toLowerCase() === e.target.value?.toLowerCase()
-                    )?.fee;
-
-                    dispatch(setDeliveryFee(e.target.value, fee));
                   }
                 }}
                 placeholder='State'
@@ -226,40 +241,83 @@ function Billing({ setStep, addressId, setAddressId }) {
                     className='tw-flex tw-justify-between tw-items-center'
                     key={state.state}
                     value={state.state}
-                    datatype='nack'
                     data-fee={state.fee}
                   >
-                    {state.state}, fee: {state.fee}
+                    {state.state}
                   </option>
                 ))}
               </select>
             ) : null}
           </div>
           <div className='tw-my-3'>
-            <input
-              className='tw-py-4 tw-w-full tw-rounded-sm tw-border tw-border-solid tw-border-gray-kwek700'
-              type='text'
-              name='city'
-              placeholder='City'
-              required
-              value={billingInfo.city}
-              onChange={e => setBillingInfo({ ...billingInfo, city: e.target.value })}
-            />
+            {selectedState ? (
+              <select
+                className='tw-block tw-py-4 tw-w-full tw-rounded-sm tw-border-gray-kwek700'
+                id='city'
+                value={billingInfo.city}
+                onChange={e => {
+                  if (e.target.value) {
+                    setSelectedCity(e.target.value);
+                    setBillingInfo({ ...billingInfo, city: e.target.value });
+
+                    const city = convertCitiesToJSON(selectedStateCity).find(
+                      city => city.name === e.target.value
+                    );
+
+                    setBillingInfo({ ...billingInfo, city: e.target.value });
+
+                    dispatch(setDeliveryFee(selectedState, city.fee, city.name));
+                  }
+                }}
+                placeholder='City'
+              >
+                <option value=''>--Select City--</option>
+                {convertCitiesToJSON(selectedStateCity)?.map(city => (
+                  <option
+                    className='tw-flex tw-justify-between tw-items-center'
+                    key={city.name}
+                    value={city.name}
+                    data-fee={city.fee}
+                  >
+                    {city.name}, Fee: {city.fee}
+                  </option>
+                ))}
+              </select>
+            ) : null}
           </div>
           {!oldAddress ? (
             <button type='submit' onClick={e => saveAddress(e)}>
               Save & Continue
             </button>
           ) : (
-            <button onClick={() => setEditStatus(false)}>Proceed</button>
+            <button
+              onClick={() => {
+                setEditStatus(false);
+                updateBilling(
+                  {
+                    address: billingInfo.address,
+                    city: billingInfo.city,
+                    addressId: addressId,
+                    contact: billingInfo.contact,
+                    fullName: billingInfo.fullName,
+                    state: billingInfo.state,
+                  },
+                  {
+                    onSuccess(data, variables, context) {
+                      message.success("Updated Billing Address successfully");
+                    },
+                  }
+                );
+              }}
+            >
+              Proceed
+            </button>
           )}
         </form>
       ) : (
         <div className={styles.form_content}>
           <div className={styles.top_head}>
-            <p className={styles.name}>
-              {billingInfo.firstname} {billingInfo.lastname}
-            </p>
+            <p className={styles.name}>{billingInfo.fullName}</p>
             <a onClick={() => setEditStatus(true)} className={styles.edit}>
               Edit Information
             </a>

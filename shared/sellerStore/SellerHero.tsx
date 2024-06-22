@@ -1,41 +1,15 @@
-import Button from "@/components/buttons/Button";
-import useReviews from "@/hooks/useReviews";
 import { RootState } from "@/store/rootReducer";
-import { Rate } from "antd";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Container } from "../../components/seller/content/Content";
 
-export const SellerHero = () => {
-  const { seller, user } = useSelector((state: RootState) => state);
+export const SellerHero = ({ seller }) => {
+  const { user } = useSelector((state: RootState) => state);
   const router = useRouter();
 
-  const { status, data, error } = useReviews({
-    token: user.token,
-    page: 1,
-    pageSize: 20,
-  });
-
-  const bgImg = seller.seller.storeBannerUrl
-    ? `linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('${seller.seller.storeBannerUrl}')`
+  const bgImg = seller.storeBannerUrl
+    ? `linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('${seller.storeBannerUrl}')`
     : "linear-gradient(rgba(87, 66, 64, 0.7), rgba(87, 66, 64, 0.7)), url('/images/stairs.jpg')";
-
-  function uploadHandler() {
-    router.push("/seller/upload-new-product");
-  }
-
-  const rating = useMemo(() => {
-    if (data) {
-      const ratings = data.getSellerReview.objects.map(
-        (review: { rating: number }) => review.rating
-      );
-      const total = ratings.reduce((acc, cur) => acc + cur, 0);
-      const avg = total / ratings.length;
-      return avg;
-    }
-    return 0;
-  }, [data]);
 
   return (
     <div
@@ -53,38 +27,37 @@ export const SellerHero = () => {
           <div className='tw-flex tw-flex-col md:tw-flex-row'>
             <div className='md:tw-mr-4'>
               <img
-                src={
-                  seller.seller.storeBannerUrl
-                    ? seller.seller.storeBannerUrl
-                    : "/images/user-photo.svg"
-                }
+                src={seller.storeBannerUrl ? seller.storeBannerUrl : "/images/user-photo.svg"}
                 className='tw-rounded-xl '
                 width={"150px"}
               />
             </div>
             <div className='tw-self-end tw-mb-4'>
               <p className='tw-font-semibold tw-text-white-100 tw-text-4xl tw-mb-0'>
-                {seller.seller.shopName}
+                {seller.shopName}
               </p>
-              <p className='tw-text-white-200'>Clothings for all ages.</p>
+              <p className='tw-text-white-200'>{seller?.storeDescription}.</p>
+              <span className='tw-text-white-100 tw-text-[12px]'>{seller?.shopAddress}</span>
 
-              <div className='tw-text-md'>
-                <Rate disabled allowHalf value={rating} className='tw-text-[12px]' />
+              {/* <div className='tw-text-md'>
+                <Rate disabled allowHalf value={seller.productRating?.rating} className='tw-text-[12px]' />
                 {data !== undefined && data.getSellerReview.objects.length > 0 ? (
                   <span className='tw-text-white-100 tw-text-[12px]'>({rating} reviews)</span>
                 ) : (
                   <span className='tw-text-white-100 tw-text-[12px]'>(0 reviews)</span>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className='tw-self-end tw-mb-7'>
-            <Button
-              icon={"fa-plus"}
-              buttonStyle={"tw-rounded-sm tw-p-3 tw-bg-yellow-filled hover:tw-shadow-md"}
-              text={"Contact Us"}
-              cmd={uploadHandler}
-            />
+            <a
+              href={`tel:+234${seller.phoneNumber}`}
+              className={"tw-rounded-sm tw-p-3 tw-bg-yellow-filled hover:tw-shadow-md"}
+              style={{ whiteSpace: "nowrap" }}
+            >
+              <i className={`fas fa-phone`} style={{ paddingRight: "12px" }} />
+              Contact Us
+            </a>
           </div>
         </div>
       </Container>

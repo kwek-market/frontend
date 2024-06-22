@@ -1,10 +1,12 @@
-import { message } from "antd";
+import { Button, Empty, message } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Load from "../../../../components/Loader/Loader";
 import BreadCrumbs from "../../../../components/admin/breadcrumbs";
 import { FormHead, FormItems } from "../../../../components/admin/form";
+import { CityDeliveryModal } from "../../../../components/admin/stateDelivery/addStateDeliveryModal";
 import { InputField } from "../../../../components/input/textInput";
+import { convertCitiesToJSON } from "../../../../helpers/helper";
 import {
   useGetStateDeliveryFee,
   useUpdateStateDeliveryFee,
@@ -15,6 +17,14 @@ import { UpdateStateDeliveryFeeSchema } from "../../../../validations/updateStat
 
 interface IFormData {
   state?: string;
+  id?: string;
+  city?: string;
+  fee?: number;
+}
+
+interface IStateDelivery {
+  state?: string;
+  city?: { name: string; fee: number }[];
   fee?: number;
 }
 
@@ -25,18 +35,37 @@ const UpdateDeliveryFee = () => {
 
   const { data, isLoading, error } = useGetStateDeliveryFee({ token });
 
+  const [isCityModalOpen, setIsCityModalOpen] = useState(false);
+
   const states = data?.getStateDeliveryFee;
 
-  const [selectedState, setSelectedState] = useState("");
+  const [selectedState, setSelectedState] = useState<IFormData>({});
+
+  const [isEditCity, seIsEditCity] = useState(false);
+  const [cityToBeEdited, setCityToBeEdited] = useState(null);
 
   const [formData, setFormData] = useState<IFormData>({});
   const { mutate: createMut } = useUpdateStateDeliveryFee(token);
 
   const handleStateChange = event => {
     if (event?.target?.value) {
-      setSelectedState(event.target.value);
+      const state = states.find(s => s.state === event.target.value);
+      setSelectedState(state);
 
-      setFormData({ ...formData, state: event.target.value });
+      const fee = event.target.options[event.target.selectedIndex].dataset.fee;
+      const id = event.target.options[event.target.selectedIndex].dataset.id;
+      const cities =
+        formData.city || event.target.options[event.target.selectedIndex].dataset.cities;
+
+      console.log("🚀 ~~ handleStateChange ~~ cities:", cities);
+
+      setFormData({
+        ...formData,
+        fee: Number(fee),
+        state: event.target.value,
+        id,
+        city: cities,
+      });
     }
   };
 
@@ -74,7 +103,7 @@ const UpdateDeliveryFee = () => {
         ]}
         header='Update State Delivery '
       />
-      <form className=' tw-mt-16 tw-font-poppins' onSubmit={e => e.preventDefault()}>
+      <form className=' tw-mt-16 tw-font-poppins ' onSubmit={e => e.preventDefault()}>
         <FormHead>Basic Information</FormHead>
 
         <FormItems>
@@ -88,12 +117,18 @@ const UpdateDeliveryFee = () => {
               <select
                 className='tw-block'
                 id='state'
-                value={selectedState}
+                value={selectedState.state}
                 onChange={handleStateChange}
               >
                 <option value=''>--Please choose an option--</option>
                 {states.map(state => (
-                  <option key={state.state} value={state.state}>
+                  <option
+                    data-id={state.id}
+                    data-fee={state.fee}
+                    data-cities={state.city}
+                    key={state.state}
+                    value={state.state}
+                  >
                     {state?.state}: {state?.fee}
                   </option>
                 ))}
@@ -106,13 +141,76 @@ const UpdateDeliveryFee = () => {
               label='Delivery Fee'
               placeholder='Write your the discount fee or charges'
               type='number'
+              value={formData.fee}
               onChange={e => setFormData({ ...formData, fee: Number(e.target.value) })}
             />
           </div>
+
+          <div className=''>
+            <FormHead>Cities</FormHead>
+
+            <div className='tw-mt-4 tw-flex tw-space-x-7'>
+              {convertCitiesToJSON(formData.city).map(city => (
+                <button
+                  className='tw-flex tw-w-[fit-content] tw-items-center tw-border-2 tw-rounded-md tw-overflow-hidde tw-relative'
+                  key={city.name}
+                  onClick={() => {
+                    setCityToBeEdited(city);
+                    seIsEditCity(true);
+                    setIsCityModalOpen(true);
+                  }}
+                >
+                  <div className='tw-bg-gray-200 tw-py-3 tw-text-gray-700 tw-px-4'>{city.name}</div>
+                  <div className='tw-px-4 tw-py-3 tw-border-l'>{city.fee}</div>
+
+                  <button
+                    onClick={e => {
+                      e.stopPropagation();
+                      const cities = convertCitiesToJSON(formData.city);
+                      const newCity = cities.filter(c => city.name !== c.name);
+                      setFormData({ ...formData, city: JSON.stringify(newCity) });
+                    }}
+                    className='tw-absolute tw-right-[-10px] tw-z-20 tw-top-[-20px]'
+                  >
+                    <i className='fas fa-times-circle tw-text-red-600 tw-text-3xl'></i>
+                  </button>
+                </button>
+              ))}
+
+              {convertCitiesToJSON(formData.city).length === 0 ? (
+                <Empty description='NO Cities Added' />
+              ) : null}
+            </div>
+
+            <Button size="large" className='tw-my-6' onClick={() => setIsCityModalOpen(true)}>
+              Add City to this state
+            </Button>
+          </div>
         </FormItems>
 
+        {/* THE ADD CITY MODAL */}
+        <CityDeliveryModal
+          isOpen={isCityModalOpen}
+          onClose={() => {
+            setIsCityModalOpen(false);
+            seIsEditCity(false);
+            setCityToBeEdited(null);
+          }}
+          onSubmit={city => {
+            const cities = convertCitiesToJSON(formData.city);
+
+            cities.push(city);
+
+            message.success("city added", 1);
+
+            setFormData({ ...formData, city: JSON.stringify(cities) });
+          }}
+          isEdit={isEditCity}
+          data={cityToBeEdited}
+        />
+
         <button
-          className='  tw-font-semibold tw-py-2 tw-px-12 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-14'
+          className='  tw-font-semibold tw-py-3 tw-px-12 tw-rounded tw-text-white-100 tw-bg-[#1E944D] tw-mt-14'
           type='submit'
           onClick={createFlashSale}
         >

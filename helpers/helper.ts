@@ -121,8 +121,17 @@ export function getMonthDateRange(dayJsDate: dayjs.Dayjs) {
   };
 }
 
-
 // make a function to separate a string into an array of words
 export function separateWords(text: string) {
   return text.split(",");
 }
+
+export const convertCitiesToJSON = (data: string): { name: string; fee: number }[] => {
+  try {
+    const cities = JSON.parse(data);
+
+    return cities;
+  } catch (error) {
+    return [];
+  }
+};

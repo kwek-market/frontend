@@ -3,6 +3,7 @@ import { DeliveryFeeEnum } from "./deliveryFee.types";
 type dataType = {
   state: string;
   fee: number;
+  city?: string
 };
 
 type ActionPayload = {
@@ -12,6 +13,7 @@ type ActionPayload = {
 
 const initialState: dataType = {
   state: "",
+  city: "",
   fee: 0,
 };
 
@@ -29,6 +31,7 @@ export function deliveryFeeReducer(
         ...state,
         state: action.payload?.state,
         fee: action.payload?.fee,
+        city: action.payload.city
       };
     default:
       return state;
