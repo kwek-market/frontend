@@ -821,16 +821,26 @@ export const GET_STATE_DELIVERY_FEE = /* GraphQL */ `
     getStateDeliveryFee {
       state
       fee
+      city
+      id
     }
   }
 `;
 
 export const UPDATE_STATE_DELIVERY_FEE = /* GraphQL */ `
-  mutation updateStateDelivery($fee: Float!, $state: String!, $token: String!) {
-    updateStateDeliveryFee(fee: $fee, state: $state, token: $token) {
+  mutation updateStateDelivery(
+    $fee: Float!
+    $state: String!
+    $token: String!
+    $id: String!
+    $city: String
+  ) {
+    updateStateDeliveryFee(fee: $fee, state: $state, token: $token, id: $id, city: $city) {
       deliveryCharge {
         state
         fee
+        city
+        id
       }
       message
       status
