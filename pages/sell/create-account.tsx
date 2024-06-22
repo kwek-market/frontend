@@ -111,7 +111,16 @@ const Page = function () {
       return;
     }
     // dispatch
-    dispatch(startSelling({ ...sellerData, phoneNumber: `${callCode}${phoneNumber}` }, user.token));
+    dispatch(
+      startSelling(
+        {
+          ...sellerData,
+          phoneNumber: `${callCode}${phoneNumber}`,
+          shopUrl: sellerData.shopUrl.trim(),
+        },
+        user.token
+      )
+    );
   };
 
   useEffect(() => {
