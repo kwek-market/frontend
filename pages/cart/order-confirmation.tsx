@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
 import usePaymentVerify from "@/hooks/usePaymentVerify";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
+import usePlaceOrder from "@/hooks/usePlaceOrder";
 import { VerifyPaymentType } from "@/interfaces/commonTypes";
 import { MainLayout } from "@/layouts";
-import usePlaceOrder from "@/hooks/usePlaceOrder";
+import { RootState } from "@/store/rootReducer";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function OrderComplete() {
   const {
@@ -29,16 +28,20 @@ function OrderComplete() {
         const store = window.sessionStorage.getItem("order");
         const order = JSON.parse(store);
         order.paymentRef = tx_ref;
-        post(order);
+        post(order, {
+          onSuccess(data, variables, context) {
+            window.sessionStorage.removeItem("order");
+          },
+        });
       },
     });
   }, [transaction_id, tx_ref]);
 
   return (
     <MainLayout>
-      <section className="tw-flex tw-justify-center tw-items-center tw-flex-col tw-py-5">
-        <p className=" tw-text-xl tw-capitalize">checking order...</p>
-        <p className="tw-text-lg">
+      <section className='tw-flex tw-justify-center tw-items-center tw-flex-col tw-py-5'>
+        <p className=' tw-text-xl tw-capitalize'>checking order...</p>
+        <p className='tw-text-lg'>
           Please wait for your order to be confirmed, you'll be redirected
         </p>
       </section>

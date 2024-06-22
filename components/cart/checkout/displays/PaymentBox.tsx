@@ -51,6 +51,8 @@ function PaymentBox({ step, addressId }) {
         paymentMethod,
         deliveryFee: deliveryFee?.fee,
         token: user.token,
+        state: deliveryFee.state,
+        city: deliveryFee.city,
       };
       placeOrderMutate(payload);
     } else if (paymentMethod === "card") {
@@ -67,6 +69,8 @@ function PaymentBox({ step, addressId }) {
         deliveryMethod: "door step",
         paymentMethod,
         deliveryFee: deliveryFee?.fee,
+        state: deliveryFee.state,
+        city: deliveryFee.city,
         token: user.token,
       };
       window.sessionStorage.setItem("order", JSON.stringify(placeOrder));
