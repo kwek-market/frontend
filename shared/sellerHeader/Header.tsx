@@ -87,7 +87,7 @@ const Component = () => {
             icon={"fa-copy"}
             buttonStyle={"tw-rounded-sm tw-p-3 tw-bg-yellow-filled hover:tw-shadow-md"}
             text={"Copy Store Url"}
-            cmd={copyHandler as any}
+            cmd={() => copyHandler(seller?.seller?.shopUrl) as any}
           />
         </div>
       </div>
