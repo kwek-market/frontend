@@ -124,6 +124,11 @@ const Component = function () {
                 <a className={styles.nav_link}>Seller Policy</a>
               </Link>
             </li>
+            {seller?.seller?.shopUrl ? (
+              <Link href={`/store/${seller?.seller?.shopUrl}`}>
+                <a className={styles.nav_link}>View your shop</a>
+              </Link>
+            ) : null}
           </ul>
         </nav>
 
