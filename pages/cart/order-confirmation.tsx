@@ -3,6 +3,7 @@ import usePlaceOrder from "@/hooks/usePlaceOrder";
 import { VerifyPaymentType } from "@/interfaces/commonTypes";
 import { MainLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
+import { message } from "antd";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -25,12 +26,13 @@ function OrderComplete() {
     };
     mutate(payload, {
       onSuccess: () => {
-        const store = window.sessionStorage.getItem("order");
+        const store = window.localStorage.getItem("order");
         const order = JSON.parse(store);
         order.paymentRef = tx_ref;
         post(order, {
           onSuccess(data, variables, context) {
-            window.sessionStorage.removeItem("order");
+            message.success("Order have been placed");
+            window.localStorage.removeItem("order");
           },
         });
       },

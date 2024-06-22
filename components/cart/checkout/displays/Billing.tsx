@@ -53,7 +53,6 @@ function Billing({ setStep, addressId, setAddressId }) {
   const selectedStateCity = filteredStates?.find(
     state => state.state.toLowerCase() === selectedState?.toLowerCase()
   )?.city;
-  console.log("🚀 ~~ Billing ~~ selectedStateCity:", selectedStateCity);
 
   function saveAddress(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -117,11 +116,12 @@ function Billing({ setStep, addressId, setAddressId }) {
       const stateAndFee = filteredStates?.find(
         s => s?.state?.toLowerCase() === billing.state?.toLowerCase()
       );
+      console.log("🚀 ~~ handleSelect ~~ stateAndFee:", stateAndFee);
 
       const city = convertCitiesToJSON(stateAndFee?.city)?.find(c => billing.city === c.name);
 
       if (city) {
-        dispatch(setDeliveryFee(stateAndFee.name, city?.fee, city?.name));
+        dispatch(setDeliveryFee(stateAndFee.state, city?.fee, city?.name));
       } else {
         message.error("Delivery is not available for this city, Please edit the city", 2);
       }
