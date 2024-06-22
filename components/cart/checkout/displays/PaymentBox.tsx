@@ -73,7 +73,7 @@ function PaymentBox({ step, addressId }) {
         city: deliveryFee.city,
         token: user.token,
       };
-      window.sessionStorage.setItem("order", JSON.stringify(placeOrder));
+      window.localStorage.setItem("order", JSON.stringify(placeOrder));
       paymentMutate(payload);
     }
   };

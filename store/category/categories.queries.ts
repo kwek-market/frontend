@@ -1,6 +1,6 @@
 export const CATEGORIES = /* GraphQL */ `
-  query categories {
-    categories {
+  query categories($search: String, $visibility: String) {
+    categories(search: $search, visibility: $visibility) {
       id
       name
       icon

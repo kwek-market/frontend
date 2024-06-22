@@ -35,7 +35,7 @@ export default memo(Home);
 
 export async function getStaticProps() {
   try {
-    const { categories } = await userFetcher(CATEGORIES);
+    const { categories } = await userFetcher(CATEGORIES, { visibility: "published" });
     const variables = { page: 1, pageSize: 4 };
     const { dealsOfTheDay } = await userFetcher(DEALS_OF_THE_DAY, variables);
 
