@@ -618,3 +618,34 @@ export const ADMIN_FLAG_VENDOR = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_SELLER_STORE = /* GraphQL */ `
+  query seller($shopUrl: String!) {
+    seller(shopUrl: $shopUrl) {
+      user {
+        fullName
+        productSet {
+          id
+          image {
+            imageUrl
+          }
+          productTitle
+          productRating {
+            rating
+            review
+          }
+          options {
+            discountedPrice
+            optionTotalPrice
+            price
+          }
+        }
+      }
+      shopName
+      shopAddress
+      storeBannerUrl
+      phoneNumber
+      storeDescription
+    }
+  }
+`;

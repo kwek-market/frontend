@@ -23,6 +23,7 @@ const Menu = function ({}) {
   const dispatch = useDispatch();
   const {
     user,
+    seller,
     cart: { cart },
     wishlist: { wishlists },
   } = useSelector((state: RootState) => state);
@@ -73,13 +74,19 @@ const Menu = function ({}) {
       icon: "fa-shopping-cart",
       title: "Sell on Kwek",
       description: "Join other merchants",
-      link: "/sell",
+      link: !user.token ? "/sell" : "/seller/profile",
     },
     address: {
       icon: "fa-home",
       title: "My Addresses",
       description: "View saved addresses",
       link: "/profile/account",
+    },
+    store: {
+      icon: "fa-store",
+      title: "View Your Store",
+      description: "View your shop/store",
+      link: seller?.seller?.shopUrl ? `/store/${seller?.seller?.shopUrl}` : "/sell",
     },
   };
 
@@ -152,6 +159,7 @@ const Menu = function ({}) {
           cmd={() => router.push("/contact-us")}
           icon='fa-phone'
         />
+
         {user.id && (
           <Button
             buttonStyle={buttonStyle.btn_block_red}

@@ -1,7 +1,7 @@
 import Button from "@/components/buttons/Button";
 import useReviews from "@/hooks/useReviews";
 import { RootState } from "@/store/rootReducer";
-import { Rate } from "antd";
+import { Rate, message } from "antd";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
@@ -22,6 +22,15 @@ const Component = () => {
 
   function uploadHandler() {
     router.push("/seller/upload-new-product");
+  }
+
+  async function copyHandler(url: string) {
+    try {
+      await navigator.clipboard.writeText(url);
+      message.success("Copy store link ");
+    } catch (error) {
+      message.error("Failed to copy shop link");
+    }
   }
 
   const rating = useMemo(() => {
@@ -73,6 +82,13 @@ const Component = () => {
               <i className='fas fa-copy'></i>
             </span>
           </p>
+
+          <Button
+            icon={"fa-copy"}
+            buttonStyle={"tw-rounded-sm tw-p-3 tw-bg-yellow-filled hover:tw-shadow-md"}
+            text={"Copy Store Url"}
+            cmd={copyHandler as any}
+          />
         </div>
       </div>
       <div className='tw-self-end tw-mb-7'>
