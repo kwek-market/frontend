@@ -45,7 +45,7 @@ const FeatureSection = () => {
     <div className={Styles.features}>
       <div className={Styles.features_question}>
         <h2 className='tw-text-3xl md:tw-text-4xl lg:tw-text-6xl tw-text-gray-kwek200 '>
-          Why Choose KwekMarketMall?
+          Why Choose kwekmarket.com
         </h2>
       </div>
       <div className='tw-grid tw-grid-cols-1 sm:tw-grid-cols-kwek-1 tw-gap-5 md:tw-gap-8  tw-mx-5 md:tw-mx-20 md:tw-mb-20'>
