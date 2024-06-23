@@ -316,7 +316,7 @@ const Page = function () {
             </label>
             <div className='tw-mt-1 tw-flex tw-rounded-md'>
               <span className='tw-inline-flex tw-bg-red-50 tw-items-center tw-px-3 tw-rounded-l-md tw-border tw-border-r-0 tw-border-gray-300 focus:tw-bg-gray-50 tw-text-gray-500 tw-text-sm'>
-                www.kwekmarket.com/
+                www.kwekmarket.com/store/
               </span>
               <input
                 type='text'
