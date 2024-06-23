@@ -87,7 +87,9 @@ const Component = () => {
             icon={"fa-copy"}
             buttonStyle={"tw-rounded-sm tw-p-3 tw-bg-yellow-filled hover:tw-shadow-md"}
             text={"Copy Store Url"}
-            cmd={() => copyHandler(seller?.seller?.shopUrl) as any}
+            cmd={() =>
+              copyHandler(`https://kwekmarket.com/store/${seller?.seller?.shopUrl}`) as any
+            }
           />
         </div>
       </div>
