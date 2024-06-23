@@ -3,14 +3,14 @@ import { FormHead, FormItems } from "@/components/admin/form";
 import { InputField, TextField } from "@/components/input/textInput";
 import { AdminLayout } from "@/layouts";
 import { message } from "antd";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { SearchSelectInput } from "../../../components/input/SelectSearchInput";
-import { userFetcherWithAuth } from "../../../helpers";
-import { ISendEmail, useAdminSendEmails } from "../../../hooks/admin/email";
-import { GET_CUSTOMERS } from "../../../store/admin/admin.queries";
-import { RootState } from "../../../store/rootReducer";
-import { SendEmailSchema } from "../../../validations/sendEmailSchema";
+import { userFetcherWithAuth } from "../../../../helpers";
+import { ISendEmail, useAdminSendEmails } from "../../../../hooks/admin/email";
+import { GET_CUSTOMERS } from "../../../../store/admin/admin.queries";
+import { RootState } from "../../../../store/rootReducer";
+import { SendEmailSchema } from "../../../../validations/sendEmailSchema";
 
 interface IFormData {
   subject?: string;
@@ -18,13 +18,27 @@ interface IFormData {
   userList?: string[];
 }
 
-const CreateEmail = () => {
+const CreateEmailForOneUser = () => {
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
 
+  const { query } = useRouter();
+  const customerId = query.userId as string;
+  const customerName = query?.name as string;
   const [formData, setFormData] = useState<IFormData>({});
+
   const { mutate: createMut } = useAdminSendEmails(token);
+
+  useEffect(() => {
+    if (query.userId) {
+      setFormData({
+        ...formData,
+        userList: [customerId],
+        template: `<h1>Hi, ${customerName}</h1>`,
+      });
+    }
+  }, []);
 
   const sendMail = async e => {
     e.preventDefault();
@@ -61,21 +75,9 @@ const CreateEmail = () => {
         header='Create Email'
       />
       <form className=' tw-mt-16 tw-font-poppins' onSubmit={e => e.preventDefault()}>
-        <FormHead>Basic Information</FormHead>
+        <FormHead>Create a mail for {customerName}</FormHead>
 
         <FormItems>
-          <div className='tw-space-y-2'>
-            <label className=' tw-font-medium'>Select Users (You can select multiple users)</label>
-            <SearchSelectInput
-              fetchOptions={search => fetchUsersList(search, token)}
-              placeholder='Search the user and select'
-              onChange={values => {
-                setFormData({ ...formData, userList: values.map(value => value.value) });
-              }}
-              mode='multiple'
-            />
-          </div>
-
           <div className='tw-space-y-2'>
             <InputField
               label='Subject'
@@ -89,6 +91,7 @@ const CreateEmail = () => {
             <TextField
               label='Message (Note: if you want to reference the user name, you write it in this syntax {{user.full_name}})'
               placeholder='Write a message here, (you can also write HTML codes here)'
+              value={formData.template}
               onChange={e => setFormData({ ...formData, template: e.target.value })}
             />
           </div>
@@ -123,4 +126,4 @@ async function fetchUsersList(search: string, token?: string): Promise<any[]> {
   }
 }
 
-export default CreateEmail;
+export default CreateEmailForOneUser;
