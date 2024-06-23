@@ -49,12 +49,14 @@ const Menu = function ({}) {
       title: "My Cart",
       description: cart?.length < 0 ? "No items in the cart" : `${cart.length} items in the cart`,
       link: "/cart",
+      show: true,
     },
     trackOrder: {
       icon: "fa-map-marker-alt",
       title: "Track Order",
       description: "View order status",
       link: "/profile/account",
+      show: true,
     },
     myOrders: {
       icon: "fa-shopping-bag",
@@ -63,30 +65,35 @@ const Menu = function ({}) {
         ? `${user.user.order.length} items ordered`
         : "No item ordered",
       link: "/profile/account",
+      show: true,
     },
     savedItems: {
       icon: "fa-heart",
       title: "Saved Items",
       description: "View saved items",
       link: "/wishlist",
+      show: true,
     },
     sell: {
       icon: "fa-shopping-cart",
       title: "Sell on Kwek",
       description: "Join other merchants",
       link: !user.token ? "/sell" : "/seller/profile",
+      show: !user.token ? true : false,
     },
     address: {
       icon: "fa-home",
       title: "My Addresses",
       description: "View saved addresses",
       link: "/profile/account",
+      show: true,
     },
     store: {
       icon: "fa-store",
       title: "View Your Store",
       description: "View your shop/store",
-      link: seller?.seller?.shopUrl ? `/store/${seller?.seller?.shopUrl}` : "/sell",
+      link: seller?.seller?.shopUrl ? `/seller/profile` : "/sell",
+      show: user?.user?.isSeller ? true : false,
     },
   };
 
@@ -131,6 +138,7 @@ const Menu = function ({}) {
             title={key[1].title}
             description={key[1].description}
             link={key[1].link}
+            show={key[1].show}
           />
         ))}
       </div>

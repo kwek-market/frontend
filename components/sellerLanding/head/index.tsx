@@ -10,7 +10,7 @@ const SellerLandingHead = () => {
   const router = useRouter();
 
   useLayoutEffect(() => {
-    if (user.token && user?.user?.sellerProfile?.length > 0) {
+    if (user.token && user?.user?.isSeller) {
       router.push("/seller/profile");
     }
   }, []);
@@ -55,7 +55,7 @@ const SellerLandingHead = () => {
       />
 
       {showMenu && (
-        <div className='tw-fixed tw-top-0 tw-right-0 tw-bottom-0 tw-z-30 tw-bg-white-light tw-w-7/12'>
+        <div className='tw-fixed tw-top-0 tw-right-0 tw-bottom-0 tw-z-30 tw-bg-white-light tw-h-1/2 tw-w-7/12'>
           <div className='tw-flex tw-flex-col tw-items-center tw-h-full tw-p  y-4 md:tw-hidden'>
             <div className='tw-mb-5'>
               <i

@@ -119,19 +119,23 @@ const Customer = () => {
 
   return (
     <AdminLayout>
-      <BreadCrumbs
-        items={[
-          { name: "Dashboard", path: "/admin/dashboard" },
-          { name: "Customers", path: "/admin/customers" },
-          {
-            name: router.query?.id as string,
-            path: "/admin/customers/" + router.query?.id,
-          },
-        ]}
-        header='Customer Info'
-        buttonPath=''
-        buttonText='Send Email'
-      />
+      {customerData?.getUserById ? (
+        <BreadCrumbs
+          items={[
+            { name: "Dashboard", path: "/admin/dashboard" },
+            { name: "Customers", path: "/admin/customers" },
+            {
+              name: router.query?.id as string,
+              path: "/admin/customers/" + router.query?.id,
+            },
+          ]}
+          header='Customer Info'
+          buttonPath={`/admin/emails/create/${customerData?.getUserById?.id}?name=${customerData?.getUserById?.fullName}`}
+          buttonText='Send Email'
+        />
+      ) : (
+        <Load />
+      )}
 
       <div className=' tw-mt-12 tw-font-poppins'>
         {/* THE CUSTOMER DETAILS */}
@@ -150,7 +154,7 @@ const Customer = () => {
         <div className=' tw-pt-6  tw-w-[50vw] tw-grid tw-grid-cols-3 tw-gap-x-4'>
           {isLoadingTotalOrders ? <Load /> : null}
           {totalOrders?.getCustomerOrders ? (
-            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
+            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans tw-flex tw-flex-col tw-justify-between'>
               <p className=' tw-mb-0 tw-text-sm tw-text-[#3A434B]'>Total No of Orders</p>
               <p className='tw-mb-0 tw-pt-2 tw-text-[#0D0F11] tw-font-bold tw-text-2xl'>
                 {totalOrders?.getCustomerOrders?.totalOrders}
@@ -160,7 +164,7 @@ const Customer = () => {
 
           {isAverageOrderValueLoading ? <Load /> : null}
           {!isAverageOrderValueLoading ? (
-            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
+            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans tw-flex tw-flex-col tw-justify-between'>
               <p className=' tw-mb-0 tw-text-sm tw-text-[#3A434B]'>Average Order Value</p>
               <p className='tw-mb-0 tw-pt-2 tw-text-[#0D0F11] tw-font-bold tw-text-2xl'>
                 {averageOrderValue}
@@ -169,7 +173,7 @@ const Customer = () => {
           ) : null}
 
           {!isTotalSpentLoading ? (
-            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
+            <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans tw-flex tw-flex-col tw-justify-between'>
               <p className=' tw-mb-0 tw-text-sm tw-text-[#3A434B]'>Total Spent</p>
               <p className='tw-mb-0 tw-pt-2 tw-text-[#0D0F11] tw-font-bold tw-text-2xl'>
                 {totalSpent}

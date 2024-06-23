@@ -144,7 +144,7 @@ const Customers = () => {
           { name: "Customers", path: "/admin/customers" },
         ]}
         header='Customers'
-        buttonPath='#'
+        buttonPath='/admin/emails/create'
         buttonText='Send Bulk Email'
       />
 

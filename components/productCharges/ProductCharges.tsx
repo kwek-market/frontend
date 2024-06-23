@@ -5,9 +5,8 @@ import { useGetProductCharge } from "../../hooks/admin/productCharges";
 import { RootState } from "../../store/rootReducer";
 import Load from "../Loader/Loader";
 import { Naira } from "../UI/NairaSymbol";
-import SimpleModal from "../modal";
 import CreateProductCharge from "./CreateProductCharge";
-import EditProductCharge from "./EcitProductCharge";
+import EditProductChargeModal from "./EcitProductCharge";
 
 interface ProductCharge {
   id: string;
@@ -74,16 +73,18 @@ export const ProductCharges = ({ onEdit }: { onEdit?: () => void }) => {
         ) : null}
       </div>
 
-      <SimpleModal
-        open={isCreateChargeModalOpen}
-        handleClose={() => setIsCreateChargeModalOpen(false)}
-      >
-        <CreateProductCharge />
-      </SimpleModal>
+      <CreateProductCharge
+        isOpen={isCreateChargeModalOpen}
+        onClose={() => setIsCreateChargeModalOpen(false)}
+      />
 
-      <SimpleModal open={isEditChargeModalOpen} handleClose={() => setIsEditChargeModalOpen(false)}>
-        <EditProductCharge charge={productCharge} />
-      </SimpleModal>
+      {productCharge ? (
+        <EditProductChargeModal
+          isOpen={productCharge && isEditChargeModalOpen}
+          onClose={() => setIsEditChargeModalOpen(false)}
+          charge={productCharge}
+        />
+      ) : null}
     </>
   );
 };

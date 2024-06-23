@@ -56,18 +56,18 @@ export const useGetTotalRevenue = (payload: { token: string }) => {
 
 export const useGetRecentTransactions = (payload: PayloadType2 & PayloadType) => {
   return useQuery(["recent-transactions", payload], () =>
-    userFetcherWithAuth(GET_RECENT_TRANSACTIONS, payload, payload.token)
+    userFetcherWithAuth(GET_RECENT_TRANSACTIONS, payload, payload.token),
   );
 };
 
 export const useGetCustomerAverageOrder = (payload: IdAndTokenPayload) => {
   return useQuery(["average-customer-order", payload], () =>
-    userFetcherWithAuth(GET_CUSTOMER_AVERAGE_ORDERS, payload, payload.token)
+    userFetcherWithAuth(GET_CUSTOMER_AVERAGE_ORDERS, payload, payload.token), {enabled: !!payload.id}
   );
 };
 
 export const useGetCustomerTotalExpense = (payload: IdAndTokenPayload) => {
   return useQuery(["average-customer-total-expense", payload], () =>
-    userFetcherWithAuth(GET_TOTAL_CUSTOMER_EXPENSES, payload, payload.token)
+    userFetcherWithAuth(GET_TOTAL_CUSTOMER_EXPENSES, payload, payload.token), {enabled: !!payload.id}
   );
 };
