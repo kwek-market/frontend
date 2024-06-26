@@ -10,9 +10,7 @@ import styles from "./ordersFilled.module.scss";
 import { OrderList } from "@/interfaces/commonTypes";
 import ReactPaginate from "react-paginate";
 
-import useTrackOrder from "@/hooks/useTrackOrder";
 import { RootState } from "@/store/rootReducer";
-import { message } from "antd";
 import { useSelector } from "react-redux";
 import SellerTrackModal from "./trackmodal";
 
@@ -33,46 +31,20 @@ const OrdersFilled = function ({
   filter,
   setFilter,
 }: OrdersFilledProps) {
-  const [orderIdText, setOrderIdText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [order, setOrder] = useState<OrderList>(null);
+
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
 
-  const showModal = (id: string) => {
+  const showModal = (order: OrderList) => {
     setIsModalOpen(true);
-    setOrderIdText(id);
+    setOrder(order);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
-  };
-
-  const { mutate, isLoading } = useTrackOrder();
-  const [info, setInfo] = useState("");
-
-  const handleTrack = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (orderIdText === "" || orderIdText === null) {
-      return message.error("Enter your order id");
-    }
-    mutate(
-      { orderId: orderIdText, token },
-      {
-        onSuccess: data => {
-          if (data.trackOrder.message.toLowerCase() === "invalid order id") {
-            message.error("Invalid order id");
-            setInfo("");
-          } else {
-            message.success(data.trackOrder.message);
-            setInfo(data.trackOrder.message);
-          }
-        },
-        onError: () => {
-          message.error("An error occurred");
-        },
-      }
-    );
   };
 
   console.log("orders", orders);
@@ -112,7 +84,9 @@ const OrdersFilled = function ({
               orderProfit={`NGN ${Number(order.profit).toLocaleString()}`}
               status={order.order.deliveryStatus}
               payment={order.paid ? "paid" : "unpaid"}
-              openTrackModal={showModal}
+              openTrackModal={() => {
+                showModal(order);
+              }}
               order={order.order}
             />
           ))}
@@ -138,15 +112,13 @@ const OrdersFilled = function ({
         activeClassName='active'
         renderOnZeroPageCount={undefined}
       />
-      <SellerTrackModal
-        handleCancel={handleCancel}
-        handleTrack={handleTrack}
-        orderIdText={orderIdText}
-        setOrderIdText={setOrderIdText}
-        isModalOpen={isModalOpen}
-        info={info}
-        loading={isLoading}
-      />
+      {isModalOpen ? (
+        <SellerTrackModal
+          handleCancel={handleCancel}
+          order={order}
+          isModalOpen={isModalOpen && order?.order ? true : false}
+        />
+      ) : null}
     </div>
   );
 };

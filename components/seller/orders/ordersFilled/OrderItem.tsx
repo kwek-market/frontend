@@ -26,7 +26,7 @@ const OrderItem = ({
   order,
 }) => {
   let orderStatus = "pending";
-  if (status?.includes("Order Successful") && order?.closed) {
+  if (status?.includes("Order Successful")) {
     orderStatus = "Successful";
   } else if (status?.includes("Order Failed") || order?.closed) {
     orderStatus = "Failed";
