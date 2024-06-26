@@ -175,6 +175,7 @@ export const GET_SELLER_ORDERS = `
         id
         orderId
         deliveryStatus
+        closed
       }
       created
       customer {
