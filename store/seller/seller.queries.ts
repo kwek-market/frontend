@@ -176,6 +176,13 @@ export const GET_SELLER_ORDERS = `
         orderId
         deliveryStatus
         closed
+        dateCreated
+        doorStep {
+          city
+          state
+          address
+          fullName
+        }
       }
       created
       customer {
