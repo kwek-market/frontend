@@ -379,6 +379,7 @@ export type OrderList = {
     id: string;
     orderId: string;
     deliveryStatus: string;
+    closed: boolean
   };
   total: number;
   profit: number;

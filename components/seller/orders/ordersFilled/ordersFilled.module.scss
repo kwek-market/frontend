@@ -169,6 +169,17 @@
         font-weight: 500;
       }
 
+      .orderStatusFailed {
+        padding: 10px 26px;
+        background: #f53131;
+        border-radius: 20px;
+        color: #ffffff;
+        width: fit-content;
+        text-align: center;
+        min-width: 128px;
+        font-weight: 500;
+      }
+
       .trackOrder {
         padding: 10px 26px;
         background: #009d19;
