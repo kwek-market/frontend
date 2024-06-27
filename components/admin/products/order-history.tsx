@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetProductOrders } from "../../../hooks/admin/products";
 import { RootState } from "../../../store/rootReducer";
+import { OrderDeliveryStatus } from "../../../validations/orders";
 
 interface Prop {
   isFetching?: boolean;
@@ -98,7 +99,7 @@ const OrderHistory = ({ isFetching }: Prop) => {
       render: (status: string) => (
         <span
           className={`${
-            status?.toLowerCase() === "delivered" ? "tw-bg-[#009D19]" : "tw-bg-[#FFC107]"
+            status?.toLowerCase() === OrderDeliveryStatus.Delivered ? "tw-bg-[#009D19]" : "tw-bg-[#FFC107]"
           } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-px-3 tw-py-2`}
         >
           {status}

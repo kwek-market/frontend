@@ -1,17 +1,32 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import CustomerDetail from "@/components/admin/customers/customer-detail";
 import { AdminLayout } from "@/layouts";
-import { Empty } from "antd";
+import { Button, Empty, Popconfirm, message } from "antd";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Load from "../../../../../components/Loader/Loader";
 import { OrderTable } from "../../../../../components/admin/orderTable/orderTable";
-import { useGetOrdersAdmin } from "../../../../../hooks/admin/orders";
+import { useGetOrdersAdmin, useUpdateOrderDeliveryStatus } from "../../../../../hooks/admin/orders";
+import useCancelOrder from "../../../../../hooks/useCancelOrder";
 import { RootState } from "../../../../../store/rootReducer";
+import {
+  OrderDeliveryStatus,
+  UpdateOrderDeliveryStatusSchema,
+} from "../../../../../validations/orders";
+import { queryClient } from "../../../../_app";
 
 const getOrderText = (order: any) => {
   let text = "";
   let className = "";
+  let status = "open";
+  let statusStyle = "tw-bg-green-500";
+
+  if (order?.closed) {
+    status = "closed";
+    statusStyle = "tw-bg-red-500";
+  }
+
   if (order?.paid) {
     text = "SUCCESS - PAYMENT SUCCESSFUL";
     className = "tw-bg-green-500";
@@ -27,7 +42,7 @@ const getOrderText = (order: any) => {
     className = "tw-bg-yellow-500";
   }
 
-  return { text, className };
+  return { text, className, status, statusStyle };
 };
 
 const OrderDetail = () => {
@@ -38,7 +53,54 @@ const OrderDetail = () => {
     token: user?.token,
   });
 
+  const { mutate: cancelOrder, isLoading: isCancellingOrder } = useCancelOrder();
+  const { mutate: updateStatus, isLoading: isLoadingStatus } = useUpdateOrderDeliveryStatus();
+
+  const [selectedStatus, setSelectedStatus] = useState("");
+
   const order = data?.order;
+
+  useEffect(() => {
+    if (order) {
+      setSelectedStatus(order?.deliveryStatus);
+    }
+  }, [order]);
+
+  const handleCancelOrder = async () => {
+    cancelOrder(
+      { orderId: router?.query?.orderId as string, token: user.token },
+      {
+        onSuccess(data) {
+          queryClient.invalidateQueries(["orders", "admin", router.query?.orderId]);
+          message.success(data?.cancelOrder?.message);
+        },
+        onError: error => {
+          message.error((error as { message: string }).message);
+        },
+      }
+    );
+  };
+
+  const handleUpdateOrderStatus = value => {
+    setSelectedStatus(value);
+    const data = {
+      orderId: router?.query.orderId,
+      token: user?.token,
+      deliveryStatus: value,
+    };
+
+    const validData = UpdateOrderDeliveryStatusSchema.parse(data);
+
+    updateStatus(validData, {
+      onSuccess() {
+        queryClient.invalidateQueries(["orders", "admin", router.query?.orderId]);
+      },
+      onError: error => {
+        message.error((error as { message: string }).message);
+      },
+    });
+  };
+
   console.log("🚀 ~~ OrderDetail ~~ order:", order);
 
   return (
@@ -98,6 +160,49 @@ const OrderDetail = () => {
                 <p className='tw-mb-0 tw-font-medium'>Total:</p>
                 <p className='tw-mb-0'>NGN {order?.orderPriceTotal}</p>
               </div>
+              <div className=' tw-flex tw-justify-between tw-pt-2 tw-items-center '>
+                <p className='tw-mb-0 tw-font-medium'>Order Status</p>
+                <p
+                  className={`tw-mb-0 tw-px-2 tw-py-1 tw-font-semibold tw-uppercase tw-text-white-100 ${
+                    getOrderText(order).statusStyle
+                  }`}
+                >
+                  {getOrderText(order).status}
+                </p>
+              </div>
+
+              <div className='tw-space-x-2'>
+                <label className='text-lg'>Update Delivery Status: </label>
+                <select
+                  onChange={e => handleUpdateOrderStatus(e.target.value)}
+                  className='tw-rounded-lg'
+                  name='updateDeliveryStatus'
+                  defaultValue={selectedStatus}
+                >
+                  {Object.values(OrderDeliveryStatus)?.map(status => (
+                    <option key={status} value={status} className='tw-capitalize'>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {!order?.closed ? (
+                <Popconfirm
+                  title='Are you sure you want to close this order, this action cannot be undone'
+                  onConfirm={handleCancelOrder}
+                >
+                  <Button
+                    loading={isCancellingOrder}
+                    className='mt-4'
+                    size='large'
+                    type='primary'
+                    danger
+                  >
+                    Close Order
+                  </Button>
+                </Popconfirm>
+              ) : null}
 
               <div className=' tw-flex tw-justify-between tw-pt-12 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium tw-text-lg tw-text-[#AF1328]'>
@@ -163,9 +268,15 @@ const OrderDetail = () => {
                   </h2>
 
                   <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
+                    <p className=' tw-font-semibold tw-mb-0'>Delivery Status</p>
+                    <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>{order?.deliveryStatus}</p>
+                  </div>
+
+                  <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
                     <p className=' tw-font-semibold tw-mb-0'>Delivery Method</p>
                     <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>{order?.deliveryMethod}</p>
                   </div>
+
                   <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
                     <p className=' tw-font-semibold tw-mb-0'>Delivery Address</p>
                     <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-2'>
@@ -250,9 +361,10 @@ const Item = ({ image, name, qty, amount, size, color, brand, fullName, email, p
           ) : null}
         </div>
         <div className='tw-space-y-1'>
-          <span className=' tw-text-opacity-60 tw-text-right'>QTY: {qty}</span>
+          <span className='tw-block tw-text-opacity-60 tw-text-right'>QTY: {qty}</span>
+          <span className='tw-block tw-text-opacity-60 tw-text-right'>Price: {Number(amount)}</span>
           <p className='tw-mb-0 tw-font-medium tw-text-xl tw-text-right tw-pt-2'>
-            NGN {Number(amount).toLocaleString()}
+            NGN {Number(amount * qty)}
           </p>
         </div>
       </div>

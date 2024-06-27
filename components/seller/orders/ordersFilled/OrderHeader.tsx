@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./ordersFilled.module.scss";
 
 const OrderHeader = function () {
@@ -31,8 +29,11 @@ const OrderHeader = function () {
           <span className={styles.title}>Status</span>
         </th>
         <th>
-          <span className={styles.title}></span>
+          <span className={styles.title}>Track Order</span>
         </th>
+        {/* <th>
+          <span className={styles.title}>Actions</span>
+        </th> */}
       </tr>
     </thead>
   );

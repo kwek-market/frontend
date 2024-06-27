@@ -48,7 +48,7 @@ const Details = function ({ show, order, idx, setActiveBtn }) {
           </h5>
           {show && (
             <span className="tw-opacity-90 tw-font-medium tw-text-black-stock tw-text-sm">
-              Delivered between 04 June and 06 June
+              Delivered
             </span>
           )}
           {!order.closed ? (

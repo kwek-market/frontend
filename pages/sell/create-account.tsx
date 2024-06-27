@@ -116,7 +116,7 @@ const Page = function () {
         {
           ...sellerData,
           phoneNumber: `${callCode}${phoneNumber}`,
-          shopUrl: sellerData.shopUrl.trim(),
+          shopUrl: sellerData.shopUrl.trim()?.replaceAll(" ", "-"),
         },
         user.token
       )

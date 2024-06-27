@@ -14,7 +14,7 @@ function useProduct(payload: { id: string }) {
   });
 
   useEffect(() => {
-    if (payload.id === undefined) return;
+    if (!payload.id) return;
     (async () => {
       try {
         setProductData({ ...productData, loading: true });
@@ -41,3 +41,11 @@ function useProduct(payload: { id: string }) {
 }
 
 export default useProduct;
+
+export function useGetProduct(id: string, enabled?: boolean) {
+  console.log("🚀 ~~ useGetProduct ~~ id:", id);
+
+  return useQuery(["single-product", id], () => userFetcher(GetProduct, { id }), {
+    enabled: !!id,
+  });
+}

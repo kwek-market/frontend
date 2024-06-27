@@ -1,17 +1,18 @@
 import DragnDrop from "@/components/DnD/DragnDrop";
+import ErrorInfo from "@/components/Loader/ErrorInfo";
 import Load from "@/components/Loader/Loader";
+import { LocationInfo, LocationMarker } from "@/components/map";
+import useLocation from "@/hooks/useLocation";
 import useStoreBanner from "@/hooks/useStoreBanner";
 import useStoreLocationUpdate from "@/hooks/useStoreLocationUpdate";
 import { RootState } from "@/store/rootReducer";
 import { getSellerData } from "@/store/seller/seller.action";
 import { Input, message } from "antd";
+import GoogleMapReact from "google-map-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GoogleMapReact from "google-map-react";
-import { LocationInfo, LocationMarker } from "@/components/map";
-import useLocation from "@/hooks/useLocation";
 import { v4 } from "uuid";
-import ErrorInfo from "@/components/Loader/ErrorInfo";
+import { useUpdateStoreUrl } from "../../../../hooks/useSellerStore";
 
 export default function Store() {
   const defaultProps = {
@@ -30,6 +31,7 @@ export default function Store() {
   const { mutate: post, isLoading: loading } = useStoreLocationUpdate();
   const address = `${seller.shopAddress} ${seller.city}  ${seller.state}`;
   const { data, status, error } = useLocation(address);
+  const { isLoading: isLoadingUrl, mutate: mutateStoreUrl } = useUpdateStoreUrl();
 
   const [store, setStore] = useState({
     storeBannerUrl: "",
@@ -37,6 +39,8 @@ export default function Store() {
   });
   const [files, setFiles] = useState<File>();
   const [previewImage, setPreviewImage] = useState(seller.storeBannerUrl ?? "");
+  const [sellerUrl, setSellerUrl] = useState(seller?.shopUrl ?? "");
+
   const [storeLocation, setStoreLocation] = useState({
     city: seller.city ?? "",
     landmark: seller.landmark ?? "",
@@ -99,11 +103,8 @@ export default function Store() {
     (async () => {
       try {
         let loading = true;
-        loading &&
-          message.loading({ content: "Uploading...", key: "uploading" });
-        const data = await (
-          await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_URL, options)
-        ).json();
+        loading && message.loading({ content: "Uploading...", key: "uploading" });
+        const data = await (await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_URL, options)).json();
 
         loading = false;
         const { secure_url } = data;
@@ -132,7 +133,7 @@ export default function Store() {
       token: user.token,
     };
     mutate(payload, {
-      onSuccess: (data) => {
+      onSuccess: data => {
         dispatch(getSellerData(user.token));
         message.success(data.storeBanner.message);
       },
@@ -158,9 +159,28 @@ export default function Store() {
       token: user.token,
     };
     post(payload, {
-      onSuccess: (data) => {
+      onSuccess: data => {
         dispatch(getSellerData(user.token));
         message.success(data.storeLocationUpdate.message);
+      },
+      onError: (err: any) => {
+        message.error(err.message);
+      },
+    });
+  }
+
+  function updateStoreUrl() {
+    if (sellerUrl.trim() === "" && sellerUrl.trim()?.length < 3)
+      return message.error("Shop cannot be empty");
+
+    const payload = {
+      shopUrl: sellerUrl.trim().replaceAll(" ", "-"),
+      token: user.token,
+    };
+    mutateStoreUrl(payload, {
+      onSuccess: data => {
+        dispatch(getSellerData(user.token));
+        message.success(data.storeUpdate.message);
       },
       onError: (err: any) => {
         message.error(err.message);
@@ -198,80 +218,79 @@ export default function Store() {
   }
 
   return (
-    <section className="tw-mb-7 md:tw-px-12 lg:tw-px-36">
-      <div className="">
-        <div className="tw-mb-3">
-          <div className="tw-flex tw-justify-end tw-mb-5">
+    <section className='tw-mb-7 md:tw-px-12 lg:tw-px-36'>
+      <div className=''>
+        <div className='tw-mb-3'>
+          <div className='tw-flex tw-justify-end tw-mb-5'>
             <button
-              className="tw-p-3 tw-text-white-100 tw-bg-red-kwek100 tw-rounded-md tw-capitalize"
+              className='tw-p-3 tw-text-white-100 tw-bg-red-kwek100 tw-rounded-md tw-capitalize'
               onClick={handleFileUpload}
             >
               upload image
             </button>
           </div>
-          <label htmlFor="id-upload" className="tw-mt-8 tw-relative">
-            <DragnDrop handleFileDrop={handleFileDrop}>
-              <div className="tw-border-2 tw-border-gray-kwek100 tw-border-dotted tw-rounded-lg tw-cursor-pointer">
-                <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-relative tw-h-[250px]">
-                  {previewImage && (
-                    <div className="tw-absolute tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-z-10 tw-flex tw-justify-center tw-bg-white-100">
-                      <img
-                        src={previewImage}
-                        alt="preview"
-                        width="100%"
-                        height="100%"
-                        className="tw-object-cover tw-object-top tw-rounded-lg"
-                      />
-                    </div>
-                  )}
-                  <p className="tw-text-gray-kwek100 tw-text-sm">
-                    Drop image here
-                  </p>
-                  <p className="tw-border tw-border-red-kwek100 tw-text-red-kwek100 tw-rounded-sm tw-p-2 tw-my-4 tw-font-medium tw-text-md">
-                    <i className="" /> choose file{" "}
-                    <i className="fas fa-caret-down" />
-                  </p>
-                  <p className="tw-text-gray-kwek100 tw-text-center tw-text-sm">
-                    Supported formats: JPG, PNG, JPEG. File size limit is 1MB{" "}
-                    <br />
-                    Recommended dimension : 1920 X 1080 px
-                  </p>
+          <div className='tw-spacey-2'>
+            <h2 className='tw-uppercase tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-mb-1'>
+              Product Image
+            </h2>
+            <label htmlFor='id-upload' className='tw-mt-8 tw-relative'>
+              <DragnDrop handleFileDrop={handleFileDrop}>
+                <div className='tw-border-2 tw-border-gray-kwek100 tw-border-dotted tw-rounded-lg tw-cursor-pointer'>
+                  <div className='tw-flex tw-flex-col tw-justify-center tw-items-center tw-relative tw-h-[250px]'>
+                    {previewImage && (
+                      <div className='tw-absolute tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-z-10 tw-flex tw-justify-center tw-bg-white-100'>
+                        <img
+                          src={previewImage}
+                          alt='preview'
+                          width='100%'
+                          height='100%'
+                          className='tw-object-cover tw-object-top tw-rounded-lg'
+                        />
+                      </div>
+                    )}
+                    <p className='tw-text-gray-kwek100 tw-text-sm'>Drop image here</p>
+                    <p className='tw-border tw-border-red-kwek100 tw-text-red-kwek100 tw-rounded-sm tw-p-2 tw-my-4 tw-font-medium tw-text-md'>
+                      <i className='' /> choose file <i className='fas fa-caret-down' />
+                    </p>
+                    <p className='tw-text-gray-kwek100 tw-text-center tw-text-sm'>
+                      Supported formats: JPG, PNG, JPEG. File size limit is 1MB <br />
+                      Recommended dimension : 1920 X 1080 px
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <input
-                type="file"
-                id="id-upload"
-                name="id-upload"
-                accept=".png, .jpg, .jpeg, image/*"
-                onChange={(e) => checkSetFile(e)}
-                className="tw-absolute tw-overflow-hidden tw-w-1 tw-opacity-0 tw-h-1 tw-z-[-1]"
-              />
-            </DragnDrop>
-          </label>
+                <input
+                  type='file'
+                  id='id-upload'
+                  name='id-upload'
+                  accept='.png, .jpg, .jpeg, image/*'
+                  onChange={e => checkSetFile(e)}
+                  className='tw-absolute tw-overflow-hidden tw-w-1 tw-opacity-0 tw-h-1 tw-z-[-1]'
+                />
+              </DragnDrop>
+            </label>
+          </div>
         </div>
-        <div className="">
+        <div className=''>
           <label
-            htmlFor="storeDescription"
-            className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+            htmlFor='storeDescription'
+            className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
           >
             Store Description
           </label>
           <Input.TextArea
-            id="storeDescription"
-            placeholder="This is a description of my test store. MY STORE FOCUSES ON BAGS AND SHOES"
+            id='storeDescription'
+            placeholder='This is a description of my test store. MY STORE FOCUSES ON BAGS AND SHOES'
             showCount
             maxLength={200}
             value={store.storeDescription}
-            onChange={(e) =>
-              setStore({ ...store, storeDescription: e.target.value })
-            }
+            onChange={e => setStore({ ...store, storeDescription: e.target.value })}
           />
         </div>
         {isLoading && <Load />}
-        <div className="tw-flex tw-justify-end tw-mt-7">
+        <div className='tw-flex tw-justify-end tw-mt-7'>
           <button
-            className="tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10"
+            className='tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10'
             onClick={() => saveChanges()}
           >
             Save Changes
@@ -280,27 +299,69 @@ export default function Store() {
       </div>
 
       <div>
-        <div className="tw-border-b tw-border-gray-kwek900 tw-border-opacity-50">
-          <p className="tw-uppercase tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-mb-1">
+        <div className='tw-border-b tw-border-gray-kwek900 tw-border-opacity-50'>
+          <p className='tw-uppercase tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-mb-1'>
+            Store Url
+          </p>
+        </div>
+        <section className='tw-mt-4'>
+          <div className=''>
+            <label
+              htmlFor='streetAddress'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
+            >
+              Store Url
+            </label>
+            <div className='tw-flex tw-border-2 tw-items-center'>
+              <div className='tw-bg-gray-400/20 tw-flex tw-text-black-kwek100 tw-py-3 tw-px-4'>
+                www.kwekmarket.com/store/
+              </div>
+              <Input
+                id='streetAddress'
+                type='text'
+                size='large'
+                placeholder='street address'
+                className='tw-border-0 !tw-outline-none focus:tw-outline-none'
+                value={sellerUrl}
+                onChange={e => setSellerUrl(e.target.value)}
+              />
+            </div>
+          </div>
+          {isLoadingUrl && <Load />}
+          <div className='tw-flex tw-justify-end tw-mt-7'>
+            <button
+              className='tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10'
+              onClick={() => updateStoreUrl()}
+            >
+              Save Changes
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <div className='tw-border-b tw-border-gray-kwek900 tw-border-opacity-50'>
+          <p className='tw-uppercase tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-mb-1'>
             store location
           </p>
         </div>
-        <section className="tw-mt-4">
-          <div className="">
+        <section className='tw-mt-4'>
+          <div className=''>
             <label
-              htmlFor="streetAddress"
-              className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+              htmlFor='streetAddress'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
             >
               Street Address
             </label>
             <Input
-              id="streetAddress"
-              type="text"
-              size="large"
-              placeholder="street address"
+              id='streetAddress'
+              type='text'
+              size='large'
+              placeholder='street address'
               value={storeLocation.shopAddress}
-              onChange={(e) =>
+              onChange={e =>
                 setStoreLocation({
                   ...storeLocation,
                   shopAddress: e.target.value,
@@ -308,7 +369,7 @@ export default function Store() {
               }
             />
           </div>
-          <div className="tw-my-4 tw-w-full tw-h-[50vh] tw-relative">
+          <div className='tw-my-4 tw-w-full tw-h-[50vh] tw-relative'>
             {data?.error_message && <ErrorInfo error={data.error_message} />}
             <GoogleMapReact
               bootstrapURLKeys={{
@@ -322,16 +383,8 @@ export default function Store() {
               {
                 <LocationMarker
                   key={v4()}
-                  lat={
-                    status === "success"
-                      ? locations.lat
-                      : defaultProps.center.lat
-                  }
-                  lng={
-                    status === "success"
-                      ? locations.lng
-                      : defaultProps.center.lng
-                  }
+                  lat={status === "success" ? locations.lat : defaultProps.center.lat}
+                  lng={status === "success" ? locations.lng : defaultProps.center.lng}
                   onClick={() => {
                     setLocationInfo({
                       name: seller.shopName,
@@ -342,29 +395,26 @@ export default function Store() {
               }
             </GoogleMapReact>
             {locationInfo.name && locationInfo.address && (
-              <LocationInfo
-                name={locationInfo.name}
-                address={locationInfo.address}
-              />
+              <LocationInfo name={locationInfo.name} address={locationInfo.address} />
             )}
           </div>
-          <section className="tw-grid tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-7">
-            <div className="tw-flex tw-flex-col tw-relative">
+          <section className='tw-grid tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-7'>
+            <div className='tw-flex tw-flex-col tw-relative'>
               <label
-                htmlFor="state"
-                className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+                htmlFor='state'
+                className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
               >
                 state
               </label>
               <Input
-                id="state"
-                type="text"
-                placeholder="state"
-                className="tw-rounded-sm tw-w-full tw-mt-2"
-                size="large"
+                id='state'
+                type='text'
+                placeholder='state'
+                className='tw-rounded-sm tw-w-full tw-mt-2'
+                size='large'
                 value={storeLocation.state}
-                onChange={(e) =>
+                onChange={e =>
                   setStoreLocation({
                     ...storeLocation,
                     state: e.target.value,
@@ -372,22 +422,22 @@ export default function Store() {
                 }
               />
             </div>
-            <div className="tw-flex tw-flex-col tw-relative">
+            <div className='tw-flex tw-flex-col tw-relative'>
               <label
-                htmlFor="city"
-                className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+                htmlFor='city'
+                className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
               >
                 city
               </label>
               <Input
-                id="city"
-                type="text"
-                placeholder="city"
-                className="tw-rounded-sm tw-w-full tw-mt-2"
-                size="large"
+                id='city'
+                type='text'
+                placeholder='city'
+                className='tw-rounded-sm tw-w-full tw-mt-2'
+                size='large'
                 value={storeLocation.city}
-                onChange={(e) =>
+                onChange={e =>
                   setStoreLocation({
                     ...storeLocation,
                     city: e.target.value,
@@ -395,22 +445,22 @@ export default function Store() {
                 }
               />
             </div>
-            <div className="tw-flex tw-flex-col tw-relative">
+            <div className='tw-flex tw-flex-col tw-relative'>
               <label
-                htmlFor="landmark"
-                className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+                htmlFor='landmark'
+                className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
               >
                 Phone Number
               </label>
               <Input
-                id="landmark"
-                type="text"
-                placeholder="landmark"
-                className="tw-rounded-sm tw-w-full"
-                size="large"
+                id='landmark'
+                type='text'
+                placeholder='landmark'
+                className='tw-rounded-sm tw-w-full'
+                size='large'
                 value={storeLocation.landmark}
-                onChange={(e) =>
+                onChange={e =>
                   setStoreLocation({
                     ...storeLocation,
                     landmark: e.target.value,
@@ -418,22 +468,22 @@ export default function Store() {
                 }
               />
             </div>
-            <div className="tw-flex tw-flex-col tw-relative">
+            <div className='tw-flex tw-flex-col tw-relative'>
               <label
-                htmlFor="lga"
-                className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+                htmlFor='lga'
+                className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
               >
                 lga address
               </label>
               <Input
-                id="lga"
-                type="text"
-                placeholder="lga"
-                className="tw-rounded-sm tw-w-full tw-mt-2"
-                size="large"
+                id='lga'
+                type='text'
+                placeholder='lga'
+                className='tw-rounded-sm tw-w-full tw-mt-2'
+                size='large'
                 value={storeLocation.lga}
-                onChange={(e) =>
+                onChange={e =>
                   setStoreLocation({
                     ...storeLocation,
                     lga: e.target.value,
@@ -443,9 +493,9 @@ export default function Store() {
             </div>
           </section>
           {loading && <Load />}
-          <div className="tw-flex tw-justify-end tw-mt-7">
+          <div className='tw-flex tw-justify-end tw-mt-7'>
             <button
-              className="tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10"
+              className='tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10'
               onClick={() => updateLocation()}
             >
               Save Changes

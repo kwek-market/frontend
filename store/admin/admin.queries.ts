@@ -176,8 +176,8 @@ export const GET_PRODUCT_REVIEWS = /* GraphQL */ `
 `;
 
 export const GET_CATEGORIES = /* GraphQL */ `
-  query categories($search: String) {
-    categories(search: $search) {
+  query categories($search: String, $visibility: String) {
+    categories(search: $search, visibility: $visibility) {
       id
       name
       icon
@@ -538,6 +538,7 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
       paymentMethod
       orderPrice
       deliveryMethod
+      deliveryStatus
       paid
       closed
       doorStep {
@@ -887,6 +888,15 @@ export const GET_PRODUCT_CHARGE = /* GraphQL */ `
       id
       hasFixedAmount
       charge
+    }
+  }
+`;
+
+export const UPDATE_DELIVERY_STATUS = /* GraphQL */ `
+  mutation updateDeliveryStatus($deliveryStatus: String!, $orderId: String!) {
+    updateDeliveryStatus(deliveryStatus: $deliveryStatus, orderId: $orderId) {
+      status
+      message
     }
   }
 `;
