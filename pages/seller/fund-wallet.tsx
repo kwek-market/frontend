@@ -8,6 +8,7 @@ import { message } from "antd";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { OrderDeliveryStatus } from "../../validations/orders";
 
 export default function fundWallet() {
   const {
@@ -19,7 +20,7 @@ export default function fundWallet() {
   const { mutate: post, isLoading: loading } = usePaymentVerify(token);
 
   useEffect(() => {
-    if (status === "cancelled") {
+    if (status === OrderDeliveryStatus.Cancelled) {
       message.error("Payment was cancelled, redirecting to profile page");
       router.push("/seller/profile");
       return;
