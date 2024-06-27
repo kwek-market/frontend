@@ -1,7 +1,7 @@
 import useAvgRating from "@/hooks/useAvgRating";
 import useGetSellerWallet from "@/hooks/useGetSellerWallet";
 import usePayment from "@/hooks/usePayment";
-import useProduct from "@/hooks/useProduct";
+import { useGetProduct } from "@/hooks/useProduct";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
 import Modal from "antd/lib/modal/Modal";
@@ -9,33 +9,42 @@ import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
+import { userFetcherWithAuth } from "../../helpers";
+import { GET_PRODUCTS } from "../../store/admin/admin.queries";
 import ErrorInfo from "../Loader/ErrorInfo";
 import Load from "../Loader/Loader";
+import SingleSelectSearchInput from "../input/SingleSelectSearchInput";
 import styles from "./PromoteProduct.module.scss";
 
 type PromoteData = {
   range: number;
   days: number;
   endDate: string;
+  productId: string;
 };
 
 type PromoteProductProps = {
-  id: string;
   promoteData: PromoteData;
   setPromoteData: React.Dispatch<React.SetStateAction<PromoteData>>;
 };
 
-const PromoteProduct = function ({ id, promoteData, setPromoteData }: PromoteProductProps) {
+const PromoteProduct = function ({ promoteData, setPromoteData }: PromoteProductProps) {
+  console.log("🚀 ~~ PromoteProduct ~~ promoteData:", promoteData);
+
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
-  const payload = {
-    id: id as string,
-  };
+
   const { status, data } = useGetSellerWallet(token);
   const { mutate, isLoading } = usePayment(token);
-  const { error, loading, product } = useProduct(payload);
+  const {
+    error,
+    isLoading: isProductLoading,
+    data: productData,
+  } = useGetProduct(promoteData?.productId);
   const [amount, setAmount] = useState(0);
+
+  const product = productData?.product;
 
   const avgRating = useAvgRating(product);
 
@@ -99,15 +108,38 @@ const PromoteProduct = function ({ id, promoteData, setPromoteData }: PromotePro
           </label>
         </div>
       </Modal>
+
       <div className={styles.promote}>
         <div className='tw-flex-[2]'>
           <form className={styles.form}>
+            <div className='tw-space-y-2'>
+              <label className=' tw-font-medium'>Select Product</label>
+              {/* <SearchSelectInput
+                fetchOptions={search => fetchProductsList(search, token)}
+                placeholder='Search the user and select'
+                onChange={value => {
+                  setPromoteData({ ...promoteData, productId: value?.value });
+                }}
+                maxTagCount={"responsive"}
+              /> */}
+
+              <SingleSelectSearchInput
+                style={{ width: "100%" }}
+                placeHolder='Select Product'
+                onSearch={value => fetchProductsList(value, token)}
+                onChange={value => {
+                  setPromoteData({ ...promoteData, productId: value });
+                }}
+              />
+            </div>
+
             <div className={styles.board}>
               <h4 className={styles.duration}>Duration</h4>
               <div className={styles.key}>
                 <Image src='/images/board.png' width='20' height='20' className={styles.img} />
               </div>
             </div>
+
             <div className={styles.parallel}>
               <div className=''>
                 <label htmlFor='day' className={styles.count}>
@@ -191,9 +223,9 @@ const PromoteProduct = function ({ id, promoteData, setPromoteData }: PromotePro
 
         <div className={styles.session2}>
           <h4 className={styles.preview}>Ad Preview</h4>
-          {loading && <Load />}
-          {error && <ErrorInfo error={error.message} />}
-          {Object.keys(product).length && (
+          {isProductLoading && <Load />}
+          {error && <ErrorInfo error={(error as any).message} />}
+          {product && (
             <div className=''>
               <div className={styles.product}>
                 <Image src={product.image[0].imageUrl} width='500' height='284' />
@@ -236,3 +268,20 @@ const PromoteProduct = function ({ id, promoteData, setPromoteData }: PromotePro
 };
 
 export default PromoteProduct;
+
+async function fetchProductsList(search: string, token?: string): Promise<any[]> {
+  try {
+    const result = await userFetcherWithAuth(
+      GET_PRODUCTS,
+      { search, token, page: 1, pageSize: 50 },
+      token
+    );
+
+    return result?.products?.objects?.map(product => ({
+      text: `${product.productTitle}`,
+      value: product.id,
+    }));
+  } catch (error) {
+    console.error(error);
+  }
+}
