@@ -29,7 +29,7 @@ const Menu = function ({}) {
   } = useSelector((state: RootState) => state);
   const router = useRouter();
 
-  const { data: categories, isLoading } = useGetCategories({ search: "" });
+  const { data: categories, isLoading } = useGetCategories({ search: "", visibility: "published" });
 
   function handleLogout() {
     dispatch(logout());

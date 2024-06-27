@@ -1,8 +1,15 @@
 import { userFetcherWithAuth } from "@/helpers";
-import { useQuery } from "react-query";
+import { message } from "antd";
+import { useMutation, useQuery } from "react-query";
 import { PAGE_SIZE } from "../../constants/constants";
 import { IdAndTokenPayload } from "../../interfaces/commonTypes";
-import { GET_ALL_ORDERS, GET_ORDERS_ADMIN } from "../../store/admin/admin.queries";
+import {
+  CREATE_FLASH_SALE,
+  GET_ALL_ORDERS,
+  GET_ORDERS_ADMIN,
+  UPDATE_DELIVERY_STATUS,
+} from "../../store/admin/admin.queries";
+import { UpdateOrderDeliveryStatusType } from "../../validations/orders";
 
 interface PayloadType {
   token: string;
@@ -36,3 +43,19 @@ export function useGetOrdersAdmin(payload: IdAndTokenPayload) {
     }
   );
 }
+
+export const useUpdateOrderDeliveryStatus = () => {
+  return useMutation(
+    (payload: UpdateOrderDeliveryStatusType) =>
+      userFetcherWithAuth(UPDATE_DELIVERY_STATUS, { ...payload }, payload.token),
+    {
+      onSuccess: data => {
+        if (!data.updateDeliveryStatus.status) {
+          throw Error(data.updateDeliveryStatus.message);
+        } else {
+          message.success(data.updateDeliveryStatus.message);
+        }
+      },
+    }
+  );
+};

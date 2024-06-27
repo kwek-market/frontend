@@ -13,6 +13,7 @@ import Load from "../Loader/Loader";
 import { v4 } from "uuid";
 import Image from "next/image";
 import useCancelOrder from "@/hooks/useCancelOrder";
+import { OrderDeliveryStatus } from "../../validations/orders";
 
 export type OrderProps = {
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
@@ -30,7 +31,7 @@ const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
   const queryClient = new QueryClient();
 
   const deliveryStatus =
-    order.deliveryStatus === " delivered"
+    order.deliveryStatus === OrderDeliveryStatus.Delivered
       ? "tw-bg-green-success"
       : "tw-bg-yellow-filled";
 
@@ -92,8 +93,8 @@ const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
             </span>
           </div>
           <span className="tw-opacity-90 tw-text-sm tw-font-medium tw-text-black-stock">
-            {order.deliveryStatus === " delivered" && (
-              <>Delivered by, Friday, 6 June</>
+            {order.deliveryStatus === OrderDeliveryStatus.Delivered && (
+              <>Delivered</>
             )}
           </span>
         </div>

@@ -175,6 +175,14 @@ export const GET_SELLER_ORDERS = `
         id
         orderId
         deliveryStatus
+        closed
+        dateCreated
+        doorStep {
+          city
+          state
+          address
+          fullName
+        }
       }
       created
       customer {
@@ -646,6 +654,25 @@ export const GET_SELLER_STORE = /* GraphQL */ `
       storeBannerUrl
       phoneNumber
       storeDescription
+    }
+  }
+`;
+
+export const UPDATE_STORE_URL = /* GraphQL */ `
+  mutation storeUpdate(
+    $shopUrl: String
+    $storeBanner: String
+    $storeDescription: String
+    $token: String!
+  ) {
+    storeUpdate(
+      shopUrl: $shopUrl
+      storeBanner: $storeBanner
+      storeDescription: $storeDescription
+      token: $token
+    ) {
+      status
+      message
     }
   }
 `;

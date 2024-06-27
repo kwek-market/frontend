@@ -379,6 +379,14 @@ export type OrderList = {
     id: string;
     orderId: string;
     deliveryStatus: string;
+    closed: boolean;
+    dateCreated: string;
+    doorStep: {
+      city: string;
+      state: string;
+      address: string;
+      fullName: string;
+    };
   };
   total: number;
   profit: number;
