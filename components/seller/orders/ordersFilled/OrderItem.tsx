@@ -26,9 +26,9 @@ const OrderItem = ({
   order,
 }) => {
   let orderStatus = "pending";
-  if (status?.includes("Order Successful")) {
+  if (status?.includes("delivered") && order?.closed) {
     orderStatus = "Successful";
-  } else if (status?.includes("Order Failed") || order?.closed) {
+  } else if (status?.includes("failed") || order?.closed) {
     orderStatus = "Failed";
   }
   console.log("🚀 ~~ order:", order, orderStatus);

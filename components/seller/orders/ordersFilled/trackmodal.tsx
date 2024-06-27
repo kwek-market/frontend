@@ -34,16 +34,11 @@ const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModal
   let orderStatus = "pending";
   if (newOrderData) {
     const { closed, deliveryStatus } = newOrderData;
-    if (
-      deliveryStatus.includes("Order Failed") ||
-      (closed && !deliveryStatus.includes("Order Successful"))
-    ) {
-      orderStatus = "failed";
-    }
-    if (deliveryStatus.includes("Order Successful")) {
+    if (deliveryStatus.includes("delivered") && closed) {
       orderStatus = "success";
-    }
-    if (deliveryStatus.includes("Order in Progress")) {
+    } else if (deliveryStatus.includes("failed") || closed) {
+      orderStatus = "failed";
+    } else {
       orderStatus = "pending";
     }
   }
