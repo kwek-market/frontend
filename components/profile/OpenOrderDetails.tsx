@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { v4 } from "uuid";
 import { OrderDetailsProps } from "./ClosedOrderDetails";
+import { OrderDeliveryStatus } from "../../validations/orders";
 dayjs.extend(LocalizedFormat);
 
 const OpenOrderDetails = function ({ setActiveBtn }: OrderDetailsProps) {
@@ -63,7 +64,7 @@ const OpenOrderDetails = function ({ setActiveBtn }: OrderDetailsProps) {
               key={v4()}
               order={order}
               idx={index}
-              show={order.deliveryStatus === "delivered"}
+              show={order.deliveryStatus === OrderDeliveryStatus.Delivered}
               setActiveBtn={setActiveBtn}
             />
           ))}

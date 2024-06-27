@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import useTrackOrder from "../../../../hooks/useTrackOrder";
 import { OrderList } from "../../../../interfaces/commonTypes";
 import { RootState } from "../../../../store/rootReducer";
+import { OrderDeliveryStatus } from "../../../../validations/orders";
 
 interface SellerTrackModalProps {
   isModalOpen: boolean;
@@ -34,10 +35,10 @@ const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModal
   let orderStatus = "pending";
   if (newOrderData) {
     const { closed, deliveryStatus } = newOrderData;
-    if (deliveryStatus.includes("delivered") && closed) {
+    if (deliveryStatus.includes(OrderDeliveryStatus.Delivered) && closed) {
       orderStatus = "success";
-    } else if (deliveryStatus.includes("failed") || closed) {
-      orderStatus = "failed";
+    } else if (deliveryStatus.includes(OrderDeliveryStatus.Cancelled) || closed) {
+      orderStatus = "cancelled";
     } else {
       orderStatus = "pending";
     }
@@ -125,11 +126,11 @@ const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModal
                 </div>
                 <Bar filled={true} />
 
-                {orderStatus === "failed" ? (
+                {orderStatus === OrderDeliveryStatus.Cancelled ? (
                   <div className='tw-text-center tw-flex-shrink-0 tw-flex tw-flex-col tw-justify-center tw-w-24'>
                     <Image src='/svg/ex.svg' width={85} height={85} />
                     <div>
-                      <p className=' tw-mb-0 tw-font-medium tw-text-red-500'>Failed</p>
+                      <p className=' tw-mb-0 tw-font-medium tw-text-red-500'>Cancelled</p>
                       <p className='tw-w-max tw-mb-0 tw-text-xs tw-font-light'>
                         {order.order.doorStep?.city} - {order.order?.doorStep?.state}
                       </p>

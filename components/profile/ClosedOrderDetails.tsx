@@ -7,6 +7,7 @@ import Details from "./Details";
 import Payment from "./Payment";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { v4 } from "uuid";
+import { OrderDeliveryStatus } from "../../validations/orders";
 dayjs.extend(LocalizedFormat);
 
 export type OrderDetailsProps = {
@@ -76,7 +77,7 @@ const ClosedOrderDetails = function ({ setActiveBtn }: OrderDetailsProps) {
               key={v4()}
               idx={index}
               order={order}
-              show={order.deliveryStatus === "delivered"}
+              show={order.deliveryStatus === OrderDeliveryStatus.Delivered}
               setActiveBtn={setActiveBtn}
             />
           ))}

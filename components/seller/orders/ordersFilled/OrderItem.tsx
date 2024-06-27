@@ -1,5 +1,6 @@
 import { Menu } from "antd";
 import styles from "./ordersFilled.module.scss";
+import { OrderDeliveryStatus } from "../../../../validations/orders";
 
 const menu = () => (
   <Menu>
@@ -26,10 +27,10 @@ const OrderItem = ({
   order,
 }) => {
   let orderStatus = "pending";
-  if (status?.includes("delivered") && order?.closed) {
+  if (status?.includes(OrderDeliveryStatus.Delivered) && order?.closed) {
     orderStatus = "Successful";
-  } else if (status?.includes("failed") || order?.closed) {
-    orderStatus = "Failed";
+  } else if (status?.includes(OrderDeliveryStatus.Cancelled) || order?.closed) {
+    orderStatus = "Cancelled";
   }
   console.log("🚀 ~~ order:", order, orderStatus);
 
@@ -72,9 +73,9 @@ const OrderItem = ({
           <button className={styles.orderStatusConfirmed}>
             <span>SuccessFul</span>
           </button>
-        ) : orderStatus === "Failed" ? (
+        ) : orderStatus === "Cancelled" ? (
           <button className={styles.orderStatusFailed}>
-            <span>Failed</span>
+            <span>Cancelled</span>
           </button>
         ) : (
           <button className={styles.orderStatusPending}>
