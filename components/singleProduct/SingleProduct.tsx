@@ -103,7 +103,25 @@ const SingleProduct = function ({ product, setShowProduct }: SingleProductProps)
               </div>
             </div>
           </div>
-          <h2>₦{product?.options[0]?.price}</h2>
+
+          <h2
+            className={`${
+              product?.options[0]?.discountedPrice ? "tw-line-through tw-text-gray-400" : ""
+            }`}
+          >
+            ₦{product?.options[0]?.price}
+          </h2>
+
+          {product?.options[0]?.discountedPrice ? (
+            <h2 className={`${product?.options[0]?.discountedPrice ? "tw-line-through" : ""}`}>
+              ₦{product?.options[0]?.discountedPrice}
+            </h2>
+          ) : null}
+
+          <p className={styles.name}>
+            <strong>Quantity: </strong>
+            {product?.options[0]?.quantity}
+          </p>
           <p className={styles.name}>{product.shortDescription}</p>
 
           <div className={styles.colors}>

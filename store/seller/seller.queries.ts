@@ -152,6 +152,7 @@ export const GET_SELLER_PRODUCTS = `
             price
             discountedPrice
             size
+            quantity
           }
           productRating {
             rating
