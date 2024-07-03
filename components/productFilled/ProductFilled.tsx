@@ -8,6 +8,7 @@ import Link from "next/link";
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { useSelector } from "react-redux";
+import { Naira } from "../UI/NairaSymbol";
 import styles from "./ProductFilled.module.scss";
 
 type ProductFilledProps = {
@@ -75,11 +76,30 @@ const ProductFilled = function ({
                   <div>
                     <p className='tw-text-lg tw-font-semibold tw-mb-0'>{prod.productTitle}</p>
                     <Rate allowHalf value={useAvgRating(prod)} />
+
+                    <p className='tw-font-light tw-text-gray-600 tw-mb-0'>
+                      <span>Quantity: </span>
+                      {prod.options[0]?.quantity}
+                    </p>
                   </div>
+
                   <div>
-                    <p className='tw-text-lg tw-font-semibold tw-mb-0 tw-text-right'>
+                    <p
+                      className={`tw-text-lg tw-font-semibold tw-mb-0 tw-text-right ${
+                        prod.options[0]?.discountedPrice ? "tw-line-through tw-text-gray-300" : ""
+                      }`}
+                    >
+                      <Naira />
                       {prod.options[0]?.price}
                     </p>
+
+                    {prod.options[0]?.discountedPrice ? (
+                      <p className={`tw-text-lg tw-font-semibold tw-mb-0 tw-text-right`}>
+                        <Naira />
+                        {prod.options[0]?.price}
+                      </p>
+                    ) : null}
+
                     <p className=' tw-text-[#BFA5A3] tw-text-xs'>
                       ({prod?.productRating.length} reviews)
                     </p>
