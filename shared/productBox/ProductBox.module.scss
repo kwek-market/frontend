@@ -33,19 +33,17 @@
 }
 
 .box_productPrice {
-  span:first-child {
-    color: $col-black;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-right: 0.5rem;
-  }
+  color: $col-black;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
 
-  span:last-child {
-    color: #c7c0bf;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: line-through;
-  }
+.box_productDiscountPrice {
+  color: #c7c0bf;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: line-through;
 }
 
 .box_productRating {

@@ -301,6 +301,7 @@ export type PaymentLinkType = {
   description: string;
   redirectUrl: string;
   token: string;
+  gateway?: string;
 };
 
 export type VerifyPaymentType = {

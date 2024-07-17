@@ -13,22 +13,28 @@ function OrderComplete() {
     user: { token },
   } = useSelector((state: RootState) => state);
   const router = useRouter();
-  const { transaction_id, tx_ref } = router.query;
+  const { reference, txref } = router.query;
+  console.log("🚀 ~~ OrderComplete ~~ router.query:", router.query);
 
   const { mutate: post } = usePlaceOrder(token);
   const { mutate } = usePaymentVerify(token);
 
   useEffect(() => {
-    if (transaction_id === null || transaction_id == undefined) return;
+    if (!reference || !txref) return;
+    console.log("🚀 ~~ useEffect ~~ reference:", reference, txref);
+
     const payload: VerifyPaymentType = {
-      transactionId: transaction_id as string,
-      paymentRef: tx_ref as string,
+      transactionId: reference as string,
+      paymentRef: txref as string,
     };
+
     mutate(payload, {
       onSuccess: () => {
         const store = window.localStorage.getItem("order");
         const order = JSON.parse(store);
-        order.paymentRef = tx_ref;
+        order.paymentRef = payload.paymentRef;
+        console.log("🚀 ~~ useEffect ~~ order:", order);
+
         post(order, {
           onSuccess(data, variables, context) {
             message.success("Order have been placed");
@@ -37,7 +43,7 @@ function OrderComplete() {
         });
       },
     });
-  }, [transaction_id, tx_ref]);
+  }, [reference, txref]);
 
   return (
     <MainLayout>
