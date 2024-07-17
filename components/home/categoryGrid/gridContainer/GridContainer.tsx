@@ -8,7 +8,7 @@ import { ProductType } from "@/interfaces/commonTypes";
 import { ProductBox } from "@/shared";
 import { Spin } from "antd";
 import { v4 as uuid } from "uuid";
-import { Banner, Card, SideBar, TitleBlock } from "../index";
+import { Banner, SideBar, TitleBlock } from "../index";
 
 type GridContainerProps = {
   title: string;
@@ -73,18 +73,17 @@ const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerP
               </div>
             ))
           )}
-
-          <div className='tw-mx-auto tw-mt-8 tw-w-24 tw-flex md:tw-hidden'>
-            <Button
-              buttonStyle='tw-bg-red-kwek100 tw-text-white-100 tw-p-2'
-              text='view more'
-              cmd={
-                cards?.length > 0
-                  ? () => router.push("/deals-of-the-day/1")
-                  : () => router.push(`/category/${title}`)
-              }
-            />
-          </div>
+        </div>
+        <div className='tw-mx-auto tw-mt-2 tw-w-24 tw-flex md:tw-hidden'>
+          <Button
+            buttonStyle='tw-bg-red-kwek100 tw-text-white-100 tw-p-2'
+            text='view more'
+            cmd={
+              cards?.length > 0
+                ? () => router.push("/deals-of-the-day/1")
+                : () => router.push(`/category/${title}`)
+            }
+          />
         </div>
 
         {/* {cards && (

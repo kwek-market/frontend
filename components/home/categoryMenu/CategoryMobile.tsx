@@ -8,11 +8,15 @@ type CategoryMobileProps = {
 
 const CategoryMobile = function ({ imgSrc, text, style }: CategoryMobileProps) {
   return (
-    <div className='tw-px-8'>
+    <div className='tw-px-2 lg:tw-px-8 lg:tw-max-w-full'>
       <Link href={`/all`}>
         <a>
-          <img src={imgSrc} alt={text} className={`${style} tw-text-center tw-w-auto tw-mx-auto`} />
-          <p className='tw-font-normal tw-whitespace-nowrap tw-text-xs tw-text-brown-kwek200 tw-mt-2 tw-text-center'>
+          <img
+            src={imgSrc}
+            alt={text}
+            className={`${style} tw-w-6 tw-h-6 tw-text-center tw-mx-auto`}
+          />
+          <p className='tw-font-normal tw-w-[3rem] lg:tw-whitespace-nowrap tw-truncate tw-text-xs tw-text-brown-kwek200 tw-mt-2 tw-text-center'>
             {" "}
             {text}
           </p>
