@@ -91,8 +91,18 @@ const CartGridComponent = function () {
               </div>
             </div>
             <div className={styles.secondBox}>
-              <p className={styles.discount_price}>₦{item.product.options[0].price}</p>
-              <p className={styles.current_price}>₦{item.product.options[0].discountedPrice}</p>
+              <p
+                className={
+                  item.product.options[0].discountedPrice
+                    ? styles.discount_price
+                    : styles.current_price
+                }
+              >
+                ₦{item.product.options[0].price}
+              </p>
+              {item.product.options[0].discountedPrice ? (
+                <p className={styles.current_price}>₦{item.product.options[0].discountedPrice}</p>
+              ) : null}
             </div>
             <div className={styles.thirdBox}>
               <div className={styles.addbtn}>

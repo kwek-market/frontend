@@ -580,6 +580,7 @@ export const DEALS_OF_THE_DAY = `
           imageUrl
         }
         options {
+          id
           price
           discountedPrice
         }
