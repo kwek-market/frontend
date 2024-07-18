@@ -6,13 +6,16 @@ import { useMutation } from "react-query";
 
 function usePaymentVerify(token: string) {
   return useMutation(
-    (data: VerifyPaymentType) =>
-      userFetcherWithAuth(VERIFYPAYMENT, data, token),
+    (data: VerifyPaymentType) => {
+      console.log("🚀 ~~ usePaymentVerify ~~ data:", data);
+
+      return userFetcherWithAuth(VERIFYPAYMENT, data, token);
+    },
     {
-      onSuccess: (res) => {
+      onSuccess: res => {
         message.success(res.verifyPayment.message);
       },
-      onError: (error) => {
+      onError: error => {
         message.error((error as any).message);
       },
     }
