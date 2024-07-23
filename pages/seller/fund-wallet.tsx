@@ -28,7 +28,7 @@ export default function fundWallet() {
     if (tx_ref && transaction_id) {
       const payload: VerifyPaymentType = {
         transactionId: transaction_id as string,
-        paymentRef: tx_ref as string,
+        transactionRef: tx_ref as string,
       };
       console.log("🚀 ~~ useEffect ~~ payload:", payload);
 

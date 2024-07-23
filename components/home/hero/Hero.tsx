@@ -1,23 +1,20 @@
-import React from "react";
-import Link from "next/link";
-import styles from "./Hero.module.scss";
 import Carousel from "@/components/Carousel/Carousel";
+import styles from "./Hero.module.scss";
 
-import { CategoryMenu } from "../index";
-import { Topbar } from "@/shared";
 import { useRouter } from "next/router";
+import { CategoryMenu } from "../index";
 
 const Hero = function () {
   const router = useRouter();
   const carouselEl = [
     {
       element: (
-        <div className="">
+        <div className='tw-w-full'>
           <img
-            src="/images/banner.png"
-            alt="banner"
-            className="tw-rounded-lg"
-            style={{ width: "1000px", height: "300px" }}
+            src='/images/banner.png'
+            alt='banner'
+            className='tw-rounded-lg tw-w-full tw-h-auto lg:tw-w-[1000px] lg:tw-h-[300px]'
+            // style={{ width: "1000px", height: "300px" }}
           />
         </div>
       ),
@@ -66,13 +63,9 @@ const Hero = function () {
   return (
     <div id={styles.hero}>
       <CategoryMenu />
-      <Carousel slides={carouselEl} height="300px" />
-      <div
-        className={`${styles.banner} tw-hidden md:tw-flex tw-justify-between tw-items-stretch`}
-      >
-        <div
-          className={`${styles.banner_section} ${styles.banner_section__one}`}
-        >
+      <Carousel slides={carouselEl} height='300px' />
+      <div className={`${styles.banner} tw-hidden md:tw-flex tw-justify-between tw-items-stretch`}>
+        <div className={`${styles.banner_section} ${styles.banner_section__one}`}>
           <div className={styles.banner_textContainer}>
             <p className={styles.banner_text}>BUY TWO, Get</p>
             <button className={`${styles.btn} btn`}>☆ 1 FREE ☆</button>
@@ -89,19 +82,14 @@ const Hero = function () {
           </div>
 
           <div className={styles.banner_textContainer}>
-            <button
-              className={`${styles.btn} btn`}
-              onClick={() => router.push("/")}
-            >
-              SHOP NOW <i className="fas fa-chevron-right" />
+            <button className={`${styles.btn} btn`} onClick={() => router.push("/")}>
+              SHOP NOW <i className='fas fa-chevron-right' />
             </button>
           </div>
         </div>
 
-        <div
-          className={`${styles.banner_section} ${styles.banner_section__two}`}
-        >
-          <img src="/svg/hero-woman.svg" alt="" />
+        <div className={`${styles.banner_section} ${styles.banner_section__two}`}>
+          <img src='/svg/hero-woman.svg' alt='' />
         </div>
       </div>
     </div>

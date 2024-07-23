@@ -107,7 +107,7 @@ const Features = function () {
           </div>
         </div>
       </div>
-      <div className="tw-block md:tw-hidden tw-mt-5">
+      <div className="tw-hidden tw-mt-5">
         <Slider element={slides} />
       </div>
     </>

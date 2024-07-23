@@ -301,11 +301,12 @@ export type PaymentLinkType = {
   description: string;
   redirectUrl: string;
   token: string;
+  gateway?: string;
 };
 
 export type VerifyPaymentType = {
   transactionId: string;
-  paymentRef: string;
+  transactionRef: string;
 };
 
 export type Order = {
