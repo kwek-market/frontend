@@ -48,7 +48,7 @@ const CategoryMenu = function () {
             : null}
         </ul>
       </section>
-      <section className='tw-flex md:tw-hidden tw-overflow-x-auto tw-overflow-y-hidden'>
+      <section className='tw-flex tw-flex-grow md:tw-hidden tw-overflow-x-auto tw-overflow-y-hidden'>
         <CategoryMobile imgSrc='/svg/all.svg' text='All' style='tw-max-w-none' />
         {isLoading ? <Load /> : null}
         {categories

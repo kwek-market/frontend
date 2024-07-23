@@ -103,11 +103,11 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             />
           )}
         </span> */}{" "}
-        <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
+        <Link href={`/product/${prod.id}?id=${prod.productTitle}`}>
           <a
             className='tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block'
             onClick={e => {
-              updateClicks(prod.id, user.token)
+              updateClicks(prod.id, user.token);
               e.stopPropagation();
             }}
           >
@@ -117,7 +117,9 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                   !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
                 } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
                 style={{ padding: "5px" }}
-                onClick={() => addToCart(prod?.options[0]?.id)}
+                onClick={() => {
+                  addToCart(prod?.options[0]?.id);
+                }}
               />
               {user.token && (
                 <i
@@ -144,10 +146,18 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             <p className={styles.box_productPrice}>
               {!!prod.options[0]?.discountedPrice && (
                 <span>
-                  ₦{""} {prod.options[0].discountedPrice}
+                  ₦{""} {prod.options[0]?.discountedPrice}
                 </span>
               )}
-              <span>₦{prod.options[0]?.price}</span>
+              <span
+                className={
+                  prod.options[0]?.discountedPrice
+                    ? styles.box_productDiscountPrice
+                    : styles.box_productPrice
+                }
+              >
+                ₦ {prod.options[0]?.price}
+              </span>
             </p>
 
             {prod.productRating.length > 0 ? (
