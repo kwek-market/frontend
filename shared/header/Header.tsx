@@ -9,7 +9,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
+
 
 import { Menu, Dropdown } from "antd";
 import SearchBar from "./SearchBar";
