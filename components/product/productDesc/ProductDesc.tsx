@@ -127,7 +127,7 @@ const ProductDesc = function ({ product }: ProductDescProps) {
                   <p className={styles.sub}>
                     For more information on the return shipping options, go to{" "}
                     <Link href='/returnPolicy'>
-                      <a>Kwek return Policy</a>
+                      Kwek return Policy
                     </Link>
                   </p>
                 </div>

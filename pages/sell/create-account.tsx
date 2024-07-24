@@ -168,8 +168,8 @@ const Page = function () {
                 <h2 className=''>Set up your Store</h2>
               </div>
               <div className={` ${styles.form_link}`}>
-                <Link href='/seller/profile'>
-                  <a className='tw-text-red-kwek100'>I have an account</a>
+                <Link href='/seller/profile' className='tw-text-red-kwek100'>
+                  I have an account
                 </Link>
               </div>
             </div>
@@ -469,12 +469,12 @@ const Page = function () {
                     className='tw-ml-3 tw-block tw-text-xs tw-font-small tw-text-gray-700 tw-mb-5'
                   >
                     I have heard and accepted the{" "}
-                    <Link href='/'>
-                      <a className='tw-text-red-kwek100'>Seller’s Policy</a>
+                    <Link href='/' className='tw-text-red-kwek100'>
+                      Seller’s Policy
                     </Link>{" "}
                     and{" "}
-                    <Link href='/'>
-                      <a className='tw-text-red-kwek100'>Terms and Conditions </a>
+                    <Link href='/' className='tw-text-red-kwek100'>
+                      Terms and Conditions 
                     </Link>
                   </label>
                 </div>

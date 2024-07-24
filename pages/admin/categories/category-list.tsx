@@ -38,8 +38,8 @@ const CategoryList = () => {
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
-        >
-          <a className='tw-py-2 tw-px-4'>Edit</a>
+          className='tw-py-2 tw-px-4'>
+          Edit
         </Link>
       </Menu.Item>
       <Menu.Item className='tw-py-2 tw-px-4' onClick={(e: any) => deleteCategory(id)}>
@@ -54,24 +54,26 @@ const CategoryList = () => {
       dataIndex: "name",
       key: "category_name",
       render: (name, object) => (
-        <Link href={`/admin/categories/${object?.id}`}>
-          <a className='tw-flex tw-items-center tw-space-x-2'>
-            {object?.icon ? (
-              <Image
-                src={object?.icon}
-                alt='pp'
-                className='  tw-rounded-full tw-overflow-hidden'
-                height={20}
-                width={20}
-              />
-            ) : (
-              <div className='tw-bg-gray-300 tw-text-black-kwek100 tw-text-4xl tw-w-16 tw-h-16 tw-text-center tw-rounded-full tw-uppercase tw-flex tw-items-center tw-justify-center'>
-                {name?.substring(0, 2)}
-              </div>
-            )}
-            <span className=''>{name}</span>
-          </a>
-        </Link>
+        (<Link
+          href={`/admin/categories/${object?.id}`}
+          className='tw-flex tw-items-center tw-space-x-2'>
+
+          {object?.icon ? (
+            <Image
+              src={object?.icon}
+              alt='pp'
+              className='  tw-rounded-full tw-overflow-hidden'
+              height={20}
+              width={20}
+            />
+          ) : (
+            <div className='tw-bg-gray-300 tw-text-black-kwek100 tw-text-4xl tw-w-16 tw-h-16 tw-text-center tw-rounded-full tw-uppercase tw-flex tw-items-center tw-justify-center'>
+              {name?.substring(0, 2)}
+            </div>
+          )}
+          <span className=''>{name}</span>
+
+        </Link>)
       ),
     },
     {

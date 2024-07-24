@@ -77,10 +77,12 @@ const Page = function () {
           <span className="tw-text-brown-kwek200 tw-font-normal tw-text-sm lg:tw-text-base">
             Do you remember your password?{" "}
           </span>{" "}
-          <Link href="/login">
-            <a className="tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base">
+          <Link
+            href="/login"
+            className="tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base">
+            
               Try Loggin In
-            </a>
+            
           </Link>
         </div>
       </div>

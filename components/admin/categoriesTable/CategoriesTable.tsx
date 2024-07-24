@@ -24,8 +24,8 @@ const CategoryTable = ({ data }: { data: Record<any, any>[] }) => {
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
-        >
-          <a className='tw-py-2 tw-px-4'>Edit</a>
+          className='tw-py-2 tw-px-4'>
+          Edit
         </Link>
       </Menu.Item>
       <Menu.Item className='tw-py-2 tw-px-4' onClick={(e: any) => deleteCategory(id)}>
@@ -39,7 +39,7 @@ const CategoryTable = ({ data }: { data: Record<any, any>[] }) => {
       title: "Category Name",
       dataIndex: "name",
       key: "category_name",
-      render: (name, object) => <Link href={`/admin/categories/${object?.id}`}>{name}</Link>,
+      render: (name, object) => <Link href={`/admin/categories/${object?.id}`} legacyBehavior>{name}</Link>,
     },
     {
       title: "Items",

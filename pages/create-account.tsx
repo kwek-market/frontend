@@ -211,8 +211,8 @@ const Page = function () {
           {form.extra && (
             <div className={styles.form_extra}>
               <p className={styles.form_extraText}>{form.extra.text}</p>
-              <Link href={form.extra.linkUrl}>
-                <a className={styles.form_extraLink}>{form.extra.linkText}</a>
+              <Link href={form.extra.linkUrl} className={styles.form_extraLink}>
+                {form.extra.linkText}
               </Link>
             </div>
           )}
