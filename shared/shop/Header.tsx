@@ -81,13 +81,13 @@ function Header() {
   }
 
   return (
-    <Fragment>
+    (<Fragment>
       <Drawer
         title='Notifications'
         placement={"right"}
         closable={false}
         onClose={() => setVisible(false)}
-        visible={visible}
+        open={visible}
         key={"right"}
       >
         {status === "loading" && <Load />}
@@ -208,7 +208,7 @@ function Header() {
           )}
         </nav>
       </header>
-    </Fragment>
+    </Fragment>)
   );
 }
 

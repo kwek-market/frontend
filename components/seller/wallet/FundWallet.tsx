@@ -33,9 +33,9 @@ export const FundWallet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   }
 
   return (
-    <Modal
+    (<Modal
       title='Add Money'
-      visible={isOpen}
+      open={isOpen}
       onOk={addMoneyToWallet}
       onCancel={onClose}
       okText='Add Money'
@@ -54,6 +54,6 @@ export const FundWallet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
           />
         </label>
       </div>
-    </Modal>
+    </Modal>)
   );
 };
