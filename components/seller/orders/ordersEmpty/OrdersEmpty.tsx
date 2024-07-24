@@ -15,8 +15,8 @@ const OrdersEmpty = function () {
         <p className={styles.head}>You currently have no orders</p>
         <p className={styles.sub}>Start selling now on Kwekmarketplace</p>
 
-        <Link href="/seller/upload-new-product">
-          <a className={styles.setShopBtn}>Set up your shop</a>
+        <Link href="/seller/upload-new-product" className={styles.setShopBtn}>
+          Set up your shop
         </Link>
       </div>
     </div>

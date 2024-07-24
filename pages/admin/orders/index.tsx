@@ -42,8 +42,8 @@ const Orders = () => {
         return (
           <Link
             href={"/admin/customers/" + objects?.user?.fullName + "/order-detail/" + objects?.id}
-          >
-            <a className=' tw-text-black-kwek100'>{orderId}</a>
+            className=' tw-text-black-kwek100'>
+            {orderId}
           </Link>
         );
       },

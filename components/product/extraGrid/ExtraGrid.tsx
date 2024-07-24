@@ -36,7 +36,7 @@ const ExtraGrid = function ({ product }: { product: ProductType }) {
       </div>
       <div className={styles.extra_contact}>
         <Link href="/contact-us">
-          <a>Contact Us</a>
+          Contact Us
         </Link>
       </div>
     </div>

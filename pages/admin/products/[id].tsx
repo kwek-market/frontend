@@ -63,10 +63,12 @@ const ProductDetail = () => {
               <div className='tw-flex tw-flex-col tw-text-xs tw-text-gray-kwek300a '>
                 <div>
                   Seller:{" "}
-                  <Link href={`/admin/vendors/vendor-info/${data?.product?.user?.id}`}>
-                    <a className=' tw-text-[#AF1328] tw-underline'>
-                      {data?.product?.user?.fullName}
-                    </a>
+                  <Link
+                    href={`/admin/vendors/vendor-info/${data?.product?.user?.id}`}
+                    className=' tw-text-[#AF1328] tw-underline'>
+
+                    {data?.product?.user?.fullName}
+
                   </Link>
                 </div>
                 {/* <Divider type="vertical" /> */}

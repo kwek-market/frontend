@@ -52,8 +52,8 @@ const Products = () => {
       render: (productTitle, x) => {
         productTitle = reduceCharacterLength(productTitle, maxTextLength);
         return (
-          <Link href={`/admin/products/${x?.id}`}>
-            <a className=' tw-text-[#1D1616]'>{productTitle}</a>
+          <Link href={`/admin/products/${x?.id}`} className=' tw-text-[#1D1616]'>
+            {productTitle}
           </Link>
         );
       },

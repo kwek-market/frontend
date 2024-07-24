@@ -104,8 +104,8 @@ const AuthForm: React.FC<Type> = function ({
 
             {sub && (
               <div className={styles.form_inputSub}>
-                <Link href={sub.url}>
-                  <a className={styles.form_inputSubLink}>{sub.text}</a>
+                <Link href={sub.url} className={styles.form_inputSubLink}>
+                  {sub.text}
                 </Link>
               </div>
             )}
@@ -134,8 +134,8 @@ const AuthForm: React.FC<Type> = function ({
         {extra && (
           <div className={styles.form_extra}>
             <p className={styles.form_extraText}>{extra.text}</p>
-            <Link href={extra.linkUrl}>
-              <a className={styles.form_extraLink}>{extra.linkText}</a>
+            <Link href={extra.linkUrl} className={styles.form_extraLink}>
+              {extra.linkText}
             </Link>
           </div>
         )}

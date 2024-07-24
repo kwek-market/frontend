@@ -39,8 +39,8 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
       <ul className={styles.nav}>
         {menu.map((item, index) => (
           <li className={styles.nav_item} key={index}>
-            <Link href={item.url}>
-              <a className={styles.nav_link}> {item.title} </a>
+            <Link href={item.url} className={styles.nav_link}>
+               {item.title} 
             </Link>
           </li>
         ))}

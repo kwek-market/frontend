@@ -107,60 +107,62 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
               />
             )}
           </span>
-          <Link href={`/product/${prod.id}?id=${prod.productTitle}`}>
-            <a
-              onClick={() => updateClicks(prod.id, user.token, mutate)}
-              className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100"
-            >
+          <Link
+            href={`/product/${prod.id}?id=${prod.productTitle}`}
+            onClick={() => updateClicks(prod.id, user.token, mutate)}
+            className="tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100">
+            
               details
-            </a>
+            
           </Link>
         </div>
       </div>
 
-      <Link href={`/product/${prod.productTitle}?id=${prod.id}`}>
-        <a onClick={() => updateClicks(prod.id, user.token, mutate)}>
-          <div className={styles.box_details}>
-            <p className={styles.box_productCategory}>{prod?.productTitle}</p>
+      <Link
+        href={`/product/${prod.productTitle}?id=${prod.id}`}
+        onClick={() => updateClicks(prod.id, user.token, mutate)}>
 
-            <p className={styles.box_productPrice}>
-              {prod.options[0]?.discountedPrice ? (
-                <Fragment>
-                  <span>
-                    ₦{""} {prod.options[0].discountedPrice}
-                  </span>
-                  <span>{prod.options[0]?.price}</span>
-                </Fragment>
-              ) : (
+        <div className={styles.box_details}>
+          <p className={styles.box_productCategory}>{prod?.productTitle}</p>
+
+          <p className={styles.box_productPrice}>
+            {prod.options[0]?.discountedPrice ? (
+              <Fragment>
+                <span>
+                  ₦{""} {prod.options[0].discountedPrice}
+                </span>
                 <span>{prod.options[0]?.price}</span>
-              )}
-            </p>
-
-            {prod.productRating.length > 0 ? (
-              <div className="tw-flex tw-flex-wrap tw-justify-center">
-                <Rate
-                  style={{ fontSize: "0.75rem" }}
-                  allowHalf
-                  disabled
-                  value={prod?.productRating[0]?.rating}
-                />
-                <small className="tw-text-gray-kwek400">
-                  ({prod.productRating[0].likes} Reviews)
-                </small>
-              </div>
+              </Fragment>
             ) : (
-              <div className="tw-flex tw-flex-wrap tw-justify-center">
-                <Rate
-                  style={{ fontSize: "0.75rem" }}
-                  allowHalf
-                  disabled
-                  value={prod?.productRating[0]?.rating}
-                />
-                <small className="tw-text-gray-kwek400">(0 Reviews)</small>
-              </div>
+              <span>{prod.options[0]?.price}</span>
             )}
-          </div>
-        </a>
+          </p>
+
+          {prod.productRating.length > 0 ? (
+            <div className="tw-flex tw-flex-wrap tw-justify-center">
+              <Rate
+                style={{ fontSize: "0.75rem" }}
+                allowHalf
+                disabled
+                value={prod?.productRating[0]?.rating}
+              />
+              <small className="tw-text-gray-kwek400">
+                ({prod.productRating[0].likes} Reviews)
+              </small>
+            </div>
+          ) : (
+            <div className="tw-flex tw-flex-wrap tw-justify-center">
+              <Rate
+                style={{ fontSize: "0.75rem" }}
+                allowHalf
+                disabled
+                value={prod?.productRating[0]?.rating}
+              />
+              <small className="tw-text-gray-kwek400">(0 Reviews)</small>
+            </div>
+          )}
+        </div>
+
       </Link>
     </div>
   );
