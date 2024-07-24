@@ -8,7 +8,7 @@ import {
   getCartFunc,
 } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import styles from "./cartGrid.module.scss";

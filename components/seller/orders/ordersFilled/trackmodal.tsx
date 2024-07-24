@@ -2,7 +2,7 @@ import Load from "@/components/Loader/Loader";
 import CancelIcon from "@/components/icons/cancel";
 import SimpleModal from "@/components/modal";
 import { message } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import useTrackOrder from "../../../../hooks/useTrackOrder";

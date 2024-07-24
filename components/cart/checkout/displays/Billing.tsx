@@ -2,7 +2,7 @@ import useBilling from "@/hooks/useBilling";
 import { BillingAddressType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { convertCitiesToJSON } from "../../../../helpers/helper";

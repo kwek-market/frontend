@@ -11,7 +11,7 @@ import { setOrderDetails } from "@/store/order/order.action";
 import useCartItems from "@/hooks/useCartItems";
 import Load from "../Loader/Loader";
 import { v4 } from "uuid";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import useCancelOrder from "@/hooks/useCancelOrder";
 import { OrderDeliveryStatus } from "../../validations/orders";
 

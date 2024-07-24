@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import UseBox from "./UseBox";
 import Styles from "./use.module.scss";

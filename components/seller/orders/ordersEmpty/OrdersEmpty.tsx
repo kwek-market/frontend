@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "./ordersEmpty.module.scss";
 import Link from "next/link";
 

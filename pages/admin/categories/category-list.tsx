@@ -7,7 +7,7 @@ import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Dropdown, Menu } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";

@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "./Sidebar.module.scss";
 import useProducts from "@/hooks/useProducts";
 import { Spin } from "antd";

@@ -2,7 +2,7 @@ import { ProductType, ReviewType } from "@/interfaces/commonTypes";
 import { Tabs, message } from "antd";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";

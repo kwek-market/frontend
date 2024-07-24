@@ -6,7 +6,7 @@ import { FiHeart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 
 // import "antd/dist/antd.css";

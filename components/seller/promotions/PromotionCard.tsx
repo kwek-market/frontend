@@ -2,7 +2,7 @@ import ModalLoader from "@/components/Loader/ModalLoader";
 import useCancelPromotion, { CancelPromotionPayload } from "@/hooks/useCancelPromotion";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { QueryClient } from "react-query";
 import { useSelector } from "react-redux";
 

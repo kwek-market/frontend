@@ -2,7 +2,7 @@ import { getIp } from "@/helpers";
 import { AddToCartPayload } from "@/interfaces/commonTypes";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
