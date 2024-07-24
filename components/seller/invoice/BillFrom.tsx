@@ -1,7 +1,7 @@
 import { RootState } from "@/store/rootReducer";
 import React from "react";
 import { useSelector } from "react-redux";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function BillFrom({ data }) {
   const {

@@ -3,7 +3,7 @@ import usePromotions from "@/hooks/usePromotions";
 import { ProductType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { Rate } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import React from "react";
 import ReactPaginate from "react-paginate";

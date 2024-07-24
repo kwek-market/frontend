@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 // import image
 import { RootState } from "@/store/rootReducer";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useDispatch, useSelector } from "react-redux";
 import Styles from "./heroSection.module.scss";
 

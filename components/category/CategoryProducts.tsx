@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import StarRatingComponent from "react-star-rating-component";
 import styles from "@/shared/productBox/ProductBox.module.scss";
 import { RootState } from "@/store/rootReducer";

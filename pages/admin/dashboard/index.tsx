@@ -19,7 +19,7 @@ import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import dayjs from "dayjs";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 import { useEffect, useState } from "react";
