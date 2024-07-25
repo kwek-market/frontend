@@ -23,16 +23,15 @@ const AuthLayout = function ({
         {withBanner && (
           <div className={styles.banner}>
             {withLogo && (
-              (<Link href='/' className={styles.logo}>
-
+              <Link href='/' className={styles.logo}>
                 <Image
                   src='/svg/kwek-logo-white.svg'
                   width='150'
                   height='25'
                   placeholder='blur'
+                  blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
                 />
-
-              </Link>)
+              </Link>
             )}
             <h1 className={styles.banner_text}>
               {bannerText.lineOne} <br /> {bannerText.lineTwo} <br /> {bannerText.lineThree}
@@ -41,7 +40,6 @@ const AuthLayout = function ({
             {bannerLink && (
               <div className={styles.banner_link}>
                 <Link href='#0' className={styles.banner_link}>
-
                   <button className={`btn ${styles.btn}`}>
                     <div className={styles.btn_text}>Shop with Kwek</div>
                     <Image
@@ -50,9 +48,9 @@ const AuthLayout = function ({
                       width='24'
                       height='11.6'
                       placeholder='blur'
+                      blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
                     />
                   </button>
-
                 </Link>
               </div>
             )}

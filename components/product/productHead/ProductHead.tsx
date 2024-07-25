@@ -123,6 +123,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                 width='848'
                 height='765'
                 placeholder='blur'
+                blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
               />
             </div>
           ))}
@@ -137,6 +138,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                   width='200'
                   height='200'
                   placeholder='blur'
+                  blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
                 />
               </button>
             </div>

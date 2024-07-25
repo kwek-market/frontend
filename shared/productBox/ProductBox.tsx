@@ -65,11 +65,12 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           <Image
             src={prod?.image[0]?.imageUrl}
             placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
             // width="329"
             // height="284"
             layout='fill'
             alt='product'
-            quality={"auto"}
+            quality={100}
             className=' tw-object-cover'
           />
         </div>
