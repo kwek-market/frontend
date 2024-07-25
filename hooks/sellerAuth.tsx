@@ -1,13 +1,13 @@
+import { verifyTokenFunc } from "@/helpers";
+import { clearAccount } from "@/store/account/account.actions";
+import { clearSubs } from "@/store/newsletter/newsletter.actions";
+import { RootState } from "@/store/rootReducer";
+import { clearSeller } from "@/store/seller/seller.action";
+import { logout } from "@/store/user/user.actions";
+import { Skeleton } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Skeleton } from "antd";
-import { verifyTokenFunc } from "@/helpers";
-import { RootState } from "@/store/rootReducer";
-import { logout } from "@/store/user/user.actions";
-import { clearAccount } from "@/store/account/account.actions";
-import { clearSubs } from "@/store/newsletter/newsletter.actions";
-import { clearSeller } from "@/store/seller/seller.action";
 
 const sellerAuth = (WrappedComponent: any) => {
   return function (props: any) {
@@ -34,7 +34,6 @@ const sellerAuth = (WrappedComponent: any) => {
 
     useEffect(() => {
       (async () => {
-        const { message } = await import("antd");
         // if no accessToken was found,then we redirect to "/" page.
         if (!user.token) {
           // console.log("no token found");
