@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./GridContainer.module.scss";
 
-import { ActiveTabbar, Card, SideBar } from "../index";
+import { userFetcher } from "@/helpers";
+import useProducts, { PayloadType } from "@/hooks/useProducts";
+import { Filtering, ProductType } from "@/interfaces/commonTypes";
+import { GetProducts } from "@/store/product/product.queries";
+import { Rings } from "react-loader-spinner";
+import ReactPaginate from "react-paginate";
+import { QueryClient, useQueryClient } from "react-query";
 import { v4 as uuid } from "uuid";
 import CategoryProducts from "../CategoryProducts";
-import { Filtering, ProductType } from "@/interfaces/commonTypes";
-import Loader from "react-loader-spinner";
-import ReactPaginate from "react-paginate";
-import useProducts, { PayloadType } from "@/hooks/useProducts";
-import { QueryClient, useQueryClient } from "react-query";
-import { userFetcher } from "@/helpers";
-import { GetProducts } from "@/store/product/product.queries";
+import { ActiveTabbar, Card, SideBar } from "../index";
 
 const GridContainer = function ({ cards, category }: any) {
   const queryClient = useQueryClient();
@@ -23,9 +23,7 @@ const GridContainer = function ({ cards, category }: any) {
     rating: -5,
   });
   const [sort, setSort] = useState("-clicks");
-  const [currentItems, setCurrentItems] = useState<ProductType[]>(
-    [] as ProductType[]
-  );
+  const [currentItems, setCurrentItems] = useState<ProductType[]>([] as ProductType[]);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -51,9 +49,8 @@ const GridContainer = function ({ cards, category }: any) {
     payload.rating = rating;
     (async () => {
       try {
-        const data = await queryClient2.fetchQuery(
-          ["category-items", payload],
-          () => userFetcher(GetProducts, payload)
+        const data = await queryClient2.fetchQuery(["category-items", payload], () =>
+          userFetcher(GetProducts, payload)
         );
         if (data?.products?.hasNext) {
           queryClient.prefetchQuery(["category-items", payload], () =>
@@ -70,13 +67,7 @@ const GridContainer = function ({ cards, category }: any) {
     return () => {
       queryClient2.cancelQueries(["category-items", payload]);
     };
-  }, [
-    sort,
-    filtering.priceRange,
-    filtering.rating,
-    filtering.sizes,
-    filtering.keyword,
-  ]);
+  }, [sort, filtering.priceRange, filtering.rating, filtering.sizes, filtering.keyword]);
 
   useEffect(() => {
     if (categoryData?.products?.hasNext) {
@@ -99,14 +90,14 @@ const GridContainer = function ({ cards, category }: any) {
   };
 
   const isLoading = categoryStatus === "loading" && (
-    <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
-      <Loader type="Rings" width={60} height={60} color="#FC476E" />
+    <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
+      <Rings width={60} height={60} color='#FC476E' />
     </div>
   );
 
   const hasError = categoryStatus === "error" && (
-    <div className="tw-w-full tw-py-5">
-      <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
+    <div className='tw-w-full tw-py-5'>
+      <h1 className='tw-text-error tw-text-xl tw-font-bold tw-text-center'>
         {(categoryError as { message: string }).message}
       </h1>
     </div>
@@ -114,10 +105,8 @@ const GridContainer = function ({ cards, category }: any) {
 
   const isEmpty =
     categoryStatus == "success" && currentItems.length === 0 ? (
-      <div className="tw-w-full tw-py-5">
-        <h1 className="tw-text-error tw-text-xl tw-font-bold tw-text-center">
-          No products
-        </h1>
+      <div className='tw-w-full tw-py-5'>
+        <h1 className='tw-text-error tw-text-xl tw-font-bold tw-text-center'>No products</h1>
       </div>
     ) : (
       currentItems.map((product: ProductType) => (
@@ -129,27 +118,16 @@ const GridContainer = function ({ cards, category }: any) {
 
   return (
     <div id={styles.categoryGrid}>
-      <ActiveTabbar
-        filter={filter}
-        setFilter={setFilter}
-        sort={sort}
-        setSort={setSort}
-      />
+      <ActiveTabbar filter={filter} setFilter={setFilter} sort={sort} setSort={setSort} />
 
-      <div className="tw-flex tw-gap-5 tw-w-full">
+      <div className='tw-flex tw-gap-5 tw-w-full'>
         {filter && (
           <aside className={styles.sidebarContainer}>
-            <SideBar
-              category={category}
-              filtering={filtering}
-              setFiltering={setFiltering}
-            />
+            <SideBar category={category} filtering={filtering} setFiltering={setFiltering} />
           </aside>
         )}
 
-        <div
-          className={filter ? styles.mainContainer : styles.mainContainer__full}
-        >
+        <div className={filter ? styles.mainContainer : styles.mainContainer__full}>
           {isLoading}
           {hasError}
           <div className={styles.products}>{isEmpty}</div>
@@ -163,28 +141,28 @@ const GridContainer = function ({ cards, category }: any) {
             </div>
           )}
           <ReactPaginate
-            nextLabel="next >"
-            onPageChange={(e) => handlePageClick(e)}
+            nextLabel='next >'
+            onPageChange={e => handlePageClick(e)}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             pageCount={pageCount}
-            previousLabel="< previous"
-            pageClassName="page-item"
-            pageLinkClassName="page-link"
-            previousClassName="page-item"
-            previousLinkClassName="page-link"
-            nextClassName="page-item"
-            nextLinkClassName="page-link"
-            breakLabel="..."
-            breakClassName="page-item"
-            breakLinkClassName="page-link"
-            containerClassName="pagination"
-            activeClassName="active"
+            previousLabel='< previous'
+            pageClassName='page-item'
+            pageLinkClassName='page-link'
+            previousClassName='page-item'
+            previousLinkClassName='page-link'
+            nextClassName='page-item'
+            nextLinkClassName='page-link'
+            breakLabel='...'
+            breakClassName='page-item'
+            breakLinkClassName='page-link'
+            containerClassName='pagination'
+            activeClassName='active'
             renderOnZeroPageCount={undefined}
           />
           {isFetching ? (
-            <div className="tw-w-full tw-py-7 tw-flex tw-justify-center">
-              <Loader type="Rings" width={60} height={60} color="#FC476E" />
+            <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
+              <Rings width={60} height={60} color='#FC476E' />
             </div>
           ) : null}{" "}
         </div>

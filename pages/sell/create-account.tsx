@@ -14,7 +14,7 @@ import { AuthLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { getSellerData, startSelling } from "@/store/seller/seller.action";
 import { getUserData } from "@/store/user/user.actions";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import { countriesData } from "../../data/countriesData";
 import styles from "./styles/sellers.module.css";
 
@@ -474,18 +474,14 @@ const Page = function () {
                     </Link>{" "}
                     and{" "}
                     <Link href='/' className='tw-text-red-kwek100'>
-                      Terms and Conditions 
+                      Terms and Conditions
                     </Link>
                   </label>
                 </div>
               </div>
               <div className='tw-mt-2 tw-flex '>
                 <button className='btn bg-primary tw-flex-1 tw-w-6 tw-p-4'>
-                  {seller.loading ? (
-                    <Loader type='Puff' color='#fff' height={30} width={30} />
-                  ) : (
-                    "Start Selling"
-                  )}
+                  {seller.loading ? <Puff color='#fff' height={30} width={30} /> : "Start Selling"}
                 </button>
               </div>
             </fieldset>

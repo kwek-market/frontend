@@ -9,7 +9,7 @@ import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { Rate } from "antd";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import Loader from "react-loader-spinner";
+import { Rings } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ProductBox.module.scss";
 
@@ -54,7 +54,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   if (prod === undefined)
     return (
       <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
-        <Loader type='Rings' width={60} height={60} color='#FC476E' />
+        <Rings width={60} height={60} color='#FC476E' />
       </div>
     );
 
@@ -109,8 +109,8 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           onClick={e => {
             updateClicks(prod.id, user.token);
             e.stopPropagation();
-          }}>
-
+          }}
+        >
           <span className='tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10'>
             <i
               className={`fas fa-shopping-cart ${
@@ -134,12 +134,10 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           <span className='tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100'>
             details
           </span>
-
         </Link>
       </div>
 
       <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
-
         <div className={styles.box_details}>
           <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
@@ -179,7 +177,6 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             </div>
           )}
         </div>
-
       </Link>
     </div>
   );

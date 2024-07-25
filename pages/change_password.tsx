@@ -1,15 +1,15 @@
-import { Topbar } from "@/shared";
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
 import Button from "@/components/buttons/Button";
 import TextInput from "@/components/input/textInput";
+import { passwordValidator } from "@/helpers";
+import { Topbar } from "@/shared";
+import { RootState } from "@/store/rootReducer";
+import { changePassword } from "@/store/user/user.actions";
 import { Alert } from "antd";
 import Link from "next/link";
-import Loader from "react-loader-spinner";
-import { passwordValidator } from "@/helpers";
-import { changePassword } from "@/store/user/user.actions";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { Puff } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
 
 export type passwordProps = {
   password1: "";
@@ -60,39 +60,30 @@ const Page = function () {
 
   const pwd = (
     <div
-      className="tw-absolute tw-p-[5px] tw-left-[92%] tw-top-[20%]"
+      className='tw-absolute tw-p-[5px] tw-left-[92%] tw-top-[20%]'
       onClick={() => setShowPassword(!showPassword)}
     >
-      {showPassword ? (
-        <i className="fas fa-eye" />
-      ) : (
-        <i className="fas fa-eye-slash" />
-      )}
+      {showPassword ? <i className='fas fa-eye' /> : <i className='fas fa-eye-slash' />}
     </div>
   );
 
   return (
     <section>
       <Topbar withLogo={true} />
-      <div className="tw-container tw-mx-auto tw-px-4 tw-text-center tw-flex tw-flex-col tw-h-screen md:tw-h-[80vh] tw-justify-center tw-items-center">
+      <div className='tw-container tw-mx-auto tw-px-4 tw-text-center tw-flex tw-flex-col tw-h-screen md:tw-h-[80vh] tw-justify-center tw-items-center'>
         <div>
-          <p className="tw-font-bold tw-text-base md:tw-text-xl lg:tw-text-3xl tw-text-red-kwek100 tw-capitalize tw-mb-4">
+          <p className='tw-font-bold tw-text-base md:tw-text-xl lg:tw-text-3xl tw-text-red-kwek100 tw-capitalize tw-mb-4'>
             Reset Your Password
           </p>
-          <p className="tw-text-brown-kwek200 tw-font-normal tw-text-sm lg:tw-text-base tw-mb-8">
+          <p className='tw-text-brown-kwek200 tw-font-normal tw-text-sm lg:tw-text-base tw-mb-8'>
             Reset your password to continue
           </p>
         </div>
 
-        <div className="tw-my-5 md:tw-w-8/12 tw-w-full">
-          <div className="tw-mb-3">
+        <div className='tw-my-5 md:tw-w-8/12 tw-w-full'>
+          <div className='tw-mb-3'>
             {error.status && (
-              <Alert
-                message={error.message}
-                type="error"
-                closable
-                onClose={onClose}
-              />
+              <Alert message={error.message} type='error' closable onClose={onClose} />
             )}
           </div>
           <TextInput
@@ -120,22 +111,21 @@ const Page = function () {
               cmd={resetPassword}
             />
           ) : (
-            <div className="tw-bg-red-kwek100 tw-truncate tw-rounded-sm tw-p-2.5 tw-w-full tw-text-white-100 tw-mt-4  md:tw-w-[500px] tw-text-center tw-flex tw-justify-center tw-items-center">
-              <Loader type="Puff" color="#fff" height={30} width={30} />
+            <div className='tw-bg-red-kwek100 tw-truncate tw-rounded-sm tw-p-2.5 tw-w-full tw-text-white-100 tw-mt-4  md:tw-w-[500px] tw-text-center tw-flex tw-justify-center tw-items-center'>
+              <Puff color='#fff' height={30} width={30} />
             </div>
           )}
         </div>
 
-        <div className="tw-mt-4">
-          <span className="tw-text-brown-kwek200 tw-font-normal tw-text-sm lg:tw-text-base">
+        <div className='tw-mt-4'>
+          <span className='tw-text-brown-kwek200 tw-font-normal tw-text-sm lg:tw-text-base'>
             Do you remember your password?{" "}
           </span>{" "}
           <Link
-            href="/login"
-            className="tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base">
-            
-              Try Loggin In
-            
+            href='/login'
+            className='tw-capitalize tw-font-bold tw-text-brown-kwek200 tw-opacity-100 tw-text-sm lg:tw-text-base'
+          >
+            Try Loggin In
           </Link>
         </div>
       </div>
