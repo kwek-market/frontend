@@ -69,9 +69,7 @@ const Header = function ({
   );
 
   return (
-    <header id={styles.mainHeader} className='tw-flex tw-flex-col tw-justify-between'>
-      Hello
-    </header>
+    <header id={styles.mainHeader} className='tw-flex tw-flex-col tw-justify-between'></header>
   );
 };
 

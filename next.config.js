@@ -1,11 +1,31 @@
 module.exports = {
   images: {
-    domains: [
-      "source.unsplash.com",
-      "res.cloudinary.com",
-      "via.placeholder.com",
-      "randomuser.me",
-      "images.pexels.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "source.unsplash.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "randomuser.me",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        port: "",
+      },
     ],
   },
   // transpilePackages: [
