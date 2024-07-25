@@ -29,8 +29,10 @@ module.exports = {
         pathname: "**",
       },
     ],
+    unoptimized: true,
   },
   httpAgentOptions: {
     keepAlive: true,
+    timeout: 500000000,
   },
 };

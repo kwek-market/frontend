@@ -24,7 +24,8 @@ const CategoryTable = ({ data }: { data: Record<any, any>[] }) => {
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
-          className='tw-py-2 tw-px-4'>
+          className='tw-py-2 tw-px-4'
+        >
           Edit
         </Link>
       </Menu.Item>
@@ -39,7 +40,11 @@ const CategoryTable = ({ data }: { data: Record<any, any>[] }) => {
       title: "Category Name",
       dataIndex: "name",
       key: "category_name",
-      render: (name, object) => <Link href={`/admin/categories/${object?.id}`} legacyBehavior>{name}</Link>,
+      render: (name, object) => (
+        <Link href={`/admin/categories/${object?.id}`} legacyBehavior>
+          {name}
+        </Link>
+      ),
     },
     {
       title: "Items",
@@ -70,7 +75,6 @@ const CategoryTable = ({ data }: { data: Record<any, any>[] }) => {
       key: "action",
       render: ({ key, id }) => (
         <span className=' tw-cursor-pointer'>
-          {console.log(key, id)}
           <Dropdown overlay={menu(id)} placement='bottomCenter' arrow>
             <DotsVerticalIcon className='tw-h-5 tw-w-5' />
           </Dropdown>
