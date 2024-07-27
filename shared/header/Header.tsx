@@ -84,26 +84,28 @@ const Header = function ({
   return (
     <header
       id={styles.mainHeader}
-      className='tw-flex tw-flex-col tw-justify-between'
+      className='tw-flex tw-items-center tw-bg-red-700 tw-flex-row tw-justify-between'
       suppressHydrationWarning
     >
-      <div onClick={() => openMenu()} className='md:tw-hidden'>
-        {!showMenu ? (
-          <i style={{}} className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`} />
-        ) : (
-          <i style={{}} className={`fas fa-times fa-2x ${styles.navBar_icon}`} />
-        )}
-      </div>
+      <div className='tw-flex tw-space-x-1'>
+        <div onClick={() => openMenu()} className='md:tw-hidden'>
+          {!showMenu ? (
+            <i style={{}} className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`} />
+          ) : (
+            <i style={{}} className={`fas fa-times fa-2x ${styles.navBar_icon}`} />
+          )}
+        </div>
 
-      <Link href='/' className={`${styles.logo} tw-px-2`}>
-        <Image
-          width='180'
-          height='30'
-          src='/svg/kweklogo.svg'
-          alt='Kwek logo'
-          className={styles.logo_image}
-        />
-      </Link>
+        <Link href='/' className={`${styles.logo} tw-px-2`}>
+          <Image
+            width='180'
+            height='30'
+            src='/svg/kweklogo.svg'
+            alt='Kwek logo'
+            className={styles.logo_image}
+          />
+        </Link>
+      </div>
 
       <div className={`${styles.headerControls} tw-flex`}>
         <Link href='/wishlist'>
@@ -143,7 +145,7 @@ const Header = function ({
                   onClick={e => e.preventDefault()}
                   suppressHydrationWarning
                 >
-                  Hi {user.user.fullName.split(" ")[0]} <i className='fas fa-chevron-down' />
+                  Hi {user.user?.fullName?.split(" ")[0]} <i className='fas fa-chevron-down' />
                 </a>
               </Dropdown>
             </div>
