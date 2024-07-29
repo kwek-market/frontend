@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Button from "@/components/buttons/Button";
-import { AddressCard } from "../index";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
-import { message, Modal } from "antd";
-import useBilling from "@/hooks/useBilling";
-import { getUserData } from "@/store/user/user.actions";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
+import Button from "@/components/buttons/Button";
+import useBilling from "@/hooks/useBilling";
+import { RootState } from "@/store/rootReducer";
+import { getUserData } from "@/store/user/user.actions";
+import { Modal, message } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AddressCard } from "../index";
 
 const Addresses = function ({ activeBtn }) {
   const { user } = useSelector((state: RootState) => state);
@@ -64,117 +64,107 @@ const Addresses = function ({ activeBtn }) {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(getUserData(user.token));
+      getUserData(user.token)(dispatch);
     }
   }, [isSuccess]);
 
-  return (<>
-    <Modal
-      title="Basic Modal"
-      open={isModalVisible}
-      onOk={handleOk}
-      onCancel={handleCancel}
-      okText="Submit"
-    >
-      <form className="">
-        <div className="tw-mb-3">
-          <label className="tw-font-medium tw-text-lg">
-            Fullname <br />
-            <input
-              type="text"
-              name="Full Name"
-              placeholder="Full Name"
-              required
-              value={billingInfo.fullName}
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, fullName: e.target.value })
-              }
-            />
-          </label>
-        </div>
-        <div className="tw-mb-3">
-          <label className="tw-font-medium tw-text-lg">
-            Contact <br />
-            <input
-              type="text"
-              name="Phone number"
-              placeholder="Phone number"
-              required
-              value={billingInfo.contact}
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, contact: e.target.value })
-              }
-            />
-          </label>
-        </div>
-        <div className="tw-mb-3">
-          <label className="tw-font-medium tw-text-lg">
-            Street Address <br />
-            <input
-              type="text"
-              name="street address"
-              placeholder="street address"
-              required
-              value={billingInfo.address}
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, address: e.target.value })
-              }
-            />
-          </label>
-        </div>
-        <div className="tw-mb-3">
-          <label className="tw-font-medium tw-text-lg">
-            City <br />
-            <input
-              type="text"
-              name="City"
-              placeholder="City"
-              required
-              value={billingInfo.city}
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, city: e.target.value })
-              }
-            />
-          </label>
-        </div>
-        <div className="tw-mb-3">
-          <label className="tw-font-medium tw-text-lg">
-            State <br />
-            <input
-              type="text"
-              name="State"
-              placeholder="State"
-              required
-              value={billingInfo.state}
-              onChange={(e) =>
-                setBillingInfo({ ...billingInfo, state: e.target.value })
-              }
-            />
-          </label>
-        </div>
-      </form>
-    </Modal>
-    <div className="tw-border-b tw-border-gray-500 tw-border-opacity-50 tw-flex tw-flex-row tw-justify-between">
-      <h4 className="tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl">
-        {activeBtn}
-      </h4>
-      <Button
-        buttonStyle="tw-p-2 tw-rounded-md tw-bg-yellow-filled tw-mb-2 tw-font-normal tw-text-gray-kwek200 tw-text-sm md:tw-text-base"
-        text="New Address"
-        cmd={showModal}
-        icon="fa-plus"
-      />
-    </div>
-    <div className="tw-flex tw-flex-col tw-flex-wrap md:tw-flex-row tw-gap-5 tw-justify-center tw-items-center tw-p-5 tw-rounded-lg tw-bg-gray-kwek700 tw-mt-3">
-      {billingSet.length === 0 ? (
-        <ErrorInfo error="No address found" />
-      ) : (
-        billingSet.map((address: any) => (
-          <AddressCard key={address.id} address={address} />
-        ))
-      )}
-    </div>
-  </>);
+  return (
+    <>
+      <Modal
+        title='Basic Modal'
+        open={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText='Submit'
+      >
+        <form className=''>
+          <div className='tw-mb-3'>
+            <label className='tw-font-medium tw-text-lg'>
+              Fullname <br />
+              <input
+                type='text'
+                name='Full Name'
+                placeholder='Full Name'
+                required
+                value={billingInfo.fullName}
+                onChange={e => setBillingInfo({ ...billingInfo, fullName: e.target.value })}
+              />
+            </label>
+          </div>
+          <div className='tw-mb-3'>
+            <label className='tw-font-medium tw-text-lg'>
+              Contact <br />
+              <input
+                type='text'
+                name='Phone number'
+                placeholder='Phone number'
+                required
+                value={billingInfo.contact}
+                onChange={e => setBillingInfo({ ...billingInfo, contact: e.target.value })}
+              />
+            </label>
+          </div>
+          <div className='tw-mb-3'>
+            <label className='tw-font-medium tw-text-lg'>
+              Street Address <br />
+              <input
+                type='text'
+                name='street address'
+                placeholder='street address'
+                required
+                value={billingInfo.address}
+                onChange={e => setBillingInfo({ ...billingInfo, address: e.target.value })}
+              />
+            </label>
+          </div>
+          <div className='tw-mb-3'>
+            <label className='tw-font-medium tw-text-lg'>
+              City <br />
+              <input
+                type='text'
+                name='City'
+                placeholder='City'
+                required
+                value={billingInfo.city}
+                onChange={e => setBillingInfo({ ...billingInfo, city: e.target.value })}
+              />
+            </label>
+          </div>
+          <div className='tw-mb-3'>
+            <label className='tw-font-medium tw-text-lg'>
+              State <br />
+              <input
+                type='text'
+                name='State'
+                placeholder='State'
+                required
+                value={billingInfo.state}
+                onChange={e => setBillingInfo({ ...billingInfo, state: e.target.value })}
+              />
+            </label>
+          </div>
+        </form>
+      </Modal>
+      <div className='tw-border-b tw-border-gray-500 tw-border-opacity-50 tw-flex tw-flex-row tw-justify-between'>
+        <h4 className='tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl'>
+          {activeBtn}
+        </h4>
+        <Button
+          buttonStyle='tw-p-2 tw-rounded-md tw-bg-yellow-filled tw-mb-2 tw-font-normal tw-text-gray-kwek200 tw-text-sm md:tw-text-base'
+          text='New Address'
+          cmd={showModal}
+          icon='fa-plus'
+        />
+      </div>
+      <div className='tw-flex tw-flex-col tw-flex-wrap md:tw-flex-row tw-gap-5 tw-justify-center tw-items-center tw-p-5 tw-rounded-lg tw-bg-gray-kwek700 tw-mt-3'>
+        {billingSet.length === 0 ? (
+          <ErrorInfo error='No address found' />
+        ) : (
+          billingSet.map((address: any) => <AddressCard key={address.id} address={address} />)
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Addresses;

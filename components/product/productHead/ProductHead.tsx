@@ -71,8 +71,8 @@ const ProductHead = function ({ product }: ProductHeadProps) {
       quantity: numItem,
       token: user.token,
     };
-    dispatch(addToCartFunc(payload, user.token));
-    dispatch(getCartFunc(user.token));
+    addToCartFunc(payload, user.token)(dispatch);
+    getCartFunc(user.token)(dispatch);
   }
 
   function addToWishlist(id: string) {
@@ -80,8 +80,8 @@ const ProductHead = function ({ product }: ProductHeadProps) {
       productId: id,
       token: user.token,
     };
-    dispatch(createWishlist(payload, user.token));
-    dispatch(getWishList(user.token));
+    createWishlist(payload, user.token)(dispatch);
+    getWishList(user.token)(dispatch);
   }
 
   // When increasing items, ensure it's not more than the quantity market has

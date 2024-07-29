@@ -100,7 +100,7 @@ const Page = function () {
       });
     }
     // pass to dispatch
-    dispatch(createUserAccount(formData));
+    createUserAccount(formData)(dispatch);
   };
 
   const form = {

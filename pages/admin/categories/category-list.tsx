@@ -38,7 +38,8 @@ const CategoryList = () => {
           href={{
             pathname: `/admin/categories/edit-category/${id}`,
           }}
-          className='tw-py-2 tw-px-4'>
+          className='tw-py-2 tw-px-4'
+        >
           Edit
         </Link>
       </Menu.Item>
@@ -54,10 +55,10 @@ const CategoryList = () => {
       dataIndex: "name",
       key: "category_name",
       render: (name, object) => (
-        (<Link
+        <Link
           href={`/admin/categories/${object?.id}`}
-          className='tw-flex tw-items-center tw-space-x-2'>
-
+          className='tw-flex tw-items-center tw-space-x-2'
+        >
           {object?.icon ? (
             <Image
               src={object?.icon}
@@ -72,8 +73,7 @@ const CategoryList = () => {
             </div>
           )}
           <span className=''>{name}</span>
-
-        </Link>)
+        </Link>
       ),
     },
     {
@@ -105,7 +105,6 @@ const CategoryList = () => {
       key: "action",
       render: ({ key, id }) => (
         <span className=' tw-cursor-pointer'>
-          {console.log(key, id)}
           <Dropdown overlay={menu(id)} placement='bottomCenter' arrow>
             <DotsVerticalIcon className='tw-h-5 tw-w-5' />
           </Dropdown>

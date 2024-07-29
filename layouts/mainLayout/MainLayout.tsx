@@ -43,18 +43,18 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
     channel.bind(userId, data => {
       console.log(data.message);
     });
-    dispatch(getCategories());
+    getCategories()(dispatch);
   }, []);
 
   useEffect(() => {
-    dispatch(getCartFunc(user.token));
+    getCartFunc(user.token)(dispatch);
     (async () => {
       try {
         const data = await verifyTokenFunc(user.token ? user.token : "");
         if (data.verifyToken.status) {
-          user.token && dispatch(getUserData(user.token));
-          user.token && user.user.isSeller && dispatch(getSellerData(user.token));
-          user.token && dispatch(getWishList(user.token));
+          user.token && getUserData(user.token)(dispatch);
+          user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
+          user.token && getWishList(user.token)(dispatch);
         } else {
           dispatch(logout());
           dispatch(clearCart());

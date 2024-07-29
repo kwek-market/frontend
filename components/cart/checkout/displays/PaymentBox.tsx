@@ -18,7 +18,7 @@ function PaymentBox({ step, addressId }) {
 
   const showModal = () => {
     if (paymentMethod === "") {
-      return message.warn("Please select a payment method");
+      return message.warning("Please select a payment method");
     }
     setConfirmModal(true);
   };
@@ -41,7 +41,7 @@ function PaymentBox({ step, addressId }) {
 
   const handleOrder = () => {
     if (paymentMethod === "") {
-      return message.warn("Please select a payment method");
+      return message.warning("Please select a payment method");
     }
     if (paymentMethod === "pay on delivery") {
       const payload: PlaceOrder = {

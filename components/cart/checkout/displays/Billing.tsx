@@ -233,7 +233,6 @@ function Billing({ setStep, addressId, setAddressId }) {
                     setBillingInfo({ ...billingInfo, state: e.target.value });
                   }
                 }}
-                placeholder='State'
               >
                 <option value=''>--Select State--</option>
                 {filteredStates?.map(state => (
@@ -269,7 +268,6 @@ function Billing({ setStep, addressId, setAddressId }) {
                     dispatch(setDeliveryFee(selectedState, city.fee, city.name));
                   }
                 }}
-                placeholder='City'
               >
                 <option value=''>--Select City--</option>
                 {convertCitiesToJSON(selectedStateCity)?.map(city => (

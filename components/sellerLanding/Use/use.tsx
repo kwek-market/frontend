@@ -73,7 +73,7 @@ const use = () => {
             </button>
           </div>
           <div className={Styles.useRegister_contentImage}>
-            <Image src='/images/electronics.png' width='1016px' height='397px' />
+            <Image src='/images/electronics.png' width='1016' height='397' />
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
         userFetcherWithAuth(GETORDER, { token, id }, token)
       );
       setLoading(false);
-      dispatch(setOrderDetails(data.order));
+      setOrderDetails(data.order)(dispatch);
       // console.log(data);
       setActiveBtn("Closed Order Details");
     } catch (err) {

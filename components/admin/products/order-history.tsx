@@ -47,7 +47,8 @@ const OrderHistory = ({ isFetching }: Prop) => {
       render: (orderId, order) => (
         <Link
           href={"/admin/customers/" + order?.user?.id + "/order-detail/" + order?.id}
-          className=' tw-text-black-kwek100'>
+          className=' tw-text-black-kwek100'
+        >
           {orderId}
         </Link>
       ),
@@ -58,7 +59,6 @@ const OrderHistory = ({ isFetching }: Prop) => {
       key: "customerName",
       render: data => (
         <div className='tw-flex tw-gap-x-2'>
-          {console.log(data)}
           <Image
             src={"/images/pp.png"}
             alt='pp'
@@ -101,7 +101,9 @@ const OrderHistory = ({ isFetching }: Prop) => {
       render: (status: string) => (
         <span
           className={`${
-            status?.toLowerCase() === OrderDeliveryStatus.Delivered ? "tw-bg-[#009D19]" : "tw-bg-[#FFC107]"
+            status?.toLowerCase() === OrderDeliveryStatus.Delivered
+              ? "tw-bg-[#009D19]"
+              : "tw-bg-[#FFC107]"
           } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-px-3 tw-py-2`}
         >
           {status}

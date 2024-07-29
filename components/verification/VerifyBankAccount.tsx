@@ -67,7 +67,7 @@ function VerifyBankAccount(props: T) {
       token: user.token,
     };
     // console.log(details);
-    dispatch(sellerVerification(details, user.token));
+    sellerVerification(details, user.token)(dispatch);
 
     // send the email
     await mutateAsync({
@@ -77,7 +77,7 @@ function VerifyBankAccount(props: T) {
       userList: [user?.user?.id],
     });
 
-    //dispatch(completeSellerVerification(user.user.email, user.token));
+    //completeSellerVerification(user.user.email, user.token);
     setIsModalVisible(false);
   };
 
@@ -182,8 +182,8 @@ function VerifyBankAccount(props: T) {
 
   useEffect(() => {
     if (seller.sellerVerified.status) {
-      dispatch(completeSellerVerification(user.user.email, user.token));
-      dispatch(getSellerData(user.token));
+      completeSellerVerification(user.user.email, user.token)(dispatch);
+      getSellerData(user.token)(dispatch);
     }
   }, [seller.sellerVerified.status]);
 

@@ -40,7 +40,7 @@ const Page = function () {
     }
     const myToken: string = router.query.token as string;
     router.query.token.length > 0 &&
-      dispatch(
+      
         changePassword(
           {
             password1: newPassword,
@@ -48,8 +48,7 @@ const Page = function () {
             token: myToken,
           },
           myToken
-        )
-      );
+      )(dispatch);
   };
 
   const onClose = () => {

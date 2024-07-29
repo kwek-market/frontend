@@ -204,10 +204,10 @@
     "@react-aria/interactions" "^3.21.3"
     "@tanstack/react-virtual" "^3.8.1"
 
-"@heroicons/react@^2.1.5":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.1.5.tgz#1e13f34976cc542deae92353c01c8b3d7942e9ba"
-  integrity sha512-FuzFN+BsHa+7OxbvAERtgBTNeZpUjgM/MIizfVkSCL2/edriN0Hx/DWRCR//aPYwO5QX/YlgLGXk+E3PcfZwjA==
+"@heroicons/react@v1":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.6.tgz#35dd26987228b39ef2316db3b1245c42eb19e324"
+  integrity sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==
 
 "@humanwhocodes/module-importer@^1.0.1":
   version "1.0.1"
@@ -2991,6 +2991,11 @@ minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-7.1.2.tgz#93a9626ce5e5e66bd4db86849e7515e92340a707"
   integrity sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==
 
+moment@^2.30.1:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
@@ -3863,10 +3868,10 @@ react-star-rating-component@^1.4.1:
     classnames "^2.2.5"
     prop-types "^15.6.1"
 
-react-step-builder@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/react-step-builder/-/react-step-builder-3.0.6.tgz#d271add73c279c570ba8e70c274255e11a52d0eb"
-  integrity sha512-5tt2ExMzBaB2JYq3aqVF8MyOERi3NYxfnVKTsAwTsyWkbV7w618ESZiFhQeJ508CS2BHU+CdUhxVO/qzCxRwjQ==
+react-step-builder@2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/react-step-builder/-/react-step-builder-2.0.11.tgz#228aa7018645af0b6f92b43942759f9233e2dd32"
+  integrity sha512-f6EVLpvLfLZNM9NWv/5XAq9MLY89vjA4VUlZb5Qcf8Y2N9GBTiuinR9IkBhLwdh6MYLKUPj6CbK48E+y8joStw==
 
 react@18.3.1:
   version "18.3.1"
