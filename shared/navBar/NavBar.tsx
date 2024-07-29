@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 
@@ -19,7 +18,7 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
     },
     {
       title: "Contact Us",
-      url: "/contact-us",
+      url: "",
     },
     {
       title: "All Categories",
@@ -27,11 +26,7 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
     },
   ];
   return (
-    <nav
-      id={styles.mainNav}
-      className="bg-primary"
-      style={{ transform: true && "translateX(0)" }}
-    >
+    <nav id={styles.mainNav} className='bg-primary' style={{ transform: true && "translateX(0)" }}>
       {/* <div className={styles.close} onClick={() => setShowNavBar(false)}>
         <i className={`fas fa-times ${styles.close_icon}`} />
       </div> */}
@@ -39,8 +34,8 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
       <ul className={styles.nav}>
         {menu.map((item, index) => (
           <li className={styles.nav_item} key={index}>
-            <Link href={item.url}>
-              <a className={styles.nav_link}> {item.title} </a>
+            <Link href={item.url} className={styles.nav_link}>
+              {item.title}
             </Link>
           </li>
         ))}

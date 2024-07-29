@@ -37,7 +37,7 @@ function Header({ submitDetails }: Props) {
     if (productOptions.length < 1) {
       return message.error("Add product options");
     }
-    dispatch(createProduct(submitDetails, user.token));
+    createProduct(submitDetails, user.token)(dispatch);
     router.push({ pathname: "/seller/profile", query: { tab: "products" } });
   }
 

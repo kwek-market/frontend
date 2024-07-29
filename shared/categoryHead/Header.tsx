@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import styles from './Header.module.scss';
 
 const Component = function () {
@@ -11,8 +11,8 @@ const Component = function () {
         <div className={styles.discountDesc}>
           <span>THRIFT THURSDAY</span>
           <p>20% OFF LEATHER BAGS</p>
-          <Link href="/">
-            <a className={styles.shopButton}>SHOP NOW</a>
+          <Link href="/" className={styles.shopButton}>
+            SHOP NOW
           </Link>
         </div>
         <div className={styles.discountImg}>

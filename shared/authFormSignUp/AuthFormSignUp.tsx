@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Link from 'next/link';
-import Loader from 'react-loader-spinner';
-import styles from '../authForm/AuthForm.module.scss';
+import Link from "next/link";
+import { Puff } from "react-loader-spinner";
+import styles from "../authForm/AuthForm.module.scss";
 
 interface Fields {
   name: string;
@@ -34,7 +34,15 @@ interface Type {
   };
 }
 
-const AuthFormSign: React.FC<Type> = function ({ title, subtitle, fields, submit, extra, userId, createUserInfo }) {
+const AuthFormSign: React.FC<Type> = function ({
+  title,
+  subtitle,
+  fields,
+  submit,
+  extra,
+  userId,
+  createUserInfo,
+}) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
   const [error, setError] = useState<any>({});
@@ -62,44 +70,44 @@ const AuthFormSign: React.FC<Type> = function ({ title, subtitle, fields, submit
     // console.log(validateEmail.test(formData.email))
 
     if (!formData.fullName) {
-      setError({ status: true, message: 'Input your full name' });
+      setError({ status: true, message: "Input your full name" });
       setLoading(false);
     } else if (!formData.email && !formData.password) {
       // console.log("enter your email and password in");
-      setError({ status: true, message: 'Input your email and password' });
+      setError({ status: true, message: "Input your email and password" });
       setLoading(false);
       // console.log(formData);
     } else if (formData.email && formData.password && !validateEmail.test(formData.email)) {
-      setError({ status: true, message: 'Invalid email' });
+      setError({ status: true, message: "Invalid email" });
       setLoading(false);
     } else if (!formData.email && formData.password) {
-      setError({ status: true, message: 'type in your email' });
+      setError({ status: true, message: "type in your email" });
       setLoading(false);
       // console.log(formData);
       // console.log("Input your email");
     } else if (!formData.password1) {
       // console.log("type in your password");
       setLoading(false);
-      setError({ status: true, message: 'Input your password' });
+      setError({ status: true, message: "Input your password" });
     } else if (formData.password1 !== formData.password2) {
       // console.log("enter your email and password in");
-      setError({ status: true, message: 'Passwords do not match' });
+      setError({ status: true, message: "Passwords do not match" });
       setLoading(false);
       // console.log(formData);
       // } else if (userId.id === null) {
       //   setError({ status: true, message: userId.message });
       //   setLoading(false);
-    } else if (createUserInfo.message === 'Password is should not be less than 8 characters') {
-      setError({ status: true, message: 'Password is should not be less than 8 characters' });
+    } else if (createUserInfo.message === "Password is should not be less than 8 characters") {
+      setError({ status: true, message: "Password is should not be less than 8 characters" });
       setLoading(false);
-    } else if (createUserInfo.message === 'Password should contain numerical character') {
-      setError({ status: true, message: 'Password should contain numerical character' });
+    } else if (createUserInfo.message === "Password should contain numerical character") {
+      setError({ status: true, message: "Password should contain numerical character" });
       setLoading(false);
-    } else if (createUserInfo.message === 'E-mail Already in use') {
-      setError({ status: true, message: 'E-mail Already in use' });
+    } else if (createUserInfo.message === "E-mail Already in use") {
+      setError({ status: true, message: "E-mail Already in use" });
       setLoading(false);
     } else {
-      setError({ status: true, message: '' });
+      setError({ status: true, message: "" });
       submitData.action(formData);
       // setLoading(false);
       console.log(formData);
@@ -125,12 +133,14 @@ const AuthFormSign: React.FC<Type> = function ({ title, subtitle, fields, submit
               <input
                 {...fieldProps}
                 className={styles.form_input}
-                type={type === 'password' ? (showPassword ? 'text' : type) : type}
-                onChange={(e) => handleChange(e)}
+                type={type === "password" ? (showPassword ? "text" : type) : type}
+                onChange={e => handleChange(e)}
               />
-              {type === 'password' && (
+              {type === "password" && (
                 <i
-                  className={`${styles.form_inputIcon} ${!showPassword ? 'far fa-eye' : 'far fa-eye-slash'}`}
+                  className={`${styles.form_inputIcon} ${
+                    !showPassword ? "far fa-eye" : "far fa-eye-slash"
+                  }`}
                   onClick={() => setShowPassword(!showPassword)}
                 />
               )}
@@ -138,8 +148,8 @@ const AuthFormSign: React.FC<Type> = function ({ title, subtitle, fields, submit
 
             {sub && (
               <div className={styles.form_inputSub}>
-                <Link href={sub.url}>
-                  <a className={styles.form_inputSubLink}>{sub.text}</a>
+                <Link href={sub.url} className={styles.form_inputSubLink}>
+                  {sub.text}
                 </Link>
               </div>
             )}
@@ -147,11 +157,13 @@ const AuthFormSign: React.FC<Type> = function ({ title, subtitle, fields, submit
         ))}
         {submit && (
           <div className={styles.form_btnContainer}>
-            <button className={`btn bg-primary ${styles.btn}`} onClick={(e) => handleSubmit(e, submit)}>
+            <button
+              className={`btn bg-primary ${styles.btn}`}
+              onClick={e => handleSubmit(e, submit)}
+            >
               {loading && loading ? (
-                <Loader
-                  type="Puff"
-                  color="#fff"
+                <Puff
+                  color='#fff'
                   height={30}
                   width={30}
                   // timeout={3000} //3 secs
@@ -166,8 +178,8 @@ const AuthFormSign: React.FC<Type> = function ({ title, subtitle, fields, submit
         {extra && (
           <div className={styles.form_extra}>
             <p className={styles.form_extraText}>{extra.text}</p>
-            <Link href={extra.linkUrl}>
-              <a className={styles.form_extraLink}>{extra.linkText}</a>
+            <Link href={extra.linkUrl} className={styles.form_extraLink}>
+              {extra.linkText}
             </Link>
           </div>
         )}

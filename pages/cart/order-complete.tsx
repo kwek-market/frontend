@@ -1,5 +1,5 @@
 import { MainLayout } from "@/layouts";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Load from "../../components/Loader/Loader";
