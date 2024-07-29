@@ -14,7 +14,7 @@ import { AuthLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
 import { getSellerData, startSelling } from "@/store/seller/seller.action";
 import { getUserData } from "@/store/user/user.actions";
-import { Puff } from "react-loader-spinner";
+import Loader from "react-loader-spinner";
 import { countriesData } from "../../data/countriesData";
 import styles from "./styles/sellers.module.css";
 
@@ -111,7 +111,7 @@ const Page = function () {
       return;
     }
     // dispatch
-    
+    dispatch(
       startSelling(
         {
           ...sellerData,
@@ -119,22 +119,22 @@ const Page = function () {
           shopUrl: sellerData.shopUrl.trim()?.replaceAll(" ", "-"),
         },
         user.token
-      )(dispatch)
-    
+      )
+    );
   };
 
   useEffect(() => {
     // if you don't have an account, you can't come to this page
     !user.token && router.push("/login");
-    user.token && getUserData(user.token)(dispatch);
-    user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
+    user.token && dispatch(getUserData(user.token));
+    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
     // if (seller.seller.sellerVerified || user.user.isSeller || seller.sellerCreated.status)
     //   router.push("/seller/profile");
   }, [seller.sellerCreated.status, user.user.isSeller, seller.seller.sellerVerified]);
 
   useEffect(() => {
-    user.token && getUserData(user.token)(dispatch);
-    user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
+    user.token && dispatch(getUserData(user.token));
+    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
   }, []);
 
   const bannerText = {
@@ -168,8 +168,8 @@ const Page = function () {
                 <h2 className=''>Set up your Store</h2>
               </div>
               <div className={` ${styles.form_link}`}>
-                <Link href='/seller/profile' className='tw-text-red-kwek100'>
-                  I have an account
+                <Link href='/seller/profile'>
+                  <a className='tw-text-red-kwek100'>I have an account</a>
                 </Link>
               </div>
             </div>
@@ -469,19 +469,23 @@ const Page = function () {
                     className='tw-ml-3 tw-block tw-text-xs tw-font-small tw-text-gray-700 tw-mb-5'
                   >
                     I have heard and accepted the{" "}
-                    <Link href='/' className='tw-text-red-kwek100'>
-                      Seller’s Policy
+                    <Link href='/'>
+                      <a className='tw-text-red-kwek100'>Seller’s Policy</a>
                     </Link>{" "}
                     and{" "}
-                    <Link href='/' className='tw-text-red-kwek100'>
-                      Terms and Conditions
+                    <Link href='/'>
+                      <a className='tw-text-red-kwek100'>Terms and Conditions </a>
                     </Link>
                   </label>
                 </div>
               </div>
               <div className='tw-mt-2 tw-flex '>
                 <button className='btn bg-primary tw-flex-1 tw-w-6 tw-p-4'>
-                  {seller.loading ? <Puff color='#fff' height={30} width={30} /> : "Start Selling"}
+                  {seller.loading ? (
+                    <Loader type='Puff' color='#fff' height={30} width={30} />
+                  ) : (
+                    "Start Selling"
+                  )}
                 </button>
               </div>
             </fieldset>

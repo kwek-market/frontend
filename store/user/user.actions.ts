@@ -34,9 +34,11 @@ export const setUser = (user: any) => ({
 });
 
 export function logout() {
-  return {
-    type: CLEAR_USER,
-    payload: null,
+  return function (dispatch: Dispatch) {
+    dispatch({
+      type: CLEAR_USER,
+      payload: null,
+    });
   };
 }
 
@@ -70,7 +72,7 @@ export function getUserData(token: string) {
         payload: response.userData,
       });
     } catch (error) {
-      dispatch(logout());
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: error.message,
@@ -97,11 +99,11 @@ export function loginUser(user: UserLogin) {
         });
       } else {
         message.error(response.loginUser.message);
-        dispatch(logout());
+        logout()(dispatch);
       }
     } catch (error) {
       message.error(error.message);
-      dispatch(logout());
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: error.message,
@@ -128,7 +130,7 @@ export function updateUser(user: UserUpdate, token: string) {
           payload: user,
         });
     } catch (err) {
-      dispatch(logout());
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: err.message,
@@ -155,7 +157,7 @@ export function sendPasswordResetEmail(email: string, token: string) {
           payload: result.sendPasswordResetEmail,
         });
     } catch (err) {
-      dispatch(logout());
+      logout()(dispatch);
     }
   };
 }
@@ -180,7 +182,7 @@ export function changePassword(
           payload: result.changePassword,
         });
     } catch (err) {
-      dispatch(logout());
+      logout()(dispatch);
       dispatch({
         type: SET_ERROR,
         payload: err.message,

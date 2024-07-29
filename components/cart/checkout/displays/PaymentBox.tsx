@@ -5,7 +5,7 @@ import usePlaceOrder from "@/hooks/usePlaceOrder";
 import { PaymentLinkType, PlaceOrder } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "../checkGrid/checkGrid.module.scss";
@@ -18,7 +18,7 @@ function PaymentBox({ step, addressId }) {
 
   const showModal = () => {
     if (paymentMethod === "") {
-      return message.warning("Please select a payment method");
+      return message.warn("Please select a payment method");
     }
     setConfirmModal(true);
   };
@@ -41,7 +41,7 @@ function PaymentBox({ step, addressId }) {
 
   const handleOrder = () => {
     if (paymentMethod === "") {
-      return message.warning("Please select a payment method");
+      return message.warn("Please select a payment method");
     }
     if (paymentMethod === "pay on delivery") {
       const payload: PlaceOrder = {

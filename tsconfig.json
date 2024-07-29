@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "es2015",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -23,8 +23,7 @@
       "@/layouts/*": ["layouts/*"],
       "@/hooks/*": ["hooks/*"],
       "@store/*": ["store/*"]
-    },
-    "incremental": true
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "seeds/countries.js"],
   "exclude": ["node_modules"]

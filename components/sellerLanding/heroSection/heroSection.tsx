@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 // import image
 import { RootState } from "@/store/rootReducer";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Styles from "./heroSection.module.scss";
 
@@ -78,7 +78,7 @@ export default heroSection;
 <div className="tw-flex tw-justify-between tw-px-5 md:tw-px-20">
 <Link href="/">
   <a>
-    <img src="/svg/kweklogo.png" />
+    <img src="/svg/kweklogo.svg" />
   </a>
 </Link>
 <div className="md:tw-flex tw-justify-center tw-items-center tw-hidden">

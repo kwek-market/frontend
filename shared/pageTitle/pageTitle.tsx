@@ -7,8 +7,8 @@ const Component = function ({ title }: { title: string }) {
   return (
     <div className={styles.first_banner}>
       <div className={styles.sublink}>
-        <Link href="/" className=" tw-cursor-pointer tw-text-white-100">
-          Home
+        <Link href="/">
+          <a className=" tw-cursor-pointer tw-text-white-100">Home</a>
         </Link>
         <i className="fas fa-angle-right" />
         <p>{title}</p>

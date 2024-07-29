@@ -3,15 +3,15 @@ import Load from "@/components/Loader/Loader";
 import { userFetcher } from "@/helpers";
 import useReviewCard from "@/hooks/useReviewCards";
 import useReviews from "@/hooks/useReviews";
-import { SellerReview } from "@/interfaces/commonTypes";
+import { PagePayload, SellerReview } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { GET_SELLER_REVIEW } from "@/store/seller/seller.queries";
 import dayjs from "dayjs";
-import { Fragment, useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+import React, { Fragment, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import Card from "../home/Card";
+import ReactPaginate from "react-paginate";
 import ReviewItem from "./ReviewItem";
 
 export default function Review() {
@@ -19,7 +19,9 @@ export default function Review() {
   const [sort, setSort] = useState("recent");
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentItems, setCurrentItems] = useState<SellerReview[]>([] as SellerReview[]);
+  const [currentItems, setCurrentItems] = useState<SellerReview[]>(
+    [] as SellerReview[]
+  );
   const {
     user: { token },
   } = useSelector((state: RootState) => state);
@@ -30,7 +32,11 @@ export default function Review() {
     sortBy: sort,
     rating: -5,
   };
-  const { status: reviewStatus, data: reviewData, error: reviewError } = useReviews(payload);
+  const {
+    status: reviewStatus,
+    data: reviewData,
+    error: reviewError,
+  } = useReviews(payload);
   const {
     "0": { data: salesData, status: salesStatus, error: salesError },
     "1": { data: qualityData, status: qualityStatus, error: qualityError },
@@ -41,7 +47,9 @@ export default function Review() {
   } = useReviewCard(token, true);
 
   useEffect(() => {
-    queryClient.fetchQuery(["reviews", payload], () => userFetcher(GET_SELLER_REVIEW, payload));
+    queryClient.fetchQuery(["reviews", payload], () =>
+      userFetcher(GET_SELLER_REVIEW, payload)
+    );
   }, [sort]);
 
   useEffect(() => {
@@ -64,14 +72,16 @@ export default function Review() {
   };
 
   return (
-    <section className='tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md'>
-      <div className='tw-border-b tw-border-gray-kwek700 tw-pb-1.5'>
-        <h1 className='tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-capitalize'>Reviews</h1>
-        <h4 className='tw-font-medium tw-text-base tw-text-gray-kwek900 tw-uppercase'>
+    <section className="tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md">
+      <div className="tw-border-b tw-border-gray-kwek700 tw-pb-1.5">
+        <h1 className="tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-capitalize">
+          Reviews
+        </h1>
+        <h4 className="tw-font-medium tw-text-base tw-text-gray-kwek900 tw-uppercase">
           store performance
         </h4>
       </div>
-      <div className='tw-mt-3 tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-3'>
+      <div className="tw-mt-3 tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-3">
         <Fragment>
           {salesStatus === "loading" && <Load />}
           {salesStatus === "error" && (
@@ -113,19 +123,19 @@ export default function Review() {
         </Fragment>
         {/* <Card name={"communication"} num={"0"} content="NGN 0" /> */}
       </div>
-      <div className='tw-mt-4'>
-        <div className='tw-flex tw-justify-between tw-items-center tw-border-b tw-border-gray-kwek700 tw-pb-2'>
-          <p className='tw-font-medium tw-text-base tw-text-gray-kwek900 tw-uppercase'>
+      <div className="tw-mt-4">
+        <div className="tw-flex tw-justify-between tw-items-center tw-border-b tw-border-gray-kwek700 tw-pb-2">
+          <p className="tw-font-medium tw-text-base tw-text-gray-kwek900 tw-uppercase">
             product reviews
           </p>
           <label>
             {" "}
             sort by{" "}
             <select
-              aria-placeholder='All time'
-              className=''
+              placeholder="All time"
+              className=""
               value={sort}
-              onChange={e => {
+              onChange={(e) => {
                 if (e.target.value === "rating") {
                   payload.rating = -5;
                 } else if (e.target.value === "-rating") {
@@ -134,10 +144,10 @@ export default function Review() {
                 setSort(e.target.value);
               }}
             >
-              <option value='-date_created'>recent</option>
-              <option value='date_created'>oldest</option>
-              <option value='rating'>raing:low to high</option>
-              <option value='-rating'>rating:high to low</option>
+              <option value="-date_created">recent</option>
+              <option value="date_created">oldest</option>
+              <option value="rating">raing:low to high</option>
+              <option value="-rating">rating:high to low</option>
             </select>
           </label>
         </div>
@@ -146,8 +156,10 @@ export default function Review() {
           {reviewStatus === "error" && (
             <ErrorInfo error={(reviewError as { message: string }).message} />
           )}
-          {reviewStatus === "success" && reviewData !== undefined && currentItems.length > 0 ? (
-            currentItems.map(review => (
+          {reviewStatus === "success" &&
+          reviewData !== undefined &&
+          currentItems.length > 0 ? (
+            currentItems.map((review) => (
               <ReviewItem
                 key={review.id}
                 name={review.user.firstName + " " + review.user.lastName}
@@ -158,8 +170,8 @@ export default function Review() {
               />
             ))
           ) : (
-            <div className='tw-flex tw-justify-center tw-items-center tw-p-3 tw-h-52'>
-              <h1 className='tw-font-semibold tw-text-lg tw-text-gray-kwek900'>
+            <div className="tw-flex tw-justify-center tw-items-center tw-p-3 tw-h-52">
+              <h1 className="tw-font-semibold tw-text-lg tw-text-gray-kwek900">
                 You currently have no reviews
               </h1>
             </div>
@@ -167,23 +179,23 @@ export default function Review() {
         </div>
       </div>
       <ReactPaginate
-        nextLabel='next >'
-        onPageChange={e => handlePageClick(e)}
+        nextLabel="next >"
+        onPageChange={(e) => handlePageClick(e)}
         pageRangeDisplayed={3}
         marginPagesDisplayed={2}
         pageCount={pageCount}
-        previousLabel='< previous'
-        pageClassName='page-item'
-        pageLinkClassName='page-link'
-        previousClassName='page-item'
-        previousLinkClassName='page-link'
-        nextClassName='page-item'
-        nextLinkClassName='page-link'
-        breakLabel='...'
-        breakClassName='page-item'
-        breakLinkClassName='page-link'
-        containerClassName='pagination'
-        activeClassName='active'
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
         renderOnZeroPageCount={undefined}
       />
     </section>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import styles from './Features.module.scss';
 
 import Carousel from '@/components/Carousel/Carousel';

@@ -1,5 +1,5 @@
 import { message } from "antd";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/rootReducer";

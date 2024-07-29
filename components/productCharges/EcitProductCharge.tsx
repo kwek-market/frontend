@@ -56,9 +56,9 @@ const EditProductChargeModal = ({
   };
 
   return (
-    (<Modal
+    <Modal
       title='Edit Product Charge'
-      open={isOpen}
+      visible={isOpen}
       onOk={updateProductCharge}
       confirmLoading={isLoading}
       okButtonProps={{
@@ -106,7 +106,7 @@ const EditProductChargeModal = ({
           </FormItems>
         </form>
       </div>
-    </Modal>)
+    </Modal>
   );
 };
 

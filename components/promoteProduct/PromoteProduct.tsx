@@ -5,7 +5,7 @@ import { useGetProduct } from "@/hooks/useProduct";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
 import Modal from "antd/lib/modal/Modal";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
