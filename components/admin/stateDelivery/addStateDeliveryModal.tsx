@@ -17,9 +17,9 @@ export const CityDeliveryModal = ({ isOpen, onClose, onSubmit, isEdit, data }) =
   }, [data]);
 
   return (
-    <Modal
+    (<Modal
       title={isEdit ? "Edit City" : "Add City"}
-      visible={isOpen}
+      open={isOpen}
       okText={isEdit ? "Update City" : "Add City"}
       onOk={() => {
         onSubmit(cityFormData);
@@ -45,6 +45,6 @@ export const CityDeliveryModal = ({ isOpen, onClose, onSubmit, isEdit, data }) =
           onChange={e => setCityFormData({ ...cityFormData, fee: Number(e.target.value) })}
         />
       </div>
-    </Modal>
+    </Modal>)
   );
 };

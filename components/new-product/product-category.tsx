@@ -104,7 +104,7 @@ function ProductCategory({
           {" "}
           Main Category <br />
           <select
-            placeholder='Select Main Category'
+            aria-placeholder='Select Main Category'
             className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
             value={category}
             onChange={e => handleCategoryChange(e)}
@@ -127,7 +127,7 @@ function ProductCategory({
               {useAsSubCategory ? "Sub-Parent" : "Sub"} Category <br />
               <select
                 className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-                placeholder='Select subcategory'
+                aria-placeholder='Select subcategory'
                 required
                 value={subCategoryValue[index]}
                 onChange={e => handleSubCategoryChange(e, index)}

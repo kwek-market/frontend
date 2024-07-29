@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 
 const Switcher = function ({ slides }) {
