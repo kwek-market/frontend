@@ -8,7 +8,7 @@ import { createUserAccount } from "@/store/account/account.actions";
 import { RootState } from "@/store/rootReducer";
 import Alert from "antd/lib/alert";
 import Link from "next/link";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { getWelcomeEmailTemplate } from "../helpers/emailTemplates";
 import { useAdminSendEmails } from "../hooks/admin/email";
@@ -100,7 +100,7 @@ const Page = function () {
       });
     }
     // pass to dispatch
-    dispatch(createUserAccount(formData));
+    createUserAccount(formData)(dispatch);
   };
 
   const form = {
@@ -200,19 +200,15 @@ const Page = function () {
               className={`btn bg-primary hover:tw-text-blue-300 ${styles.btn}`}
               onClick={e => createAccount(e)}
             >
-              {account.loading ? (
-                <Loader type='Puff' color='#fff' height={30} width={30} />
-              ) : (
-                form.submit.text
-              )}
+              {account.loading ? <Puff color='#fff' height={30} width={30} /> : form.submit.text}
             </button>
           </div>
 
           {form.extra && (
             <div className={styles.form_extra}>
               <p className={styles.form_extraText}>{form.extra.text}</p>
-              <Link href={form.extra.linkUrl}>
-                <a className={styles.form_extraLink}>{form.extra.linkText}</a>
+              <Link href={form.extra.linkUrl} className={styles.form_extraLink}>
+                {form.extra.linkText}
               </Link>
             </div>
           )}

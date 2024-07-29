@@ -31,8 +31,10 @@ export const OrderTable = ({ token, id }: { token?: string; id?: string }) => {
       dataIndex: "orderId",
       key: "order_number",
       render: (order_number, object) => (
-        <Link href={"/admin/customers/" + router.query?.id + "/order-detail/" + object?.id}>
-          <a className=' tw-text-black-kwek100'>{order_number}</a>
+        <Link
+          href={"/admin/customers/" + router.query?.id + "/order-detail/" + object?.id}
+          className=' tw-text-black-kwek100'>
+          {order_number}
         </Link>
       ),
     },

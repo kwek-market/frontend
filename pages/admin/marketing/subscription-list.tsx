@@ -18,7 +18,7 @@ const SubscriptionList = () => {
             pathname: "/admin/marketing/edit-subscription/chicken",
           }}
         >
-          <a>Edit</a>
+          Edit
         </Link>
       </Menu.Item>
       <Menu.Item>

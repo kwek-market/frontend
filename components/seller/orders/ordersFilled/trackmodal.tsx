@@ -2,7 +2,7 @@ import Load from "@/components/Loader/Loader";
 import CancelIcon from "@/components/icons/cancel";
 import SimpleModal from "@/components/modal";
 import { message } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import useTrackOrder from "../../../../hooks/useTrackOrder";
@@ -73,15 +73,18 @@ const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModal
   return (
     <SimpleModal open={isModalOpen} handleClose={handleCancel}>
       <div className='tw-bg-[#FCF7F8] tw-w-[90vw] tw-mt-[5vh] tw-mx-auto tw-pt-16  tw-relative tw-pb-24 tw-max-h-[90vh] tw-overflow-scroll'>
-        <div
-          className=' tw-absolute tw-top-6 tw-right-6 lg:tw-top-16 lg:tw-right-16 tw-cursor-pointer'
-          onClick={() => handleCancel()}
-        >
-          <CancelIcon />
+        <div className='tw-flex tw-items-center tw-justify-between tw-px-6'>
+          <h1 className='tw-text-2xl lg:tw-text-3xl font-[600] tw-text-[#1D1616] tw-text-center tw-font-poppins mb-0'>
+            Track your Shipment
+          </h1>
+
+          <div
+            className=' lg:tw-absolute  lg:tw-top-16 lg:tw-right-16 tw-cursor-pointer'
+            onClick={() => handleCancel()}
+          >
+            <CancelIcon className='tw-w-6 tw-h-6' />
+          </div>
         </div>
-        <h1 className=' tw-text-3xl font-[600] tw-text-[#1D1616] tw-text-center tw-font-poppins mb-0'>
-          Track your Shipment
-        </h1>
 
         <div className=' tw-bg-white-100 tw-py-8 lg:tw-py-16 tw-px-5 lg:tw-px-20 tw-w-[90%] lg:tw-w-[85%] tw-mx-auto tw-mt-14'>
           <div className='tw-flex tw-flex-col lg:tw-flex-row tw-gap-x-4'>

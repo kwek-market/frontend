@@ -10,25 +10,23 @@ type MenuBoxProps = {
 };
 
 const MenuBox = function ({ icon, title, description, link, show }: MenuBoxProps) {
-  return (
-    <>
-      {show ? (
-        <Link href={link}>
-          <a>
-            <span className={style.menuBox}>
-              <span>
-                <i className={`fas ${icon} icon tw-text-gray-kwek900`} />
-              </span>
-              <span style={{ paddingLeft: "12px" }}>
-                <span className={style.title}>{title}</span>
-                <span className={style.description}>{description}</span>
-              </span>
-            </span>
-          </a>
-        </Link>
-      ) : null}
-    </>
-  );
+  return <>
+    {show ? (
+      (<Link href={link}>
+
+        <span className={style.menuBox}>
+          <span>
+            <i className={`fas ${icon} icon tw-text-gray-kwek900`} />
+          </span>
+          <span style={{ paddingLeft: "12px" }}>
+            <span className={style.title}>{title}</span>
+            <span className={style.description}>{description}</span>
+          </span>
+        </span>
+
+      </Link>)
+    ) : null}
+  </>;
 };
 
 export default MenuBox;

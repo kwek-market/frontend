@@ -6,7 +6,7 @@ const ActiveTabbar = function () {
   return (
     <div className={styles.bar_container}>
       <div className={styles.bar_content}>
-        <Link href="/seller/profile">
+        <Link href="/seller/profile" legacyBehavior>
           <div className={styles.filter}>
             <a>
               <i className="fas fa-angle-left" />

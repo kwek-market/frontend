@@ -32,14 +32,14 @@ export default function Wallet() {
       : 0;
 
   return (
-    <section className='tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md'>
+    (<section className='tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md'>
       <Drawer
         title='Withdraw Funds'
         placement={"right"}
         onClose={() => {
           setVisible(false);
         }}
-        visible={visible}
+        open={visible}
         key={"right-fuck"}
         closable={true}
         destroyOnClose={true}
@@ -47,10 +47,8 @@ export default function Wallet() {
       >
         <WithdrawFunds />
       </Drawer>
-
       <FundWallet isOpen={isFundWalletModalOpen} onClose={() => setIsFundWalletModalOpen(false)} />
       <WalletHeader setIsFundWalletModalOpen={setIsFundWalletModalOpen} setVisible={setVisible} />
-
       <div className='tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-5 tw-mt-4'>
         {walletStatus === "loading" && <Load />}
         {walletStatus === "error" && <ErrorInfo error='An error occurred' />}
@@ -80,6 +78,6 @@ export default function Wallet() {
         )}
       </div>
       <WalletContent />
-    </section>
+    </section>)
   );
 }
