@@ -7,7 +7,7 @@ import {
 } from "@/store/seller/seller.action";
 import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
-import { Circles } from "react-loader-spinner";
+import Loader from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { StepComponentProps } from "react-step-builder";
 import { getVendorApplicationEmail } from "../../helpers/emailTemplates";
@@ -67,7 +67,7 @@ function VerifyBankAccount(props: T) {
       token: user.token,
     };
     // console.log(details);
-    sellerVerification(details, user.token)(dispatch);
+    dispatch(sellerVerification(details, user.token));
 
     // send the email
     await mutateAsync({
@@ -77,7 +77,7 @@ function VerifyBankAccount(props: T) {
       userList: [user?.user?.id],
     });
 
-    //completeSellerVerification(user.user.email, user.token);
+    //dispatch(completeSellerVerification(user.user.email, user.token));
     setIsModalVisible(false);
   };
 
@@ -182,8 +182,8 @@ function VerifyBankAccount(props: T) {
 
   useEffect(() => {
     if (seller.sellerVerified.status) {
-      completeSellerVerification(user.user.email, user.token)(dispatch);
-      getSellerData(user.token)(dispatch);
+      dispatch(completeSellerVerification(user.user.email, user.token));
+      dispatch(getSellerData(user.token));
     }
   }, [seller.sellerVerified.status]);
 
@@ -192,7 +192,7 @@ function VerifyBankAccount(props: T) {
       {isOpen && <VerifiedModal />}
       <Modal
         title='Confirm Submission'
-        open={isModalVisible}
+        visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
@@ -204,7 +204,8 @@ function VerifyBankAccount(props: T) {
           <p className='tw-font-medium'>Account Number : {props.state.bankAccountNumber}</p>
         </div>
       </Modal>
-      ;<Header title='verify bank account' num='4' />
+      ;
+      <Header title='verify bank account' num='4' />
       <div className='tw-bg-white-100 tw-border tw-border-white-300 tw-p-6'>
         <h4 className='tw-text-gray-kwek200 tw-font-semibold tw-text-2xl tw-mb-3'>
           Enter your account details linked to the BVN entered previously
@@ -241,7 +242,7 @@ function VerifyBankAccount(props: T) {
             value={props.getState("bankAccountNumber", "")}
             onChange={props.handleChange}
           />
-          {loading && <Circles width={20} height={20} color='#FC476E' />}
+          {loading && <Loader type='CradleLoader' width={20} height={20} color='#FC476E' />}
           {props.state.bankName && props.state.bankAccountNumber && (
             <p className='tw-font-medium'>{bankAccountName}</p>
           )}

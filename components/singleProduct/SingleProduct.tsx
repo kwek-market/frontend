@@ -1,7 +1,7 @@
 import useAvgRating from "@/hooks/useAvgRating";
 import { ProductType } from "@/interfaces/commonTypes";
 import { message } from "antd";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import StarRatingComponent from "react-star-rating-component";

@@ -1,7 +1,7 @@
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import { AdminLayout } from "@/layouts";
 import { Empty } from "antd";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Load from "../../../../components/Loader/Loader";

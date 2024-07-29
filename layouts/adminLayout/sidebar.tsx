@@ -1,5 +1,5 @@
 import CancelIcon from "@/components/icons/cancel";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import SidebarItems from "./sidebar-items";
 
 const SideBarAdmin = ({ sidebarOpen, setSidebarOpen }) => {

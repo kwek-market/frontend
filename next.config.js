@@ -1,38 +1,11 @@
-/** @type {import('next').NextConfig} */
-
 module.exports = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "source.unsplash.com",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
-        hostname: "via.placeholder.com",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
-        hostname: "randomuser.me",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
-        hostname: "images.pexels.com",
-        pathname: "**",
-      },
+    domains: [
+      "source.unsplash.com",
+      "res.cloudinary.com",
+      "via.placeholder.com",
+      "randomuser.me",
+      "images.pexels.com",
     ],
-    unoptimized: true,
-  },
-  httpAgentOptions: {
-    keepAlive: true,
-    timeout: 500000000,
   },
 };

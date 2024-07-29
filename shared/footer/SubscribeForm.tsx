@@ -19,7 +19,7 @@ const Component = function () {
       return;
     }
     console.log(email);
-    subscribeToNewsletter(email, user.token)(dispatch);
+    dispatch(subscribeToNewsletter(email, user.token));
   }
 
   return (

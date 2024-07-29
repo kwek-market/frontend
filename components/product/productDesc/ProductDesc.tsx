@@ -2,7 +2,7 @@ import { ProductType, ReviewType } from "@/interfaces/commonTypes";
 import { Tabs, message } from "antd";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
@@ -41,16 +41,17 @@ const ProductDesc = function ({ product }: ProductDescProps) {
     e.preventDefault();
     const { comment, token, productId } = reviewType;
     if (token === "") return message.error("Login to enter comment");
-
-    reviewProduct(
-      {
-        rating: rating,
-        token,
-        review: comment,
-        productId,
-      },
-      user.token
-    )(dispatch);
+    dispatch(
+      reviewProduct(
+        {
+          rating: rating,
+          token,
+          review: comment,
+          productId,
+        },
+        user.token
+      )
+    );
   }
 
   return (
@@ -125,7 +126,9 @@ const ProductDesc = function ({ product }: ProductDescProps) {
                   <p className={styles.head}>7 Days Return Guarantee</p>
                   <p className={styles.sub}>
                     For more information on the return shipping options, go to{" "}
-                    <Link href='/returnPolicy'>Kwek return Policy</Link>
+                    <Link href='/returnPolicy'>
+                      <a>Kwek return Policy</a>
+                    </Link>
                   </p>
                 </div>
               </div>

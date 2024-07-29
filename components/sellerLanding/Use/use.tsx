@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import UseBox from "./UseBox";
 import Styles from "./use.module.scss";
@@ -73,7 +73,7 @@ const use = () => {
             </button>
           </div>
           <div className={Styles.useRegister_contentImage}>
-            <Image src='/images/electronics.png' width='1016' height='397' />
+            <Image src='/images/electronics.png' width='1016px' height='397px' />
           </div>
         </div>
       </div>

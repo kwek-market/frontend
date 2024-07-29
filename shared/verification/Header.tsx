@@ -27,7 +27,7 @@ function Header() {
     <Menu>
       <Menu.Item>
         <Link href="/seller/profile/#settings">
-          account
+          <a>account</a>
         </Link>
       </Menu.Item>
       <Menu.Item>

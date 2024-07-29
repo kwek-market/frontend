@@ -4,10 +4,10 @@ import styles from "../checkGrid/checkGrid.module.scss";
 
 function Payment({ isModalfourVisible, handlefourOk, handlefourCancel }) {
   return (
-    (<Modal
+    <Modal
       title="Transfer"
       className={styles.pickup_modal}
-      open={isModalfourVisible}
+      visible={isModalfourVisible}
       onOk={handlefourOk}
       onCancel={handlefourCancel}
       style={{ top: 20 }}
@@ -162,7 +162,7 @@ function Payment({ isModalfourVisible, handlefourOk, handlefourCancel }) {
           </div>
         </div>
       </div>
-    </Modal>)
+    </Modal>
   );
 }
 

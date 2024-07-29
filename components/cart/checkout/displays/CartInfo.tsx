@@ -1,5 +1,5 @@
 import { RootState } from "@/store/rootReducer";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { v4 } from "uuid";
