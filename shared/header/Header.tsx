@@ -100,9 +100,10 @@ const Header = function ({
           <Image
             width='180'
             height='30'
-            src='/svg/kweklogo.svg'
+            src='/svg/kweklogo.png'
             alt='Kwek logo'
             className={styles.logo_image}
+            objectFit='cover'
           />
         </Link>
       </div>

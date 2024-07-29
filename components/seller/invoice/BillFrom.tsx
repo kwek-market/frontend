@@ -25,7 +25,7 @@ export default function BillFrom({ data }) {
           {data.store.email}
         </p>
       </article>
-      <Image src="/svg/kweklogo.svg" alt="kweklogo" width="250" height="200" />
+      <Image src="/svg/kweklogo.png" alt="kweklogo" width="250" height="200" />
     </div>
   );
 }

@@ -19,7 +19,7 @@ const SellerLandingHead = () => {
     <div className=' tw-bg-lightMagenta tw-py-6 2xl:tw-py-9 tw-px-[5%] tw-flex tw-gap-x-8 lg:tw-gap-x-14 tw-justify-between tw-items-center lg:tw-justify-between lg:tw-items-center'>
       <Link href='/'>
         <a>
-          <img src='/svg/kweklogo.svg' />
+          <img src='/svg/kweklogo.png' />
         </a>
       </Link>
 
