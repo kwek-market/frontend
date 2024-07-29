@@ -1,17 +1,16 @@
-import React from "react";
-import Loader from "react-loader-spinner";
+import { Audio } from "react-loader-spinner";
 
-import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
 import List from "@/components/wishlist/List";
 import styles from "@/components/wishlist/list.module.scss";
+import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
 
 import { MainLayout } from "@/layouts";
-import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
+import { useSelector } from "react-redux";
 
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { WishlistType } from "@/interfaces/commonTypes";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
+import { WishlistType } from "@/interfaces/commonTypes";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Page = function () {
   const {
@@ -20,7 +19,7 @@ const Page = function () {
 
   const isLoading = loading && (
     <div>
-      <Loader type="Audio" color="#fff" height={30} width={30} />
+      <Audio color='#fff' height={30} width={30} />
     </div>
   );
 
@@ -42,7 +41,7 @@ const Page = function () {
     );
 
   return (
-    <MainLayout title="Wishlist">
+    <MainLayout title='Wishlist'>
       <section>
         {isLoading}
         {hasError}

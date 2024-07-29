@@ -1,12 +1,11 @@
-import TextInput from "@/components/input/textInput";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import Load from "@/components/Loader/Loader";
 import { emailValidator, passwordValidator } from "@/helpers";
 import usePasswordUpdate, { UpdatePassword } from "@/hooks/usePasswordUpdate";
 import { RootState } from "@/store/rootReducer";
-import { changePassword, updateUser } from "@/store/user/user.actions";
+import { updateUser } from "@/store/user/user.actions";
 import { Input, message } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export type UserDataType = {
@@ -55,18 +54,17 @@ export default function PersonalDetails({}) {
     if (phoneNumber === "" || phoneNumber.length === 0) {
       return message.error("Invalid phoneNumber");
     }
-    dispatch(
-      updateUser(
-        {
-          newFirstName: firstname,
-          newLastName: lastname,
-          newEmail: email,
-          newPhoneNumber: Number(phoneNumber),
-          token: user.token,
-        },
-        user.token
-      )
-    );
+
+    updateUser(
+      {
+        newFirstName: firstname,
+        newLastName: lastname,
+        newEmail: email,
+        newPhoneNumber: Number(phoneNumber),
+        token: user.token,
+      },
+      user.token
+    )(dispatch);
   }
 
   const resetPassword = () => {
@@ -98,25 +96,25 @@ export default function PersonalDetails({}) {
   };
 
   return (
-    <section className="tw-mb-7">
-      <div className="">
-        <section className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-7">
-          <div className="tw-flex tw-flex-col tw-relative">
+    <section className='tw-mb-7'>
+      <div className=''>
+        <section className='tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-7'>
+          <div className='tw-flex tw-flex-col tw-relative'>
             <label
-              htmlFor="firstname"
-              className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+              htmlFor='firstname'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
             >
               firstname
             </label>
             <Input
-              id="firstname"
-              type="text"
-              placeholder="firstname"
-              className="tw-rounded-sm tw-w-full tw-mt-2"
-              size="large"
+              id='firstname'
+              type='text'
+              placeholder='firstname'
+              className='tw-rounded-sm tw-w-full tw-mt-2'
+              size='large'
               value={personalDetails.firstname}
-              onChange={(e) =>
+              onChange={e =>
                 setPersonalDetails({
                   ...personalDetails,
                   firstname: e.target.value,
@@ -124,22 +122,22 @@ export default function PersonalDetails({}) {
               }
             />
           </div>
-          <div className="tw-flex tw-flex-col tw-relative">
+          <div className='tw-flex tw-flex-col tw-relative'>
             <label
-              htmlFor="lastname"
-              className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+              htmlFor='lastname'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
             >
               lastname
             </label>
             <Input
-              id="lastname"
-              type="text"
-              placeholder="lastname"
-              className="tw-rounded-sm tw-w-full tw-mt-2"
-              size="large"
+              id='lastname'
+              type='text'
+              placeholder='lastname'
+              className='tw-rounded-sm tw-w-full tw-mt-2'
+              size='large'
               value={personalDetails.lastname}
-              onChange={(e) =>
+              onChange={e =>
                 setPersonalDetails({
                   ...personalDetails,
                   lastname: e.target.value,
@@ -147,23 +145,23 @@ export default function PersonalDetails({}) {
               }
             />
           </div>
-          <div className="tw-flex tw-flex-col tw-relative">
+          <div className='tw-flex tw-flex-col tw-relative'>
             <label
-              htmlFor="phoneNumber"
-              className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+              htmlFor='phoneNumber'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
             >
               Phone Number
             </label>
             <Input
-              id="phoneNumber"
-              type="text"
-              addonBefore="+234"
-              placeholder="Phone Number"
-              className="tw-rounded-sm tw-w-full"
-              size="large"
+              id='phoneNumber'
+              type='text'
+              addonBefore='+234'
+              placeholder='Phone Number'
+              className='tw-rounded-sm tw-w-full'
+              size='large'
               value={personalDetails.phoneNumber}
-              onChange={(e) =>
+              onChange={e =>
                 setPersonalDetails({
                   ...personalDetails,
                   phoneNumber: e.target.value,
@@ -171,23 +169,23 @@ export default function PersonalDetails({}) {
               }
             />
           </div>
-          <div className="tw-flex tw-flex-col tw-relative">
+          <div className='tw-flex tw-flex-col tw-relative'>
             <label
-              htmlFor="email"
-              className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+              htmlFor='email'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
             >
               email address
             </label>
             <Input
-              id="email"
-              type="email"
-              placeholder="email"
-              className="tw-rounded-sm tw-w-full tw-mt-2"
-              size="large"
+              id='email'
+              type='email'
+              placeholder='email'
+              className='tw-rounded-sm tw-w-full tw-mt-2'
+              size='large'
               value={personalDetails.email}
               disabled
-              onChange={(e) =>
+              onChange={e =>
                 setPersonalDetails({
                   ...personalDetails,
                   email: e.target.value,
@@ -197,39 +195,39 @@ export default function PersonalDetails({}) {
           </div>
         </section>
         {user.loading && <Load />}
-        <div className="tw-flex tw-justify-end">
+        <div className='tw-flex tw-justify-end'>
           <button
-            className="tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10"
+            className='tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-10'
             onClick={() => saveChanges()}
           >
             Save Changes
           </button>
         </div>
       </div>
-      <div className="">
-        <div className="tw-border-b tw-border-gray-kwek900 tw-border-opacity-50">
-          <p className="tw-uppercase tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-mb-1">
+      <div className=''>
+        <div className='tw-border-b tw-border-gray-kwek900 tw-border-opacity-50'>
+          <p className='tw-uppercase tw-font-semibold tw-text-lg tw-text-gray-kwek900 tw-mb-1'>
             Change Password
           </p>
         </div>
 
-        <section className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-12 tw-mt-5">
-          <div className="tw-flex tw-flex-col tw-relative">
+        <section className='tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-justify-between tw-gap-2 tw-mb-12 tw-mt-5'>
+          <div className='tw-flex tw-flex-col tw-relative'>
             <label
-              htmlFor="currentPassword"
-              className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+              htmlFor='currentPassword'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
             >
               Current Password
             </label>
             <Input
-              id="currentPassword"
-              type="password"
-              placeholder="Current Password"
-              className="tw-rounded-sm tw-w-full tw-mt-2"
-              size="large"
+              id='currentPassword'
+              type='password'
+              placeholder='Current Password'
+              className='tw-rounded-sm tw-w-full tw-mt-2'
+              size='large'
               value={password.currentPassword}
-              onChange={(e) =>
+              onChange={e =>
                 setPassword({
                   ...password,
                   currentPassword: e.target.value,
@@ -237,22 +235,22 @@ export default function PersonalDetails({}) {
               }
             />
           </div>
-          <div className="tw-flex tw-flex-col tw-relative">
+          <div className='tw-flex tw-flex-col tw-relative'>
             <label
-              htmlFor="newPassword"
-              className="tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
-            "
+              htmlFor='newPassword'
+              className='tw-text-base tw-text-gray-kwek200 tw-font-medium tw-capitalize tw-mb-2 
+            '
             >
               new Password
             </label>
             <Input
-              id="newPassword"
-              type="password"
-              placeholder="new Password"
-              className="tw-rounded-sm tw-w-full tw-mt-2"
-              size="large"
+              id='newPassword'
+              type='password'
+              placeholder='new Password'
+              className='tw-rounded-sm tw-w-full tw-mt-2'
+              size='large'
               value={password.newPassword}
-              onChange={(e) =>
+              onChange={e =>
                 setPassword({
                   ...password,
                   newPassword: e.target.value,
@@ -263,9 +261,9 @@ export default function PersonalDetails({}) {
         </section>
         {error.status && <ErrorInfo error={error.message} />}
         {isLoading && <Load />}
-        <div className="tw-flex tw-justify-end tw-mt-6">
+        <div className='tw-flex tw-justify-end tw-mt-6'>
           <button
-            className="tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-8"
+            className='tw-bg-red-kwek100 tw-text-white-100 tw-rounded-md tw-py-3 tw-px-8'
             onClick={() => resetPassword()}
           >
             Update Password

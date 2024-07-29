@@ -90,7 +90,7 @@ export function debounce(func: any, timeout: number = 300) {
   return (...args) => {
     console.log("🚀 ~~ return ~~ args:", args);
 
-    clearTimeout(timer);
+    clearTimeout(timer as any);
 
     timer = setTimeout(() => {
       func.apply(this, args);
@@ -134,4 +134,34 @@ export const convertCitiesToJSON = (data: string): { name: string; fee: number }
   } catch (error) {
     return [];
   }
+};
+
+
+export const getOrderText = (order: any) => {
+  let text = "";
+  let className = "";
+  let status = "open";
+  let statusStyle = "tw-bg-green-500";
+
+  if (order?.closed) {
+    status = "closed";
+    statusStyle = "tw-bg-red-500";
+  }
+
+  if (order?.paid) {
+    text = "SUCCESS - PAYMENT SUCCESSFUL";
+    className = "tw-bg-green-500";
+  }
+
+  if (!order?.paid && order?.closed) {
+    text = "CANCELLED - PAYMENT UNSUCCESSFUL";
+    className = "tw-bg-red-500";
+  }
+
+  if (!order?.paid && !order?.closed) {
+    text = "PENDING - PAYMENT PENDING";
+    className = "tw-bg-yellow-500";
+  }
+
+  return { text, className, status, statusStyle };
 };

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { GraphQLClient, request } from "graphql-request";
 
 // const oldUrl = "https://kwekapi.com/v1/kwekql";
@@ -10,11 +11,7 @@ export const userFetcher = async (query: string, variables?: any) => {
   return await request(graphqlEndpoint, query, variables);
 };
 
-export const userFetcherWithAuth = async <T>(
-  query: string,
-  variables: T,
-  token: string
-) => {
+export const userFetcherWithAuth = async <T>(query: string, variables: T, token: string) => {
   const endpoint = graphqlEndpoint;
 
   if (token === "" || token === undefined) {

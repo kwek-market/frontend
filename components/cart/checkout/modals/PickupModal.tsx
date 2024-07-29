@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import Modal from "antd/lib/modal";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React from "react";
 import styles from "../checkGrid/checkGrid.module.scss";
 

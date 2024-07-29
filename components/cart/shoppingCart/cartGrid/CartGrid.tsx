@@ -93,9 +93,9 @@ const CartGrid = function () {
               </div>
               <p>Delivery Fee is not included yet</p>
               <Link href='/cart/checkout'>
-                <a>
-                  <button className={styles.checkout_btn}>Proceed to Checkout</button>
-                </a>
+
+                <button className={styles.checkout_btn}>Proceed to Checkout</button>
+
               </Link>
             </div>
           </div>

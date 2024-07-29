@@ -1,34 +1,22 @@
-import BreadCrumbs from "@/components/admin/breadcrumbs";
-import CustomerDetail from "@/components/admin/customers/customer-detail";
-import { AdminLayout } from "@/layouts";
-import { Button, Empty, Popconfirm, message } from "antd";
-import { useRouter } from "next/router";
+import { Empty, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Load from "../../../../../components/Loader/Loader";
-import { OrderTable } from "../../../../../components/admin/orderTable/orderTable";
-import { useGetOrdersAdmin, useUpdateOrderDeliveryStatus } from "../../../../../hooks/admin/orders";
-import useCancelOrder from "../../../../../hooks/useCancelOrder";
-import { RootState } from "../../../../../store/rootReducer";
-import {
-  OrderDeliveryStatus,
-  UpdateOrderDeliveryStatusSchema,
-} from "../../../../../validations/orders";
-import { queryClient } from "../../../../_app";
-import { getOrderText } from "../../../../../helpers/helper";
+import { getOrderText } from "../../../helpers/helper";
+import { useGetOrdersAdmin } from "../../../hooks/admin/orders";
+import { Item } from "../../../pages/admin/customers/[id]/order-detail/[orderId]";
+import { RootState } from "../../../store/rootReducer";
+import Load from "../../Loader/Loader";
+import CustomerDetail from "../../admin/customers/customer-detail";
 
-
-
-const OrderDetail = () => {
-  const router = useRouter();
+const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
   const { user } = useSelector((state: RootState) => state);
   const { data, isLoading, error } = useGetOrdersAdmin({
-    id: router.query?.orderId as string,
+    id: orderId as string,
     token: user?.token,
   });
 
-  const { mutate: cancelOrder, isLoading: isCancellingOrder } = useCancelOrder();
-  const { mutate: updateStatus, isLoading: isLoadingStatus } = useUpdateOrderDeliveryStatus();
+  // const { mutate: cancelOrder, isLoading: isCancellingOrder } = useCancelOrder();
+  // const { mutate: updateStatus, isLoading: isLoadingStatus } = useUpdateOrderDeliveryStatus();
 
   const [selectedStatus, setSelectedStatus] = useState("");
 
@@ -40,65 +28,16 @@ const OrderDetail = () => {
     }
   }, [order]);
 
-  const handleCancelOrder = async () => {
-    cancelOrder(
-      { orderId: router?.query?.orderId as string, token: user.token },
-      {
-        onSuccess(data) {
-          queryClient.invalidateQueries(["orders", "admin", router.query?.orderId]);
-          message.success(data?.cancelOrder?.message);
-        },
-        onError: error => {
-          message.error((error as { message: string }).message);
-        },
-      }
-    );
-  };
-
-  const handleUpdateOrderStatus = value => {
-    setSelectedStatus(value);
-    const data = {
-      orderId: router?.query.orderId,
-      token: user?.token,
-      deliveryStatus: value,
-    };
-
-    const validData = UpdateOrderDeliveryStatusSchema.parse(data);
-
-    updateStatus(validData, {
-      onSuccess() {
-        queryClient.invalidateQueries(["orders", "admin", router.query?.orderId]);
-      },
-      onError: error => {
-        message.error((error as { message: string }).message);
-      },
-    });
-  };
-
-  console.log("🚀 ~~ OrderDetail ~~ order:", order);
-
   return (
-    <AdminLayout>
-      <BreadCrumbs
-        items={[
-          { name: "Dashboard", path: "/admin/dashboard" },
-          { name: "Customers", path: "/admin/customers" },
-          {
-            name: router.query?.id as string,
-            path: "/admin/customers/" + router.query?.id,
-          },
-          {
-            name: "Order List",
-            path: "/admin/customers/" + router.query?.id + "/order-list",
-          },
-          {
-            name: "Order Detail",
-            path: "/admin/customers/" + router.query?.id + "/order-list/" + router.query?.orderId,
-          },
-        ]}
-        header='Order Detail'
-      />
-
+    <Modal
+      title='Order details'
+      open={open}
+      // onOk={handleOk}
+      confirmLoading={isLoading}
+      onCancel={onclose}
+      className='!tw-max-w-7xl !tw-w-full !tw-h-[80vh] tw-overflow-y-scroll'
+      wrapClassName='tw-px-4 tw-py-4'
+    >
       <div className=' tw-mt-12 tw-font-poppins'>
         {isLoading ? <Load className='tw-w-64' /> : null}
         {order?.user ? (
@@ -145,38 +84,38 @@ const OrderDetail = () => {
                 </p>
               </div>
 
-              <div className='tw-space-x-2'>
-                <label className='text-lg'>Update Delivery Status: </label>
-                <select
-                  onChange={e => handleUpdateOrderStatus(e.target.value)}
-                  className='tw-rounded-lg'
-                  name='updateDeliveryStatus'
-                  defaultValue={selectedStatus}
-                >
-                  {Object.values(OrderDeliveryStatus)?.map(status => (
-                    <option key={status} value={status} className='tw-capitalize'>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* <div className='tw-space-x-2'>
+            <label className='text-lg'>Update Delivery Status: </label>
+            <select
+              onChange={e => handleUpdateOrderStatus(e.target.value)}
+              className='tw-rounded-lg'
+              name='updateDeliveryStatus'
+              defaultValue={selectedStatus}
+            >
+              {Object.values(OrderDeliveryStatus)?.map(status => (
+                <option key={status} value={status} className='tw-capitalize'>
+                  {status}
+                </option>
+              ))}
+            </select>
+          </div> */}
 
-              {!order?.closed ? (
-                <Popconfirm
-                  title='Are you sure you want to close this order, this action cannot be undone'
-                  onConfirm={handleCancelOrder}
-                >
-                  <Button
-                    loading={isCancellingOrder}
-                    className='mt-4'
-                    size='large'
-                    type='primary'
-                    danger
-                  >
-                    Close Order
-                  </Button>
-                </Popconfirm>
-              ) : null}
+              {/* {!order?.closed ? (
+            <Popconfirm
+              title='Are you sure you want to close this order, this action cannot be undone'
+              onConfirm={handleCancelOrder}
+            >
+              <Button
+                loading={isCancellingOrder}
+                className='mt-4'
+                size='large'
+                type='primary'
+                danger
+              >
+                Close Order
+              </Button>
+            </Popconfirm>
+          ) : null} */}
 
               <div className=' tw-flex tw-justify-between tw-pt-12 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium tw-text-lg tw-text-[#AF1328]'>
@@ -268,80 +207,9 @@ const OrderDetail = () => {
             </div>
           </div>
         ) : null}
-
-        <div className='tw-mt-10'>
-          <h2 className='tw-text-2xl tw-font-bold'>More Customer Orders </h2>
-
-          {order ? <OrderTable id={order?.user?.id as string} token={user?.token} /> : null}
-        </div>
       </div>
-    </AdminLayout>
+    </Modal>
   );
 };
 
-export default OrderDetail;
-
-export const Item = ({ image, name, qty, amount, size, color, brand, fullName, email, phone }) => {
-  return (
-    <div className='tw-border-gray-kwek700 tw-border tw-rounded-2xl tw-pl-2 tw-py-2 tw-flex tw-gap-x-6 tw-pr-8'>
-      {/* <Image
-        src={image}
-        alt="item"
-        width={121}
-        height={101}
-        className=" tw-rounded-xl tw-object-cover tw-overflow-hidden"
-      /> */}
-      <img
-        src={image}
-        alt='item'
-        className='tw-w-[121px] tw-h-[101px] tw-rounded-xl tw-object-cover tw-overflow-hidden'
-      />
-      <div className='tw-flex tw-justify-between tw-w-full tw-pt-5'>
-        <div className='tw-space-y-1'>
-          <p className='tw-mb-0 tw-font-medium tw-text-xl tw-text-black-kwek100'>{name}</p>
-
-          {size ? (
-            <p className='tw-font-medium'>
-              Size: <span className='tw-font-light'>{size}</span>
-            </p>
-          ) : null}
-          {color ? (
-            <p className='tw-font-medium'>
-              Color: <span className='tw-font-light'>{color}</span>
-            </p>
-          ) : null}
-          {brand ? (
-            <p className='tw-font-medium'>
-              Brand: <span className='tw-font-light'>{brand}</span>
-            </p>
-          ) : null}
-
-          {fullName ? (
-            <p className='tw-font-medium'>
-              Vendor Name: <span className='tw-font-light'>{fullName}</span>
-            </p>
-          ) : null}
-
-          {email ? (
-            <p className='tw-font-medium'>
-              Vendor email: <span className='tw-font-light'>{email}</span>
-            </p>
-          ) : null}
-
-          {phone ? (
-            <p className='tw-font-medium'>
-              Vendor no: <span className='tw-font-light'>{phone}</span>
-            </p>
-          ) : null}
-        </div>
-        <div className='tw-space-y-1'>
-          <span className='tw-block tw-text-opacity-60 tw-text-right'>QTY: {qty}</span>
-          <span className='tw-block tw-text-opacity-60 tw-text-right'>Price: {Number(amount)}</span>
-          <p className='tw-mb-0 tw-font-medium tw-text-xl tw-text-right tw-pt-2'>
-            NGN {Number(amount * qty)}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
+export default SellerOrderDetailsModal;
