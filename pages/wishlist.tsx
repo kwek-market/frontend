@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import { WishlistType } from "@/interfaces/commonTypes";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Page = function () {
   const {
