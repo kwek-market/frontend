@@ -20,7 +20,7 @@ const Page = function () {
       email: formData.email,
       password: formData.password,
     };
-    dispatch(loginUser(variables));
+    loginUser(variables)(dispatch);
   };
 
   const form = {

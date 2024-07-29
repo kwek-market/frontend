@@ -1,5 +1,5 @@
 import Link from "next/dist/client/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const SellerLandingBody = () => {
   return (

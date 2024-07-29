@@ -12,6 +12,7 @@ import ReactPaginate from "react-paginate";
 
 import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
+import SellerOrderDetailsModal from "../SellerOrderDetailsModal";
 import SellerTrackModal from "./trackmodal";
 
 dayjs.extend(localizedformat);
@@ -32,6 +33,7 @@ const OrdersFilled = function ({
   setFilter,
 }: OrdersFilledProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [orderDetails, setOrderDetails] = useState({ id: null, isOpen: false });
   const [order, setOrder] = useState<OrderList>(null);
 
   const {
@@ -88,6 +90,9 @@ const OrdersFilled = function ({
                 showModal(order);
               }}
               order={order.order}
+              onClick={() => {
+                setOrderDetails({ id: order?.order?.id, isOpen: true });
+              }}
             />
           ))}
         </tbody>
@@ -117,6 +122,14 @@ const OrdersFilled = function ({
           handleCancel={handleCancel}
           order={order}
           isModalOpen={isModalOpen && order?.order ? true : false}
+        />
+      ) : null}
+
+      {orderDetails.isOpen ? (
+        <SellerOrderDetailsModal
+          onclose={() => setOrderDetails({ isOpen: false, id: null })}
+          orderId={orderDetails.id}
+          open={orderDetails.isOpen}
         />
       ) : null}
     </div>

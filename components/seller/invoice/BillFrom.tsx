@@ -1,7 +1,7 @@
 import { RootState } from "@/store/rootReducer";
 import React from "react";
 import { useSelector } from "react-redux";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function BillFrom({ data }) {
   const {
@@ -25,7 +25,7 @@ export default function BillFrom({ data }) {
           {data.store.email}
         </p>
       </article>
-      <Image src="/svg/kweklogo.svg" alt="kweklogo" width="250" height="200" />
+      <Image src="/svg/kweklogo.png" alt="kweklogo" width="250" height="200" />
     </div>
   );
 }

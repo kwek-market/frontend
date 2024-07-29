@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 
-import Link from "next/link";
-import Loader from "react-loader-spinner";
-import styles from "./AuthForm.module.scss";
 import { emailValidator } from "@/helpers";
-import { Type, UserLogin, UserError } from "@/interfaces/commonTypes";
-import { useDispatch, useSelector } from "react-redux";
+import { Type, UserError, UserLogin } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import Alert from "antd/lib/alert";
+import Link from "next/link";
+import { Puff } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import styles from "./AuthForm.module.scss";
 
-const AuthForm: React.FC<Type> = function ({
-  title,
-  subtitle,
-  fields,
-  submit,
-  extra,
-}) {
+const AuthForm: React.FC<Type> = function ({ title, subtitle, fields, submit, extra }) {
   const user = useSelector((state: RootState) => state.user);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserLogin>({
@@ -46,11 +40,7 @@ const AuthForm: React.FC<Type> = function ({
     if (!formData.email && !formData.password) {
       setError({ status: true, message: "Input your email and password" });
       setLoading(false);
-    } else if (
-      formData.email &&
-      formData.password &&
-      !emailValidator(formData.email)
-    ) {
+    } else if (formData.email && formData.password && !emailValidator(formData.email)) {
       setError({ status: true, message: "Invalid email" });
       setLoading(false);
     } else if (!formData.email && formData.password) {
@@ -72,14 +62,7 @@ const AuthForm: React.FC<Type> = function ({
           <h2 className={styles.form_title}>{title}</h2>
           <p className={styles.form_subtitle}>{subtitle}</p>
         </div>
-        {error.status && (
-          <Alert
-            message={error.message}
-            type="error"
-            closable
-            onClose={onClose}
-          />
-        )}
+        {error.status && <Alert message={error.message} type='error' closable onClose={onClose} />}
 
         {fields.map(({ type, sub, ...fieldProps }, index) => (
           <React.Fragment key={index}>
@@ -87,10 +70,8 @@ const AuthForm: React.FC<Type> = function ({
               <input
                 {...fieldProps}
                 className={`${styles.form_input} tw-w-full`}
-                type={
-                  type === "password" ? (showPassword ? "text" : type) : type
-                }
-                onChange={(e) => handleChange(e)}
+                type={type === "password" ? (showPassword ? "text" : type) : type}
+                onChange={e => handleChange(e)}
               />
               {type === "password" && (
                 <i
@@ -104,8 +85,8 @@ const AuthForm: React.FC<Type> = function ({
 
             {sub && (
               <div className={styles.form_inputSub}>
-                <Link href={sub.url}>
-                  <a className={styles.form_inputSubLink}>{sub.text}</a>
+                <Link href={sub.url} className={styles.form_inputSubLink}>
+                  {sub.text}
                 </Link>
               </div>
             )}
@@ -113,14 +94,10 @@ const AuthForm: React.FC<Type> = function ({
         ))}
 
         <div className={styles.form_btnContainer}>
-          <button
-            className={`btn bg-primary ${styles.btn}`}
-            onClick={(e) => handleSubmit(e)}
-          >
+          <button className={`btn bg-primary ${styles.btn}`} onClick={e => handleSubmit(e)}>
             {user.loading ? (
-              <Loader
-                type="Puff"
-                color="#fff"
+              <Puff
+                color='#fff'
                 height={30}
                 width={30}
                 // timeout={3000} //3 secs
@@ -134,8 +111,8 @@ const AuthForm: React.FC<Type> = function ({
         {extra && (
           <div className={styles.form_extra}>
             <p className={styles.form_extraText}>{extra.text}</p>
-            <Link href={extra.linkUrl}>
-              <a className={styles.form_extraLink}>{extra.linkText}</a>
+            <Link href={extra.linkUrl} className={styles.form_extraLink}>
+              {extra.linkText}
             </Link>
           </div>
         )}

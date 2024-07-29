@@ -46,9 +46,9 @@ const CreateProductCharge = ({ isOpen, onClose }: { isOpen?: boolean; onClose: a
   };
 
   return (
-    <Modal
+    (<Modal
       title='Create Product Charge'
-      visible={isOpen}
+      open={isOpen}
       onOk={createProductCharge}
       confirmLoading={isLoading}
       okButtonProps={{
@@ -93,7 +93,7 @@ const CreateProductCharge = ({ isOpen, onClose }: { isOpen?: boolean; onClose: a
           </FormItems>
         </form>
       </div>
-    </Modal>
+    </Modal>)
   );
 };
 

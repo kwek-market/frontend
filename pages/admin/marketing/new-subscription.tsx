@@ -35,7 +35,7 @@ const NewSubscription = () => {
           <div className="tw-grid lg:tw-grid-cols-2 tw-gap-6">
             <SelectField
               label="Category"
-              placeholder="Select a Category from the Dropdown"
+              aria-placeholder="Select a Category from the Dropdown"
             >
               <option value="">Select a Category from the Dropdown</option>
             </SelectField>

@@ -3,7 +3,7 @@ import usePromotions from "@/hooks/usePromotions";
 import { ProductType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { Rate } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import React from "react";
 import ReactPaginate from "react-paginate";
@@ -57,56 +57,59 @@ const ProductFilled = function ({
         </div>
         <div className='tw-grid tw-gap-3 tw-grid-cols-2 lg:tw-grid-cols-4 tw-mt-2'>
           {product.map((prod: ProductType) => (
-            <Link href={`/product/${prod?.id}`}>
-              <a key={prod.id} className='tw-shadow-lg tw-cursor-pointer tw-relative tw-block'>
-                <Image
-                  src={prod.image[0].imageUrl}
-                  alt={prod.productTitle}
-                  layout='responsive'
-                  width={200}
-                  height={200}
-                  className=' tw-object-cover'
-                />
-                {!!isPromoted(prod.id) && (
-                  <span className='tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[35%] md:tw-left-[60%] tw-top-[5%]'>
-                    promoted
-                  </span>
-                )}
-                <div className='tw-flex tw-flex-wrap tw-justify-between tw-p-3'>
-                  <div>
-                    <p className='tw-text-lg tw-font-semibold tw-mb-0'>{prod.productTitle}</p>
-                    <Rate allowHalf value={useAvgRating(prod)} />
+            (<Link
+              href={`/product/${prod?.id}`}
+              key={prod.id}
+              className='tw-shadow-lg tw-cursor-pointer tw-relative tw-block'>
 
-                    <p className='tw-font-light tw-text-gray-600 tw-mb-0'>
-                      <span>Quantity: </span>
-                      {prod.options[0]?.quantity}
-                    </p>
-                  </div>
+              <Image
+                src={prod.image[0].imageUrl}
+                alt={prod.productTitle}
+                layout='responsive'
+                width={200}
+                height={200}
+                className=' tw-object-cover'
+              />
+              {!!isPromoted(prod.id) && (
+                <span className='tw-bg-green-success tw-text-white-100 tw-rounded-xl tw-py-1 tw-px-4 tw-absolute tw-left-[35%] md:tw-left-[60%] tw-top-[5%]'>
+                  promoted
+                </span>
+              )}
+              <div className='tw-flex tw-flex-wrap tw-justify-between tw-p-3'>
+                <div>
+                  <p className='tw-text-lg tw-font-semibold tw-mb-0'>{prod.productTitle}</p>
+                  <Rate allowHalf value={useAvgRating(prod)} />
 
-                  <div>
-                    <p
-                      className={`tw-text-lg tw-font-semibold tw-mb-0 tw-text-right ${
-                        prod.options[0]?.discountedPrice ? "tw-line-through tw-text-gray-300" : ""
-                      }`}
-                    >
+                  <p className='tw-font-light tw-text-gray-600 tw-mb-0'>
+                    <span>Quantity: </span>
+                    {prod.options[0]?.quantity}
+                  </p>
+                </div>
+
+                <div>
+                  <p
+                    className={`tw-text-lg tw-font-semibold tw-mb-0 tw-text-right ${
+                      prod.options[0]?.discountedPrice ? "tw-line-through tw-text-gray-300" : ""
+                    }`}
+                  >
+                    <Naira />
+                    {prod.options[0]?.price}
+                  </p>
+
+                  {prod.options[0]?.discountedPrice ? (
+                    <p className={`tw-text-lg tw-font-semibold tw-mb-0 tw-text-right`}>
                       <Naira />
                       {prod.options[0]?.price}
                     </p>
+                  ) : null}
 
-                    {prod.options[0]?.discountedPrice ? (
-                      <p className={`tw-text-lg tw-font-semibold tw-mb-0 tw-text-right`}>
-                        <Naira />
-                        {prod.options[0]?.price}
-                      </p>
-                    ) : null}
-
-                    <p className=' tw-text-[#BFA5A3] tw-text-xs'>
-                      ({prod?.productRating.length} reviews)
-                    </p>
-                  </div>
+                  <p className=' tw-text-[#BFA5A3] tw-text-xs'>
+                    ({prod?.productRating.length} reviews)
+                  </p>
                 </div>
-              </a>
-            </Link>
+              </div>
+
+            </Link>)
           ))}
         </div>
         <div className='tw-mt-4'>
