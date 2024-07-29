@@ -111,7 +111,7 @@ const Page = function () {
       return;
     }
     // dispatch
-    dispatch(
+    
       startSelling(
         {
           ...sellerData,
@@ -119,22 +119,22 @@ const Page = function () {
           shopUrl: sellerData.shopUrl.trim()?.replaceAll(" ", "-"),
         },
         user.token
-      )
-    );
+      )(dispatch)
+    
   };
 
   useEffect(() => {
     // if you don't have an account, you can't come to this page
     !user.token && router.push("/login");
-    user.token && dispatch(getUserData(user.token));
-    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
+    user.token && getUserData(user.token)(dispatch);
+    user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
     // if (seller.seller.sellerVerified || user.user.isSeller || seller.sellerCreated.status)
     //   router.push("/seller/profile");
   }, [seller.sellerCreated.status, user.user.isSeller, seller.seller.sellerVerified]);
 
   useEffect(() => {
-    user.token && dispatch(getUserData(user.token));
-    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
+    user.token && getUserData(user.token)(dispatch);
+    user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
   }, []);
 
   const bannerText = {

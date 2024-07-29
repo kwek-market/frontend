@@ -30,8 +30,8 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
       token: user.token,
       quantity: 1,
     };
-    dispatch(addToCartFunc(payload, user.token));
-    dispatch(getCartFunc(user.token));
+    addToCartFunc(payload, user.token)(dispatch);
+    getCartFunc(user.token)(dispatch);
   }
 
   function addToWishlist(id: string) {
@@ -39,8 +39,8 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
       productId: id,
       token: user.token,
     };
-    dispatch(createWishlist(payload, user.token));
-    dispatch(getWishList(user.token));
+    createWishlist(payload, user.token)(dispatch);
+    getWishList(user.token)(dispatch);
   }
 
   const checkIfItemInCart = useItemInCart(prod, cart.cart);

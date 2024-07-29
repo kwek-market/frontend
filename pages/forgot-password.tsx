@@ -21,7 +21,7 @@ const Page = function () {
     if (email === "") {
       return setError("Enter your email");
     }
-    dispatch(sendPasswordResetEmail(email, user.token));
+    sendPasswordResetEmail(email, user.token)(dispatch);
   };
 
   const onClose = () => {

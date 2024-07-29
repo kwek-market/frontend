@@ -1,12 +1,12 @@
-import React from "react";
-import Image from "next/legacy/image";
-import styles from "./Sidebar.module.scss";
 import useProducts from "@/hooks/useProducts";
-import { Spin } from "antd";
-import StarRatingComponent from "react-star-rating-component";
 import { ProductType } from "@/interfaces/commonTypes";
+import { Spin } from "antd";
+import Image from "next/legacy/image";
 import Link from "next/link";
+
 import { v4 } from "uuid";
+import styles from "./Sidebar.module.scss";
+import StarRatingComponent from "react-star-rating-component";
 
 const Sidebar = function ({ title }) {
   const payload = {
@@ -15,11 +15,7 @@ const Sidebar = function ({ title }) {
     sortBy: "-sales",
     search: title,
   };
-  const {
-    status: categoryStatus,
-    data: categoryData,
-    error: categoryError,
-  } = useProducts(payload);
+  const { status: categoryStatus, data: categoryData, error: categoryError } = useProducts(payload);
 
   return (
     <div className={styles.sidebar}>
@@ -27,31 +23,31 @@ const Sidebar = function ({ title }) {
 
       <div className={styles.products}>
         {categoryStatus === "error" && (
-          <div className="tw-py-5 tw-w-full tw-text-center">
-            <h1 className="tw-text-error tw-font-bold tw-text-2xl">
+          <div className='tw-py-5 tw-w-full tw-text-center'>
+            <h1 className='tw-text-error tw-font-bold tw-text-2xl'>
               {(categoryError as { message: string }).message}
             </h1>
           </div>
         )}
         {categoryStatus === "loading" && (
-          <div className="tw-py-5 tw-w-full tw-text-center">
-            <Spin size="large" />
+          <div className='tw-py-5 tw-w-full tw-text-center'>
+            <Spin size='large' />
           </div>
         )}
         {categoryData?.products.objects.length &&
           categoryData?.products.objects.map((product: ProductType) => (
-            (<Link
+            <Link
               key={v4()}
               href={`/product/${product.id}?id=${product.productTitle}`}
-              className="hover:tw-text-opacity-25">
-
+              className='hover:tw-text-opacity-25'
+            >
               <div className={styles.product}>
                 <div className={styles.product_imageContainer}>
                   <Image
                     src={product?.image[0].imageUrl}
-                    width="96"
-                    height="110"
-                    className="tw-object-cover"
+                    width='96'
+                    height='110'
+                    className='tw-object-cover'
                   />
                 </div>
 
@@ -66,29 +62,27 @@ const Sidebar = function ({ title }) {
                   </p>
                   {product.productRating.length > 0 ? (
                     <div>
-                      <StarRatingComponent
-                        name="rate1"
-                        starCount={5}
-                        value={product.productRating[0].rating}
-                        editing={false}
-                        emptyStarColor="#c4c4c4"
-                        starColor="#ffc107"
-                      />
+                      {
+                        (
+                          <StarRatingComponent
+                            name='rate1'
+                            starCount={5}
+                            value={product.productRating[0].rating}
+                            editing={false}
+                            emptyStarColor='#c4c4c4'
+                            starColor='#ffc107'
+                          />
+                        ) as any
+                      }
                     </div>
                   ) : (
                     <div className={styles.box_productRating}>
-                      <StarRatingComponent
-                        name="rate2"
-                        starCount={5}
-                        value={0}
-                        editing={false}
-                      />
+                      <StarRatingComponent name='rate2' starCount={5} value={0} editing={false} />
                     </div>
                   )}
                 </div>
               </div>
-
-            </Link>)
+            </Link>
           ))}
       </div>
     </div>

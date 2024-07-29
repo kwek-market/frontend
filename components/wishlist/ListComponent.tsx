@@ -30,13 +30,12 @@ const ListComponent = function ({
       token: user.token,
       quantity: 1,
     };
-    dispatch(addToCartFunc(payload, user.token));
-    dispatch(getCartFunc(user.token));
+    addToCartFunc(payload, user.token)(dispatch);
+    getCartFunc(user.token)(dispatch);
   }
 
   return (
-    (<Link href={`/product/${productId}`} className=''>
-
+    <Link href={`/product/${productId}`} className=''>
       <div className={listStyle}>
         <div className={styles.first_grid}>
           <Image src={imgSrc} alt={altText} width='100' height='80' className={styles.img} />
@@ -69,14 +68,7 @@ const ListComponent = function ({
               // layout="responsive"
             />
           </div>
-          <Image
-            src={imgSrc}
-            alt={altText}
-            width='100%'
-            height='100%'
-            layout='responsive'
-            className={styles.img}
-          />
+          <Image src={imgSrc} alt={altText} layout='responsive' className={styles.img} />
         </div>
         <div className={styles.content_box}>
           <p className={inStock ? styles.stock : styles.stock_out}>
@@ -108,8 +100,7 @@ const ListComponent = function ({
           )}
         </div>
       </div>
-
-    </Link>)
+    </Link>
   );
 };
 
