@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./TopBar.module.scss";
 
@@ -12,11 +12,11 @@ const Topbar = function ({ withLogo }: { withLogo: boolean }) {
   return (
     <div id={styles.topbar}>
       {withLogo && (
-        (<Link href="/" className={styles.logo}>
-
-          <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
-
-        </Link>)
+        <Link href="/">
+          <a className={styles.logo}>
+            <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
+          </a>
+        </Link>
       )}
 
       <div className={styles.ad}>
@@ -49,11 +49,11 @@ const Topbar = function ({ withLogo }: { withLogo: boolean }) {
         </div>
 
         <Link href="/">
-
-          <button className={`btn btn--outline-white ${styles.ad_cta}`}>
-            Learn More
-          </button>
-
+          <a>
+            <button className={`btn btn--outline-white ${styles.ad_cta}`}>
+              Learn More
+            </button>
+          </a>
         </Link>
       </div>
 

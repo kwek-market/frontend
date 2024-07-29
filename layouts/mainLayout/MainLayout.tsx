@@ -1,16 +1,16 @@
-import Search from "@/components/search/Search";
-import { verifyTokenFunc } from "@/helpers";
-import { Footer, Header, Menu, Navbar, PageTitle } from "@/shared";
-import MobileSearchBar from "@/shared/header/MobileSearchBar";
-import { clearCart, getCartFunc } from "@/store/cart/cart.actions";
-import { getCategories } from "@/store/category/categories.actions";
-import { RootState } from "@/store/rootReducer";
-import { getSellerData } from "@/store/seller/seller.action";
-import { getUserData, logout } from "@/store/user/user.actions";
-import { clearWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./MainLayout.module.scss";
+import { Topbar, Header, Navbar, Footer, PageTitle, Menu } from "@/shared";
+import { useDispatch, useSelector } from "react-redux";
+import { getSellerData } from "@/store/seller/seller.action";
+import { RootState } from "@/store/rootReducer";
+import { getUserData, logout } from "@/store/user/user.actions";
+import { getCategories } from "@/store/category/categories.actions";
+import { clearCart, getCartFunc } from "@/store/cart/cart.actions";
+import { verifyTokenFunc } from "@/helpers";
+import { clearWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
+import Search from "@/components/search/Search";
+import MobileSearchBar from "@/shared/header/MobileSearchBar";
 // import Pusher from "react-pusher";
 import Pusher from "pusher-js";
 
@@ -40,21 +40,23 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
   });
   useEffect(() => {
     const channel = pusherClient.subscribe(userId);
-    channel.bind(userId, data => {
+    channel.bind(userId, (data) => {
       console.log(data.message);
     });
-    getCategories()(dispatch);
+    dispatch(getCategories());
   }, []);
 
   useEffect(() => {
-    getCartFunc(user.token)(dispatch);
+    dispatch(getCartFunc(user.token));
     (async () => {
       try {
         const data = await verifyTokenFunc(user.token ? user.token : "");
         if (data.verifyToken.status) {
-          user.token && getUserData(user.token)(dispatch);
-          user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
-          user.token && getWishList(user.token)(dispatch);
+          user.token && dispatch(getUserData(user.token));
+          user.token &&
+            user.user.isSeller &&
+            dispatch(getSellerData(user.token));
+          user.token && dispatch(getWishList(user.token));
         } else {
           dispatch(logout());
           dispatch(clearCart());
@@ -78,8 +80,13 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
         check={check}
         setCheck={setCheck}
       />{" "}
-      <div className='tw-px-4 tw-mt-4'>
-        <MobileSearchBar search={search} setSearch={setSearch} check={check} setCheck={setCheck} />
+      <div className="tw-px-4 tw-mt-4">
+        <MobileSearchBar
+          search={search}
+          setSearch={setSearch}
+          check={check}
+          setCheck={setCheck}
+        />
       </div>
       <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
       {showMenu && <Menu />}
@@ -87,7 +94,7 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
       {check ? (
         <Search search={search} check={check} />
       ) : (
-        <main id='main-container'>
+        <main id="main-container">
           <main className={styles.main_container}>{children}</main>
         </main>
       )}

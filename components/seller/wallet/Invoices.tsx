@@ -83,12 +83,10 @@ export default function Invoices() {
                     <td className="tw-p-3">{item.customerName}</td>
                     <td>{item.customerEmail}</td>
                     <td>
-                      <Link
-                        href={`invoice/${item.id}`}
-                        className="tw-underline tw-font-semibold tw-text-gray-kwek900">
-
-                        {item.invoiceNumber}
-
+                      <Link href={`invoice/${item.id}`}>
+                        <a className="tw-underline tw-font-semibold tw-text-gray-kwek900">
+                          {item.invoiceNumber}
+                        </a>
                       </Link>
                     </td>
                     <td>{dayjs(item.issueDate).format("DD/MM/YYYY")}</td>

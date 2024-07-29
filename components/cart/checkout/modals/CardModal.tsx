@@ -4,10 +4,10 @@ import styles from "../checkGrid/checkGrid.module.scss";
 
 function CardModal({ isModaltwoVisible, handletwoOk, handletwoCancel }) {
   return (
-    (<Modal
+    <Modal
       title="Enter Card Details"
       className={styles.pickup_modal}
-      open={isModaltwoVisible}
+      visible={isModaltwoVisible}
       onOk={handletwoOk}
       onCancel={handletwoCancel}
       style={{ top: 20 }}
@@ -63,7 +63,7 @@ function CardModal({ isModaltwoVisible, handletwoOk, handletwoCancel }) {
           </div>
         </div>
       </form>
-    </Modal>)
+    </Modal>
   );
 }
 

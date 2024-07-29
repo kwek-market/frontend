@@ -15,9 +15,35 @@ import {
   UpdateOrderDeliveryStatusSchema,
 } from "../../../../../validations/orders";
 import { queryClient } from "../../../../_app";
-import { getOrderText } from "../../../../../helpers/helper";
 
+const getOrderText = (order: any) => {
+  let text = "";
+  let className = "";
+  let status = "open";
+  let statusStyle = "tw-bg-green-500";
 
+  if (order?.closed) {
+    status = "closed";
+    statusStyle = "tw-bg-red-500";
+  }
+
+  if (order?.paid) {
+    text = "SUCCESS - PAYMENT SUCCESSFUL";
+    className = "tw-bg-green-500";
+  }
+
+  if (!order?.paid && order?.closed) {
+    text = "CANCELLED - PAYMENT UNSUCCESSFUL";
+    className = "tw-bg-red-500";
+  }
+
+  if (!order?.paid && !order?.closed) {
+    text = "PENDING - PAYMENT PENDING";
+    className = "tw-bg-yellow-500";
+  }
+
+  return { text, className, status, statusStyle };
+};
 
 const OrderDetail = () => {
   const router = useRouter();
@@ -281,7 +307,7 @@ const OrderDetail = () => {
 
 export default OrderDetail;
 
-export const Item = ({ image, name, qty, amount, size, color, brand, fullName, email, phone }) => {
+const Item = ({ image, name, qty, amount, size, color, brand, fullName, email, phone }) => {
   return (
     <div className='tw-border-gray-kwek700 tw-border tw-rounded-2xl tw-pl-2 tw-py-2 tw-flex tw-gap-x-6 tw-pr-8'>
       {/* <Image

@@ -1,13 +1,15 @@
-import { MainLayout } from "@/layouts";
-import { ContactUsPage } from "../../components/contactUs/ContactUs";
+import React from "react";
 
-function index() {
+import ContactUs from "@/components/contactUs/ContactUs";
+
+import { MainLayout } from "@/layouts";
+
+const Page = function () {
   return (
-    <MainLayout title='Contact Us'>
-      <ContactUsPage />
-      <div className=''>Hello</div>
+    <MainLayout title="Contact Us">
+      <ContactUs />
     </MainLayout>
   );
-}
+};
 
-export default index;
+export default Page;

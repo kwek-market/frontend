@@ -179,7 +179,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                     className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
                   />
                   <select
-                    aria-placeholder='Select Main Category'
+                    placeholder='Select Main Category'
                     className='tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
                     name='sizePostfix'
                     onChange={e => {

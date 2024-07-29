@@ -107,19 +107,21 @@ const Transactions = () => {
       dataIndex: "order",
       key: "orderId",
       render: (order: any) => (
-        (<Link
+        <Link
           href={"/admin/customers/" + order?.user?.fullName + "/order-detail/" + order?.orderId}
-          className={`${
-            status.toLowerCase() === "success"
-              ? "tw-bg-[#009D19]"
-              : status.toLowerCase() === "failed"
-              ? "tw-bg-[#AF1328]"
-              : "tw-bg-[#FFC107]"
-          } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}>
-
-          {status}
-
-        </Link>)
+        >
+          <a
+            className={`${
+              status.toLowerCase() === "success"
+                ? "tw-bg-[#009D19]"
+                : status.toLowerCase() === "failed"
+                ? "tw-bg-[#AF1328]"
+                : "tw-bg-[#FFC107]"
+            } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}
+          >
+            {status}
+          </a>
+        </Link>
       ),
     },
     {

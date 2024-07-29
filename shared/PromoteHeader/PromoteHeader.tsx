@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from "./PromoteHeader.module.scss";
 import { useRouter } from "next/router";
 
