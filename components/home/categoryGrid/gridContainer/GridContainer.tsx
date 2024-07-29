@@ -59,7 +59,7 @@ const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerP
       >
         <div
           className={`${styles.products}  ${
-            timer ? "!tw-flex-nowrap tw-flex tw-space-x-4 md:tw-space-x-6" : ""
+            timer ? "!tw-flex-nowrap tw-flex !tw-justify-start tw-space-x-4 md:tw-space-x-6" : ""
           }`}
         >
           {categoryStatus === "error" && (
@@ -82,7 +82,7 @@ const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerP
                   key={uuid()}
                   className={`${styles.product} ${
                     timer
-                      ? "!tw-flex-[0_0_40%] md:!tw-flex-[0_0_40%] lg:!tw-flex-[0_0_30%] !tw-min-w-0 last:!tw-mr-4 first:!tw-ml-4 md:last:!tw-mr-6 md:first:!tw-ml-6"
+                      ? "!tw-flex-[0_0_40%] md:!tw-flex-[0_0_40%] lg:!tw-flex-[0_0_20%] !tw-min-w-0 last:!tw-mr-4 first:!tw-ml-4 md:last:!tw-mr-6 md:first:!tw-ml-6"
                       : ""
                   }`}
                 >

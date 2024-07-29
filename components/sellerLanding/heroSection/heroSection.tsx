@@ -78,7 +78,7 @@ export default heroSection;
 <div className="tw-flex tw-justify-between tw-px-5 md:tw-px-20">
 <Link href="/">
   <a>
-    <img src="/svg/kweklogo.svg" />
+    <img src="/svg/kweklogo.png" />
   </a>
 </Link>
 <div className="md:tw-flex tw-justify-center tw-items-center tw-hidden">
