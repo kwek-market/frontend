@@ -20,6 +20,8 @@
     "axios": "^1.7.2",
     "chart.js": "^4.4.3",
     "dayjs": "^1.11.12",
+    "embla-carousel-autoplay": "^8.1.7",
+    "embla-carousel-react": "^8.1.7",
     "google-map-react": "^2.2.1",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.0",
