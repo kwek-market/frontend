@@ -8,7 +8,7 @@ import {
   getCartFunc,
 } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import styles from "./cartGrid.module.scss";
@@ -24,8 +24,8 @@ const CartGridComponent = function () {
       cartId,
       token: user.token,
     };
-    dispatch(deleteCartItem(payload));
-    dispatch(getCartFunc(user.token));
+    deleteCartItem(payload)(dispatch);
+    getCartFunc(user.token)(dispatch);
   }
 
   async function increaseQuantity(productId: string) {
@@ -35,8 +35,8 @@ const CartGridComponent = function () {
       quantity: 1,
       ipAddress: await getIp(),
     };
-    dispatch(addToCartFunc(payload, user.token));
-    dispatch(getCartFunc(user.token));
+    addToCartFunc(payload, user.token)(dispatch);
+    getCartFunc(user.token)(dispatch);
   }
 
   async function decreaseQuantity(itemId: string, cartId: string) {
@@ -45,8 +45,8 @@ const CartGridComponent = function () {
       cartId,
     };
     user.token ? (payload["token"] = user.token) : (payload["ip"] = await getIp());
-    dispatch(deleteItemInCart(payload));
-    dispatch(getCartFunc(user.token));
+    deleteItemInCart(payload);
+    getCartFunc(user.token);
   }
 
   return (

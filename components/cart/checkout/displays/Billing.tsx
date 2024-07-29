@@ -2,7 +2,7 @@ import useBilling from "@/hooks/useBilling";
 import { BillingAddressType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { convertCitiesToJSON } from "../../../../helpers/helper";
@@ -233,7 +233,6 @@ function Billing({ setStep, addressId, setAddressId }) {
                     setBillingInfo({ ...billingInfo, state: e.target.value });
                   }
                 }}
-                placeholder='State'
               >
                 <option value=''>--Select State--</option>
                 {filteredStates?.map(state => (
@@ -269,7 +268,6 @@ function Billing({ setStep, addressId, setAddressId }) {
                     dispatch(setDeliveryFee(selectedState, city.fee, city.name));
                   }
                 }}
-                placeholder='City'
               >
                 <option value=''>--Select City--</option>
                 {convertCitiesToJSON(selectedStateCity)?.map(city => (

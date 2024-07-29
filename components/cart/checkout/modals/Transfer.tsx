@@ -4,10 +4,10 @@ import styles from "../checkGrid/checkGrid.module.scss";
 
 function Transfer({ isModalthreeVisible, handlethreeCancel, showModalfour }) {
   return (
-    <Modal
+    (<Modal
       title="Transfer"
       className={styles.pickup_modal}
-      visible={isModalthreeVisible}
+      open={isModalthreeVisible}
       onCancel={handlethreeCancel}
       style={{ top: 20 }}
       footer={[
@@ -60,7 +60,7 @@ function Transfer({ isModalthreeVisible, handlethreeCancel, showModalfour }) {
           />
         </div>
       </form>
-    </Modal>
+    </Modal>)
   );
 }
 

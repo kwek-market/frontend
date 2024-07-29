@@ -1,6 +1,6 @@
 import { Menu } from "antd";
-import styles from "./ordersFilled.module.scss";
 import { OrderDeliveryStatus } from "../../../../validations/orders";
+import styles from "./ordersFilled.module.scss";
 
 const menu = () => (
   <Menu>
@@ -25,6 +25,7 @@ const OrderItem = ({
   orderIndex,
   orderShortId,
   order,
+  onClick,
 }) => {
   let orderStatus = "pending";
   if (status?.includes(OrderDeliveryStatus.Delivered) && order?.closed) {
@@ -35,7 +36,7 @@ const OrderItem = ({
   console.log("🚀 ~~ order:", order, orderStatus);
 
   return (
-    <tr className={styles.itemGrid}>
+    <tr onClick={onClick} className={styles.itemGrid}>
       {/* <td>
           <input type="checkbox" name="" id="" />
         </td> */}
@@ -84,7 +85,13 @@ const OrderItem = ({
         )}
       </td>
       <td>
-        <button className={styles.trackOrder} onClick={() => openTrackModal(orderShortId)}>
+        <button
+          className={styles.trackOrder}
+          onClick={e => {
+            e.stopPropagation();
+            openTrackModal(orderShortId);
+          }}
+        >
           <span>Track Order</span>
         </button>
       </td>
