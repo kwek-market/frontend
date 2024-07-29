@@ -111,7 +111,7 @@ function ProductImage({ submitDetails, setSubmitDetails }: UploadProductProps) {
             product image {files ? files.length : 0}/5
           </p>
           <p className='tw-text-gray-kwek200 tw-text-sm md:tw-text-base tw-font-normal tw-mb-0'>
-            Recommended Image dimention is 500px by 500px, <span className="tw-font-medium">Image should not be larger than 2.5mb</span>
+            Recommended Image dimention is 500px by 500px
           </p>
         </div>
         <Button

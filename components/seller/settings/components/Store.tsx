@@ -8,7 +8,7 @@ import useStoreLocationUpdate from "@/hooks/useStoreLocationUpdate";
 import { RootState } from "@/store/rootReducer";
 import { getSellerData } from "@/store/seller/seller.action";
 import { Input, message } from "antd";
-import GoogleMapReact from "google-map-react/dist/index";
+import GoogleMapReact from "google-map-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
@@ -134,7 +134,7 @@ export default function Store() {
     };
     mutate(payload, {
       onSuccess: data => {
-        getSellerData(user.token)(dispatch);
+        dispatch(getSellerData(user.token));
         message.success(data.storeBanner.message);
       },
       onError: (err: any) => {
@@ -160,7 +160,7 @@ export default function Store() {
     };
     post(payload, {
       onSuccess: data => {
-        getSellerData(user.token)(dispatch);
+        dispatch(getSellerData(user.token));
         message.success(data.storeLocationUpdate.message);
       },
       onError: (err: any) => {
@@ -179,7 +179,7 @@ export default function Store() {
     };
     mutateStoreUrl(payload, {
       onSuccess: data => {
-        getSellerData(user.token)(dispatch);
+        dispatch(getSellerData(user.token));
         message.success(data.storeUpdate.message);
       },
       onError: (err: any) => {

@@ -12,9 +12,9 @@ function ShopLayout({ children }) {
   const { user } = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    user.token && getUserData(user.token)(dispatch);
-    user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
-    user.token && getCartFunc(user.token)(dispatch);
+    user.token && dispatch(getUserData(user.token));
+    user.token && user.user.isSeller && dispatch(getSellerData(user.token));
+    user.token && dispatch(getCartFunc(user.token));
   }, []);
 
   return (

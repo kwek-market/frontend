@@ -7,7 +7,7 @@ import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { Carousel, Radio, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { Fragment, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,8 +71,8 @@ const ProductHead = function ({ product }: ProductHeadProps) {
       quantity: numItem,
       token: user.token,
     };
-    addToCartFunc(payload, user.token)(dispatch);
-    getCartFunc(user.token)(dispatch);
+    dispatch(addToCartFunc(payload, user.token));
+    dispatch(getCartFunc(user.token));
   }
 
   function addToWishlist(id: string) {
@@ -80,8 +80,8 @@ const ProductHead = function ({ product }: ProductHeadProps) {
       productId: id,
       token: user.token,
     };
-    createWishlist(payload, user.token)(dispatch);
-    getWishList(user.token)(dispatch);
+    dispatch(createWishlist(payload, user.token));
+    dispatch(getWishList(user.token));
   }
 
   // When increasing items, ensure it's not more than the quantity market has
@@ -123,7 +123,6 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                 width='848'
                 height='765'
                 placeholder='blur'
-                blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
               />
             </div>
           ))}
@@ -138,7 +137,6 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                   width='200'
                   height='200'
                   placeholder='blur'
-                  blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
                 />
               </button>
             </div>

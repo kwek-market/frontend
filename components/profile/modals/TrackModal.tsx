@@ -42,9 +42,9 @@ export default function TrackModal({
   }, [order]);
 
   return (
-    (<Modal
+    <Modal
       title={`Order: ${order.orderId}`}
-      open={isModalVisible}
+      visible={isModalVisible}
       onOk={handleOk}
       onCancel={handleCancel}
       width={"auto"}
@@ -76,6 +76,6 @@ export default function TrackModal({
           icon={<ImTruck />}
         />
       </Steps>
-    </Modal>)
+    </Modal>
   );
 }

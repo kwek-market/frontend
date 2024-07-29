@@ -2,7 +2,7 @@ import Load from "@/components/Loader/Loader";
 import TableNav from "@/components/table/table-nav";
 import { useGetProductReviews } from "@/hooks/admin/products";
 import moment from "moment";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface Prop {

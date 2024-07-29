@@ -27,8 +27,8 @@ const OrderList = () => {
             "order-" +
             order_number
           }
-          className=" tw-text-black-kwek100">
-          {order_number}
+        >
+          <a className=" tw-text-black-kwek100">{order_number}</a>
         </Link>
       ),
     },

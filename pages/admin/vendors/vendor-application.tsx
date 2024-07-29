@@ -59,10 +59,8 @@ const VendorApplications = () => {
       dataIndex: "name",
       key: "name",
       render: (name: string, object) => (
-        <Link
-          href={"/admin/vendors/vendor-info/" + object.id}
-          className=' tw-text-black-kwek100'>
-          {name}
+        <Link href={"/admin/vendors/vendor-info/" + object.id}>
+          <a className=' tw-text-black-kwek100'>{name}</a>
         </Link>
       ),
     },

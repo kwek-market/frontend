@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./extraGrid.module.scss";
 import { ProductType } from "@/interfaces/commonTypes";
@@ -36,7 +36,7 @@ const ExtraGrid = function ({ product }: { product: ProductType }) {
       </div>
       <div className={styles.extra_contact}>
         <Link href="/contact-us">
-          Contact Us
+          <a>Contact Us</a>
         </Link>
       </div>
     </div>

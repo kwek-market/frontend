@@ -15,7 +15,7 @@ const SimpleModal = ({ children, open, handleClose }: SimpleModalProps) => {
           onClick={e => handleClose()}
         >
           <div
-            className=' tw-z-[2] tw-mx-auto'
+            className=' tw-z-[2]  tw-px-8 tw-mx-auto'
             onClick={e => {
               e.stopPropagation();
             }}

@@ -6,7 +6,7 @@ const ActiveTabbar = function () {
   return (
     <div className={styles.bar_container}>
       <div className={styles.bar_content}>
-        <Link href="/seller/filter" legacyBehavior>
+        <Link href="/seller/filter">
           <div className={styles.filter}>
             <a>
               Filters

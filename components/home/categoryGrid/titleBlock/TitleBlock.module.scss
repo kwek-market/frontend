@@ -15,8 +15,7 @@
   border-right: 1px solid #c4c4c4;
   @include respondMax("tablet") {
     border-right: none;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.75rem;
     padding-right: 0;
   }
   padding-right: 2rem;

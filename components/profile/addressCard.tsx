@@ -1,16 +1,18 @@
 import useBillingDelete from "@/hooks/useBillingDelete";
-import useBillingUpdate from "@/hooks/useBillingUpdate";
 import { RootState } from "@/store/rootReducer";
 import { getUserData } from "@/store/user/user.actions";
-import { Modal, message } from "antd";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { message, Modal } from "antd";
+import useBillingUpdate from "@/hooks/useBillingUpdate";
 
 const AddressCard = function ({ address }) {
   const { user } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const { mutate: deleteMutate, isSuccess } = useBillingDelete(user.token);
-  const { mutate: updateMutate, isSuccess: success } = useBillingUpdate(user.token);
+  const { mutate: updateMutate, isSuccess: success } = useBillingUpdate(
+    user.token
+  );
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [addressId, setAddressId] = useState("");
@@ -54,109 +56,121 @@ const AddressCard = function ({ address }) {
 
   useEffect(() => {
     if (isSuccess || success) {
-      getUserData(user.token)(dispatch);
+      dispatch(getUserData(user.token));
     }
   }, [isSuccess, success]);
 
   return (
     <>
       <Modal
-        title='Update Address'
-        open={isModalVisible}
+        title="Update Address"
+        visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText='Update'
+        okText="Update"
       >
-        <form className=''>
-          <div className='tw-mb-3'>
-            <label className='tw-font-medium tw-text-lg'>
+        <form className="">
+          <div className="tw-mb-3">
+            <label className="tw-font-medium tw-text-lg">
               Fullname <br />
               <input
-                type='text'
-                name='Full Name'
-                placeholder='Full Name'
+                type="text"
+                name="Full Name"
+                placeholder="Full Name"
                 required
                 value={billingInfo.fullName}
-                onChange={e => setBillingInfo({ ...billingInfo, fullName: e.target.value })}
+                onChange={(e) =>
+                  setBillingInfo({ ...billingInfo, fullName: e.target.value })
+                }
               />
             </label>
           </div>
-          <div className='tw-mb-3'>
-            <label className='tw-font-medium tw-text-lg'>
+          <div className="tw-mb-3">
+            <label className="tw-font-medium tw-text-lg">
               Contact <br />
               <input
-                type='text'
-                name='Phone number'
-                placeholder='Phone number'
+                type="text"
+                name="Phone number"
+                placeholder="Phone number"
                 required
                 value={billingInfo.contact}
-                onChange={e => setBillingInfo({ ...billingInfo, contact: e.target.value })}
+                onChange={(e) =>
+                  setBillingInfo({ ...billingInfo, contact: e.target.value })
+                }
               />
             </label>
           </div>
-          <div className='tw-mb-3'>
-            <label className='tw-font-medium tw-text-lg'>
+          <div className="tw-mb-3">
+            <label className="tw-font-medium tw-text-lg">
               Street Address <br />
               <input
-                type='text'
-                name='street address'
-                placeholder='street address'
+                type="text"
+                name="street address"
+                placeholder="street address"
                 required
                 value={billingInfo.address}
-                onChange={e => setBillingInfo({ ...billingInfo, address: e.target.value })}
+                onChange={(e) =>
+                  setBillingInfo({ ...billingInfo, address: e.target.value })
+                }
               />
             </label>
           </div>
-          <div className='tw-mb-3'>
-            <label className='tw-font-medium tw-text-lg'>
+          <div className="tw-mb-3">
+            <label className="tw-font-medium tw-text-lg">
               City <br />
               <input
-                type='text'
-                name='City'
-                placeholder='City'
+                type="text"
+                name="City"
+                placeholder="City"
                 required
                 value={billingInfo.city}
-                onChange={e => setBillingInfo({ ...billingInfo, city: e.target.value })}
+                onChange={(e) =>
+                  setBillingInfo({ ...billingInfo, city: e.target.value })
+                }
               />
             </label>
           </div>
-          <div className='tw-mb-3'>
-            <label className='tw-font-medium tw-text-lg'>
+          <div className="tw-mb-3">
+            <label className="tw-font-medium tw-text-lg">
               State <br />
               <input
-                type='text'
-                name='State'
-                placeholder='State'
+                type="text"
+                name="State"
+                placeholder="State"
                 required
                 value={billingInfo.state}
-                onChange={e => setBillingInfo({ ...billingInfo, state: e.target.value })}
+                onChange={(e) =>
+                  setBillingInfo({ ...billingInfo, state: e.target.value })
+                }
               />
             </label>
           </div>
         </form>
       </Modal>
-      <div className='tw-bg-white-100 tw-rounded-lg tw-p-3 tw-shadow-lg'>
-        <div className='tw-flex tw-flex-row tw-justify-between'>
-          <h4 className='tw-font-semibold tw-text-base tw-text-black-stock'>Address</h4>
+      <div className="tw-bg-white-100 tw-rounded-lg tw-p-3 tw-shadow-lg">
+        <div className="tw-flex tw-flex-row tw-justify-between">
+          <h4 className="tw-font-semibold tw-text-base tw-text-black-stock">
+            Address
+          </h4>
           <span>
             <i
-              className='fas fa-pen tw-text-black-stock tw-pr-5 tw-cursor-pointer'
+              className="fas fa-pen tw-text-black-stock tw-pr-5 tw-cursor-pointer"
               onClick={() => showModal(address.id)}
             />
             <i
-              className='fas fa-trash tw-text-error tw-cursor-pointer'
+              className="fas fa-trash tw-text-error tw-cursor-pointer"
               onClick={() => deleteMutate({ addressId: address.id })}
             />
           </span>
         </div>
-        <div className='tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70'>
-          <h6 className='tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70'>
+        <div className="tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70">
+          <h6 className="tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70">
             {address.fullName}
           </h6>
-          <h6 className='tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70'>
+          <h6 className="tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70">
             {address.address}, {address.city}, {address.state}
           </h6>
-          <h6 className='tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70'>
+          <h6 className="tw-text-base tw-text-gray-kwek200 tw-font-normal tw-opacity-70">
             +234 {address.contact}
           </h6>
         </div>

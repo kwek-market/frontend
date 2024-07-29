@@ -148,11 +148,11 @@ const Menu = function ({}) {
           {isLoading ? <Load /> : null}
           {categories
             ? categories?.categories.map((category, index) => (
-                (<Link key={index} href={`/category/${category.name}`}>
-
-                  <CategoryBox key={category.id} name={category.name} icon={category?.icon} />
-
-                </Link>)
+                <Link key={index} href={`/category/${category.name}`}>
+                  <a>
+                    <CategoryBox key={category.id} name={category.name} icon={category?.icon} />
+                  </a>
+                </Link>
               ))
             : null}
         </div>
