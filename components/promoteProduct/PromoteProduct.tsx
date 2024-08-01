@@ -31,9 +31,7 @@ type PromoteProductProps = {
 const PromoteProduct = function ({ promoteData, setPromoteData }: PromoteProductProps) {
   console.log("🚀 ~~ PromoteProduct ~~ promoteData:", promoteData);
 
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { status, data } = useGetSellerWallet(token);
   const { mutate, isLoading } = usePayment(token);

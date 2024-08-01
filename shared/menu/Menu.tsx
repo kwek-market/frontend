@@ -21,12 +21,10 @@ import menuStyle from "./menu.module.scss";
 
 const Menu = function ({}) {
   const dispatch = useDispatch();
-  const {
-    user,
-    seller,
-    cart: { cart },
-    wishlist: { wishlists },
-  } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const cart = useSelector((state: RootState) => state.cart?.cart);
+  const seller = useSelector((state: RootState) => state.seller);
+
   const router = useRouter();
 
   const { data: categories, isLoading } = useGetCategories({ search: "", visibility: "published" });
@@ -148,11 +146,9 @@ const Menu = function ({}) {
           {isLoading ? <Load /> : null}
           {categories
             ? categories?.categories.map((category, index) => (
-                (<Link key={index} href={`/category/${category.name}`}>
-
+                <Link key={index} href={`/category/${category.name}`}>
                   <CategoryBox key={category.id} name={category.name} icon={category?.icon} />
-
-                </Link>)
+                </Link>
               ))
             : null}
         </div>

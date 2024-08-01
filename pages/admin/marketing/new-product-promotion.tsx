@@ -21,9 +21,7 @@ interface IFormData {
 }
 
 const NewProductPromotion = () => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [formData, setFormData] = useState<IFormData>({});
   const { mutate: createMut } = useAdminPromoteProduct(token);

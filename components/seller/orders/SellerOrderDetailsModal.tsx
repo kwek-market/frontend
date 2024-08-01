@@ -9,7 +9,7 @@ import Load from "../../Loader/Loader";
 import CustomerDetail from "../../admin/customers/customer-detail";
 
 const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state?.user);
   const { data, isLoading, error } = useGetOrdersAdmin({
     id: orderId as string,
     token: user?.token,

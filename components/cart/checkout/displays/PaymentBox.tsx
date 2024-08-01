@@ -11,7 +11,10 @@ import { useSelector } from "react-redux";
 import styles from "../checkGrid/checkGrid.module.scss";
 
 function PaymentBox({ step, addressId }) {
-  const { user, cart, deliveryFee } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const cart = useSelector((state: RootState) => state.cart);
+  const deliveryFee = useSelector((state: RootState) => state.deliveryFee);
+
   const [paymentMethod, setPaymentMethod] = useState("");
 
   const [confirmModal, setConfirmModal] = useState(false);

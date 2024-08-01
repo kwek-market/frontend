@@ -6,7 +6,7 @@ import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
 
 const Orders = function ({ activeBtn, setActiveBtn }) {
-  const { user } = useSelector((state: RootState) => state);
+  const user  = useSelector((state: RootState) => state.user);
   const { data } = useOrders(user.token);
 
   const [orderStatus, setOrderStatus] = React.useState<string>("open");

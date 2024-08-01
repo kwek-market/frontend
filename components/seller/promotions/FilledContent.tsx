@@ -5,8 +5,8 @@ import { v4 } from "uuid";
 import PromotionCard from "./PromotionCard";
 
 export default function FilledContent() {
-  const { user } = useSelector((state: RootState) => state);
-  const { status, data, error } = usePromotions(user.token);
+  const user = useSelector((state: RootState) => state?.user);
+  const { status, data, error } = usePromotions(user?.token);
   console.log(data);
 
   return (

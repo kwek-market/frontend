@@ -6,7 +6,9 @@ import { v4 } from "uuid";
 import styles from "../checkGrid/checkGrid.module.scss";
 
 function CartInfo() {
-  const { cart, deliveryFee } = useSelector((state: RootState) => state);
+  const cart = useSelector((state: RootState) => state.cart);
+  const deliveryFee = useSelector((state: RootState) => state.deliveryFee);
+
   console.log("🚀 ~~ CartInfo ~~ deliveryFee:", deliveryFee);
 
   const result = useMemo(() => {

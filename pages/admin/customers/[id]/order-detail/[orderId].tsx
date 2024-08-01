@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Load from "../../../../../components/Loader/Loader";
 import { OrderTable } from "../../../../../components/admin/orderTable/orderTable";
+import { getOrderText } from "../../../../../helpers/helper";
 import { useGetOrdersAdmin, useUpdateOrderDeliveryStatus } from "../../../../../hooks/admin/orders";
 import useCancelOrder from "../../../../../hooks/useCancelOrder";
 import { RootState } from "../../../../../store/rootReducer";
@@ -15,13 +16,10 @@ import {
   UpdateOrderDeliveryStatusSchema,
 } from "../../../../../validations/orders";
 import { queryClient } from "../../../../_app";
-import { getOrderText } from "../../../../../helpers/helper";
-
-
 
 const OrderDetail = () => {
   const router = useRouter();
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
   const { data, isLoading, error } = useGetOrdersAdmin({
     id: router.query?.orderId as string,
     token: user?.token,

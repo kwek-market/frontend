@@ -21,9 +21,7 @@ import { RootState } from "../../../store/rootReducer";
 //  update the category array according to the number
 
 const AddCategory = () => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [formData, setFormDta] = useState<CreateCategoryPayload>({
     name: "",

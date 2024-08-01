@@ -1,4 +1,3 @@
-import Revenue from "./Revenue";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import Load from "@/components/Loader/Loader";
 import useHomeCard from "@/hooks/useHomeCard";
@@ -6,15 +5,14 @@ import useReviewCard from "@/hooks/useReviewCards";
 import useSellerOrders from "@/hooks/useSellerOrders";
 import useSellerProducts from "@/hooks/useSellerProducts";
 import { RootState } from "@/store/rootReducer";
-import React, { Fragment, useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import ProgressText from "./ProgressText";
+import Revenue from "./Revenue";
 
 export default function Home() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user.token);
   const {
     status: productStatus,
     data: productData,
@@ -52,11 +50,7 @@ export default function Home() {
   const {
     "0": { data: earningsData, status: earningsStatus, error: earningsError },
     "1": { data: daysData, status: daysStatus, error: daysError },
-    "2": {
-      data: customersData,
-      status: customersStatus,
-      error: customersError,
-    },
+    "2": { data: customersData, status: customersStatus, error: customersError },
     "3": { data: revenueData, status: revenueStatus, error: revenueError },
   } = useHomeCard(token, false);
   const {
@@ -65,10 +59,7 @@ export default function Home() {
   } = useHomeCard(token, true);
 
   const total = useMemo(() => {
-    return ordersData?.getSellerOrders.objects.reduce(
-      (a, b) => a + b.profit,
-      0
-    );
+    return ordersData?.getSellerOrders.objects.reduce((a, b) => a + b.profit, 0);
   }, [ordersData]);
 
   const thisMonthTotal = useMemo(() => {
@@ -76,9 +67,9 @@ export default function Home() {
   }, [ordData]);
 
   return (
-    <section className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[5fr,2fr] tw-gap-3 tw-my-4">
-      <section className="">
-        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-3">
+    <section className='tw-grid tw-grid-cols-1 md:tw-grid-cols-[5fr,2fr] tw-gap-3 tw-my-4'>
+      <section className=''>
+        <div className='tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-3'>
           <Fragment>
             {ordersStatus === "loading" && <Load />}
             {ordersStatus === "error" && (
@@ -88,7 +79,7 @@ export default function Home() {
             ordersData !== undefined &&
             ordersData.getSellerOrders.objects.length > 0 ? (
               <Card
-                name="order sales"
+                name='order sales'
                 content={`NGN ${thisMonthTotal}`}
                 num={`NGN ${total}`}
                 imgSrc={"/svg/bag.svg"}
@@ -96,8 +87,8 @@ export default function Home() {
               />
             ) : (
               <Card
-                name="order sales"
-                content="NGN 0"
+                name='order sales'
+                content='NGN 0'
                 num={"NGN 0"}
                 imgSrc={"/svg/bag.svg"}
                 imgAlt={"order"}
@@ -108,13 +99,11 @@ export default function Home() {
           <Fragment>
             {earningsStatus === "loading" && <Load />}
             {earningsStatus === "error" && (
-              <ErrorInfo
-                error={(earningsError as { message: string }).message}
-              />
+              <ErrorInfo error={(earningsError as { message: string }).message} />
             )}
             {earningsStatus === "success" && earningsData !== undefined && (
               <Card
-                name="sales earnings"
+                name='sales earnings'
                 content={`NGN ${earningData.getSellerSalesEarnings}`}
                 num={`NGN ${earningsData.getSellerSalesEarnings}`}
                 imgSrc={"/svg/profits.svg"}
@@ -143,12 +132,10 @@ export default function Home() {
         </div>
       </section>
       <aside>
-        <div className="tw-mb-4">
+        <div className='tw-mb-4'>
           <ProgressText
             text={"product quality"}
-            val={
-              qualityData !== undefined && qualityData.getSellerProductQuality
-            }
+            val={qualityData !== undefined && qualityData.getSellerProductQuality}
           />
           <ProgressText
             text={"delivery rate"}
@@ -156,12 +143,8 @@ export default function Home() {
           />
         </div>
       </aside>
-      <Revenue
-        revenue={revenueData}
-        status={revenueStatus}
-        err={revenueError}
-      />
-      <div className="tw-grid tw-grid-cols-1 tw-gap-3 tw-mt-3">
+      <Revenue revenue={revenueData} status={revenueStatus} err={revenueError} />
+      <div className='tw-grid tw-grid-cols-1 tw-gap-3 tw-mt-3'>
         <Fragment>
           {salesStatus === "loading" && <Load />}
           {salesStatus === "error" && (
@@ -169,7 +152,7 @@ export default function Home() {
           )}
           {salesStatus === "success" && salesData !== undefined && (
             <Card
-              name="successful sales"
+              name='successful sales'
               content={saleData.getSellerSuccessfulSales ?? 0}
               num={salesData.getSellerSuccessfulSales ?? 0}
               imgSrc={"/svg/sale.svg"}
@@ -184,7 +167,7 @@ export default function Home() {
           )}
           {daysStatus === "success" && daysData !== undefined && (
             <Card
-              name="Days selling on Kwek"
+              name='Days selling on Kwek'
               num={daysData.getSellerDaysSelling}
               content={`NGN ${daysData.getSellerDaysSelling}`}
               imgSrc={"/svg/calendar.svg"}
@@ -201,7 +184,7 @@ export default function Home() {
           productData !== undefined &&
           productData.getSellerProducts.objects.length > 0 ? (
             <Card
-              name="products"
+              name='products'
               content={prodData?.getSellerProducts.objects.length}
               num={productData.getSellerProducts.objects.length}
               imgSrc={"/svg/received.svg"}
@@ -209,7 +192,7 @@ export default function Home() {
             />
           ) : (
             <Card
-              name="products"
+              name='products'
               content={0}
               num={0}
               imgSrc={"/svg/received.svg"}

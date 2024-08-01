@@ -10,9 +10,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const Promote = function () {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const router = useRouter();
   const { id } = router.query;
   const { status, data } = useGetSellerWallet(token);

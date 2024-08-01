@@ -19,9 +19,7 @@ interface IFormData {
 }
 
 const CreateEmail = () => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [formData, setFormData] = useState<IFormData>({});
 

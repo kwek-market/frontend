@@ -45,7 +45,10 @@ const Header = function ({
   setCheck,
 }: HeaderProps) {
   const dispatch = useDispatch();
-  const { user, cart, wishlist } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const cart = useSelector((state: RootState) => state.cart);
+  const wishlist = useSelector((state: RootState) => state.wishlist);
+
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const router = useRouter();
   function handleLogout() {

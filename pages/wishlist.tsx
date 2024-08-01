@@ -13,9 +13,7 @@ import { WishlistType } from "@/interfaces/commonTypes";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Page = function () {
-  const {
-    wishlist: { error, loading, wishlists },
-  } = useSelector((state: RootState) => state);
+  const { error, loading, wishlists } = useSelector((state: RootState) => state.wishlist);
 
   const isLoading = loading && (
     <div>

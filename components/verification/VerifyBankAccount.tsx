@@ -21,7 +21,9 @@ interface T extends StepComponentProps {
 }
 function VerifyBankAccount(props: T) {
   const dispatch = useDispatch();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const seller = useSelector((state: RootState) => state.seller);
+
   const [loading, setLoading] = useState(false);
   const fetchFromState = (value: string, defaultValue: string = "") => {
     const checkThis = props.getState(value, defaultValue);

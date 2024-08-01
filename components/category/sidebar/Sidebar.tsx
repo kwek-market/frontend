@@ -1,14 +1,13 @@
-import { Category } from "./Category";
-import { Gender } from "./Gender";
-import { Rating } from "./Rating";
-import { Price } from "./Price";
-import { Size } from "./Size";
-import React from "react";
-import styles from "./Sidebar.module.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootReducer";
 import useCategory from "@/hooks/useCategory";
 import { Filtering } from "@/interfaces/commonTypes";
+import { RootState } from "@/store/rootReducer";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Category } from "./Category";
+import { Price } from "./Price";
+import { Rating } from "./Rating";
+import styles from "./Sidebar.module.scss";
+import { Size } from "./Size";
 
 type SidebarProps = {
   category: string;
@@ -17,8 +16,8 @@ type SidebarProps = {
 };
 
 const Sidebar = function ({ category, filtering, setFiltering }: SidebarProps) {
-  const { categories } = useSelector((state: RootState) => state);
-  const { id } = categories.categories.find((cat) => cat.name === category);
+  const categories = useSelector((state: RootState) => state.categories);
+  const { id } = categories.categories.find(cat => cat.name === category);
   const payload = { id };
   const { status, data, error } = useCategory(payload);
 

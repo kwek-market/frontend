@@ -22,9 +22,7 @@ const Vendors = () => {
   const maxNameLength = 14;
 
   const [page, setPage] = useState(1);
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { data: activeData, isLoading: isActiveLoading } = useGetSellers({
     token,

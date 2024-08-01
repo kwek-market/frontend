@@ -12,9 +12,7 @@ const FlashSales = () => {
   const { TabPane } = Tabs;
   const [page, setPage] = useState(1);
 
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { data, isLoading, error } = useGetAdminFlashSales({ token, page, pageSize: PAGE_SIZE });
 

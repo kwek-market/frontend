@@ -30,9 +30,7 @@ const ProductFilled = function ({
   filter,
   setFilter,
 }: ProductFilledProps) {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const { status, data, error } = usePromotions(token);
 
   function isPromoted(id: string) {
