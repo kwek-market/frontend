@@ -33,6 +33,5 @@ module.exports = {
   },
   httpAgentOptions: {
     keepAlive: true,
-    timeout: 500000000,
   },
 };
