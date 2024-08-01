@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useAdminSendEmails } from "../../hooks/admin/email";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/rootReducer";
 import { getVendorApplicationEmail } from "../../helpers/emailTemplates";
+import { useAdminSendEmails } from "../../hooks/admin/email";
+import { RootState } from "../../store/rootReducer";
 
 function VerifiedModal() {
   const router = useRouter();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
   const { mutateAsync } = useAdminSendEmails(user?.token);
 
   function handleClick() {
@@ -15,7 +15,7 @@ function VerifiedModal() {
   }
 
   useEffect(() => {
-    console.log('things are happening')
+    console.log("things are happening");
 
     mutateAsync({
       subject: "Exclusive Offer Just for You! Save Big at Kwek Market",
@@ -23,7 +23,7 @@ function VerifiedModal() {
       token: user?.token,
       userList: [user?.user?.id],
     });
-  })
+  });
 
   return (
     <div className='tw-bg-gray-kwek200a tw-flex tw-justify-center tw-items-center tw-z-30 tw-fixed tw-top-0 tw-right-0 tw-bottom-0 tw-left-0'>

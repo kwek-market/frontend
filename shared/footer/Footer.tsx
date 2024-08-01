@@ -7,7 +7,8 @@ import { RootState } from "../../store/rootReducer";
 import Form from "./SubscribeForm";
 
 const Component = function () {
-  const { seller, user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const seller = useSelector((state: RootState) => state.seller);
 
   return (
     <footer className={styles.footer}>
@@ -114,9 +115,7 @@ const Component = function () {
           <ul className={styles.nav_menu}>
             <li className={styles.nav_item}>
               <Link href='/seller/profile' className={styles.nav_link}>
-
                 {user?.user?.isSeller ? "Enter Vendor profile" : "Sell on Kwek"}
-
               </Link>
             </li>
             <li className={styles.nav_item}>
@@ -201,8 +200,8 @@ const Component = function () {
           <Link
             href='https://www.facebook.com/Kwekmarket/'
             className={styles.social_link}
-            target='_blank noreferer noopener'>
-
+            target='_blank noreferer noopener'
+          >
             <Image
               width='28'
               height='28'
@@ -210,14 +209,13 @@ const Component = function () {
               alt='visacard'
               className={styles.social_icon}
             />
-
           </Link>
 
           <Link
             href='https://www.instagram.com/invites/contact/?i=lthbstut4tp&utm_content=6szcidd'
             className={styles.social_link}
-            target='_blank noreferer noopener'>
-
+            target='_blank noreferer noopener'
+          >
             <Image
               width='28'
               height='28'
@@ -225,14 +223,13 @@ const Component = function () {
               alt='visacard'
               className={styles.social_icon}
             />
-
           </Link>
 
           <Link
             href='https://twitter.com/kwekmarket?t=gFj8_Lp-EA2gJEZ0QZkEFQ&s=09'
             className={styles.social_link}
-            target='_blank noreferer noopener'>
-
+            target='_blank noreferer noopener'
+          >
             <Image
               width='28'
               height='28'
@@ -240,7 +237,6 @@ const Component = function () {
               alt='visacard'
               className={styles.social_icon}
             />
-
           </Link>
         </div>
       </div>

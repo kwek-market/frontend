@@ -21,17 +21,17 @@ const ListComponent = function ({
   productId,
 }) {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
       ipAddress: await getIp(),
       productOptionId: id,
-      token: user.token,
+      token: user?.token,
       quantity: 1,
     };
-    addToCartFunc(payload, user.token)(dispatch);
-    getCartFunc(user.token)(dispatch);
+    addToCartFunc(payload, user?.token)(dispatch);
+    getCartFunc(user?.token)(dispatch);
   }
 
   return (

@@ -10,9 +10,7 @@ function OrderComplete() {
   const router = useRouter();
   const { orderId } = router.query;
 
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { data, isLoading, error } = useGetAllOrders({ search: orderId as string, token });
 

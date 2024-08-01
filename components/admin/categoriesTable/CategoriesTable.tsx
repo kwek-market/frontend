@@ -7,9 +7,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 const CategoryTable = ({ data }: { data: Record<any, any>[] }) => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { mutate: deleteMut } = useDeleteCategory();
 

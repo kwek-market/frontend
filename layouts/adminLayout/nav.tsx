@@ -6,9 +6,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const NavAdmin = ({ sidebarOpen, setSidebarOpen }) => {
-  const reduxState = useSelector((state: RootState) => state);
-  const searchState = reduxState.search;
-  const user = reduxState.user;
+  const user = useSelector((state: RootState) => state.user);
+  const searchState = useSelector((state: RootState) => state.search);
+
   const dispatch = useDispatch();
   const elementRef = useRef<HTMLDivElement>(null);
 

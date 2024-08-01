@@ -11,9 +11,7 @@ import { RootState } from "../../../../store/rootReducer";
 
 const Category = () => {
   const router = useRouter();
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const {
     data: categoryData,
     isLoading,

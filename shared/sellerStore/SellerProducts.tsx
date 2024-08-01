@@ -6,9 +6,7 @@ import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 
 export function SellerProduct({ products }: { products: ProductType[] }) {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const queryClient = useQueryClient();
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);

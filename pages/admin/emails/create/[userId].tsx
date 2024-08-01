@@ -19,9 +19,7 @@ interface IFormData {
 }
 
 const CreateEmailForOneUser = () => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { query } = useRouter();
   const customerId = query.userId as string;

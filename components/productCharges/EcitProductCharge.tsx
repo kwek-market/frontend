@@ -19,9 +19,7 @@ const EditProductChargeModal = ({
   isOpen?: boolean;
   onClose: any;
 }) => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state?.user?.token);
 
   const [formData, setFormData] = useState<UpdateProductChargeType>({
     charge: charge.charge,

@@ -28,9 +28,7 @@ const Customer = () => {
 
   const customerId = router.query.id as string;
 
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const {
     data: userData,

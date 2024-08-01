@@ -34,9 +34,7 @@ export function useGetSellers(payload: USERTYPE) {
 }
 
 export function useCompleteSeller() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   return useMutation(
     (payload: { email: string }) =>
       userFetcherWithAuth(COMPLETE_SELLER_VERIFICATION, payload, token),
@@ -66,9 +64,8 @@ export function useCompleteSeller() {
 }
 
 export function useRejectSeller() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
+
   return useMutation(
     (payload: { email: string }) => userFetcherWithAuth(REJECT_SELLER_VERIFICATION, payload, token),
     {
@@ -97,9 +94,7 @@ export function useRejectSeller() {
 }
 
 export function useFlagVendor() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   return useMutation(
     (payload: { id: string; redFlaggedVendor: boolean; token?: string }) =>

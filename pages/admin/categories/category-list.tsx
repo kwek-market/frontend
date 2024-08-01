@@ -17,9 +17,7 @@ const CategoryList = () => {
   const [search, setSearch] = useState("");
   const [searchDebouncedValue] = useDebounce(search, 600);
 
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state?.user?.token);
 
   const { data: categoryData, isFetching } = useGetAdminCategories({
     search: searchDebouncedValue,

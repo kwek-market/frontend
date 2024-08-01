@@ -14,9 +14,7 @@ const VendorApplications = () => {
   const [activeKey, setActiveKey] = useState("1");
   const { TabPane } = Tabs;
   const [page, setPage] = useState(1);
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { data: getVendorsData, isLoading: isLoadingSellers } = useGetSellers({
     token,
@@ -59,9 +57,7 @@ const VendorApplications = () => {
       dataIndex: "name",
       key: "name",
       render: (name: string, object) => (
-        <Link
-          href={"/admin/vendors/vendor-info/" + object.id}
-          className=' tw-text-black-kwek100'>
+        <Link href={"/admin/vendors/vendor-info/" + object.id} className=' tw-text-black-kwek100'>
           {name}
         </Link>
       ),

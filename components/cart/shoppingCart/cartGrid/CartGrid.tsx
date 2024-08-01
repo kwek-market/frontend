@@ -12,10 +12,9 @@ import styles from "./cartGrid.module.scss";
 import CartGridComponent from "./cartGridComponent";
 
 const CartGrid = function () {
-  const {
-    cart,
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const cart = useSelector((state: RootState) => state.cart);
+  const token = useSelector((state: RootState) => state.user?.token);
+
   const router = useRouter();
   const [coupon, setCoupon] = useState<string>("");
   const { mutate, isLoading } = useApplyCoupon();
@@ -93,9 +92,7 @@ const CartGrid = function () {
               </div>
               <p>Delivery Fee is not included yet</p>
               <Link href='/cart/checkout'>
-
                 <button className={styles.checkout_btn}>Proceed to Checkout</button>
-
               </Link>
             </div>
           </div>

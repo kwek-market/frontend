@@ -7,7 +7,8 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 const Component = () => {
-  const { seller, user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const seller = useSelector((state: RootState) => state.seller);
   const router = useRouter();
 
   const { status, data, error } = useReviews({

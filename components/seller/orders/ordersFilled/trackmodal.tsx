@@ -20,9 +20,7 @@ interface SellerTrackModalProps {
 }
 
 const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModalProps) => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state?.user?.token);
 
   const [info, setInfo] = useState("");
   // const [orderIdText, setOrderIdText] = useState(order?.order?.orderId);
