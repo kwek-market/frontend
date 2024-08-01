@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { Container } from "../../components/seller/content/Content";
 
 export const SellerHero = ({ seller }) => {
-  const { user } = useSelector((state: RootState) => state);
   const router = useRouter();
 
   const bgImg = seller.storeBannerUrl

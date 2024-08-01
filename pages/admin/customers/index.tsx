@@ -14,9 +14,7 @@ import { PAGE_SIZE } from "../../../constants/constants";
 const Customers = () => {
   const [activeKey, setActiveKey] = useState("1");
   const { TabPane } = Tabs;
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [page, setPage] = useState(1);
 

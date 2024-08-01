@@ -11,9 +11,7 @@ import { useSelector } from "react-redux";
 import { OrderDeliveryStatus } from "../../validations/orders";
 
 export default function fundWallet() {
-  const {
-    user: { token, user },
-  } = useSelector((state: RootState) => state);
+  const { token, user } = useSelector((state: RootState) => state?.user);
   const router = useRouter();
   const { transaction_id, tx_ref, status } = router.query;
   const { mutate, isLoading } = useFundWallet();

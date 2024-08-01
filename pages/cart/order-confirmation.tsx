@@ -9,9 +9,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function OrderComplete() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const router = useRouter();
   const { reference, trxref } = router.query;
 

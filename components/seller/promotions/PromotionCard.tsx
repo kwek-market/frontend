@@ -18,9 +18,7 @@ export type PromotionCardProps = {
 
 export default function PromotionCard({ promotion }) {
   const queryClient = new QueryClient();
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state?.user);
   const active = promotion.promo[0].active ? "tw-bg-yellow-filled" : "tw-bg-green-success";
   console.log("🚀 ~~ PromotionCard ~~ promotion:", promotion);
 

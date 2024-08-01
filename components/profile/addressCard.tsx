@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const AddressCard = function ({ address }) {
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const { mutate: deleteMutate, isSuccess } = useBillingDelete(user.token);
   const { mutate: updateMutate, isSuccess: success } = useBillingUpdate(user.token);

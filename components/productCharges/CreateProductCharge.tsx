@@ -11,9 +11,7 @@ import { FormItems } from "../admin/form";
 import { InputField, RadioField } from "../input/textInput";
 
 const CreateProductCharge = ({ isOpen, onClose }: { isOpen?: boolean; onClose: any }) => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [formData, setFormData] = useState<CreateProductChargeType>({
     charge: 0,
@@ -46,7 +44,7 @@ const CreateProductCharge = ({ isOpen, onClose }: { isOpen?: boolean; onClose: a
   };
 
   return (
-    (<Modal
+    <Modal
       title='Create Product Charge'
       open={isOpen}
       onOk={createProductCharge}
@@ -93,7 +91,7 @@ const CreateProductCharge = ({ isOpen, onClose }: { isOpen?: boolean; onClose: a
           </FormItems>
         </form>
       </div>
-    </Modal>)
+    </Modal>
   );
 };
 

@@ -13,9 +13,7 @@ import WalletHeader from "./WalletHeader";
 import WithdrawFunds from "./WithdrawFunds";
 
 export default function Wallet() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [visible, setVisible] = useState(false);
   const [isFundWalletModalOpen, setIsFundWalletModalOpen] = useState(false);
@@ -32,7 +30,7 @@ export default function Wallet() {
       : 0;
 
   return (
-    (<section className='tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md'>
+    <section className='tw-mt-4 tw-p-4 tw-bg-white-100 tw-shadow-md tw-border tw-border-gray-kwek700 tw-rounded-md'>
       <Drawer
         title='Withdraw Funds'
         placement={"right"}
@@ -78,6 +76,6 @@ export default function Wallet() {
         )}
       </div>
       <WalletContent />
-    </section>)
+    </section>
   );
 }

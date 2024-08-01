@@ -8,33 +8,25 @@ import useSellerProducts from "@/hooks/useSellerProducts";
 import { PagePayload, ProductType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { GET_SELLER_PRODUCTS } from "@/store/seller/seller.queries";
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 
 export default function Product() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const queryClient = useQueryClient();
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentItems, setCurrentItems] = useState<ProductType[]>(
-    [] as ProductType[]
-  );
+  const [currentItems, setCurrentItems] = useState<ProductType[]>([] as ProductType[]);
   const [filter, setFilter] = useState<string>("-clicks");
   const payload: PagePayload = {
     token,
     page: currentPage,
     pageSize: 20,
     sortBy: filter,
-    rating: -5
+    rating: -5,
   };
-  const {
-    status,
-    data: productsData,
-    error: productError,
-  } = useSellerProducts(payload);
+  const { status, data: productsData, error: productError } = useSellerProducts(payload);
   const [showProduct, setShowProduct] = useState(false);
   const [product, setProduct] = useState<ProductType>({} as ProductType);
 
@@ -67,12 +59,8 @@ export default function Product() {
   return (
     <Fragment>
       {status === "loading" && <Load />}
-      {status === "error" && (
-        <ErrorInfo error={(productError as { message: string }).message} />
-      )}
-      {status === "success" &&
-      currentItems !== undefined &&
-      currentItems.length > 0
+      {status === "error" && <ErrorInfo error={(productError as { message: string }).message} />}
+      {status === "success" && currentItems !== undefined && currentItems.length > 0
         ? !showProduct && (
             <ProductFilled
               product={currentItems}
@@ -85,9 +73,7 @@ export default function Product() {
             />
           )
         : !showProduct && <ProductEmpty />}
-      {showProduct && (
-        <SingleProduct setShowProduct={setShowProduct} product={product} />
-      )}
+      {showProduct && <SingleProduct setShowProduct={setShowProduct} product={product} />}
     </Fragment>
   );
 }

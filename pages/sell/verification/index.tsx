@@ -15,7 +15,7 @@ import { Step, StepComponentProps, Steps } from "react-step-builder";
 import VerifiedModal from "../../../components/verification/VerifiedModal";
 
 function index(props: StepComponentProps) {
-  const { seller } = useSelector((state: RootState) => state);
+  const seller = useSelector((state: RootState) => state.seller);
   const router = useRouter();
 
   const submitDetails = (details: any) => {
@@ -38,7 +38,7 @@ function index(props: StepComponentProps) {
   }
   const config: configProps = {
     navigation: {
-      component: ProgressTracker, // a React component with special props provided automatically
+      component: ProgressTracker as any, // a React component with special props provided automatically
       location: "before", // or after
     },
   };

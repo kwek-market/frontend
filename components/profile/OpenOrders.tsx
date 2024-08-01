@@ -1,16 +1,13 @@
 import useOrders from "@/hooks/useOrders";
 import { Order } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
-import React from "react";
 import { useSelector } from "react-redux";
 import ErrorInfo from "../Loader/ErrorInfo";
 import Load from "../Loader/Loader";
 import { OpenOrder } from "./index";
 
 const OpenOrders = function ({ setActiveBtn }) {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state?.user?.token);
   const { status, data, error, refetch } = useOrders(token);
 
   const loading = status === "loading" && <Load />;
@@ -20,10 +17,9 @@ const OpenOrders = function ({ setActiveBtn }) {
     <>
       {loading}
       {hasError}
-      {data !== undefined &&
-        data.orders.filter((order) => order.closed !== true).length < 1 && (
-          <ErrorInfo error={"No open orders"} />
-        )}
+      {data !== undefined && data.orders.filter(order => order.closed !== true).length < 1 && (
+        <ErrorInfo error={"No open orders"} />
+      )}
       {data !== undefined &&
         data.orders.map(
           (order: Order) =>

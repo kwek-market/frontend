@@ -21,13 +21,11 @@ export type UserPasswordType = {
 };
 
 export default function PersonalDetails({}) {
-  const {
-    user,
-    seller: { seller },
-  } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const seller = useSelector((state: RootState) => state.seller?.seller);
 
   const dispatch = useDispatch();
-  const { mutate, isLoading } = usePasswordUpdate(user.token);
+  const { mutate, isLoading } = usePasswordUpdate(user?.token);
   const [personalDetails, setPersonalDetails] = useState<UserDataType>({
     firstname: seller.firstname ?? "",
     lastname: seller.lastname ?? "",

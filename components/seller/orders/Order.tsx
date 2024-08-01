@@ -5,21 +5,17 @@ import useSellerOrders from "@/hooks/useSellerOrders";
 import { OrderList } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { GET_SELLER_ORDERS } from "@/store/seller/seller.queries";
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { OrdersEmpty, OrdersFilled } from ".";
 
 export default function Order() {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const queryClient = useQueryClient();
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentItems, setCurrentItems] = useState<OrderList[]>(
-    [] as OrderList[]
-  );
+  const [currentItems, setCurrentItems] = useState<OrderList[]>([] as OrderList[]);
   const [filter, setFilter] = useState<string>("-clicks");
   const payload = {
     token,
@@ -27,11 +23,7 @@ export default function Order() {
     pageSize: 20,
     thisMonth: false,
   };
-  const {
-    status: ordersStatus,
-    data: ordersData,
-    error: ordersError,
-  } = useSellerOrders(payload);
+  const { status: ordersStatus, data: ordersData, error: ordersError } = useSellerOrders(payload);
 
   const handlePageClick = (event: { selected: number }) => {
     setCurrentPage(event.selected + 1);
@@ -63,9 +55,7 @@ export default function Order() {
       {ordersStatus === "error" && (
         <ErrorInfo error={(ordersError as { message: string }).message} />
       )}
-      {ordersStatus === "success" &&
-      ordersData !== undefined &&
-      currentItems.length > 0 ? (
+      {ordersStatus === "success" && ordersData !== undefined && currentItems.length > 0 ? (
         <OrdersFilled
           orders={currentItems}
           handlePageClick={handlePageClick}

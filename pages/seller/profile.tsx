@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Page = function () {
   const dispatch = useDispatch();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state?.user);
+  const seller = useSelector((state: RootState) => state?.seller);
 
   useEffect(() => {
     user.token && getSellerData(user.token);

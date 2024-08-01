@@ -17,10 +17,9 @@ import { FileInputLarge } from "../../../../components/input/FileInputLarge";
 import { deletePropertyNullUndefined } from "../../../../helpers/helper";
 
 const EditCategory = () => {
-  const {
-    user: { token },
-    categories,
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
+  const categories = useSelector((state: RootState) => state.categories);
+
   const router = useRouter();
   const { id } = router.query;
   const { data, error, isLoading } = useCategory({

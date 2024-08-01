@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=--max-old-space-size=4096 next dev --port 3100",
-    "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
+    "dev": "NODE_OPTIONS=--max-old-space-size=20480 next dev --port 3100",
+    "build": "NODE_OPTIONS=--max-old-space-size=20480 next build",
     "start": "next start",
     "lint": "next lint",
     "check-lint": "eslint ."
@@ -76,8 +76,5 @@
   },
   "resolutions": {
     "@babel/runtime": "^7.24.6"
-  },
-  "engines": {
-    "node": ">=18.17.0"
   }
 }

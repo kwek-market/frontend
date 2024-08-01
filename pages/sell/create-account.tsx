@@ -24,7 +24,9 @@ const classNames = (...classes: string[]) => {
 
 const Page = function () {
   const dispatch = useDispatch();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const seller = useSelector((state: RootState) => state.seller);
+
   const router = useRouter();
   const [callCode, setCallCode] = useState<number>(93);
   const [countryName, setCountryName] = useState<string>("NG");

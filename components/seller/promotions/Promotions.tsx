@@ -9,8 +9,8 @@ import Filled from "./Filled";
 import FilledHeader from "./FilledHeader";
 
 export default function Promotions() {
-  const { user } = useSelector((state: RootState) => state);
-  const { status, data, error } = usePromotions(user.token);
+  const user = useSelector((state: RootState) => state.user);
+  const { status, data, error } = usePromotions(user?.token);
 
   return (
     <Fragment>

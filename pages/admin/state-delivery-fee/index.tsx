@@ -6,9 +6,7 @@ import { AdminLayout } from "../../../layouts";
 import { RootState } from "../../../store/rootReducer";
 
 const StateDeliveryFee = () => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { data, isLoading, error } = useGetStateDeliveryFee({ token });
 
@@ -20,7 +18,6 @@ const StateDeliveryFee = () => {
       dataIndex: "no",
       key: "product",
       render: (product, data, index) => {
-
         return <div>{index + 1}</div>;
       },
     },

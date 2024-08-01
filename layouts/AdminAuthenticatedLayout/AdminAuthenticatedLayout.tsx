@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
 
 export const AdminAuthenticatedLayout = ({ children }: { children: ReactNode }) => {
-  const reduxState = useSelector((state: RootState) => state);
-  const user = reduxState.user;
+  const user = useSelector((state: RootState) => state.user);
 
   const router = useRouter();
 

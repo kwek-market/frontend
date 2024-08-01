@@ -21,7 +21,7 @@ type MainLayoutType = {
 
 const MainLayout = function ({ children, title }: MainLayoutType) {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
   const [showNavBar, setShowNavBar] = useState<boolean>(false);
   const [userNav, setUserNav] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -32,7 +32,7 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
     setShowMenu(!showMenu);
   }
 
-  const userId = user.id ? user.id : "";
+  const userId = user?.id ? user?.id : "";
   const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
   // Pusher.logToConsole = true;
   const pusherClient = new Pusher(key, {

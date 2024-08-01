@@ -17,9 +17,7 @@ export const ProductCharges = ({ onEdit }: { onEdit?: () => void }) => {
   const [isCreateChargeModalOpen, setIsCreateChargeModalOpen] = useState(false);
   const [isEditChargeModalOpen, setIsEditChargeModalOpen] = useState(false);
 
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state?.user?.token);
 
   const {
     data,

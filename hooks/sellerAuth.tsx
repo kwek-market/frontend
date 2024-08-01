@@ -15,7 +15,7 @@ const sellerAuth = (WrappedComponent: any) => {
     const dispatch = useDispatch();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const { user } = useSelector((state: RootState) => state);
+    const user = useSelector((state: RootState) => state.user);
 
     // useEffect(() => {
     //   const beforeHistoryChange = (url: string, { shallow }) => {

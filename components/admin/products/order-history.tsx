@@ -16,7 +16,7 @@ interface Prop {
 const OrderHistory = ({ isFetching }: Prop) => {
   const [page, setPage] = useState(1);
   const router = useRouter();
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state?.user);
 
   const { data, isLoading, error } = useGetProductOrders({
     page,
