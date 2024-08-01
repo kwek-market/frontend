@@ -1,13 +1,15 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: "jit",
   prefix: "tw-",
-  purge: [
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
     "./shared/**/*.{js,ts,jsx,tsx}",
     "./layouts/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
+
   theme: {
     extend: {
       colors: {
@@ -98,5 +100,5 @@ module.exports = {
       opacity: ["disabled"],
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/forms")],
 };
