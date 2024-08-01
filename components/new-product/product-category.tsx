@@ -21,7 +21,7 @@ function ProductCategory({
   useNameAsValue?: boolean;
   useAsSubCategory?: boolean;
 }) {
-  const { categories: localCategories } = useSelector((state: RootState) => state);
+  const localCategories = useSelector((state: RootState) => state.categories);
   const [categories] = useState(doNotUseLocal ? categoriesFromParent : localCategories);
   const queryClient = new QueryClient();
   const [loading, setLoading] = useState<boolean>(false);

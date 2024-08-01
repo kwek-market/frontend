@@ -22,7 +22,7 @@ function Delivery({
 }: DeliveryType) {
   const [editStatus, setEditStatus] = useState(true);
 
-  const { deliveryFee } = useSelector((state: RootState) => state);
+  const deliveryFee = useSelector((state: RootState) => state.deliveryFee);
 
   function deliverFunc() {
     if (deliveryMethod === "" || deliveryMethod === null) {

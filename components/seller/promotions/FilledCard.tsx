@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import Card from "../home/Card";
 
 export default function FilledCard() {
-  const { user } = useSelector((state: RootState) => state);
-  const { status, data, error } = usePromotions(user.token);
+  const user = useSelector((state: RootState) => state.user);
+  const { status, data, error } = usePromotions(user?.token);
   return (
     <div className='tw-border tw-border-gray-kwek700 tw-rounded-sm tw-p-3 tw-mt-5'>
       <div className='tw-flex tw-justify-between tw-items-center tw-border-b tw-border-gray-kwek700 tw-pb-2 tw-bg-[#fcfafa]'>

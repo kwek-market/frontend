@@ -20,9 +20,7 @@ export default function Review() {
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<SellerReview[]>([] as SellerReview[]);
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const payload = {
     token,
     page: currentPage,

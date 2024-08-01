@@ -10,7 +10,8 @@ const heroSection = () => {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
-  const { user, seller } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const seller = useSelector((state: RootState) => state.seller);
 
   return (
     <div className={Styles.hero}>

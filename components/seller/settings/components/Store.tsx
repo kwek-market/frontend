@@ -22,10 +22,9 @@ export default function Store() {
     },
     zoom: 8,
   };
-  const {
-    user,
-    seller: { seller },
-  } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state?.user);
+  const seller = useSelector((state: RootState) => state?.seller?.seller);
+
   const dispatch = useDispatch();
   const { mutate, isLoading } = useStoreBanner();
   const { mutate: post, isLoading: loading } = useStoreLocationUpdate();

@@ -16,7 +16,8 @@ import mobileStyles from "./cartgridcomponent.module.scss";
 
 const CartGridComponent = function () {
   const dispatch = useDispatch();
-  const { user, cart } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const cart = useSelector((state: RootState) => state.cart);
 
   function deleteItemFromCart(itemId: string, cartId: string) {
     const payload = {

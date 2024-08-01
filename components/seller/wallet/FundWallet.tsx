@@ -6,9 +6,7 @@ import { RootState } from "../../../store/rootReducer";
 
 export const FundWallet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [amount, setAmount] = useState(null);
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { mutate, isLoading } = usePayment(token);
 
@@ -33,7 +31,7 @@ export const FundWallet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   }
 
   return (
-    (<Modal
+    <Modal
       title='Add Money'
       open={isOpen}
       onOk={addMoneyToWallet}
@@ -54,6 +52,6 @@ export const FundWallet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
           />
         </label>
       </div>
-    </Modal>)
+    </Modal>
   );
 };

@@ -26,9 +26,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const {
-    user: { token, user },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [currentMonth, setCurrentMonth] = useState("thisMonth");
 
@@ -211,9 +209,10 @@ const Dashboard = () => {
             <h2 className='tw-mb-0 tw-tracking-[1px] tw-text-[#18181B]'>Active Customers</h2>
             <Link
               href='/admin/customers'
-              className=' tw-uppercase tw-text-xs tw-font-semibold tw-text-[#151518] tw-text-opacity-50 tw-tracking-[1px] tw-flex tw-items-center tw-gap-x-2'>
-              See All customers<ChevronRightIcon width={20} height={20} />
-
+              className=' tw-uppercase tw-text-xs tw-font-semibold tw-text-[#151518] tw-text-opacity-50 tw-tracking-[1px] tw-flex tw-items-center tw-gap-x-2'
+            >
+              See All customers
+              <ChevronRightIcon width={20} height={20} />
             </Link>
           </div>
 

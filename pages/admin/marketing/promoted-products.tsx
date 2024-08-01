@@ -8,9 +8,7 @@ import { useGetAdminPromotedProducts } from "../../../hooks/admin/promotedProduc
 import { RootState } from "../../../store/rootReducer";
 
 const PromotedProducts = () => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const [page, setPage] = useState(1);
 

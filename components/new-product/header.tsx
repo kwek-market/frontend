@@ -12,7 +12,7 @@ type Props = {
 function Header({ submitDetails }: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
 
   function goBack() {
     router.back();

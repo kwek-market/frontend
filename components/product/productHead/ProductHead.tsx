@@ -54,10 +54,9 @@ type ProductHeadProps = {
 const ProductHead = function ({ product }: ProductHeadProps) {
   const router = useRouter();
 
-  const {
-    user,
-    wishlist: { wishlists },
-  } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
+  const wishlists = useSelector((state: RootState) => state.wishlist?.wishlists);
+
   const dispatch = useDispatch();
 
   const [numItem, incNumItem] = useState(1);

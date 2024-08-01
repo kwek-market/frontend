@@ -17,9 +17,7 @@ const Orders = () => {
   const [page, setPage] = useState(1);
 
   const { TabPane } = Tabs;
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const search = router.query.search as string;
 

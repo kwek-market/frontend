@@ -13,9 +13,7 @@ import { OrderProps } from "./OpenOrder";
 
 const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
   const dispatch = useDispatch();
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const { items, loading } = useCartItems(order);
   const [load, setLoading] = useState(false);
   const queryClient = new QueryClient();

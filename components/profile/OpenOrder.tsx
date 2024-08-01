@@ -22,9 +22,7 @@ export type OrderProps = {
 
 const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
   const dispatch = useDispatch();
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
   const { items, loading } = useCartItems(order);
   const [load, setLoading] = useState(false);
   const queryClient = new QueryClient();
@@ -42,7 +40,8 @@ const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
         userFetcherWithAuth(GETORDER, { token, id }, token)
       );
       setLoading(false);
-      setOrderDetails(data.order);1
+      setOrderDetails(data.order);
+      1;
       setActiveBtn("Open Order Details");
     } catch (err) {
       message.error(err.message);

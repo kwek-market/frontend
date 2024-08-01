@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddressCard } from "../index";
 
 const Addresses = function ({ activeBtn }) {
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const { mutate: createMutate, isSuccess } = useBilling(user.token);
   const {

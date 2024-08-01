@@ -23,7 +23,7 @@ const Customer = () => {
   const { TabPane } = Tabs;
   const [activeKey, setActiveKey] = useState("1");
 
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state?.user);
 
   const [page, setPage] = useState(1);
 
@@ -85,7 +85,8 @@ const Customer = () => {
       render: order_number => (
         <Link
           href={"/admin/customers/" + router.query?.id + "/order-detail/" + "order-" + order_number}
-          className=' tw-text-black-kwek100'>
+          className=' tw-text-black-kwek100'
+        >
           {order_number}
         </Link>
       ),
@@ -217,7 +218,8 @@ const Customer = () => {
         {orders?.getCustomerOrdersPaginated?.objects?.length > 0 ? (
           <Link
             href={"/admin/customers/" + router.query?.id + "/order-list"}
-            className=' tw-underline tw-text-[#009D19] '>
+            className=' tw-underline tw-text-[#009D19] '
+          >
             View All Orders
           </Link>
         ) : null}

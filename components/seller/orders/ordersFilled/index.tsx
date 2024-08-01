@@ -10,8 +10,6 @@ import styles from "./ordersFilled.module.scss";
 import { OrderList } from "@/interfaces/commonTypes";
 import ReactPaginate from "react-paginate";
 
-import { RootState } from "@/store/rootReducer";
-import { useSelector } from "react-redux";
 import SellerOrderDetailsModal from "../SellerOrderDetailsModal";
 import SellerTrackModal from "./trackmodal";
 
@@ -35,10 +33,6 @@ const OrdersFilled = function ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [orderDetails, setOrderDetails] = useState({ id: null, isOpen: false });
   const [order, setOrder] = useState<OrderList>(null);
-
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
 
   const showModal = (order: OrderList) => {
     setIsModalOpen(true);

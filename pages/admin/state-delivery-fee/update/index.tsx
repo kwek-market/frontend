@@ -29,9 +29,7 @@ interface IStateDelivery {
 }
 
 const UpdateDeliveryFee = () => {
-  const {
-    user: { token },
-  } = useSelector((state: RootState) => state);
+  const token = useSelector((state: RootState) => state.user?.token);
 
   const { data, isLoading, error } = useGetStateDeliveryFee({ token });
 
@@ -182,7 +180,7 @@ const UpdateDeliveryFee = () => {
               ) : null}
             </div>
 
-            <Button size="large" className='tw-my-6' onClick={() => setIsCityModalOpen(true)}>
+            <Button size='large' className='tw-my-6' onClick={() => setIsCityModalOpen(true)}>
               Add City to this state
             </Button>
           </div>
