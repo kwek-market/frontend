@@ -1,2 +1,5 @@
 [build]
   node_version="20.12.1"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
