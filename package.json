@@ -30,7 +30,7 @@
     "jspdf": "^2.5.1",
     "luxon": "^3.4.4",
     "moment": "^2.30.1",
-    "next": "14.2.5",
+    "next": "14.0.1",
     "next-redux-wrapper": "^8.1.0",
     "nookies": "^2.5.2",
     "pusher-js": "^8.3.0",
@@ -50,7 +50,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^3.1.0",
     "sass": "^1.77.8",
-    "sharp": "^0.33.1",
     "use-debounce": "^10.0.1",
     "uuid": "^10.0.0",
     "zod": "^3.23.8"
@@ -71,6 +70,7 @@
     "globals": "^15.8.0",
     "next-images": "^1.8.5",
     "postcss": "^8.4.39",
+    "sharp": "^0.33.4",
     "tailwindcss": "^3.4.6",
     "typescript": "4.9.5"
   },
