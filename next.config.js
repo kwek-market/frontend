@@ -34,4 +34,5 @@ module.exports = {
   httpAgentOptions: {
     keepAlive: true,
   },
+  output: "export",
 };
