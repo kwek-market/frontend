@@ -13,15 +13,16 @@ const Component = function () {
   return (
     <footer className={styles.footer}>
       <div className={`${styles.footer_section} ${styles.footer_sectionOne}`}>
-        <div className={styles.logo}>
+        <Link href='/' className={`${styles.logo} tw-px-2`}>
           <Image
             width='180'
             height='30'
-            src='/svg/kwek-logo-white.svg'
+            src='/svg/kweklogo.png'
             alt='Kwek logo'
             className={styles.logo_image}
+            objectFit='cover'
           />
-        </div>
+        </Link>
 
         <div className={styles.cta_section}>
           <div className={styles.cta}>
