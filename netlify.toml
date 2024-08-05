@@ -1,2 +1,9 @@
 [build]
   node_version="20.12.1"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
