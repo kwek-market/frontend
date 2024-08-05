@@ -14,7 +14,8 @@ const Topbar = function ({ withLogo }: { withLogo: boolean }) {
       {withLogo && (
         (<Link href="/" className={styles.logo}>
 
-          <Image src="/svg/kwek-logo-white.svg" width="150" height="25" />
+          <Image src="/svg/kweklogo.png" width='180'
+            height='30' objectFit="cover" />
 
         </Link>)
       )}

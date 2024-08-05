@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Load from "../../../components/Loader/Loader";
@@ -41,7 +41,14 @@ const SellerStore = ({ seller }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getStaticPaths: GetStaticPaths = async context => {
+  return {
+    paths: [],
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async context => {
   try {
     const storeUrl = context.params?.url;
 

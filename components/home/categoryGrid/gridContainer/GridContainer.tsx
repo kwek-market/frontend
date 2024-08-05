@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import styles from "./GridContainer.module.scss";
 
 import Button from "@/components/buttons/Button";
-import Slider from "@/components/slider/slider";
 import useProducts from "@/hooks/useProducts";
 import { ProductType } from "@/interfaces/commonTypes";
 import { ProductBox } from "@/shared";
@@ -11,6 +10,7 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback } from "react";
 import { v4 as uuid } from "uuid";
+import Slider from "../../../slider/slider";
 import { Banner, SideBar, TitleBlock } from "../index";
 
 type GridContainerProps = {
@@ -132,7 +132,7 @@ const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerP
 
       <div className='tw-mx-auto tw-mt-2 tw-w-24 tw-flex md:tw-hidden'>
         <Button
-          buttonStyle='tw-bg-red-kwek100 tw-text-white-100 tw-p-2'
+          buttonStyle='tw-bg-red-kwek100 tw-text-white-100 tw-text-xs tw-p-2'
           text='view more'
           cmd={
             cards?.length > 0

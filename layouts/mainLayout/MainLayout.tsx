@@ -78,7 +78,7 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
         check={check}
         setCheck={setCheck}
       />{" "}
-      <div className='tw-px-4 tw-mt-4'>
+      <div className='tw-px-4 tw-mt-2'>
         <MobileSearchBar search={search} setSearch={setSearch} check={check} setCheck={setCheck} />
       </div>
       <Navbar showNavBar={showNavBar} setShowNavBar={setShowNavBar} />
