@@ -25,10 +25,11 @@ const AuthLayout = function ({
             {withLogo && (
               <Link href='/' className={styles.logo}>
                 <Image
-                  src='/svg/kwek-logo-white.svg'
-                  width='150'
-                  height='25'
+                  src='/svg/svg/kweklogo.png'
+                  width='180'
+                  height='30'
                   placeholder='blur'
+                  objectFit="cover"
                   blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
                 />
               </Link>

@@ -20,7 +20,7 @@ const SideBarAdmin = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div className='tw-w-full tw-h-full tw-pt-14'>
         <div className='tw-w-max tw-mx-auto'>
-          <Image src='/svg/kwek-logo-white-smaller.svg' width={182} height={24} />
+          <Image src='/svg/svg/kweklogo.png' width='180' height='30' objectFit="cover" />
         </div>
 
         <div className=' tw-pt-20 tw-h-[80vh] '>

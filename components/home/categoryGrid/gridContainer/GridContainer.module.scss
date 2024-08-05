@@ -3,12 +3,12 @@
 
 #categoryGrid {
   @include flex(space-between, flex-start);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .mainContainer {
   @include flex();
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 78%;
   // flex: 3;
 
@@ -19,14 +19,14 @@
 
 .mainContainer__full {
   @include flex();
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 100%;
 }
 
 .sidebarContainer {
   width: 20%;
   // flex: 1;
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   @include respondMax("tablet") {
     display: none;
@@ -36,7 +36,7 @@
 .products {
   @include flex(space-between, flex-start);
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   .product {
     width: 24%;
@@ -50,7 +50,7 @@
 .cards {
   @include flex(space-between, flex-start);
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   .card {
     width: 32%;
@@ -68,7 +68,8 @@
 .banners {
   @include flex(space-between, flex-start);
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 
   @include respondMax("mobile") {
     display: block;

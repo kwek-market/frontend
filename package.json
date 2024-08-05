@@ -50,7 +50,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^3.1.0",
     "sass": "^1.77.8",
-    "sharp": "^0.33.4",
+    "tailwind-scrollbar": "^3.1.0",
     "use-debounce": "^10.0.1",
     "uuid": "^10.0.0",
     "zod": "^3.23.8"
@@ -58,6 +58,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.7.0",
+    "@netlify/plugin-nextjs": "^5.6.0",
     "@types/google-map-react": "^2.1.10",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.14.12",

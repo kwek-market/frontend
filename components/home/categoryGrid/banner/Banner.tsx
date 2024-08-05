@@ -1,8 +1,7 @@
-import React from "react";
-import Image from "next/legacy/image";
-import styles from "./Banner.module.scss";
-import { useRouter } from "next/router";
 import { ProductType } from "@/interfaces/commonTypes";
+import Image from "next/legacy/image";
+import { useRouter } from "next/router";
+import styles from "./Banner.module.scss";
 
 const Banner = function ({ product }: { product: ProductType }) {
   const router = useRouter();
@@ -12,22 +11,17 @@ const Banner = function ({ product }: { product: ProductType }) {
         <p className={styles.textSm}>New Products</p>
         <h3 className={styles.textLg}>{product?.subcategory.name}</h3>
         <button
-          onClick={() =>
-            router.push(`/product/${product?.id}?id=${product?.productTitle}`)
-          }
+          onClick={() => router.push(`/product/${product?.id}?id=${product?.productTitle}`)}
           className={`btn ${styles.btn}`}
         >
-          Shop Now <span className="material-icons">chevron_right</span>
+          Shop Now <span className='material-icons'>chevron_right</span>
         </button>
       </div>
 
       <div className={styles.imageContainer}>
-        <Image
-          src={product?.image[0].imageUrl}
-          width="300"
-          height="160"
-          className=" tw-object-cover"
-        />
+        <div className='tw-full tw-relative'>
+          <Image src={product?.image[0].imageUrl} className=' tw-object-cover' layout='fill' />
+        </div>
       </div>
     </div>
   );
