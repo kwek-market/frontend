@@ -126,8 +126,15 @@ function Header() {
       </Drawer>
       <header className='tw-bg-red-kwek100 tw-py-4 tw-px-8 tw-flex tw-justify-between'>
         <nav className='md:tw-flex-[3] lg:tw-flex-[5]'>
+          {/* //TODO: CHANGE LOGO IMAGE HERE */}
           <Link href='/'>
-            <img src='/svg/kweklogo.png' alt='logo' />
+            <img
+              className='tw-object-cover'
+              src='/svg/kweklogo.png'
+              alt='logo'
+              width='180'
+              height='30'
+            />
           </Link>
         </nav>
         <nav className='md:tw-flex tw-justify-between tw-flex-[4] tw-hidden'>

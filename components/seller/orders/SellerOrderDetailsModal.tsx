@@ -28,6 +28,8 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
     }
   }, [order]);
 
+  console.log("getOrderText(order).status", getOrderText(order).status);
+
   return (
     <Modal
       title='Order details'
@@ -40,6 +42,7 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
     >
       <div className=' tw-mt-12 tw-font-poppins'>
         {isLoading ? <Load className='tw-w-64' /> : null}
+
         {order?.user ? (
           <CustomerDetail
             image='/images/pp.png'
@@ -70,17 +73,17 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
                 <p className='tw-mb-0'>{new Date(order?.dateCreated).toLocaleDateString()}</p>
               </div>
               <div className=' tw-flex tw-justify-between tw-pt-2 tw-items-center '>
-                <p className='tw-mb-0 tw-font-medium'>Total:</p>
-                <p className='tw-mb-0'>NGN {order?.orderPriceTotal}</p>
+                <p className='tw-mb-0 tw-font-medium tw-text-lg'>Total:</p>
+                <p className='tw-mb-0 tw-text-lg tw-font-semibold'>NGN {order?.orderPriceTotal}</p>
               </div>
               <div className=' tw-flex tw-justify-between tw-pt-2 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium'>Order Status</p>
                 <p
-                  className={`tw-mb-0 tw-px-2 tw-py-1 tw-font-semibold tw-uppercase tw-text-white-100 ${
-                    getOrderText(order).statusStyle
+                  className={`tw-mb-0 tw-px-2 tw-py-1 tw-font-semibold tw-uppercase ${
+                    getOrderText(order).className
                   }`}
                 >
-                  {getOrderText(order).status}
+                  {getOrderText(order).text}
                 </p>
               </div>
 
@@ -152,55 +155,22 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
                 ))}
               </div>
 
-              <div className=' tw-grid tw-gap-y-8 md:tw-grid-cols-2 tw-gap-x-8 tw-text-[#574240] tw-mt-8'>
+              <div className=' tw-grid tw-gap-y-8 tw-gap-x-8 tw-text-[#574240] tw-mt-8'>
                 <div className=' tw-bg-review tw-rounded-2xl tw-p-8'>
                   <h2 className='tw-mb-0 tw-text-2xl tw-font-semibold tw-text-[#574240]'>
-                    Payment Information
+                    More Information
                   </h2>
 
                   <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
-                    <p className=' tw-font-semibold tw-mb-0'>Payment Method</p>
-                    <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>{order?.paymentMethod}</p>
-                  </div>
-                  <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
-                    <p className=' tw-font-semibold tw-mb-0'>Payment Details</p>
-                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-2'>
-                      Items subtotal: NGN {order.orderPrice}
+                    <p className=' tw-font-semibold tw-mb-0'>Our Office Address </p>
+                    <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>
+                      No 10, Ojutalayo Street, Parakin Obalufe Ile Ife, Osun State.
                     </p>
-                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-1'>
-                      Delivery Cost: NGN {order.orderPriceTotal - order.orderPrice}
-                    </p>
-                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-1'>
-                      Total: NGN {order.orderPriceTotal}
-                    </p>
-                  </div>
-                </div>
-                <div className='tw-bg-review tw-rounded-2xl tw-p-8'>
-                  <h2 className='tw-mb-0 tw-text-2xl tw-font-semibold tw-text-[#574240]'>
-                    Delivery Information
-                  </h2>
-
-                  <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
-                    <p className=' tw-font-semibold tw-mb-0'>Delivery Status</p>
-                    <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>{order?.deliveryStatus}</p>
                   </div>
 
                   <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
-                    <p className=' tw-font-semibold tw-mb-0'>Delivery Method</p>
-                    <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>{order?.deliveryMethod}</p>
-                  </div>
-
-                  <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
-                    <p className=' tw-font-semibold tw-mb-0'>Delivery Address</p>
-                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-2'>
-                      {order?.doorStep?.fullName}
-                    </p>
-                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-1'>
-                      {order?.doorStep?.address},
-                    </p>
-                    <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-1'>
-                      {order?.doorStep?.city}, {order?.doorStep?.state}.
-                    </p>
+                    <p className=' tw-font-semibold tw-mb-0'>Our Customer Support </p>
+                    <p className=' tw-text-opacity-70 tw-pt-2 tw-mb-0'>08066045387</p>
                   </div>
                 </div>
               </div>
