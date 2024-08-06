@@ -74,6 +74,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       dealsOfTheDay,
       pageCount: dealsOfTheDay.pages,
     },
-    revalidate: 1,
+    revalidate: 1, // EVERY ONE SECONDS
   };
 };

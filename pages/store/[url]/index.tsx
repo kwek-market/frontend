@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Load from "../../../components/Loader/Loader";
 import { Container } from "../../../components/seller/content/Content";
+import { ONE_HOUR } from "../../../constants/constants";
 import { userFetcher } from "../../../helpers";
 import { Header } from "../../../shared";
 import { SellerHero } from "../../../shared/sellerStore/SellerHero";
@@ -55,7 +56,7 @@ export const getStaticProps: GetStaticProps = async context => {
     const storeData = await userFetcher(GET_SELLER_STORE, { shopUrl: storeUrl });
     const store = storeData?.seller;
 
-    return { props: { seller: store } };
+    return { props: { seller: store }, revalidate: ONE_HOUR };
   } catch (error) {
     console.log(error);
     return { notFound: true };

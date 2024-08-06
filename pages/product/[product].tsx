@@ -7,6 +7,7 @@ import { GetProduct } from "@/store/product/product.queries";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
+import { ONE_HOUR } from "../../constants/constants";
 
 const Page = function ({ product }) {
   const router = useRouter();
@@ -55,5 +56,6 @@ export const getStaticProps: GetStaticProps = async context => {
     props: {
       product,
     },
+    revalidate: ONE_HOUR,
   };
 };
