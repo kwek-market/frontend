@@ -114,7 +114,7 @@ const ProductDesc = function ({ product }: ProductDescProps) {
                 </div>
                 <div className={styles.info}>
                   <p className={styles.head}>Delivery</p>
-                  <p className={styles.sub}>Estimated delivery time: 1 - 9 days</p>
+                  <p className={styles.sub}>Estimated delivery time: 1 - 4 days</p>
                 </div>
               </div>
               <div className={styles.contentbox}>
