@@ -55,6 +55,7 @@ const CategoryMenu = function () {
                 key={uuid()}
                 imgSrc={item.icon || "/svg/cat-icon-electronics.svg"}
                 text={item.name}
+                href={`/category/${item?.name}`}
               />
             ))
           : null}
