@@ -5,6 +5,7 @@ import { Fragment, memo } from "react";
 import { userFetcher } from "@/helpers";
 import { CATEGORIES } from "@/store/category/categories.queries";
 import { DEALS_OF_THE_DAY } from "@/store/seller/seller.queries";
+import { GetStaticProps } from "next";
 import { v4 } from "uuid";
 
 const Home = function ({ categories, dealsOfTheDay }) {
@@ -33,7 +34,7 @@ const Home = function ({ categories, dealsOfTheDay }) {
 
 export default memo(Home);
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<ReturnType<GetStaticProps>> {
   try {
     const { categories } = await userFetcher(CATEGORIES, { visibility: "published" });
     const variables = { page: 1, pageSize: 4 };
@@ -59,6 +60,7 @@ export async function getStaticProps() {
         categories: sortedCategories,
         dealsOfTheDay: dealsOfTheDay,
       },
+      revalidate: 3600,
     };
   } catch (error) {
     console.log(error.message);
@@ -68,6 +70,7 @@ export async function getStaticProps() {
         categories: [],
         dealsOfTheDay: [],
       },
+      revalidate: 3600,
     };
   }
 }

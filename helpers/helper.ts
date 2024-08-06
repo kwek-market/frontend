@@ -136,7 +136,6 @@ export const convertCitiesToJSON = (data: string): { name: string; fee: number }
   }
 };
 
-
 export const getOrderText = (order: any) => {
   let text = "";
   let className = "";
@@ -145,7 +144,9 @@ export const getOrderText = (order: any) => {
 
   if (order?.closed) {
     status = "closed";
+    text = "CLOSED";
     statusStyle = "tw-bg-red-500";
+    className = "tw-bg-red-500";
   }
 
   if (order?.paid) {
