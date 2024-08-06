@@ -4,12 +4,13 @@ type CategoryMobileProps = {
   imgSrc: string;
   text: string;
   style?: string;
+  href?: string,
 };
 
-const CategoryMobile = function ({ imgSrc, text, style }: CategoryMobileProps) {
+const CategoryMobile = function ({ imgSrc, text, style, href }: CategoryMobileProps) {
   return (
     <div className='tw-px-2 lg:tw-px-8 lg:tw-max-w-full'>
-      <Link href={`/all`}>
+      <Link href={href ?? `/all`}>
         <img
           src={imgSrc}
           alt={text}
