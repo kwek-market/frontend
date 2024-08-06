@@ -4,6 +4,7 @@ import { MainLayout } from "@/layouts";
 import { CATEGORIES } from "@/store/category/categories.queries";
 import { Fragment } from "react";
 import { v4 } from "uuid";
+import { ONE_HOUR } from "../constants/constants";
 
 export default function all({ categories }) {
   return (
@@ -42,6 +43,7 @@ export async function getStaticProps() {
       props: {
         categories: sortedCategories,
       },
+      revalidate: ONE_HOUR,
     };
   } catch (error) {
     console.log(error.message);
@@ -50,6 +52,7 @@ export async function getStaticProps() {
       props: {
         categories: [],
       },
+      revalidate: ONE_HOUR,
     };
   }
 }

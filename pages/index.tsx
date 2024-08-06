@@ -7,8 +7,11 @@ import { CATEGORIES } from "@/store/category/categories.queries";
 import { DEALS_OF_THE_DAY } from "@/store/seller/seller.queries";
 import { GetStaticProps } from "next";
 import { v4 } from "uuid";
+import { ONE_HOUR } from "../constants/constants";
 
 const Home = function ({ categories, dealsOfTheDay }) {
+  console.log("🚀 ~~ Home ~~ categories:", categories);
+
   return (
     <MainLayout>
       <Hero />
@@ -17,14 +20,12 @@ const Home = function ({ categories, dealsOfTheDay }) {
         <CategoryGrid title='Deals Of The day' timer cards={dealsOfTheDay?.objects?.slice(0, 4)} />
       ) : null}
       <div>
-        {categories !== undefined &&
+        {categories &&
           categories.length > 0 &&
           categories
             .slice(0, 8)
             .map(({ id, name }) => (
-              <Fragment key={v4()}>
-                {name !== undefined && <CategoryGrid title={name} sidebar />}
-              </Fragment>
+              <Fragment key={v4()}>{name && <CategoryGrid title={name} sidebar />}</Fragment>
             ))}
       </div>
       {/* <Brands /> */}
@@ -53,24 +54,20 @@ export async function getStaticProps(): Promise<ReturnType<GetStaticProps>> {
     }
 
     const sortedCategories = sortArray(categories);
-    console.log("🚀 ~~ getStaticProps ~~ sortedCategories:", sortedCategories);
-
     return {
       props: {
         categories: sortedCategories,
         dealsOfTheDay: dealsOfTheDay,
       },
-      revalidate: 3600,
+      revalidate: ONE_HOUR,
     };
   } catch (error) {
-    console.log(error.message);
-
     return {
       props: {
         categories: [],
         dealsOfTheDay: [],
       },
-      revalidate: 3600,
+      revalidate: ONE_HOUR,
     };
   }
 }
