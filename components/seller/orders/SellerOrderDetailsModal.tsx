@@ -120,13 +120,13 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
             </Popconfirm>
           ) : null} */}
 
-              <div className=' tw-flex tw-justify-between tw-pt-12 tw-items-center '>
+              <div className='md:tw-flex tw-gap-3 tw-justify-between tw-pt-12 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium tw-text-lg tw-text-[#AF1328]'>
                   ITEMS ({order?.cartItems.length})
                 </p>
                 <div className=' tw-flex tw-gap-x-4 tw-items-center '>
                   <div
-                    className={` tw-text-white-100 tw-rounded-sm tw-px-3 tw-py-1 ${
+                    className={` tw-text-white-100 tw-text-xs md:tw-text-lg tw-rounded-sm tw-px-3 tw-py-1 ${
                       getOrderText(order).className
                     }`}
                   >
