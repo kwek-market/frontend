@@ -22,6 +22,7 @@ import { logout } from "@/store/user/user.actions";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
 import { Dropdown, Menu } from "antd";
 import SearchBar from "./SearchBar";
+import Logo from "../../components/UI/Logo";
 
 interface HeaderProps {
   userNav: boolean;
@@ -90,7 +91,7 @@ const Header = function ({
       className='tw-flex tw-items-center tw-bg-red-700 tw-flex-row tw-justify-between'
       suppressHydrationWarning
     >
-      <div className='tw-flex tw-space-x-1'>
+      <div className='tw-flex tw-space-x-1 tw-items-center'>
         <div onClick={() => openMenu()} className='md:tw-hidden'>
           {!showMenu ? (
             <i style={{}} className={`fas fa-bars fa-2x md:tw-hidden ${styles.navBar_icon}`} />
@@ -99,16 +100,7 @@ const Header = function ({
           )}
         </div>
 
-        <Link href='/' className={`${styles.logo} tw-px-2`}>
-          <Image
-            width='180'
-            height='30'
-            src='/svg/kweklogo.png'
-            alt='Kwek logo'
-            className={styles.logo_image}
-            objectFit='cover'
-          />
-        </Link>
+        <Logo />
       </div>
 
       <div className={`${styles.headerControls} tw-flex`}>

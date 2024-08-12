@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { queryClient } from "../../pages/_app";
+import Logo from "../../components/UI/Logo";
 
 dayjs.extend(relativeTime);
 
@@ -126,16 +127,7 @@ function Header() {
       </Drawer>
       <header className='tw-bg-red-kwek100 tw-py-4 tw-px-8 tw-flex tw-justify-between'>
         <nav className='md:tw-flex-[3] lg:tw-flex-[5]'>
-          {/* //TODO: CHANGE LOGO IMAGE HERE */}
-          <Link href='/'>
-            <img
-              className='tw-object-cover'
-              src='/svg/kweklogo.png'
-              alt='logo'
-              width='180'
-              height='30'
-            />
-          </Link>
+          <Logo className='tw-h-14' src='/svg/kwek-logo-white.png' />
         </nav>
         <nav className='md:tw-flex tw-justify-between tw-flex-[4] tw-hidden'>
           <nav>
