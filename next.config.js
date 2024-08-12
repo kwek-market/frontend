@@ -29,7 +29,9 @@ module.exports = {
         pathname: "**",
       },
     ],
-    unoptimized: true,
+    unoptimized: false,
+    imageSizes: [200, 320, 400, 500],
+    minimumCacheTTL: 11,
   },
   httpAgentOptions: {
     keepAlive: true,
