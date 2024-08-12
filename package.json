@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS=--max-old-space-size=4096 next dev --port 3100",
     "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
-    "start": "next start",
+    "start": "NODE_ENV=production next start",
     "lint": "next lint",
     "check-lint": "eslint ."
   },

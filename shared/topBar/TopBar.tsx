@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import styles from "./TopBar.module.scss";
+import Logo from "../../components/UI/Logo";
 
 const Topbar = function ({ withLogo }: { withLogo: boolean }) {
   const [show, setShow] = useState(true);
@@ -12,12 +13,7 @@ const Topbar = function ({ withLogo }: { withLogo: boolean }) {
   return (
     <div id={styles.topbar}>
       {withLogo && (
-        (<Link href="/" className={styles.logo}>
-
-          <Image src="/svg/kweklogo.png" width='180'
-            height='30' objectFit="cover" />
-
-        </Link>)
+        (<Logo href="/" className={styles.logo} />)
       )}
 
       <div className={styles.ad}>

@@ -1,5 +1,5 @@
 import CancelIcon from "@/components/icons/cancel";
-import Image from "next/legacy/image";
+import Logo from "../../components/UI/Logo";
 import SidebarItems from "./sidebar-items";
 
 const SideBarAdmin = ({ sidebarOpen, setSidebarOpen }) => {
@@ -18,12 +18,16 @@ const SideBarAdmin = ({ sidebarOpen, setSidebarOpen }) => {
         </div>
       </div>
 
-      <div className='tw-w-full tw-h-full tw-pt-14'>
-        <div className='tw-w-max tw-mx-auto'>
-          <Image src='/svg/svg/kweklogo.png' width='180' height='30' objectFit="cover" />
+      <div className='tw-w-full tw-h-full tw-pt-4'>
+        <div className='tw-px-6'>
+          <Logo
+            className='tw-h-14 tw-w-full tw-overflow-hidden tw-mx-auto'
+            src='/svg/kwek-logo-red.png'
+            href='/admin'
+          />
         </div>
 
-        <div className=' tw-pt-20 tw-h-[80vh] '>
+        <div className=' tw-pt-10 tw-h-[80vh] '>
           {/* tw-overflow-y-scroll causing a white line on the sidebar removed for now. */}
           <SidebarItems />
         </div>
