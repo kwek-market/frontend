@@ -281,7 +281,7 @@ export default OrderDetail;
 
 export const Item = ({ image, name, qty, amount, size, color, brand, fullName, email, phone }) => {
   return (
-    <div className='tw-border-gray-kwek700 tw-border tw-rounded-2xl tw-pl-2 tw-py-2 tw-flex tw-gap-x-6 tw-pr-8'>
+    <div className='tw-border-gray-kwek700 tw-border tw-rounded-2xl tw-pl-2 tw-py-2 lg:tw-flex tw-gap-x-6 tw-pr-8'>
       {/* <Image
         src={image}
         alt="item"
@@ -292,7 +292,7 @@ export const Item = ({ image, name, qty, amount, size, color, brand, fullName, e
       <img
         src={image}
         alt='item'
-        className='tw-w-[121px] tw-h-[101px] tw-rounded-xl tw-object-cover tw-overflow-hidden'
+        className='tw-w-full tw-h-44 lg:tw-w-[121px] lg:tw-h-[101px] tw-rounded-xl tw-object-cover tw-overflow-hidden'
       />
       <div className='tw-flex tw-justify-between tw-w-full tw-pt-5'>
         <div className='tw-space-y-1'>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./AuthLayout.module.scss";
 
 import { useRouter } from "next/router";
+import Logo from "../../components/UI/Logo";
 
 const AuthLayout = function ({
   children,
@@ -23,16 +24,7 @@ const AuthLayout = function ({
         {withBanner && (
           <div className={styles.banner}>
             {withLogo && (
-              <Link href='/' className={styles.logo}>
-                <Image
-                  src='/svg/svg/kweklogo.png'
-                  width='180'
-                  height='30'
-                  placeholder='blur'
-                  objectFit="cover"
-                  blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN89PDhNQAIzQN82oRX+AAAAABJRU5ErkJggg=='
-                />
-              </Link>
+              <Logo className={styles.logo} />
             )}
             <h1 className={styles.banner_text}>
               {bannerText.lineOne} <br /> {bannerText.lineTwo} <br /> {bannerText.lineThree}

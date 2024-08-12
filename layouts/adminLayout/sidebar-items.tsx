@@ -159,8 +159,12 @@ const SidebarItems = () => {
               >
                 <div className=' tw-pt-4 tw-flex tw-flex-col tw-gap-y-4 tw-pl-8'>
                   {item.options.map((option, idx) => (
-                    <Link href={option.path} key={idx}>
-                      <a className='tw-text-white-100 tw-text-opacity-70'>{option.name}</a>
+                    <Link
+                      className='tw-text-white-100 tw-text-opacity-70'
+                      href={option.path}
+                      key={idx}
+                    >
+                      {option.name}
                     </Link>
                   ))}
                 </div>
@@ -185,15 +189,14 @@ const SidebarItems = () => {
         )}
       </div>
 
-      <Link href={"/"}>
-        <a
-          className={`tw-block tw-mt-8 tw-border-l-4 tw-border-transparent tw-py-3 tw-pl-7 tw-text-sm tw-cursor-pointer  tw-text-white-100 tw-text-opacity-70`}
-        >
-          <div className=' tw-flex tw-items-center tw-gap-x-[10px]'>
-            <UserIcon className='tw-w-4 tw-h-4' fill={"#ffffffb3"} />
-            Switch to User
-          </div>
-        </a>
+      <Link
+        className='tw-block tw-mt-8 tw-border-l-4 tw-border-transparent tw-py-3 tw-pl-7 tw-text-sm tw-cursor-pointer  tw-text-white-100 tw-text-opacity-70'
+        href={"/"}
+      >
+        <span className=' tw-flex tw-items-center tw-gap-x-[10px]'>
+          <UserIcon className='tw-w-4 tw-h-4' fill={"#ffffffb3"} />
+          Switch to User
+        </span>
       </Link>
     </div>
   );

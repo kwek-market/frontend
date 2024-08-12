@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./Footer.module.scss";
 
 import { useSelector } from "react-redux";
+import Logo from "../../components/UI/Logo";
 import { RootState } from "../../store/rootReducer";
 import Form from "./SubscribeForm";
 
@@ -13,16 +14,10 @@ const Component = function () {
   return (
     <footer className={styles.footer}>
       <div className={`${styles.footer_section} ${styles.footer_sectionOne}`}>
-        <Link href='/' className={`${styles.logo} tw-px-2`}>
-          <Image
-            width='180'
-            height='30'
-            src='/svg/kweklogo.png'
-            alt='Kwek logo'
-            className={styles.logo_image}
-            objectFit='cover'
-          />
-        </Link>
+        <Logo
+          src='/svg/kwek-logo-red.png'
+          className={`tw-px-2 tw-h-6 tw-overflow-hidden tw-relative`}
+        />
 
         <div className={styles.cta_section}>
           <div className={styles.cta}>

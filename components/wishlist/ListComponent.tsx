@@ -20,6 +20,8 @@ const ListComponent = function ({
   options,
   productId,
 }) {
+  console.log("🚀 ~~ imgSrc:", imgSrc);
+
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
 
@@ -38,7 +40,7 @@ const ListComponent = function ({
     <Link href={`/product/${productId}`} className=''>
       <div className={listStyle}>
         <div className={styles.first_grid}>
-          <Image src={imgSrc} alt={altText} width='100' height='80' className={styles.img} />
+          <Image src={imgSrc} alt={altText} width={100} height={80} className={styles.img} />
         </div>
         <div className={styles.second_grid}>
           <p className={styles.item_name}>{itemName}</p>
@@ -68,7 +70,7 @@ const ListComponent = function ({
               // layout="responsive"
             />
           </div>
-          <Image src={imgSrc} alt={altText} layout='responsive' className={styles.img} />
+          <Image src={imgSrc} alt={altText} width={100} height={80} className={styles.img} />
         </div>
         <div className={styles.content_box}>
           <p className={inStock ? styles.stock : styles.stock_out}>

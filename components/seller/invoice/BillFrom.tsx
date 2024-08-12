@@ -1,6 +1,7 @@
 import { RootState } from "@/store/rootReducer";
 import Image from "next/legacy/image";
 import { useSelector } from "react-redux";
+import Logo from "../../UI/Logo";
 
 export default function BillFrom({ data }) {
   const seller = useSelector((state: RootState) => state.seller?.seller);
@@ -22,7 +23,7 @@ export default function BillFrom({ data }) {
           {data.store.email}
         </p>
       </article>
-      <Image src='/svg/kweklogo.png' alt='kweklogo' width='250' height='200' />
+      <Logo />
     </div>
   );
 }
