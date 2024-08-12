@@ -56,10 +56,7 @@ function ProductCategory({
         });
       }
 
-      setSubmitDetails({
-        ...submitDetails,
-        subcategory: useNameAsValue ? data.category.name : data.category.id,
-      });
+      return data?.category;
     } catch (error) {
       setLoading(false);
       message.error(error.message);
@@ -78,6 +75,8 @@ function ProductCategory({
   }
 
   function handleSubCategoryChange(e: React.ChangeEvent<HTMLSelectElement>, index: number) {
+    const selectedName = e.target.options[e.target.selectedIndex].dataset.name;
+
     setSubCategoryValue(prev => {
       // replace the value in the array if there's an existing value and
       // remove the values after it
@@ -90,6 +89,11 @@ function ProductCategory({
     });
 
     getSubCategories(e.target.value, index);
+
+    setSubmitDetails({
+      ...submitDetails,
+      subcategory: useNameAsValue ? selectedName : e.target.value,
+    });
   }
 
   return (
