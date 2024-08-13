@@ -184,6 +184,26 @@ export const GET_SELLER_ORDERS = `
           address
           fullName
         }
+        cartItems {
+          id
+          product {
+            productTitle
+            image {
+              imageUrl
+            }
+            brand
+            color
+            gender
+            user {
+              id
+              fullName
+              email
+              phoneNumber
+            }
+          }
+          price
+          quantity
+        }
       }
       created
       customer {
