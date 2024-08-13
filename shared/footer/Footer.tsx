@@ -14,10 +14,7 @@ const Component = function () {
   return (
     <footer className={styles.footer}>
       <div className={`${styles.footer_section} ${styles.footer_sectionOne}`}>
-        <Logo
-          src='/svg/kwek-logo-red.png'
-          className={`tw-px-2 tw-h-6 tw-overflow-hidden tw-relative`}
-        />
+        <Logo src='/svg/kwek-logo-red.png' className={`tw-px-2 tw-h-14 tw-w-56 tw-relative`} />
 
         <div className={styles.cta_section}>
           <div className={styles.cta}>

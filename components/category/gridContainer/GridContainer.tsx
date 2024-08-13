@@ -143,7 +143,7 @@ const GridContainer = function ({ cards, category }: any) {
           <ReactPaginate
             nextLabel='next >'
             onPageChange={e => handlePageClick(e)}
-            pageRangeDisplayed={3}
+            pageRangeDisplayed={2}
             marginPagesDisplayed={2}
             pageCount={pageCount}
             previousLabel='< previous'
@@ -158,7 +158,7 @@ const GridContainer = function ({ cards, category }: any) {
             breakLinkClassName='page-link'
             containerClassName='pagination'
             activeClassName='active'
-            renderOnZeroPageCount={undefined}
+            renderOnZeroPageCount={null}
           />
           {isFetching ? (
             <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
