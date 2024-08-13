@@ -527,6 +527,7 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
           color
           gender
           user {
+            id
             fullName
             email
             phoneNumber

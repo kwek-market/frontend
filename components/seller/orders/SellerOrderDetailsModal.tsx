@@ -8,7 +8,7 @@ import { RootState } from "../../../store/rootReducer";
 import Load from "../../Loader/Loader";
 import CustomerDetail from "../../admin/customers/customer-detail";
 
-const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
+const SellerOrderDetailsModal = ({ open, onclose, orderId, order }) => {
   const user = useSelector((state: RootState) => state?.user);
   const { data, isLoading, error } = useGetOrdersAdmin({
     id: orderId as string,
@@ -19,12 +19,20 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
   // const { mutate: updateStatus, isLoading: isLoadingStatus } = useUpdateOrderDeliveryStatus();
 
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [filteredCartItems, setFilteredCartItems] = useState([]);
 
-  const order = data?.order;
 
   useEffect(() => {
     if (order) {
       setSelectedStatus(order?.deliveryStatus);
+
+      // if (order.cartItems) {
+      //   const sellerOrdersOnly = order.cartItems?.filter(item => {
+      //     console.log(item, item?.product?.user?.id, user?.id);
+      //     return item?.product?.user?.id === user?.id;
+      //   });
+      //   setFilteredCartItems(sellerOrdersOnly);
+      // }
     }
   }, [order]);
 
@@ -66,7 +74,7 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
             <div>
               <div className=' tw-flex tw-justify-between tw-pt-4 tw-items-center'>
                 <p className=' tw-mb-0  tw-font-semibold tw-text-xl'>Order No. {order?.orderId}</p>
-                <p className='tw-mb-0'>{order?.cartItems.length} items</p>
+                <p className='tw-mb-0'>{order.cartItems?.length} items</p>
               </div>
               <div className=' tw-flex tw-justify-between tw-pt-4 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium'>Placed on: </p>
@@ -122,7 +130,7 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
 
               <div className='md:tw-flex tw-gap-3 tw-justify-between tw-pt-12 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium tw-text-lg tw-text-[#AF1328]'>
-                  ITEMS ({order?.cartItems.length})
+                  ITEMS ({order.cartItems?.length})
                 </p>
                 <div className=' tw-flex tw-gap-x-4 tw-items-center '>
                   <div
@@ -138,7 +146,7 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId }) => {
               <div className=' tw-border-b tw-border-gray-kwek700 tw-mt-4 tw-w-full' />
 
               <div className=' tw-pt-6 tw-space-y-4'>
-                {order?.cartItems.map((item, index) => (
+                {order.cartItems?.map((item, index) => (
                   <Item
                     key={item?.id}
                     image={item?.product?.image[0]?.imageUrl}
