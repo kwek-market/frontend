@@ -31,7 +31,7 @@ const OrdersFilled = function ({
   setFilter,
 }: OrdersFilledProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [orderDetails, setOrderDetails] = useState({ id: null, isOpen: false });
+  const [orderDetails, setOrderDetails] = useState({ id: null, isOpen: false, order: null });
   const [order, setOrder] = useState<OrderList>(null);
 
   const showModal = (order: OrderList) => {
@@ -85,7 +85,7 @@ const OrdersFilled = function ({
               }}
               order={order.order}
               onClick={() => {
-                setOrderDetails({ id: order?.order?.id, isOpen: true });
+                setOrderDetails({ id: order?.order?.id, isOpen: true, order });
               }}
             />
           ))}
@@ -121,9 +121,10 @@ const OrdersFilled = function ({
 
       {orderDetails.isOpen ? (
         <SellerOrderDetailsModal
-          onclose={() => setOrderDetails({ isOpen: false, id: null })}
+          onclose={() => setOrderDetails({ isOpen: false, id: null, order: null })}
           orderId={orderDetails.id}
           open={orderDetails.isOpen}
+          order={orderDetails.order?.order}
         />
       ) : null}
     </div>
