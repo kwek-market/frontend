@@ -5,14 +5,20 @@ import { userFetcher } from "@/helpers";
 import useProducts, { PayloadType } from "@/hooks/useProducts";
 import { Filtering, ProductType } from "@/interfaces/commonTypes";
 import { GetProducts } from "@/store/product/product.queries";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Pagination from "rc-pagination";
 import { Rings } from "react-loader-spinner";
-import ReactPaginate from "react-paginate";
 import { QueryClient, useQueryClient } from "react-query";
 import { v4 as uuid } from "uuid";
 import CategoryProducts from "../CategoryProducts";
 import { ActiveTabbar, Card, SideBar } from "../index";
 
 const GridContainer = function ({ cards, category }: any) {
+  const { query, asPath, pathname, basePath } = useRouter();
+  const categoryName = query?.category;
+  console.log("🚀 ~~ GridContainer ~~ categoryId:", categoryName);
+
   const queryClient = useQueryClient();
   const queryClient2 = new QueryClient();
   const [filter, setFilter] = useState(false);
@@ -25,10 +31,11 @@ const GridContainer = function ({ cards, category }: any) {
   const [sort, setSort] = useState("-clicks");
   const [currentItems, setCurrentItems] = useState<ProductType[]>([] as ProductType[]);
   const [pageCount, setPageCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState((query?.page as any as number) || 1);
+  console.log("🚀 ~~ GridContainer ~~ query?.page:", query?.page);
 
   const payload: PayloadType = {
-    page: currentPage,
+    page: Number(query?.page) || 1,
     pageSize: 20,
     search: category,
     sortBy: sort,
@@ -82,7 +89,7 @@ const GridContainer = function ({ cards, category }: any) {
     return () => {
       queryClient.cancelQueries(["category-items", payload]);
     };
-  }, [categoryData, currentPage, queryClient]);
+  }, [categoryData, currentPage, queryClient, query]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event: { selected: number }) => {
@@ -140,25 +147,60 @@ const GridContainer = function ({ cards, category }: any) {
               ))}
             </div>
           )}
-          <ReactPaginate
-            nextLabel='next >'
-            onPageChange={e => handlePageClick(e)}
-            pageRangeDisplayed={2}
-            marginPagesDisplayed={2}
-            pageCount={pageCount}
-            previousLabel='< previous'
-            pageClassName='page-item'
-            pageLinkClassName='page-link'
-            previousClassName='page-item'
-            previousLinkClassName='page-link'
-            nextClassName='page-item'
-            nextLinkClassName='page-link'
-            breakLabel='...'
-            breakClassName='page-item'
-            breakLinkClassName='page-link'
-            containerClassName='pagination'
-            activeClassName='active'
-            renderOnZeroPageCount={null}
+          <Pagination
+            pageSize={20}
+            // totalBoundaryShowSizeChanger={2}
+            // pageSizeOptions={["1", "2", "3"]}
+            nextIcon={<button>Next</button>}
+            prevIcon={<button>Prev</button>}
+            showLessItems={true}
+            defaultCurrent={1}
+            total={payload.pageSize * pageCount}
+            itemRender={(page, type, element) => {
+              if (type === "jump-next" || type === "jump-prev") {
+                return (
+                  <Link
+                    href={{
+                      pathname: `/category/${categoryName}`,
+
+                      query: { page },
+                    }}
+                    className='tw-px-3 tw-py-2'
+                  >
+                    ...
+                  </Link>
+                );
+              }
+
+              if (type === "next" || type === "prev") {
+                return (
+                  <Link
+                    href={{
+                      pathname: `/category/${categoryName}`,
+
+                      query: { page: page == 0 ? 1 : page },
+                    }}
+                    className='tw-px-3 tw-py-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-xl'
+                  >
+                    {type === "prev" ? <span className=''> {"<"} </span> : null}
+                    {element}
+                    {type === "next" ? <span className=''> {">"} </span> : null}
+                  </Link>
+                );
+              }
+
+              return (
+                <Link
+                  href={{ pathname: `/category/${categoryName}`, query: { page } }}
+                  className='tw-px-3 tw-py-2'
+                >
+                  {page}
+                </Link>
+              );
+            }}
+            className='tw-text-red-500 tw-w-full tw-py-5 px-6 tw-flex tw-space-x-2 tw-justify-center tw-items-center'
+            role='button'
+            locale={{}}
           />
           {isFetching ? (
             <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
