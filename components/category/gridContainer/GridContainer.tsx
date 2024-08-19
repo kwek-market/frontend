@@ -147,61 +147,63 @@ const GridContainer = function ({ cards, category }: any) {
               ))}
             </div>
           )}
-          <Pagination
-            pageSize={20}
-            // totalBoundaryShowSizeChanger={2}
-            // pageSizeOptions={["1", "2", "3"]}
-            nextIcon={<button>Next</button>}
-            prevIcon={<button>Prev</button>}
-            showLessItems={true}
-            defaultCurrent={1}
-            total={payload.pageSize * pageCount}
-            itemRender={(page, type, element) => {
-              if (type === "jump-next" || type === "jump-prev") {
+          <div className='tw-w-full tw-overflow-x-scroll tw-scrollbar-none'>
+            <Pagination
+              pageSize={20}
+              totalBoundaryShowSizeChanger={1}
+              // pageSizeOptions={["1", "2", "3"]}
+              nextIcon={<button>Next</button>}
+              prevIcon={<button>Prev</button>}
+              showLessItems={true}
+              defaultCurrent={1}
+              total={payload.pageSize * pageCount}
+              itemRender={(page, type, element) => {
+                if (type === "jump-next" || type === "jump-prev") {
+                  return (
+                    <Link
+                      href={{
+                        pathname: `/category/${categoryName}`,
+
+                        query: { page },
+                      }}
+                      className='tw-px-3 tw-py-2'
+                    >
+                      ...
+                    </Link>
+                  );
+                }
+
+                if (type === "next" || type === "prev") {
+                  return (
+                    <Link
+                      href={{
+                        pathname: `/category/${categoryName}`,
+
+                        query: { page: page == 0 ? 1 : page },
+                      }}
+                      className='tw-px-3 tw-py-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-xl'
+                    >
+                      {type === "prev" ? <span className=''> {"<"} </span> : null}
+                      {element}
+                      {type === "next" ? <span className=''> {">"} </span> : null}
+                    </Link>
+                  );
+                }
+
                 return (
                   <Link
-                    href={{
-                      pathname: `/category/${categoryName}`,
-
-                      query: { page },
-                    }}
+                    href={{ pathname: `/category/${categoryName}`, query: { page } }}
                     className='tw-px-3 tw-py-2'
                   >
-                    ...
+                    {page}
                   </Link>
                 );
-              }
-
-              if (type === "next" || type === "prev") {
-                return (
-                  <Link
-                    href={{
-                      pathname: `/category/${categoryName}`,
-
-                      query: { page: page == 0 ? 1 : page },
-                    }}
-                    className='tw-px-3 tw-py-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-xl'
-                  >
-                    {type === "prev" ? <span className=''> {"<"} </span> : null}
-                    {element}
-                    {type === "next" ? <span className=''> {">"} </span> : null}
-                  </Link>
-                );
-              }
-
-              return (
-                <Link
-                  href={{ pathname: `/category/${categoryName}`, query: { page } }}
-                  className='tw-px-3 tw-py-2'
-                >
-                  {page}
-                </Link>
-              );
-            }}
-            className='tw-text-red-500 tw-w-full tw-py-5 px-6 tw-flex tw-space-x-2 tw-justify-center tw-items-center'
-            role='button'
-            locale={{}}
-          />
+              }}
+              className='tw-text-red-500 tw-overflow-x-scroll tw-w-max tw-py-5 px-6 tw-flex tw-space-x-2 tw-justify-center tw-items-center'
+              role='button'
+              locale={{}}
+            />
+          </div>
           {isFetching ? (
             <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
               <Rings width={60} height={60} color='#FC476E' />
