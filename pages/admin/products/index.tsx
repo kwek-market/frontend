@@ -29,7 +29,7 @@ const Products = () => {
     page: page,
     pageSize: 10,
     search: searchDebounce,
-    sortBy: "+dateCreated",
+    sortBy: "date_created",
   });
 
   const goToPage = (page: number) => {

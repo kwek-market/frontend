@@ -42,6 +42,7 @@ const AdminTable = ({
         dataSource={data}
         pagination={false}
         loading={isLoading}
+        rowKey={'state'}
       />
       {data?.length > 0 && (
         <TableNav

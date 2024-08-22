@@ -9,8 +9,10 @@ const StateDeliveryFee = () => {
   const token = useSelector((state: RootState) => state.user?.token);
 
   const { data, isLoading, error } = useGetStateDeliveryFee({ token });
+  console.log("🚀 ~~ StateDeliveryFee ~~ data:", data);
 
-  const stateDeliveryFee = data?.getStateDeliveryFee;
+  const stateDeliveryFee = data?.stateDeliveryFees;
+  console.log("🚀 ~~ StateDeliveryFee ~~ stateDeliveryFee:", stateDeliveryFee);
 
   const columns = [
     {
@@ -28,9 +30,12 @@ const StateDeliveryFee = () => {
       key: "state",
     },
     {
-      title: "Delivery Fee",
-      dataIndex: "fee",
-      key: "deliveryFee",
+      title: "NO of Cities",
+      dataIndex: "deliveryFees",
+      key: "no_of_cities",
+      render: (deliveryFees, data, index) => {
+        return <div>{deliveryFees?.length}</div>;
+      },
     },
   ];
 
