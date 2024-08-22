@@ -55,7 +55,6 @@ export const CityDeliveryModal = ({
       confirmLoading={isUpdateLoading || isCreateLoading}
       onOk={async e => {
         e.preventDefault();
-        console.log(cityFormData);
 
         try {
           if (isEdit) {

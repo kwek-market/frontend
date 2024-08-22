@@ -35,7 +35,6 @@ const UpdateDeliveryFee = () => {
   const [isCityModalOpen, setIsCityModalOpen] = useState(false);
 
   const states = data?.stateDeliveryFees;
-  console.log("🚀 ~~ UpdateDeliveryFee ~~ states:", states);
 
   const [selectedState, setSelectedState] = useState<IFormData>({});
   const [cities, setCities] = useState([]);
@@ -128,7 +127,6 @@ const UpdateDeliveryFee = () => {
                   className='tw-flex tw-w-[fit-content] tw-items-center tw-border-2 tw-rounded-md tw-overflow-hidde tw-relative'
                   key={fee.city}
                   onClick={() => {
-                    console.log(cities);
                     setCityToBeEdited(fee);
                     seIsEditCity(true);
                     setIsCityModalOpen(true);
