@@ -75,8 +75,8 @@ export const GET_RECENT_TRANSACTIONS = /* GraphQL */ `
 `;
 
 export const GET_PRODUCTS = /* GraphQL */ `
-  query products($page: Int, $pageSize: Int, $search: String) {
-    products(page: $page, pageSize: $pageSize, search: $search) {
+  query products($page: Int, $pageSize: Int, $search: String, $sortBy: String) {
+    products(page: $page, pageSize: $pageSize, search: $search, sortBy: $sortBy) {
       page
       pages
       hasNext
