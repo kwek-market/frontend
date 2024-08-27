@@ -46,8 +46,8 @@ const CartGridComponent = function () {
       cartId,
     };
     user.token ? (payload["token"] = user.token) : (payload["ip"] = await getIp());
-    deleteItemInCart(payload);
-    getCartFunc(user.token);
+    deleteItemInCart(payload)(dispatch);
+    getCartFunc(user.token)(dispatch);
   }
 
   return (
@@ -91,6 +91,7 @@ const CartGridComponent = function () {
                 ) : null}
               </div>
             </div>
+
             <div className={styles.secondBox}>
               <p
                 className={
@@ -105,6 +106,7 @@ const CartGridComponent = function () {
                 <p className={styles.current_price}>₦{item.product.options[0].discountedPrice}</p>
               ) : null}
             </div>
+
             <div className={styles.thirdBox}>
               <div className={styles.addbtn}>
                 <button onClick={() => decreaseQuantity(item.id, item.cart.id)}>-</button>
@@ -112,6 +114,7 @@ const CartGridComponent = function () {
                 <button onClick={() => increaseQuantity(item.product.options[0].id)}>+</button>
               </div>
             </div>
+            
             <div className={styles.forthBox}>
               <p className={styles.subtotal}>₦{item.price}</p>
             </div>

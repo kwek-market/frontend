@@ -47,12 +47,18 @@ export default [
     rules: {
       indent: ["error", 2],
       "linebreak-style": ["error", "unix"],
-      quotes: ["error", "single"],
       semi: ["error", "always"],
       "@next/next/no-duplicate-head": "off",
       "react-hooks/exhaustive-deps": "off",
       "@next/next/no-page-custom-font": "off",
       "react-hooks/rules-of-hooks": "off",
+
+      "@typescript-eslint/no-unused-vars": [
+        "off",
+        {
+          ignoreRestSiblings: true,
+        },
+      ],
     },
     ignores: ["/node_modules/"],
   },
