@@ -7,6 +7,7 @@ import StarRatingComponent from "react-star-rating-component";
 import useAvgRating from "@/hooks/useAvgRating";
 
 const ExtraGrid = function ({ product }: { product: ProductType }) {
+  
   return (
     <div className={styles.extra_container}>
       <div className={styles.extra_info}>

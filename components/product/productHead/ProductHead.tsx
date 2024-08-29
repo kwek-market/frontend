@@ -5,7 +5,8 @@ import { AddToCartPayload, AddToWishlistPayload, ProductType } from "@/interface
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
-import { Carousel, Radio, message } from "antd";
+import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
+import { Button, Carousel, Modal, Radio, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
@@ -14,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
 import { v4 } from "uuid";
 import { separateWords } from "../../../helpers/helper";
+import { useDeleteProduct } from "../../../store/product/product.action";
 import styles from "./productHead.module.scss";
 
 const SampleNextArrow = function (props) {
@@ -56,6 +58,9 @@ const ProductHead = function ({ product }: ProductHeadProps) {
 
   const user = useSelector((state: RootState) => state.user);
   const wishlists = useSelector((state: RootState) => state.wishlist?.wishlists);
+
+  const { mutate: deleteProduct, isLoading: isDeleting } = useDeleteProduct(user.token);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -109,6 +114,23 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   const handleCarouselChange = (number: number) => {
     carouselRef?.current?.goTo(number);
   };
+
+  const handleDeleteProduct = () => {
+    deleteProduct(
+      { id: product.id },
+      {
+        onSuccess() {
+          router.push("/seller/profile?tab=products");
+        },
+      }
+    );
+  };
+
+  const handleCancel = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  console.log("separateWords(product.color)", separateWords(product.color));
 
   return (
     <div className={styles.product_container}>
@@ -191,19 +213,21 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             defaultValue='a'
             buttonStyle='solid'
           >
-            {separateWords(product.color).map((color, index) => (
-              <Radio.Button
-                key={v4()}
-                style={{
-                  backgroundColor: `${color.toLowerCase()}`,
-                  opacity: selectedColor === color ? 0.8 : 1,
-                  border: selectedColor === color ? `2px solid magenta` : "0px",
-                }}
-                onClick={e => setSelectedColor(color)}
-                className='tw-p-3 tw-w-5 tw-h-5 tw-border-4'
-                value='a'
-              ></Radio.Button>
-            ))}
+            {separateWords(product.color).map((color, index) =>
+              color ? (
+                <Radio.Button
+                  key={v4()}
+                  style={{
+                    backgroundColor: `${color.toLowerCase()}`,
+                    opacity: selectedColor === color ? 0.8 : 1,
+                    border: selectedColor === color ? `2px solid magenta` : "0px",
+                  }}
+                  onClick={e => setSelectedColor(color)}
+                  className='tw-p-3 tw-w-5 tw-h-5 tw-border-4'
+                  value='a'
+                ></Radio.Button>
+              ) : null
+            )}
           </Radio.Group>
         </div>
         <div className={styles.product_option_size}>
@@ -261,11 +285,11 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         </div>
         <div className={styles.product_option_details}>
           <div className={styles.orderbox}>
-            <Image src='/svg/pickup.svg' width='40' height='40' />
+            <Image alt='pickup' src='/svg/pickup.svg' width='40' height='40' />
             <p>Pickup & Pay on Collection Available</p>
           </div>
           <div className={styles.debox}>
-            <Image src='/svg/cod.svg' width='40' height='40' />
+            <Image alt='delivery' src='/svg/cod.svg' width='40' height='40' />
             <p>Pay on Delivery</p>
           </div>
         </div>
@@ -304,6 +328,58 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             </button>
           </div>
         </div>
+
+        {user?.user?.id === product?.user?.id ? (
+          <div className='tw-flex tw-mt-5 tw-space-x-4'>
+            <Button
+              size='large'
+              className='tw-text-gray-50 tw-bg-yellow-500 hover:tw-bg-yellow-600 hover:tw-text-gray-50'
+              icon={<PencilAltIcon className='tw-w-7 tw-h-7' />}
+              onClick={() => router.push(`/seller/edit-product/${product.id}`)}
+            >
+              Edit product
+            </Button>
+
+            <>
+              <Button
+                size='large'
+                className='tw-text-gray-50 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50'
+                icon={<TrashIcon className='tw-w-7 tw-h-7' />}
+                onClick={() => {
+                  setIsDeleteModalOpen(true);
+                }}
+              >
+                Delete product
+              </Button>
+              <Modal
+                title='Are you sure you want to delete this product?'
+                open={isDeleteModalOpen}
+                onOk={handleDeleteProduct}
+                okText='Yes, Delete'
+                confirmLoading={isDeleting}
+                onCancel={handleCancel}
+                classNames={{ header: "!tw-text-2xl" }}
+                className='!tw-text-2xl'
+                okButtonProps={{
+                  size: "large",
+                  type: "primary",
+                  className:
+                    "tw-text-white-100 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50",
+                }}
+                cancelButtonProps={{
+                  size: "large",
+                  type: "text",
+                  className: "tw-bg-transparent hover:tw-bg-transparent border-2 ",
+                }}
+              >
+                <p className='tw-text-sm tw-text-gray-800'>
+                  By Deleting this product, you will lose all the information about it. and you will
+                  not be able to retrieve it.
+                </p>
+              </Modal>
+            </>
+          </div>
+        ) : null}
       </div>
     </div>
   );

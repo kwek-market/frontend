@@ -17,3 +17,17 @@ export const UpdateStateDeliveryFeeSchema = z.object({
 });
 
 export type UpdateStateDeliveryFeeType = z.infer<typeof UpdateStateDeliveryFeeSchema>;
+
+export const CreateStateDeliveryFeeSchema = z.object({
+  state: z.string({
+    required_error: "State is required",
+    invalid_type_error: "type of State should be string",
+  }),
+  fee: z.number({ required_error: "Fee is required" }),
+  city: z.string({
+    required_error: "City is required",
+    invalid_type_error: "type of City should be string",
+  }),
+});
+
+export type CreateStateDeliveryFeeType = z.infer<typeof CreateStateDeliveryFeeSchema>;
