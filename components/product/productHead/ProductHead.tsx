@@ -116,12 +116,21 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   };
 
   const handleDeleteProduct = () => {
-    deleteProduct({ id: product.id });
+    deleteProduct(
+      { id: product.id },
+      {
+        onSuccess() {
+          router.push("/seller/profile?tab=products");
+        },
+      }
+    );
   };
 
   const handleCancel = () => {
     setIsDeleteModalOpen(false);
   };
+
+  console.log("separateWords(product.color)", separateWords(product.color));
 
   return (
     <div className={styles.product_container}>
@@ -204,19 +213,21 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             defaultValue='a'
             buttonStyle='solid'
           >
-            {separateWords(product.color).map((color, index) => (
-              <Radio.Button
-                key={v4()}
-                style={{
-                  backgroundColor: `${color.toLowerCase()}`,
-                  opacity: selectedColor === color ? 0.8 : 1,
-                  border: selectedColor === color ? `2px solid magenta` : "0px",
-                }}
-                onClick={e => setSelectedColor(color)}
-                className='tw-p-3 tw-w-5 tw-h-5 tw-border-4'
-                value='a'
-              ></Radio.Button>
-            ))}
+            {separateWords(product.color).map((color, index) =>
+              color ? (
+                <Radio.Button
+                  key={v4()}
+                  style={{
+                    backgroundColor: `${color.toLowerCase()}`,
+                    opacity: selectedColor === color ? 0.8 : 1,
+                    border: selectedColor === color ? `2px solid magenta` : "0px",
+                  }}
+                  onClick={e => setSelectedColor(color)}
+                  className='tw-p-3 tw-w-5 tw-h-5 tw-border-4'
+                  value='a'
+                ></Radio.Button>
+              ) : null
+            )}
           </Radio.Group>
         </div>
         <div className={styles.product_option_size}>
