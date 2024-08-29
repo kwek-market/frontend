@@ -45,14 +45,23 @@ export default [
     },
 
     rules: {
-      indent: ["error", 2],
+      indent: ["off", 2],
       "linebreak-style": ["error", "unix"],
-      quotes: ["error", "single"],
       semi: ["error", "always"],
+      "prefer-const": "off",
       "@next/next/no-duplicate-head": "off",
       "react-hooks/exhaustive-deps": "off",
       "@next/next/no-page-custom-font": "off",
       "react-hooks/rules-of-hooks": "off",
+
+      "@typescript-eslint/no-unused-vars": [
+        "off",
+        {
+          ignoreRestSiblings: true,
+        },
+      ],
+      "@typescript-eslint/explicit-module-boundary-types": "off", // Disables the rule that enforces explicit return types
+      "@typescript-eslint/no-explicit-any": "off",
     },
     ignores: ["/node_modules/"],
   },

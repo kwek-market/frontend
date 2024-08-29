@@ -52,12 +52,12 @@ const OrderItem = ({
           <span>{customerName}</span>
         </div>
       </td>
-      <td className={styles.orderTotal}>
+      {/* <td className={styles.orderTotal}>
         <span>{orderTotal}</span>
       </td>
       <td className={styles.orderProfit}>
         <span>{orderProfit}</span>
-      </td>
+      </td> */}
       <td>
         {payment === "paid" ? (
           <button className={styles.orderPaymentPaid}>

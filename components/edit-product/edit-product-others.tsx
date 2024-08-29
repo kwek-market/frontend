@@ -1,7 +1,7 @@
-import { UploadProductProps } from "@/interfaces/commonTypes";
+import { EditProductProps } from "@/interfaces/commonTypes";
 import { Select } from "antd";
 import { SelectValue } from "antd/lib/select";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ICreateProductCharge, useGetProductCharge } from "../../hooks/admin/productCharges";
 import { RootState } from "../../store/rootReducer";
@@ -18,34 +18,52 @@ const sizes = [
   { id: 8, name: "YARD" },
 ];
 
-function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
+function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditProductProps) {
   const [seoKeywords, setSeoKeywords] = useState([]);
   const { token } = useSelector((state: RootState) => state.user);
   const [size, setSize] = useState(sizes[0].name);
-  const [formValues, setFormValues] = useState([
-    {
-      size: "",
-      quantity: "",
-      price: 0,
-      discountPrice: 0,
-      totalPrice: 0,
-      sizePostfix: sizes[0].name,
-    },
-  ]);
+  const [formValues, setFormValues] = useState([...submitDetails.productOptions]);
+
+  console.log("🚀 ~~ EditProductOthers ~~ formValues:", formValues[0]);
 
   const { data: productChargeData, isLoading: isLoadingCharge } = useGetProductCharge(token);
+  const [currentTotalPrice, setCurrentTotalPrice] = useState(0);
 
   const productCharge = productChargeData?.getProductCharge[0] as ICreateProductCharge;
+
+  useEffect(() => {
+    if (productCharge) {
+      if (productCharge && productCharge?.hasFixedAmount) {
+        setCurrentTotalPrice(
+          productCharge?.charge + Number(formValues?.[formValues.length - 1].price)
+        );
+      } else if (!productCharge?.hasFixedAmount) {
+        setCurrentTotalPrice(
+          (productCharge?.charge / 100) * Number(formValues?.[formValues.length - 1].price) +
+            Number(formValues?.[formValues.length - 1].price)
+        );
+      } else {
+        setCurrentTotalPrice(Number(formValues?.[formValues.length - 1].price));
+      }
+    }
+
+    return () => {};
+  }, [productCharge]);
+
+  useEffect(() => {
+    setFormValues(submitDetails.productOptions);
+
+    return () => {};
+  }, [submitDetails.productOptions]);
 
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormValues = [...formValues];
 
-    // if(e.target.name === 'sizePostfix') {
-
-    //   newFormValues[i][e.target.name] = e.target.value;
-    //   setFormValues(newFormValues);
-    //   return
-    // }
+    if (e.target.name === "sizePostfix") {
+      newFormValues[i]["size"] = `${formValues[i]?.size?.split(" ")[0]} ${e.target.value}`;
+      setFormValues(newFormValues);
+      return;
+    }
 
     newFormValues[i][e.target.name] = e.target.value;
     setFormValues(newFormValues);
@@ -60,7 +78,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
         price: 0,
         discountPrice: 0,
         totalPrice: 0,
-        sizePostfix: sizes[0].name,
       },
     ]);
   };
@@ -70,14 +87,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     newFormValues.splice(i, 1);
     setFormValues(newFormValues);
   };
-
-  const currentTotalPrice =
-    productCharge && productCharge?.hasFixedAmount
-      ? productCharge?.charge + Number(formValues[formValues.length - 1].price)
-      : !productCharge?.hasFixedAmount
-      ? (productCharge?.charge / 100) * Number(formValues[formValues.length - 1].price) +
-        Number(formValues[formValues.length - 1].price)
-      : Number(formValues[formValues.length - 1].price);
 
   const handleSubmit = async () => {
     const { message } = await import("antd");
@@ -122,7 +131,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
     for (let i = 0; i < formValues.length; i++) {
       const newFormValues = {
-        size: formValues[i].size ? `${formValues[i].size} ${formValues[i].sizePostfix}` : "",
+        size: formValues[i].size,
         quantity: formValues[i].quantity,
         price: formValues[i].price,
         discounted_price: formValues[i].discountPrice,
@@ -134,7 +143,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               Number(formValues[i].price)
             : Number(formValues[i].price),
       };
-      val.push(JSON.stringify(newFormValues));
+      val.push(newFormValues);
     }
 
     setSubmitDetails({
@@ -177,7 +186,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                     type='tel'
                     placeholder='0'
                     name='size'
-                    value={element.size || ""}
+                    value={element.size?.split(" ")[0] || ""}
                     onChange={e => handleChange(index, e)}
                     className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
                   />
@@ -188,6 +197,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                     onChange={e => {
                       handleChange(index, e as any);
                     }}
+                    value={formValues[index].size?.split(" ")[1] || ""}
                   >
                     {sizes.map(size => (
                       <option key={size.id} value={size.name}>
@@ -395,6 +405,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
               onChange={e => handleSeo(e)}
               size='large'
               style={{ width: "100%" }}
+              value={submitDetails.keyword}
             ></Select>
           </label>
         </div>
@@ -403,4 +414,4 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   );
 }
 
-export default Others;
+export default EditProductOthers;

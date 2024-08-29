@@ -16,12 +16,12 @@ const OrderHeader = function () {
         <th>
           <span className={styles.title}>Customer</span>
         </th>
-        <th>
+        {/* <th>
           <span className={styles.title}>Total</span>
         </th>
         <th>
           <span className={styles.title}>Profit</span>
-        </th>
+        </th> */}
         <th>
           <span className={styles.title}>Payment</span>
         </th>

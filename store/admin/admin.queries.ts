@@ -75,8 +75,8 @@ export const GET_RECENT_TRANSACTIONS = /* GraphQL */ `
 `;
 
 export const GET_PRODUCTS = /* GraphQL */ `
-  query products($page: Int, $pageSize: Int, $search: String) {
-    products(page: $page, pageSize: $pageSize, search: $search) {
+  query products($page: Int, $pageSize: Int, $search: String, $sortBy: String) {
+    products(page: $page, pageSize: $pageSize, search: $search, sortBy: $sortBy) {
       page
       pages
       hasNext
@@ -829,6 +829,19 @@ export const GET_STATE_DELIVERY_FEE = /* GraphQL */ `
   }
 `;
 
+export const STATE_DELIVERY_FEE = /* GraphQL */ `
+  query getStateDelivery {
+    stateDeliveryFees {
+      state
+      deliveryFees {
+        id
+        city
+        fee
+      }
+    }
+  }
+`;
+
 export const UPDATE_STATE_DELIVERY_FEE = /* GraphQL */ `
   mutation updateStateDelivery(
     $fee: Float!
@@ -844,6 +857,29 @@ export const UPDATE_STATE_DELIVERY_FEE = /* GraphQL */ `
         city
         id
       }
+      message
+      status
+    }
+  }
+`;
+
+export const CREATE_STATE_DELIVERY_FEE = /* GraphQL */ `
+  mutation createStateDelivery($fee: Float!, $state: String!, $token: String!, $city: String!) {
+    createStateDeliveryFee(fee: $fee, state: $state, token: $token, city: $city) {
+      deliveryCharge {
+        state
+        fee
+        city
+      }
+      message
+      status
+    }
+  }
+`;
+
+export const DELETE_STATE_DELIVERY_FEE = /* GraphQL */ `
+  mutation deleteStateDeliveryFee($token: String!, $id: String!) {
+    deleteStateDeliveryFee(token: $token, id: $id) {
       message
       status
     }
