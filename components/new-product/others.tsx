@@ -13,6 +13,9 @@ const sizes = [
   { id: 3, name: "L" },
   { id: 4, name: "XL" },
   { id: 5, name: "XXL" },
+  { id: 6, name: "INCH" },
+  { id: 7, name: "CM" },
+  { id: 8, name: "YARD" },
 ];
 
 function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
