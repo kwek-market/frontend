@@ -158,9 +158,35 @@ export type UploadProductType = {
   warranty: string;
 };
 
+export type EditProductType = {
+  brand: string;
+  category: string;
+  subcategory: string;
+  chargeFivePercentVat: boolean;
+  color: string;
+  gender: string;
+  keyword: string[];
+  productImageUrl: string[];
+  productOptions: Record<string, any>[];
+  productTitle: string;
+  productWeight: string;
+  returnPolicy: string;
+  shortDescription: string;
+  warranty: string;
+  productId: string;
+  token?: string;
+};
+
 export type UploadProductProps = {
   submitDetails: UploadProductType & Record<any, any>;
   setSubmitDetails: React.Dispatch<React.SetStateAction<UploadProductType>>;
+  product?: ProductType;
+};
+
+export type EditProductProps = {
+  submitDetails: EditProductType & Record<any, any>;
+  setSubmitDetails: React.Dispatch<React.SetStateAction<EditProductType>>;
+  product?: ProductType;
 };
 
 export type ProductType = {
@@ -469,7 +495,7 @@ export type SellerReview = {
   id: string;
   product: ProductType;
   rating: number;
-  review: String;
+  review: string;
   user: {
     firstName: string;
     lastName: string;

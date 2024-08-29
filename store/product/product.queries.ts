@@ -72,33 +72,74 @@ export const CreateProduct = /* GraphQL */ `
 
 export const UpdateProduct = /* GraphQL */ `
   mutation updateProduct(
-    $id: ID!
-    $title: String!
-    $description: String!
-    $price: Float!
-    $category: String!
-    $subcategory: String!
-    $image: String!
+    $brand: String
+    $category: String
+    $chargeFivePercentVat: Boolean
+    $color: String
+    $gender: String
+    $keyword: [String]
+    $productImageUrl: [String]
+    $productOptions: [String]
+    $productTitle: String
+    $productWeight: String
+    $returnPolicy: String
+    $shortDescription: String
+    $subcategory: String
+    $token: String!
+    $warranty: String
+    $productId: String!
   ) {
     updateProduct(
-      id: $id
-      title: $title
-      description: $description
-      price: $price
+      brand: $brand
       category: $category
+      chargeFivePercentVat: $chargeFivePercentVat
+      color: $color
+      gender: $gender
+      keyword: $keyword
+      productImageUrl: $productImageUrl
+      productOptions: $productOptions
+      productTitle: $productTitle
+      productWeight: $productWeight
+      returnPolicy: $returnPolicy
+      shortDescription: $shortDescription
       subcategory: $subcategory
-      image: $image
+      token: $token
+      warranty: $warranty
+      productId: $productId
     ) {
-      id
-      title
-      description
-      price
-      category
-      subcategory
-      image {
+      product {
         id
-        imageUrl
+        productTitle
+        user {
+          id
+          username
+          isSeller
+          sellerProfile {
+            shopName
+          }
+        }
+        category {
+          name
+        }
+        subcategory {
+          name
+        }
+        dateCreated
+        image {
+          id
+          imageUrl
+        }
+        options {
+          id
+          size
+          quantity
+          price
+          discountedPrice
+          optionTotalPrice
+        }
       }
+      status
+      message
     }
   }
 `;
