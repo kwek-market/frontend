@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
 import { v4 } from "uuid";
 import { separateWords } from "../../../helpers/helper";
+import { useDeleteProduct } from "../../../store/product/product.action";
 import styles from "./productHead.module.scss";
 
 const SampleNextArrow = function (props) {
@@ -57,6 +58,9 @@ const ProductHead = function ({ product }: ProductHeadProps) {
 
   const user = useSelector((state: RootState) => state.user);
   const wishlists = useSelector((state: RootState) => state.wishlist?.wishlists);
+
+  const { mutate: deleteProduct, isLoading: isDeleting } = useDeleteProduct(user.token);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -111,26 +115,12 @@ const ProductHead = function ({ product }: ProductHeadProps) {
     carouselRef?.current?.goTo(number);
   };
 
-  const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
+  const handleDeleteProduct = () => {
+    deleteProduct({ id: product.id });
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
-    setOpen(false);
+    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -344,19 +334,34 @@ const ProductHead = function ({ product }: ProductHeadProps) {
                 size='large'
                 className='tw-text-gray-50 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50'
                 icon={<TrashIcon className='tw-w-7 tw-h-7' />}
+                onClick={() => {
+                  setIsDeleteModalOpen(true);
+                }}
               >
                 Delete product
               </Button>
               <Modal
                 title='Are you sure you want to delete this product?'
-                open={open}
-                onOk={handleOk}
-                confirmLoading={confirmLoading}
+                open={isDeleteModalOpen}
+                onOk={handleDeleteProduct}
+                okText='Yes, Delete'
+                confirmLoading={isDeleting}
                 onCancel={handleCancel}
-                okButtonProps={{size: "large", type: "primary", className: "tw-text-white-100 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50"}}
-                cancelButtonProps={{size: "large", type: "text", className: "tw-text-white-100 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50"}}
+                classNames={{ header: "!tw-text-2xl" }}
+                className='!tw-text-2xl'
+                okButtonProps={{
+                  size: "large",
+                  type: "primary",
+                  className:
+                    "tw-text-white-100 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50",
+                }}
+                cancelButtonProps={{
+                  size: "large",
+                  type: "text",
+                  className: "tw-bg-transparent hover:tw-bg-transparent border-2 ",
+                }}
               >
-                <p>
+                <p className='tw-text-sm tw-text-gray-800'>
                   By Deleting this product, you will lose all the information about it. and you will
                   not be able to retrieve it.
                 </p>

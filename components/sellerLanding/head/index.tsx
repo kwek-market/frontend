@@ -1,5 +1,5 @@
 import { RootState } from "@/store/rootReducer";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,27 +23,28 @@ const SellerLandingHead = () => {
       <Logo />
 
       <div className=' tw-font-poppins tw-font-[500] tw-text-sm lg:tw-text-base tw-hidden md:tw-flex tw-gap-x-5  lg:tw-gap-x-16  2xl:tw-text-lg md:tw-items-center'>
-        <Link href={"/sell"}>
-          <a className='tw-text-black-kwek100'>Shop</a>
+        <Link className='tw-text-black-kwek100' href={"/sell"}>
+          Shop
         </Link>
-        <Link href={"/aboutUs"}>
-          <a className='tw-text-black-kwek100'>About Us</a>
+        <Link className='tw-text-black-kwek100' href={"/aboutUs"}>
+          About Us
         </Link>
-        <Link href={"/contact-us"}>
-          <a className='tw-text-black-kwek100'>Contact us</a>
+        <Link className='tw-text-black-kwek100' href={"/contact-us"}>
+          Contact us
         </Link>
-        <Link href={"/"}>
-          <a className='tw-text-black-kwek100'>Buy on Kwek</a>
+        <Link className='tw-text-black-kwek100' href={"/"}>
+          Buy on Kwek
         </Link>
         {!user.user.isSeller ? (
-          <Link href={"/sell/create-account"}>
-            <a className='tw-inline-block tw-bg-red-kwek100 tw-text-white-light tw-px-5 tw-py-3 tw-rounded-sm'>
-              Register now
-            </a>
+          <Link
+            className='tw-inline-block tw-bg-red-kwek100 tw-text-white-light tw-px-5 tw-py-3 tw-rounded-sm'
+            href={"/sell/create-account"}
+          >
+            Register now
           </Link>
         ) : (
-          <Link href='/seller/profile'>
-            <a className='tw-text-black-kwek100'>Account</a>
+          <Link className='tw-text-black-kwek100' href='/seller/profile'>
+            Account
           </Link>
         )}
       </div>
@@ -63,25 +64,25 @@ const SellerLandingHead = () => {
               />
             </div>
             <div className=' tw-flex tw-flex-col tw-justify-center tw-items-center tw-gap-y-5'>
-              <Link href={"/sell"}>
-                <a className='tw-text-black-kwek100'>Shop</a>
+              <Link className='tw-text-black-kwek100' href={"/sell"}>
+                Shop
               </Link>
-              <Link href={"/aboutUs"}>
-                <a className='tw-text-black-kwek100'>About Us</a>
+              <Link className='tw-text-black-kwek100' href={"/aboutUs"}>
+                About Us
               </Link>
-              <Link href={"/contact-us"}>
-                <a className='tw-text-black-kwek100'>Contact us</a>
+              <Link className='tw-text-black-kwek100' href={"/contact-us"}>
+                Contact us
               </Link>
-              <Link href={"/"}>
-                <a className='tw-text-black-kwek100'>Buy on Kwek</a>
+              <Link className='tw-text-black-kwek100' href={"/"}>
+                Buy on Kwek
               </Link>
               {!user.user.isSeller ? (
-                <Link href={"/sell/create-account"}>
-                  <a className='tw-text-black-kwek100'>Register now</a>
+                <Link className='tw-text-black-kwek100' href={"/sell/create-account"}>
+                  Register now
                 </Link>
               ) : (
-                <Link href='/seller/profile'>
-                  <a className='tw-text-black-kwek100'>Account</a>
+                <Link className='tw-text-black-kwek100' href='/seller/profile'>
+                  Account
                 </Link>
               )}
             </div>
