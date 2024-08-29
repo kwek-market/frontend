@@ -5,7 +5,8 @@ import { AddToCartPayload, AddToWishlistPayload, ProductType } from "@/interface
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
-import { Carousel, Radio, message } from "antd";
+import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
+import { Button, Carousel, Radio, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
@@ -52,6 +53,8 @@ type ProductHeadProps = {
 };
 
 const ProductHead = function ({ product }: ProductHeadProps) {
+  console.log("🚀 ~~ ProductHead ~~ product:", product);
+
   const router = useRouter();
 
   const user = useSelector((state: RootState) => state.user);
@@ -261,11 +264,11 @@ const ProductHead = function ({ product }: ProductHeadProps) {
         </div>
         <div className={styles.product_option_details}>
           <div className={styles.orderbox}>
-            <Image src='/svg/pickup.svg' width='40' height='40' />
+            <Image alt='pickup' src='/svg/pickup.svg' width='40' height='40' />
             <p>Pickup & Pay on Collection Available</p>
           </div>
           <div className={styles.debox}>
-            <Image src='/svg/cod.svg' width='40' height='40' />
+            <Image alt='delivery' src='/svg/cod.svg' width='40' height='40' />
             <p>Pay on Delivery</p>
           </div>
         </div>
@@ -304,6 +307,27 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             </button>
           </div>
         </div>
+
+        {user?.user?.id === product?.user?.id ? (
+          <div className='tw-flex tw-mt-5 tw-space-x-4'>
+            <Button
+              size='large'
+              className='tw-text-gray-50 tw-bg-yellow-500 hover:tw-bg-yellow-600 hover:tw-text-gray-50'
+              icon={<PencilAltIcon className='tw-w-7 tw-h-7' />}
+              onClick={()=> router.push(`/seller/edit-product/${product.id}`)}
+            >
+              Edit product
+            </Button>
+
+            <Button
+              size='large'
+              className='tw-text-gray-50 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50'
+              icon={<TrashIcon className='tw-w-7 tw-h-7' />}
+            >
+              Delete product
+            </Button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

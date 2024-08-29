@@ -24,7 +24,8 @@
       "@/hooks/*": ["hooks/*"],
       "@store/*": ["store/*"]
     },
-    "incremental": true
+    "incremental": true,
+    "noImplicitAny": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "seeds/countries.js"],
   "exclude": ["node_modules"]
