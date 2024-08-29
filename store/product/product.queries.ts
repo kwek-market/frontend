@@ -145,9 +145,10 @@ export const UpdateProduct = /* GraphQL */ `
 `;
 
 export const DeleteProduct = /* GraphQL */ `
-  mutation deleteProduct($id: ID!) {
-    deleteProduct(id: $id) {
-      id
+  mutation deleteProduct($id: String!, $token: String!) {
+    deleteProduct(id: $id, token: $token) {
+      status
+      message
     }
   }
 `;

@@ -6,7 +6,7 @@ import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
-import { Button, Carousel, Radio, message } from "antd";
+import { Button, Carousel, Modal, Radio, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
@@ -53,8 +53,6 @@ type ProductHeadProps = {
 };
 
 const ProductHead = function ({ product }: ProductHeadProps) {
-  console.log("🚀 ~~ ProductHead ~~ product:", product);
-
   const router = useRouter();
 
   const user = useSelector((state: RootState) => state.user);
@@ -111,6 +109,28 @@ const ProductHead = function ({ product }: ProductHeadProps) {
 
   const handleCarouselChange = (number: number) => {
     carouselRef?.current?.goTo(number);
+  };
+
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState("Content of the modal");
+
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const handleOk = () => {
+    setModalText("The modal will be closed after two seconds");
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    console.log("Clicked cancel button");
+    setOpen(false);
   };
 
   return (
@@ -314,18 +334,34 @@ const ProductHead = function ({ product }: ProductHeadProps) {
               size='large'
               className='tw-text-gray-50 tw-bg-yellow-500 hover:tw-bg-yellow-600 hover:tw-text-gray-50'
               icon={<PencilAltIcon className='tw-w-7 tw-h-7' />}
-              onClick={()=> router.push(`/seller/edit-product/${product.id}`)}
+              onClick={() => router.push(`/seller/edit-product/${product.id}`)}
             >
               Edit product
             </Button>
 
-            <Button
-              size='large'
-              className='tw-text-gray-50 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50'
-              icon={<TrashIcon className='tw-w-7 tw-h-7' />}
-            >
-              Delete product
-            </Button>
+            <>
+              <Button
+                size='large'
+                className='tw-text-gray-50 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50'
+                icon={<TrashIcon className='tw-w-7 tw-h-7' />}
+              >
+                Delete product
+              </Button>
+              <Modal
+                title='Are you sure you want to delete this product?'
+                open={open}
+                onOk={handleOk}
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+                okButtonProps={{size: "large", type: "primary", className: "tw-text-white-100 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50"}}
+                cancelButtonProps={{size: "large", type: "text", className: "tw-text-white-100 tw-bg-red-600 hover:tw-bg-red-700 hover:tw-text-gray-50"}}
+              >
+                <p>
+                  By Deleting this product, you will lose all the information about it. and you will
+                  not be able to retrieve it.
+                </p>
+              </Modal>
+            </>
           </div>
         ) : null}
       </div>

@@ -1,7 +1,7 @@
 import { userFetcherWithAuth } from "@/helpers";
 import { EditProductType, UploadProductType } from "@/interfaces/commonTypes";
 import { Dispatch } from "redux";
-import { CreateProduct, UpdateProduct } from "./product.queries";
+import { CreateProduct, DeleteProduct, UpdateProduct } from "./product.queries";
 import { productType } from "./product.types";
 
 export const clearProduct = () => ({
@@ -41,11 +41,32 @@ export function updateProduct(Data: EditProductType, token: string) {
     const { message } = await import("antd");
     try {
       setLoading();
-      const res = await userFetcherWithAuth(UpdateProduct, {...Data, token}, token);
+      const res = await userFetcherWithAuth(UpdateProduct, { ...Data, token }, token);
       message.success("Product updated  successfully");
       dispatch({
         type: productType.UPDATE_PRODUCT,
         payload: res.updateProduct,
+      });
+    } catch (err) {
+      message.error(err.message.slice(0, err.message.indexOf(".")), 5);
+      dispatch({
+        type: productType.ERROR,
+        payload: err.message.slice(0, err.message.indexOf(".")),
+      });
+    }
+  };
+}
+
+export function useDeleteProduct(data: { id: string }, token: string) {
+  return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
+    try {
+      setLoading();
+      const res = await userFetcherWithAuth(DeleteProduct, { ...data, token }, token);
+      message.success("Product updated  successfully");
+      dispatch({
+        type: productType.DELETE_PRODUCT,
+        payload: res.deleteProduct,
       });
     } catch (err) {
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);
