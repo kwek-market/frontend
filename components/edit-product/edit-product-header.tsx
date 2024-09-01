@@ -37,7 +37,13 @@ function EditProductHeader({ submitDetails }: Props) {
     if (productOptions.length < 1) {
       return message.error("Add product options");
     }
-    updateProduct({ ...submitDetails }, user.token)(dispatch);
+    const newProductOptions = productOptions?.map(option => JSON.stringify(option));
+    console.log("🚀 ~~ saveItem ~~ productOptions:", newProductOptions);
+
+    updateProduct(
+      { ...submitDetails, productOptions: newProductOptions as any },
+      user.token
+    )(dispatch);
     // router.push({ pathname: "/seller/profile", query: { tab: "products" } });
   }
 

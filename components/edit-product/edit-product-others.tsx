@@ -3,6 +3,7 @@ import { Select } from "antd";
 import { SelectValue } from "antd/lib/select";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { addCurrentTotalPrice } from "../../helpers/helper";
 import { ICreateProductCharge, useGetProductCharge } from "../../hooks/admin/productCharges";
 import { RootState } from "../../store/rootReducer";
 import Load from "../Loader/Loader";
@@ -24,7 +25,11 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
   const [size, setSize] = useState(sizes[0].name);
   const [formValues, setFormValues] = useState([...submitDetails.productOptions]);
 
-  console.log("🚀 ~~ EditProductOthers ~~ formValues:", formValues[0]);
+  console.log(
+    "🚀 ~~ EditProductOthers ~~ formValues:",
+    submitDetails.productOptions,
+    formValues[0]
+  );
 
   const { data: productChargeData, isLoading: isLoadingCharge } = useGetProductCharge(token);
   const [currentTotalPrice, setCurrentTotalPrice] = useState(0);
@@ -32,29 +37,42 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
   const productCharge = productChargeData?.getProductCharge[0] as ICreateProductCharge;
 
   useEffect(() => {
-    if (productCharge) {
-      if (productCharge && productCharge?.hasFixedAmount) {
+    if (productCharge && formValues.length > 0) {
+      console.log("productCharge, formValues", productCharge, formValues);
+      if (productCharge) {
         setCurrentTotalPrice(
-          productCharge?.charge + Number(formValues?.[formValues.length - 1].price)
+          addCurrentTotalPrice(productCharge, formValues?.[formValues.length - 1])
         );
-      } else if (!productCharge?.hasFixedAmount) {
-        setCurrentTotalPrice(
-          (productCharge?.charge / 100) * Number(formValues?.[formValues.length - 1].price) +
-            Number(formValues?.[formValues.length - 1].price)
-        );
-      } else {
-        setCurrentTotalPrice(Number(formValues?.[formValues.length - 1].price));
       }
     }
 
     return () => {};
-  }, [productCharge]);
+  }, [productCharge, formValues]);
 
   useEffect(() => {
-    setFormValues(submitDetails.productOptions);
+    if (product.options.length > 0) {
+      const newProductOptions = product.options.map(option => ({
+        size: option.size,
+        quantity: option.quantity,
+        price: Number(option.price) - option.productCharge,
+        discounted_price: option.discountedPrice,
+        option_total_price: option.price,
+      }));
+      setFormValues(newProductOptions);
+    } else {
+      setFormValues([
+        {
+          size: "",
+          quantity: "",
+          price: 0,
+          discounted_price: 0,
+          option_total_price: 0,
+        },
+      ]);
+    }
 
     return () => {};
-  }, [submitDetails.productOptions]);
+  }, [product.options]);
 
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormValues = [...formValues];
@@ -76,8 +94,8 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
         size: "",
         quantity: "",
         price: 0,
-        discountPrice: 0,
-        totalPrice: 0,
+        discounted_price: 0,
+        option_total_price: 0,
       },
     ]);
   };
@@ -129,22 +147,18 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
     const val = [];
 
     // "{'size': 12, 'quantity':1, 'price': 400, 'discounted_price': 20, 'option_total_price': 380}"
-    for (let i = 0; i < formValues.length; i++) {
+    for (const values of formValues) {
       const newFormValues = {
-        size: formValues[i].size,
-        quantity: formValues[i].quantity,
-        price: formValues[i].price,
-        discounted_price: formValues[i].discountPrice,
-        option_total_price:
-          productCharge && productCharge?.hasFixedAmount
-            ? productCharge?.charge + Number(formValues[i].price)
-            : !productCharge?.hasFixedAmount
-            ? (productCharge?.charge / 100) * Number(formValues[i].price) +
-              Number(formValues[i].price)
-            : Number(formValues[i].price),
+        size: values.size,
+        quantity: values.quantity,
+        price: values.price || 0,
+        discounted_price: values.discounted_price || 0,
+        option_total_price: addCurrentTotalPrice(productCharge, values),
       };
       val.push(newFormValues);
     }
+
+    message.success("Product price is now set");
 
     setSubmitDetails({
       ...submitDetails,
@@ -183,7 +197,7 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
                 <br />
                 <div className=' tw-flex tw-space-x-2 tw-items-center  '>
                   <input
-                    type='tel'
+                    type='number'
                     placeholder='0'
                     name='size'
                     value={element.size?.split(" ")[0] || ""}
@@ -247,7 +261,7 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
                 <input
                   type='number'
                   placeholder='0'
-                  name='discountPrice'
+                  name='discount_price'
                   value={element.discountPrice || ""}
                   onChange={e => handleChange(index, e)}
                   className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
@@ -261,7 +275,7 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
                   <input
                     type='number'
                     placeholder='0'
-                    name='totalPrice'
+                    name='option_total_price'
                     value={currentTotalPrice}
                     disabled={true}
                     // onChange={e => handleChange(index, e)}
