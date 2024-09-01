@@ -5,7 +5,6 @@ import { message } from "antd";
 import Image from "next/legacy/image";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { convertCitiesToJSON } from "../../../../helpers/helper";
 import { useGetStateDeliveryFee } from "../../../../hooks/admin/stateDeliveryFee";
 import useBillingUpdate from "../../../../hooks/useBillingUpdate";
 import { setDeliveryFee } from "../../../../store/deliveryFee/deliveryFee.action";
@@ -18,9 +17,12 @@ function Billing({ setStep, addressId, setAddressId }) {
 
   const { data, isLoading, error } = useGetStateDeliveryFee({ token: user?.token });
 
-  const states = data?.getStateDeliveryFee;
+  const states = data?.stateDeliveryFees;
 
-  const [selectedState, setSelectedState] = useState("");
+  const [selectedState, setSelectedState] = useState<{
+    deliveryFees: Record<any, any>[];
+    state: string;
+  }>(null);
   const {
     user: { billingSet },
   } = user;
@@ -46,13 +48,7 @@ function Billing({ setStep, addressId, setAddressId }) {
 
   const [selectedCity, setSelectedCity] = useState(null);
 
-  const filteredStates = states?.filter(
-    state => state.fee > 0 && convertCitiesToJSON(state.city).length > 0
-  );
-
-  const selectedStateCity = filteredStates?.find(
-    state => state.state.toLowerCase() === selectedState?.toLowerCase()
-  )?.city;
+  const filteredStates = states?.filter(state => state?.deliveryFees.length > 0);
 
   function saveAddress(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -111,17 +107,17 @@ function Billing({ setStep, addressId, setAddressId }) {
     setBillingInfo({ ...billing });
 
     if (billing?.city) {
-      setSelectedState(billing?.state);
+      setSelectedState(filteredStates.find(state => billing?.state === state.state));
 
       const stateAndFee = filteredStates?.find(
         s => s?.state?.toLowerCase() === billing.state?.toLowerCase()
       );
       console.log("🚀 ~~ handleSelect ~~ stateAndFee:", stateAndFee);
 
-      const city = convertCitiesToJSON(stateAndFee?.city)?.find(c => billing.city === c.name);
+      const city = stateAndFee?.deliveryFees?.find(c => billing.city === c.city);
 
       if (city) {
-        dispatch(setDeliveryFee(stateAndFee.state, city?.fee, city?.name));
+        dispatch(setDeliveryFee(stateAndFee.state, city?.fee, city?.city));
       } else {
         message.error("Delivery is not available for this city, Please edit the city", 2);
       }
@@ -228,8 +224,12 @@ function Billing({ setStep, addressId, setAddressId }) {
                 id='state'
                 value={billingInfo.state}
                 onChange={e => {
-                  if (e.target.value) {
-                    setSelectedState(e.target.value);
+                  const state = filteredStates.find(state => {
+                    console.log("🚀 ~~ Billing ~~ state:", state);
+                    return state.state === e.target.value;
+                  });
+                  if (state) {
+                    setSelectedState(state);
                     setBillingInfo({ ...billingInfo, state: e.target.value });
                   }
                 }}
@@ -259,25 +259,25 @@ function Billing({ setStep, addressId, setAddressId }) {
                     setSelectedCity(e.target.value);
                     setBillingInfo({ ...billingInfo, city: e.target.value });
 
-                    const city = convertCitiesToJSON(selectedStateCity).find(
-                      city => city.name === e.target.value
+                    const city = selectedState?.deliveryFees.find(
+                      city => city.city === e.target.value
                     );
 
-                    setBillingInfo({ ...billingInfo, city: e.target.value });
+                    // setBillingInfo({ ...billingInfo, city: e.target.value });
 
-                    dispatch(setDeliveryFee(selectedState, city.fee, city.name));
+                    dispatch(setDeliveryFee(selectedState.state, city.fee, city.city));
                   }
                 }}
               >
                 <option value=''>--Select City--</option>
-                {convertCitiesToJSON(selectedStateCity)?.map(city => (
+                {selectedState?.deliveryFees.map(({ city, id, fee }) => (
                   <option
                     className='tw-flex tw-justify-between tw-items-center'
-                    key={city.name}
-                    value={city.name}
-                    data-fee={city.fee}
+                    key={id}
+                    value={city}
+                    data-fee={fee}
                   >
-                    {city.name}, Fee: {city.fee}
+                    {city}, Fee: {fee}
                   </option>
                 ))}
               </select>
