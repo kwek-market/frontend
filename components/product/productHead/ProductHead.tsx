@@ -130,7 +130,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
     setIsDeleteModalOpen(false);
   };
 
-  console.log("separateWords(product.color)", separateWords(product.color));
+  console.log("separateWords(product.color)", product);
 
   return (
     <div className={styles.product_container}>
@@ -140,7 +140,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             <div key={idx}>
               <Image
                 className={styles.carousel_img}
-                src={image.imageUrl}
+                src={image?.imageUrl}
                 width='848'
                 height='765'
                 placeholder='blur'
@@ -155,7 +155,7 @@ const ProductHead = function ({ product }: ProductHeadProps) {
               <button className={styles.img_sub}>
                 <Image
                   className={styles.carousel_img}
-                  src={image.imageUrl}
+                  src={image?.imageUrl}
                   width='200'
                   height='200'
                   placeholder='blur'

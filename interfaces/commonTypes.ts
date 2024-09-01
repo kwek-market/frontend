@@ -233,6 +233,7 @@ export type ProductType = {
     price: string;
     discountedPrice: string;
     optionTotalPrice: string;
+    productCharge: number;
   }[];
   dateCreated: string;
   brand: string;
