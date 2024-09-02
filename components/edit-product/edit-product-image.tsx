@@ -5,7 +5,6 @@ import { RcFile } from "antd/es/upload";
 import { GetProp } from "antd/lib";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { v4 } from "uuid";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -18,22 +17,20 @@ function EditProductImage({ submitDetails, setSubmitDetails, product }: EditProd
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
-    const images = submitDetails.productImageUrl.map((url: string, index) => {
-      console.log("🚀 ~~ submitDetails.productImageUrl.map ~~ url:", url);
-
+    const images = product.image.map((image, index) => {
       return {
-        uid: v4(),
+        uid: image.id,
         name: `image-${index + 1}`,
         status: "done",
-        url: url,
+        url: image.imageUrl,
         response: {
-          secure_url: url,
+          secure_url: image.imageUrl,
         },
       };
     });
 
     setFileList(images as UploadFile[]);
-  }, [submitDetails.productImageUrl]);
+  }, [product.image]);
 
   const onChange: UploadProps["onChange"] = async ({ fileList: newFileList, file }) => {
     console.log("🚀 ~~ constonChange:UploadProps[]= ~~ file:", file, newFileList);

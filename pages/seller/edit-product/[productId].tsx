@@ -9,13 +9,17 @@ import EditProductImage from "../../../components/edit-product/edit-product-imag
 import EditProductOthers from "../../../components/edit-product/edit-product-others";
 import EditProductPricing from "../../../components/edit-product/edit-product-pricing";
 import Load from "../../../components/Loader/Loader";
+import { useGetProductCharge } from "../../../hooks/admin/productCharges";
 import { useGetProduct } from "../../../hooks/useProduct";
 import { EditProductType, ProductType } from "../../../interfaces/commonTypes";
 import { RootState } from "../../../store/rootReducer";
 
 const index = () => {
   const router = useRouter();
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
+  const { data: productChargeData, isLoading: isLoadingCharge } = useGetProductCharge(token);
+
+  const productCharge = productChargeData?.getProductCharge;
 
   const productId = router?.query?.productId as string;
   const { data, isLoading, isError } = useGetProduct(productId as string, !!productId);
@@ -39,10 +43,14 @@ const index = () => {
   });
 
   useEffect(() => {
-    if (data?.product) {
+    if (data?.product && productCharge) {
       const product = data?.product as ProductType;
       const productOptions = data?.product?.options?.map(option => ({
-        ...option,
+        price: Number(option.price) - option.productCharge,
+        quantity: option.quantity,
+        size: option.size,
+        discounted_price: option.discountedPrice,
+        option_total_price: option.price,
         sizePostfix: option?.size?.trim(" ")[1] || "",
       }));
 
@@ -66,11 +74,11 @@ const index = () => {
     }
 
     return () => {};
-  }, [data?.product]);
+  }, [data?.product, productCharge]);
 
   return (
     <>
-      {data?.product && !isLoading && user?.id === data?.product?.user?.id ? (
+      {data?.product && productCharge && !isLoading && user?.id === data?.product?.user?.id ? (
         <section>
           <EditProductHeader submitDetails={submitDetails} />
           <section className='tw-bg-primary tw-mx-auto tw-py-6 tw-px-3 md:tw-px-20 lg:tw-px-56'>

@@ -45,6 +45,7 @@ export const getStaticPaths: GetStaticPaths = async context => {
 export const getStaticProps: GetStaticProps = async context => {
   const payload = { id: context.params.product };
   let product = null;
+
   try {
     const data = await userFetcher(GetProduct, payload);
     product = data?.product;

@@ -1,5 +1,6 @@
 import { VERIFY_TOKEN } from "@/store/user/user.queries";
 import dayjs from "dayjs";
+import { ICreateProductCharge } from "../hooks/admin/productCharges";
 import { userFetcher } from "./userFetcher";
 
 export function getInitials(name: string) {
@@ -166,3 +167,22 @@ export const getOrderText = (order: any) => {
 
   return { text, className, status, statusStyle };
 };
+
+export function addCurrentTotalPrice(
+  productCharge: ICreateProductCharge,
+  values: Record<string, any>
+) {
+  return productCharge && productCharge?.hasFixedAmount
+    ? productCharge?.charge + Number(values.price)
+    : !productCharge?.hasFixedAmount
+    ? (productCharge?.charge / 100) * Number(values.price) + Number(values.price)
+    : Number(values.price);
+}
+
+export function removeCurrentTotalPrice(productCharge: ICreateProductCharge, price: number) {
+  return productCharge && productCharge?.hasFixedAmount
+    ? Number(price) - productCharge?.charge
+    : !productCharge?.hasFixedAmount
+    ? Number(price)
+    : Number(price);
+}
