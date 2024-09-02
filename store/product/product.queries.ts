@@ -298,6 +298,7 @@ export const GetProduct = /* GraphQL */ `
         price
         discountedPrice
         optionTotalPrice
+        productCharge
       }
       dateCreated
       brand
