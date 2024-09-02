@@ -7,7 +7,7 @@ import { CATEGORIES } from "@/store/category/categories.queries";
 import { DEALS_OF_THE_DAY } from "@/store/seller/seller.queries";
 import { GetStaticProps } from "next";
 import { v4 } from "uuid";
-import { ONE_HOUR } from "../constants/constants";
+import { TEN_SECONDS } from "../constants/constants";
 
 const Home = function ({ categories, dealsOfTheDay }) {
   console.log("🚀 ~~ Home ~~ categories:", categories);
@@ -59,7 +59,7 @@ export async function getStaticProps(): Promise<ReturnType<GetStaticProps>> {
         categories: sortedCategories,
         dealsOfTheDay: dealsOfTheDay,
       },
-      revalidate: ONE_HOUR,
+      revalidate: TEN_SECONDS,
     };
   } catch (error) {
     return {
@@ -67,7 +67,7 @@ export async function getStaticProps(): Promise<ReturnType<GetStaticProps>> {
         categories: [],
         dealsOfTheDay: [],
       },
-      revalidate: ONE_HOUR,
+      revalidate: TEN_SECONDS,
     };
   }
 }
