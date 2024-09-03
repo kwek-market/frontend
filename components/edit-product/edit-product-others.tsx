@@ -55,7 +55,7 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
         size: option.size,
         quantity: option.quantity,
         price: Number(option.price) - option.productCharge,
-        discounted_price: option.discountedPrice,
+        discounted_price: Number(option.discountedPrice) - option.productCharge,
         option_total_price: option.price,
       }));
       setFormValues(newProductOptions);
@@ -261,11 +261,14 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
                 <input
                   type='number'
                   placeholder='0'
-                  name='discount_price'
-                  value={element.discountPrice || ""}
+                  name='discounted_price'
+                  value={element.discounted_price || ""}
                   onChange={e => handleChange(index, e)}
                   className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
                 />
+                <p className='tw-text-xs tw-text-yellow-900'>
+                  The product charge will also be added on the discount price will
+                </p>
               </label>
 
               {productCharge ? (
