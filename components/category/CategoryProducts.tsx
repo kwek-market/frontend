@@ -10,7 +10,6 @@ import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { Rate } from "antd";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export type ProductBoxProps = {
@@ -120,14 +119,18 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
 
           <p className={styles.box_productPrice}>
             {prod.options[0]?.discountedPrice ? (
-              <Fragment>
+              <p className='tw-space-x-2'>
                 <span>
                   ₦{""} {prod.options[0].discountedPrice}
                 </span>
-                <span>{prod.options[0]?.price}</span>
-              </Fragment>
+                <span className='tw-text-gray-kwek100 tw-line-through'>
+                  ₦{""} {prod.options[0]?.price}
+                </span>
+              </p>
             ) : (
-              <span>{prod.options[0]?.price}</span>
+              <span>
+                ₦{""} {prod.options[0]?.price}
+              </span>
             )}
           </p>
 
