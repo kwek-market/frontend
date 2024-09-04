@@ -3,6 +3,7 @@ import { createProduct } from "@/store/product/product.action";
 import { RootState } from "@/store/rootReducer";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import { MAX_PRODUCT_TITLE_LENGTH } from "../../constants/constants";
 import Button from "../buttons/Button";
 
 type Props = {
@@ -30,6 +31,11 @@ function Header({ submitDetails }: Props) {
     }
     if (productTitle.trim() === "") {
       return message.error("Add a product title");
+    }
+    if (productTitle.trim().length > MAX_PRODUCT_TITLE_LENGTH) {
+      return message.error(
+        `Product title must not be greater than ${MAX_PRODUCT_TITLE_LENGTH} characters long`
+      );
     }
     if (productImageUrl.length < 1) {
       return message.error("Add product images");

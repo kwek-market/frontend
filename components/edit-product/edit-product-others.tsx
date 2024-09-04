@@ -55,7 +55,9 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
         size: option.size,
         quantity: option.quantity,
         price: Number(option.price) - option.productCharge,
-        discounted_price: Number(option.discountedPrice) - option.productCharge,
+        discounted_price: !option.discountedPrice
+          ? Number(option.discountedPrice)
+          : Number(option.discountedPrice) - option.productCharge,
         option_total_price: option.price,
       }));
       setFormValues(newProductOptions);

@@ -214,7 +214,11 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             starColor='#ffc107'
           />
         )}
-        <p className={styles.product_subtitle}>{product.shortDescription}</p>
+        <div
+          className={"tw-px-4 tw-prose tw-prose-sm tw-line-clamp-3 tw-mb-3"}
+          dangerouslySetInnerHTML={{ __html: product.shortDescription }}
+        ></div>
+
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
           <Radio.Group
