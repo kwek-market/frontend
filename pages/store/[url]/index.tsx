@@ -45,7 +45,7 @@ const SellerStore = ({ seller }) => {
 export const getStaticPaths: GetStaticPaths = async context => {
   return {
     paths: [],
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -55,7 +55,6 @@ export const getStaticProps: GetStaticProps = async context => {
 
     const storeData = await userFetcher(GET_SELLER_STORE, { shopUrl: storeUrl });
     const store = storeData?.seller;
-    console.log("🚀 ~~ store:", store);
 
     return { props: { seller: store }, revalidate: TEN_SECONDS };
   } catch (error) {

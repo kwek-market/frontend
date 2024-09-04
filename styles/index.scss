@@ -189,20 +189,23 @@ progress[value]::-webkit-progress-bar {
 }
 
 // two editor containers
-
-.jodit-wysiwyg {
-  padding-left: 10px;
-}
-// allows default ul and dot to show up
-ul {
-  list-style: inside;
-}
-// allows default ol to show up
-ol {
-  list-style: inside;
-  list-style-type: number;
-}
-// allows table borders to show up
-td {
-  border: solid 1px;
+#myjoditEditor,
+#mySecondJoditEditor {
+  // text can start 10 px within the editor
+  .jodit-wysiwyg {
+    padding-left: 10px;
+  }
+  // allows default ul and dot to show up
+  ul {
+    list-style: inside;
+  }
+  // allows default ol to show up
+  ol {
+    list-style: inside;
+    list-style-type: number;
+  }
+  // allows table borders to show up
+  td {
+    border: solid 1px;
+  }
 }

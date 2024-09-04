@@ -78,7 +78,10 @@ function OrderComplete() {
                 </span>
               </li>
               <li className='tw-text-opacity-70 tw-text-gray-kwek900 tw-text-base'>
-                Total Amount: <span className='tw-font-semibold'>{order?.orderPrice}</span>
+                Total Amount:{" "}
+                <span className='tw-font-semibold'>
+                  {Number(order?.orderPrice) + Number(order?.deliveryFee)}
+                </span>
               </li>
             </ul>
 
