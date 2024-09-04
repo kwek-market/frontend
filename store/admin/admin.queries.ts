@@ -396,6 +396,7 @@ export const GET_ALL_ORDERS = /* GraphQL */ `
         dateCreated
         paid
         paymentMethod
+        deliveryFee
         user {
           fullName
           firstName
