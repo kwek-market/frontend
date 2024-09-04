@@ -1,6 +1,32 @@
-import { EditProductProps, UploadProductProps } from "@/interfaces/commonTypes";
+import { EditProductProps } from "@/interfaces/commonTypes";
+import JoditEditor from "jodit-react";
+import { useMemo, useRef } from "react";
+import { EDITOR_OPTIONS } from "../../constants/constants";
 
-function EditProductDetails({ submitDetails, setSubmitDetails }: EditProductProps) {
+function EditProductDetails({ submitDetails, setSubmitDetails, product }: EditProductProps) {
+  const editorRef = useRef(null);
+
+  const config = useMemo(
+    () => ({
+      readonly: false,
+      placeholder: "",
+      defaultActionOnPaste: "insert_as_html",
+      defaultLineHeight: 1.5,
+      enter: "div",
+      // options that we defined in above step.
+      buttons: EDITOR_OPTIONS,
+      buttonsMD: EDITOR_OPTIONS,
+      buttonsSM: EDITOR_OPTIONS,
+      buttonsXS: EDITOR_OPTIONS,
+      statusbar: false,
+      sizeLG: 900,
+      sizeMD: 700,
+      sizeSM: 400,
+      toolbarAdaptive: false,
+    }),
+    []
+  );
+
   return (
     <div className='tw-pt-3 tw-px-5 tw-pb-20 tw-mb-5 tw-bg-white-100 tw-rounded-md'>
       <div className='tw-p-3 tw-border-b tw-border-grey-kwek700'>
@@ -68,23 +94,21 @@ function EditProductDetails({ submitDetails, setSubmitDetails }: EditProductProp
           />
         </label>
 
-        <label className='tw-text-base tw-font-medium tw-capitalize tw-pt-3'>
-          {" "}
-          short description (Optional) <br />
-          <textarea
-            rows={4}
-            required
-            placeholder='Hint: Input product Highlights/Features in bullets. Not more than 200 Characters'
-            className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-            value={submitDetails.shortDescription}
-            onChange={e =>
-              setSubmitDetails({
-                ...submitDetails,
-                shortDescription: e.target.value,
-              })
-            }
-          ></textarea>
-        </label>
+        <div className='tw-mt-3'>
+          <label className='tw-text-base tw-font-medium tw-pt-3'>
+            {" "}
+            short description (Optional) <br />
+            <JoditEditor
+              ref={editorRef}
+              className='!tw-z-0'
+              value={product.shortDescription}
+              config={config as any}
+              onChange={htmlString =>
+                setSubmitDetails({ ...submitDetails, shortDescription: htmlString })
+              }
+            />
+          </label>
+        </div>
       </div>
     </div>
   );

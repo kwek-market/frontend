@@ -2,13 +2,13 @@ import ProductEmpty from "@/components/emptyProduct/EmptyProduct";
 import ErrorInfo from "@/components/Loader/ErrorInfo";
 import Load from "@/components/Loader/Loader";
 import ProductFilled from "@/components/productFilled/ProductFilled";
-import SingleProduct from "@/components/singleProduct/SingleProduct";
 import { userFetcher } from "@/helpers";
 import useSellerProducts from "@/hooks/useSellerProducts";
 import { PagePayload, ProductType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { GET_SELLER_PRODUCTS } from "@/store/seller/seller.queries";
 import { Fragment, useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 
@@ -28,7 +28,8 @@ export default function Product() {
   };
   const { status, data: productsData, error: productError } = useSellerProducts(payload);
   const [showProduct, setShowProduct] = useState(false);
-  const [product, setProduct] = useState<ProductType>({} as ProductType);
+
+  const product = productsData?.getSellerProducts?.objects as ProductType[];
 
   const handlePageClick = (event: { selected: number }) => {
     setCurrentPage(event.selected + 1);
@@ -47,33 +48,68 @@ export default function Product() {
         userFetcher(GET_SELLER_PRODUCTS, payload)
       );
     }
-    if (productsData === undefined) return;
-    setPageCount(productsData.getSellerProducts.pages);
-    setCurrentItems(productsData.getSellerProducts.objects);
-    // console.log(`current page: ${currentPage}`);
+
+    // // console.log(`current page: ${currentPage}`);
     return () => {
       queryClient.cancelQueries(["sellerProducts", payload]);
     };
   }, [productsData, currentPage, queryClient, filter]);
 
+  useEffect(() => {
+    if (productsData) {
+      setPageCount(productsData.getSellerProducts.pages);
+      setCurrentItems(productsData.getSellerProducts.objects);
+    }
+  }, [productsData]);
+
   return (
     <Fragment>
       {status === "loading" && <Load />}
       {status === "error" && <ErrorInfo error={(productError as { message: string }).message} />}
-      {status === "success" && currentItems !== undefined && currentItems.length > 0
-        ? !showProduct && (
-            <ProductFilled
-              product={currentItems}
-              setShowProduct={setShowProduct}
-              setProduct={setProduct}
-              handlePageClick={handlePageClick}
+      {product ? (
+        <>
+          <ProductFilled
+            product={product}
+            setShowProduct={setShowProduct}
+            handlePageClick={handlePageClick}
+            pageCount={pageCount}
+            filter={filter}
+            setFilter={setFilter}
+            pageSize={payload.pageSize}
+          />
+          <div className='tw-mt-4'>
+            <ReactPaginate
+              nextLabel='next >'
+              onPageChange={e => handlePageClick(e)}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
               pageCount={pageCount}
-              filter={filter}
-              setFilter={setFilter}
+              previousLabel='< previous'
+              pageClassName='tw-text-red-kwek100 tw-text-xl tw-px-2 tw-py-2'
+              previousClassName={`tw-text-gray-50 tw-block tw-px-2 tw-py-2 tw-rounded-xl ${
+                productsData?.getSellerProducts.hasPrev
+                  ? "tw-bg-red-kwek100"
+                  : "tw-bg-gray-kwek100 !tw-cursor-not-allowed"
+              }`}
+              nextClassName={`tw-text-gray-50 tw-block tw-px-2 tw-py-2 tw-rounded-xl ${
+                productsData?.getSellerProducts.hasNext
+                  ? "tw-bg-red-kwek100"
+                  : "tw-bg-gray-kwek100 !tw-cursor-not-allowed"
+              }`}
+              breakLabel='...'
+              breakClassName='page-item'
+              breakLinkClassName='page-link'
+              containerClassName='tw-w-full tw-flex tw-justify-center tw-items-center tw-list-none tw-space-x-5'
+              className=''
+              activeClassName='active'
+              renderOnZeroPageCount={undefined}
             />
-          )
-        : !showProduct && <ProductEmpty />}
-      {showProduct && <SingleProduct setShowProduct={setShowProduct} product={product} />}
+          </div>
+        </>
+      ) : (
+        !showProduct && <ProductEmpty />
+      )}
+      {/* {showProduct && <SingleProduct setShowProduct={setShowProduct} product={product} />} */}
     </Fragment>
   );
 }

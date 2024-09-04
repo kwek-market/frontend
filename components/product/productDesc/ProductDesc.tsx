@@ -57,35 +57,10 @@ const ProductDesc = function ({ product }: ProductDescProps) {
     <div className={styles.desc_container}>
       <Tabs defaultActiveKey='1'>
         <TabPane tab='Description' key='1'>
-          <div className={styles.tab_content}>
-            <p className={styles.descP}>{product.shortDescription}</p>
-            {/* <div className={styles.checked}>
-              <div className={styles.cheaked_content}>
-                <i className="fas fa-check" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-              </div>
-              <div className={styles.cheaked_content}>
-                <i className="fas fa-check" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-              </div>
-              <div className={styles.cheaked_content}>
-                <i className="fas fa-check" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-              </div>
-              <div className={styles.cheaked_content}>
-                <i className="fas fa-check" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-              </div>
-            </div>
-            <p className={styles.descP}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </p> */}
-          </div>
+          <div
+            className={"tw-px-4 tw-prose tw-prose-sm"}
+            dangerouslySetInnerHTML={{ __html: product.shortDescription }}
+          ></div>
         </TabPane>
         <TabPane tab='Additional' key='2'>
           <div className={styles.tab_content}>
