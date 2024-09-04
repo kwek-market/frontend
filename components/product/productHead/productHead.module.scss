@@ -111,9 +111,17 @@
       font-size: 32px;
       font-weight: 600;
       line-height: 48px;
-      margin-bottom: 7px;
       color: #1d1616;
       margin-bottom: 4px;
+    }
+    .product_discount_price {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 48px;
+      margin-bottom: 4px;
+      color: #a8a0a0;
+      margin-top: -16px;
+      text-decoration: line-through;
     }
     .box_productRating {
       @include flex(flex-start, center);
@@ -181,7 +189,7 @@
     }
 
     .product_option_order {
-      @include flex(space-between, center,row wrap);
+      @include flex(space-between, center, row wrap);
       margin-bottom: 24px;
       padding-bottom: 32px;
       border-bottom: 1px solid #bfa5a3;
@@ -244,7 +252,7 @@
           margin-right: 16px;
 
           @include respondMax("mobile") {
-            padding: .75rem 1.25rem;
+            padding: 0.75rem 1.25rem;
           }
 
           i {
@@ -271,7 +279,7 @@
           background: transparent;
 
           @include respondMax("mobile") {
-            padding: .75rem 1.25rem;
+            padding: 0.75rem 1.25rem;
           }
 
           i {
