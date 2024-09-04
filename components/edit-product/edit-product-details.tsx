@@ -98,7 +98,7 @@ function EditProductDetails({ submitDetails, setSubmitDetails, product }: EditPr
           />
         </label>
 
-        <div className='tw-mt-3'>
+        <div id='myjoditEditor' className='tw-mt-3'>
           <label className='tw-text-base tw-font-medium tw-pt-3'>
             {" "}
             short description (Optional) <br />
