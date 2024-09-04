@@ -1,7 +1,11 @@
 import { EditProductProps } from "@/interfaces/commonTypes";
-import JoditEditor from "jodit-react";
+import dynamic from "next/dynamic";
 import { useMemo, useRef } from "react";
 import { EDITOR_OPTIONS } from "../../constants/constants";
+
+const JoditEditor = dynamic(() => import("jodit-react"), {
+  ssr: false,
+});
 
 function EditProductDetails({ submitDetails, setSubmitDetails, product }: EditProductProps) {
   const editorRef = useRef(null);
