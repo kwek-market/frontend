@@ -18,7 +18,7 @@ type ProductFilledProps = {
   handlePageClick: (event: { selected: number }) => void;
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
-  pageSize: number;
+  pageSize?: number;
 };
 
 const ProductFilled = function ({
