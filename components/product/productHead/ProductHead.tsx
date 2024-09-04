@@ -183,7 +183,16 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           </p>
           <p className={styles.product_Code}>Product Code: {product?.id}</p>
         </div>
-        <p className={styles.product_price}>₦{product.options[0]?.price}</p>
+        <p className={styles.product_price}>
+          ₦
+          {product.options[0]?.discountedPrice
+            ? product.options[0]?.discountedPrice
+            : product.options[0]?.price}
+        </p>
+        {product.options[0]?.discountedPrice ? (
+          <p className={styles.product_discount_price}>₦{product.options[0]?.price}</p>
+        ) : null}
+
         {!product.productRating.length ? (
           <div className={styles.box_productRating}>
             <StarRatingComponent
@@ -205,7 +214,11 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             starColor='#ffc107'
           />
         )}
-        <p className={styles.product_subtitle}>{product.shortDescription}</p>
+        <div
+          className={"tw-px-4 tw-prose tw-prose-sm tw-line-clamp-3 tw-mb-3"}
+          dangerouslySetInnerHTML={{ __html: product.shortDescription }}
+        ></div>
+
         <div className={styles.product_options_color}>
           <p>COLOR:</p>
           <Radio.Group

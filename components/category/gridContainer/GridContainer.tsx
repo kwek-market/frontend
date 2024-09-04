@@ -157,6 +157,9 @@ const GridContainer = function ({ cards, category }: any) {
               showLessItems={true}
               defaultCurrent={1}
               total={payload.pageSize * pageCount}
+              className='tw-text-red-500 tw-overflow-x-scroll tw-scrollbar-none tw-py-5 px-6 tw-flex tw-space-x-2 tw-justify-center tw-items-center tw-w-full'
+              role='button'
+              locale={{}}
               itemRender={(page, type, element) => {
                 if (type === "jump-next" || type === "jump-prev") {
                   return (
@@ -199,9 +202,6 @@ const GridContainer = function ({ cards, category }: any) {
                   </Link>
                 );
               }}
-              className='tw-text-red-500 tw-overflow-x-scroll tw-w-max tw-py-5 px-6 tw-flex tw-space-x-2 tw-justify-center tw-items-center'
-              role='button'
-              locale={{}}
             />
           </div>
           {isFetching ? (
