@@ -13,6 +13,7 @@ import useCancelOrder from "../../../../../hooks/useCancelOrder";
 import { RootState } from "../../../../../store/rootReducer";
 import {
   OrderDeliveryStatus,
+  OrderDeliveryStatusWhenPaid,
   UpdateOrderDeliveryStatusSchema,
 } from "../../../../../validations/orders";
 import { queryClient } from "../../../../_app";
@@ -151,7 +152,7 @@ const OrderDetail = () => {
                   name='updateDeliveryStatus'
                   defaultValue={selectedStatus}
                 >
-                  {Object.values(OrderDeliveryStatus)?.map(status => (
+                  {Object.values(!order?.paid ? OrderDeliveryStatus: OrderDeliveryStatusWhenPaid)?.map(status => (
                     <option key={status} value={status} className='tw-capitalize'>
                       {status}
                     </option>
@@ -159,7 +160,7 @@ const OrderDetail = () => {
                 </select>
               </div>
 
-              {!order?.closed ? (
+              {!order?.closed && !order?.paid ? (
                 <Popconfirm
                   title='Are you sure you want to close this order, this action cannot be undone'
                   onConfirm={handleCancelOrder}

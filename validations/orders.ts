@@ -6,6 +6,12 @@ export enum OrderDeliveryStatus {
   Cancelled = "closed",
 }
 
+export enum OrderDeliveryStatusWhenPaid {
+  OrderInProgress = "Order in progress",
+  Delivered = "delivered",
+}
+
+
 export const UpdateOrderDeliveryStatusSchema = z.object({
   orderId: z.string({
     required_error: "Order is required",
