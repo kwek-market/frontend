@@ -224,6 +224,7 @@ export const GetProducts = /* GraphQL */ `
         options {
           id
           size
+          color
           quantity
           price
           discountedPrice
@@ -294,6 +295,7 @@ export const GetProduct = /* GraphQL */ `
       options {
         id
         size
+        color
         quantity
         price
         discountedPrice
