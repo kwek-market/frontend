@@ -19,6 +19,7 @@ const CartGridComponent = function () {
   const user = useSelector((state: RootState) => state.user);
   const cart = useSelector((state: RootState) => state.cart);
 
+
   function deleteItemFromCart(itemId: string, cartId: string) {
     const payload = {
       itemId,

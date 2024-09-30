@@ -210,6 +210,8 @@
       .product_qty {
         @include flex(flex-start, center, row nowrap);
         margin-bottom: 1rem;
+        width: 100%;
+        margin-top: 12px;
       }
 
       .product_addToCart {
@@ -243,6 +245,8 @@
 
       .product_buttonbox {
         @include flex(flex-start, center, row);
+        width: 100%;
+        margin-top: 12px;
 
         .butnowButton {
           @include flex(flex-start, center, row);
@@ -250,6 +254,8 @@
           background: #af1328;
           border-radius: 5px;
           margin-right: 16px;
+          width: 100%;
+          justify-content: center;
 
           @include respondMax("mobile") {
             padding: 0.75rem 1.25rem;
@@ -277,6 +283,8 @@
           border: 1px solid #af1328 !important;
           border-radius: 5px !important;
           background: transparent;
+          width: 100%;
+          justify-content: center;
 
           @include respondMax("mobile") {
             padding: 0.75rem 1.25rem;

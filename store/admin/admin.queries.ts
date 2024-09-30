@@ -90,6 +90,7 @@ export const GET_PRODUCTS = /* GraphQL */ `
           price
           discountedPrice
           size
+          color
         }
         sales {
           amount
@@ -119,6 +120,7 @@ export const GET_PRODUCT = /* GraphQL */ `
         price
         discountedPrice
         size
+        color
       }
       image {
         id
