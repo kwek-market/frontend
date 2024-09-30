@@ -42,6 +42,7 @@ const GridContainer = function ({ title, timer, sidebar, cards }: GridContainerP
   const { status: categoryStatus, data: categoryData, error: categoryError } = useProducts(payload);
 
   const newBanner =
+    // eslint-disable-next-line no-constant-binary-expression
     !!categoryData?.products.objects !== undefined &&
     categoryData?.products.objects
       .slice(0, 2)
