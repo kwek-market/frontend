@@ -6,11 +6,13 @@ import { AddToCartPayload, AddToWishlistPayload, ProductType } from "@/interface
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
-import { Rate } from "antd";
+import { Modal, Rate } from "antd";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { Rings } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
+import ProductVariant from "../../components/product/ProductVariant/ProductVariant";
 import styles from "./ProductBox.module.scss";
 
 export type ProductBoxProps = {
@@ -20,10 +22,12 @@ export type ProductBoxProps = {
 
 const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const user = useSelector((state: RootState) => state.user);
   const cart = useSelector((state: RootState) => state.cart);
   const wishlist = useSelector((state: RootState) => state.wishlist);
   const { mutate } = useClicksUpdate();
+  const [isProductVariantModalOpen, setIsProductVariantModalOpen] = useState(false);
 
   async function addToCart(id: string) {
     const payload: AddToCartPayload = {
@@ -106,12 +110,11 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             />
           )}
         </span> */}{" "}
-        <Link
-          href={`/product/${prod.id}?id=${prod.productTitle}`}
+        <div
           className='tw-absolute tw-top-0 tw-left-0 tw-right-0 tw-bottom-0 overlay tw-z-20 tw-bg-brown-kwek300 tw-cursor-pointer tw-block'
           onClick={e => {
             updateClicks(prod.id, user.token);
-            e.stopPropagation();
+            router.push(`/product/${prod.id}?id=${prod.productTitle}`);
           }}
         >
           <span className='tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10'>
@@ -120,7 +123,12 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                 !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
               } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
               style={{ padding: "5px" }}
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation();
+                if (prod.options.length > 1) {
+                  setIsProductVariantModalOpen(true);
+                  return;
+                }
                 addToCart(prod?.options[0]?.id);
               }}
             />
@@ -137,10 +145,14 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           <span className='tw-bg-red-kwek200 bg-red-200 tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-p-2 tw-text-center tw-text-white-100 tw-uppercase tw-opacity-100'>
             details
           </span>
-        </Link>
+        </div>
       </div>
 
-      <Link href={`/product/${prod.id}?id=${prod.productTitle}`} replace>
+      <div
+        onClick={() => {
+          router.push(`/product/${prod.id}?id=${prod.productTitle}`);
+        }}
+      >
         <div className={styles.box_details}>
           <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
@@ -180,7 +192,34 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             </div>
           )}
         </div>
-      </Link>
+      </div>
+
+      {isProductVariantModalOpen && (
+        <Modal
+          title='Please Select a product Variation'
+          open={isProductVariantModalOpen}
+          okButtonProps={{
+            className: "tw-w-full tw-bg-red-kwek100 hover:!tw-bg-red-kwek100",
+            size: "large",
+          }}
+          cancelButtonProps={{
+            className:
+              "tw-w-full tw-border-red-kwek100 tw-text-red-kwek100  hover:!tw-text-red-kwek100/50 hover:!tw-border-red-kwek100/50",
+            size: "large",
+          }}
+          okText='View Cart'
+          cancelText='Continue'
+          classNames={{
+            footer: "tw-flex",
+          }}
+          onOk={() => {
+            router.push("/cart");
+          }}
+          onCancel={() => setIsProductVariantModalOpen(false)}
+        >
+          <ProductVariant product={prod} />
+        </Modal>
+      )}
     </div>
   );
 };
