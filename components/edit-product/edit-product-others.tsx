@@ -37,22 +37,10 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
   const productCharge = productChargeData?.getProductCharge[0] as ICreateProductCharge;
 
   useEffect(() => {
-    if (productCharge && formValues.length > 0) {
-      console.log("productCharge, formValues", productCharge, formValues);
-      if (productCharge) {
-        setCurrentTotalPrice(
-          addCurrentTotalPrice(productCharge, formValues?.[formValues.length - 1])
-        );
-      }
-    }
-
-    return () => {};
-  }, [productCharge, formValues]);
-
-  useEffect(() => {
     if (product.options.length > 0) {
       const newProductOptions = product.options.map(option => ({
         size: option.size,
+        color: option.color,
         quantity: option.quantity,
         price: Number(option.price) - option.productCharge,
         discounted_price: !option.discountedPrice
@@ -65,6 +53,7 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
       setFormValues([
         {
           size: "",
+          color: "",
           quantity: "",
           price: 0,
           discounted_price: 0,
@@ -94,6 +83,7 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
       ...formValues,
       {
         size: "",
+        color: "",
         quantity: "",
         price: 0,
         discounted_price: 0,
@@ -152,6 +142,7 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
     for (const values of formValues) {
       const newFormValues = {
         size: values.size,
+        color: values.color,
         quantity: values.quantity,
         price: values.price || 0,
         discounted_price: values.discounted_price || 0,
@@ -226,6 +217,21 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
 
               <label className='tw-text-base tw-font-medium tw-capitalize'>
                 {" "}
+                color
+                <br />
+                <input
+                  type='text'
+                  placeholder='0'
+                  name='color'
+                  required
+                  value={element.color || ""}
+                  onChange={e => handleChange(index, e)}
+                  className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
+                />
+              </label>
+
+              <label className='tw-text-base tw-font-medium tw-capitalize'>
+                {" "}
                 quantity
                 <br />
                 <input
@@ -281,9 +287,9 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
                     type='number'
                     placeholder='0'
                     name='option_total_price'
-                    value={currentTotalPrice}
+                    value={addCurrentTotalPrice(productCharge, element)}
                     disabled={true}
-                    // onChange={e => handleChange(index, e)}
+                    onChange={e => handleChange(index, e)}
                     className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2 disabled:tw-text-gray-500 disabled:tw-bg-gray-200'
                   />
                 </label>

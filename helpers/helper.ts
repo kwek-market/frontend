@@ -172,6 +172,15 @@ export function addCurrentTotalPrice(
   productCharge: ICreateProductCharge,
   values: Record<string, any>
 ) {
+  if (values.discounted_price) {
+    return productCharge && productCharge?.hasFixedAmount
+      ? productCharge?.charge + Number(values.discounted_price)
+      : !productCharge?.hasFixedAmount
+      ? (productCharge?.charge / 100) * Number(values.discounted_price) +
+        Number(values.discounted_price)
+      : Number(values.discounted_price);
+  }
+
   return productCharge && productCharge?.hasFixedAmount
     ? productCharge?.charge + Number(values.price)
     : !productCharge?.hasFixedAmount
