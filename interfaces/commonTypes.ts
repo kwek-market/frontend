@@ -229,6 +229,7 @@ export type ProductType = {
   options: {
     id: string;
     size: string;
+    color: string;
     quantity: string;
     price: string;
     discountedPrice: string;

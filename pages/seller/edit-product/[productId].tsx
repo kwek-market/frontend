@@ -47,6 +47,7 @@ const index = () => {
       const product = data?.product as ProductType;
       const productOptions = data?.product?.options?.map(option => ({
         price: Number(option.price) - option.productCharge,
+        color: option.color,
         quantity: option.quantity,
         size: option.size,
         discounted_price: option.discountedPrice,

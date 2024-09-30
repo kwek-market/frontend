@@ -3,6 +3,7 @@ import { Select } from "antd";
 import { SelectValue } from "antd/lib/select";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { addCurrentTotalPrice } from "../../helpers/helper";
 import { ICreateProductCharge, useGetProductCharge } from "../../hooks/admin/productCharges";
 import { RootState } from "../../store/rootReducer";
 import Load from "../Loader/Loader";
@@ -25,6 +26,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const [formValues, setFormValues] = useState([
     {
       size: "",
+      color: "",
       quantity: "",
       price: 0,
       discountPrice: 0,
@@ -56,6 +58,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
       ...formValues,
       {
         size: "",
+        color: "",
         quantity: "",
         price: 0,
         discountPrice: 0,
@@ -70,14 +73,6 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     newFormValues.splice(i, 1);
     setFormValues(newFormValues);
   };
-
-  const currentTotalPrice =
-    productCharge && productCharge?.hasFixedAmount
-      ? productCharge?.charge + Number(formValues[formValues.length - 1].price)
-      : !productCharge?.hasFixedAmount
-      ? (productCharge?.charge / 100) * Number(formValues[formValues.length - 1].price) +
-        Number(formValues[formValues.length - 1].price)
-      : Number(formValues[formValues.length - 1].price);
 
   const handleSubmit = async () => {
     const { message } = await import("antd");
@@ -123,6 +118,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     for (let i = 0; i < formValues.length; i++) {
       const newFormValues = {
         size: formValues[i].size ? `${formValues[i].size} ${formValues[i].sizePostfix}` : "",
+        color: formValues[i].color,
         quantity: formValues[i].quantity,
         price: formValues[i].price,
         discounted_price: formValues[i].discountPrice,
@@ -200,6 +196,21 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
 
               <label className='tw-text-base tw-font-medium tw-capitalize'>
                 {" "}
+                color
+                <br />
+                <input
+                  type='text'
+                  placeholder='0'
+                  name='color'
+                  required
+                  value={element.color || ""}
+                  onChange={e => handleChange(index, e)}
+                  className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
+                />
+              </label>
+
+              <label className='tw-text-base tw-font-medium tw-capitalize'>
+                {" "}
                 quantity
                 <br />
                 <input
@@ -213,22 +224,20 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                 />
               </label>
 
-              {productCharge ? (
-                <label className='tw-text-base tw-font-medium tw-capitalize'>
-                  {" "}
-                  price
-                  <br />
-                  <input
-                    type='number'
-                    placeholder='0'
-                    name='price'
-                    required
-                    value={element.price || ""}
-                    onChange={e => handleChange(index, e)}
-                    className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-                  />
-                </label>
-              ) : null}
+              <label className='tw-text-base tw-font-medium tw-capitalize'>
+                {" "}
+                price
+                <br />
+                <input
+                  type='number'
+                  placeholder='0'
+                  name='price'
+                  required
+                  value={element.price || ""}
+                  onChange={e => handleChange(index, e)}
+                  className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
+                />
+              </label>
 
               <label className='tw-text-base tw-font-medium tw-capitalize'>
                 {" "}
@@ -252,7 +261,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                     type='number'
                     placeholder='0'
                     name='totalPrice'
-                    value={currentTotalPrice}
+                    value={addCurrentTotalPrice(productCharge, element)}
                     disabled={true}
                     // onChange={e => handleChange(index, e)}
                     className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2 disabled:tw-text-gray-500 disabled:tw-bg-gray-200'

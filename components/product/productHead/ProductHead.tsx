@@ -10,12 +10,12 @@ import { Button, Carousel, Modal, Radio, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
 import { v4 } from "uuid";
-import { separateWords } from "../../../helpers/helper";
 import { useDeleteProduct } from "../../../store/product/product.action";
+import ProductVariant from "../ProductVariant/ProductVariant";
 import styles from "./productHead.module.scss";
 
 const SampleNextArrow = function (props) {
@@ -55,14 +55,25 @@ type ProductHeadProps = {
 
 const ProductHead = function ({ product }: ProductHeadProps) {
   const router = useRouter();
+  const cart = useSelector((state: RootState) => state.cart);
 
   const user = useSelector((state: RootState) => state.user);
   const wishlists = useSelector((state: RootState) => state.wishlist?.wishlists);
 
   const { mutate: deleteProduct, isLoading: isDeleting } = useDeleteProduct(user.token);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isProductVariantModalOpen, setIsProductVariantModalOpen] = useState(false);
 
   const dispatch = useDispatch();
+
+  const result = useMemo(() => {
+    let initial = 0;
+    cart.cart.forEach(item => {
+      const current = item.price * item.quantity;
+      initial += current;
+    });
+    return initial;
+  }, [cart.cart]);
 
   const [numItem, incNumItem] = useState(1);
 
@@ -89,11 +100,11 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   }
 
   // When increasing items, ensure it's not more than the quantity market has
-  const increaseQuantity = useCallback(() => {
+  const increaseQuantityManually = useCallback(() => {
     incNumItem(prev => prev + 1);
   }, [numItem]);
 
-  const decreaseQuantity = useCallback(() => {
+  const decreaseQuantityManually = useCallback(() => {
     incNumItem(prev => (prev === 0 ? 0 : prev - 1));
   }, [numItem]);
 
@@ -129,8 +140,13 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   const handleCancel = () => {
     setIsDeleteModalOpen(false);
   };
+  console.log(product?.options);
 
-  console.log("separateWords(product.color)", product);
+  const colors = Array.from(new Set(product?.options?.map(option => option?.color)))?.filter(
+    value => value
+  );
+
+  console.log("products", product, colors);
 
   return (
     <div className={styles.product_container}>
@@ -219,35 +235,39 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           dangerouslySetInnerHTML={{ __html: product.shortDescription }}
         ></div>
 
-        <div className={styles.product_options_color}>
-          <p>COLOR:</p>
-          <Radio.Group
-            className={`${styles.product_options_color} tw-flex tw-space-x-4 tw-items-center tw-border-r-2`}
-            defaultValue='a'
-            buttonStyle='solid'
-          >
-            {separateWords(product.color).map((color, index) =>
-              color ? (
+        {colors.length > 0 && (
+          <div className={styles.product_options_color}>
+            <p>COLOR:</p>
+            <Radio.Group
+              className={`${styles.product_options_color} tw-flex tw-space-x-4 tw-items-center tw-border-r-2`}
+              defaultValue='a'
+              buttonStyle='solid'
+            >
+              {colors.map(color => (
                 <Radio.Button
                   key={v4()}
                   style={{
-                    backgroundColor: `${color.toLowerCase()}`,
+                    backgroundColor: `${color?.toLowerCase()}`,
                     opacity: selectedColor === color ? 0.8 : 1,
                     border: selectedColor === color ? `2px solid magenta` : "0px",
                   }}
-                  onClick={e => setSelectedColor(color)}
+                  onClick={e => {
+                    setIsProductVariantModalOpen(true);
+                  }}
                   className='tw-p-3 tw-w-5 tw-h-5 tw-border-4'
                   value='a'
                 ></Radio.Button>
-              ) : null
-            )}
-          </Radio.Group>
-        </div>
+              ))}
+            </Radio.Group>
+          </div>
+        )}
         <div className={styles.product_option_size}>
           <p>SIZE:</p>
           <div className={styles.product_sizebox}>
             {product.options.map(option => (
-              <button key={v4()}>{option.size}</button>
+              <button onClick={() => setIsProductVariantModalOpen(true)} key={v4()}>
+                {option.size}
+              </button>
             ))}
           </div>
         </div>
@@ -260,17 +280,25 @@ const ProductHead = function ({ product }: ProductHeadProps) {
           </p>
         </div>
         <div className={styles.product_option_order}>
-          <div className={styles.product_qty}>
-            <p>QTY:</p>
-            <div className={styles.product_addToCart}>
-              <button onClick={() => decreaseQuantity()}>-</button>
-              <p>{numItem}</p>
-              <button onClick={() => increaseQuantity()}>+</button>
+          {product?.options?.length === 1 && (
+            <div className={styles.product_qty}>
+              <p>QTY:</p>
+              <div className={styles.product_addToCart}>
+                <button onClick={() => decreaseQuantityManually()}>-</button>
+                <p>{numItem}</p>
+                <button onClick={() => increaseQuantityManually()}>+</button>
+              </div>
             </div>
-          </div>
+          )}
           <div className={styles.product_buttonbox}>
             <button
-              onClick={() => addToCart(product.options[0].id)}
+              onClick={() => {
+                if (product?.options?.length > 1) {
+                  setIsProductVariantModalOpen(true);
+                  return;
+                }
+                addToCart(product.options[0].id);
+              }}
               className={styles.butnowButton}
             >
               <i className='fas fa-shopping-cart' />
@@ -393,6 +421,34 @@ const ProductHead = function ({ product }: ProductHeadProps) {
             </>
           </div>
         ) : null}
+
+        {/* THE PRODUCT VARIANT MODALS */}
+        {isProductVariantModalOpen && (
+          <Modal
+            title='Please Select a product Variation'
+            open={isProductVariantModalOpen}
+            okButtonProps={{
+              className: "tw-w-full tw-bg-red-kwek100 hover:!tw-bg-red-kwek100",
+              size: "large",
+            }}
+            cancelButtonProps={{
+              className:
+                "tw-w-full tw-border-red-kwek100 tw-text-red-kwek100  hover:!tw-text-red-kwek100/50 hover:!tw-border-red-kwek100/50",
+              size: "large",
+            }}
+            okText='View Cart'
+            cancelText='Continue'
+            classNames={{
+              footer: "tw-flex",
+            }}
+            onOk={() => {
+              router.push("/cart");
+            }}
+            onCancel={() => setIsProductVariantModalOpen(false)}
+          >
+            <ProductVariant product={product} />
+          </Modal>
+        )}
       </div>
     </div>
   );
