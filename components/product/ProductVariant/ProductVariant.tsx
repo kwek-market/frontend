@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIp } from "../../../helpers";
 import {
   AddToCartPayload,
-  DeleteFromCartPayload,
   ProductType,
+  RemoveItemFromCartWithOptionId,
 } from "../../../interfaces/commonTypes";
 import {
   addToCartFunc,
   deleteCartItem,
-  deleteItemInCart,
   getCartFunc,
+  removeItemFromCartWithOptionId,
 } from "../../../store/cart/cart.actions";
 import { RootState } from "../../../store/rootReducer";
 import { Naira } from "../../UI/NairaSymbol";
@@ -31,13 +31,13 @@ const ProductVariant = ({ product }: { product: ProductType }) => {
     getCartFunc(user.token)(dispatch);
   }
 
-  async function decreaseQuantity(itemId: string, cartId: string) {
-    const payload: DeleteFromCartPayload = {
-      itemId,
-      cartId,
+  async function decreaseQuantity(optionId: string) {
+    const payload: RemoveItemFromCartWithOptionId = {
+      productOptionId: optionId,
+      quantity: 1,
     };
     user.token ? (payload["token"] = user.token) : (payload["ip"] = await getIp());
-    deleteItemInCart(payload)(dispatch);
+    await removeItemFromCartWithOptionId(payload)(dispatch);
     getCartFunc(user.token)(dispatch);
   }
 
@@ -53,7 +53,7 @@ const ProductVariant = ({ product }: { product: ProductType }) => {
   }
 
   const getParticularProductInCart = optionId => {
-    const cartProduct = cart?.cart?.find(cartItem => cartItem?.product?.id === product.id);
+    const cartProduct = cart?.cart?.find(cartItem => cartItem?.productOptionId === optionId);
 
     return cartProduct;
   };
@@ -90,7 +90,10 @@ const ProductVariant = ({ product }: { product: ProductType }) => {
 
           <div className='tw-flex tw-items-center tw-space-x-4'>
             <button
-              disabled={Number(option.quantity) === 0}
+              disabled={
+                Number(option.quantity) <= 0 ||
+                getParticularProductInCart(option.id)?.quantity === 0
+              }
               className='tw-p-1.5 tw-bg-red-kwek100 disabled:tw-bg-red-kwek100/50'
               onClick={() => {
                 const cart = getParticularProductInCart(option.id);
@@ -98,7 +101,7 @@ const ProductVariant = ({ product }: { product: ProductType }) => {
                   message.error("No Product Found");
                   return;
                 }
-                decreaseQuantity(option.id, cart.id);
+                decreaseQuantity(option.id);
               }}
             >
               <MinusIcon className='tw-text-white-100 tw-w-6 tw-h-5' />
@@ -112,6 +115,7 @@ const ProductVariant = ({ product }: { product: ProductType }) => {
               onClick={() => {
                 addToCart(option.id);
               }}
+              disabled={Number(option.quantity) <= getParticularProductInCart(option.id)?.quantity}
             >
               <PlusIcon className='tw-text-white-100 tw-w-6 tw-h-5' />
             </button>

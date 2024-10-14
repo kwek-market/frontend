@@ -21,6 +21,7 @@ export const GetCart = /* GraphQL */ `
   query userCart($token: String, $ip: String) {
     userCart(token: $token, ip: $ip) {
       id
+      productOptionId
       product {
         id
         productTitle
@@ -37,6 +38,7 @@ export const GetCart = /* GraphQL */ `
           id
           size
           price
+          quantity
           discountedPrice
           optionTotalPrice
         }
@@ -71,12 +73,7 @@ export const DeleteCart = /* GraphQL */ `
 `;
 
 export const DeleteCartItem = /* GraphQL */ `
-  mutation deleteCartItem(
-    $cartId: String!
-    $ip: String
-    $itemId: String!
-    $token: String
-  ) {
+  mutation deleteCartItem($cartId: String!, $ip: String, $itemId: String!, $token: String) {
     deleteCartItem(cartId: $cartId, ip: $ip, itemId: $itemId, token: $token) {
       status
       message
@@ -122,6 +119,15 @@ export const GETCARTITEM = `
 export const CANCELORDER = `
   mutation cancelOrder($orderId: String!) {
     cancelOrder(orderId: $orderId) {
+      status
+      message
+    }
+  }
+`;
+
+export const REMOVE_ITEM_FROM_CART_WITH_OPTION_ID = `
+  mutation removeItemFromCartWithOptionId($ip: String, $productOptionId: String!, $quantity: Int, $token: String) {
+    removeItemFromCartWithOptionId(ip: $ip, productOptionId: $productOptionId, quantity: $quantity, token: $token) {
       status
       message
     }
