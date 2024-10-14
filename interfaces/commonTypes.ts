@@ -271,6 +271,13 @@ export type DeleteFromCartPayload = {
   itemId: string;
 };
 
+export type RemoveItemFromCartWithOptionId = {
+  productOptionId: string;
+  token?: string;
+  ip?: string;
+  quantity: number;
+};
+
 export type AddToWishlistPayload = {
   productId: string;
   token: string;
