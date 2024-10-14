@@ -19,7 +19,6 @@ const CartGridComponent = function () {
   const user = useSelector((state: RootState) => state.user);
   const cart = useSelector((state: RootState) => state.cart);
 
-
   function deleteItemFromCart(itemId: string, cartId: string) {
     const payload = {
       itemId,
@@ -51,6 +50,19 @@ const CartGridComponent = function () {
     getCartFunc(user.token)(dispatch);
   }
 
+  const getParticularProductInCart = optionId => {
+    const cartProduct = cart?.cart?.find(cartItem => cartItem?.productOptionId === optionId);
+
+    return cartProduct;
+  };
+
+  const getParticularProductOptionInCart = optionId => {
+    const cartProduct = cart?.cart?.find(cartItem => cartItem?.productOptionId === optionId);
+    const option = cartProduct?.product?.options?.find(option => option?.id === optionId);
+
+    return option;
+  };
+
   return (
     <>
       <div className={`${styles.items_content} tw-hidden md:tw-flex tw-flex-col`}>
@@ -77,10 +89,21 @@ const CartGridComponent = function () {
                 </p>
                 <p className={styles.name}>{item.product.productTitle}</p>
 
-                {item.product?.options[0]?.size ? (
+                {getParticularProductOptionInCart(item?.productOptionId)?.size ? (
                   <div className={""}>
                     <span className={"tw-font-medium tw-text-gray-kwek700"}>Size: </span>
-                    <span className={""}>{item.product?.options[0]?.size}</span>
+                    <span className={""}>
+                      {getParticularProductOptionInCart(item?.productOptionId)?.size}
+                    </span>
+                  </div>
+                ) : null}
+
+                {getParticularProductOptionInCart(item?.productOptionId)?.color ? (
+                  <div className={""}>
+                    <span className={"tw-font-medium tw-text-gray-kwek700"}>Color: </span>
+                    <span className={""}>
+                      {getParticularProductOptionInCart(item?.productOptionId)?.color}
+                    </span>
                   </div>
                 ) : null}
 
@@ -96,28 +119,46 @@ const CartGridComponent = function () {
             <div className={styles.secondBox}>
               <p
                 className={
-                  item.product.options[0].discountedPrice
+                  getParticularProductOptionInCart(item?.productOptionId).discountedPrice
                     ? styles.discount_price
                     : styles.current_price
                 }
               >
-                ₦{item.product.options[0].price}
+                ₦{getParticularProductOptionInCart(item?.productOptionId).price}
               </p>
-              {item.product.options[0].discountedPrice ? (
-                <p className={styles.current_price}>₦{item.product.options[0].discountedPrice}</p>
+              {getParticularProductOptionInCart(item?.productOptionId).discountedPrice ? (
+                <p className={styles.current_price}>
+                  ₦{getParticularProductOptionInCart(item?.productOptionId).discountedPrice}
+                </p>
               ) : null}
             </div>
 
             <div className={styles.thirdBox}>
               <div className={styles.addbtn}>
-                <button onClick={() => decreaseQuantity(item.id, item.cart.id)}>-</button>
+                <button
+                  disabled={
+                    Number(item?.quantity) <= 0 ||
+                    Number(getParticularProductOptionInCart(item?.productOptionId)?.quantity) <= 0
+                  }
+                  onClick={() => decreaseQuantity(item.id, item.cart.id)}
+                >
+                  -
+                </button>
                 <p className={styles.qty}>{item.quantity}</p>
-                <button onClick={() => increaseQuantity(item.product.options[0].id)}>+</button>
+                <button
+                  disabled={
+                    Number(item?.quantity) >=
+                    Number(getParticularProductOptionInCart(item?.productOptionId)?.quantity)
+                  }
+                  onClick={() => increaseQuantity(item.productOptionId)}
+                >
+                  +
+                </button>
               </div>
             </div>
-            
+
             <div className={styles.forthBox}>
-              <p className={styles.subtotal}>₦{item.price}</p>
+              <p className={styles.subtotal}>₦{item.price * item?.quantity}</p>
             </div>
           </div>
         ))}
