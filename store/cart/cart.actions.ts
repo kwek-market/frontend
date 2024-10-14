@@ -2,6 +2,7 @@ import { getIp, userFetcher, userFetcherWithAuth } from "@/helpers";
 import {
   AddToCartPayload,
   DeleteFromCartPayload,
+  RemoveItemFromCartWithOptionId,
 } from "@/interfaces/commonTypes";
 import { Dispatch } from "redux";
 import {
@@ -10,6 +11,7 @@ import {
   DeleteCartItem,
   GetCart,
   ReduceItemQuantity,
+  REMOVE_ITEM_FROM_CART_WITH_OPTION_ID,
 } from "./cart.queries";
 import { CartType } from "./cart.types";
 
@@ -47,9 +49,7 @@ export function getCartFunc(token: string) {
     try {
       setLoading();
       const ip = await getIp();
-      let variable: { ip?: string; token?: string } = !token
-        ? { ip }
-        : { token };
+      let variable: { ip?: string; token?: string } = !token ? { ip } : { token };
       const res = await userFetcher(GetCart, variable);
       dispatch({
         type: CartType.GET_CART,
@@ -64,11 +64,7 @@ export function getCartFunc(token: string) {
   };
 }
 
-export function deleteCartItem(payload: {
-  itemId: string;
-  cartId: string;
-  token: string;
-}) {
+export function deleteCartItem(payload: { itemId: string; cartId: string; token: string }) {
   return async function (dispatch: Dispatch) {
     const { message } = await import("antd");
     try {
@@ -85,7 +81,7 @@ export function deleteCartItem(payload: {
   };
 }
 
-export function deleteCart(payload: {}) {
+export function deleteCart(payload: Record<any, any>) {
   return async function (dispatch: Dispatch) {
     const { message } = await import("antd");
     try {
@@ -109,6 +105,23 @@ export function deleteItemInCart(payload: DeleteFromCartPayload) {
       setLoading();
       const res = await userFetcher(ReduceItemQuantity, payload);
       message.success(res.decreaseCartItemQuantity.message);
+    } catch (err) {
+      message.error(err.message.slice(0, err.message.indexOf(".")), 5);
+      dispatch({
+        type: CartType.ERROR,
+        payload: err.message.slice(0, err.message.indexOf(".")),
+      });
+    }
+  };
+}
+
+export function removeItemFromCartWithOptionId(payload: RemoveItemFromCartWithOptionId) {
+  return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
+    try {
+      setLoading();
+      const res = await userFetcher(REMOVE_ITEM_FROM_CART_WITH_OPTION_ID, payload);
+      message.success(res.removeItemFromCartWithOptionId.message);
     } catch (err) {
       message.error(err.message.slice(0, err.message.indexOf(".")), 5);
       dispatch({
