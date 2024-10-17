@@ -7,6 +7,7 @@ import { addCurrentTotalPrice } from "../../helpers/helper";
 import { ICreateProductCharge, useGetProductCharge } from "../../hooks/admin/productCharges";
 import { RootState } from "../../store/rootReducer";
 import Load from "../Loader/Loader";
+import SizeSelector from "../edit-product/size-selector";
 
 const sizes = [
   { id: 1, name: "S" },
@@ -42,12 +43,20 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
   const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormValues = [...formValues];
 
-    // if(e.target.name === 'sizePostfix') {
+    if (e.target.name === "sizePostfix") {
+      console.log(e.target.dataset.name, formValues[i]?.size, e.target.value);
 
-    //   newFormValues[i][e.target.name] = e.target.value;
-    //   setFormValues(newFormValues);
-    //   return
-    // }
+      if (e.target.dataset.name === "letter") {
+        newFormValues[i]["size"] = `${e.target.value}`;
+      } else if (e.target.dataset.name === "number") {
+        newFormValues[i]["size"] = `${formValues[i]?.size?.split(" ")?.[0]}`;
+      } else {
+        newFormValues[i]["size"] = `${formValues[i]?.size?.split(" ")?.[0]} ${e.target.value}`;
+      }
+
+      setFormValues(newFormValues);
+      return;
+    }
 
     newFormValues[i][e.target.name] = e.target.value;
     setFormValues(newFormValues);
@@ -73,6 +82,8 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
     newFormValues.splice(i, 1);
     setFormValues(newFormValues);
   };
+
+  console.log("This is the fucking form values", formValues);
 
   const handleSubmit = async () => {
     const { message } = await import("antd");
@@ -162,37 +173,16 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
           {formValues.map((element, index) => (
             <div
               key={index}
-              className='tw-grid tw-grid-cols-kwek-5 tw-gap-3 tw-mt-3 tw-border-b-2 tw-border-grey-kwek700 tw-pb-4'
+              className='2xl:tw-flex tw-grid sm:tw-grid-cols-2 md:tw-grid-cols-3 tw-items-start tw-gap-3 tw-mt-3 tw-border-b-2 tw-border-grey-kwek700 tw-pb-4'
             >
-              <label className='tw-text-base tw-font-medium tw-capitalize'>
-                {" "}
-                size (Optional)
-                <br />
-                <div className=' tw-flex tw-space-x-2 tw-items-center  '>
-                  <input
-                    type='tel'
-                    placeholder='0'
-                    name='size'
-                    value={element.size || ""}
-                    onChange={e => handleChange(index, e)}
-                    className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-                  />
-                  <select
-                    aria-placeholder='Select Main Category'
-                    className='tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-                    name='sizePostfix'
-                    onChange={e => {
-                      handleChange(index, e as any);
-                    }}
-                  >
-                    {sizes.map(size => (
-                      <option key={size.id} value={size.name}>
-                        {size.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </label>
+              <SizeSelector
+                key={index}
+                index={index}
+                element={element}
+                sizes={sizes}
+                formValues={formValues}
+                handleChange={handleChange}
+              />
 
               <label className='tw-text-base tw-font-medium tw-capitalize'>
                 {" "}
@@ -200,7 +190,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                 <br />
                 <input
                   type='text'
-                  placeholder='0'
+                  placeholder='blue'
                   name='color'
                   required
                   value={element.color || ""}
@@ -255,7 +245,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
 
               {productCharge ? (
                 <label className='tw-text-base tw-font-medium tw-capitalize'>
-                  Total price (inc our Charges)
+                  Total price
                   <br />
                   <input
                     type='number'
@@ -266,6 +256,7 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                     // onChange={e => handleChange(index, e)}
                     className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2 disabled:tw-text-gray-500 disabled:tw-bg-gray-200'
                   />
+                  <p className='tw-text-xs tw-text-yellow-900'>This include our Charges</p>
                 </label>
               ) : null}
 
