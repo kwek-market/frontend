@@ -129,7 +129,7 @@ function PaymentBox({ step, addressId }) {
         </div>
       )}
       <SimpleModal open={confirmModal} handleClose={handleCancel}>
-        <div className=' tw-bg-white-100 tw-rounded tw-w-[80vw] lg:tw-w-[30vw] tw-mt-[30vh] tw-p-10'>
+        <div className=' tw-bg-white-100 tw-rounded tw-w-[80vw] lg:tw-w-[30vw] tw-mt-[30vh] tw-mx-auto tw-p-10'>
           <h2 className='tw-mb-0 tw-font-bold tw-text-center tw-text-3xl tw-pb-10'>Place Order?</h2>
 
           <button type='submit' onClick={() => handleOrder()}>
