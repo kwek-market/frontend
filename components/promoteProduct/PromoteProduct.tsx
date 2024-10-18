@@ -10,7 +10,7 @@ import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
 import { userFetcherWithAuth } from "../../helpers";
-import { GET_PRODUCTS } from "../../store/admin/admin.queries";
+import { GET_SELLER_PRODUCTS } from "../../store/seller/seller.queries";
 import ErrorInfo from "../Loader/ErrorInfo";
 import Load from "../Loader/Loader";
 import SingleSelectSearchInput from "../input/SingleSelectSearchInput";
@@ -270,12 +270,12 @@ export default PromoteProduct;
 async function fetchProductsList(search: string, token?: string): Promise<any[]> {
   try {
     const result = await userFetcherWithAuth(
-      GET_PRODUCTS,
+      GET_SELLER_PRODUCTS,
       { search, token, page: 1, pageSize: 50 },
       token
     );
 
-    return result?.products?.objects?.map(product => ({
+    return result?.getSellerProducts?.objects?.map(product => ({
       text: `${product.productTitle}`,
       value: product.id,
     }));

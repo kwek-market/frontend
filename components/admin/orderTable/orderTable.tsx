@@ -33,7 +33,8 @@ export const OrderTable = ({ token, id }: { token?: string; id?: string }) => {
       render: (order_number, object) => (
         <Link
           href={"/admin/customers/" + router.query?.id + "/order-detail/" + object?.id}
-          className=' tw-text-black-kwek100'>
+          className=' tw-text-black-kwek100'
+        >
           {order_number}
         </Link>
       ),
@@ -68,9 +69,13 @@ export const OrderTable = ({ token, id }: { token?: string; id?: string }) => {
     },
     {
       title: "Payment",
-      dataIndex: "payment",
+      dataIndex: "paid",
       key: "payment",
-      render: (paid, object) => <div className=''>{paid ? "Paid" : "Not Paid"}</div>,
+      render: (payment: string) => (
+        <p className={`${!payment ? "tw-text-red-kwek100" : "tw-text-green-success"}`}>
+          {payment ? "Paid" : "Not Paid"}
+        </p>
+      ),
     },
   ];
 
