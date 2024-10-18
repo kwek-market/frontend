@@ -1,15 +1,16 @@
+import { verifyTokenFunc } from "@/helpers";
+import { clearAccount } from "@/store/account/account.actions";
+import { clearSubs } from "@/store/newsletter/newsletter.actions";
+import { RootState } from "@/store/rootReducer";
+import { clearSeller } from "@/store/seller/seller.action";
+import { logout } from "@/store/user/user.actions";
+import { Skeleton } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Skeleton } from "antd";
-import { verifyTokenFunc } from "@/helpers";
-import { RootState } from "@/store/rootReducer";
-import { logout } from "@/store/user/user.actions";
-import { clearAccount } from "@/store/account/account.actions";
-import { clearSubs } from "@/store/newsletter/newsletter.actions";
-import { clearSeller } from "@/store/seller/seller.action";
 
-const withAuth = (WrappedComponent: any) => {
+const withAuth = (WrappedComponent: any, page?: string) => {
+  // eslint-disable-next-line react/display-name
   return function (props: any) {
     const router = useRouter();
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const withAuth = (WrappedComponent: any) => {
           // import("antd").then((antd) => {
           //   antd.message.error("You are not authenticated");
           // });
-          router.push("/login");
+          router.push("/login", { query: { next_page: page } });
         } else {
           // we call the api that verifies the token.
           const data = await verifyTokenFunc(user.token);
@@ -41,7 +42,7 @@ const withAuth = (WrappedComponent: any) => {
             dispatch(clearSubs());
             dispatch(clearAccount());
             dispatch(clearSeller());
-            router.push("/login");
+            router.push("/login", { query: { next_page: page } });
           }
         }
       })();

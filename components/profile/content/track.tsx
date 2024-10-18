@@ -9,15 +9,24 @@ import Load from "@/components/Loader/Loader";
 import useTrackOrder from "@/hooks/useTrackOrder";
 import { RootState } from "@/store/rootReducer";
 import { message } from "antd";
+import { useAtom } from "jotai";
 import { useSelector } from "react-redux";
+import { useGetOrder } from "../../../hooks/admin/orders";
+import { activeOrderIdAtom } from "../active-button-atom";
 import TrackModal from "../modals/TrackModal";
 
 const Track = function ({ activeBtn }: { activeBtn: string }) {
   const token = useSelector((state: RootState) => state.user?.token);
+
   const [track, setTrack] = useState<string>("");
+  const { isLoading: isOrderLoading, data } = useGetOrder({ id: track, token });
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
+  const [, setOrderId] = useAtom(activeOrderIdAtom);
+
+  const order = data?.orderByOrderId;
+  console.log("🚀 ~~ Track ~~ order:", order);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -46,6 +55,7 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
           } else {
             setInfo(data.trackOrder.message);
             showModal();
+            // setOrderId()
             setError("");
           }
         },
@@ -58,12 +68,15 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
 
   return (
     <>
-      <TrackModal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-        info={info}
-      />
+      {order && (
+        <TrackModal
+          isModalVisible={isModalVisible}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+          info={info}
+          order={{ order: order }}
+        />
+      )}
       <div className='tw-border-b tw-border-gray-500 tw-border-opacity-50'>
         <h4 className='tw-text-black-stock tw-font-semibold tw-text-base md:tw-text-xl lg:tw-text-3xl'>
           {activeBtn}
@@ -81,10 +94,10 @@ const Track = function ({ activeBtn }: { activeBtn: string }) {
         <Button
           buttonStyle='tw-p-2 tw-bg-green-success tw-rounded-sm tw-text-white-100 tw-mt-3 md:tw-mt-0'
           text='Track Order'
-          cmd={checkOrder}
+          cmd={() => checkOrder()}
         />
       </div>
-      {isLoading && <Load />}
+      {(isLoading || isOrderLoading) && <Load />}
       {error && <ErrorInfo error={error} />}
     </>
   );

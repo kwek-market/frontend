@@ -543,6 +543,64 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
       orderPrice
       deliveryMethod
       deliveryStatus
+      deliveryFee
+      paid
+      closed
+      doorStep {
+        city
+        state
+        address
+        fullName
+      }
+    }
+  }
+`;
+
+
+export const GET_ORDERS_BY_ID = /* GraphQL */ `
+  query orderByOrderId($token: String!, $id: String!) {
+    orderByOrderId(token: $token, orderId: $id) {
+      orderId
+      dateCreated
+      user {
+        id
+        fullName
+        email
+        phoneNumber
+        sellerProfile {
+          phoneNumber
+        }
+        billingSet {
+          contact
+        }
+      }
+      orderPrice
+      orderPriceTotal
+      cartItems {
+        id
+        product {
+          productTitle
+          image {
+            imageUrl
+          }
+          brand
+          color
+          gender
+          user {
+            id
+            fullName
+            email
+            phoneNumber
+          }
+        }
+        price
+        quantity
+      }
+      paymentMethod
+      orderPrice
+      deliveryMethod
+      deliveryStatus
+      deliveryFee
       paid
       closed
       doorStep {

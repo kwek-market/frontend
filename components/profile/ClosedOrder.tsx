@@ -5,17 +5,20 @@ import useCartItems from "@/hooks/useCartItems";
 import { GETORDER } from "@/store/billing/order.queries";
 import { setOrderDetails } from "@/store/order/order.action";
 import { RootState } from "@/store/rootReducer";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { QueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import Load from "../Loader/Loader";
 import { OrderProps } from "./OpenOrder";
+import { activeOrderIdAtom } from "./active-button-atom";
 
 const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.user?.token);
   const { items, loading } = useCartItems(order);
   const [load, setLoading] = useState(false);
+  const [orderId, setOrderId] = useAtom(activeOrderIdAtom);
   const queryClient = new QueryClient();
 
   async function checkDetails(id: string) {
@@ -29,6 +32,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
       setOrderDetails(data.order)(dispatch);
       // console.log(data);
       setActiveBtn("Closed Order Details");
+      setOrderId(id);
     } catch (err) {
       message.error(err.message);
     }

@@ -1,5 +1,7 @@
 import { VERIFY_TOKEN } from "@/store/user/user.queries";
+import { clsx, type ClassValue } from "clsx";
 import dayjs from "dayjs";
+import { twMerge } from "tailwind-merge";
 import { ICreateProductCharge } from "../hooks/admin/productCharges";
 import { userFetcher } from "./userFetcher";
 
@@ -194,4 +196,8 @@ export function removeCurrentTotalPrice(productCharge: ICreateProductCharge, pri
     : !productCharge?.hasFixedAmount
     ? Number(price)
     : Number(price);
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
