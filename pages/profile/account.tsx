@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-import ExtraInfo from '@/shared/extraInfo/ExtraInfo';
+import ExtraInfo from "@/shared/extraInfo/ExtraInfo";
 
-import { MainLayout } from '@/layouts';
+import { MainLayout } from "@/layouts";
 
-import { Menu, ProfileContent } from '@/components/profile/';
-import withAuth from '@/hooks/withAuth';
+import { Menu, ProfileContent } from "@/components/profile/";
+import withAuth from "@/hooks/withAuth";
 
 function account() {
-  const [activeBtn, setActiveBtn] = useState('Account');
+  const [activeBtn, setActiveBtn] = useState("Account");
 
   return (
-    <MainLayout title="Profile">
-      <div className="tw-grid md:tw-grid-cols-kwek-3 tw-gap-5">
+    <MainLayout title='Profile'>
+      <div className='tw-grid md:tw-grid-cols-kwek-3 tw-gap-5'>
         <Menu activeBtn={activeBtn} setActiveBtn={setActiveBtn} />
         <ProfileContent activeBtn={activeBtn} setActiveBtn={setActiveBtn} />
       </div>
@@ -21,4 +21,4 @@ function account() {
   );
 }
 
-export default withAuth(account);
+export default withAuth(account, "/profile/account");

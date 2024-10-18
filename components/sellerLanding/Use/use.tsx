@@ -1,9 +1,12 @@
 import Image from "next/legacy/image";
+import { useRouter } from "next/router";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import UseBox from "./UseBox";
 import Styles from "./use.module.scss";
 
 const use = () => {
+  const router = useRouter();
+
   const useBox = [
     {
       title: "Create your store",
@@ -66,6 +69,9 @@ const use = () => {
             </h1>
             <button
               className={`tw-text-center tw-p-2 tw-truncate tw-rounded-md tw-bg-red-kwek100 tw-text-white-100 tw-flex `}
+              onClick={() => {
+                router.push("/sell/create-account");
+              }}
             >
               Register Now{"  "}
               {/* <i className="fas fa-long-arrow-right fa-2x tw-ml-2"></i> */}

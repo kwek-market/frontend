@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
+import { useDispatch, useSelector } from "react-redux";
 
-import { loginUser } from "@/store/user/user.actions";
-import { RootState } from "@/store/rootReducer";
 import { UserLogin } from "@/interfaces/commonTypes";
+import { RootState } from "@/store/rootReducer";
+import { loginUser } from "@/store/user/user.actions";
 
 const Page = function () {
   const dispatch = useDispatch();
@@ -65,11 +65,16 @@ const Page = function () {
 
   useEffect(() => {
     // check if user is a seller or not and redirect to appropriate page
-    user.user.isVerified !== false && router.push("/");
+
+    if (router.query?.next_page) {
+      router.push(router.query.next_page as string);
+    } else {
+      user.user.isVerified !== false && router.push("/");
+    }
   }, [user.user.isVerified]);
 
   return (
-    <AuthLayout id="Login" withBanner bannerText={bannerText}>
+    <AuthLayout id='Login' withBanner bannerText={bannerText}>
       <AuthForm {...form} />
     </AuthLayout>
   );

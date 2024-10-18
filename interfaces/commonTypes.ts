@@ -372,6 +372,7 @@ export type Order = {
   coupon: any;
   paymentMethod: string;
   deliveryMethod: string;
+  deliveryFee: string;
   deliveryStatus: string;
   dateCreated: Date;
 };

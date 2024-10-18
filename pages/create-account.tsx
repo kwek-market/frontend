@@ -42,7 +42,7 @@ const Page = function () {
 
   useEffect(() => {
     if (account.status) {
-      router.push("/email-verification");
+      router.push("/email-verification", { query: { next_page: router?.query?.next_page } });
     }
   }, [account.status]);
 

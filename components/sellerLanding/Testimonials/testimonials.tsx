@@ -16,8 +16,8 @@ const Testimonials = () => {
               width='70'
             />
             <div className='tw-flex tw-flex-col tw-justify-center tw-items-left tw-ml-3'>
-              <h3 className='tw-text-base md:tw-text-lg tw-text-gray-kwek200'>James Afuye</h3>
-              <h4 className='tw-text-sm md:tw-text-lg'>Sales & Marketing</h4>
+              <h3 className='tw-text-base md:tw-text-lg tw-text-gray-kwek200'>James Mathew</h3>
+              <h4 className='tw-text-sm md:tw-text-lg'>Customer</h4>
             </div>
             <div className='tw-absolute tw-right-1'>
               <img src='/images/quote.png' className='tw-w-10' />
@@ -25,14 +25,14 @@ const Testimonials = () => {
           </div>
           <div>
             <h3 className='  xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6'>
-              “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+              &ldquo;Great experience shopping with you! The process was smooth, delivery was fast,
+              and my order arrived exactly as described. I will definitely shop here again and
+              recommend to others!&ldquo;
             </h3>
           </div>
-          <div className='tw-absolute tw-bottom-[5%]  md:tw-bottom-[10%] '>
+          {/* <div className='tw-absolute tw-bottom-[5%]  md:tw-bottom-[10%] '>
             <img className='tw-h-5' src='/svg/FedEx-Logo.svg' />
-          </div>
+          </div> */}
         </>
       ),
     },
@@ -56,14 +56,15 @@ const Testimonials = () => {
           </div>
           <div>
             <h3 className='  xl:tw-line-clamp-none tw-text-gray-kwek200 tw-opacity-70 tw-text-sm md:tw-text-lg tw-mt-6'>
-              “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+              &ldquo;I had a great experience shopping on this website. The layout is super easy to
+              navigate, and I found exactly what I was looking for without any hassle. The product
+              pages are detailed, and the photos make it easy to see what you’re getting, which is
+              always a plus.&ldquo;
             </h3>
           </div>
-          <div className='tw-absolute tw-bottom-[5%]  md:tw-bottom-[10%]'>
+          {/* <div className='tw-absolute tw-bottom-[5%]  md:tw-bottom-[10%]'>
             <img className='tw-h-5' src='/svg/FedEx-Logo.svg' />
-          </div>
+          </div> */}
         </>
       ),
     },
