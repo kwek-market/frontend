@@ -54,8 +54,8 @@ const Vendors = () => {
       render: (name, object) => {
         name = reduceCharacterLength(name, maxNameLength);
         return (
-          <Link href={"/admin/vendors/vendor-info/" + object.key}>
-            <a className=' tw-text-black-kwek100'>{name}</a>
+          <Link className='tw-text-black-kwek100' href={"/admin/vendors/vendor-info/" + object.key}>
+            {name}
           </Link>
         );
       },

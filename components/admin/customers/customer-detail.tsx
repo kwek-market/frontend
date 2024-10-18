@@ -20,10 +20,10 @@ const CustomerDetail = ({ image, name, email, phone }: CustomerDetailProps) => {
       />
       <div className=' text-k'>
         <h2 className='tw-mb-0 tw-font-medium tw-text-2xl'>{name}</h2>
-        <div className=' tw-flex tw-gap-x-[10px] tw-items-center'>
+        <div className=' xl:tw-flex tw-gap-x-[10px] tw-items-center'>
           {email}
           <Divider className='tw-bg-black' type='vertical' />
-          {phone ? "+" + phone : ""}
+          {phone ? +phone : ""}
         </div>
       </div>
     </div>

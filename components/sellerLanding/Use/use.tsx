@@ -1,6 +1,7 @@
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import girlImg from "../../../public/images/how-it-work.jpg";
 import UseBox from "./UseBox";
 import Styles from "./use.module.scss";
 
@@ -41,7 +42,14 @@ const use = () => {
             How it Works
           </h2>
           <p className='tw-text-lg'>Get set-up in three easy steps</p>
-          <div className={` tw-bg-gray-kwek800 tw-mt-5 lg:tw-mt-0 ${Styles.UseGrayBox}`}></div>
+          <div className='tw-relative tw-h-full tw-w-full'>
+            <Image
+              src={girlImg}
+              className={`tw-bg-gray-kwek800 tw-object-cover tw-mt-5 lg:tw-mt-0 ${Styles.UseGrayBox}`}
+              alt='girl image'
+              layout='fill'
+            />
+          </div>
         </div>
 
         <div className='tw-hidden md:tw-block md:tw-mx-4'>
