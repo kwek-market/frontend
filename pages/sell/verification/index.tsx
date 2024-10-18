@@ -60,4 +60,4 @@ function index(props: StepComponentProps) {
   );
 }
 
-export default withAuth(index);
+export default withAuth(index, '/sell/verification');

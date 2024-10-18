@@ -44,11 +44,11 @@ function EditProductHeader({ submitDetails }: Props) {
       { ...submitDetails, productOptions: newProductOptions as any },
       user.token
     )(dispatch);
-    // router.push({ pathname: "/seller/profile", query: { tab: "products" } });
+    router.push({ pathname: "/seller/profile", query: { tab: "products" } });
   }
 
   return (
-    <header className='tw-bg-red-kwek100 tw-py-4 tw-px-2 md:tw-px-8 tw-flex tw-justify-between tw-items-center tw-sticky tw-top-0'>
+    <header className='tw-bg-red-kwek100 tw-z-50 tw-py-4 tw-px-2 md:tw-px-8 tw-flex tw-justify-between tw-items-center tw-sticky tw-top-0'>
       <nav>
         <div
           className='tw-flex tw-justify-center tw-items-center tw-rounded-full tw-h-7 tw-w-7 hover:cursor-pointer'

@@ -9,6 +9,7 @@ import useTrackOrder from "../../../../hooks/useTrackOrder";
 import { OrderList } from "../../../../interfaces/commonTypes";
 import { RootState } from "../../../../store/rootReducer";
 import { OrderDeliveryStatus } from "../../../../validations/orders";
+import OrderTracker from "./OrderTracker";
 
 interface SellerTrackModalProps {
   isModalOpen: boolean;
@@ -94,7 +95,7 @@ const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModal
               onSubmit={handleTrack}
             >
               <p className=' tw-font-poppins tw-text-2xl tw-text-center tw-mb-0'>
-                Let's find your order
+                Let&apos;s find your order
               </p>
               <input
                 type='text'
@@ -115,60 +116,7 @@ const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModal
             {isLoading ? (
               <Load />
             ) : info ? (
-              <div className='tw-flex tw-flex-col lg:tw-flex-row tw-justify-between tw-items-center lg:tw-items-start tw-font-poppins '>
-                <div className='tw-text-center tw-flex-shrink-0 tw-flex tw-flex-col tw-justify-center tw-w-24'>
-                  <Image src='/svg/track/ordered.svg' width={85} height={85} />
-                  <div className=''>
-                    <p className=' tw-mb-0 tw-font-medium'>Ordered</p>
-                    <p className=' tw-mb-0 tw-text-xs tw-font-light'>
-                      {new Date(order.order.dateCreated)?.toDateString()}
-                    </p>
-                  </div>
-                </div>
-                <Bar filled={true} />
-
-                {orderStatus === OrderDeliveryStatus.Cancelled ? (
-                  <div className='tw-text-center tw-flex-shrink-0 tw-flex tw-flex-col tw-justify-center tw-w-24'>
-                    <Image src='/svg/ex.svg' width={85} height={85} />
-                    <div>
-                      <p className=' tw-mb-0 tw-font-medium tw-text-red-500'>Cancelled</p>
-                      <p className='tw-w-max tw-mb-0 tw-text-xs tw-font-light'>
-                        {order.order.doorStep?.city} - {order.order?.doorStep?.state}
-                      </p>
-                    </div>
-                  </div>
-                ) : null}
-
-                {orderStatus === "success" || orderStatus === "pending" ? (
-                  <div className='tw-text-center tw-flex-shrink-0 tw-flex tw-flex-col tw-justify-center tw-w-24'>
-                    <Image src='/svg/track/transit.svg' width={85} height={85} />
-                    <div>
-                      <p className=' tw-mb-0 tw-font-medium'>Delivering.... </p>
-                      <p className=' tw-mb-0 tw-text-xs tw-font-light'>
-                        {order.order.doorStep?.city} - {order.order?.doorStep?.state}
-                      </p>
-                    </div>
-                  </div>
-                ) : null}
-
-                <Bar filled={orderStatus === "success"} />
-                <div className='tw-text-center tw-flex-shrink-0 tw-flex tw-flex-col tw-justify-center tw-w-24'>
-                  <Image src='/svg/track/picked.svg' width={85} height={91} />
-                  <div>
-                    <p className=' tw-mb-0 tw-font-medium'>Delivered</p>
-                    <p className=' tw-mb-0 tw-text-xs tw-font-light'>
-                      {orderStatus === "success" ? order?.order?.doorStep?.address : "Not yet"}
-                    </p>
-                  </div>
-                </div>
-                {/* <div className=" tw-flex-shrink-0 tw-flex tw-flex-col tw-justify-cente tw-w-24r">
-                  <Image src="/svg/track/picked.svg" width={85} height={85} />
-                  <div>
-                    <p className=" tw-mb-0 tw-font-medium">Picked Up</p>
-                    <p className=" tw-mb-0 tw-text-xs tw-font-light">Not Yet</p>
-                  </div>
-                </div> */}
-              </div>
+              <OrderTracker order={order as any} orderStatus={order.order?.deliveryStatus as any} />
             ) : null}
           </div>
         </div>
@@ -178,20 +126,3 @@ const SellerTrackModal = ({ isModalOpen, handleCancel, order }: SellerTrackModal
 };
 
 export default SellerTrackModal;
-
-const Bar = ({ filled }: { filled?: boolean }) => {
-  return (
-    <>
-      <div
-        className={`tw-hidden lg:tw-block  tw-w-full tw-h-[9px] tw-rounded-[10px] tw-mt-10 ${
-          filled ? "tw-bg-[#009D19]" : "tw-bg-[#D9D9D9]"
-        }`}
-      ></div>
-      <div
-        className={` lg:tw-hidden  tw-h-[5rem] tw-w-[9px] tw-rounded-[10px] tw-mt-10 ${
-          filled ? "tw-bg-[#009D19]" : "tw-bg-[#D9D9D9]"
-        }`}
-      ></div>
-    </>
-  );
-};

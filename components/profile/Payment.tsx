@@ -2,9 +2,9 @@ import { Order } from "@/interfaces/commonTypes";
 import PaymentCard from "./PaymentCard";
 
 const Payment = function ({ order }: { order: Order }) {
-  const subtotal = Number(order.orderPrice).toLocaleString();
-  const totalPrice = Number(order.orderPriceTotal).toLocaleString();
-  const shippingAddress = `${order.doorStep.fullName} ${order.doorStep.address} ${order.doorStep.city} ${order.doorStep.state}`;
+  const subtotal = Number(order?.orderPrice).toLocaleString();
+  const totalPrice = Number(order?.orderPriceTotal).toLocaleString();
+  const shippingAddress = `${order?.doorStep?.fullName} ${order?.doorStep?.address} ${order?.doorStep?.city} ${order?.doorStep?.state}`;
 
   return (
     <>
@@ -15,11 +15,11 @@ const Payment = function ({ order }: { order: Order }) {
           </p>
         </div>
         <div className='tw-ml-2'>
-          <PaymentCard title='Payment Method' desc={order.paymentMethod} />
+          <PaymentCard title='Payment Method' desc={order?.paymentMethod} />
           <br />
           <PaymentCard
             title='Payment Details'
-            desc={`Items subtotal: NGN ${subtotal} Shipping Fees: NGN 100 Total: NGN ${totalPrice}`}
+            desc={`Items subtotal: NGN ${subtotal} Shipping Fees: NGN ${order?.deliveryFee} Total: NGN ${totalPrice}`}
           />
         </div>
       </div>
@@ -30,9 +30,9 @@ const Payment = function ({ order }: { order: Order }) {
           </p>
         </div>
         <div className='tw-ml-2'>
-          <PaymentCard title='Delivery Method' desc={order.deliveryMethod} />
+          <PaymentCard title='Delivery Method' desc={order?.deliveryMethod} />
           <br />
-          <PaymentCard title='Delivery Status' desc={order.deliveryStatus} />
+          <PaymentCard title='Delivery Status' desc={order?.deliveryStatus} />
           <br />
           <PaymentCard title='Shipping Address' desc={shippingAddress} />
         </div>
