@@ -74,7 +74,7 @@ const OrderDetail = () => {
     });
   };
 
-  console.log("🚀 ~~ OrderDetail ~~ order:", order);
+  console.log("🚀 ~~ OrderDetail ~~ order:", order?.user?.billingSet?.at(-1), order);
 
   return (
     <AdminLayout>
@@ -106,7 +106,8 @@ const OrderDetail = () => {
             name={order?.user?.fullName}
             email={order?.user?.email}
             phone={
-              order?.user?.sellerProfile?.[0]?.phoneNumber || order?.user?.billingSet?.[-1]?.contact
+              order?.user?.sellerProfile?.[0]?.phoneNumber ||
+              order?.user?.billingSet?.at(-1)?.contact
             }
           />
         ) : null}
@@ -152,7 +153,9 @@ const OrderDetail = () => {
                   name='updateDeliveryStatus'
                   defaultValue={selectedStatus}
                 >
-                  {Object.values(!order?.paid ? OrderDeliveryStatus: OrderDeliveryStatusWhenPaid)?.map(status => (
+                  {Object.values(
+                    !order?.paid ? OrderDeliveryStatus : OrderDeliveryStatusWhenPaid
+                  )?.map(status => (
                     <option key={status} value={status} className='tw-capitalize'>
                       {status}
                     </option>
