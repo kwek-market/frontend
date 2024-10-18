@@ -1,12 +1,12 @@
-import { userFetcherWithAuth } from "@/helpers";
+import { userFetcher, userFetcherWithAuth } from "@/helpers";
 import { message } from "antd";
 import { useMutation, useQuery } from "react-query";
 import { PAGE_SIZE } from "../../constants/constants";
 import { IdAndTokenPayload } from "../../interfaces/commonTypes";
 import {
-  CREATE_FLASH_SALE,
   GET_ALL_ORDERS,
   GET_ORDERS_ADMIN,
+  GET_ORDERS_BY_ID,
   UPDATE_DELIVERY_STATUS,
 } from "../../store/admin/admin.queries";
 import { UpdateOrderDeliveryStatusType } from "../../validations/orders";
@@ -42,6 +42,14 @@ export function useGetOrdersAdmin(payload: IdAndTokenPayload) {
       enabled: !!payload.id,
     }
   );
+}
+
+export function useGetOrder(payload: { id: string; token?: string }) {
+  const query = payload.id?.startsWith("KWEK") ? GET_ORDERS_BY_ID : GET_ORDERS_ADMIN;
+  return useQuery(["orders", payload.id], () => userFetcher(query, payload), {
+    keepPreviousData: false,
+    enabled: !!payload.id,
+  });
 }
 
 export const useUpdateOrderDeliveryStatus = () => {

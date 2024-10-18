@@ -7,12 +7,14 @@ import { Order as OrderType } from "@/interfaces/commonTypes";
 import { GETORDER } from "@/store/billing/order.queries";
 import { setOrderDetails } from "@/store/order/order.action";
 import { RootState } from "@/store/rootReducer";
+import { useAtom } from "jotai";
 import Image from "next/legacy/image";
 import React, { Fragment, useState } from "react";
 import { QueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderDeliveryStatus } from "../../validations/orders";
 import Load from "../Loader/Loader";
+import { activeOrderIdAtom } from "./active-button-atom";
 
 export type OrderProps = {
   setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
@@ -25,6 +27,7 @@ const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
   const token = useSelector((state: RootState) => state.user?.token);
   const { items, loading } = useCartItems(order);
   const [load, setLoading] = useState(false);
+  const [orderId, setOrderId] = useAtom(activeOrderIdAtom);
   const queryClient = new QueryClient();
 
   const deliveryStatus =
@@ -43,6 +46,7 @@ const Order = function ({ setActiveBtn, order, refetch }: OrderProps) {
       setOrderDetails(data.order);
       1;
       setActiveBtn("Open Order Details");
+      setOrderId(id);
     } catch (err) {
       message.error(err.message);
     }

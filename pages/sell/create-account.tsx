@@ -113,21 +113,20 @@ const Page = function () {
       return;
     }
     // dispatch
-    
-      startSelling(
-        {
-          ...sellerData,
-          phoneNumber: `${callCode}${phoneNumber}`,
-          shopUrl: sellerData.shopUrl.trim()?.replaceAll(" ", "-"),
-        },
-        user.token
-      )(dispatch)
-    
+
+    startSelling(
+      {
+        ...sellerData,
+        phoneNumber: `${callCode}${phoneNumber}`,
+        shopUrl: sellerData.shopUrl.trim()?.replaceAll(" ", "-"),
+      },
+      user.token
+    )(dispatch);
   };
 
   useEffect(() => {
     // if you don't have an account, you can't come to this page
-    !user.token && router.push("/login");
+
     user.token && getUserData(user.token)(dispatch);
     user.token && user.user.isSeller && getSellerData(user.token)(dispatch);
     // if (seller.seller.sellerVerified || user.user.isSeller || seller.sellerCreated.status)
@@ -494,4 +493,4 @@ const Page = function () {
   );
 };
 
-export default withAuth(Page);
+export default withAuth(Page, "/sell/create-account");

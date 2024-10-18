@@ -32,6 +32,7 @@
     "html-to-image": "^1.11.11",
     "html2pdf.js": "^0.10.2",
     "jodit-react": "^4.1.2",
+    "jotai": "^2.10.1",
     "jspdf": "^2.5.1",
     "luxon": "^3.4.4",
     "moment": "^2.30.1",
