@@ -29,18 +29,20 @@ const Promote = function () {
     }
     if (range === 0) return message.error("Range must be more than 0");
     if (days === 0) return message.error("Days must be more than 0");
-    if (!productId) return message.error("ProductId must be more than 0");
+    if (!productId) return message.error("ProductId is required");
+    console.log("🚀 ~~ promoteProduct ~~ productId:", productId, id);
 
     const payload = {
       days,
-      productId: id as string,
+      productId,
       amount: range,
       token,
     };
+
     mutate(payload, {
       onSuccess: data => {
         message.success(data.promoteProduct.message);
-        router.push("/seller/profile");
+        router.push("/seller/profile", { query: { tab: "products" } });
       },
       onError: (err: any) => {
         message.error(err.message);

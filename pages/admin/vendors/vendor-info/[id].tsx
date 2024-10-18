@@ -100,7 +100,7 @@ const Customer = () => {
           />
         ) : null}
 
-        <div className=' tw-pt-6  tw-w-[50vw] tw-grid tw-grid-cols-3 tw-gap-x-4'>
+        <div className=' tw-pt-6  xl:tw-w-[50vw] tw-grid xl:tw-grid-cols-3 tw-gap-4'>
           {isLoadingCustomerTotalOrders ? <Load className='tw-h-32' /> : null}
           {totalOrders ? (
             <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans'>
@@ -146,7 +146,7 @@ const Customer = () => {
           </div>
 
           <div className=' tw-gap-x-8 tw-text-[#574240] tw-mt-8'>
-            <div className='tw-grid-cols-2 tw-grid tw-bg-review tw-rounded-2xl tw-p-8 tw-gap-6'>
+            <div className='xl:tw-grid-cols-2 tw-grid tw-bg-review tw-rounded-2xl tw-p-8 tw-gap-6'>
               <div className=' tw-bg-white-100 tw-p-6 tw-rounded-[10px] tw-mt-6'>
                 <p className=' tw-font-semibold tw-mb-0'>Registration details</p>
                 <div className='tw-mt-2 tw-space-y-2'>
