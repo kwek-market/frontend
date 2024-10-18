@@ -59,7 +59,7 @@ const Component = function () {
             ) : null}
           </ul>
         </nav>
-
+        {/* 
         <nav className={styles.nav}>
           <h4 className={styles.nav_header}>Payment</h4>
 
@@ -70,7 +70,7 @@ const Component = function () {
               </Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         <nav className={styles.nav}>
           <h4 className={styles.nav_header}>Buying On kwek</h4>
@@ -95,7 +95,7 @@ const Component = function () {
             </li> */}
 
             <li className={styles.nav_item}>
-              <Link href='/returnpolicy' className={styles.nav_link}>
+              <Link href='/returnPolicy' className={styles.nav_link}>
                 Kwek Return Policy
               </Link>
             </li>
@@ -128,12 +128,6 @@ const Component = function () {
           <h4 className={styles.nav_header}>More Info</h4>
 
           <ul className={styles.nav_menu}>
-            <li className={styles.nav_item}>
-              <Link href='/sitemap.xml' className={styles.nav_link}>
-                Site Map
-              </Link>
-            </li>
-
             <li className={styles.nav_item}>
               <Link href='/privacyPolicy' className={styles.nav_link}>
                 Privacy Policy
