@@ -1,103 +1,106 @@
-import React from 'react'
-import Link from 'next/link';
-import styles from './Billing.module.scss'
-
-
 const BillingPolicy = function () {
-    return (
-        <div>
-            <div className={styles.billing}>
-                <p>
-                Kwekmarketmall has ensured a first week (7days) of free usage of our services by our newly 
-                registered customers. Customers charges are required to be paid after. We at kwekmarketmall
-                 will be rendering a 24hrs service for you in which everyone can access your database ads 
-                 anytime until your subscription expire (maintenance fee).
+  return (
+    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-6'>
+      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8'>
+        <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
+          Kwekmarket Billing Policy
+        </h1>
+        <p className='tw-text-gray-600 tw-mb-6'>
+          At Kwekmarket, we are committed to providing an efficient platform for both buyers and
+          vendors. Below is our billing policy outlining the processes related to promotions and
+          withdrawals.
+        </p>
 
-<p>Categorizing our users, there is fee variance in other to ensure and render
-     a perfect service to you.</p>
-                </p>
-                <p>At Kwekmarketmall , we have 4 categories of users. </p>
-                <p>
-                <ul><li>• Betterlife</li><br />
-<li>• Boomer</li><br />
-<li>• Express Premium (wholesalers, private labelling and 
-    manufacturers)</li><br />
-<li>• Franchise (retailers, wholesalers, private labelling and manufacturers)</li></ul>
-                </p>
-                <h4>Billing Policy for Betterlife</h4>
-                <p>
-                Users under this category will be able to post about 15 products each with 30days 
-                expiration
-                 but subject to be influenced by admin. There will be a charged fee of <span>N1500.</span> From the 
-                 breakdown,
-                  we will be providing you a standard 24hrs service for a token sum of <span>N50.</span>
-Users are allowed to change products three times but can't exceed their total products for sale in total 
-for that
- period of subscription range as it will request to terminate your current subscription in which you will 
- be required to upgrade your category of subscription or better still maintain your current ads until the
-  end of the subscription.</p>
+        <hr className='tw-my-6' />
 
-<p>Services we support you to offer your customers
-<ul><li>• Warranty when available</li><br />
-<li>• Successful customer monitoring system (Email Marketing)</li><br />
-<li>• Special ads subscription</li></ul></p>
-                
-                <h4>Billing Policy for Boomer</h4>
-                <p>
-                Users under this category will be able to post about 45 products each with 30days 
-                expiration. There will be a charged fee of <span>N4050.</span> From the breakdown, we will be 
-                providing you a standard 24hrs service for a token 
-                sum of <span>N135.</span><br />
-Users are allowed to change products ten times but can't exceed their total products for sale in 
-total for that period of subscription range as it will request to terminate your current subscription 
-in which you will be required to upgrade your category of subscription or better still maintain your 
-current ads until the end of the subscription.</p>
+        {/* Section 1: User Categories */}
+        <div className='tw-mb-8'>
+          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            1. User Categories
+          </h2>
 
+          <h3 className='tw-text-xl tw-font-medium tw-text-gray-600 tw-mb-2'>Buyers</h3>
+          <p className='tw-text-gray-600 tw-mb-4'>
+            Buyers can browse and purchase products listed by vendors without any subscription fees.
+          </p>
 
-
-<p>Services we support you to offer your customers
-<ul><li>• Warranty when available</li><br />
-<li>• Successful customer monitoring system (Email Marketing)</li><br />
-<li>• Special ads subscription</li><br />
-<li>• Gift card utility</li></ul></p>
-                
-                <h4>Billing Policy for Express Premium</h4>
-                <p>
-                Users under this category will be able to post about 100 products (wholesales, private 
-                labelling and manufacturers) each with 30days expiration. There will be a charged fee of 
-               <span> N8250</span> (editable by admin). From the breakdown, we will be providing you a standard 24hrs
-                 service for a token sum of <span>N135.</span>
-Users are allowed to change products three times in case product is out of stock but can't exceed their 
-total products for sale (100) in total for that period of subscription range as it will request to
- terminate your current subscription in which you will be required to upgrade your category of 
- subscription or better still maintain your current ads until the 
- end of the subscription.</p>
-
-<p>Services we support you to offer your customers
-<ul><li>• Warranty when available</li><br />
-<li>• Successful customer monitoring system (Email Marketing)</li><br />
-<li>• Special ads subscription (featured)</li><br />
-<li>• Gift card utility</li><br />
-<li>• Invoice generator</li></ul></p>
-               
-                <h4>Billing Policy for Franchise</h4>
-                <p>
-                All our services known, including our discrete ones are open to users under this category.
-                </p>
-                <h4>What happens to your database after exhausted subscription</h4>
-                <p>
-                We are aware at kwekmarketmall that you will continuously want to make use of our services,
-                 so at the subscription, we will give you extra 3-days to enjoy our services plus another
-                  2-days warning. Failure to subscribe after this five (5) days will render your database 
-                  dormant. Dormant in that you will not be able access, advertise your ads until you 
-                  subscribe again.<br />
-To make our subscription durable, affordable and relaxing, we have set out different packages of 
-subscription for you as follow:
-                </p>
-            </div>
+          <h3 className='tw-text-xl tw-font-medium tw-text-gray-600 tw-mb-2'>Vendors</h3>
+          <p className='tw-text-gray-600'>
+            Vendors can list an unlimited number of products for free, with no restrictions on
+            product changes. All vendors must undergo a verification process before their
+            registration is confirmed, and all information submitted must be accurate.
+          </p>
         </div>
-    );
+
+        {/* Section 2: Promotion Services */}
+        <div className='tw-mb-8'>
+          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            2. Promotion Services
+          </h2>
+          <p className='tw-text-gray-600'>
+            Vendors have the option to promote their products at a rate of ₦1 per click. The
+            promotion service is designed to enhance visibility and reach for vendor listings. Fees
+            for promotions are deducted from the vendor's funded wallet on the platform.
+          </p>
+        </div>
+
+        {/* Section 3: Payment Options */}
+        <div className='tw-mb-8'>
+          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            3. Payment Options
+          </h2>
+          <p className='tw-text-gray-600'>
+            Payment on Delivery: Buyers have the option to pay upon receiving their orders. Other
+            payment methods may include credit/debit cards and mobile payments, offering flexibility
+            for buyers.
+          </p>
+        </div>
+
+        {/* Section 4: Withdrawal Process */}
+        <div className='tw-mb-8'>
+          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            4. Withdrawal Process
+          </h2>
+          <p className='tw-text-gray-600 tw-mb-2'>
+            Vendors can initiate withdrawals 3 days after the delivery of a particular product.
+            There is no obligation for vendors to withdraw their funds; they may choose to keep
+            their funds in their Kwekmarket wallet.
+          </p>
+          <p className='tw-text-gray-600'>
+            Withdrawals must be initiated by the vendor and will reflect instantly unless delayed by
+            a third-party payment gateway.
+          </p>
+        </div>
+
+        {/* Note Section */}
+        <div className='tw-mb-8'>
+          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Note</h2>
+          <p className='tw-text-gray-600'>
+            The platform is accessible to all users without requiring a subscription.
+          </p>
+        </div>
+
+        {/* Contact Information */}
+        <div className='tw-mb-8'>
+          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Contact Us</h2>
+          <p className='tw-text-gray-600'>
+            For any inquiries or support, please contact us at:
+            <a href='mailto:support@kwekmarket.com' className='tw-text-blue-600 tw-underline'>
+              support@kwekmarket.com
+            </a>
+          </p>
+        </div>
+
+        {/* Final Note */}
+        <div className='tw-mt-8 tw-text-center'>
+          <p className='tw-text-gray-600 tw-italic'>
+            We appreciate your business and are dedicated to providing the best experience possible
+            at Kwekmarket!
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-
-export default BillingPolicy
+export default BillingPolicy;
