@@ -151,7 +151,15 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   return (
     <div className={styles.product_container}>
       <div className={styles.product_carousel}>
-        <Carousel arrows {...settings} autoplay dots={true} ref={carouselRef}>
+        <Carousel
+          arrows={false}
+          nextArrow={<SampleNextArrow />}
+          prevArrow={<SamplePrevArrow />}
+          autoplay
+          dots={true}
+          draggable
+          ref={carouselRef}
+        >
           {product?.image?.map((image, idx) => (
             <div key={idx}>
               <Image
