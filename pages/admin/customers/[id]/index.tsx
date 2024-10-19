@@ -82,9 +82,9 @@ const Customer = () => {
       title: "Order Number",
       dataIndex: "orderId",
       key: "order_number",
-      render: order_number => (
+      render: (order_number, object) => (
         <Link
-          href={"/admin/customers/" + router.query?.id + "/order-detail/" + "order-" + order_number}
+          href={"/admin/customers/" + router.query?.id + "/order-detail/" + object.id}
           className=' tw-text-black-kwek100'
         >
           {order_number}
@@ -98,8 +98,9 @@ const Customer = () => {
     },
     {
       title: "No of Items",
-      dataIndex: "no_of_items",
+      dataIndex: "cartItems",
       key: "no_of_items",
+      render: (cartItems: any[]) => <p>{cartItems.length}</p>,
     },
     {
       title: "Status",
@@ -115,6 +116,11 @@ const Customer = () => {
       title: "Payment",
       dataIndex: "paid",
       key: "payment",
+      render: (payment: string) => (
+        <p className={`${!payment ? "tw-text-red-kwek100" : "tw-text-green-success"}`}>
+          {payment ? "Paid" : "Not Paid"}
+        </p>
+      ),
     },
   ];
 
@@ -147,12 +153,15 @@ const Customer = () => {
             image='/images/pp.png'
             name={customerData?.getUserById?.fullName}
             email={customerData?.getUserById?.email}
-            phone={customerData?.getUserById?.phoneNumber}
+            phone={
+              customerData?.getUserById?.phoneNumber ||
+              customerData?.getUserById?.billingSet?.at(-1)?.contact
+            }
           />
         ) : null}
 
         {/* THE ORDER ANALYTICS */}
-        <div className=' tw-pt-6  tw-w-[50vw] tw-grid tw-grid-cols-3 tw-gap-x-4'>
+        <div className=' tw-pt-6 xl:tw-w-[50vw] tw-grid xl:tw-grid-cols-3 tw-gap-4'>
           {isLoadingTotalOrders ? <Load /> : null}
           {totalOrders?.getCustomerOrders ? (
             <div className=' tw-py-6 tw-px-4 tw-bg-[#FAFBFF] tw-border tw-border-[#D7DCE0] tw-rounded-[20px] tw-font-dm-sans tw-flex tw-flex-col tw-justify-between'>
@@ -215,14 +224,14 @@ const Customer = () => {
           </Tabs>
         </div>
 
-        {orders?.getCustomerOrdersPaginated?.objects?.length > 0 ? (
+        {/* {orders?.getCustomerOrdersPaginated?.objects?.length > 0 ? (
           <Link
             href={"/admin/customers/" + router.query?.id + "/order-list"}
             className=' tw-underline tw-text-[#009D19] '
           >
             View All Orders
           </Link>
-        ) : null}
+        ) : null} */}
 
         <FormHead>Billing Addresses</FormHead>
         <div className=' tw-pt-6 tw-space-y-6'>

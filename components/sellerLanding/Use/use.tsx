@@ -11,8 +11,7 @@ const use = () => {
   const useBox = [
     {
       title: "Create your store",
-      description:
-        "Register your store with a unique store URL for your store on Kwekmarkethall.com",
+      description: "Register your store with a unique store URL for your store on kwekmarket.com",
       image: "/images/shop.png",
       bgColor: "tw-bg-green-success",
       textColor: "tw-text-white-100",
