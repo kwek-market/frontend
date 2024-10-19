@@ -1,10 +1,8 @@
 const BillingPolicy = function () {
   return (
-    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-6'>
-      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8'>
-        <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
-          Kwekmarket Billing Policy
-        </h1>
+    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-2 lg:tw-p-6'>
+      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-rounded-lg'>
+        <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>Billing Policy</h1>
         <p className='tw-text-gray-600 tw-mb-6'>
           At Kwekmarket, we are committed to providing an efficient platform for both buyers and
           vendors. Below is our billing policy outlining the processes related to promotions and
@@ -15,7 +13,7 @@ const BillingPolicy = function () {
 
         {/* Section 1: User Categories */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             1. User Categories
           </h2>
 
@@ -34,7 +32,7 @@ const BillingPolicy = function () {
 
         {/* Section 2: Promotion Services */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             2. Promotion Services
           </h2>
           <p className='tw-text-gray-600'>
@@ -46,7 +44,7 @@ const BillingPolicy = function () {
 
         {/* Section 3: Payment Options */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             3. Payment Options
           </h2>
           <p className='tw-text-gray-600'>
@@ -58,7 +56,7 @@ const BillingPolicy = function () {
 
         {/* Section 4: Withdrawal Process */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             4. Withdrawal Process
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -74,7 +72,9 @@ const BillingPolicy = function () {
 
         {/* Note Section */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Note</h2>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            Note
+          </h2>
           <p className='tw-text-gray-600'>
             The platform is accessible to all users without requiring a subscription.
           </p>
@@ -82,7 +82,9 @@ const BillingPolicy = function () {
 
         {/* Contact Information */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Contact Us</h2>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            Contact Us
+          </h2>
           <p className='tw-text-gray-600'>
             For any inquiries or support, please contact us at:
             <a href='mailto:support@kwekmarket.com' className='tw-text-blue-600 tw-underline'>

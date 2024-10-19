@@ -1,8 +1,10 @@
 const ReturnPolicy = function () {
   return (
-    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-6'>
-      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8'>
-        <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>Kwek Return Policy</h1>
+    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-2 lg:tw-p-6'>
+      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-rounded-lg'>
+        <h1 className='tw-text-xl lg:tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
+          Kwek Return Policy
+        </h1>
         <p className='tw-text-gray-600 tw-mb-6'>
           <strong>Effective Date:</strong> October 2024
         </p>
@@ -16,7 +18,7 @@ const ReturnPolicy = function () {
 
         {/* Section 1: Return Eligibility */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             1. Return Eligibility
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -41,7 +43,7 @@ const ReturnPolicy = function () {
 
         {/* Section 2: Return Period */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             2. Return Period
           </h2>
           <p className='tw-text-gray-600'>
@@ -52,7 +54,7 @@ const ReturnPolicy = function () {
 
         {/* Section 3: Return Process */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             3. Return Process
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>To initiate a return, follow these steps:</p>
@@ -98,7 +100,7 @@ const ReturnPolicy = function () {
 
         {/* Section 4: Refund Processing */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             4. Refund Processing
           </h2>
           <p className='tw-text-gray-600'>
@@ -110,7 +112,9 @@ const ReturnPolicy = function () {
 
         {/* Section 5: Exchanges */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>5. Exchanges</h2>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            5. Exchanges
+          </h2>
           <p className='tw-text-gray-600'>
             If you need to exchange an item for the same item or a different one, please follow the
             return process above, and place a new order for the desired item.
@@ -119,7 +123,7 @@ const ReturnPolicy = function () {
 
         {/* Section 6: Customer Service Response Time */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             6. Customer Service Response Time
           </h2>
           <p className='tw-text-gray-600'>
@@ -130,7 +134,7 @@ const ReturnPolicy = function () {
 
         {/* Section 7: Frequently Asked Questions (FAQs) */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             7. Frequently Asked Questions (FAQs)
           </h2>
           <div className='tw-mb-4'>
@@ -161,7 +165,9 @@ const ReturnPolicy = function () {
 
         {/* Contact Information */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Contact Us</h2>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            Contact Us
+          </h2>
           <p className='tw-text-gray-600'>
             If you have further questions or need assistance, feel free to contact us at:
           </p>

@@ -1,8 +1,10 @@
 const TermsOfService = function () {
   return (
-    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-6'>
-      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8'>
-        <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>Terms of Service</h1>
+    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-2 lg:tw-p-6'>
+      <div className='lg:tw-max-w-4xl tw-mx-auto tw-bg-white tw-rounded-lg'>
+        <h1 className='tw-text-2xl lg:tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
+          Terms of Service
+        </h1>
         <p className='tw-text-gray-600 tw-mb-6'>
           <strong>Effective Date:</strong> October 2024
         </p>
@@ -18,7 +20,9 @@ const TermsOfService = function () {
           this site.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Definitions</h2>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          Definitions
+        </h2>
         <p className='tw-text-gray-600 tw-mb-4'>In these terms of service:</p>
         <ul className='tw-list-disc tw-list-inside tw-text-gray-600 tw-mb-4'>
           <li>
@@ -27,14 +31,16 @@ const TermsOfService = function () {
           <li>“We,” “our,” “us” refers to Kwekmarket management.</li>
         </ul>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>1. Overview</h2>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          1. Overview
+        </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
           Kwekmarket is committed to connecting local market sellers with buyers through an
           easy-to-use platform that bridges the gap between the internet and local marketplaces. Our
           platform is designed to foster simplicity, transparency, and efficiency for all users.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           2. Acceptance of Terms
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -43,7 +49,9 @@ const TermsOfService = function () {
           website.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>3. Eligibility</h2>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          3. Eligibility
+        </h2>
         <ul className='tw-list-disc tw-list-inside tw-text-gray-600 tw-mb-4'>
           <li>Users aged 14 and above can use our services without restrictions.</li>
           <li>
@@ -53,7 +61,7 @@ const TermsOfService = function () {
           </li>
         </ul>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           4. Rules for Sellers
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -65,7 +73,7 @@ const TermsOfService = function () {
           .
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           5. Rules for Buyers
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -77,7 +85,7 @@ const TermsOfService = function () {
           .
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           6. Third-Party Policies
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -93,7 +101,7 @@ const TermsOfService = function () {
           third-party policies.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           7. User Accounts and Responsibilities
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -109,7 +117,9 @@ const TermsOfService = function () {
           <li>You are responsible for keeping your password secure.</li>
         </ul>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>8. Your Content</h2>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          8. Your Content
+        </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
           Content posted on Kwekmarket (profile, shop names, images, descriptions, etc.) remains
           your property. However, by posting content, you grant Kwekmarket a non-exclusive,
@@ -117,7 +127,7 @@ const TermsOfService = function () {
           promotion of the platform.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           9. License and Use of Services
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -131,7 +141,9 @@ const TermsOfService = function () {
           <li>Do not share malicious content or attempt to disrupt the platform.</li>
         </ul>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>10. Termination</h2>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          10. Termination
+        </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
           You may close your account at any time through your account settings. However, Kwekmarket
           reserves the right to terminate your account for violations of these terms, misuse, or any
@@ -139,14 +151,16 @@ const TermsOfService = function () {
           its content.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>11. Warranties</h2>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          11. Warranties
+        </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
           Kwekmarket provides services “as is,” without warranties of any kind, either express or
           implied, including but not limited to the implied warranties of merchantability and
           fitness for a particular purpose. We do not guarantee uninterrupted or error-free service.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           12. Limitation of Liability
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -155,7 +169,7 @@ const TermsOfService = function () {
           Kwekmarket’s liability will not exceed the amount you have paid us in the past 12 months.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           13. Dispute Resolution
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -164,7 +178,7 @@ const TermsOfService = function () {
           intervene.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           14. Indemnification
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -173,7 +187,7 @@ const TermsOfService = function () {
           these terms.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
           15. Changes to Terms of Service
         </h2>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -183,7 +197,9 @@ const TermsOfService = function () {
           terms.
         </p>
 
-        <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>16. Contact Us</h2>
+        <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          16. Contact Us
+        </h2>
         <p className='tw-text-gray-600'>
           For questions or concerns about these Terms of Service, please contact us at:
           <a href='mailto:support@kwekmarket.com' className='tw-text-blue-600 tw-underline'>
