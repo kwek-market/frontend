@@ -1,8 +1,8 @@
 const SellerPolicy = function () {
   return (
-    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-6'>
-      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8'>
-        <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
+    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-2 lg:tw-p-6'>
+      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-rounded-lg'>
+        <h1 className='tw-text-xl lg:tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
           Kwekmarket Seller's Policy
         </h1>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -25,7 +25,7 @@ const SellerPolicy = function () {
 
         {/* Section 1: What Can I Sell as a Vendor? */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             1. What Can I Sell as a Vendor?
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -48,7 +48,7 @@ const SellerPolicy = function () {
 
         {/* Section 2: What Can't Be Sold on Kwekmarket? */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             2. What Can't Be Sold on Kwekmarket?
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -74,7 +74,7 @@ const SellerPolicy = function () {
 
         {/* Section 3: Be Honestly Transparent */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             3. Be Honestly Transparent
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -100,7 +100,7 @@ const SellerPolicy = function () {
 
         {/* Section 4: Communication */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             4. Communication
           </h2>
           <p className='tw-text-gray-600'>
@@ -111,7 +111,7 @@ const SellerPolicy = function () {
 
         {/* Section 5: Fees Involved */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             5. Fees Involved
           </h2>
           <ul className='tw-list-disc tw-list-inside tw-text-gray-600'>
@@ -123,7 +123,7 @@ const SellerPolicy = function () {
 
         {/* Section 6: Vendor Withdrawals */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             6. Vendor Withdrawals
           </h2>
           <p className='tw-text-gray-600'>

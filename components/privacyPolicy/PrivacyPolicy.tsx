@@ -1,7 +1,7 @@
 const PrivacyPolicy = function () {
   return (
-    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-6'>
-      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8'>
+    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-2 lg:tw-p-6'>
+      <div className='lg:tw-max-w-4xl tw-mx-auto tw-bg-white tw-rounded-lg'>
         <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>Privacy Policy</h1>
         <p className='tw-text-gray-600 tw-mb-6'>
           This Privacy Policy describes our collection, use, disclosure, retention, and protection
@@ -21,7 +21,7 @@ const PrivacyPolicy = function () {
 
         {/* Section: Database Equipment Information */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             Database Equipment Information
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -42,7 +42,7 @@ const PrivacyPolicy = function () {
 
         {/* Section: The Received Database Equipped Information */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             The Received Database Equipped Information
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -63,7 +63,7 @@ const PrivacyPolicy = function () {
 
         {/* Section: Your Role as a Database Owner */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             Your Role as a Database Owner
           </h2>
           <p className='tw-text-gray-600'>
@@ -75,7 +75,7 @@ const PrivacyPolicy = function () {
 
         {/* Section: Messages from Kwekmarket */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             Messages from Kwekmarket
           </h2>
           <p className='tw-text-gray-600'>
@@ -88,7 +88,7 @@ const PrivacyPolicy = function () {
 
         {/* Section: Disclosure, Sharing, and Usage of Information */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             Disclosure, Sharing, and Usage of Information
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -112,7 +112,9 @@ const PrivacyPolicy = function () {
 
         {/* Section: Data Retention */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Data Retention</h2>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            Data Retention
+          </h2>
           <p className='tw-text-gray-600'>
             Your information is available as long as necessary for the purposes set out in this
             policy, for as long as your database is active, or as needed to provide the services to
@@ -127,7 +129,7 @@ const PrivacyPolicy = function () {
 
         {/* Section: Privacy Policy Changes */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             Privacy Policy Changes
           </h2>
           <p className='tw-text-gray-600'>
@@ -146,7 +148,9 @@ const PrivacyPolicy = function () {
 
         {/* Section: Contact Us */}
         <div className='tw-mt-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>Contact Us</h2>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+            Contact Us
+          </h2>
           <p className='tw-text-gray-600'>
             If you have questions or suggestions about your personal information, you can contact
             the Kwekmarket support team by sending an email to{" "}
