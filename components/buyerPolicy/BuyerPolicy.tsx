@@ -1,8 +1,8 @@
 const BuyerPolicy = function () {
   return (
-    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-6'>
-      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8'>
-        <h1 className='tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
+    <div className='tw-bg-gray-50 tw-min-h-screen tw-p-2 lg:tw-p-6'>
+      <div className='tw-max-w-4xl tw-mx-auto tw-bg-white tw-rounded-lg'>
+        <h1 className='tw-text-xl lg:tw-text-3xl tw-font-bold tw-text-gray-800 tw-mb-4'>
           Kwekmarket Buyer Policy
         </h1>
         <p className='tw-text-gray-600 tw-mb-4'>
@@ -25,7 +25,7 @@ const BuyerPolicy = function () {
 
         {/* Section 1: Creating a Kwekmarket Account */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             1. Creating a Kwekmarket Account
           </h2>
           <p className='tw-text-gray-600'>
@@ -37,7 +37,7 @@ const BuyerPolicy = function () {
 
         {/* Section 2: Purchasing on Kwekmarket */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             2. Purchasing on Kwekmarket
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -59,7 +59,7 @@ const BuyerPolicy = function () {
 
         {/* Section 3: Reviews and Feedback */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             3. Reviews and Feedback
           </h2>
           <p className='tw-text-gray-600 tw-mb-2'>
@@ -85,7 +85,7 @@ const BuyerPolicy = function () {
 
         {/* Section 4: Requesting a Cancellation */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             4. Requesting a Cancellation
           </h2>
           <p className='tw-text-gray-600'>
@@ -97,7 +97,7 @@ const BuyerPolicy = function () {
 
         {/* Section 5: Returning an Item */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             5. Returning an Item
           </h2>
           <p className='tw-text-gray-600'>
@@ -110,7 +110,7 @@ const BuyerPolicy = function () {
 
         {/* Section 6: Dispute and Resolution Process */}
         <div className='tw-mb-8'>
-          <h2 className='tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
+          <h2 className='tw-text-xl lg:tw-text-2xl tw-font-semibold tw-text-gray-700 tw-mb-3'>
             6. Dispute and Resolution Process
           </h2>
           <p className='tw-text-gray-600'>

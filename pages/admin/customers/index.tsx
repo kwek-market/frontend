@@ -54,8 +54,8 @@ const Customers = () => {
       dataIndex: "name",
       key: "name",
       render: (name: string, { key }) => (
-        <Link href={"/admin/customers/" + key}>
-          <a className=' tw-text-black-kwek100'>{name}</a>
+        <Link className=' tw-text-black-kwek100' href={"/admin/customers/" + key}>
+          {name}
         </Link>
       ),
     },
