@@ -19,10 +19,40 @@ export function createWishlist(payload: AddToWishlistPayload, token: string) {
   return async function (dispatch: Dispatch) {
     const { message } = await import("antd");
     try {
+      if (!token) {
+        return message.error("You must login in to add an item to a wishlist", 5);
+      }
+
       setLoading();
       const res = await userFetcherWithAuth(AddToWishlist, payload, token);
       // console.log(res);
       message.success("added to wishlist", 5);
+      dispatch({
+        type: WishlistType.ADD_WISHLIST,
+        payload: res.addToWishlist,
+      });
+    } catch (err) {
+      message.error(err.message.slice(0, err.message.indexOf(".")), 5);
+      dispatch({
+        type: WishlistType.ERROR,
+        payload: err.message.slice(0, err.message.indexOf(".")),
+      });
+    }
+  };
+}
+
+export function removeFromWishlist(payload: AddToWishlistPayload, token: string) {
+  return async function (dispatch: Dispatch) {
+    const { message } = await import("antd");
+    try {
+      if (!token) {
+        return message.error("You must login in to remove an item from your wishlist", 5);
+      }
+
+      setLoading();
+      const res = await userFetcherWithAuth(AddToWishlist, payload, token);
+      // console.log(res);
+      message.success("Removed From wishlist", 5);
       dispatch({
         type: WishlistType.ADD_WISHLIST,
         payload: res.addToWishlist,
