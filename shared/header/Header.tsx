@@ -21,8 +21,8 @@ import { clearSeller } from "@/store/seller/seller.action";
 import { logout } from "@/store/user/user.actions";
 import { clearWishlist } from "@/store/wishlist/wishlist.actions";
 import { Dropdown, Menu } from "antd";
-import SearchBar from "./SearchBar";
 import Logo from "../../components/UI/Logo";
+import SearchBar from "./SearchBar";
 
 interface HeaderProps {
   userNav: boolean;
@@ -88,7 +88,7 @@ const Header = function ({
   return (
     <header
       id={styles.mainHeader}
-      className='tw-flex tw-items-center tw-bg-red-700 tw-flex-row tw-justify-between'
+      className='tw-flex tw-items-center tw-bg-red-700 tw-flex-row tw-justify-between tw-relative tw-z-50'
       suppressHydrationWarning
     >
       <div className='tw-flex tw-space-x-1 tw-items-center'>

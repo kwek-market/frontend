@@ -8,7 +8,7 @@
   flex-direction: row;
   top: 0;
   background-color: white;
-  z-index: 30;
+  z-index: 50;
   @include flex(space-between, center);
   flex-flow: nowrap;
 
