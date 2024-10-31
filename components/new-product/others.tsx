@@ -241,6 +241,9 @@ function Others({ submitDetails, setSubmitDetails }: UploadProductProps) {
                   onChange={e => handleChange(index, e)}
                   className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
                 />
+                 <p className='tw-text-xs tw-text-yellow-900'>
+                  The product charge will also be added on the discount price will
+                </p>
               </label>
 
               {productCharge ? (
