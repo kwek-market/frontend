@@ -40,14 +40,14 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
   useEffect(() => {
     if (product.options.length > 0) {
       const newProductOptions = product.options.map(option => ({
-        size: option.size,
-        color: option.color,
-        quantity: option.quantity,
-        price: Number(option.price) - option.productCharge,
+        size: option.size || "",
+        color: option.color || "",
+        quantity: option.quantity || "",
+        price: Number(option.price) - option.productCharge || "",
         discounted_price: !option.discountedPrice
           ? Number(option.discountedPrice)
-          : Number(option.discountedPrice) - option.productCharge,
-        option_total_price: option.price,
+          : Number(option.discountedPrice) - option.productCharge || "",
+        option_total_price: option.price || "",
       }));
       setFormValues(newProductOptions);
     } else {
@@ -363,23 +363,6 @@ function EditProductOthers({ submitDetails, setSubmitDetails, product }: EditPro
               <option value='4 years'>4yrs warranty</option>
               <option value='5 years'>5yrs warranty</option>
             </select>
-          </label>
-
-          <label className='tw-text-base tw-font-medium tw-capitalize'>
-            {" "}
-            color - separated by comma (,) (Optional) <br />
-            <input
-              type='text'
-              placeholder='what is the color of this item?'
-              className='tw-w-full tw-rounded-md tw-border-gray-kwek100 tw-border-1 tw-mt-2'
-              value={submitDetails.color}
-              onChange={e =>
-                setSubmitDetails({
-                  ...submitDetails,
-                  color: e.target.value,
-                })
-              }
-            />
           </label>
 
           <label className='tw-text-base tw-font-medium tw-capitalize'>
