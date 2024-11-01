@@ -1,11 +1,13 @@
 import { getIp } from "@/helpers";
-import { AddToCartPayload } from "@/interfaces/commonTypes";
+import { AddToCartPayload, AddToWishlistPayload } from "@/interfaces/commonTypes";
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
+import { Button } from "antd";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
+import { getWishList, removeFromWishlist } from "../../store/wishlist/wishlist.actions";
 import styles from "./list.module.scss";
 
 const ListComponent = function ({
@@ -36,6 +38,15 @@ const ListComponent = function ({
     getCartFunc(user?.token)(dispatch);
   }
 
+  function addToWishlist(id: string) {
+    const payload: AddToWishlistPayload = {
+      productId: id,
+      token: user.token,
+    };
+    removeFromWishlist(payload, user.token)(dispatch);
+    getWishList(user.token)(dispatch);
+  }
+
   return (
     <Link href={`/product/${productId}`} className=''>
       <div className={listStyle}>
@@ -60,17 +71,19 @@ const ListComponent = function ({
       </div>
       <div className={styles.list_grid_mobile}>
         <div className={styles.picture_grid}>
-          <div className={styles.heartImg}>
-            <Image
+          {/* //TODO: fIX THIS LATER */}
+          {/* <div className={cn(styles.heartImg, "tw-relative tw-z-0")}>
+            <img
               src='/svg/heart-filled.svg'
               alt={altText}
               width={12}
               height={10.68}
-              className={styles.heart}
-              // layout="responsive"
+              className={cn(styles.heart, "tw-w-3 tw-h-2 tw-relative")}
             />
+          </div> */}
+          <div className='relative'>
+            <Image src={imgSrc} alt={altText} width={100} height={80} className={styles.img} />
           </div>
-          <Image src={imgSrc} alt={altText} width={100} height={80} className={styles.img} />
         </div>
         <div className={styles.content_box}>
           <p className={inStock ? styles.stock : styles.stock_out}>
@@ -100,6 +113,15 @@ const ListComponent = function ({
               </p>
             </div>
           )}
+
+          <Button
+            className='tw-border-red-kwek100 tw-text-red-kwek100 tw-mt-3 tw-mb-4 hover:!tw-border-red-kwek100 hover:!tw-text-red-kwek100'
+            onClick={() => {
+              addToWishlist(productId);
+            }}
+          >
+            Remove Item
+          </Button>
         </div>
       </div>
     </Link>
