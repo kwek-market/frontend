@@ -152,6 +152,7 @@ const OrderDetail = () => {
                   className='tw-rounded-lg'
                   name='updateDeliveryStatus'
                   defaultValue={selectedStatus}
+                  value={selectedStatus}
                 >
                   {Object.values(
                     !order?.paid ? OrderDeliveryStatus : OrderDeliveryStatusWhenPaid

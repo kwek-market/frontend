@@ -3,6 +3,7 @@ import { clsx, type ClassValue } from "clsx";
 import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 import { ICreateProductCharge } from "../hooks/admin/productCharges";
+import { ProductType } from "../interfaces/commonTypes";
 import { userFetcher } from "./userFetcher";
 
 export function getInitials(name: string) {
@@ -145,6 +146,8 @@ export const getOrderText = (order: any) => {
   let status = "open";
   let statusStyle = "tw-bg-green-500";
 
+  console.log(order?.closed, order?.paid);
+
   if (order?.closed) {
     status = "closed";
     text = "CLOSED";
@@ -201,3 +204,13 @@ export function removeCurrentTotalPrice(productCharge: ICreateProductCharge, pri
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export const getProductQuantity = (productOption: ProductType["options"]) => {
+  const quantity = productOption.reduce((prev, curr) => {
+    const currentQuantity = curr.quantity || 0;
+
+    return prev + Number(currentQuantity);
+  }, 0);
+
+  return quantity;
+};
