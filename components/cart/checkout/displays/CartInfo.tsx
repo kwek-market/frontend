@@ -9,7 +9,7 @@ function CartInfo() {
   const cart = useSelector((state: RootState) => state.cart);
   const deliveryFee = useSelector((state: RootState) => state.deliveryFee);
 
-  console.log("🚀 ~~ CartInfo ~~ deliveryFee:", deliveryFee);
+  console.log("🚀 ~~ CartInfo ~~ deliveryFee:", cart.cart);
 
   const result = useMemo(() => {
     let initial = 0;
@@ -55,12 +55,16 @@ function CartInfo() {
 
               <div className={"tw-flex tw-space-x-2 tw-items-baseline"}>
                 <p className={styles.qty}>Color:</p>
-                <p className={"tw-font-medium tw-text-lg"}>{item.product.color}</p>
+                <p className={"tw-font-medium tw-text-lg"}>
+                  {item.product.options?.find(opt => opt.id === item?.productOptionId)?.color}
+                </p>
               </div>
 
               <div className={"tw-flex tw-space-x-2 tw-items-baseline"}>
                 <p className={styles.qty}>Size:</p>
-                <p className={"tw-font-medium tw-text-lg"}>{item.product.options[0].size}</p>
+                <p className={"tw-font-medium tw-text-lg"}>
+                  {item.product.options?.find(opt => opt.id === item?.productOptionId)?.size}
+                </p>
               </div>
             </div>
           </div>

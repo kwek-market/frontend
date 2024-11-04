@@ -120,6 +120,7 @@ export const GET_PRODUCT = /* GraphQL */ `
         price
         discountedPrice
         size
+        quantity
         color
       }
       image {
@@ -535,7 +536,12 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
             email
             phoneNumber
           }
+          options {
+            id
+            productCharge
+          }
         }
+        charge
         price
         quantity
       }
@@ -555,7 +561,6 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
     }
   }
 `;
-
 
 export const GET_ORDERS_BY_ID = /* GraphQL */ `
   query orderByOrderId($token: String!, $id: String!) {

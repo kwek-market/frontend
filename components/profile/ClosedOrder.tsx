@@ -69,7 +69,7 @@ const ClosedOrder = function ({ order, setActiveBtn }: OrderProps) {
         {order?.paid ? (
           <Badge
             badgeStyle='tw-bg-green-500 tw-opacity-70 tw-p-1.5 tw-text-xs tw-text-center tw-text-white-100 tw-inline tw-uppercase tw-whitespace-nowrap'
-            text='PAYED - PAYMENT SUCCESSFUL'
+            text='PAID - PAYMENT SUCCESSFUL'
           />
         ) : null}
 

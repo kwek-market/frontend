@@ -1,13 +1,10 @@
-import React from "react";
-
-import Link from "next/link";
-import Image from "next/legacy/image";
+import { WishlistType } from "@/interfaces/commonTypes";
 import dayjs from "dayjs";
 import styles from "./list.module.scss";
 import ListComponent from "./ListComponent";
-import { WishlistType } from "@/interfaces/commonTypes";
 
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import { getProductQuantity } from "../../helpers/helper";
 dayjs.extend(localizedFormat);
 
 export type WishlistProps = {
@@ -21,9 +18,9 @@ const Component = function ({ wishlists }: WishlistProps) {
       listStyle={styles.list_grid}
       altText={wishlists.product.productTitle}
       itemName={wishlists.product.productTitle}
-      itemPrice={wishlists.product.options[0]?.discountedPrice}
+      itemPrice={wishlists.product.options[0]?.price}
       itemDate={dayjs(wishlists.wishlist.createdAt).format("LL")}
-      inStock={wishlists.product.options.length}
+      inStock={getProductQuantity(wishlists.product.options)}
       itemId={wishlists.product.options[0]?.id}
       options={wishlists.product.options}
       productId={wishlists?.product?.id}

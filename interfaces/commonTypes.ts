@@ -294,6 +294,8 @@ export type WishlistType = {
       size: string;
       quantity: string;
       price: string;
+      color: string;
+      productCharge: number;
       discountedPrice: string;
       optionTotalPrice: string;
     }[];
