@@ -30,6 +30,7 @@ const Transactions = () => {
     pageSize: PAGE_SIZE,
     search: searchDebouncedValue,
     token,
+    sortBy: "-date_created",
   });
 
   const { data: refundRequestsData, isLoading: isLoadingRefundRequests } = useGetRefundRequests({

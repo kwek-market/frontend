@@ -6,7 +6,7 @@ import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
-import { Button, Carousel, Modal, Radio, message } from "antd";
+import { Badge, Button, Carousel, Modal, Radio, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import React, { Fragment, useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StarRatingComponent from "react-star-rating-component";
 import { v4 } from "uuid";
+import { cn, getProductQuantity } from "../../../helpers/helper";
 import { useDeleteProduct } from "../../../store/product/product.action";
 import ProductVariant from "../ProductVariant/ProductVariant";
 import styles from "./productHead.module.scss";
@@ -151,6 +152,13 @@ const ProductHead = function ({ product }: ProductHeadProps) {
   return (
     <div className={styles.product_container}>
       <div className={styles.product_carousel}>
+        {Number(getProductQuantity(product.options)) === 0 && (
+          <Badge.Ribbon
+            color='orange'
+            className='tw-absolute tw-top-0 tw-z-10'
+            text='Out of stock'
+          ></Badge.Ribbon>
+        )}
         <Carousel
           arrows={false}
           nextArrow={<SampleNextArrow />}
@@ -298,20 +306,26 @@ const ProductHead = function ({ product }: ProductHeadProps) {
               </div>
             </div>
           )}
-          <div className={styles.product_buttonbox}>
-            <button
-              onClick={() => {
-                if (product?.options?.length > 1) {
-                  setIsProductVariantModalOpen(true);
-                  return;
-                }
-                addToCart(product.options[0].id);
-              }}
-              className={styles.butnowButton}
-            >
-              <i className='fas fa-shopping-cart' />
-              <p>Buy Now</p>
-            </button>
+          <div className={cn(styles.product_buttonbox, "tw-space-x-4")}>
+            {getProductQuantity(product.options) !== 0 ? (
+              <button
+                onClick={() => {
+                  if (product?.options?.length > 1) {
+                    setIsProductVariantModalOpen(true);
+                    return;
+                  }
+                  addToCart(product.options[0].id);
+                }}
+                className={styles.butnowButton}
+              >
+                <i className='fas fa-shopping-cart' />
+                <p>Buy Now</p>
+              </button>
+            ) : (
+              <Button className='tw-w-full !tw-py-3.5 tw-h-full' type='primary' disabled>
+                Out of Stock
+              </Button>
+            )}
             {user.token && (
               <Fragment>
                 {!checkIfItemInWishlist(product.id) ? (

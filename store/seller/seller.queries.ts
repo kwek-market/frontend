@@ -603,6 +603,8 @@ export const DEALS_OF_THE_DAY = `
           id
           price
           discountedPrice
+          color
+          quantity
         }
         productRating {
           rating
