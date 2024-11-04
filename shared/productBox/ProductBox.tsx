@@ -6,13 +6,14 @@ import { AddToCartPayload, AddToWishlistPayload, ProductType } from "@/interface
 import { addToCartFunc, getCartFunc } from "@/store/cart/cart.actions";
 import { RootState } from "@/store/rootReducer";
 import { createWishlist, getWishList } from "@/store/wishlist/wishlist.actions";
-import { Modal, Rate } from "antd";
+import { Badge, Modal, Rate } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Rings } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import ProductVariant from "../../components/product/ProductVariant/ProductVariant";
+import { getProductQuantity } from "../../helpers/helper";
 import styles from "./ProductBox.module.scss";
 
 export type ProductBoxProps = {
@@ -57,6 +58,8 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
     mutate({ productId, token });
   }
 
+  console.log("getProductQuantity(prod.options)", getProductQuantity(prod.options));
+
   if (prod === undefined)
     return (
       <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>
@@ -66,6 +69,14 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
 
   return (
     <div className='tw-w-full'>
+      {Number(getProductQuantity(prod.options)) === 0 ? (
+        <Badge.Ribbon
+          color='orange'
+          className='tw-absolute tw-top-0 tw-z-10'
+          text='Out of stock'
+        ></Badge.Ribbon>
+      ) : null}
+
       <div className='tw-relative tw-w-full'>
         <div className='tw-relative tw-w-full tw-h-[150px] lg:tw-h-[284px]'>
           <Image
@@ -80,11 +91,6 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
             className=' tw-object-cover'
           />
         </div>
-        {Number(prod?.options[0]?.quantity) === 0 ? (
-          <div className='absolute top-0 z-20 left-0 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-br-lg'>
-            Out of Stock
-          </div>
-        ) : null}
         {/* <span
           id="cart-wishlist"
           className="tw-absolute top-75 tw-right-0 tw-mr-3 tw-flex tw-flex-row hover:tw-hidden"
@@ -118,21 +124,23 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           }}
         >
           <span className='tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10'>
-            <i
-              className={`fas fa-shopping-cart ${
-                !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
-              } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
-              style={{ padding: "5px" }}
-              onClick={e => {
-                e.stopPropagation();
-                if (prod.options.length > 1) {
-                  setIsProductVariantModalOpen(true);
-                  return;
-                }
-                addToCart(prod?.options[0]?.id);
-              }}
-            />
-            {user.token && (
+            {getProductQuantity(prod.options) && (
+              <i
+                className={`fas fa-shopping-cart ${
+                  !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
+                } tw-rounded-full fa-0.5x fa-xs tw-mb-2 tw-text-gray-kwek100`}
+                style={{ padding: "5px" }}
+                onClick={e => {
+                  e.stopPropagation();
+                  if (prod.options.length > 1) {
+                    setIsProductVariantModalOpen(true);
+                    return;
+                  }
+                  addToCart(prod?.options[0]?.id);
+                }}
+              />
+            )}
+            {user.token && getProductQuantity(prod.options) && (
               <i
                 className={`fas fa-heart tw-p-1 ${
                   !checkIfItemInWishlist(id) ? "tw-bg-white-100" : "tw-bg-gray-kwek700"

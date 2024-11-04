@@ -18,6 +18,7 @@ export default function History() {
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<WalletHistory[]>([] as WalletHistory[]);
+  //TODO: add  sortBy: "-date_created"
   const payload = { token, page: currentPage, pageSize: 20 };
   const { status, error, data } = useWalletTransaction(payload);
   const [history, setHistory] = useState({

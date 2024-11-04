@@ -8,7 +8,7 @@ import { RootState } from "../../../store/rootReducer";
 import Load from "../../Loader/Loader";
 import CustomerDetail from "../../admin/customers/customer-detail";
 
-const SellerOrderDetailsModal = ({ open, onclose, orderId, order }) => {
+const SellerOrderDetailsModal = ({ open, onclose, orderId, order: nack }) => {
   const user = useSelector((state: RootState) => state?.user);
   const { data, isLoading, error } = useGetOrdersAdmin({
     id: orderId as string,
@@ -21,6 +21,7 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId, order }) => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [filteredCartItems, setFilteredCartItems] = useState([]);
 
+  const order = data?.order;
 
   useEffect(() => {
     if (order) {
@@ -37,6 +38,10 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId, order }) => {
   }, [order]);
 
   console.log("getOrderText(order).status", getOrderText(order).status);
+  const totalProductCharge: number = order?.cartItems.reduce(
+    (prevItem, currItem) => prevItem + currItem.charge,
+    0
+  );
 
   return (
     <Modal
@@ -82,7 +87,9 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId, order }) => {
               </div>
               <div className=' tw-flex tw-justify-between tw-pt-2 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium tw-text-lg'>Total:</p>
-                <p className='tw-mb-0 tw-text-lg tw-font-semibold'>NGN {order?.orderPriceTotal}</p>
+                <p className='tw-mb-0 tw-text-lg tw-font-semibold'>
+                  NGN {order?.orderPrice - totalProductCharge}
+                </p>
               </div>
               <div className=' tw-flex tw-justify-between tw-pt-2 tw-items-center '>
                 <p className='tw-mb-0 tw-font-medium'>Order Status</p>
@@ -152,7 +159,7 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId, order }) => {
                     image={item?.product?.image[0]?.imageUrl}
                     name={item?.product?.productTitle}
                     qty={item?.quantity}
-                    amount={item?.price}
+                    amount={item?.price - item?.charge}
                     size={item?.product?.size}
                     color={item?.product?.color}
                     brand={item?.product?.brand}
