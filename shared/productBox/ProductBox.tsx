@@ -58,7 +58,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
     mutate({ productId, token });
   }
 
-  console.log("getProductQuantity(prod.options)", getProductQuantity(prod.options));
+  console.log("getProductQuantity(prod?.options)", getProductQuantity(prod?.options));
 
   if (prod === undefined)
     return (
@@ -69,7 +69,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
 
   return (
     <div className='tw-w-full'>
-      {Number(getProductQuantity(prod.options)) === 0 ? (
+      {Number(getProductQuantity(prod?.options)) === 0 ? (
         <Badge.Ribbon
           color='orange'
           className='tw-absolute tw-top-0 tw-z-10'
@@ -124,7 +124,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           }}
         >
           <span className='tw-absolute tw-right-0 tw-flex tw-flex-col tw-mt-2 tw-mr-2 tw-z-10'>
-            {getProductQuantity(prod.options) && (
+            {getProductQuantity(prod?.options) && (
               <i
                 className={`fas fa-shopping-cart ${
                   !checkIfItemInCart(prod?.options[0]?.id) ? "tw-bg-white-100" : "tw-bg-red-kwek100"
@@ -132,7 +132,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                 style={{ padding: "5px" }}
                 onClick={e => {
                   e.stopPropagation();
-                  if (prod.options.length > 1) {
+                  if (prod?.options.length > 1) {
                     setIsProductVariantModalOpen(true);
                     return;
                   }
@@ -140,7 +140,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                 }}
               />
             )}
-            {user.token && getProductQuantity(prod.options) && (
+            {user.token && getProductQuantity(prod?.options) && (
               <i
                 className={`fas fa-heart tw-p-1 ${
                   !checkIfItemInWishlist(id) ? "tw-bg-white-100" : "tw-bg-gray-kwek700"
@@ -165,19 +165,19 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
           <p className={styles.box_productCategory}>{prod?.productTitle}</p>
 
           <p className={styles.box_productPrice}>
-            {!!prod.options[0]?.discountedPrice && (
+            {!!prod?.options[0]?.discountedPrice && (
               <span>
-                ₦{""} {prod.options[0]?.discountedPrice}
+                ₦{""} {prod?.options[0]?.discountedPrice}
               </span>
             )}
             <span
               className={
-                prod.options[0]?.discountedPrice
+                prod?.options[0]?.discountedPrice
                   ? styles.box_productDiscountPrice
                   : styles.box_productPrice
               }
             >
-              ₦ {prod.options[0]?.price}
+              ₦ {prod?.options[0]?.price}
             </span>
           </p>
 

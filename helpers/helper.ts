@@ -206,11 +206,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getProductQuantity = (productOption: ProductType["options"]) => {
-  const quantity = productOption.reduce((prev, curr) => {
-    const currentQuantity = curr.quantity || 0;
+  console.log("🚀 ~~ getProductQuantity ~~ productOption:", productOption);
 
-    return prev + Number(currentQuantity);
-  }, 0);
+  let quantity = 0;
+  if (Array.isArray(productOption)) {
+    quantity = productOption.reduce((prev, curr) => {
+      const currentQuantity = curr.quantity || 0;
+
+      return prev + Number(currentQuantity);
+    }, 0);
+  }
 
   return quantity;
 };
