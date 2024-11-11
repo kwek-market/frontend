@@ -54,6 +54,8 @@ export async function getStaticProps(): Promise<ReturnType<GetStaticProps>> {
     }
 
     const sortedCategories = sortArray(categories);
+    console.log("🚀 ~~ getStaticProps ~~ sortedCategories:", sortedCategories);
+
     return {
       props: {
         categories: sortedCategories,
