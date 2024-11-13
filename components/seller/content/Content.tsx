@@ -33,7 +33,7 @@ function Content() {
   }, [router.query]);
   const [activeKey, setActiveKey] = useState("1");
   return (
-    <div className='tw-py-3'>
+    <div className='tw-py-3 tw-px-2'>
       <Tabs
         animated
         tabBarStyle={{ margin: "0px", borderColor: "red" }}

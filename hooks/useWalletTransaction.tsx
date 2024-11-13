@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 type Payload = { token: string; page: number; pageSize: number };
 
 export default function useWalletTransaction(payload: Payload) {
-  return useQuery("wallet-transaction", () =>
+  return useQuery(["wallet-transaction", payload], () =>
     userFetcher(GET_SELLER_TRANSACTIONS, payload)
   );
 }

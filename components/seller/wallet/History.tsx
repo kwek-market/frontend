@@ -19,13 +19,9 @@ export default function History() {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<WalletHistory[]>([] as WalletHistory[]);
   //TODO: add  sortBy: "-date_created"
-  const payload = { token, page: currentPage, pageSize: 20 };
+  const payload = { token, page: currentPage, pageSize: 20, orderBy: "-date" };
   const { status, error, data } = useWalletTransaction(payload);
-  const [history, setHistory] = useState({
-    search: "",
-    sort: "",
-    filter: "",
-  });
+  console.log("🚀 ~~ History ~~ data:", data?.getSellerWalletTransactions, currentPage);
 
   useEffect(() => {
     if (data?.getSellerWalletTransactions.hasNext) {
@@ -49,7 +45,7 @@ export default function History() {
   return (
     <section className=''>
       {/* <Top history={history} setHistory={setHistory}   /> */}
-      <div className='tw-mt-4'>
+      <div className='tw-mt-4 tw-overflow-x-scroll'>
         {status === "loading" && <Load />}
         {status === "error" && <ErrorInfo error={"An error occurred"} />}
         <table className='tw-table-auto tw-w-full'>
@@ -67,9 +63,9 @@ export default function History() {
               ? currentItems.map((item, index: number) => (
                   <tr key={item.id} className={`${even(index)} tw-bg-opacity-10`}>
                     <td className='tw-p-3'>{item.remark}</td>
-                    <td>{dayjs(item.date).format("DD/MM/YYYY")}</td>
-                    <td>NGN {item.amount}</td>
-                    <td>
+                    <td className='tw-p-3'>{dayjs(item.date).format("DD/MM/YYYY")}</td>
+                    <td className='tw-p-3'>NGN {item.amount}</td>
+                    <td className='tw-p-3'>
                       {item.status ? (
                         <span className='tw-border tw-border-green-success tw-rounded-md tw-text-green-success'>
                           Successful
@@ -80,7 +76,7 @@ export default function History() {
                         </span>
                       )}
                     </td>
-                    <td>NGN {item.wallet.balance}</td>
+                    <td className='tw-p-3'>NGN {item.wallet.balance}</td>
                   </tr>
                 ))
               : null}
