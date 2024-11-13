@@ -258,8 +258,8 @@ export const GET_SELLER_WALLET = `
 `;
 
 export const GET_SELLER_TRANSACTIONS = `
-  query getSellerWalletTransactions($token: String!, $page: Int, $pageSize: Int) {
-    getSellerWalletTransactions(token: $token, page: $page, pageSize: $pageSize) {
+  query getSellerWalletTransactions($token: String!, $page: Int, $pageSize: Int, $orderBy: String) {
+    getSellerWalletTransactions(token: $token, page: $page, pageSize: $pageSize, orderBy: $orderBy) {
       page
       pages
       hasNext
