@@ -7,10 +7,10 @@ export type WalletHeaderType = {
 
 export default function WalletHeader({ setVisible, setIsFundWalletModalOpen }: WalletHeaderType) {
   return (
-    <div className='tw-flex tw-justify-between'>
+    <div className='lg:tw-flex tw-justify-between'>
       <h1 className='tw-font-semibold tw-text-lg tw-text-gray-kwek900'>Wallet</h1>
 
-      <div className='tw-space-x-3 tw-flex tw-items-center'>
+      <div className='tw-space-x-3 tw-flex tw-items-center tw-mt-4 lg:tw-mt-0'>
         <button
           className='tw-rounded-md tw-capitalize tw-bg-yellow-500 tw-text-white-100 tw-p-3 tw-flex'
           onClick={() => setIsFundWalletModalOpen(true)}
