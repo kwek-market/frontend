@@ -6,9 +6,10 @@ import useWalletTransaction from "@/hooks/useWalletTransaction";
 import { WalletHistory } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { GET_SELLER_TRANSACTIONS } from "@/store/seller/seller.queries";
+import { Button } from "antd";
 import dayjs from "dayjs";
+import Pagination from "rc-pagination";
 import { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
 import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 
@@ -51,11 +52,15 @@ export default function History() {
         <table className='tw-table-auto tw-w-full'>
           <thead>
             <tr className='tw-border-b tw-border-gray-kwek700'>
-              <td className='tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>remarks</td>
-              <td className='tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>date</td>
-              <td className='tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>amount</td>
-              <td className='tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>status</td>
-              <td className='tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>balance</td>
+              <td className='tw-px-3 tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>
+                remarks
+              </td>
+              <td className='tw-px-3 tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>date</td>
+              <td className='tw-px-3 tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>amount</td>
+              <td className='tw-px-3 tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>status</td>
+              <td className='tw-px-3 tw-uppercase tw-text-gray-kwek900 tw-font-semibold'>
+                balance
+              </td>
             </tr>
           </thead>
           <tbody>
@@ -82,26 +87,48 @@ export default function History() {
               : null}
           </tbody>
         </table>
-        <div className='tw-mt-4'>
-          <ReactPaginate
-            nextLabel='next >'
-            onPageChange={e => handlePageClick(e)}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            pageCount={pageCount}
-            previousLabel='< previous'
-            pageClassName='page-item'
-            pageLinkClassName='page-link'
-            previousClassName='page-item'
-            previousLinkClassName='page-link'
-            nextClassName='page-item'
-            nextLinkClassName='page-link'
-            breakLabel='...'
-            breakClassName='page-item'
-            breakLinkClassName='page-link'
-            containerClassName='pagination'
-            activeClassName='active'
-            renderOnZeroPageCount={undefined}
+
+        <div className='tw-w-full tw-overflow-x-scroll tw-scrollbar-none'>
+          <Pagination
+            pageSize={20}
+            totalBoundaryShowSizeChanger={1}
+            // pageSizeOptions={["1", "2", "3"]}
+            nextIcon={<button>Next</button>}
+            prevIcon={<button>Prev</button>}
+            showLessItems={true}
+            defaultCurrent={1}
+            total={payload.pageSize * pageCount}
+            className='tw-text-red-500 tw-overflow-x-scroll tw-scrollbar-none tw-py-5 px-6 tw-flex tw-space-x-2 tw-justify-center tw-items-center tw-w-full'
+            role='button'
+            locale={{}}
+            itemRender={(page, type, element) => {
+              if (type === "jump-next" || type === "jump-prev") {
+                return (
+                  <Button onClick={() => setCurrentPage(page)} className='tw-px-3 tw-py-2'>
+                    ...
+                  </Button>
+                );
+              }
+
+              if (type === "next" || type === "prev") {
+                return (
+                  <Button
+                    onClick={() => setCurrentPage(page)}
+                    className='tw-px-3 tw-py-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-xl'
+                  >
+                    {type === "prev" ? <span className=''> {"<"} </span> : null}
+                    {element}
+                    {type === "next" ? <span className=''> {">"} </span> : null}
+                  </Button>
+                );
+              }
+
+              return (
+                <Button onClick={() => setCurrentPage(page)} className='tw-px-3 tw-py-2'>
+                  {page}
+                </Button>
+              );
+            }}
           />
         </div>
       </div>
