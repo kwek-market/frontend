@@ -142,9 +142,7 @@ const CategoryProducts = function ({ id, product: prod }: ProductBoxProps) {
                 disabled
                 value={prod?.productRating[0]?.rating}
               />
-              <small className='tw-text-gray-kwek400'>
-                ({prod.productRating[0].likes} Reviews)
-              </small>
+              <small className='tw-text-gray-kwek400'>({prod.productRating?.length} Reviews)</small>
             </div>
           ) : (
             <div className='tw-flex tw-flex-wrap tw-justify-center'>
