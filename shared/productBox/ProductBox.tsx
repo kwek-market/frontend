@@ -190,7 +190,7 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
                 value={prod.productRating[0]?.rating}
               />
               <small className='tw-text-gray-kwek400'>
-                ({prod.productRating[0].likes} reviews)
+                ({prod.productRating?.length || 0} reviews)
               </small>
             </div>
           ) : (

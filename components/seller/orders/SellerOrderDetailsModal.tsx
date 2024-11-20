@@ -1,7 +1,7 @@
 import { Empty, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getOrderText } from "../../../helpers/helper";
+import { getOrderText, getProductOption } from "../../../helpers/helper";
 import { useGetOrdersAdmin } from "../../../hooks/admin/orders";
 import { Item } from "../../../pages/admin/customers/[id]/order-detail/[orderId]";
 import { RootState } from "../../../store/rootReducer";
@@ -160,8 +160,8 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId, order: nack }) => {
                     name={item?.product?.productTitle}
                     qty={item?.quantity}
                     amount={item?.price - item?.charge}
-                    size={item?.product?.size}
-                    color={item?.product?.color}
+                    size={getProductOption(item?.productOptionId, item?.product?.options)?.size}
+                    color={getProductOption(item?.productOptionId, item?.product?.options)?.color}
                     brand={item?.product?.brand}
                     fullName={item?.product?.user?.fullName}
                     email={item?.product?.user?.email}

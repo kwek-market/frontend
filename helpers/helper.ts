@@ -219,3 +219,9 @@ export const getProductQuantity = (productOption: ProductType["options"]) => {
 
   return quantity;
 };
+
+export const getProductOption = (id: string, productOptions: ProductType["options"]) => {
+  const option = productOptions?.find(option => option.id === id) ?? undefined;
+
+  return option;
+};
