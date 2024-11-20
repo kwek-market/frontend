@@ -522,6 +522,7 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
       orderPriceTotal
       cartItems {
         id
+        productOptionId
         product {
           productTitle
           image {
@@ -539,6 +540,9 @@ export const GET_ORDERS_ADMIN = /* GraphQL */ `
           options {
             id
             productCharge
+            color
+            size
+            price
           }
         }
         charge
