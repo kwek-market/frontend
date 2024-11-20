@@ -6,7 +6,6 @@ import { Button } from "antd";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import StarRatingComponent from "react-star-rating-component";
 import { getWishList, removeFromWishlist } from "../../store/wishlist/wishlist.actions";
 import styles from "./list.module.scss";
 
@@ -22,7 +21,7 @@ const ListComponent = function ({
   options,
   productId,
 }) {
-  console.log("🚀 ~~ imgSrc:", imgSrc);
+  console.log("🚀 ~~ imgSrc:", imgSrc, productId, options);
 
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
@@ -91,7 +90,7 @@ const ListComponent = function ({
           </p>
           <p className={styles.item_name}>{itemName}</p>
           <p className={styles.item_price}>₦{itemPrice}</p>
-          {options[0]?.productRating?.length > 0 ? (
+          {/* {options[0]?.productRating?.length > 0 ? (
             <div className='tw-flex'>
               <StarRatingComponent
                 name='rate1'
@@ -102,7 +101,8 @@ const ListComponent = function ({
                 starColor='#ffc107'
               />
               <small className='tw-text-gray-kwek400'>
-                ({options[0].productRating[0].likes} Reviews)
+                {console.log("🚀 ~~ options:", options)}({options[0].productRating[0].likes}{" "}
+                Reviews)
               </small>
             </div>
           ) : (
@@ -112,7 +112,7 @@ const ListComponent = function ({
                 <small className='tw-text-gray-kwek400'>(0 Reviews)</small>
               </p>
             </div>
-          )}
+          )} */}
 
           <Button
             className='tw-border-red-kwek100 tw-text-red-kwek100 tw-mt-3 tw-mb-4 hover:!tw-border-red-kwek100 hover:!tw-text-red-kwek100'

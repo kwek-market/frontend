@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Load from "../../../../../components/Loader/Loader";
 import { OrderTable } from "../../../../../components/admin/orderTable/orderTable";
-import { getOrderText } from "../../../../../helpers/helper";
+import { getOrderText, getProductOption } from "../../../../../helpers/helper";
 import { useGetOrdersAdmin, useUpdateOrderDeliveryStatus } from "../../../../../hooks/admin/orders";
 import useCancelOrder from "../../../../../hooks/useCancelOrder";
 import { RootState } from "../../../../../store/rootReducer";
@@ -206,8 +206,8 @@ const OrderDetail = () => {
                     name={item?.product?.productTitle}
                     qty={item?.quantity}
                     amount={item?.price}
-                    size={item?.product?.size}
-                    color={item?.product?.color}
+                    size={getProductOption(item?.productOptionId, item?.product?.options)?.size}
+                    color={getProductOption(item?.productOptionId, item?.product?.options)?.color}
                     brand={item?.product?.brand}
                     fullName={item?.product?.user?.fullName}
                     email={item?.product?.user?.email}

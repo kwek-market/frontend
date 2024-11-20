@@ -63,7 +63,7 @@ export default function Product({ product }: ProductProps) {
                   starColor='#ffc107'
                 />{" "}
                 <small className='tw-text-gray-kwek400 tw-ml-2'>
-                  ({product.productRating[0].likes} reviews)
+                  ({product.productRating?.length || 0} reviews)
                 </small>
               </div>
             ) : (
