@@ -60,7 +60,9 @@ const MainLayout = function ({ children, title }: MainLayoutType) {
           dispatch(clearCart());
           dispatch(clearWishlist());
         }
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     })();
   }, [user.token]);
 

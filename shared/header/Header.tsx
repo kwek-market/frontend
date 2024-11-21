@@ -104,17 +104,34 @@ const Header = function ({
       </div>
 
       <div className={`${styles.headerControls} tw-flex`}>
-        <Link href='/wishlist'>
+        <Link className='tw-relative' href='/wishlist'>
           <FiHeart
             className='tw-text-black-stock'
             style={{ height: "28px", width: "28px", marginRight: "1.5rem" }}
           />
+          <span
+            className={
+              "tw-absolute tw-bg-yellow-secondary tw-rounded-full tw-w-4 tw-h-4 tw-flex tw-justify-center tw-items-center tw-text-xs tw-top-0 tw-right-5"
+            }
+            suppressHydrationWarning
+          >
+            {wishlist.wishlists?.length}
+          </span>
         </Link>
-        <Link href='/cart'>
+
+        <Link className='tw-relative' href='/cart'>
           <AiOutlineShoppingCart
             className='tw-text-black-stock'
             style={{ height: "28px", width: "30px" }}
           />
+          <span
+            className={
+              "tw-absolute tw-bg-yellow-secondary tw-rounded-full tw-w-4 tw-h-4 tw-flex tw-justify-center tw-items-center tw-text-xs tw-top-0 tw-right-0"
+            }
+            suppressHydrationWarning
+          >
+            {cart.cart?.length}
+          </span>
         </Link>
       </div>
 
