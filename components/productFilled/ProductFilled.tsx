@@ -7,6 +7,7 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
+import { getProductQuantity } from "../../helpers/helper";
 import { Naira } from "../UI/NairaSymbol";
 import styles from "./ProductFilled.module.scss";
 
@@ -83,7 +84,7 @@ const ProductFilled = function ({
 
                   <p className='tw-font-light tw-text-gray-600 tw-mb-0'>
                     <span>Quantity: </span>
-                    {prod.options[0]?.quantity}
+                    {getProductQuantity(prod.options)}
                   </p>
                 </div>
 

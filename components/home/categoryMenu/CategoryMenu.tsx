@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Spin } from "antd";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { v4 as uuid } from "uuid";
@@ -48,7 +49,11 @@ const CategoryMenu = function () {
       </section>
       <section className='tw-flex tw-flex-grow md:tw-hidden tw-overflow-x-auto tw-overflow-y-hidden tw-scrollbar-none'>
         <CategoryMobile imgSrc='/svg/all.svg' text='All' style='tw-max-w-none' />
-        {isLoading ? <Load /> : null}
+        {isLoading ? (
+          <div className='tw-py-5 tw-w-full tw-text-center'>
+            <Spin size='large' />
+          </div>
+        ) : null}
         {categories
           ? categories?.categories.map(item => (
               <CategoryMobile
