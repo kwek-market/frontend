@@ -7,8 +7,9 @@ import useSellerProducts from "@/hooks/useSellerProducts";
 import { PagePayload, ProductType } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
 import { GET_SELLER_PRODUCTS } from "@/store/seller/seller.queries";
+import { Button } from "antd";
+import Pagination from "rc-pagination";
 import { Fragment, useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
 import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 
@@ -78,31 +79,46 @@ export default function Product() {
             pageSize={payload.pageSize}
           />
           <div className='tw-mt-4'>
-            <ReactPaginate
-              nextLabel='next >'
-              onPageChange={e => handlePageClick(e)}
-              pageRangeDisplayed={3}
-              marginPagesDisplayed={2}
-              pageCount={pageCount}
-              previousLabel='< previous'
-              pageClassName='tw-text-red-kwek100 tw-text-xl tw-px-2 tw-py-2'
-              previousClassName={`tw-text-gray-50 tw-block tw-px-2 tw-py-2 tw-rounded-xl ${
-                productsData?.getSellerProducts.hasPrev
-                  ? "tw-bg-red-kwek100"
-                  : "tw-bg-gray-kwek100 !tw-cursor-not-allowed"
-              }`}
-              nextClassName={`tw-text-gray-50 tw-block tw-px-2 tw-py-2 tw-rounded-xl ${
-                productsData?.getSellerProducts.hasNext
-                  ? "tw-bg-red-kwek100"
-                  : "tw-bg-gray-kwek100 !tw-cursor-not-allowed"
-              }`}
-              breakLabel='...'
-              breakClassName='page-item'
-              breakLinkClassName='page-link'
-              containerClassName='tw-w-full tw-flex tw-justify-center tw-items-center tw-list-none tw-space-x-5'
-              className=''
-              activeClassName='active'
-              renderOnZeroPageCount={undefined}
+            <Pagination
+              pageSize={20}
+              totalBoundaryShowSizeChanger={1}
+              // pageSizeOptions={["1", "2", "3"]}
+              nextIcon={<button>Next</button>}
+              prevIcon={<button>Prev</button>}
+              showLessItems={true}
+              defaultCurrent={1}
+              total={payload.pageSize * pageCount}
+              className='tw-text-red-500 tw-overflow-x-scroll tw-scrollbar-none tw-py-5 px-6 tw-flex tw-space-x-2 tw-justify-center tw-items-center tw-w-full'
+              role='button'
+              locale={{}}
+              itemRender={(page, type, element) => {
+                if (type === "jump-next" || type === "jump-prev") {
+                  return (
+                    <Button onClick={() => setCurrentPage(page)} className='tw-px-3 tw-py-2'>
+                      ...
+                    </Button>
+                  );
+                }
+
+                if (type === "next" || type === "prev") {
+                  return (
+                    <Button
+                      onClick={() => setCurrentPage(page)}
+                      className='tw-px-3 tw-py-2 tw-bg-red-kwek100 tw-text-white-100 tw-rounded-xl'
+                    >
+                      {type === "prev" ? <span className=''> {"<"} </span> : null}
+                      {element}
+                      {type === "next" ? <span className=''> {">"} </span> : null}
+                    </Button>
+                  );
+                }
+
+                return (
+                  <Button onClick={() => setCurrentPage(page)} className='tw-px-3 tw-py-2'>
+                    {page}
+                  </Button>
+                );
+              }}
             />
           </div>
         </>
