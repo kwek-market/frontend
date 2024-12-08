@@ -25,4 +25,4 @@ function VerificationLayout({ children }) {
   );
 }
 
-export default sellerAuth(VerificationLayout);
+export default VerificationLayout;

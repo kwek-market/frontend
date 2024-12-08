@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { AuthLayout } from "@/layouts";
 import { AuthForm } from "@/shared";
@@ -20,7 +20,13 @@ const Page = function () {
       email: formData.email,
       password: formData.password,
     };
-    loginUser(variables)(dispatch);
+    loginUser(variables, () => {
+      if (router.query?.next_page) {
+        router.push(router.query.next_page as string);
+      } else {
+        user.user.isVerified !== false && router.push("/");
+      }
+    })(dispatch);
   };
 
   const form = {
@@ -62,16 +68,6 @@ const Page = function () {
     lineTwo: "Approach to",
     lineThree: "Shopping",
   };
-
-  useEffect(() => {
-    // check if user is a seller or not and redirect to appropriate page
-
-    if (router.query?.next_page) {
-      router.push(router.query.next_page as string);
-    } else {
-      user.user.isVerified !== false && router.push("/");
-    }
-  }, [user.user.isVerified]);
 
   return (
     <AuthLayout id='Login' withBanner bannerText={bannerText}>

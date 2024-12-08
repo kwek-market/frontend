@@ -1,10 +1,7 @@
-import { Dispatch } from "redux";
 import { userFetcherWithAuth } from "@/helpers";
-import {
-  SellerData,
-  SellerVerification,
-  StartSelling,
-} from "../../interfaces/commonTypes";
+import { message } from "antd";
+import { Dispatch } from "redux";
+import { AnyFunction, SellerVerification, StartSelling } from "../../interfaces/commonTypes";
 import {
   COMPLETE_SELLER_VERIFICATION,
   SELLER_DATA,
@@ -21,15 +18,11 @@ export function sellerLoading() {
   };
 }
 
-export function startSelling(startSelling: StartSelling, token: string) {
+export function startSelling(startSelling: StartSelling, token: string, onSuccess: AnyFunction) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(
-        START_SELLING,
-        startSelling,
-        token
-      );
+      const response = await userFetcherWithAuth(START_SELLING, startSelling, token);
       console.log(response);
       import("antd").then(({ message }) => {
         response.startSelling.status
@@ -44,6 +37,12 @@ export function startSelling(startSelling: StartSelling, token: string) {
             status: response.startSelling.status,
           },
         });
+      if (onSuccess) {
+        onSuccess({
+          message: response.startSelling.message,
+          status: response.startSelling.status,
+        });
+      }
     } catch (error) {
       import("antd").then(({ message }) => {
         message.error(error.message);
@@ -58,27 +57,28 @@ export function startSelling(startSelling: StartSelling, token: string) {
 
 export function sellerVerification(
   sellerVerification: SellerVerification,
-  token: string
+  token: string,
+  onSuccess?: AnyFunction
 ) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(
-        SELLER_VERIFICATION,
-        sellerVerification,
-        token
-      );
+      const response = await userFetcherWithAuth(SELLER_VERIFICATION, sellerVerification, token);
       console.log(response);
-      import("antd").then(({ message }) => {
-        response.sellerVerification.status
-          ? message.success(response.sellerVerification.message)
-          : message.error(response.sellerVerification.message);
-      });
-      response.sellerVerification.status &&
+
+      if (response.sellerVerification.status) {
+        message.success(response.sellerVerification.message);
         dispatch({
           type: SellerTypes.SELLER_VERIFICATION,
           payload: { ...sellerVerification, ...response.sellerVerification },
         });
+
+        if (onSuccess) {
+          onSuccess(response.sellerVerification);
+        }
+      } else {
+        message.error(response.sellerVerification.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -89,11 +89,7 @@ export function completeSellerVerification(email: string, token: string) {
   return async function (dispatch: Dispatch) {
     try {
       sellerLoading();
-      const response = await userFetcherWithAuth(
-        COMPLETE_SELLER_VERIFICATION,
-        { email },
-        token
-      );
+      const response = await userFetcherWithAuth(COMPLETE_SELLER_VERIFICATION, { email }, token);
       console.log(response);
       import("antd").then(({ message }) => {
         response.completeSellerVerification.status

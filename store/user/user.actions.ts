@@ -1,5 +1,5 @@
 import { getIp, userFetcher, userFetcherWithAuth } from "@/helpers";
-import { UserLogin, UserUpdate } from "@/interfaces/commonTypes";
+import { AnyFunction, UserLogin, UserUpdate } from "@/interfaces/commonTypes";
 import { Dispatch } from "redux";
 import {
   GET_USER,
@@ -34,6 +34,7 @@ export const setUser = (user: any) => ({
 });
 
 export function logout() {
+  localStorage.clearItem("kwek");
   return {
     type: CLEAR_USER,
     payload: null,
@@ -79,7 +80,7 @@ export function getUserData(token: string) {
   };
 }
 
-export function loginUser(user: UserLogin) {
+export function loginUser(user: UserLogin, onSuccess: AnyFunction) {
   return async function (dispatch: Dispatch) {
     const { message } = await import("antd");
     try {
@@ -95,6 +96,8 @@ export function loginUser(user: UserLogin) {
           type: USERLOGIN,
           payload: response.loginUser,
         });
+
+        onSuccess(response.loginUser);
       } else {
         message.error(response.loginUser.message);
         dispatch(logout());

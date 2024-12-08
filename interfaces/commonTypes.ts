@@ -566,3 +566,6 @@ export interface IdAndTokenPayload {
   id: string;
   token: string;
 }
+
+
+export type AnyFunction  = (...any: any[]) => void
