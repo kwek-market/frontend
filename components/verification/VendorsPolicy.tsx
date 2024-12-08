@@ -55,7 +55,7 @@ function VendorsPolicy(props: StepComponentProps) {
 
         <div className="tw-mb-3">
           <p className="tw-mb-3 tw-font-bold tw-text-gray-kwek300">
-            2.What Can't be Sold on kwekmarket{" "}
+            2.What Can&apos;t be Sold on kwekmarket{" "}
           </p>
 
           <p>
@@ -109,7 +109,7 @@ function VendorsPolicy(props: StepComponentProps) {
             <p>
               6. Do not create duplicate shops or take any other action (such as
               manipulating clicks, carts or sales) maybe for your greedy purpose
-              of manipulating search or circumventing kwekmarketmall's policies.{" "}
+              of manipulating search or circumventing kwekmarketmall&apos;s policies.{" "}
             </p>
             <p>
               7. You must be price friendly, remember you want to always make

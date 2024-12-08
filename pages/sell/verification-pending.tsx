@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import VerificationLayout from "../../layouts/seller/VerificationLayout";
 import { RootState } from "../../store/rootReducer";
 
-function VerifiedModal() {
+function VerificationPending() {
   const router = useRouter();
   const user = useSelector((state: RootState) => state.user);
 
@@ -16,7 +17,7 @@ function VerifiedModal() {
   }, []);
 
   return (
-    <div className='tw-bg-gray-kwek200a tw-flex tw-justify-center tw-items-center tw-z-30 tw-fixed tw-top-0 tw-right-0 tw-bottom-0 tw-left-0'>
+    <div className='tw-bg-gray-kwek200 tw-flex tw-justify-center tw-items-center tw-z-30 tw-fixed tw-top-0 tw-right-0 tw-bottom-0 tw-left-0'>
       <div className='tw-w-4/5 tw-h-[70%] tw-bg-white-100 tw-rounded-md tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-2 md:tw-p-14'>
         <div className='tw-rounded-full'>
           <img src='/svg/verified-pic.svg' />
@@ -44,4 +45,4 @@ function VerifiedModal() {
   );
 }
 
-export default VerifiedModal;
+export default VerificationPending;

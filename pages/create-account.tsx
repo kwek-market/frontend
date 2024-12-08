@@ -10,8 +10,6 @@ import Alert from "antd/lib/alert";
 import Link from "next/link";
 import { Puff } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
-import { getWelcomeEmailTemplate } from "../helpers/emailTemplates";
-import { useAdminSendEmails } from "../hooks/admin/email";
 import styles from "../shared/authForm/AuthForm.module.scss";
 
 const Page = function () {
@@ -19,7 +17,6 @@ const Page = function () {
   const user = useSelector((state: RootState) => state.user);
 
   const account = useSelector((state: RootState) => state.account);
-  const { mutateAsync } = useAdminSendEmails(user?.token);
   const [showPassword1, setShowPassword1] = useState<boolean>(false);
   const [showPassword2, setShowPassword2] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormDataType>({
@@ -45,17 +42,6 @@ const Page = function () {
       router.push("/email-verification", { query: { next_page: router?.query?.next_page } });
     }
   }, [account.status]);
-
-  useEffect(() => {
-    if (user) {
-      mutateAsync({
-        subject: "Welcome To Kwek Market",
-        template: getWelcomeEmailTemplate(user.fullName),
-        token: user.token,
-        userList: [user.id],
-      });
-    }
-  }, [user]);
 
   const createAccount = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -141,6 +127,7 @@ const Page = function () {
             <input
               className={styles.form_input}
               type='text'
+              name='name'
               value={formData.fullName}
               onChange={e => setFormData({ ...formData, fullName: e.target.value })}
               placeholder='Full Name'

@@ -1,17 +1,11 @@
 import { SellerVerification } from "@/interfaces/commonTypes";
 import { RootState } from "@/store/rootReducer";
-import {
-  completeSellerVerification,
-  getSellerData,
-  sellerVerification,
-} from "@/store/seller/seller.action";
+import { getSellerData, sellerVerification } from "@/store/seller/seller.action";
 import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { Circles } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { StepComponentProps } from "react-step-builder";
-import { getVendorApplicationEmail } from "../../helpers/emailTemplates";
-import { useAdminSendEmails } from "../../hooks/admin/email";
 import Button from "../buttons/Button";
 import Header from "./Header";
 import VerifiedModal from "./VerifiedModal";
@@ -32,8 +26,6 @@ function VerifyBankAccount(props: T) {
     }
     return defaultValue;
   };
-
-  const { mutateAsync } = useAdminSendEmails(user?.token);
 
   let [isOpen, setIsOpen] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -69,18 +61,10 @@ function VerifyBankAccount(props: T) {
       token: user.token,
     };
     // console.log(details);
-    sellerVerification(details, user.token)(dispatch);
-
-    // send the email
-    await mutateAsync({
-      subject: "Exclusive Offer Just for You! Save Big at Kwek Market",
-      template: getVendorApplicationEmail(),
-      token: user?.token,
-      userList: [user?.user?.id],
-    });
-
-    //completeSellerVerification(user.user.email, user.token);
-    setIsModalVisible(false);
+    sellerVerification(details, user.token, (data, nack) => {
+      setIsModalVisible(false);
+      props.next();
+    })(dispatch);
   };
 
   const handleCancel = () => {
@@ -175,16 +159,7 @@ function VerifyBankAccount(props: T) {
   }, []);
 
   useEffect(() => {
-    if (seller.seller.sellerIsVerified) {
-      // show success modal
-      openModal();
-      props.next;
-    }
-  }, [seller.seller.sellerIsVerified]);
-
-  useEffect(() => {
     if (seller.sellerVerified.status) {
-      completeSellerVerification(user.user.email, user.token)(dispatch);
       getSellerData(user.token)(dispatch);
     }
   }, [seller.sellerVerified.status]);

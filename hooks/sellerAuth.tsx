@@ -10,12 +10,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const sellerAuth = (WrappedComponent: any) => {
-  return function (props: any) {
+  return function SellerAuth(props: any) {
     const router = useRouter();
     const dispatch = useDispatch();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const user = useSelector((state: RootState) => state.user);
+    const seller = useSelector((state: RootState) => state.seller);
 
     // useEffect(() => {
     //   const beforeHistoryChange = (url: string, { shallow }) => {
@@ -45,13 +46,20 @@ const sellerAuth = (WrappedComponent: any) => {
           // console.log({ data });
           // verify token first
           if (data.verifyToken.status) {
-            // if token was verified, then we can check if the person is a seller
+            // check if the is a seller and the verification is pending
             if (user.user.isSeller) {
-              setIsAuthenticated(data.verifyToken.status);
-              setIsLoading(false);
-            } else {
-              // person is not a seller
-              // message.error("You are not a seller");
+              // check if the user is a seller and is verified
+              if (user.user?.isSeller && seller.seller.sellerIsVerified) {
+                setIsAuthenticated(data.verifyToken.status);
+                return setIsLoading(false);
+              }
+
+              if (!seller.seller?.sellerIsVerified) {
+                return router.push("/sell/verification");
+              }
+            }
+
+            if (!user.user?.isSeller) {
               router.push("/sell/create-account");
             }
           } else {

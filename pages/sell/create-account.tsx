@@ -120,7 +120,10 @@ const Page = function () {
         phoneNumber: `${callCode}${phoneNumber}`,
         shopUrl: sellerData.shopUrl.trim()?.replaceAll(" ", "-"),
       },
-      user.token
+      user.token,
+      data => {
+        router.push("/sell/verification");
+      }
     )(dispatch);
   };
 

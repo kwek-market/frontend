@@ -116,7 +116,7 @@ const Component = function () {
                 Seller Policy
               </Link>
             </li>
-            {seller?.seller?.shopUrl ? (
+            {user?.user.isSeller && seller?.seller?.shopUrl ? (
               <Link href={`/store/${seller?.seller?.shopUrl}`} className={styles.nav_link}>
                 View your shop
               </Link>
