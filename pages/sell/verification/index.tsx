@@ -50,6 +50,8 @@ function index(props: StepComponentProps) {
     },
   };
 
+  console.log(props.allSteps);
+
   return (
     <VerificationLayout>
       <Steps config={config}>
