@@ -24,7 +24,8 @@ const Page = function () {
       if (router.query?.next_page) {
         router.push(router.query.next_page as string);
       } else {
-        user.user.isVerified !== false && router.push("/");
+        // user.user.isVerified !== false && router.push("/");
+        router.push("/");
       }
     })(dispatch);
   };
