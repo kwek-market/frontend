@@ -70,9 +70,7 @@ const Header = function ({
       </Menu.Item>
 
       <Menu.Item>
-        <Link href='/' onClick={() => handleLogout()}>
-          Logout
-        </Link>
+        <button onClick={() => handleLogout()}>Logout</button>
       </Menu.Item>
     </Menu>
   );

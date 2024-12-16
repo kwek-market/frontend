@@ -34,7 +34,7 @@ export const setUser = (user: any) => ({
 });
 
 export function logout() {
-  localStorage.clearItem("kwek");
+  window.localStorage.removeItem("kwek");
   return {
     type: CLEAR_USER,
     payload: null,
