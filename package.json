@@ -67,6 +67,7 @@
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.7.0",
     "@netlify/plugin-nextjs": "^5.6.0",
+    "@playwright/test": "^1.49.1",
     "@tailwindcss/typography": "^0.5.15",
     "@types/google-map-react": "^2.1.10",
     "@types/luxon": "^3.4.2",
