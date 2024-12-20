@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+node_modules/
 
 # testing
 /coverage
@@ -139,7 +140,11 @@ dist
 
 makefile
 .idea
-
+/node_modules
 
 # yarn cache
 .yarn
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
