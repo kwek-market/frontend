@@ -4,7 +4,7 @@ import { AuthHelpers } from '../utils/helpers';
 
 test.describe('Sign Up Page', () => {
   test('should render all UI elements on Sign Up page', async ({ page }) => {
-    await page.goto('http://localhost:3100/create-account' , { waitUntil: 'networkidle' }); // Replace with your actual URL
+    await page.goto('http://localhost:3100/create-account' , { waitUntil: 'networkidle' });
 
     // Validate the UI elements
     await expect(page.getByPlaceholder('Full Name')).toBeVisible();
@@ -25,7 +25,7 @@ test.describe('Sign Up Page', () => {
   });
 
   test('should successfully create an account with valid details', async ({ page }) => {
-    await page.goto('http://localhost:3100/login'); // Ensure baseURL is set
+    await page.goto('http://localhost:3100/login'); 
 
     
     // Fill out the sign-up form

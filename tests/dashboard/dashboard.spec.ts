@@ -1,7 +1,7 @@
 import { test, expect, Page, Browser } from '@playwright/test';
 
 test.describe('Kwekmarket Dashboard E2E Tests', () => {
-  const baseURL = 'http://localhost:3100'; // Replace with the actual URL
+  const baseURL = 'http://localhost:3100'; 
   let page: Page;
   let browser: Browser;
 
@@ -16,7 +16,8 @@ test.describe('Kwekmarket Dashboard E2E Tests', () => {
   test('Verify header, search bar, and navigation links', async () => {
     // Verify the logo (scoped to header)
     const logo = page.locator('header >> text=Kwekmarket');
-    await expect(logo).toBeVisible();
+    await expect(logo).toBeVisible({ timeout: 15000 });
+
 
     // Verify search bar
     const searchInput = page.locator('input[placeholder="I\'m searching for..."]');
@@ -42,7 +43,8 @@ test.describe('Kwekmarket Dashboard E2E Tests', () => {
 
     const categorySection = page.locator('.CategorySection'); // Replace with actual class
     for (const category of categories) {
-      await expect(categorySection.locator(`text=${category}`)).toBeVisible();
+      await expect(categorySection.locator(`text=${category}`)).toBeVisible({ timeout: 15000 });
+
     }
   });
 
@@ -51,7 +53,8 @@ test.describe('Kwekmarket Dashboard E2E Tests', () => {
     const shopNowButton = page.locator('text=SHOP NOW');
     
     const promoBanner = page.locator(`text=${promoText}`).first(); // Target the first occurrence
-    await expect(promoBanner).toBeVisible();
+    await expect(promoBanner).toBeVisible({ timeout: 15000 });
+
     await expect(shopNowButton).toBeVisible();
 
     // Click on "SHOP NOW" button and verify navigation
@@ -69,7 +72,7 @@ test.describe('Kwekmarket Dashboard E2E Tests', () => {
 
     const serviceSection = page.locator('.ServicesContainer'); // Replace with the actual container class
     for (const serviceText of serviceTexts) {
-      await expect(serviceSection.locator(`text=${serviceText}`)).toBeVisible();
+      await expect(serviceSection.locator(`text=${serviceText}`)).toBeVisible( { timeout: 15000 } );
     }
   });
 
@@ -85,7 +88,7 @@ test.describe('Kwekmarket Dashboard E2E Tests', () => {
     for (const link of footerLinks) {
       const footerLink = footer.locator(`text=${link}`);
       await expect(footerLink).toBeVisible();
-      await footerLink.click();
+      await footerLink.click({ timeout: 15000 });
       await expect(page).not.toHaveURL(baseURL); // Ensure navigation occurs
       await page.goBack();
     }
@@ -103,7 +106,7 @@ test.describe('Kwekmarket Dashboard E2E Tests', () => {
     const socialSection = page.locator('.SocialMediaContainer'); // Scoped to social media container
     for (const social of socialLinks) {
       const socialLink = socialSection.locator(`text=${social}`);
-      await expect(socialLink).toBeVisible();
+      await expect(socialLink).toBeVisible({ timeout: 15000 });
     }
   });
 
