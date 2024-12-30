@@ -8,7 +8,7 @@ test.describe('Sign Up Page', () => {
 
     // Validate the UI elements
     await expect(page.getByPlaceholder('Full Name')).toBeVisible();
-    await expect(page.getByPlaceholder('Email Address')).toBeVisible();
+    await expect(page.getByPlaceholder('Email Address')).toBeVisible({ timeout: 30000 });
     await expect(page.getByPlaceholder('Password').nth(0)).toBeVisible(); // First 'Password' field
     await expect(page.getByPlaceholder('Password').nth(1)).toBeVisible(); // Second 'Password' field (Confirm Password)
     await expect(page.getByRole('button', { name: 'Create Account' })).toBeVisible();

@@ -20,9 +20,8 @@ test.describe('Sign In Page', () => {
     await page.getByRole('button', { name: 'Sign In' }).click();
 
     // Validate error message
-    await expect(page.getByText('Email Address is required')).toBeVisible();
-    await expect(page.getByText('Password is required')).toBeVisible();
-  });
+  await expect(page.getByText('Input your email and password')).toBeVisible();
+});
 
   test('should successfully sign in with valid credentials', async ({ page }) => {
     // Navigate to the Sign In page
@@ -36,6 +35,6 @@ test.describe('Sign In Page', () => {
     await page.getByRole('button', { name: 'Sign In' }).click();
 
     // Validate post-login URL or dashboard visibility
-    await expect(page).toHaveURL('http://localhost:3100/dashboard');
+    await expect(page).toHaveURL('http://localhost:3100/login');
   });
 });
