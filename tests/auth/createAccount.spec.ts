@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { AuthHelpers } from '../utils/helpers';
 
 function generateRandomEmail() {
   const timestamp = Date.now();
