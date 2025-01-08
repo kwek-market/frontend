@@ -30,6 +30,12 @@ jobs:
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
 
+    - name: Verify GraphQL API availability
+      run: |
+        curl -X POST -H "Content-Type: application/json" \
+        --data '{"query":"query { categories { id name } }"}' \
+        https://api.kwekmarket.com/v1/kwekql || exit 1
+
     - name: Build the application
       run: yarn build # Ensure your app has a build step
 
@@ -42,6 +48,9 @@ jobs:
       run: npx wait-on http://localhost:3100
 
     - name: Run Playwright tests
+      env:
+        GRAPHQL_API_URL: https://api.kwekmarket.com/v1/kwekql
+        PORT: 3100
       run: yarn playwright test
 
     - uses: actions/upload-artifact@v4
@@ -50,5 +59,3 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-
-
