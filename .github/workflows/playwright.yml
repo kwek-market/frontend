@@ -60,7 +60,7 @@ jobs:
       env:
         GRAPHQL_API_URL: https://api.kwekmarket.com/v1/kwekql
         PORT: 3100
-      run: yarn playwright test
+      run: yarn run test
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}

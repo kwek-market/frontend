@@ -7,7 +7,13 @@
     "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
     "start": "NODE_ENV=production next start",
     "lint": "next lint",
-    "check-lint": "eslint ."
+    "check-lint": "eslint .",
+    "test": "playwright test",              
+    "test:debug": "playwright test --debug", 
+    "test:headed": "playwright test --headed", 
+    "test:filter": "playwright test --grep @tag", 
+    "test:update": "playwright test --update-snapshots", 
+    "test:report": "playwright show-report" 
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^9.0.0",
@@ -57,6 +63,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^3.1.0",
     "sass": "^1.77.8",
+    "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.4",
     "tailwind-scrollbar": "^3.1.0",
     "use-debounce": "^10.0.1",
