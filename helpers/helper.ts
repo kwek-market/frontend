@@ -206,8 +206,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getProductQuantity = (productOption: ProductType["options"]) => {
-  console.log("🚀 ~~ getProductQuantity ~~ productOption:", productOption);
-
   let quantity = 0;
   if (Array.isArray(productOption)) {
     quantity = productOption.reduce((prev, curr) => {

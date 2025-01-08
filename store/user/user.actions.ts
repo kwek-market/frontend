@@ -94,7 +94,10 @@ export function loginUser(user: UserLogin, onSuccess: AnyFunction) {
 
         dispatch({
           type: USERLOGIN,
-          payload: response.loginUser,
+          payload: {
+            ...response.loginUser,
+            user: { ...response.loginUser.user, token: response.loginUser.token },
+          },
         });
 
         onSuccess(response.loginUser);
