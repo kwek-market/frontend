@@ -130,6 +130,7 @@ const VendorApplications = () => {
       }),
     [getVendorsData]
   );
+  console.log("🚀 ~~ VendorApplications ~~ data:", getVendorsData?.getUserType);
 
   const rejected = useMemo(
     () =>
