@@ -5,7 +5,7 @@ import { GraphQLClient, request } from "graphql-request";
 // const newUrl = "https://kwekapi.herokuapp.com/v1/kwekql";
 // https://kwekapi.vercel.app/v1/kwekql
 // const graphqlEndpoint = "https://kwekapi.vercel.app/v1/kwekql";
-const graphqlEndpoint = "https://api.kwekmarket.com/v1/graphql";
+const graphqlEndpoint = "https://api.kwekmarket.com/v1/kwekql";
 // const graphqlEndpoint = "https://backend-smwz.onrender.com/v1/graphql";
 
 export const userFetcher = async (query: string, variables?: any) => {

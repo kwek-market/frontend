@@ -58,8 +58,6 @@ const ProductBox = function ({ id, product: prod }: ProductBoxProps) {
     mutate({ productId, token });
   }
 
-  console.log("getProductQuantity(prod?.options)", getProductQuantity(prod?.options));
-
   if (prod === undefined)
     return (
       <div className='tw-w-full tw-py-7 tw-flex tw-justify-center'>

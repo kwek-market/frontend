@@ -322,6 +322,8 @@ export const GET_SELLERS = /* GraphQL */ `
           phoneNumber
           date
           sellerIsVerified
+          preferedId
+          preferedIdUrl
         }
       }
     }
@@ -490,6 +492,10 @@ export const GET_USER_BY_ID = /* GraphQL */ `
         city
         lga
         date
+        sellerIsVerified
+        sellerIsRejected
+        preferedId
+        preferedIdUrl
       }
       storedetail {
         id

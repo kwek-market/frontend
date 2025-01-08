@@ -3,7 +3,7 @@ import CustomerDetail from "@/components/admin/customers/customer-detail";
 import { FormHead } from "@/components/admin/form";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
-import { Tabs } from "antd";
+import { Image, Tabs } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ import {
   useGetCustomerTotalExpense,
 } from "../../../../hooks/admin/dashboard";
 import { userGetUserById } from "../../../../hooks/admin/user";
-import { useFlagVendor } from "../../../../hooks/admin/vendors";
+import { useCompleteSeller, useFlagVendor, useRejectSeller } from "../../../../hooks/admin/vendors";
 import useSellerProducts from "../../../../hooks/useSellerProducts";
 
 const Customer = () => {
@@ -54,12 +54,24 @@ const Customer = () => {
   const { data: customerTotalExpense, isLoading: isTotalExpenseLoading } =
     useGetCustomerTotalExpense({ id: customerId, token });
 
+  const { mutate: acceptVendor } = useCompleteSeller();
+  const { mutate: rejectVendor } = useRejectSeller();
+
   const { mutate: flagVendor } = useFlagVendor();
 
   const vendor = userData?.getUserById;
   const totalOrders = customerTotalOrder?.getCustomerOrders;
   const avgOrderValue = averageOrderValue?.getCustomerAverageOrder;
   const totalExpense = customerTotalExpense?.getCustomerTotalExpense;
+
+  const isVendorPending =
+    Array.isArray(userData?.getUserById?.sellerProfile) &&
+    !userData?.getUserById?.sellerProfile[0]?.sellerIsVerified &&
+    !userData?.getUserById?.sellerProfile[0]?.sellerIsRejected;
+
+  const isVendorRejected =
+    Array.isArray(userData?.getUserById?.sellerProfile) &&
+    userData?.getUserById?.sellerProfile[0]?.sellerIsRejected;
 
   return (
     <AdminLayout>
@@ -99,6 +111,32 @@ const Customer = () => {
             phone={userData?.getUserById?.sellerProfile[0]?.phoneNumber}
           />
         ) : null}
+
+        {isVendorPending && (
+          <div className='tw-flex tw-space-x-2'>
+            <button
+              className='tw-px-6 tw-py-2 tw-text-sm tw-rounded-md tw-mt-3 tw-text-white-100 tw-bg-green-success'
+              onClick={e => acceptVendor({ email: userData?.getUserById?.email })}
+            >
+              Accept
+            </button>
+            <button
+              className='tw-px-6 tw-py-2 tw-text-sm tw-rounded-md tw-mt-3 tw-text-white-100 tw-bg-error'
+              onClick={e => rejectVendor({ email: userData?.getUserById?.email })}
+            >
+              Reject
+            </button>
+          </div>
+        )}
+
+        {isVendorRejected && (
+          <button
+            className='tw-px-6 tw-py-2 tw-text-sm tw-rounded-md tw-mt-3 tw-text-white-100 tw-bg-green-success'
+            onClick={e => rejectVendor({ email: userData?.getUserById?.email })}
+          >
+            Re - Accept
+          </button>
+        )}
 
         <div className=' tw-pt-6  xl:tw-w-[50vw] tw-grid xl:tw-grid-cols-3 tw-gap-4'>
           {isLoadingCustomerTotalOrders ? <Load className='tw-h-32' /> : null}
@@ -180,6 +218,22 @@ const Customer = () => {
                     <p className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
                       {new Date(vendor?.sellerProfile[0]?.date).toDateString()}
                     </p>
+                  </div>
+
+                  <div className=''>
+                    <p className=' tw-mb-0 tw-font-medium tw-text-opacity-70 tw-pt-2'>
+                      DOCUMENT:{" "}
+                      <span className='tw-font-light tw-uppercase'>
+                        {vendor?.sellerProfile[0]?.preferedId}
+                      </span>
+                    </p>
+                    <div className=' tw-mb-0 tw-text-opacity-70 tw-pt-0.5'>
+                      <Image
+                        width={"100%"}
+                        alt='Vendor document'
+                        src={vendor?.sellerProfile[0]?.preferedIdUrl}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
