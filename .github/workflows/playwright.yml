@@ -37,12 +37,15 @@ jobs:
         https://api.kwekmarket.com/v1/kwekql || exit 1
 
     - name: Build the application
-      run: yarn build # Ensure your app has a build step
+      run: yarn build
+      env:
+        NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
     - name: Start the application
       run: yarn start &
       env:
         PORT: 3100
+        NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
     - name: Wait for the application to be ready
       run: npx wait-on http://localhost:3100
