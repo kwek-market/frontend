@@ -36,6 +36,9 @@ jobs:
         --data '{"query":"query { categories { id name } }"}' \
         https://api.kwekmarket.com/v1/kwekql || exit 1
 
+    - name: Update Browserslist DB
+      run: npx update-browserslist-db@latest
+      
     - name: Build the application
       run: yarn build
       env:
