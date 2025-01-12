@@ -6,37 +6,45 @@ test.describe("Header Tests", () => {
     await page.goto("http://localhost:3100");
   });
 
-  test.skip("Logo should navigate to the homepage", async ({ page }) => {
+  test("Logo should navigate to the homepage", async ({ page }) => {
+    // Navigate to the homepage
+    await page.goto('http://localhost:3100');
+    
+    // Target the specific logo element
+    const logo = page.locator('img[alt="kweklogo"]').nth(0);
+  
+    // Ensure the logo is visible before interacting
+    await expect(logo).toBeVisible({ timeout: 60000 });
+  
     // Click on the logo
-    await page.locator('img[alt="Kwek Market"]').click();
-
+    await logo.click();
+  
     // Assert the page URL is the homepage
     await expect(page).toHaveURL("http://localhost:3100");
   });
+  
+  
 
   
 
-  test.skip("Search bar should allow input and search", async ({ page }) => {
+  test("Search bar should allow input and display results", async ({ page }) => {
     const searchBar = page.locator('input[placeholder="I\'m searching for..."]');
     const searchButton = page.locator('button:has-text("Search")');
-
+  
     // Type into the search bar
     await searchBar.fill("Test Query");
-
+  
     // Click the search button
-    await searchButton.click({ timeout: 30000 });
-
-    // Wait for navigation to complete
-    await page.waitForNavigation({ timeout: 30000 });
-
-    // Assert the URL contains the search query
-    await expect(page).toHaveURL(/.*search.*/); // Update the regex based on your site's search functionality
-
-    // Assert that no results are found
-    const noResultsMessage = page.locator('text=No items found'); // Update the selector based on your site's implementation
+    await searchButton.click();
+  
+    // Wait for dynamic content to update
+    const noResultsMessage = page.locator('text=No items found');
     await expect(noResultsMessage).toBeVisible({ timeout: 30000 });
+  
+    // Optionally verify other search result updates if needed
+    // Example: await expect(page.locator('text=Expected Result')).toBeVisible();
   });
-
+  
 
 
 test("Wishlist icon should navigate to wishlist page", async ({ page }) => {
