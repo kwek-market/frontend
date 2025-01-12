@@ -36,21 +36,24 @@ test.describe('Categories Tests', () => {
     // }
   });
 
-  test('Navigate and validate category: Vehicles & Equipment', async () => {
-  await page.goto('http://localhost:3100', { waitUntil: 'networkidle' });
+  test('Navigate and validate category: Vehicles & Equipment', async ({ page }) => {
+    await page.goto('http://localhost:3100', { waitUntil: 'networkidle' });
 
-  // Ensure React Query DevTools does not interfere
-  await page.locator('aside[aria-label="React Query Devtools"]').evaluate(node => node.style.display = 'none');
+    // Ensure React Query DevTools does not interfere
+    await page.locator('aside[aria-label="React Query Devtools"]').evaluate(node => node.style.display = 'none');
 
-  // Locate and click the Vehicles & Equipment link
-  const vehiclesLink = page.locator('a.CategoryMenu_menu_link__WwrlG:visible:has-text("Vehicles & Equipment")');
-  await vehiclesLink.scrollIntoViewIfNeeded();
-  await vehiclesLink.click({ timeout: 120000 });
+    // Locate and click the Vehicles & Equipment link
+    const vehiclesLink = page.locator('a.CategoryMenu_menu_link__WwrlG:visible:has-text("Vehicles & Equipment")');
+    await vehiclesLink.scrollIntoViewIfNeeded();
+    await vehiclesLink.click({ timeout: 120000 });
 
-  // Validate the page title after navigation
-  const pageTitle = page.locator('p.pageTitle_category_title__eZOLz');
-  await expect(pageTitle).toHaveText('Vehicles & Equipment');
-});
+    // Validate the page title after navigation
+    const pageTitle = page.locator('p.pageTitle_category_title__eZOLz');
+    await expect(pageTitle).toHaveText('Vehicles & Equipment');
+
+  });
+  
+  
 
 test('Navigate and validate category: Beauty & Personal care', async ({ page }) => {
   await page.goto('http://localhost:3100', { waitUntil: 'networkidle' });
