@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: E2E Tests
 
 on:
   push:
@@ -68,3 +68,4 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+
