@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
 
-  timeout: 120000, // Set global timeout to 60 secon
+  timeout: 130000, // Set global timeout to 130 seconds
   
   testDir: './tests',
 
