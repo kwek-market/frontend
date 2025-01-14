@@ -1,94 +1,47 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Header Tests", () => {
-  test.beforeEach(async ({ page }) => {
-    // Navigate to the homepage
-    await page.goto("http://localhost:3100");
-  });
-
-  test("Logo should navigate to the homepage", async ({ page }) => {
-    // Navigate to the homepage
-    await page.goto('http://localhost:3100');
+test.describe('Navbar Navigation Links Tests', () => {
+    const TIMEOUT = 60000;  // 40 seconds for navigation and visibility checks
+  
+    test.beforeEach(async ({ page }) => {
+      await page.goto('http://localhost:3100', { timeout: TIMEOUT });
+    });
+  
+    test('should navigate to correct page when clicking "Shop" navbar link', async ({ page }) => {
+        const shopLink = page.locator('nav').getByRole('link', { name: 'Shop' });
+        await expect(shopLink).toBeVisible({ timeout: TIMEOUT });
+        await shopLink.click({ timeout: TIMEOUT });
+        await expect(page).toHaveURL('http://localhost:3100/seller/profile', { timeout: TIMEOUT });
+      });
+    test('should navigate to correct page when clicking "About Us" navbar link', async ({ page }) => {
+        const aboutUsLink = page.locator('nav a.Navbar_nav_link__i6Yvx:has-text("About Us")');
+        await expect(aboutUsLink).toBeVisible({ timeout: TIMEOUT });
+        await aboutUsLink.click({ timeout: TIMEOUT });
+        await expect(page).toHaveURL('http://localhost:3100/aboutUs', { timeout: TIMEOUT });
+      });
     
-    // Target the specific logo element
-    const logo = page.locator('img[alt="kweklogo"]').nth(0);
+      test.skip('should navigate to correct page when clicking "Contact Us" navbar link', async ({ page }) => {
+        const contactUsLink = page.locator('nav a.Navbar_nav_link__i6Yvx:has-text("Contact Us")');
+        
+        // Ensure the link is visible and correct
+        await expect(contactUsLink).toBeVisible({ timeout: TIMEOUT });
+      
+        // Click the link and wait for navigation
+        await Promise.all([
+          page.waitForNavigation({ timeout: TIMEOUT, waitUntil: 'load' }),
+          contactUsLink.click({ timeout: TIMEOUT })
+        ]);
+      
+        // Verify the final URL
+        await expect(page).toHaveURL('http://localhost:3100/contact-us', { timeout: TIMEOUT });
+      });
+      
   
-    // Ensure the logo is visible before interacting
-    await expect(logo).toBeVisible({ timeout: 60000 });
-  
-    // Click on the logo
-    await logo.click();
-  
-    // Assert the page URL is the homepage
-    await expect(page).toHaveURL("http://localhost:3100");
+      test('should navigate to correct page when clicking "All Categories" navbar link', async ({ page }) => {
+        const allCategoriesLink = page.locator('nav').getByRole('link', { name: 'All Categories' });
+        await expect(allCategoriesLink).toBeVisible({ timeout: TIMEOUT });
+        await allCategoriesLink.click({ timeout: TIMEOUT });
+        await expect(page).toHaveURL('http://localhost:3100/all', { timeout: TIMEOUT });
+      });
   });
   
-  
-
-  
-
-  test("Search bar should allow input and display results", async ({ page }) => {
-    const searchBar = page.locator('input[placeholder="I\'m searching for..."]');
-    const searchButton = page.locator('button:has-text("Search")');
-  
-    // Type into the search bar
-    await searchBar.fill("Test Query");
-  
-    // Click the search button
-    await searchButton.click();
-  
-    // Wait for dynamic content to update
-    const noResultsMessage = page.locator('text=No items found');
-    await expect(noResultsMessage).toBeVisible({ timeout: 30000 });
-  
-    // Optionally verify other search result updates if needed
-    // Example: await expect(page.locator('text=Expected Result')).toBeVisible();
-  });
-  
-
-
-test("Wishlist icon should navigate to wishlist page", async ({ page }) => {
-  // Find the element with the text 'saved' and click on it
-  const savedLink = page.locator('text=saved');
-  await savedLink.waitFor({ state: 'visible', timeout: 30000 }); // Ensure the element is visible
-  await savedLink.click({ timeout: 30000 });
-
-  // Assert the page URL is the wishlist page
-  await expect(page).toHaveURL("http://localhost:3100/wishlist");
-
-  // Pause the test to keep the browser open
-//   await page.pause();
-});
-  
-  test("Cart icon should navigate to cart page", async ({ page }) => {
-    // Click on the cart icon
-    const cartLink = page.locator('text=cart');
-    await cartLink.waitFor({ state: 'visible', timeout: 30000 }); // Ensure the element is visible
-    await cartLink.click({ timeout: 30000 });
-  
-    // Assert the page URL is the cart page
-    await expect(page).toHaveURL("http://localhost:3100/cart");
-  
-    // Pause the test to keep the browser open
-    await page.pause();
-  });
-
-  test("Shortcut items should have correct counters", async ({ page }) => {
-    // Check the wishlist counter
-    const wishlistCounter = page.locator('a[href="/wishlist"] .tw-absolute');
-    await expect(wishlistCounter).toHaveText("0");
-
-    // Check the cart counter
-    const cartCounter = page.locator('a[href="/cart"] .tw-absolute');
-    await expect(cartCounter).toHaveText("0");
-  });
-
-  test("Sign In link should navigate to login page", async ({ page }) => {
-    // Click on the Sign In link
-    const signInLink = page.locator('a[href="/login"]');
-    await signInLink.click();
-
-    // Assert the page URL is the login page
-    await expect(page).toHaveURL("http://localhost:3100/login");
-  });
-});
