@@ -8,12 +8,12 @@
     "start": "NODE_ENV=production next start",
     "lint": "next lint",
     "check-lint": "eslint .",
-    "test": "playwright test",              
-    "test:debug": "playwright test --debug", 
-    "test:headed": "playwright test --headed", 
-    "test:filter": "playwright test --grep @tag", 
-    "test:update": "playwright test --update-snapshots", 
-    "test:report": "playwright show-report" 
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:filter": "playwright test --grep @tag",
+    "test:update": "playwright test --update-snapshots",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^9.0.0",

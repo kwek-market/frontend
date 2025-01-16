@@ -28,6 +28,11 @@ module.exports = {
         hostname: "images.pexels.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+        pathname: "**",
+      },
     ],
     unoptimized: false,
     imageSizes: [200, 320, 400, 500],
