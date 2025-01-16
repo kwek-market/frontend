@@ -234,8 +234,8 @@ const PromoteProduct = function ({ promoteData, setPromoteData }: PromoteProduct
               <div className='tw-text-center'>
                 <p className={styles.fash}>{product.productTitle}</p>
                 <p className={styles.shiny}>
-                  ₦{product.options[0]?.discountedPrice}
-                  <span className={styles.heel}>₦{product.options[0]?.price}</span>
+                  ₦{product.options[0]?.price}
+                  <span className={styles.heel}>₦{product.options[0]?.discountedPrice}</span>
                 </p>
                 <div className={styles.revs}>
                   <StarRatingComponent

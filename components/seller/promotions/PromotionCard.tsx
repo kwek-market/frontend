@@ -19,8 +19,8 @@ export type PromotionCardProps = {
 export default function PromotionCard({ promotion }) {
   const queryClient = new QueryClient();
   const token = useSelector((state: RootState) => state?.user);
-  const active = promotion.promo[0].active ? "tw-bg-yellow-filled" : "tw-bg-green-success";
-  console.log("🚀 ~~ PromotionCard ~~ promotion:", promotion);
+  const currentPromo = promotion?.promo?.find(pro => pro?.active);
+  const active = currentPromo?.active ? "tw-bg-yellow-filled" : "tw-bg-green-success";
 
   const { mutate, isLoading } = useCancelPromotion();
 
@@ -62,24 +62,24 @@ export default function PromotionCard({ promotion }) {
         <div className='tw-mt-2'>
           <div className='tw-text-sm'>
             <span className='tw-font-normal tw-text-gray-kwek900'>Links Clicked: </span>
-            <span className='tw-font-semibold'>{promotion?.promo?.[0]?.linkClicks}</span>
+            <span className='tw-font-semibold'>{currentPromo?.linkClicks}</span>
           </div>
 
           <div className='tw-text-sm'>
             <span className='tw-font-normal tw-text-gray-kwek900'>Reached: </span>
-            <span className='tw-font-semibold'>{promotion?.promo?.[0]?.reach}</span>
+            <span className='tw-font-semibold'>{currentPromo?.reach}</span>
           </div>
 
           <div className='tw-text-sm'>
             <span className='tw-font-normal tw-text-gray-kwek900'>Amount Deposited: </span>
-            <span className='tw-font-semibold'>{promotion?.promo?.[0]?.amount}</span>
+            <span className='tw-font-semibold'>{currentPromo?.amount}</span>
           </div>
         </div>
       </div>
       <div>
         <span className={`tw-rounded-full tw-inline-block tw-h-4 tw-w-4  ${active}`}></span>
         <span className='tw-font-medium tw-text-base tw-text-gray-kwek900 tw-ml-2'>
-          {promotion.promo[0].active ? "Ongoing" : "Completed"}
+          {currentPromo?.active ? "Ongoing" : "Completed"}
         </span>
       </div>
       <div className='tw-flex tw-flex-1 tw-gap-2 tw-ml-2'>
