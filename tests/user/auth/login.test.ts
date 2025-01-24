@@ -14,7 +14,7 @@ test.describe('Sign In Page', () => {
 
   test('should show an error for empty fields on Sign In', async ({ page }) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/login');
+    await page.goto('http://localhost:3100/login'); 
 
     // Click Sign In without filling out fields
     await page.getByRole('button', { name: 'Sign In' }).click();

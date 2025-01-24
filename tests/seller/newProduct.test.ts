@@ -11,7 +11,7 @@ test.describe('Product Upload Form Navigation and Test', () => {
 
     // Step 3: Click the "Sign In" button
     await page.click('text=Sign In');
-    await page.waitForURL('http://localhost:3100/seller/profile'); // Ensure the navigation happens after login
+    await page.waitForURL('http://localhost:3100/login/seller/profile'); // Ensure the navigation happens after login
 
     console.log('Successfully logged in.');
 
@@ -24,7 +24,7 @@ test.describe('Product Upload Form Navigation and Test', () => {
     console.log('Successfully navigated to the "Shop" section.');
 
     // Step 5: Navigate to the "Upload New Product" page
-    await page.goto('http://localhost:3100/seller/upload-new-product');
+    await page.goto('/seller/upload-new-product');
     await page.waitForSelector('#productUploadForm'); // Wait for the product upload form to load
     console.log('Successfully navigated to the "Upload New Product" page.');
 

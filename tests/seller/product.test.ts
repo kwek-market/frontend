@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { login } from '../../utils/sellerloginHelper';
 
-  test.describe('Beauty Product Page', () => {
-  test('should render all UI elements on product page', async ({ page }) => {
-    // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/seller/profile');
+test.describe('Product Navigation', () => {
+  test('Login and navigate to product page', async ({ page }) => {
+    // Reuse the login step
+    await login(page);
+
     // Validate the UI elements
     const productButton = page.locator('nav btn:has-text("Product")');
     await productButton.waitFor({ state: 'visible', timeout: 80000 });
