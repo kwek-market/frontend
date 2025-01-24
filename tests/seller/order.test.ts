@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../../utils/sellerloginHelper'; // Adjust the path based on your project structure
+import { login } from '../utils/sellerloginHelper'; // Adjust the path based on your project structure
 
 test.describe('Order Navigation', () => {
   test('Login and navigate to orders page', async ({ page }) => {

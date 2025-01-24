@@ -1,18 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { login } from '../utils/sellerloginHelper';
 
-test.describe('Product Upload Form Navigation and Test', () => {
-  test('Login, navigate to product upload, and complete the form', async ({ page }) => {
-    // Step 1: Navigate to the login page
-    await page.goto('http://localhost:3100/login');
-
-    // Step 2: Fill in the login credentials
-    await page.fill('input[name="email"]', 'afuyejames@gmail.com');
-    await page.fill('input[name="password"]', 'Abiodune22@');
-
-    // Step 3: Click the "Sign In" button
-    await page.click('text=Sign In');
-    await page.waitForURL('http://localhost:3100/login/seller/profile'); // Ensure the navigation happens after login
-
+test.describe('Product Navigation', () => {
+  test('Login and navigate to product page', async ({ page }) => {
+    // Reuse the login step
+    await login(page);
     console.log('Successfully logged in.');
 
     // Step 4: Locate and click the "Shop" button
