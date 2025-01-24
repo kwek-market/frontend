@@ -47,8 +47,8 @@ test.describe('Sign Up Page', () => {
     await page.getByRole('button', { name: 'Create Account' }).click();
 
     // // Verify the redirect to the Email Verification page
-    // await expect(page).toHaveURL(/.*verify-email/, { timeout: 10000 }); // URL contains 'verify-email'
-    // await expect(page.locator('h1')).toHaveText('Verify Your Email');
-    // await expect(page.locator('text=Check your email inbox')).toBeVisible();
+    await expect(page).toHaveURL('http://localhost:3100/create-account?next_page=', { timeout: 40000 }); // URL contains 'verify-email'
+    await expect(page.locator('h1')).toHaveText('Verify your email to finish signing up to Kwek');
+    await expect(page.locator('text=Check your email inbox')).toBeVisible();
   });
 });

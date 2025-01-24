@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 test.describe('Navbar Navigation Links Tests', () => {
-    const TIMEOUT = 60000;  // 40 seconds for navigation and visibility checks
+    const TIMEOUT = 60000;  
   
     test.beforeEach(async ({ page }) => {
-      await page.goto('http://localhost:3100', { timeout: TIMEOUT });
+      await page.goto('http://localhost:3100/', { timeout: TIMEOUT });
     });
   
     test('should navigate to correct page when clicking "Shop" navbar link', async ({ page }) => {
@@ -20,7 +20,7 @@ test.describe('Navbar Navigation Links Tests', () => {
         await expect(page).toHaveURL('http://localhost:3100/aboutUs', { timeout: TIMEOUT });
       });
     
-      test.skip('should navigate to correct page when clicking "Contact Us" navbar link', async ({ page }) => {
+      test('should navigate to correct page when clicking "Contact Us" navbar link', async ({ page }) => {
         const contactUsLink = page.locator('nav a.Navbar_nav_link__i6Yvx:has-text("Contact Us")');
         
         // Ensure the link is visible and correct
