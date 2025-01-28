@@ -6,16 +6,15 @@
       // Reuse the login step
       await login(page);
   
-    
-    // Locate and click  "Copy Store Url"
-    const urlButton = page.locator('text="Copy Store Url"');
-    await expect(urlButton).toBeVisible(); // Ensure it's visible
-    await urlButton.click();
-       
-    // Locate and click  "Copy Store Url"
-        const newProductButton = page.locator('text="New Product"');
-        await expect(newProductButton).toBeVisible(); // Ensure it's visible
-        await newProductButton.click();
+    // Click the first button with "Copy Store Url"
+      const urlButton = page.locator('button.tw-rounded-sm.tw-bg-yellow-filled:has-text("Copy Store Url")');
+      await urlButton.waitFor({ state: 'visible', timeout: 60000 }); // Wait for up to 60 seconds
+      await urlButton.click();
+      
+    // Locate and click "New Product"
+     const newProductButton = page.locator('button.tw-rounded-sm.tw-bg-yellow-filled:has-text("New Product")');
+     await expect(newProductButton).toBeVisible(); // Ensure it's visible
+    await newProductButton.click();
 
   });
 });

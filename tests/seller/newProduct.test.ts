@@ -7,31 +7,27 @@ test.describe('Product Navigation', () => {
     await login(page);
     console.log('Successfully logged in.');
 
-    // Step 4: Locate and click the "Shop" button
-    const shopButton = page.locator('text=Shop');
-    await shopButton.waitFor({ state: 'visible', timeout: 10000 });
-    await shopButton.scrollIntoViewIfNeeded();
-    await shopButton.click();
+   // Locate and click "New Product"
+   const urlButton = page.locator('button.tw-rounded-sm.tw-bg-yellow-filled:has-text("New Product")');
+   await urlButton.waitFor({ state: 'visible', timeout: 60000 }); // Wait for up to 60 seconds
+   await urlButton.click();
 
-    console.log('Successfully navigated to the "Shop" section.');
+   // Step 6: Verify navigation to the "Upload New Product" page
+  await expect(page).toHaveURL('http://localhost:3100/seller/upload-new-product', { timeout: 10000 });
 
-    // Step 5: Navigate to the "Upload New Product" page
-    await page.goto('/seller/upload-new-product');
-    await page.waitForSelector('#productUploadForm'); // Wait for the product upload form to load
-    console.log('Successfully navigated to the "Upload New Product" page.');
-
-    // Step 6: Fill the product upload form
     // Select a category from the dropdown
-    await page.click('#productCategoryDropdown');
-    const categories = page.locator('.dropdown-menu li');
-    expect(await categories.count()).toBeGreaterThan(0);
-    await categories.nth(1).click(); // Replace with the desired category index
-    const selectedCategory = await page.locator('#selectedCategory').textContent();
-    console.log(`Selected category: ${selectedCategory}`);
+  const dropdown = page.locator('select'); // Adjust the selector if needed
+  await dropdown.click();
+
+  // Step 3: Select "Electronics" from the dropdown
+  await dropdown.selectOption({ label: 'Electronics' });
+
+  // Step 4: Verify the selection
+  await expect(dropdown).toHaveValue('Electronics');
 
     // Upload a product image
     const uploadInput = page.locator('#uploadImageButton');
-    await uploadInput.setInputFiles('path/to/test-image.jpg'); // Replace with your test image file path
+    await uploadInput.setInputFiles('../images/test.avif'); // Replace with your test image file path
     const uploadedImages = page.locator('.uploaded-image');
     expect(await uploadedImages.count()).toBe(1); // Validate the image upload
     console.log('Image uploaded successfully.');
