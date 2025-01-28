@@ -6,7 +6,7 @@ test.describe('Cart Page', () => {
     await page.goto('http://localhost:3100/category/Home%20&%20Garden');
 
     // Validate the UI elements
-    await expect(page.getByText('  Cart')).toBeVisible();
+    await expect(page.getByText('Cart')).toBeVisible();
     
 
     const productGrid = page.locator('.GridContainer_products__9AobY');
