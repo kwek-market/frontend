@@ -41,7 +41,7 @@ test.describe('Product Navigation', () => {
     console.log('Filled out product details.');
 
     // Step 7: Submit the form
-    await page.click('#submitButton');
+    await page.click('#save item');
     await page.waitForSelector('.success-message'); // Wait for a success message or confirmation
     const successMessage = await page.locator('.success-message').textContent();
     expect(successMessage).toContain('Product uploaded successfully');

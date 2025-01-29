@@ -16,6 +16,7 @@ import { test, expect } from '@playwright/test';
         const newProductButton = page.locator('text="New Promotion"');
         await expect(newProductButton).toBeVisible(); // Ensure it's visible
         await newProductButton.click();
-
+    //
+    await expect(page).toHaveURL('http://localhost:3100/seller/promote-product');
   });
 });
