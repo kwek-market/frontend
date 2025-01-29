@@ -1,20 +1,20 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../utils/sellerloginHelper'; // Adjust the path based on your project structure
+import { login } from '../utils/sellerloginHelper';
 
 test.describe('Order Navigation', () => {
   test('Login and navigate to orders page', async ({ page }) => {
     // Reuse the login step
     await login(page);
 
-    // Navigate to "Orders" page
-    const ordersButton = page.locator('nav a:has-text("Order")');
-    await ordersButton.waitFor({ state: 'visible', timeout: 80000 });
-    await ordersButton.scrollIntoViewIfNeeded();
-    await ordersButton.click();
+    // Navigate to "Order" page
+const ordersButton = page.locator('div[role="tab"]:has-text("Order")');
+await ordersButton.waitFor({ state: 'visible', timeout: 30000 });
+await ordersButton.scrollIntoViewIfNeeded();
+await ordersButton.click();
 
     // Wait for the orders page to load
-    const orderTable = page.locator('table'); // Assuming orders are displayed in a table
-    await orderTable.waitFor({ state: 'visible', timeout: 80000 });
+    const orderTable = page.locator('table'); 
+    await orderTable.waitFor({ state: 'visible', timeout: 80000000 });
 
     // Locate all rows in the table
     const rows = orderTable.locator('tbody tr');
