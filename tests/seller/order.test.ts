@@ -7,10 +7,10 @@ test.describe('Order Navigation', () => {
     await login(page);
 
     // Navigate to "Order" page
-const ordersButton = page.locator('div[role="tab"]:has-text("Order")');
-await ordersButton.waitFor({ state: 'visible', timeout: 30000 });
-await ordersButton.scrollIntoViewIfNeeded();
-await ordersButton.click();
+    const ordersButton = page.locator('div[role="tab"]:has-text("Order")');
+    await ordersButton.waitFor({ state: 'visible', timeout: 30000 });
+    await ordersButton.scrollIntoViewIfNeeded();
+    await ordersButton.click();
 
     // Wait for the orders page to load
     const orderTable = page.locator('table'); 
