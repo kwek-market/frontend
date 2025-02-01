@@ -3,20 +3,19 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   timeout: 300000, // Global timeout for each test (5 minutes)
 
-  testDir: './tests', // Directory containing test files
+testDir: './tests', // Directory containing test files
 
-  fullyParallel: true, // Run tests in parallel
+fullyParallel: true, // Run tests in parallel
 
-  forbidOnly: !!process.env.CI, // Fail the build if `test.only` is present in CI
+forbidOnly: !!process.env.CI, // Fail the build if `test.only` is present in CI
 
-  retries: process.env.CI ? 2 : 0, // Retry failed tests twice on CI, no retries locally
+retries: process.env.CI ? 2 : 0, // Retry failed tests twice on CI, no retries locally
 
-  workers: process.env.CI ? 4 : undefined, // Limit workers to 4 in CI for better performance
+workers: process.env.CI ? 4 : undefined, // Limit workers to 4 in CI for better performance
 
-  reporter: [
-    ['html', { open: 'always' }], // Generate HTML reports that automatically open
-  ],
-
+reporter: [
+  ['html', { open: 'always' }], // Generate HTML reports that automatically open
+],
   use: {
     baseURL: 'http://localhost:3100', // Base URL for relative navigation
     headless: true, // Run tests in headless mode (no GUI)

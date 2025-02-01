@@ -11,6 +11,8 @@ import FilledHeader from "./FilledHeader";
 export default function Promotions() {
   const user = useSelector((state: RootState) => state.user);
   const { status, data, error } = usePromotions(user?.token);
+  console.log("🚀 ~~ Promotions ~~ data:", data);
+
 
   return (
     <Fragment>

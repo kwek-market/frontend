@@ -1,16 +1,18 @@
-import React from "react";
+import { Rate } from "antd";
 import Image from "next/legacy/image";
 import styles from "./reviews.module.scss";
-import { Rate } from "antd";
 
 function ReviewItem({ name, date, reviewBody, rating, sellerPic }) {
   return (
     <div className={styles.reviewer}>
       <Image
-        src="https://randomuser.me/api/portraits/women/10.jpg"
-        alt="reviewer"
-        width="80"
-        height="80"
+        src={
+          sellerPic ??
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+        }
+        alt='reviewer'
+        width='80'
+        height='80'
         className={styles.img}
       />
       <div className={styles.reviewer_content}>

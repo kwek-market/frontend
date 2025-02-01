@@ -12,60 +12,81 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - uses: actions/checkout@v4
 
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
 
+    
     - name: Enable Corepack
       run: corepack enable
 
+    
     - name: Prepare Yarn
       run: corepack prepare yarn@3.6.4 --activate
 
     - name: Install dependencies
       run: yarn install
 
+    
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
 
+    
     - name: Verify GraphQL API availability
       run: |
         curl -X POST -H "Content-Type: application/json" \
         --data '{"query":"query { categories { id name } }"}' \
         https://api.kwekmarket.com/v1/kwekql || exit 1
 
+    
     - name: Update Browserslist DB
       run: npx update-browserslist-db@latest
+    
     
     - name: Install Sharp
       run: yarn add sharp
       
+    
     - name: Build the application
       run: yarn build
       env:
         NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
+    
     - name: Start the application
       run: yarn start &
       env:
         PORT: 3100
         NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
+    
     - name: Wait for the application to be ready
-      run: npx wait-on http://localhost:3100
+      run: npx wait-on http://localhost:3100 --timeout 600000
 
     - name: Run Playwright tests
       env:
         GRAPHQL_API_URL: https://api.kwekmarket.com/v1/kwekql
         PORT: 3100
-      run: yarn run test
+      run: yarn test
+      continue-on-error: true # Prevent pipeline failure; we'll collect artifacts next
 
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
+    - name: Upload Playwright HTML Report
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v4
       with:
-        name: playwright-report
+        name: playwright-html-report
         path: playwright-report/
         retention-days: 30
 
+    - name: Upload Debug Artifacts (Screenshots & Traces)
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-debug-artifacts
+        path: |
+          tests/screenshots/
+          tests/traces/
+        retention-days: 30

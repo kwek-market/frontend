@@ -18,7 +18,7 @@ const NavBar = function ({ showNavBar, setShowNavBar }: NavProps) {
     },
     {
       title: "Contact Us",
-      url: "",
+      url: "/contact-us",
     },
     {
       title: "All Categories",
