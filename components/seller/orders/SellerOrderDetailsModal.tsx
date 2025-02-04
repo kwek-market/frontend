@@ -47,7 +47,7 @@ const SellerOrderDetailsModal = ({ open, onclose, orderId, order: nack }) => {
     <Modal
       title='Order details'
       open={open}
-      // onOk={handleOk}
+      onOk={onclose}
       confirmLoading={isLoading}
       onCancel={onclose}
       className='!tw-max-w-7xl !tw-w-full !tw-h-[80vh] tw-overflow-y-scroll'
