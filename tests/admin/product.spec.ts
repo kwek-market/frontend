@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { config } from '../utils/config';
 import { loginAsNormalUser, switchToAdminUser } from '../utils/adminAuth';
-import page from '@/pages/deals-of-the-day/[id]';
 
 test.describe('Product Page Tests', () => {
     test.beforeEach(async ({ page }) => {      
