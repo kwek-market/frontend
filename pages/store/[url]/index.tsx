@@ -51,7 +51,7 @@ export const getStaticPaths: GetStaticPaths = async context => {
 
 export const getStaticProps: GetStaticProps = async context => {
   try {
-    const storeUrl = context.params?.url;
+    const storeUrl = context.params??.url;
 
     const storeData = await userFetcher(GET_SELLER_STORE, { shopUrl: storeUrl });
     const store = storeData?.seller;

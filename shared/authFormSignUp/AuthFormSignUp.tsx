@@ -77,7 +77,11 @@ const AuthFormSign: React.FC<Type> = function ({
       setError({ status: true, message: "Input your email and password" });
       setLoading(false);
       // console.log(formData);
-    } else if (formData.email && formData.password && !validateEmail.test(formData.email)) {
+    } else if (
+      formData.email &&
+      formData.password &&
+      !validateEmail.test(formData.email)
+    ) {
       setError({ status: true, message: "Invalid email" });
       setLoading(false);
     } else if (!formData.email && formData.password) {
@@ -97,11 +101,22 @@ const AuthFormSign: React.FC<Type> = function ({
       // } else if (userId.id === null) {
       //   setError({ status: true, message: userId.message });
       //   setLoading(false);
-    } else if (createUserInfo.message === "Password is should not be less than 8 characters") {
-      setError({ status: true, message: "Password is should not be less than 8 characters" });
+    } else if (
+      createUserInfo.message ===
+      "Password is should not be less than 8 characters"
+    ) {
+      setError({
+        status: true,
+        message: "Password is should not be less than 8 characters",
+      });
       setLoading(false);
-    } else if (createUserInfo.message === "Password should contain numerical character") {
-      setError({ status: true, message: "Password should contain numerical character" });
+    } else if (
+      createUserInfo.message === "Password should contain numerical character"
+    ) {
+      setError({
+        status: true,
+        message: "Password should contain numerical character",
+      });
       setLoading(false);
     } else if (createUserInfo.message === "E-mail Already in use") {
       setError({ status: true, message: "E-mail Already in use" });
@@ -133,8 +148,10 @@ const AuthFormSign: React.FC<Type> = function ({
               <input
                 {...fieldProps}
                 className={styles.form_input}
-                type={type === "password" ? (showPassword ? "text" : type) : type}
-                onChange={e => handleChange(e)}
+                type={
+                  type === "password" ? (showPassword ? "text" : type) : type
+                }
+                onChange={(e) => handleChange(e)}
               />
               {type === "password" && (
                 <i
@@ -148,7 +165,7 @@ const AuthFormSign: React.FC<Type> = function ({
 
             {sub && (
               <div className={styles.form_inputSub}>
-                <Link href={sub.url} className={styles.form_inputSubLink}>
+                <Link href={sub?.url} className={styles.form_inputSubLink}>
                   {sub.text}
                 </Link>
               </div>
@@ -159,11 +176,11 @@ const AuthFormSign: React.FC<Type> = function ({
           <div className={styles.form_btnContainer}>
             <button
               className={`btn bg-primary ${styles.btn}`}
-              onClick={e => handleSubmit(e, submit)}
+              onClick={(e) => handleSubmit(e, submit)}
             >
               {loading && loading ? (
                 <Puff
-                  color='#fff'
+                  color="#fff"
                   height={30}
                   width={30}
                   // timeout={3000} //3 secs
