@@ -50,7 +50,7 @@ jobs:
       - name: Start the application
         run: yarn start &
         env:
-          PORT: 
+          PORT:
           NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
       - name: Wait for the application to be ready
@@ -58,8 +58,8 @@ jobs:
 
       - name: Run Playwright tests
         env:
-          GRAPHQL_API_URL: https://api.kwekmarket.com/v1/kwekql
-          PORT: 
+          GRAPHQL_API_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_ENDPOINT }}
+          PORT:
         run: yarn test
         continue-on-error: true # Prevent pipeline failure; we'll collect artifacts next
 
