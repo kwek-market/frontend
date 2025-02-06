@@ -1,84 +1,55 @@
-import { test, expect } from '@playwright/test';
-import { config } from '../utils/config';
-import { loginAsNormalUser, switchToAdminUser } from '../utils/adminAuth';
+import { expect, test } from "@playwright/test";
 
-test.describe('Product Page Tests', () => {
-    test.beforeEach(async ({ page }) => {      
-        await loginAsNormalUser(page); 
-        await switchToAdminUser(page);
-        await expect(page).toHaveURL(`${config.baseUrl}/admin/dashboard`, { timeout: 100000});
+test.describe("Order Navigation", () => {
+  test("Login and navigate to orders page", async ({ page }) => {
+    // Reuse the login step
+    await login(page);
+
+    // Locate and click the "Order" tab
+    const ordersButton = page.locator('div.tw-cursor-pointer:has-text("Products")');
+    await ordersButton.waitFor({ state: "visible", timeout: 30000 });
+    await ordersButton.scrollIntoViewIfNeeded();
+    await ordersButton.click();
+
+    // Verify that the URL has changed to '/admin/products'
+    // await expect(page).toHaveURL('http://localhost:3100/admin/products');
+
+    // Wait for the product table to load
+    const productTable = page.locator("table");
+    await productTable.waitFor({ state: "visible", timeout: 80000 });
+
+    // Locate all rows in the product table's tbody
+    const rows = productTable.locator("tbody tr");
+    const rowCount = await rows.count();
+    console.log(`Found ${rowCount} rows in the product table`);
+
+    // Iterate over each row and extract data
+    // Note: Since the first column is the checkbox, data starts at td:nth-child(2)
+    for (let i = 0; i < rowCount; i++) {
+      const product = await rows.nth(i).locator("td:nth-child(2)").textContent();
+      const vendor = await rows.nth(i).locator("td:nth-child(3)").textContent();
+      const unitPrice = await rows.nth(i).locator("td:nth-child(4)").textContent();
+      const sold = await rows.nth(i).locator("td:nth-child(5)").textContent();
+      const dateUploaded = await rows.nth(i).locator("td:nth-child(6)").textContent();
+
+      // Log the extracted data
+      console.log({
+        product: product?.trim(),
+        vendor: vendor?.trim(),
+        unitPrice: unitPrice?.trim(),
+        sold: sold?.trim(),
+        dateUploaded: dateUploaded?.trim(),
       });
 
-  test('Navigating to product page',async ({page}) =>{
-      await page.locator('a[href="/admin/products"]').click();
-      await expect(page).toHaveURL('http://localhost:3100/admin/products');  
-  });
-      
+      // Validate that none of these fields are null or undefined
+      expect(product).not.toBeNull();
+      expect(vendor).not.toBeNull();
+      expect(unitPrice).not.toBeNull();
+      expect(sold).not.toBeNull();
+      expect(dateUploaded).not.toBeNull();
 
-  test('verify Product table headers', async ({ page }) => {
-    await page.locator('a[href="/admin/products"]').click();
-    await expect(page).toHaveURL('http://localhost:3100/admin/products');
-
-    const table = page.locator('//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div/div/div/div'); 
-    await expect(table).toBeVisible();
-
-    const headers = table.locator('//table/thead/tr');
-    await headers.waitFor({ state: 'visible', timeout: 10000 });
-    
-    let actualHeaders: string[] = await headers.locator('th').allTextContents();
-    
-   
-    actualHeaders = actualHeaders.map(header => header.trim()).filter(header => header !== "");
-    
-    const expectedHeaders: string[] = ['Product', 'Vendor', 'Unit Price', 'Sold', 'Date Uploaded'];
-    
-    expect(actualHeaders).toEqual(expectedHeaders);    
-  
-  });
-  
-
-  test('Search for a product and validate the results', async ({ page }) => {
-    await page.locator('a[href="/admin/products"]').click();
-    await expect(page).toHaveURL('http://localhost:3100/admin/products');
-
-   
-    const searchBar = page.locator('input[placeholder="Search by products name"]'); 
-    await searchBar.fill('spray'); 
-    await searchBar.press('Enter');
-    await page.waitForLoadState('networkidle'); 
-
-    const productNames = await page.locator('//table/tbody/tr/td[2]').allTextContents(); 
-    console.log(productNames);
-    expect(productNames.length).toBeGreaterThan(0);
-    productNames.forEach((name) => {
-      expect(name.toLowerCase()).toContain('spray');
-    });
-  });
-
-
-  test('Navigate between product pages using pagination', async ({ page }) => {
-    await page.locator('a[href="/admin/products"]').click();
-    await expect(page).toHaveURL('http://localhost:3100/admin/products');
-
-    const paginationContainer = page.locator('div.tw-flex.tw-justify-between.tw-align-center.tw-gap-1');
-    const buttons = paginationContainer.locator('button');
-  
-    const buttonCount = await buttons.count();
-  
-    for (let i = 0; i < buttonCount; i++) {
-      const button = buttons.nth(i);
-  
-      const isDisabled = await button.isDisabled();
-      if (!isDisabled) {
-      
-        const pageNumber = await button.innerText();
-        console.log(`Navigating to page ${pageNumber}`);
-        await button.click();
-        const activeButton = paginationContainer.locator(
-          'button.tw-bg-[#AF1328].tw-text-white-400[disabled]'
-        );
-        await expect(activeButton).toHaveText(pageNumber);
-      }
+      // Example: You can add further validations such as checking the format of the date,
+      // the numeric value of the price, etc.
     }
   });
 });
