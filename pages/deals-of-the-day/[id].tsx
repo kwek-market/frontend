@@ -68,7 +68,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     page: context.params.id,
     pageSize: 20,
   };
-  const { dealsOfTheDay } = await userFetcher(DEALS_OF_THE_DAY, payload);
+  let dealsOfTheDay = { objects: [], pages: 0 };
+  try {
+      dealsOfTheDay  = await userFetcher(DEALS_OF_THE_DAY, payload);
+  } catch (error) {
+    console.log(error);
+  }
   return {
     props: {
       dealsOfTheDay,
