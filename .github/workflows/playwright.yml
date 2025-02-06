@@ -50,16 +50,16 @@ jobs:
       - name: Start the application
         run: yarn start &
         env:
-          PORT: 3100
+          PORT: 
           NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
       - name: Wait for the application to be ready
-        run: npx wait-on http://localhost:3100 --timeout 600000
+        run: npx wait-on https://staging.kwekmarket.com/ --timeout 600000
 
       - name: Run Playwright tests
         env:
           GRAPHQL_API_URL: https://api.kwekmarket.com/v1/kwekql
-          PORT: 3100
+          PORT: 
         run: yarn test
         continue-on-error: true # Prevent pipeline failure; we'll collect artifacts next
 
