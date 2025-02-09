@@ -54,7 +54,7 @@ jobs:
           NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
       - name: Wait for the application to be ready
-        run: npx wait-on https://staging.kwekmarket.com/ --timeout 600000
+        run: npx wait-on https://www.kwekmarket.com/ --timeout 600000
 
       - name: Run Playwright tests
         env:
