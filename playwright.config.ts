@@ -17,7 +17,7 @@ reporter: [
   ['html', { open: 'always' }], // Generate HTML reports that automatically open
 ],
   use: {
-    baseURL: 'http://localhost:3100', // Base URL for relative navigation
+    baseURL: process.env.BASE_URL || 'http://localhost:3100', 
     headless: true, // Run tests in headless mode (no GUI)
     trace: 'on-first-retry', // Collect trace for debugging on first retry
     screenshot: 'only-on-failure', // Take screenshots for failed tests

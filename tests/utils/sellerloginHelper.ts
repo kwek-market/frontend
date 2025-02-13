@@ -1,9 +1,9 @@
 // loginHelper.ts
 import { expect, Page } from '@playwright/test';
-
+import baseURL from '@playwright/test';
 export async function login(page: Page) {
   // Step 1: Navigate to the login page
-  await page.goto('http://localhost:3100/login');
+  await page.goto(`${baseURL}/login`);
 
   // Step 2: Fill in the login credentials
   await page.fill('input[name="email"]', 'afuyejames@gmail.com');
@@ -13,7 +13,7 @@ export async function login(page: Page) {
   await page.click('text=Sign In');
 
   // Step 4: Verify successful login
-  await page.waitForURL('http://localhost:3100/', { timeout: 800000 });
+  await page.waitForURL(`${baseURL}`, { timeout: 800000 });
   // Step 6: Locate and click the "Shop" button
       const shopButton = page.locator('nav a:has-text("Shop")');
   
@@ -22,5 +22,5 @@ export async function login(page: Page) {
       await shopButton.click();
   
       // // Step 5: Verify successful navigation to the seller profile
-       await expect(page).toHaveURL('http://localhost:3100/seller/profile', {timeout: 800000});
+       await expect(page).toHaveURL(`${baseURL}/seller/profile`, {timeout: 800000});
 }

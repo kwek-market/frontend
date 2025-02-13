@@ -1,10 +1,11 @@
 import { test, expect, Page } from '@playwright/test';
 
 test.describe('Categories Tests', () => {
-  const baseURL = 'http://localhost:3100';
   let page: Page;
 
   const navigateAndValidateCategory = async (categoryName: string) => {
+    const baseURL = test.info().project.use.baseURL; // Dynamically get baseURL
+
     // Navigate to the base URL
     await page.goto(baseURL, { waitUntil: 'networkidle' });
 
@@ -29,6 +30,8 @@ test.describe('Categories Tests', () => {
   });
 
   test('Verify promotional banner for Women section', async () => {
+    const baseURL = test.info().project.use.baseURL; // Dynamically get baseURL
+
     const promoText = 'BUY TWO, Get FOR WOMEN Get up to 30% Off';
     const promoBanner = page.locator(`text=${promoText}`).first();
     const shopNowButton = page.locator('text=SHOP NOW');

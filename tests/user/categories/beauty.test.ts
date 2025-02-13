@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Beauty Product Page', () => {
-  test('should render all UI elements on beauty page', async ({ page }) => {
+  test('should render all UI elements on beauty page', async ({ page, baseURL }) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/category/Beauty%20&%20Personal%20care');
+    await page.goto(`${baseURL}/category/Beauty%20&%20Personal%20care`);
 
     // Validate the UI elements
     await expect(page.getByText('Filters')).toBeVisible();

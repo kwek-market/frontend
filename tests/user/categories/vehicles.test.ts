@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Vehicles Product Page', () => {
-  test('should render all UI elements on beauty page', async ({ page }) => {
+  test('should render all UI elements on beauty page', async ({ page, baseURL }) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/category/Vehicles%20&%20Equipment');
+    await page.goto(`${baseURL}/category/Vehicles%20&%20Equipment`);
 
     // Validate the UI elements
     await expect(page.getByText('Filters')).toBeVisible();

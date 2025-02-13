@@ -4,6 +4,7 @@ test.describe.skip('Footer Navigation Links Test', () => {
   test.setTimeout(30000); // Increased timeout for slow loads
 
   const footerLinks = [
+    
     { name: 'Buyer Policy', path: '/buyerPolicy', url: 'http://localhost:3100/buyerPolicy' },
     { name: 'Kwek Return Policy', path: '/returnPolicy', url: 'http://localhost:3100/returnPolicy' },
   ];
