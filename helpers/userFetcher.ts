@@ -1,18 +1,19 @@
 // @ts-expect-error "Because of it is not seeing the graphql-request"
 import { GraphQLClient, request } from "graphql-request";
 
-// const oldUrl = "https://kwekapi.com/v1/kwekql";
-// const newUrl = "https://kwekapi.herokuapp.com/v1/kwekql";
-// https://kwekapi.vercel.app/v1/kwekql
-// const graphqlEndpoint = "https://kwekapi.vercel.app/v1/kwekql";
-const graphqlEndpoint = "https://api.kwekmarket.com/v1/kwekql";
+const graphqlEndpoint = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
+
 // const graphqlEndpoint = "https://backend-smwz.onrender.com/v1/graphql";
 
 export const userFetcher = async (query: string, variables?: any) => {
   return await request(graphqlEndpoint, query, variables);
 };
 
-export const userFetcherWithAuth = async <T>(query: string, variables: T, token: string) => {
+export const userFetcherWithAuth = async <T>(
+  query: string,
+  variables: T,
+  token: string
+) => {
   const endpoint = graphqlEndpoint;
 
   if (token === "" || token === undefined) {

@@ -7,7 +7,6 @@ import { MainLayout } from "@/layouts";
 import { DEALS_OF_THE_DAY } from "@/store/seller/seller.queries";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import React from "react";
 import ReactPaginate from "react-paginate";
 import { v4 } from "uuid";
 
@@ -20,36 +19,36 @@ export default function page({ dealsOfTheDay, pageCount }) {
   };
 
   return (
-    <MainLayout title="deals of the day">
+    <MainLayout title='deals of the day'>
       {router.isFallback ? (
         <Load />
       ) : dealsOfTheDay.objects.length > 0 ? (
-        <div className="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-5 tw-mb-8">
+        <div className='tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-5 tw-mb-8'>
           {dealsOfTheDay.objects.map((product: ProductType) => (
             <CategoryProducts key={v4()} id={product.id} product={product} />
           ))}
         </div>
       ) : (
-        <ErrorInfo error="No product" />
+        <ErrorInfo error='No product' />
       )}
       <ReactPaginate
-        nextLabel="next >"
-        onPageChange={(e) => handlePageClick(e)}
+        nextLabel='next >'
+        onPageChange={e => handlePageClick(e)}
         pageRangeDisplayed={3}
         marginPagesDisplayed={2}
         pageCount={pageCount}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
+        previousLabel='< previous'
+        pageClassName='page-item'
+        pageLinkClassName='page-link'
+        previousClassName='page-item'
+        previousLinkClassName='page-link'
+        nextClassName='page-item'
+        nextLinkClassName='page-link'
+        breakLabel='...'
+        breakClassName='page-item'
+        breakLinkClassName='page-link'
+        containerClassName='pagination'
+        activeClassName='active'
         renderOnZeroPageCount={undefined}
       />
     </MainLayout>
@@ -63,16 +62,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async context => {
   const payload = {
     page: context.params.id,
     pageSize: 20,
   };
   let dealsOfTheDay = { objects: [], pages: 0 };
   try {
-      dealsOfTheDay  = await userFetcher(DEALS_OF_THE_DAY, payload);
+    dealsOfTheDay = await userFetcher(DEALS_OF_THE_DAY, payload);
   } catch (error) {
     console.log(error);
+
+    return { notFound: true };
   }
   return {
     props: {

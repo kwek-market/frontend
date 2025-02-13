@@ -36,24 +36,30 @@ const SellerStore = ({ seller }) => {
       />
       {seller ? <SellerHero seller={seller} /> : <Load />}
       <Container>
-        {seller ? <SellerProduct products={seller?.user?.productSet} /> : <Load />}
+        {seller ? (
+          <SellerProduct products={seller?.user?.productSet} />
+        ) : (
+          <Load />
+        )}
       </Container>
     </div>
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async context => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
   return {
     paths: [],
     fallback: true,
   };
 };
 
-export const getStaticProps: GetStaticProps = async context => {
+export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const storeUrl = context.params?.url;
 
-    const storeData = await userFetcher(GET_SELLER_STORE, { shopUrl: storeUrl });
+    const storeData = await userFetcher(GET_SELLER_STORE, {
+      shopUrl: storeUrl,
+    });
     const store = storeData?.seller;
 
     return { props: { seller: store }, revalidate: TEN_SECONDS };
