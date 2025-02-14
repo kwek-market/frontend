@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Sign In Page', () => {
-  test('should render all UI elements on Sign In page', async ({ page }) => {
+  test('should render all UI elements on Sign In page', async ({ page, baseURL}) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/login');
+    await page.goto(`${baseURL}/login`);
 
     // Validate the UI elements
     await expect(page.getByPlaceholder('Email Address')).toBeVisible();
@@ -12,9 +12,9 @@ test.describe('Sign In Page', () => {
     await expect(page.getByText('Forgot Password?')).toBeVisible();
   });
 
-  test('should show an error for empty fields on Sign In', async ({ page }) => {
+  test('should show an error for empty fields on Sign In', async ({ page, baseURL }) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/login'); 
+    await page.goto(`${baseURL}/login`); 
 
     // Click Sign In without filling out fields
     await page.getByRole('button', { name: 'Sign In' }).click();
@@ -23,9 +23,9 @@ test.describe('Sign In Page', () => {
   await expect(page.getByText('Input your email and password')).toBeVisible();
 });
 
-  test('should successfully sign in with valid credentials', async ({ page }) => {
+  test('should successfully sign in with valid credentials', async ({ page, baseURL }) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/login');
+    await page.goto(`${baseURL}/login`);
 
     // Fill out the login form
     await page.getByPlaceholder('Email Address').fill('test@example.com');
@@ -35,6 +35,6 @@ test.describe('Sign In Page', () => {
     await page.getByRole('button', { name: 'Sign In' }).click();
 
     // Validate post-login URL or dashboard visibility
-    await expect(page).toHaveURL('http://localhost:3100/login');
+    await expect(page).toHaveURL(`${baseURL}/login`);
   });
 });

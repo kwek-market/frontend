@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Cart Page', () => {
-  test('should render all UI elements on beauty page', async ({ page }) => {
+  test('should render all UI elements on beauty page', async ({ page, baseURL }) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/category/Home%20&%20Garden');
+    await page.goto(`${baseURL}/category/Home%20&%20Garden`);
 
     // Validate the UI elements
     await expect(page.getByText('Cart')).toBeVisible();

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { login } from '../utils/sellerloginHelper';
 
 test.describe('Product Navigation', () => {
-  test('Login and navigate to product page', async ({ page }) => {
+  test('Login and navigate to product page', async ({ page, baseURL }) => {
     // Reuse the login step
     await login(page);
     console.log('Successfully logged in.');
@@ -13,7 +13,7 @@ test.describe('Product Navigation', () => {
     await urlButton.click();
 
     // Step 6: Verify navigation to the "Upload New Product" page
-    await expect(page).toHaveURL('http://localhost:3100/seller/upload-new-product', { timeout: 10000 });
+    await expect(page, baseURL).toHaveURL(`${baseURL}/seller/upload-new-product`, { timeout: 10000 });
 
     // Verify the main container for product category
     const productCategoryContainer = page.locator('div.tw-pt-3.tw-px-5.tw-pb-20.tw-mb-5.tw-bg-white-100.tw-rounded-md');

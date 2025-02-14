@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
   import { login } from '../utils/sellerloginHelper';
 
   test.describe('Promotion Navigation', () => {
-    test('Login and navigate to product page', async ({ page }) => {
+    test('Login and navigate to product page', async ({ page, baseURL }) => {
       // Reuse the login step
       await login(page);
   
@@ -20,7 +20,7 @@ import { test, expect } from '@playwright/test';
     await newPromotionButton.scrollIntoViewIfNeeded();
     await newPromotionButton.click();
     //
-    await expect(page).toHaveURL('http://localhost:3100/seller/promote-product', {timeout: 80000});
+    await expect(page).toHaveURL(`${baseURL}/seller/promote-product`, {timeout: 80000});
 
   // Verify the presence of the main container
   const mainContainer = page.locator('main.PromoteHeader_build__xGT5G');

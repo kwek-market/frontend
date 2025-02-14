@@ -10,8 +10,8 @@ function generateSecurePassword() {
 }
 
 test.describe('Sign Up Page', () => {
-  test('should render all UI elements on Sign Up page', async ({ page }) => {
-    await page.goto('http://localhost:3100/create-account', { waitUntil: 'networkidle' });
+  test('should render all UI elements on Sign Up page', async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/create-account`, { waitUntil: 'networkidle' });
 
     // Validate the UI elements
     await expect(page.getByPlaceholder('Full Name')).toBeVisible();
@@ -22,16 +22,16 @@ test.describe('Sign Up Page', () => {
     await expect(page.getByRole('link', { name: 'Login' })).toBeVisible();
   });
 
-  test('should show validation error for empty fields', async ({ page }) => {
-    await page.goto('http://localhost:3100/create-account');
+  test('should show validation error for empty fields', async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/create-account`);
     await page.getByRole('button', { name: 'Create Account' }).click();
 
     // Assert validation errors
     await expect(page.locator('text=Email field cannot be empty')).toBeVisible();
   });
 
-  test('should successfully create an account with valid details', async ({ page }) => {
-    await page.goto('http://localhost:3100/create-account');
+  test('should successfully create an account with valid details', async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/create-account`);
 
     // Dynamically generate valid inputs
     const randomEmail = generateRandomEmail();
@@ -47,7 +47,7 @@ test.describe('Sign Up Page', () => {
     await page.getByRole('button', { name: 'Create Account' }).click();
 
     // // Verify the redirect to the Email Verification page
-    await expect(page).toHaveURL('http://localhost:3100/create-account?next_page=', { timeout: 40000 }); // URL contains 'verify-email'
+    await expect(page).toHaveURL(`${baseURL}/create-account?next_page=`, { timeout: 40000 }); // URL contains 'verify-email'
     await expect(page.locator('h1')).toHaveText('Verify your email to finish signing up to Kwek');
     await expect(page.locator('text=Check your email inbox')).toBeVisible();
   });

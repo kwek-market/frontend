@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 test.describe('Forgot Password Page', () => {
-  test('should render all UI elements on Forgot Password page', async ({ page }) => {
+  test('should render all UI elements on Forgot Password page', async ({ page, baseURL }) => {
     // Navigate to the Sign In page
-    await page.goto('http://localhost:3100/forgot-password');
+    await page.goto(`${baseURL}/forgot-password`);
 
     // Validate the UI elements
     await expect(page.getByPlaceholder('email address')).toBeVisible();

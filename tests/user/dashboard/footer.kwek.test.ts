@@ -7,8 +7,9 @@ test.describe("Footer kwek link Test", () => {
     { name: "Terms of Service", url: "http://localhost:3100/terms-of-service" },
   ];
 
-  test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:3100");
+  test.beforeEach(async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}`);
+
   });
 
   footerLinks.forEach((link) => {

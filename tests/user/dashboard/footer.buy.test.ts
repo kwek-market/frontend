@@ -4,20 +4,13 @@ test.describe.skip("Footer Navigation Links Test", () => {
   test.setTimeout(30000); // Increased timeout for slow loads
 
   const footerLinks = [
-    {
-      name: "Buyer Policy",
-      path: "/buyerPolicy",
-      url: "http://localhost:3100/buyerPolicy",
-    },
-    {
-      name: "Kwek Return Policy",
-      path: "/returnPolicy",
-      url: "http://localhost:3100/returnPolicy",
-    },
+  { name: 'Buyer Policy', path: '/buyerPolicy' },
+  { name: 'Kwek Return Policy', path: '/returnPolicy' },
+];
   ];
 
-  test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:3100");
+  test.beforeEach(async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}`);
   });
 
   footerLinks.forEach((link) => {
