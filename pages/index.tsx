@@ -10,8 +10,6 @@ import { v4 } from "uuid";
 import { TEN_SECONDS } from "../constants/constants";
 
 const Home = function ({ categories, dealsOfTheDay }) {
-  console.log("🚀 ~~ Home ~~ categories:", categories);
-
   return (
     <MainLayout>
       <Hero />

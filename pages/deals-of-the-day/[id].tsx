@@ -64,22 +64,30 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async context => {
   const payload = {
-    page: context.params.id,
+    page: context.params?.id,
     pageSize: 20,
   };
+
+  // Initialize with default values
   let dealsOfTheDay = { objects: [], pages: 0 };
+
   try {
-    dealsOfTheDay = await userFetcher(DEALS_OF_THE_DAY, payload);
+    const response = await userFetcher(DEALS_OF_THE_DAY, payload);
+    // Ensure the response has a valid "pages" property
+    dealsOfTheDay = {
+      objects: response.objects || [],
+      pages: response.pages ?? 0, // Fallback to 0 if undefined
+    };
   } catch (error) {
     console.log(error);
-
     return { notFound: true };
   }
+
   return {
     props: {
       dealsOfTheDay,
-      pageCount: dealsOfTheDay.pages,
+      pageCount: dealsOfTheDay.pages, // Now guaranteed to be a number
     },
-    revalidate: 1, // EVERY ONE SECONDS
+    revalidate: 1,
   };
 };
