@@ -7,7 +7,7 @@ test.describe.skip("Footer Navigation Links Test", () => {
   { name: 'Buyer Policy', path: '/buyerPolicy' },
   { name: 'Kwek Return Policy', path: '/returnPolicy' },
 ];
-  ];
+
 
   test.beforeEach(async ({ page, baseURL }) => {
     await page.goto(`${baseURL}`);
@@ -15,7 +15,7 @@ test.describe.skip("Footer Navigation Links Test", () => {
 
   footerLinks.forEach((link) => {
     test(`should navigate to correct page when clicking "${link.name}" footer link`, async ({
-      page,
+      page, baseURL
     }) => {
       const footer = page.locator("footer");
       const footerLink = footer.locator(`text=${link.name}`);
@@ -26,7 +26,7 @@ test.describe.skip("Footer Navigation Links Test", () => {
       await footerLink.click(); // Click the link
 
       // Wait for the URL to update
-      await page.waitForURL(link?.url, { timeout: 60000 });
+      await page.waitForURL(`${baseURL}${link.path}`, { timeout: 60000 });
 
       // Optional: Assert that a specific element on the page is loaded
       const pageHeader = page.locator("h1"); // Replace 'h1' with an appropriate selector
