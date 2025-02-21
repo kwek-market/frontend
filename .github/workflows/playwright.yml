@@ -25,32 +25,23 @@ jobs:
         run: corepack prepare yarn@3.6.4 --activate
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
 
       - name: Verify GraphQL API availability
         run: |
-          curl -X POST -H "Content-Type: application/json" \
+          curl -v -X POST -H "Content-Type: application/json" \
           --data '{"query":"query { categories { id name } }"}' \
           ${{ secrets.NEXT_PUBLIC_BACKEND_ENDPOINT }} || exit 1
 
       - name: Update Browserslist DB
         run: npx update-browserslist-db@latest
 
-      - name: Install Sharp
-        run: yarn add sharp
-
       - name: Build the application
         run: yarn build
         env:
-          NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
-
-      - name: Start the application
-        run: yarn start &
-        env:
-          PORT:
           NEXT_PUBLIC_PUSHER_KEY: ${{ secrets.NEXT_PUBLIC_PUSHER_KEY }}
 
       - name: Wait for the application to be ready
@@ -59,9 +50,7 @@ jobs:
       - name: Run Playwright tests
         env:
           GRAPHQL_API_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_ENDPOINT }}
-          PORT:
         run: yarn test
-        continue-on-error: true # Prevent pipeline failure; we'll collect artifacts next
 
       - name: Upload Playwright HTML Report
         if: ${{ always() }}
