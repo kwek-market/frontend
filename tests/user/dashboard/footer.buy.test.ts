@@ -7,7 +7,6 @@ test.describe.skip("Footer Navigation Links Test", () => {
   { name: 'Buyer Policy', path: '/buyerPolicy' },
   { name: 'Kwek Return Policy', path: '/returnPolicy' },
 ];
-  ];
 
   test.beforeEach(async ({ page, baseURL }) => {
     await page.goto(`${baseURL}`);
