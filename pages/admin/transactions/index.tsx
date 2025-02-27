@@ -94,7 +94,7 @@ const Transactions = () => {
         <button
           className={`${
             status ? "tw-bg-[#009D19]" : "tw-bg-[#AF1328]"
-          } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}
+          } tw-text-white-100 tw-text-xs tw-font-medium tw-rounded-[10px] tw-w-full tw-py-1 tw-px-1`}
         >
           {status ? "SUCCESS" : "FAILED"}
         </button>
@@ -108,7 +108,7 @@ const Transactions = () => {
       dataIndex: "order",
       key: "orderId",
       render: (order: any) => (
-        (<Link
+        <Link
           href={"/admin/customers/" + order?.user?.fullName + "/order-detail/" + order?.orderId}
           className={`${
             status.toLowerCase() === "success"
@@ -116,11 +116,10 @@ const Transactions = () => {
               : status.toLowerCase() === "failed"
               ? "tw-bg-[#AF1328]"
               : "tw-bg-[#FFC107]"
-          } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}>
-
+          } tw-text-white-100 tw-text-sm tw-font-medium tw-rounded-[10px] tw-w-full tw-py-2`}
+        >
           {status}
-
-        </Link>)
+        </Link>
       ),
     },
     {
@@ -176,7 +175,7 @@ const Transactions = () => {
         header='Wallet Transaction List'
       />
 
-      <div className=' tw-flex tw-gap-x-2 tw-mt-6 tw-items-center '>
+      {/* <div className=' tw-flex tw-gap-x-2 tw-mt-6 tw-items-center '>
         <span className=' tw-opacity-70'>Filter By:</span>
         <select
           value='all'
@@ -184,9 +183,14 @@ const Transactions = () => {
         >
           <option value='all'>All Wallet Transactions</option>
         </select>
-      </div>
+      </div> */}
       <div className='tw-mt-6'>
-        <Search placeholder='Search by Transaction ID' />
+        <Search
+          onChange={value => {
+            setSearch(value.target.value.trim());
+          }}
+          placeholder='Search by Transaction ID'
+        />
       </div>
 
       <div className=' tw-pt-4'>
