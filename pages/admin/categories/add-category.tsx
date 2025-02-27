@@ -8,7 +8,7 @@ import {
 } from "@/hooks/admin/category";
 import { AdminLayout } from "@/layouts";
 import { CreateCategorySchema } from "@/validations/createCategory";
-import { message } from "antd";
+import { DatePicker, message } from "antd";
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -19,6 +19,8 @@ import { RootState } from "../../../store/rootReducer";
 // once a category is selected,
 // fetch the subcategories
 //  update the category array according to the number
+
+const dateFormat = "YYYY-MM-DD";
 
 const AddCategory = () => {
   const token = useSelector((state: RootState) => state.user?.token);
@@ -162,14 +164,17 @@ const AddCategory = () => {
             name='visibility'
           />
 
-          <InputField
-            label='Publish Date'
-            type='date'
-            value={formData?.publishDate || todayDate}
-            onChange={e => {
-              setFormDta({ ...formData, publishDate: e.target.value });
-            }}
-          />
+          <div className='tw-space-y-2'>
+            <label className=' tw-font-medium'>Published Date</label>
+            <DatePicker
+              className='tw-w-full tw-py-4 tw-font-medium tw-text-base'
+              defaultValue={dayjs()}
+              disabledDate={current => current && current < dayjs().startOf("day")}
+              onChange={date => {
+                setFormDta({ ...formData, publishDate: date.toISOString() });
+              }}
+            />
+          </div>
         </FormItems>
 
         <FormHead>Image</FormHead>
