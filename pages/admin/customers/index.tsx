@@ -4,7 +4,6 @@ import AdminTable from "@/components/table";
 import { useGetCustomers } from "@/hooks/useGetCustomers";
 import { AdminLayout } from "@/layouts";
 import { RootState } from "@/store/rootReducer";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { Tabs } from "antd";
 import Link from "next/dist/client/link";
 import { useMemo, useState } from "react";
@@ -88,15 +87,6 @@ const Customers = () => {
       title: "Amount Spent",
       dataIndex: "amount_spent",
       key: "amount_spent",
-    },
-    {
-      title: "",
-      key: "action",
-      render: (text, record) => (
-        <span>
-          <DotsVerticalIcon className='tw-h-5 tw-w-5 tw-text-[#27BE63]' />
-        </span>
-      ),
     },
   ];
 
