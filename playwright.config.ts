@@ -17,7 +17,7 @@ reporter: [
   ['html', { open: 'always' }], // Generate HTML reports that automatically open
 ],
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3100', 
+    baseURL: process.env.BASE_URL || 'https://www.kwekmarket.com/', 
     headless: true, // Run tests in headless mode (no GUI)
     trace: 'on-first-retry', // Collect trace for debugging on first retry
     screenshot: 'only-on-failure', // Take screenshots for failed tests
