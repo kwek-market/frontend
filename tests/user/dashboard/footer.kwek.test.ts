@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Footer kwek link Test", () => {
-  const footerLinks = [
-    { name: "About Us", url: "http://localhost:3100/aboutUs" },
-    { name: "Contact Us", url: "http://localhost:3100/contact-us" },
-    { name: "Terms of Service", url: "http://localhost:3100/terms-of-service" },
-  ];
+  let footerLinks = [];
 
   test.beforeEach(async ({ page, baseURL }) => {
     await page.goto(`${baseURL}`);
-
+    footerLinks = [
+      { name: "About Us", url: `${baseURL}/aboutUs"`},
+      { name: "Contact Us", url: `${baseURL}/contact-us"`},
+      { name: "Terms of Service", url: `${baseURL}/terms-of-service` },
+    ];
   });
 
   footerLinks.forEach((link) => {
